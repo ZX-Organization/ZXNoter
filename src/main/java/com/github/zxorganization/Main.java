@@ -1,4 +1,4 @@
-package com.github.zxorganization.io;
+package com.github.zxorganization;
 
 import com.github.zxorganization.ui.ZXNoterApp;
 

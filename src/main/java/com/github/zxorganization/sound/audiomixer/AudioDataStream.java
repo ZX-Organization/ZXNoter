@@ -11,9 +11,11 @@ public class AudioDataStream {
     protected AudioFormat audioFormat;//音频格式
     protected ByteBuffer audioData;//音频数据
 
+/*
     public static void main(String[] args) throws Exception {
         AudioDataStream audioDataStream = new AudioDataStream(AudioMixer.sampleRateConvert(Files.readAllBytes(Path.of("Hikaru Station.wav")), 12800));
     }
+*/
 
 
     public AudioDataStream(AudioInputStream audioStream) throws IOException {
