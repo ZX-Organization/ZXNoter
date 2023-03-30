@@ -7,10 +7,10 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="openjfx.javafx.controls" level="project" />
-    <orderEntry type="library" name="openjfx.javafx.base" level="project" />
-    <orderEntry type="library" name="openjfx.javafx.graphics" level="project" />
-    <orderEntry type="library" name="alibaba.fastjson2" level="project" />
-    <orderEntry type="library" name="apache.httpcomponents.client5.httpclient5" level="project" />
+    <orderEntry type="library" exported="" name="openjfx.javafx.controls" level="project" />
+    <orderEntry type="library" exported="" name="openjfx.javafx.base" level="project" />
+    <orderEntry type="library" exported="" name="openjfx.javafx.graphics" level="project" />
+    <orderEntry type="library" exported="" name="alibaba.fastjson2" level="project" />
+    <orderEntry type="library" exported="" name="apache.httpcomponents.client5.httpclient5" level="project" />
   </component>
 </module>
