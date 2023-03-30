@@ -1,2 +1,2 @@
 # ZXNoter
-THis is a MusicGame MapEditor,welcom for use!
+This is a MusicGame MapEditor,welcome for use!
