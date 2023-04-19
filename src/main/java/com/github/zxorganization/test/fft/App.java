@@ -28,7 +28,7 @@ public class App extends Application {
     Canvas canvas = new Canvas();
     Canvas canvas2 = new Canvas();
     Timeline timeline;
-    int pos = 3770000;
+    int pos = 3770000;//音频的显示位置
 
     int N = 512;
     int S = 100;
@@ -63,9 +63,6 @@ public class App extends Application {
 
 
 
-        /*App app=new App();
-        System.out.println("APP "+app);*/
-
        /* TargetDataLine targetDataLine;
         AudioFormat audioFormat = new AudioFormat(48000, 16, 1, true, false);
         DataLine.Info dataLineInfo = new DataLine.Info(TargetDataLine.class, audioFormat);
@@ -91,40 +88,16 @@ public class App extends Application {
 
         ByteBuffer buf = ByteBuffer.wrap(audioInputStream.readAllBytes());
         buf.order(ByteOrder.LITTLE_ENDIAN);
-/*
-        double[] data = {-0.35668879080953375, -0.6118094913035987, 0.8534269560320435, -0.6699697478438837, 0.35425500561437717,
-                0.8910250650549392, -0.025718699518642918, 0.07649691490732002};
-        int N = 8;
-        Complex[] input = new Complex[N];
-        for (int i = 0; i <= N - 1; i++) {
-            input[i] = new Complex(data[i], 0);
-        }
 
-
-        //傅里叶变换计算
-        Double[] x;//声明复数数组
-        Double[] x1 = new Double[N];
-        for (int i = 0; i <= N - 1; i++) {
-            input[i] = new Complex(data[i], 0);
-        }//将实数数据转换为复数数据
-        input = FFT.getFFT(input, N);//傅里叶变换
-        x = Complex.toModArray(input);//计算傅里叶变换得到的复数数组的模值
-        for (int i = 0; i <= N - 1; i++) {
-            //的模值数组除以N再乘以2
-            x1[i] = x[i] / N * 2;
-           // System.out.println(x1[i]);
-        }*/
 
         GraphicsContext gc = canvas.getGraphicsContext2D();
         GraphicsContext gc2 = canvas2.getGraphicsContext2D();
 
 
+        // 创建一个Timeline对象，每秒执行30次指定的操作
+        timeline = new Timeline(new KeyFrame(Duration.millis(1000. / 30), e -> {
 
-
-        // 创建一个Timeline对象，每秒执行60次指定的操作
-        timeline = new Timeline(new KeyFrame(Duration.millis(1000 / 30), e -> {
-
-            pos += 3000;
+            pos += 1000;//音频偏移
 
 
             double w = canvas.getWidth();
@@ -133,21 +106,14 @@ public class App extends Application {
             gc2.clearRect(0, 0, canvas2.getWidth(), canvas2.getHeight());
 
 
-
-
-            //buf.position(pos * 2);
             double lastV = 0;
             for (int x = 0; x < w; x++) {
                 buf.position((pos + x * S) * 2);
-                //buf.position((pos * 10 * x) * 2);
 
-                //Math.
 
                 for (int i = 0; i < S; i++) {
                     double v = buf.getShort() / 200.;
-                    //
                     //v = Math.max(v, 1);
-                    //System.out.println(v);
                     gc.drawImage(image, x, (v < 0 ? h / 2 : h / 2 - v), 1, Math.abs(v));
                     /*v = h / 2. - v;
                     gc.setStroke(Color.rgb(0, 100, 0));
@@ -164,35 +130,20 @@ public class App extends Application {
                     }
 
                     //傅里叶变换计算
-                    Double[] x2;
                     data = FFT.getFFT(data, N);//傅里叶变换
-                    x2 = Complex.toModArray(data);//计算傅里叶变换得到的复数数组的模值
+                    Double[] x2 = Complex.toModArray(data);//计算傅里叶变换得到的复数数组的模值
                     for (int i = 0; i < N / 2; i++) {
                         x2[N / 2 + i] = x2[N / 2 + i] / N * 3;
                         int c = (int) (x2[N / 2 + i] * 20);
                         gc2.setLineWidth(6);
-                        gc2.setStroke(Color.rgb((Math.min(c, 255)), (c > 255 ? Math.min(c - 255, 255) : 0), (int) ((Math.min(c, 255))*0.3)));
+                        gc2.setStroke(Color.rgb((Math.min(c, 255)), (c > 255 ? Math.min(c - 255, 255) : 0), (int) ((Math.min(c, 255)) * 0.3)));
                         gc2.strokeLine(x, i * 2, x, i * 2);
                     }
 
-/*
 
-                    if (x2.length <= x)
-                        continue;
-                    double v = x2[x] * 4;
-*/
-
-                    //gc2.drawImage(image, x, (v < 0 ? h / 2 : h / 2 - v), 1, Math.abs(v));
 
                 }
 
-
-
-
-                /*gc.setStroke(Color.RED);
-                gc.setLineWidth(1); //设置线条宽度为5像素
-                gc.strokeLine(i, h / 2 + v, i, h / 2 - v);
-                gc.stroke();*/
             }
         }));
         timeline.setCycleCount(Timeline.INDEFINITE); //设置无限循环
