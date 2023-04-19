@@ -28,7 +28,7 @@ public class App extends Application {
     Canvas canvas = new Canvas();
     Canvas canvas2 = new Canvas();
     Timeline timeline;
-    int pos = 3770000;//音频的显示位置
+    int pos = 0;//音频的显示位置
 
     int N = 512;
     int S = 100;
@@ -41,14 +41,14 @@ public class App extends Application {
         {
             Pane pane = new Pane(canvas);
             pane.setBackground(Background.fill(Color.BLACK));
-            pane.setPrefHeight(600);
+            pane.setPrefHeight(300);
             vBox.getChildren().add(pane);
             FxUtils.canvasBind(canvas);
         }
         {
             Pane pane = new Pane(canvas2);
             pane.setBackground(Background.fill(Color.BLACK));
-            pane.setPrefHeight(600);
+            pane.setPrefHeight(300);
             vBox.getChildren().add(pane);
             FxUtils.canvasBind(canvas2);
         }
@@ -81,7 +81,7 @@ public class App extends Application {
         targetDataLine.start();
 */
 
-        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(App.class.getResource("angela - 全力 Summer!.wav"));
+        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(App.class.getResource("ここなつ - キミヱゴサーチ_01.wav"));
 
         Image image = new Image(App.class.getResource("Line.png").toString());
 
@@ -95,7 +95,7 @@ public class App extends Application {
 
 
         // 创建一个Timeline对象，每秒执行30次指定的操作
-        timeline = new Timeline(new KeyFrame(Duration.millis(1000. / 30), e -> {
+        timeline = new Timeline(new KeyFrame(Duration.millis(1000. / 10), e -> {
 
             pos += 1000;//音频偏移
 
@@ -137,7 +137,7 @@ public class App extends Application {
                         int c = (int) (x2[N / 2 + i] * 20);
                         gc2.setLineWidth(6);
                         gc2.setStroke(Color.rgb((Math.min(c, 255)), (c > 255 ? Math.min(c - 255, 255) : 0), (int) ((Math.min(c, 255)) * 0.3)));
-                        gc2.strokeLine(x, i * 2, x, i * 2);
+                        gc2.strokeLine(x, i , x, i );
                     }
 
 
