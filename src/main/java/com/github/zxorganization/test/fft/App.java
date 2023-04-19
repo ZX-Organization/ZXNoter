@@ -21,27 +21,43 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+import java.util.Random;
 
 public class App extends Application {
     Stage stage;
     Canvas canvas = new Canvas();
+    Canvas canvas2 = new Canvas();
     Timeline timeline;
-    int pos=1024;
+    int pos = 3770000;
+
+    int N = 512;
+    int S = 100;
+    Complex[] data = new Complex[N];
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-
         stage = primaryStage;
+        VBox vBox = new VBox();
+        {
+            Pane pane = new Pane(canvas);
+            pane.setBackground(Background.fill(Color.BLACK));
+            pane.setPrefHeight(600);
+            vBox.getChildren().add(pane);
+            FxUtils.canvasBind(canvas);
+        }
+        {
+            Pane pane = new Pane(canvas2);
+            pane.setBackground(Background.fill(Color.BLACK));
+            pane.setPrefHeight(600);
+            vBox.getChildren().add(pane);
+            FxUtils.canvasBind(canvas2);
+        }
 
-        Pane pane = new Pane(canvas);
-        pane.setBackground(Background.fill(Color.DARKGRAY));
-        pane.setPrefHeight(600);
 
-        VBox vBox = new VBox(pane);
-        FxUtils.canvasBind(canvas);
         //vBox.setBackground(Background.fill(Color.GRAY));
         Scene scene = new Scene(vBox);
         stage.setScene(scene);
+        stage.setWidth(1800);
         stage.show();
 
 
@@ -100,19 +116,79 @@ public class App extends Application {
         }*/
 
         GraphicsContext gc = canvas.getGraphicsContext2D();
+        GraphicsContext gc2 = canvas2.getGraphicsContext2D();
+
+
+
+
         // 创建一个Timeline对象，每秒执行60次指定的操作
-        timeline = new Timeline(new KeyFrame(Duration.millis(1000 / 60), e -> {
+        timeline = new Timeline(new KeyFrame(Duration.millis(1000 / 30), e -> {
+
+            pos += 3000;
+
+
             double w = canvas.getWidth();
             double h = canvas.getHeight();
             gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-            buf.position(++pos*40);
-            for (int i = 0; i < w; i++) {
+            gc2.clearRect(0, 0, canvas2.getWidth(), canvas2.getHeight());
 
 
-                int v = buf.getShort()/100;
 
 
-                 gc.drawImage(image,i,h / 2 - v,1, v*2);
+            //buf.position(pos * 2);
+            double lastV = 0;
+            for (int x = 0; x < w; x++) {
+                buf.position((pos + x * S) * 2);
+                //buf.position((pos * 10 * x) * 2);
+
+                //Math.
+
+                for (int i = 0; i < S; i++) {
+                    double v = buf.getShort() / 200.;
+                    //
+                    //v = Math.max(v, 1);
+                    //System.out.println(v);
+                    gc.drawImage(image, x, (v < 0 ? h / 2 : h / 2 - v), 1, Math.abs(v));
+                    /*v = h / 2. - v;
+                    gc.setStroke(Color.rgb(0, 100, 0));
+                    gc.strokeLine(x - 1, lastV, x, v);
+                    lastV = v;*/
+                }
+
+                if (x % 6 == 0) {
+
+
+                    buf.position((pos + x * S) * 2);
+                    for (int i = 0; i < N; i++) {
+                        data[i] = new Complex(buf.getShort() / 80., 0);
+                    }
+
+                    //傅里叶变换计算
+                    Double[] x2;
+                    data = FFT.getFFT(data, N);//傅里叶变换
+                    x2 = Complex.toModArray(data);//计算傅里叶变换得到的复数数组的模值
+                    for (int i = 0; i < N / 2; i++) {
+                        x2[N / 2 + i] = x2[N / 2 + i] / N * 3;
+                        int c = (int) (x2[N / 2 + i] * 20);
+                        gc2.setLineWidth(6);
+                        gc2.setStroke(Color.rgb((Math.min(c, 255)), (c > 255 ? Math.min(c - 255, 255) : 0), (int) ((Math.min(c, 255))*0.3)));
+                        gc2.strokeLine(x, i * 2, x, i * 2);
+                    }
+
+/*
+
+                    if (x2.length <= x)
+                        continue;
+                    double v = x2[x] * 4;
+*/
+
+                    //gc2.drawImage(image, x, (v < 0 ? h / 2 : h / 2 - v), 1, Math.abs(v));
+
+                }
+
+
+
+
                 /*gc.setStroke(Color.RED);
                 gc.setLineWidth(1); //设置线条宽度为5像素
                 gc.strokeLine(i, h / 2 + v, i, h / 2 - v);

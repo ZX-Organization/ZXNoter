@@ -10,16 +10,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b249eaa7-b542-446b-a081-2e446aaf85ac" name="变更" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/test/fft/App.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/test/fft/Complex.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/test/fft/FFT.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/test/fft/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/utils/FxUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/github/zxorganization/test/fft/Line.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/github/zxorganization/test/fft/angela - 全力 Summer!.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/ZXNoterDoc.xmind" beforeDir="false" afterPath="$PROJECT_DIR$/docs/ZXNoterDoc.xmind" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/github/zxorganization/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/github/zxorganization/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/test/fft/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/test/fft/App.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -183,6 +175,7 @@
       <workItem from="1680520338514" duration="6000" />
       <workItem from="1681710438722" duration="9349000" />
       <workItem from="1681732667401" duration="183000" />
+      <workItem from="1681751308744" duration="11905000" />
     </task>
     <task id="LOCAL-00001" summary="重新刷新构建项目">
       <created>1680175856963</created>
