@@ -193,7 +193,7 @@ public class AudioChannel {
      */
     public long getTime() {
         if (lastPlayState.equals(PlayState.PLAY))
-            return (long) (lastTime + (System.currentTimeMillis() - lastTimeStamp) * sonic.getRate() * sonic.getSpeed());
+            pauseTime = (long) (lastTime + (System.currentTimeMillis() - lastTimeStamp) * sonic.getRate() * sonic.getSpeed());
         return pauseTime;
     }
 

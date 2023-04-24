@@ -10,11 +10,41 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b249eaa7-b542-446b-a081-2e446aaf85ac" name="变更" comment="跟新 开发文档 还有 UI界面">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/github/zxorganization/test/fft/ここなつ - キミヱゴサーチ_01.pkf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/github/zxorganization/test/fft/ここなつ - キミヱゴサーチ_01.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/audioFFT.fft" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/test/bpm/App.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/test/bpm/Bpm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/test/fft/App2.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/test/fft/AudioV.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/github/zxorganization/test/Line.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/github/zxorganization/test/angela - 全力 Summer!.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/github/zxorganization/test/ここなつ - キミヱゴサーチ_01.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/github/zxorganization/test/ここなつ - キミヱゴサーチ_01_accompaniment.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/github/zxorganization/test/ここなつ - キミヱゴサーチ_01_vocals.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/github/zxorganization/test/ゆびきり.pkf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/github/zxorganization/test/ゆびきり.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/github/zxorganization/test/ゆびきり_drums.pkf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/github/zxorganization/test/ゆびきり_drums.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/github/zxorganization/test/ゆびきり_drums_01.pkf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/github/zxorganization/test/ゆびきり_drums_01.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/github/zxorganization/test/竹 (feat. ちょこ)_accompaniment_01.wav" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/sound/audiomixer/AudioChannel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/sound/audiomixer/AudioChannel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/test/fft/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/test/fft/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/test/fft/FFT.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/test/fft/FFT.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/test/fft/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/test/fft/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/github/zxorganization/test/fft/Line.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/github/zxorganization/test/fft/angela - 全力 Summer!.pkf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/github/zxorganization/test/fft/angela - 全力 Summer!.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/github/zxorganization/test/fft/ここなつ - キミヱゴサーチ_01.pkf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/github/zxorganization/test/fft/ここなつ - キミヱゴサーチ_01.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/github/zxorganization/sound/audiomixer/AudioChannel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/github/zxorganization/sound/audiomixer/AudioChannel.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/github/zxorganization/test/fft/App.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/github/zxorganization/test/fft/App.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/github/zxorganization/test/fft/FFT.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/github/zxorganization/test/fft/FFT.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/github/zxorganization/test/fft/Line.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/github/zxorganization/test/fft/angela - 全力 Summer!.pkf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/github/zxorganization/test/fft/angela - 全力 Summer!.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/github/zxorganization/test/fft/ここなつ - キミヱゴサーチ_01.pkf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/github/zxorganization/test/fft/ここなつ - キミヱゴサーチ_01.wav" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,19 +78,20 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "I:/AllProjects/ZX-Organization/ZXNoter/src/main/resources/com/github/zxorganization/test/fft",
-    "project.structure.last.edited": "工件",
-    "project.structure.proportion": "0.17",
-    "project.structure.side.proportion": "0.32979977",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;I:/AllProjects/ZX-Organization/ZXNoter/src/main/resources/com/github/zxorganization/test/fft&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;工件&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.17&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.32979977&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;http.proxy&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="I:\AllProjects\ZX-Organization\ZXNoter\src\main\resources\com\github\zxorganization\test\fft" />
@@ -77,16 +108,31 @@
       <recent name="D:\Projects\ZX-Organization\ZXNoter\src\main\java\com\github\zxorganization" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.github.zxorganization.test.bpm" />
+      <recent name="com.github.zxorganization.test.fft" />
       <recent name="com.github.zxorganization" />
     </key>
   </component>
-  <component name="RunManager" selected="应用程序.com.github.zxorganization.test.fft.Main">
+  <component name="RunManager" selected="应用程序.Bpm">
     <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.github.zxorganization.test.fft.App" />
       <module name="ZXNoter" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.github.zxorganization.test.fft.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Bpm" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.github.zxorganization.test.bpm.Bpm" />
+      <module name="ZXNoter" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.github.zxorganization.test.bpm.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -120,19 +166,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="com.github.zxorganization.sound.audiomixer.Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.github.zxorganization.sound.audiomixer.Main" />
-      <module name="ZXNoter" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.github.zxorganization.sound.audiomixer.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="com.github.zxorganization.test.fft.Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.github.zxorganization.test.fft.Main" />
       <module name="ZXNoter" />
@@ -148,11 +181,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="应用程序.Bpm" />
         <item itemvalue="应用程序.com.github.zxorganization.test.fft.Main" />
         <item itemvalue="应用程序.App" />
         <item itemvalue="应用程序.FFTTest" />
         <item itemvalue="应用程序.Main" />
-        <item itemvalue="应用程序.com.github.zxorganization.sound.audiomixer.Main" />
       </list>
     </recent_temporary>
   </component>
@@ -180,6 +213,13 @@
       <workItem from="1681732667401" duration="183000" />
       <workItem from="1681751308744" duration="12802000" />
       <workItem from="1681896107803" duration="503000" />
+      <workItem from="1681970962574" duration="5617000" />
+      <workItem from="1681995724000" duration="4003000" />
+      <workItem from="1682000011141" duration="2861000" />
+      <workItem from="1682003265888" duration="7107000" />
+      <workItem from="1682086560616" duration="88000" />
+      <workItem from="1682086656166" duration="12548000" />
+      <workItem from="1682267974763" duration="15127000" />
     </task>
     <task id="LOCAL-00001" summary="重新刷新构建项目">
       <created>1680175856963</created>
@@ -262,10 +302,15 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="重新刷新构建项目" />
     <MESSAGE value="添加图标" />
     <MESSAGE value="修改" />
     <MESSAGE value="跟新 开发文档 还有 UI界面" />
     <option name="LAST_COMMIT_MESSAGE" value="跟新 开发文档 还有 UI界面" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
