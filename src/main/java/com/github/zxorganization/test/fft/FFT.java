@@ -42,10 +42,12 @@ public class FFT {
     protected final int fftBufferSize = 512;//FFT缓冲区大小
     protected int fftPosition;//FFT缓冲区位置
     protected float[][] fftData;//FFT缓冲区
+    protected int fftLoopPosition;//FFT缓冲区循环位置
 
     protected int fftAccuracy;//fft精度
     protected int samplingAccuracy;//采样精度
     protected int samplingLength;//采样长度
+
 
     protected void putFloat(float f) throws IOException {
         check(4);
@@ -164,7 +166,7 @@ public class FFT {
         //fftData = new float[samplingLength][fftAccuracy / 2];
 
 
-        ExecutorService executorService = Executors.newFixedThreadPool(36);
+        ExecutorService executorService = Executors.newFixedThreadPool(12);
 
 
         for (int i = 0; i < samplingLength; i++) {
@@ -214,6 +216,10 @@ public class FFT {
             throw new RuntimeException(e);
         }
     }
+
+
+
+
 
     /**
      * 获取某个时间点的频谱
