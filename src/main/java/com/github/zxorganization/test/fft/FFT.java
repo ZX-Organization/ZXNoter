@@ -164,7 +164,7 @@ public class FFT {
         //fftData = new float[samplingLength][fftAccuracy / 2];
 
 
-        ExecutorService executorService = Executors.newFixedThreadPool(24);
+        ExecutorService executorService = Executors.newFixedThreadPool(36);
 
 
         for (int i = 0; i < samplingLength; i++) {
@@ -193,7 +193,7 @@ public class FFT {
                 for (int k = 0; k < fftAccuracy / 2; k++) {
                     try {
                         //设置写入位置
-                        position(12 + finalI * fftAccuracy / 2 * 4 + k * 4);
+                        position(12L + (long) finalI * fftAccuracy / 2 * 4 + k * 4L);
                         x2[fftAccuracy / 2 + k] = x2[fftAccuracy / 2 + k] / fftAccuracy * 3;
 
                         putFloat(x2[fftAccuracy / 2 + k].floatValue());
@@ -215,8 +215,13 @@ public class FFT {
         }
     }
 
-
-   /* public float[] fftGet() {
+    /**
+     * 获取某个时间点的频谱
+     *
+     * @param position 位置
+     * @return
+     *//*
+    public float[] fftGet(long position) {
         //fftData[]
         //return
     }*/

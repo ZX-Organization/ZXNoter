@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="ZXNoter:jar" />
+      <artifact name="ZXNoter:jar2" />
     </artifacts-to-build>
   </component>
   <component name="AutoImportSettings">
@@ -10,41 +10,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b249eaa7-b542-446b-a081-2e446aaf85ac" name="变更" comment="跟新 开发文档 还有 UI界面">
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/ZXNoter_jar2.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/audioFFT.fft" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/test/bpm/App.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/test/bpm/Bpm.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/test/fft/App2.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/test/fft/AudioV.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/github/zxorganization/test/Line.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/github/zxorganization/test/angela - 全力 Summer!.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/github/zxorganization/test/ここなつ - キミヱゴサーチ_01.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/github/zxorganization/test/ここなつ - キミヱゴサーチ_01_accompaniment.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/github/zxorganization/test/ここなつ - キミヱゴサーチ_01_vocals.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/github/zxorganization/test/ゆびきり.pkf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/github/zxorganization/test/ゆびきり.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/github/zxorganization/test/ゆびきり_drums.pkf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/github/zxorganization/test/ゆびきり_drums.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/github/zxorganization/test/ゆびきり_drums_01.pkf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/github/zxorganization/test/ゆびきり_drums_01.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/github/zxorganization/test/竹 (feat. ちょこ)_accompaniment_01.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/github/zxorganization/test/bpm/ゆびきり_drums.wav" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/sound/audiomixer/AudioChannel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/sound/audiomixer/AudioChannel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/test/fft/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/test/fft/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/test/bpm/Bpm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/test/bpm/Bpm.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/test/fft/FFT.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/test/fft/FFT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/test/fft/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/test/fft/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/github/zxorganization/test/fft/Line.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/github/zxorganization/test/fft/angela - 全力 Summer!.pkf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/github/zxorganization/test/fft/angela - 全力 Summer!.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/github/zxorganization/test/fft/ここなつ - キミヱゴサーチ_01.pkf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/github/zxorganization/test/fft/ここなつ - キミヱゴサーチ_01.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/github/zxorganization/sound/audiomixer/AudioChannel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/github/zxorganization/sound/audiomixer/AudioChannel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/github/zxorganization/test/fft/App.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/github/zxorganization/test/fft/App.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/MANIFEST.MF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/META-INF/MANIFEST.MF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/github/zxorganization/test/bpm/Bpm.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/github/zxorganization/test/bpm/Bpm.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/github/zxorganization/test/fft/FFT.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/github/zxorganization/test/fft/FFT.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/github/zxorganization/test/fft/Line.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/github/zxorganization/test/fft/angela - 全力 Summer!.pkf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/github/zxorganization/test/fft/angela - 全力 Summer!.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/github/zxorganization/test/fft/ここなつ - キミヱゴサーチ_01.pkf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/github/zxorganization/test/fft/ここなつ - キミヱゴサーチ_01.wav" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,7 +60,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;I:/AllProjects/ZX-Organization/ZXNoter/src/main/resources/com/github/zxorganization/test/fft&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/zedoC/Desktop&quot;,
     &quot;project.structure.last.edited&quot;: &quot;工件&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.17&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.32979977&quot;,
@@ -101,11 +76,11 @@
       <recent name="P:\ZX-Organization\ZXNoter\resourcespackage" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Projects\ZX-Organization\ZXNoter\src\main\resources\com\github\zxorganization\test\bpm" />
       <recent name="I:\AllProjects\ZX-Organization\ZXNoter\src\main\resources\com\github\zxorganization\test\fft" />
       <recent name="D:\Projects\ZX-Organization\ZXNoter\src\main\resources\com\github\zxorganization\test\fft" />
       <recent name="D:\Projects\ZX-Organization\ZXNoter\src\main\resources\com\github\zxorganization" />
       <recent name="D:\Projects\ZX-Organization\ZXNoter\src\main\resources\test" />
-      <recent name="D:\Projects\ZX-Organization\ZXNoter\src\main\java\com\github\zxorganization" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.github.zxorganization.test.bpm" />
@@ -219,7 +194,9 @@
       <workItem from="1682003265888" duration="7107000" />
       <workItem from="1682086560616" duration="88000" />
       <workItem from="1682086656166" duration="12548000" />
-      <workItem from="1682267974763" duration="15127000" />
+      <workItem from="1682267974763" duration="17662000" />
+      <workItem from="1682410043508" duration="1621000" />
+      <workItem from="1682423497466" duration="2049000" />
     </task>
     <task id="LOCAL-00001" summary="重新刷新构建项目">
       <created>1680175856963</created>
