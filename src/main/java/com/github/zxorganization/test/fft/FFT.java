@@ -224,7 +224,7 @@ public class FFT {
     /**
      * 获取某个时间点的频谱
      *
-     * @param position 位置
+     * @param
      * @return
      *//*
     public float[] fftGet(long position) {
