@@ -1,9 +1,5 @@
 package com.github.zxorganization.test.bpm;
 
-import com.github.zxorganization.sound.audiomixer.AudioChannel;
-import com.github.zxorganization.sound.audiomixer.AudioMixer;
-import com.github.zxorganization.test.fft.Complex;
-import com.github.zxorganization.test.fft.FFT;
 import com.github.zxorganization.utils.FxUtils;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -16,48 +12,38 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.LineUnavailableException;
-import java.net.URL;
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.nio.file.Path;
+import static com.github.zxorganization.test.bpm.Bpm.fft;
 
 public class App extends Application {
     Stage stage;
     Canvas canvas = new Canvas();
     Canvas canvas2 = new Canvas();
     Timeline timeline;
-    int pos = 937505;//音频的显示位置
 
-    int N = 512;
-    int S = 80;
+    long audioPosMS = 0;
 
-    public App() throws LineUnavailableException {
-    }
-
+    double mouseDraggedX = 0;
+    double mouseDraggedAudioPosMS = 0;
+    int audioPixMS = 14;
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
         stage = primaryStage;
         VBox vBox = new VBox();
         {
             Pane pane = new Pane(canvas);
             pane.setBackground(Background.fill(Color.BLACK));
-            pane.setPrefHeight(300);
+            pane.setPrefHeight(360);
             vBox.getChildren().add(pane);
             FxUtils.canvasBind(canvas);
         }
         {
             Pane pane = new Pane(canvas2);
             pane.setBackground(Background.fill(Color.BLACK));
-            pane.setPrefHeight(300);
+            pane.setPrefHeight(360);
             vBox.getChildren().add(pane);
             FxUtils.canvasBind(canvas2);
         }
@@ -66,32 +52,11 @@ public class App extends Application {
         //vBox.setBackground(Background.fill(Color.GRAY));
         Scene scene = new Scene(vBox);
         stage.setScene(scene);
-        stage.setWidth(1800);
+        stage.setWidth(600);
         stage.show();
 
 
-
-
-       /* TargetDataLine targetDataLine;
-        AudioFormat audioFormat = new AudioFormat(48000, 16, 1, true, false);
-        DataLine.Info dataLineInfo = new DataLine.Info(TargetDataLine.class, audioFormat);
-        Mixer.Info[] mixerInfos = AudioSystem.getMixerInfo();
-
-        *//*{
-            int i = 0;
-            for (Mixer.Info info : mixerInfos) {
-                System.out.println(i++ + " " + info.getName());
-            }
-        }*//*
-
-        Mixer mixer = AudioSystem.getMixer(mixerInfos[30]);
-        targetDataLine = (TargetDataLine) mixer.getLine(dataLineInfo);
-        targetDataLine.open(audioFormat);
-        targetDataLine.start();
-*/
-
-
-        Image image = new Image(App.class.getResource("../Line.png").toString());
+        Image image = new Image("file:///testresources/Line.png");
 
 
         GraphicsContext gc = canvas.getGraphicsContext2D();
@@ -103,8 +68,18 @@ public class App extends Application {
         });
 
 
+        canvas.setOnMousePressed(event -> {
+            mouseDraggedX = event.getX();
+            mouseDraggedAudioPosMS = audioPosMS;
+        });
+
+        canvas.setOnMouseDragged(event -> {
+            audioPosMS = (long) (mouseDraggedAudioPosMS + ((mouseDraggedX - event.getX()) * audioPixMS));
+        });
+
+
         // 创建一个Timeline对象，每秒执行30次指定的操作
-        timeline = new Timeline(new KeyFrame(Duration.millis(1000. / 10), e -> {
+        timeline = new Timeline(new KeyFrame(Duration.millis(1000. / 30), e -> {
 
             //pos = (int) (1d * audioChannel.getTime() / audioChannel.getAudioLength() * audioSize);//音频偏移
 
@@ -114,6 +89,15 @@ public class App extends Application {
             gc2.clearRect(0, 0, canvas2.getWidth(), canvas2.getHeight());
 
             for (int x = 0; x < w; x++) {
+
+
+                float[] fftData = fft.fftGet(fft.fftTimeToPosition(audioPosMS + (long) x * audioPixMS));
+                for (int i = 0; i < fftData.length; i++) {
+                    int v2 = (int) (fftData[i]);
+                    gc.setLineWidth(2);
+                    gc.setStroke(Color.rgb((Math.min(v2, 255)), (v2 > 255 ? Math.min(v2 - 255, 255) : 0), (v2 > 255 * 2 ? Math.min(v2 - 255 * 2, 255) : 0)));
+                    gc.strokeLine(x, i * 2, x, i * 2);
+                }
 
                 /*gc.setTextAlign(TextAlignment.LEFT);
                     gc.setFont(Font.font(16));
