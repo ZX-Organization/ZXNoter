@@ -12,7 +12,7 @@ public class Bpm {
 
     public static void main(String[] args) throws Exception {
         //URL audioURL = Bpm.class.getResource("ゆびきり_drums.wav");
-        //fft = new FFT(Path.of("audioFFT.fft"), Path.of("testresources/ゆびきり.wav"), 256, 4);
+        //fft = new FFT(Path.of("audioFFT.fft"), Path.of("testresources/ゆびきり_drums_01.wav"), 512, 4);
 
 
         fft = new FFT(Path.of("audioFFT.fft"));

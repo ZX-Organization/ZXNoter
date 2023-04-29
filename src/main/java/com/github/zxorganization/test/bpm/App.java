@@ -4,14 +4,19 @@ import com.github.zxorganization.utils.FxUtils;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.input.ScrollEvent;
+import javafx.scene.input.TouchEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -27,11 +32,14 @@ public class App extends Application {
 
     double mouseDraggedX = 0;
     double mouseDraggedAudioPosMS = 0;
-    int audioPixMS = 14;
+    double audioPixMS = 14;
 
     @Override
     public void start(Stage primaryStage) {
         stage = primaryStage;
+
+        stage.setTitle("FFT BPM");
+
         VBox vBox = new VBox();
         {
             Pane pane = new Pane(canvas);
@@ -77,6 +85,14 @@ public class App extends Application {
             audioPosMS = (long) (mouseDraggedAudioPosMS + ((mouseDraggedX - event.getX()) * audioPixMS));
         });
 
+        canvas.setOnScroll(event -> {
+            if (event.getDeltaY() > 0) {
+                audioPixMS *= 1.2;
+            } else if (event.getDeltaY() < 0) {
+                audioPixMS /= 1.2;
+            }
+        });
+
 
         // 创建一个Timeline对象，每秒执行30次指定的操作
         timeline = new Timeline(new KeyFrame(Duration.millis(1000. / 30), e -> {
@@ -88,15 +104,42 @@ public class App extends Application {
             gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
             gc2.clearRect(0, 0, canvas2.getWidth(), canvas2.getHeight());
 
+
+            double ys = h / fft.getFFTAccuracy() * 2;
+
+
             for (int x = 0; x < w; x++) {
 
+                long t = audioPosMS + (long) (x * audioPixMS);
+                float[] fftData = fft.fftGet(fft.fftTimeToPosition(t));
 
-                float[] fftData = fft.fftGet(fft.fftTimeToPosition(audioPosMS + (long) x * audioPixMS));
+
                 for (int i = 0; i < fftData.length; i++) {
-                    int v2 = (int) (fftData[i]);
-                    gc.setLineWidth(2);
+
+                    int v2 = (int) (fftData[i]) / 2;
+                    gc.setLineWidth(ys);
                     gc.setStroke(Color.rgb((Math.min(v2, 255)), (v2 > 255 ? Math.min(v2 - 255, 255) : 0), (v2 > 255 * 2 ? Math.min(v2 - 255 * 2, 255) : 0)));
-                    gc.strokeLine(x, i * 2, x, i * 2);
+                    gc.strokeLine(x, i * ys, x, i * ys);
+                }
+                int pixS = 0;
+                if (audioPixMS < 5) {
+                    pixS = 100;
+                } else if (audioPixMS < 10) {
+                    pixS = 500;
+                } else if (audioPixMS < 20) {
+                    pixS = 1000;
+                } else if (audioPixMS < 40) {
+                    pixS = 5000;
+                }
+                if (t % pixS < audioPixMS) {
+                    gc.setLineWidth(3);
+                    gc.setStroke(Color.GREEN);
+                    gc.strokeLine(x, 0, x, h);
+
+                    gc.setTextAlign(TextAlignment.RIGHT);
+                    gc.setFont(Font.font(16));
+                    gc.setFill(Color.GREEN);
+                    gc.fillText("" + t, x - 4, 100);
                 }
 
                 /*gc.setTextAlign(TextAlignment.LEFT);
