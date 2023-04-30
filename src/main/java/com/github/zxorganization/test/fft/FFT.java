@@ -39,7 +39,7 @@ public class FFT {
 
 
     protected long byteBufferPosition;//字节缓冲区位置
-    protected final int byteBufferSize = 1024 * 1024 * 20;//字节缓冲区大小
+    protected final int byteBufferSize = 1024 * 1024 * 60;//字节缓冲区大小
 
     protected final int fftBufferSize = 512;//FFT缓冲区大小
     protected long fftBufferPosition;//FFT缓冲区绝对位置
@@ -204,11 +204,12 @@ public class FFT {
                     for (int j = 0; j < fftAccuracy; j++) {
                         float v = 0;
                         for (int k = 0; k < sampleAccuracy; k++) {
-                            v = Math.max(v, auBuf.getShort());
+                            v +=auBuf.getShort();
                         }
+                        v/=sampleAccuracy;
 
                         try {
-                            data[j] = new Complex(v, 0);
+                            data[j] = new Complex(v , 0);
                         } catch (Exception e) {
                             data[j] = new Complex(0, 0);
                         }
@@ -228,11 +229,10 @@ public class FFT {
                             throw new RuntimeException(e);
                         }
                     }
-                    bufferPosition(16L + (long) finalI * fftAccuracy / 2 * 4);
-                    for (int k = 0; k < fftAccuracy / 2; k++) {//取一半
+                    bufferPosition(16L + (long) finalI * (fftAccuracy / 2) * 4);
+                    for (int k = fftAccuracy / 2; k < fftAccuracy; k++) {//取一半
                         //设置写入位置
-                        x2[fftAccuracy / 2 + k] = x2[fftAccuracy / 2 + k] / fftAccuracy;
-                        putFloat(x2[fftAccuracy / 2 + k].floatValue());
+                        putFloat((float) (x2[k] / fftAccuracy));
                     }
                     lock.set(lock.get() + 1);
                     lock.notifyAll();
@@ -271,7 +271,7 @@ public class FFT {
      */
     public float[] fftGet(long position) {
         if (fftData == null) {
-            fftData = new float[1800 * 100][fftAccuracy / 2];//初始化fft缓冲区
+            fftData = new float[1800 * 100*10][fftAccuracy / 2];//初始化fft缓冲区
             fftBufferPosition = 1;
         }
 

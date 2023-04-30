@@ -64,9 +64,6 @@ public class App extends Application {
         stage.show();
 
 
-        Image image = new Image("file:///testresources/Line.png");
-
-
         GraphicsContext gc = canvas.getGraphicsContext2D();
         GraphicsContext gc2 = canvas2.getGraphicsContext2D();
         //audioChannel.play();
@@ -87,9 +84,9 @@ public class App extends Application {
 
         canvas.setOnScroll(event -> {
             if (event.getDeltaY() > 0) {
-                audioPixMS *= 1.2;
-            } else if (event.getDeltaY() < 0) {
                 audioPixMS /= 1.2;
+            } else if (event.getDeltaY() < 0) {
+                audioPixMS *= 1.2;
             }
         });
 
@@ -107,22 +104,28 @@ public class App extends Application {
 
             double ys = h / fft.getFFTAccuracy() * 2;
 
+            long drawText = 0;
 
             for (int x = 0; x < w; x++) {
 
                 long t = audioPosMS + (long) (x * audioPixMS);
                 float[] fftData = fft.fftGet(fft.fftTimeToPosition(t));
 
-
                 for (int i = 0; i < fftData.length; i++) {
+                    int v2 = (int) (fftData[i]);
+                    gc.setFill(Color.rgb((Math.min(v2, 255)), (v2 > 255 ? Math.min(v2 - 255, 255) : 0), (v2 > 255 * 2 ? Math.min(v2 - 255 * 2, 255) : 0)));
+                    gc.fillRect(x, i * ys, x , (i + 1) * ys);
 
-                    int v2 = (int) (fftData[i]) / 2;
-                    gc.setLineWidth(ys);
-                    gc.setStroke(Color.rgb((Math.min(v2, 255)), (v2 > 255 ? Math.min(v2 - 255, 255) : 0), (v2 > 255 * 2 ? Math.min(v2 - 255 * 2, 255) : 0)));
-                    gc.strokeLine(x, i * ys, x, i * ys);
+                    //gc.setLineWidth(4);
+                    //gc.setStroke(Color.rgb((Math.min(v2, 255)), (v2 > 255 ? Math.min(v2 - 255, 255) : 0), (v2 > 255 * 2 ? Math.min(v2 - 255 * 2, 255) : 0)));
+                    //gc.strokeLine(x, i * ys, x, i * ys);
                 }
                 int pixS = 0;
-                if (audioPixMS < 5) {
+                if (audioPixMS < 0.5) {
+                    pixS = 10;
+                } else if (audioPixMS < 1) {
+                    pixS = 50;
+                } else if (audioPixMS < 2) {
                     pixS = 100;
                 } else if (audioPixMS < 10) {
                     pixS = 500;
@@ -131,10 +134,12 @@ public class App extends Application {
                 } else if (audioPixMS < 40) {
                     pixS = 5000;
                 }
-                if (t % pixS < audioPixMS) {
-                    gc.setLineWidth(3);
+                if (t % pixS < audioPixMS && drawText != t) {
+                    drawText = t;
+                    gc.setLineWidth(4);
                     gc.setStroke(Color.GREEN);
-                    gc.strokeLine(x, 0, x, h);
+                    gc.strokeLine(x - 3, 0, x - 3, h);
+
 
                     gc.setTextAlign(TextAlignment.RIGHT);
                     gc.setFont(Font.font(16));

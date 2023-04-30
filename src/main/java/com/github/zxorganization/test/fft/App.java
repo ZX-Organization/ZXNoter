@@ -26,6 +26,7 @@ import javafx.util.Duration;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.LineUnavailableException;
+import java.io.File;
 import java.net.URI;
 import java.net.URL;
 import java.nio.ByteBuffer;
@@ -38,10 +39,10 @@ public class App extends Application {
     Canvas canvas = new Canvas();
     Canvas canvas2 = new Canvas();
     Timeline timeline;
-    int pos = 937505;//音频的显示位置
+    int pos = 0;//音频的显示位置
 
     int N = 512;
-    int S = 80;
+    int S = 200;
     Complex[] data = new Complex[N];
     AudioMixer audioMixer = new AudioMixer(44100, 64);
 
@@ -99,7 +100,7 @@ public class App extends Application {
         targetDataLine.open(audioFormat);
         targetDataLine.start();
 */
-        URL audioURL = App.class.getResource("ここなつ - キミヱゴサーチ_01.wav");
+        URL audioURL = new File("testresources/ゆびきり_drums_01.wav").toURL();
         AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(audioURL);
 
         int audioLength = audioInputStream.available();
@@ -111,7 +112,7 @@ public class App extends Application {
         audioChannel.setVolume(0.1f);
 
 
-        Image image = new Image(App.class.getResource("Line.png").toString());
+        Image image = new Image("file:///testresources/Line.png");
 
 
         ByteBuffer buf = ByteBuffer.wrap(audioInputStream.readAllBytes());
