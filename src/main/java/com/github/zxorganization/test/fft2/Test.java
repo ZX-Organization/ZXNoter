@@ -6,6 +6,7 @@ import be.tarsos.dsp.beatroot.BeatRootOnsetEventHandler;
 import be.tarsos.dsp.io.TarsosDSPAudioInputStream;
 import be.tarsos.dsp.io.jvm.AudioDispatcherFactory;
 import be.tarsos.dsp.onsets.ComplexOnsetDetector;
+import be.tarsos.dsp.onsets.OnsetHandler;
 import com.github.zxorganization.test.fft2.generator.FFTRealtimeGenerator;
 import com.github.zxorganization.test.fft2.reader.FFTReader;
 
@@ -25,11 +26,11 @@ public class Test  {
 
 
         FFTReader fftReader = new FFTReader(new FFTRealtimeGenerator(audio));*/
-        AudioDispatcher audioDispatcher = AudioDispatcherFactory.fromPipe("testresources/ゆびきり.wav", 44100, 2048, 0);
+        /*AudioDispatcher audioDispatcher = AudioDispatcherFactory.fromPipe("testresources/ゆびきり.wav", 44100, 2048, 0);
         DetermineDurationProcessor ddp = new DetermineDurationProcessor();
         audioDispatcher.addAudioProcessor(ddp);
         audioDispatcher.run();
-        audioDispatcher.skip(50);
+        audioDispatcher.skip(50);*/
 
 
         File audioFile = new File("testresources/ゆびきり.wav");
@@ -45,32 +46,13 @@ public class Test  {
         dispatcher.addAudioProcessor(detector);
         dispatcher.run();
 
-        handler.trackBeats(this);
+        OnsetHandler beatHandler= (v, v1) -> System.out.println(v);
 
-
-
+        handler.trackBeats(beatHandler);
 
     }
 
 
-    @Override
-    public String name() {
-        return "beat";
-    }
 
-    @Override
-    public String description() {
-        String descr = "\tCalculates onsets using a complex domain onset detector. " +
-                "\n\tThe output is a semicolon separated list of a timestamp, and a salliance. ";
-        descr += "\n\n\tinput.wav\t\ta readable wav file.";
-        descr += "";
-        return descr;
-    }
-
-    @Override
-    public String synopsis() {
-        String helpString = "input.wav";
-        return helpString;
-    }
 
 }
