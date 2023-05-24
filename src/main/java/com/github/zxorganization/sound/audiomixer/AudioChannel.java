@@ -46,28 +46,6 @@ public class AudioChannel {
     public long getAudioLength() {
         return audioLength;
     }
-/*
-
-    public AudioChannel(byte[] audioData, AudioFormat lineFormat) throws UnsupportedAudioFileException, IOException {
-        inputStream = AudioSystem.getAudioInputStream(new ByteArrayInputStream(audioData));
-        playState = PlayState.PAUSE;
-        lastPlayState = PlayState.PAUSE;
-        startBehavior = StartBehavior.PAUSE;//自动启动
-        endBehavior = EndBehavior.CLOSE;//自动关闭
-        audioFormat = inputStream.getFormat();
-
-
-        sonic = new Sonic((int) audioFormat.getSampleRate(), audioFormat.getChannels());
-
-        channelBufSize = ((int) audioFormat.getSampleRate()) / 65 * 2;
-        inBuffer = new byte[channelBufSize];//输入缓冲区
-        frameLength = inputStream.getFrameLength();
-
-        audioLength = (frameLength * 1000) / (long) (audioFormat.getSampleRate());
-
-        // audioInputStream=new MixerAudioInputStream(inputStream);
-    }
-*/
 
 
     /**

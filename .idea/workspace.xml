@@ -9,31 +9,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b249eaa7-b542-446b-a081-2e446aaf85ac" name="变更" comment="429">
-      <change afterPath="$PROJECT_DIR$/docs/FFTReader.drawio" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/FFT系统.xmind" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/test/fft2/Test.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/test/fft2/Utils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/test/fft2/frame/FFTFrame.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/test/fft2/generator/FFTFileGenerator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/test/fft2/generator/FFTGenerator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/test/fft2/generator/FFTRealtimeGenerator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/test/fft2/reader/BufferedFFTReader.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/test/fft2/reader/FFTReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+    <list default="true" id="b249eaa7-b542-446b-a081-2e446aaf85ac" name="变更" comment="">
+      <change afterPath="$PROJECT_DIR$/docs/.$bpm检测算法.drawio.bkp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/bpm检测算法.drawio" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/matlab/bpmTest.mlx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/matlab/matlab.mat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/matlab/untitled.fig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/github/zxorganization/test/ゆびきり-1c_32I.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testresources/ここなつ - キミヱゴサーチ_01_vocals.pkf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/test/bpm/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/test/bpm/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/test/bpm/Bpm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/test/bpm/Bpm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/test/fft/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/test/fft/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/test/fft/FFT.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/test/fft/FFT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/github/zxorganization/test/bpm/App.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/github/zxorganization/test/bpm/App.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/github/zxorganization/test/bpm/Bpm.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/github/zxorganization/test/bpm/Bpm.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/github/zxorganization/test/fft/App.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/github/zxorganization/test/fft/App.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/github/zxorganization/test/fft/FFT.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/github/zxorganization/test/fft/FFT.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testresources/ゆびきり_drums_01.pkf" beforeDir="false" afterPath="$PROJECT_DIR$/testresources/ゆびきり_drums_01.pkf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testresources/ゆびきり_drums_01.wav" beforeDir="false" afterPath="$PROJECT_DIR$/testresources/ゆびきり_drums_01.wav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/bpm检测算法" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/sound/audiomixer/AudioChannel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/sound/audiomixer/AudioChannel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +60,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Projects/AudioMixer&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Projects&quot;,
     &quot;project.structure.last.edited&quot;: &quot;工件&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.17&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.32979977&quot;,
@@ -214,7 +200,10 @@
       <workItem from="1682656290388" duration="15388000" />
       <workItem from="1682675108822" duration="19000" />
       <workItem from="1682768667792" duration="17340000" />
-      <workItem from="1682821053420" duration="1321000" />
+      <workItem from="1682821053420" duration="3264000" />
+      <workItem from="1683049542965" duration="10000" />
+      <workItem from="1684380810593" duration="484000" />
+      <workItem from="1684381617649" duration="4515000" />
     </task>
     <task id="LOCAL-00001" summary="重新刷新构建项目">
       <created>1680175856963</created>
@@ -279,7 +268,14 @@
       <option name="project" value="LOCAL" />
       <updated>1680274456990</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="430">
+      <created>1682823420635</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1682823420635</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -303,7 +299,8 @@
     <MESSAGE value="修改" />
     <MESSAGE value="跟新 开发文档 还有 UI界面" />
     <MESSAGE value="429" />
-    <option name="LAST_COMMIT_MESSAGE" value="429" />
+    <MESSAGE value="430" />
+    <option name="LAST_COMMIT_MESSAGE" value="430" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
