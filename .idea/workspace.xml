@@ -10,11 +10,36 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b249eaa7-b542-446b-a081-2e446aaf85ac" name="变更" comment="变更">
+      <change afterPath="$PROJECT_DIR$/src/main/java/team/zxorg/zxnoter/test/fft2/generator/FFTFileGenerator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/team/zxorg/zxnoter/test/fft2/generator/FFTGenerator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/ZXNoter-UI.xd" beforeDir="false" afterPath="$PROJECT_DIR$/docs/ZXNoter-UI.xd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/ZXNoterDoc.xmind" beforeDir="false" afterPath="$PROJECT_DIR$/docs/ZXNoterDoc.xmind" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/test/fft/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/test/fft/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/github/zxorganization/test/bpm/Bpm.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/github/zxorganization/test/bpm/Bpm.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/META-INF/MANIFEST.MF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/team/zxorg/zxnoter/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/sound/audiomixer/AudioChannel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/team/zxorg/zxnoter/test/sound/audiomixer/AudioChannel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/sound/audiomixer/AudioDataStream.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/team/zxorg/zxnoter/test/sound/audiomixer/AudioDataStream.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/sound/audiomixer/AudioMixer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/team/zxorg/zxnoter/test/sound/audiomixer/AudioMixer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/sound/audiomixer/BytesUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/team/zxorg/zxnoter/test/sound/audiomixer/BytesUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/sound/audiomixer/Sonic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/team/zxorg/zxnoter/test/sound/audiomixer/Sonic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/test/bpm/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/team/zxorg/zxnoter/test/bpm/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/test/bpm/Bpm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/team/zxorg/zxnoter/test/bpm/Bpm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/test/fft/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/team/zxorg/zxnoter/test/fft/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/test/fft/App2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/team/zxorg/zxnoter/test/fft/App2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/test/fft/AudioV.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/team/zxorg/zxnoter/test/fft/AudioV.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/test/fft/Complex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/team/zxorg/zxnoter/test/fft/Complex.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/test/fft/FFT.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/team/zxorg/zxnoter/test/fft/FFT.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/test/fft/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/team/zxorg/zxnoter/test/fft/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/test/fft2/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/team/zxorg/zxnoter/test/fft2/Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/test/fft2/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/team/zxorg/zxnoter/test/fft2/Utils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/test/fft2/frame/FFTFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/team/zxorg/zxnoter/test/fft2/frame/FFTFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/test/fft2/generator/FFTFileGenerator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/test/fft2/generator/FFTGenerator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/test/fft2/generator/FFTRealtimeGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/team/zxorg/zxnoter/test/fft2/generator/FFTRealtimeGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/test/fft2/reader/BufferedFFTReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/team/zxorg/zxnoter/test/fft2/reader/BufferedFFTReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/test/fft2/reader/FFTReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/team/zxorg/zxnoter/test/fft2/reader/FFTReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/ui/ZXNoterApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/team/zxorg/zxnoter/ui/ZXNoterApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/utils/FxUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/team/zxorg/zxnoter/utils/FxUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/MANIFEST.MF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/github/zxorganization/test/ゆびきり-1c_32I.wav" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,26 +108,13 @@
       <recent name="com.github.zxorganization" />
     </key>
   </component>
-  <component name="RunManager" selected="应用程序.Bpm">
+  <component name="RunManager" selected="应用程序.team.zxorg.zxnoter.test.bpm.Bpm">
     <configuration name="Bpm" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.github.zxorganization.test.bpm.Bpm" />
       <module name="ZXNoter" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.github.zxorganization.test.bpm.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="BufferedFFTReader" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.github.zxorganization.test.fft2.reader.BufferedFFTReader" />
-      <module name="ZXNoter" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.github.zxorganization.test.fft2.reader.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -149,13 +161,26 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="team.zxorg.zxnoter.test.bpm.Bpm" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="team.zxorg.zxnoter.test.bpm.Bpm" />
+      <module name="ZXNoter" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="team.zxorg.zxnoter.test.bpm.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="应用程序.team.zxorg.zxnoter.test.bpm.Bpm" />
         <item itemvalue="应用程序.Bpm" />
         <item itemvalue="应用程序.Main" />
         <item itemvalue="应用程序.com.github.zxorganization.test.bpm.App" />
         <item itemvalue="应用程序.Test" />
-        <item itemvalue="应用程序.BufferedFFTReader" />
       </list>
     </recent_temporary>
   </component>
@@ -206,7 +231,7 @@
       <workItem from="1686093115006" duration="6000" />
       <workItem from="1686156510769" duration="91000" />
       <workItem from="1686156608880" duration="1058000" />
-      <workItem from="1686160376718" duration="1896000" />
+      <workItem from="1686160376718" duration="2466000" />
     </task>
     <task id="LOCAL-00001" summary="重新刷新构建项目">
       <created>1680175856963</created>
@@ -292,7 +317,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686156769810</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="变更">
+      <created>1686162293272</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1686162293272</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
