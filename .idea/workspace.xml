@@ -9,14 +9,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b249eaa7-b542-446b-a081-2e446aaf85ac" name="变更" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/test/bpm/Main.java" afterDir="false" />
+    <list default="true" id="b249eaa7-b542-446b-a081-2e446aaf85ac" name="变更" comment="变更">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/ZXNoter-UI.xd" beforeDir="false" afterPath="$PROJECT_DIR$/docs/ZXNoter-UI.xd" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/ZXNoterDoc.xmind" beforeDir="false" afterPath="$PROJECT_DIR$/docs/ZXNoterDoc.xmind" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/github/zxorganization/sound/audiomixer/AudioChannel$EndBehavior.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/github/zxorganization/sound/audiomixer/AudioChannel$EndBehavior.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/github/zxorganization/sound/audiomixer/AudioChannel$PlayState.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/github/zxorganization/sound/audiomixer/AudioChannel$PlayState.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/github/zxorganization/sound/audiomixer/AudioChannel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/github/zxorganization/sound/audiomixer/AudioChannel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/github/zxorganization/test/fft2/Test.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/github/zxorganization/test/fft2/Test.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/test/fft/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/test/fft/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/github/zxorganization/test/bpm/Bpm.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/github/zxorganization/test/bpm/Bpm.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -207,6 +205,8 @@
       <workItem from="1686092752991" duration="356000" />
       <workItem from="1686093115006" duration="6000" />
       <workItem from="1686156510769" duration="91000" />
+      <workItem from="1686156608880" duration="1058000" />
+      <workItem from="1686160376718" duration="1896000" />
     </task>
     <task id="LOCAL-00001" summary="重新刷新构建项目">
       <created>1680175856963</created>
@@ -278,7 +278,21 @@
       <option name="project" value="LOCAL" />
       <updated>1682823420635</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="变更">
+      <created>1686156690787</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1686156690787</updated>
+    </task>
+    <task id="LOCAL-00012" summary="变更">
+      <created>1686156769810</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1686156769810</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -303,7 +317,8 @@
     <MESSAGE value="跟新 开发文档 还有 UI界面" />
     <MESSAGE value="429" />
     <MESSAGE value="430" />
-    <option name="LAST_COMMIT_MESSAGE" value="430" />
+    <MESSAGE value="变更" />
+    <option name="LAST_COMMIT_MESSAGE" value="变更" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

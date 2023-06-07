@@ -82,7 +82,6 @@ public class App extends Application {
 
 
 
-
        /* TargetDataLine targetDataLine;
         AudioFormat audioFormat = new AudioFormat(48000, 16, 1, true, false);
         DataLine.Info dataLineInfo = new DataLine.Info(TargetDataLine.class, audioFormat);
