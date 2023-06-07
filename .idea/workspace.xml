@@ -85,7 +85,7 @@
       <recent name="com.github.zxorganization" />
     </key>
   </component>
-  <component name="RunManager" selected="应用程序.Main">
+  <component name="RunManager" selected="应用程序.Bpm">
     <configuration name="Bpm" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.github.zxorganization.test.bpm.Bpm" />
       <module name="ZXNoter" />
@@ -153,11 +153,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="应用程序.Bpm" />
         <item itemvalue="应用程序.Main" />
         <item itemvalue="应用程序.com.github.zxorganization.test.bpm.App" />
         <item itemvalue="应用程序.Test" />
         <item itemvalue="应用程序.BufferedFFTReader" />
-        <item itemvalue="应用程序.Bpm" />
       </list>
     </recent_temporary>
   </component>
