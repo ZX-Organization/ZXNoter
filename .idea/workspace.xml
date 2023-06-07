@@ -10,16 +10,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b249eaa7-b542-446b-a081-2e446aaf85ac" name="变更" comment="">
-      <change afterPath="$PROJECT_DIR$/docs/.$bpm检测算法.drawio.bkp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/bpm检测算法.drawio" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/matlab/bpmTest.mlx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/matlab/matlab.mat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/matlab/untitled.fig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/github/zxorganization/test/ゆびきり-1c_32I.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/testresources/ここなつ - キミヱゴサーチ_01_vocals.pkf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/test/bpm/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/bpm检测算法" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/sound/audiomixer/AudioChannel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/zxorganization/sound/audiomixer/AudioChannel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/ZXNoterDoc.xmind" beforeDir="false" afterPath="$PROJECT_DIR$/docs/ZXNoterDoc.xmind" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/github/zxorganization/sound/audiomixer/AudioChannel$EndBehavior.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/github/zxorganization/sound/audiomixer/AudioChannel$EndBehavior.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/github/zxorganization/sound/audiomixer/AudioChannel$PlayState.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/github/zxorganization/sound/audiomixer/AudioChannel$PlayState.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/github/zxorganization/sound/audiomixer/AudioChannel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/github/zxorganization/sound/audiomixer/AudioChannel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/github/zxorganization/test/fft2/Test.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/github/zxorganization/test/fft2/Test.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,20 +85,7 @@
       <recent name="com.github.zxorganization" />
     </key>
   </component>
-  <component name="RunManager" selected="应用程序.Test">
-    <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.github.zxorganization.test.fft.App" />
-      <module name="ZXNoter" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.github.zxorganization.test.fft2.generator.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="应用程序.Main">
     <configuration name="Bpm" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.github.zxorganization.test.bpm.Bpm" />
       <module name="ZXNoter" />
@@ -128,6 +112,19 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.github.zxorganization.test.bpm.Main" />
+      <module name="ZXNoter" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.github.zxorganization.test.bpm.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.github.zxorganization.test.fft2.Test" />
       <module name="ZXNoter" />
@@ -141,12 +138,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="com.github.zxorganization.test.fft.Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.github.zxorganization.test.fft.Main" />
+    <configuration name="com.github.zxorganization.test.bpm.App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.github.zxorganization.test.bpm.App" />
       <module name="ZXNoter" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.github.zxorganization.test.fft2.generator.*" />
+          <option name="PATTERN" value="com.github.zxorganization.test.bpm.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -156,11 +153,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="应用程序.Main" />
+        <item itemvalue="应用程序.com.github.zxorganization.test.bpm.App" />
         <item itemvalue="应用程序.Test" />
         <item itemvalue="应用程序.BufferedFFTReader" />
         <item itemvalue="应用程序.Bpm" />
-        <item itemvalue="应用程序.com.github.zxorganization.test.fft.Main" />
-        <item itemvalue="应用程序.App" />
       </list>
     </recent_temporary>
   </component>
@@ -204,6 +201,12 @@
       <workItem from="1683049542965" duration="10000" />
       <workItem from="1684380810593" duration="484000" />
       <workItem from="1684381617649" duration="4515000" />
+      <workItem from="1685044324893" duration="634000" />
+      <workItem from="1685257136185" duration="1216000" />
+      <workItem from="1686077167237" duration="608000" />
+      <workItem from="1686092752991" duration="356000" />
+      <workItem from="1686093115006" duration="6000" />
+      <workItem from="1686156510769" duration="91000" />
     </task>
     <task id="LOCAL-00001" summary="重新刷新构建项目">
       <created>1680175856963</created>
