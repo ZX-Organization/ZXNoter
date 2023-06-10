@@ -1,6 +1,6 @@
 <component name="libraryTable">
   <library name="openjfx.javafx.graphics" type="repository">
-    <properties maven-id="org.openjfx:javafx-graphics:LATEST" />
+    <properties maven-id="org.openjfx:javafx-graphics:21-ea+17" />
     <CLASSES>
       <root url="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-graphics/21-ea+17/javafx-graphics-21-ea+17.jar!/" />
       <root url="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-graphics/21-ea+17/javafx-graphics-21-ea+17-win.jar!/" />

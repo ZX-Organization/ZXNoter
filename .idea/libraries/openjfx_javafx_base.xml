@@ -1,6 +1,6 @@
 <component name="libraryTable">
   <library name="openjfx.javafx.base" type="repository">
-    <properties maven-id="org.openjfx:javafx-base:LATEST" />
+    <properties maven-id="org.openjfx:javafx-base:21-ea+17" />
     <CLASSES>
       <root url="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-base/21-ea+17/javafx-base-21-ea+17.jar!/" />
       <root url="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-base/21-ea+17/javafx-base-21-ea+17-win.jar!/" />

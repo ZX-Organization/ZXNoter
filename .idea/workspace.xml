@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="383ca631-0730-40fc-9c0d-eb28702ab707" name="更改" comment="" />
+    <list default="true" id="383ca631-0730-40fc-9c0d-eb28702ab707" name="更改" comment="test">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -35,6 +40,7 @@
     &quot;project.structure.last.edited&quot;: &quot;库&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.17&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.32979977&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -67,6 +73,8 @@
       <workItem from="1686419464744" duration="99000" />
       <workItem from="1686419626770" duration="217000" />
       <workItem from="1686419870060" duration="372000" />
+      <workItem from="1686420717427" duration="146000" />
+      <workItem from="1686420869537" duration="539000" />
     </task>
     <task id="LOCAL-00001" summary="test">
       <created>1686419932018</created>
