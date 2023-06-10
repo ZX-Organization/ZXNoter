@@ -1,6 +1,6 @@
 <component name="libraryTable">
   <library name="apache.httpcomponents.client5.httpclient5" type="repository">
-    <properties maven-id="org.apache.httpcomponents.client5:httpclient5:LATEST" />
+    <properties maven-id="org.apache.httpcomponents.client5:httpclient5:5.2.1" />
     <CLASSES>
       <root url="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/client5/httpclient5/5.2.1/httpclient5-5.2.1.jar!/" />
       <root url="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/core5/httpcore5/5.2/httpcore5-5.2.jar!/" />
