@@ -1,11 +1,17 @@
 <component name="libraryTable">
   <library name="openjfx.javafx.base" type="repository">
-    <properties maven-id="org.openjfx:javafx-base:21-ea+5" />
+    <properties maven-id="org.openjfx:javafx-base:LATEST" />
     <CLASSES>
-      <root url="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-base/21-ea+5/javafx-base-21-ea+5.jar!/" />
-      <root url="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-base/21-ea+5/javafx-base-21-ea+5-win.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-base/21-ea+17/javafx-base-21-ea+17.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-base/21-ea+17/javafx-base-21-ea+17-win.jar!/" />
     </CLASSES>
-    <JAVADOC />
-    <SOURCES />
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-base/21-ea+17/javafx-base-21-ea+17-javadoc.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-base/21-ea+17/javafx-base-21-ea+17-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-base/21-ea+17/javafx-base-21-ea+17-sources.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-base/21-ea+17/javafx-base-21-ea+17-sources.jar!/" />
+    </SOURCES>
   </library>
 </component>
