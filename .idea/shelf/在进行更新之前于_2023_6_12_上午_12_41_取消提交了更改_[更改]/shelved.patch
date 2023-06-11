@@ -1,0 +1,14 @@
+Index: src/CustomTitleBarExample.java
+===================================================================
+diff --git a/src/CustomTitleBarExample.java b/src/CustomTitleBarExample.java
+--- a/src/CustomTitleBarExample.java	
++++ b/src/CustomTitleBarExample.java	
+@@ -86,7 +86,7 @@
+     private void addWindowLayoutListener() {
+         frame.addComponentListener(new ComponentAdapter() {
+             public void componentMoved(ComponentEvent e) {
+-                checkWindowLayout();
++                //checkWindowLayout();
+             }
+         });
+     }
