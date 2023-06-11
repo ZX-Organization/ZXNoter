@@ -1,89 +1,130 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
 public class CustomTitleBarExample {
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                createAndShowGUI();
-            }
-        });
+
+    private JFrame frame;
+    private JPanel titleBarPanel;
+
+    private int dragOffsetX;
+    private int dragOffsetY;
+
+    public CustomTitleBarExample() {
+        createAndShowGUI();
     }
 
-    private static void createAndShowGUI() {
-        JFrame frame = new JFrame("Custom Title Bar Example");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    private void createAndShowGUI() {
+        // 创建 JFrame
+        frame = new JFrame();
         frame.setSize(400, 300);
-        frame.setLocationRelativeTo(null); // 居中显示
+        frame.setLocationRelativeTo(null);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setUndecorated(true); // 设置为无装饰窗口
 
-        // 创建自定义的标题栏面板
-        TitleBarPanel titleBarPanel = new TitleBarPanel(frame);
+        // 创建自定义标题栏面板
+        titleBarPanel = createTitleBarPanel();
+        frame.add(titleBarPanel, BorderLayout.NORTH);
 
-        // 获取JRootPane并设置自定义的JMenuBar
-        JRootPane rootPane = frame.getRootPane();
-        rootPane.setJMenuBar(new CustomMenuBar(titleBarPanel));
+        // 添加鼠标事件监听器
+        addDragWindowListeners(titleBarPanel);
 
-        // 将自定义的标题栏面板添加到JFrame的contentPane
-        frame.setContentPane(titleBarPanel);
+        // 添加内容面板
+        JPanel contentPanel = new JPanel();
+        contentPanel.setBackground(Color.WHITE);
+        frame.add(contentPanel, BorderLayout.CENTER);
 
+        // 添加窗口布局设置监听器
+        addWindowLayoutListener();
+
+        // 显示窗口
         frame.setVisible(true);
     }
-}
 
-// 自定义标题栏面板
-class TitleBarPanel extends JPanel {
-    private JFrame frame;
-    private JLabel titleLabel;
-    private JButton customButton;
+    private JPanel createTitleBarPanel() {
+        JPanel panel = new JPanel();
+        panel.setBackground(Color.LIGHT_GRAY);
+        panel.setLayout(new BorderLayout());
 
-    public TitleBarPanel(JFrame frame) {
-        this.frame = frame;
-        initialize();
-    }
-
-    private void initialize() {
-        setLayout(new BorderLayout());
-        setPreferredSize(new Dimension(0, 30)); // 设置标题栏高度
-
-        // 创建标题栏上的组件
-        titleLabel = new JLabel(frame.getTitle());
-        customButton = new JButton("Custom Button");
-
-        // 设置标题栏的样式
+        // 创建标题文本
+        JLabel titleLabel = new JLabel("Custom Title Bar");
         titleLabel.setForeground(Color.WHITE);
-        titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        titleLabel.setFont(new Font("Arial", Font.BOLD, 16));
-        setBackground(Color.DARK_GRAY);
+        panel.add(titleLabel, BorderLayout.CENTER);
 
-        // 添加组件到标题栏面板
-        add(titleLabel, BorderLayout.CENTER);
-        add(customButton, BorderLayout.EAST);
-    }
-}
-
-// 自定义JMenuBar
-class CustomMenuBar extends JMenuBar {
-    private TitleBarPanel titleBarPanel;
-
-    public CustomMenuBar(TitleBarPanel titleBarPanel) {
-        this.titleBarPanel = titleBarPanel;
-        initialize();
-    }
-
-    private void initialize() {
-        JMenu menu = new JMenu("Window");
-        JMenuItem menuItem = new JMenuItem("Custom Action");
-        menuItem.addActionListener(new ActionListener() {
-            @Override
+        // 创建按钮
+        JButton closeButton = new JButton("X");
+        closeButton.setFocusable(false);
+        closeButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // 处理自定义动作
-                JOptionPane.showMessageDialog(titleBarPanel, "Custom Action Clicked!");
+                System.exit(0);
             }
         });
-        menu.add(menuItem);
-        add(menu);
+        panel.add(closeButton, BorderLayout.EAST);
+
+        return panel;
+    }
+
+    private void addDragWindowListeners(Component component) {
+        component.addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent e) {
+                dragOffsetX = e.getX();
+                dragOffsetY = e.getY();
+            }
+        });
+
+        component.addMouseMotionListener(new MouseMotionAdapter() {
+            public void mouseDragged(MouseEvent e) {
+                Point currentPos = frame.getLocation();
+                int offsetX = e.getXOnScreen() - dragOffsetX;
+                int offsetY = e.getYOnScreen() - dragOffsetY;
+                Point newPos = new Point(offsetX, offsetY);
+                frame.setLocation(newPos);
+            }
+        });
+    }
+
+    private void addWindowLayoutListener() {
+        frame.addComponentListener(new ComponentAdapter() {
+            public void componentMoved(ComponentEvent e) {
+                checkWindowLayout();
+            }
+        });
+    }
+
+    private void checkWindowLayout() {
+        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        GraphicsDevice defaultScreen = ge.getDefaultScreenDevice();
+        Rectangle bounds = defaultScreen.getDefaultConfiguration().getBounds();
+        int screenWidth = bounds.width;
+        int screenHeight = bounds.height;
+        int windowX = frame.getX();
+        int windowY = frame.getY();
+        int windowWidth = frame.getWidth();
+        int windowHeight = frame.getHeight();
+
+        // 检查窗口是否靠近屏幕边缘
+        if (windowX <= 10) {
+            // 窗口靠近屏幕左边缘
+            frame.setLocation(0, windowY);
+        } else if (windowX >= screenWidth - windowWidth - 10) {
+            // 窗口靠近屏幕右边缘
+            frame.setLocation(screenWidth - windowWidth, windowY);
+        }
+
+        if (windowY <= 10) {
+            // 窗口靠近屏幕上边缘
+            frame.setLocation(windowX, 0);
+        } else if (windowY >= screenHeight - windowHeight - 10) {
+            // 窗口靠近屏幕下边缘
+            frame.setLocation(windowX, screenHeight - windowHeight);
+        }
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                new CustomTitleBarExample();
+            }
+        });
     }
 }
