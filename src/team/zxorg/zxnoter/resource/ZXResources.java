@@ -1,9 +1,5 @@
 package team.zxorg.zxnoter.resource;
 
-import java.util.HashMap;
-
-public class ZXResources {
-
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.SVGPath;
 import javafx.scene.shape.Shape;
@@ -18,40 +14,30 @@ import java.util.function.Consumer;
 public class ZXResources {
     public static void loadResourcePackage(Path resourcePackagePath) {
         try {
-            Files.walk(resourcePackagePath, 1).forEach(path -> {
+            Files.walk(resourcePackagePath).forEach(path -> {
                 try {
-                    if (!path.equals(resourcePackagePath)) {
-                        if (Files.isDirectory(path)) {
-                            String type = path.getFileName().toString();
-                            if (type.equals("img")) {
+                    if (!Files.isDirectory(path)) {
+                        String type = path.getFileName().toString();
+                        type = type.substring(type.lastIndexOf(".") + 1).toLowerCase();
+                        String key = path.subpath(resourcePackagePath.getNameCount(), path.getNameCount()).toString();
+                        key = key.substring(0, key.lastIndexOf(".")).replaceAll("[\\\\/]", ".").toLowerCase();
+                        if (type.equals("png")) {
 
-                            } else if (type.equals("lang")) {
+                        } else if (type.equals("lang")) {
 
-                            } else if (type.equals("svg")) {
-                                loadSvg(path);
-                            }
+                        } else if (type.equals("svg")) {
+                            SVGPath svg = new SVGPath();
+                            svg.setContent(Utils.readSvg(path));
+                            allThings.put(key, svg);
                         }
                     }
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
             });
-            Utils.depthTraversal(resourcePackagePath, (filePath, subPath) -> {
-                /*System.out.println(filePath);
-                System.out.println(subPath);*/
-            });
-
-
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    private static void loadSvg(Path svgPath) throws IOException {
-        Files.walk(svgPath).forEach(filePath -> {
-            filePath.subpath(svgPath.getNameCount(), filePath.getNameCount());
-            System.out.println(filePath);
-        });
     }
 
     public static HashMap<String, Object> allThings = new HashMap<>();
@@ -67,7 +53,7 @@ public class ZXResources {
         if (allThings.get(key) instanceof Shape shape)
             iconPane.setShape(shape);
         else
-            iconPane = getSvgPane("system.question-line");
+            iconPane = getSvgPane("svg.icons.system.question-line");
         return iconPane;
     }
 }
