@@ -5,13 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="383ca631-0730-40fc-9c0d-eb28702ab707" name="更改" comment="test">
-      <change afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/note/BaseNote.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/reference/jitaimei/0/1556074008.mc" beforeDir="false" afterPath="$PROJECT_DIR$/docs/reference/jitaimei/0/1556074008.mc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" />
-    </list>
-    <list id="d353b375-46ce-4a9f-ab70-1baf89729b76" name="zedoC 进行的更改" comment="">
-      <change afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CustomTitleBarExample.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CustomTitleBarExample.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,46 +27,47 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2R1YotfL7yBLOwfMshyHIzAN8uh" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Downloaded.Files.Path.Enabled": "false",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "jdk.selected.JAVA_MODULE": "19",
-    "last_opened_file_path": "F:/AllProjects/ZX-Organization/ZXNoter",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "库",
-    "project.structure.proportion": "0.17",
-    "project.structure.side.proportion": "0.32979977",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;19&quot;,
+    &quot;last_opened_file_path&quot;: &quot;F:/AllProjects/ZX-Organization/ZXNoter&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;库&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.17&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.32979977&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="zxnoter" />
+    <configuration name="CustomTitleBarExample" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="CustomTitleBarExample" />
+      <module name="ZXNoter" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="zxnoter" />
-      <option name="filePath" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="应用程序.CustomTitleBarExample" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -88,10 +84,8 @@
       <workItem from="1686419626770" duration="217000" />
       <workItem from="1686419870060" duration="372000" />
       <workItem from="1686420717427" duration="146000" />
-      <workItem from="1686420869537" duration="621000" />
-      <workItem from="1686496404001" duration="59000" />
-      <workItem from="1686496517395" duration="245000" />
-      <workItem from="1686497938555" duration="857000" />
+      <workItem from="1686420869537" duration="539000" />
+      <workItem from="1686472053305" duration="887000" />
     </task>
     <task id="LOCAL-00001" summary="test">
       <created>1686419932018</created>
@@ -101,18 +95,18 @@
       <updated>1686419932018</updated>
     </task>
     <task id="LOCAL-00002" summary="test">
-      <created>1686421419592</created>
+      <created>1686472136608</created>
       <option name="number" value="00002" />
       <option name="presentableId" value="LOCAL-00002" />
       <option name="project" value="LOCAL" />
-      <updated>1686421419592</updated>
+      <updated>1686472136608</updated>
     </task>
     <task id="LOCAL-00003" summary="test">
-      <created>1686421424639</created>
+      <created>1686472330472</created>
       <option name="number" value="00003" />
       <option name="presentableId" value="LOCAL-00003" />
       <option name="project" value="LOCAL" />
-      <updated>1686421424639</updated>
+      <updated>1686472330472</updated>
     </task>
     <option name="localTasksCounter" value="4" />
     <servers />
