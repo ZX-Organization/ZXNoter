@@ -4,8 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="383ca631-0730-40fc-9c0d-eb28702ab707" name="更改" comment="">
+    <list default="true" id="383ca631-0730-40fc-9c0d-eb28702ab707" name="更改" comment="update">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/map/LocalizedInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/map/LocalizedMapInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/note/BaseNote.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/note/BaseNote.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/note/fixedorbit/FixedOrbitNote.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/note/fixedorbit/FixedOrbitNote.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/note/fixedorbit/LongNote.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/note/fixedorbit/LongNote.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/note/fixedorbit/SlideNote.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/note/fixedorbit/SlideNote.java" afterDir="false" />
+    </list>
+    <list id="2bad2e98-5b47-464b-b736-3f62dd865ba7" name="zedoC 进行的更改" comment="zedoC 进行的更改" />
+    <list default="true" id="383ca631-0730-40fc-9c0d-eb28702ab707" name="更改" comment="test">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2023_6_11_2_09____.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/_2023_6_11_2_09____.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/ZXNApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/ZXNApp.java" afterDir="false" />
     </list>
     <list id="2bad2e98-5b47-464b-b736-3f62dd865ba7" name="zedoC 进行的更改" comment="" />
@@ -53,6 +66,10 @@
     "project.structure.last.edited": "项目",
     "project.structure.proportion": "0.17",
     "project.structure.side.proportion": "0.32979977",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
     "settings.editor.selected.configurable": "configurable.group.appearance",
     "vue.rearranger.settings.migration": "true"
   }
@@ -139,13 +156,20 @@
       <updated>1686472330472</updated>
     </task>
     <task id="LOCAL-00004" summary="update">
-      <created>1686502904981</created>
+      <created>1686501635641</created>
       <option name="number" value="00004" />
       <option name="presentableId" value="LOCAL-00004" />
       <option name="project" value="LOCAL" />
-      <updated>1686502904981</updated>
+      <updated>1686501635641</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="zedoC 进行的更改">
+      <created>1686501639407</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1686501639407</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -165,8 +189,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="test" />
     <MESSAGE value="creat some files" />
-    <MESSAGE value="zedoC 进行的更改" />
     <MESSAGE value="update" />
-    <option name="LAST_COMMIT_MESSAGE" value="update" />
+    <MESSAGE value="zedoC 进行的更改" />
+    <option name="LAST_COMMIT_MESSAGE" value="zedoC 进行的更改" />
   </component>
 </project>

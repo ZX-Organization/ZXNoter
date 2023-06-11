@@ -1,5 +1,8 @@
 package team.zxorg.zxnoter.note.fixedorbit;
 
+/**
+ * 滑键
+ */
 public class SlideNote extends FixedOrbitNote{
     /**
      * 滑键参数,正右负左
