@@ -22,9 +22,11 @@ public class CustomTitleBarExample {
         // 创建自定义的标题栏面板
         TitleBarPanel titleBarPanel = new TitleBarPanel(frame);
 
-        // 设置自定义的标题栏面板作为 JFrame 的装饰器
-        frame.setUndecorated(true);
-        frame.getRootPane().setWindowDecorationStyle(JRootPane.NONE);
+        // 获取JRootPane并设置自定义的JMenuBar
+        JRootPane rootPane = frame.getRootPane();
+        rootPane.setJMenuBar(new CustomMenuBar(titleBarPanel));
+
+        // 将自定义的标题栏面板添加到JFrame的contentPane
         frame.setContentPane(titleBarPanel);
 
         frame.setVisible(true);
@@ -35,7 +37,7 @@ public class CustomTitleBarExample {
 class TitleBarPanel extends JPanel {
     private JFrame frame;
     private JLabel titleLabel;
-    private JButton closeButton;
+    private JButton customButton;
 
     public TitleBarPanel(JFrame frame) {
         this.frame = frame;
@@ -48,7 +50,7 @@ class TitleBarPanel extends JPanel {
 
         // 创建标题栏上的组件
         titleLabel = new JLabel(frame.getTitle());
-        closeButton = new JButton("Close");
+        customButton = new JButton("Custom Button");
 
         // 设置标题栏的样式
         titleLabel.setForeground(Color.WHITE);
@@ -56,16 +58,32 @@ class TitleBarPanel extends JPanel {
         titleLabel.setFont(new Font("Arial", Font.BOLD, 16));
         setBackground(Color.DARK_GRAY);
 
-        // 添加关闭按钮的点击事件处理
-        closeButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.exit(0);
-            }
-        });
-
         // 添加组件到标题栏面板
         add(titleLabel, BorderLayout.CENTER);
-        add(closeButton, BorderLayout.EAST);
+        add(customButton, BorderLayout.EAST);
+    }
+}
+
+// 自定义JMenuBar
+class CustomMenuBar extends JMenuBar {
+    private TitleBarPanel titleBarPanel;
+
+    public CustomMenuBar(TitleBarPanel titleBarPanel) {
+        this.titleBarPanel = titleBarPanel;
+        initialize();
+    }
+
+    private void initialize() {
+        JMenu menu = new JMenu("Window");
+        JMenuItem menuItem = new JMenuItem("Custom Action");
+        menuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // 处理自定义动作
+                JOptionPane.showMessageDialog(titleBarPanel, "Custom Action Clicked!");
+            }
+        });
+        menu.add(menuItem);
+        add(menu);
     }
 }
