@@ -14,4 +14,12 @@ public class Timing {
         this.timingStamp = timingStamp;
         this.bpmRatio = bpmRatio;
     }
+
+    @Override
+    public String toString() {
+        return "Timing{" +
+                "时间戳=" + timingStamp +
+                ", bpm倍率=" + bpmRatio +
+                '}';
+    }
 }

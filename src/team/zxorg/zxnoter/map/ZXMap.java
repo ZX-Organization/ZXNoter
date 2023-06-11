@@ -14,6 +14,7 @@ public class ZXMap {
      * 所有时间点
      */
     ArrayList<Timing> timingPoints;
+    LocalizedMapInfo localizedMapInfo;
 
 
 }

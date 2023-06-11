@@ -4,14 +4,55 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="295bcb0d-2118-4e02-b35e-a9da4569b815" name="更改" comment="update">
-      <change afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/io/reader/McReader.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/io/reader/OsuReader.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/io/writer/ImdWriter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/io/writer/McWriter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/io/writer/OsuWriter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/note/freeorbit/FreeOrbitNote.java" afterDir="false" />
+    <list default="true" id="295bcb0d-2118-4e02-b35e-a9da4569b815" name="更改" comment="a">
+      <change afterPath="$PROJECT_DIR$/docs/reference/Contrapasso -paradiso-/Contrapasso -paradiso-.zip" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/reference/Contrapasso -paradiso-/IvmData/Bass/bass.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/reference/Contrapasso -paradiso-/IvmData/Bass/bassmix.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/reference/Contrapasso -paradiso-/IvmData/Bass/basswma.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/reference/Contrapasso -paradiso-/IvmData/BpmAnalyzer/BpmAnalyzer.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/reference/Contrapasso -paradiso-/IvmData/BpmAnalyzer/FMp3Dec.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/reference/Contrapasso -paradiso-/IvmData/BpmAnalyzer/WmFile.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/reference/Contrapasso -paradiso-/IvmData/BpmAnalyzer/unicows.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/reference/Contrapasso -paradiso-/IvmData/imd.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/reference/Contrapasso -paradiso-/IvmData/ivm.ini" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/reference/Contrapasso -paradiso-/WinRing0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/reference/Contrapasso -paradiso-/WinRing0.sys" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/reference/Contrapasso -paradiso-/WinRing0.vxd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/reference/Contrapasso -paradiso-/WinRing0x64.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/reference/Contrapasso -paradiso-/WinRing0x64.sys" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/reference/Contrapasso -paradiso-/t+pazolite - Contrapasso -paradiso-.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/reference/Contrapasso -paradiso-/t+pazolite - Contrapasso -paradiso-.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/reference/Contrapasso -paradiso-/t+pazolite - Contrapasso -paradiso-_4k_hd.bak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/reference/Contrapasso -paradiso-/t+pazolite - Contrapasso -paradiso-_4k_hd.imd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/reference/Corruption/Corruption.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/reference/Corruption/Corruption.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/reference/Corruption/Corruption.zip" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/reference/Corruption/Corruption_4k_ez.bak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/reference/Corruption/Corruption_4k_ez.imd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/reference/Corruption/Corruption_4k_hd.bak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/reference/Corruption/Corruption_cover.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/reference/Corruption/Corruption_title_ipad.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/reference/Corruption/IvmData/Bass/bass.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/reference/Corruption/IvmData/Bass/bassmix.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/reference/Corruption/IvmData/Bass/basswma.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/reference/Corruption/IvmData/BpmAnalyzer/BpmAnalyzer.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/reference/Corruption/IvmData/BpmAnalyzer/FMp3Dec.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/reference/Corruption/IvmData/BpmAnalyzer/WmFile.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/reference/Corruption/IvmData/BpmAnalyzer/unicows.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/reference/Corruption/IvmData/imd.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/reference/Corruption/IvmData/ivm.ini" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/reference/Corruption/WinRing0.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/reference/Corruption/WinRing0.sys" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/reference/Corruption/WinRing0.vxd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/reference/Corruption/WinRing0x64.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/reference/Corruption/WinRing0x64.sys" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/io/reader/ImdReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/io/reader/ImdReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/map/LocalizedMapInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/map/LocalizedMapInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/map/ZXMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/map/ZXMap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/note/Timing.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/note/Timing.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/resource/ZXResources.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/resource/ZXResources.java" afterDir="false" />
     </list>
     <list id="9563a533-f70b-4cf6-9026-5fb6bd4d4309" name="zedoC 进行的更改" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -23,6 +64,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -34,10 +76,49 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "node.js.selected.package.tslint": "(autodetect)"
+    "last_opened_file_path": "F:/AllProjects/ZX-Organization/ZXNoter/docs/reference",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\AllProjects\ZX-Organization\ZXNoter\docs\reference" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="ImdReader" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="team.zxorg.zxnoter.io.reader.ImdReader" />
+      <module name="ZXNoter" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="team.zxorg.zxnoter.io.reader.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="应用程序.ImdReader" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="TaskManager">
+    <task id="LOCAL-00001" summary="a">
+      <created>1686504112106</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1686504112106</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="a" />
+    <option name="LAST_COMMIT_MESSAGE" value="a" />
   </component>
 </project>
