@@ -4,11 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="383ca631-0730-40fc-9c0d-eb28702ab707" name="更改" comment="test">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2023_6_11_2_09____.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/_2023_6_11_2_09____.xml" afterDir="false" />
+    <list default="true" id="383ca631-0730-40fc-9c0d-eb28702ab707" name="更改" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/ZXNApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/ZXNApp.java" afterDir="false" />
     </list>
     <list id="2bad2e98-5b47-464b-b736-3f62dd865ba7" name="zedoC 进行的更改" comment="" />
@@ -141,7 +138,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686472330472</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="update">
+      <created>1686502904981</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1686502904981</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -162,6 +166,7 @@
     <MESSAGE value="test" />
     <MESSAGE value="creat some files" />
     <MESSAGE value="zedoC 进行的更改" />
-    <option name="LAST_COMMIT_MESSAGE" value="zedoC 进行的更改" />
+    <MESSAGE value="update" />
+    <option name="LAST_COMMIT_MESSAGE" value="update" />
   </component>
 </project>
