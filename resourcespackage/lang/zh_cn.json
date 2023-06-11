@@ -1,0 +1,14 @@
+{
+  "zxn": {
+    "stage": {
+      "main": {
+        "title-bar": {
+          "file-menu": {
+            "file": "文件",
+            "create-project": "新建项目"
+          }
+        }
+      }
+    }
+  }
+}
