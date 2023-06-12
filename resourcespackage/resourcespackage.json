@@ -1,8 +1,8 @@
 {
-  "Name": "ZXNoterDefault",
-  "Author": "ZXOrg",
-  "CreationDate": 1686500384748,
-  "Resource": {
-
+  "type": "guide",
+  "name": "ZXNoterDefault",
+  "author": "ZXOrg",
+  "creationDate": 1686500384748,
+  "resource": {
   }
 }

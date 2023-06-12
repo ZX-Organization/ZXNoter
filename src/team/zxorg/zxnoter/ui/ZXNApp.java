@@ -36,6 +36,7 @@ public class ZXNApp extends Application {
         HBox titlePane = new HBox(icon, icon2);
         titlePane.setBackground(Background.fill(Color.RED));
         titlePane.setPrefSize(Region.USE_COMPUTED_SIZE, 30);
+        titlePane.setMinSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
 
 
         Image image=ZXResources.getImage("sdas");
@@ -57,6 +58,15 @@ public class ZXNApp extends Application {
         stage.setWidth(800);
         stage.setHeight(600);
         stage.show();
+
+
+        System.out.println(ZXResources.getLanguageContent("languageCode.zh_cn","zh_cn"));
+        System.out.println(ZXResources.getLanguageContent("titleBar.menu.file","zh_cn"));
+        System.out.println(ZXResources.getLanguageContent("cnmd","zh_cn"));
+
+        System.out.println(ZXResources.getLanguageContent("languageCode.en_us","en_us"));
+        System.out.println(ZXResources.getLanguageContent("titleBar.menu.file","en_us"));
+        System.out.println(ZXResources.getLanguageContent("cnmd","en_us"));
     }
 
     public static void run() {
