@@ -9,12 +9,19 @@ public class ZXMap {
     /**
      * 所有打击物件
      */
-    ArrayList<BaseNote> hitObjects;
+    public ArrayList<BaseNote> hitObjects = new ArrayList<>();
     /**
      * 所有时间点
      */
-    ArrayList<Timing> timingPoints;
-    LocalizedMapInfo localizedMapInfo;
+    public ArrayList<Timing> timingPoints;
+    public LocalizedMapInfo localizedMapInfo;
 
-
+    @Override
+    public String toString() {
+        return "ZXMap{" +
+                "物件列表=" + hitObjects + '\n' +
+                ", 时间点=" + timingPoints + '\n' +
+                ", 本地化信息=" + localizedMapInfo + '\n' +
+                '}';
+    }
 }

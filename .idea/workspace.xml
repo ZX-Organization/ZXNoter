@@ -5,21 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="295bcb0d-2118-4e02-b35e-a9da4569b815" name="更改" comment="update">
-      <change afterPath="$PROJECT_DIR$/resourcespackage/svg/ZXNoter-ICON.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/resource/Utils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/io/ImdInfos.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/note/fixedorbit/ComplexNote.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resourcespackage/ZXMapGraphics/note.png" beforeDir="false" afterPath="$PROJECT_DIR$/resourcespackage/img/graphics/note.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resourcespackage/ZXMapGraphics/noteC.png" beforeDir="false" afterPath="$PROJECT_DIR$/resourcespackage/img/graphics/noteC.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resourcespackage/ZXMapGraphics/noteL.png" beforeDir="false" afterPath="$PROJECT_DIR$/resourcespackage/img/graphics/noteL.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resourcespackage/ZXMapGraphics/noteLE.png" beforeDir="false" afterPath="$PROJECT_DIR$/resourcespackage/img/graphics/noteLE.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resourcespackage/ZXMapGraphics/noteS.png" beforeDir="false" afterPath="$PROJECT_DIR$/resourcespackage/img/graphics/noteS.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resourcespackage/ZXMapGraphics/noteSEL.png" beforeDir="false" afterPath="$PROJECT_DIR$/resourcespackage/img/graphics/noteSEL.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resourcespackage/ZXMapGraphics/noteSER.png" beforeDir="false" afterPath="$PROJECT_DIR$/resourcespackage/img/graphics/noteSER.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resourcespackage/ZXMapGraphics/stageHint.png" beforeDir="false" afterPath="$PROJECT_DIR$/resourcespackage/img/graphics/stageHint.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resourcespackage/resourcespackage.json" beforeDir="false" afterPath="$PROJECT_DIR$/resourcespackage/resourcespackage.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/resource/ZXResources.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/resource/ZXResources.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/io/reader/ImdReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/io/reader/ImdReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/map/LocalizedMapInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/map/LocalizedMapInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/map/ZXMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/map/ZXMap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/note/BaseNote.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/note/BaseNote.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/note/fixedorbit/FixedOrbitNote.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/note/fixedorbit/FixedOrbitNote.java" afterDir="false" />
     </list>
     <list id="9563a533-f70b-4cf6-9026-5fb6bd4d4309" name="zedoC 进行的更改" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -30,8 +24,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="AnnotationType" />
+        <option value="Enum" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -48,11 +43,19 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-        &quot;keyToString&quot;: {
-        &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;
-        }
-        }</component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "last_opened_file_path": "F:/AllProjects/ZXNoter-advance",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mongo"
+    ]
+  }
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Projects\ZXNoter\resourcespackage\svg" />
@@ -61,7 +64,20 @@
       <recent name="D:\Projects\ZXNoter\resourcespackage\image\graphics" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="应用程序.ImdReader">
+    <configuration name="ImdReader" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="team.zxorg.zxnoter.io.reader.ImdReader" />
+      <module name="ZXNoter" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="team.zxorg.zxnoter.io.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="team.zxorg.zxnoter.Main" />
       <module name="ZXNoter" />
@@ -77,15 +93,35 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="应用程序.ImdReader" />
         <item itemvalue="应用程序.Main" />
       </list>
     </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
+    <task active="true" id="Default" summary="默认任务">
+      <changelist id="295bcb0d-2118-4e02-b35e-a9da4569b815" name="更改" comment="update" />
+      <created>1686584331234</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1686584331234</updated>
+      <workItem from="1686584332351" duration="5866000" />
+    </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

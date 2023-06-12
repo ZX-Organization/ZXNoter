@@ -9,7 +9,7 @@ public class FixedOrbitNote extends BaseNote {
     /**
      * 轨道
      */
-    int orbit;
+    public int orbit;
     public FixedOrbitNote(long timeStamp , int orbit) {
         super(timeStamp);
         this.orbit = orbit;
