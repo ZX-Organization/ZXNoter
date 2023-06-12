@@ -10,10 +10,7 @@ public class Main {
 
 
 
-        /**
-         * 载入资源
-         */
-        ZXResources.loadResourcePackage(Path.of("./resourcespackage/"));
+
 
         /**
          * 测试UI

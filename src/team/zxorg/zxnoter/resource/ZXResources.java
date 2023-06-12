@@ -1,5 +1,6 @@
 package team.zxorg.zxnoter.resource;
 
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.SVGPath;
 import javafx.scene.shape.Shape;
@@ -22,7 +23,8 @@ public class ZXResources {
                         String key = path.subpath(resourcePackagePath.getNameCount(), path.getNameCount()).toString();
                         key = key.substring(0, key.lastIndexOf(".")).replaceAll("[\\\\/]", ".").toLowerCase();
                         if (type.equals("png")) {
-
+                            Image image = new Image(path.toRealPath().toUri().toURL().toString());
+                            allThings.put(key, image);
                         } else if (type.equals("lang")) {
 
                         } else if (type.equals("svg")) {
@@ -55,5 +57,17 @@ public class ZXResources {
         else
             iconPane = getSvgPane("svg.icons.system.question-line");
         return iconPane;
+    }
+    /**
+     * 获取图片资源
+     *
+     * @param key
+     * @return
+     */
+    public static Image getImage(String key) {
+        if (allThings.get(key) instanceof Image image)
+            return image;
+        else
+            return getImage("img.unknown");
     }
 }
