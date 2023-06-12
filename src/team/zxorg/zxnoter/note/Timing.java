@@ -17,7 +17,7 @@ public class Timing {
 
     @Override
     public String toString() {
-        return "Timing{" +
+        return '\n' +"Timing{" +
                 "时间戳=" + timingStamp +
                 ", bpm倍率=" + bpmRatio +
                 '}';

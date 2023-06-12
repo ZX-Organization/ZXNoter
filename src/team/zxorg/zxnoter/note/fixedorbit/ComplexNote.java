@@ -34,8 +34,8 @@ public class ComplexNote extends FixedOrbitNote implements Cloneable{
 
     @Override
     public String toString() {
-        return "ComplexNote{" +'\n' +
-                "组合列表=" + notes +
+        return '\n' +"ComplexNote{" +
+                "组合列表=" + notes +'\n' +
                 ", 起始轨道=" + orbit +
                 ", 起始时间=" + timeStamp +
                 '}'+'\n';

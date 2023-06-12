@@ -15,6 +15,13 @@ public class LocalizedMapInfo{
     public String getInfo(String key){
         return allInfo.get(key);
     }
+
+    @Override
+    public String toString() {
+        return '\n' +"LocalizedMapInfo{" +allInfo +
+                '}';
+    }
+
     public interface UnLocalizing {
         String unLocalize(String name);
     }
