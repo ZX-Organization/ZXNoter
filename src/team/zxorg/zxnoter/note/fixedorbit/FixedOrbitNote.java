@@ -5,7 +5,7 @@ import team.zxorg.zxnoter.note.BaseNote;
 /**
  * 定轨按键
  */
-public class FixedOrbitNote extends BaseNote {
+public class FixedOrbitNote extends BaseNote implements Cloneable{
     /**
      * 轨道
      */
@@ -13,5 +13,18 @@ public class FixedOrbitNote extends BaseNote {
     public FixedOrbitNote(long timeStamp , int orbit) {
         super(timeStamp);
         this.orbit = orbit;
+    }
+
+    @Override
+    public FixedOrbitNote clone(){
+        return new FixedOrbitNote(timeStamp , orbit);
+    }
+
+    @Override
+    public String toString() {
+        return '\n' +"FixedOrbitNote{" +
+                "轨道=" + orbit +
+                ", 时间戳=" + timeStamp +
+                '}';
     }
 }

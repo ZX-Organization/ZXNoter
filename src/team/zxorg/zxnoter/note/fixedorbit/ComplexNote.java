@@ -1,6 +1,7 @@
 package team.zxorg.zxnoter.note.fixedorbit;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class ComplexNote extends FixedOrbitNote implements Cloneable{
     ArrayList<FixedOrbitNote> notes = new ArrayList<>();
@@ -24,6 +25,19 @@ public class ComplexNote extends FixedOrbitNote implements Cloneable{
 
     @Override
     public ComplexNote clone() {
-        return new ComplexNote(timeStamp,orbit,notes);
+        ArrayList<FixedOrbitNote> newNotes = new ArrayList<>();
+        for (int i = 0; i < notes.size(); i++) {
+            newNotes.add(notes.get(i).clone());
+        }
+        return new ComplexNote(timeStamp,orbit,newNotes);
+    }
+
+    @Override
+    public String toString() {
+        return "ComplexNote{" +'\n' +
+                "组合列表=" + notes +
+                ", 起始轨道=" + orbit +
+                ", 起始时间=" + timeStamp +
+                '}'+'\n';
     }
 }

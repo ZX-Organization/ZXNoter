@@ -97,31 +97,36 @@ public class ImdReader {
             int notePar = bf.getInt();
 
             FixedOrbitNote tempNote = null;
+            //初始化物件
             switch (noteType){
                 case 0->{
+                    //单键
                     tempNote = new FixedOrbitNote(timeStamp,orbit);
                     break;
                 }
                 case 1->{
+                    //滑键
                     tempNote = new SlideNote(timeStamp , orbit , notePar);
                     break;
                 }
                 case 2->{
+                    //长键
                     tempNote = new LongNote(timeStamp , orbit , notePar);
                 }
             }
+
             if (complexPar != 0)
                 //组合参数不为零,处理组合键
                 switch (complexPar){
                     case 0x06->{
                         //组合头,重新初始化缓存组合键,并将此首按键加入组合键中
                         tempComplexNote = new ComplexNote(timeStamp, orbit);
-                        tempComplexNote.addNote(tempNote);
+                        tempComplexNote.addNote(tempNote.clone());
                         break;
                     }
                     case 0x02->{
                         //组合键中间部分,直接加入缓存组合键中
-                        tempComplexNote.addNote(tempNote);
+                        tempComplexNote.addNote(tempNote.clone());
                         break;
                     }
                     case 0x0A->{
