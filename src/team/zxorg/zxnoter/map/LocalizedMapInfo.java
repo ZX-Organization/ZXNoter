@@ -2,6 +2,9 @@ package team.zxorg.zxnoter.map;
 
 import java.util.HashMap;
 
+/**
+ * 本地化信息类
+ */
 public class LocalizedMapInfo{
     public HashMap<String , String > allInfo;
 
@@ -22,10 +25,4 @@ public class LocalizedMapInfo{
                 '}';
     }
 
-    public interface UnLocalizing {
-        String unLocalize(String name);
-    }
-    public interface Localizing {
-        String Localize(String name);
-    }
 }

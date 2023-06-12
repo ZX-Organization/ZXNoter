@@ -1,6 +1,6 @@
 package team.zxorg.zxnoter.io.reader;
 
-import team.zxorg.zxnoter.io.ImdInfos;
+import team.zxorg.zxnoter.map.mapInfos.ImdInfos;
 import team.zxorg.zxnoter.map.LocalizedMapInfo;
 import team.zxorg.zxnoter.map.ZXMap;
 import team.zxorg.zxnoter.note.Timing;
@@ -17,6 +17,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 
+/**
+ * imd读取器(节奏大师)
+ */
 public class ImdReader {
 
     public static ZXMap readFile(Path path) throws IOException {
@@ -34,26 +37,28 @@ public class ImdReader {
         inputStream.close();
         bf.order(ByteOrder.LITTLE_ENDIAN);
 
+        //初始化
         ZXMap zxMap = new ZXMap();
         LocalizedMapInfo localizedMapInfo = new LocalizedMapInfo();
-        ImdUnLocalized imdUnLocalized = new ImdUnLocalized();
 
+        //截取文件标题
         String title = fileName.substring(0, fileName.indexOf("_"));
-        //标题
-        localizedMapInfo.addInfo(imdUnLocalized.unLocalize("imdTitle"), title);
+        //谱面标题
+        localizedMapInfo.addInfo(ImdInfos.ImdTitle.name(), title);
         //图片路径
-        localizedMapInfo.addInfo(imdUnLocalized.unLocalize("imdBgPath"), title + ".png$&" + title + ".jpg");
+        localizedMapInfo.addInfo(ImdInfos.ImdBgPath.unLocalize(), "{"+title + ".png}{" + title + ".jpg}");
+        //音频路径
+        localizedMapInfo.addInfo(ImdInfos.ImdAudioPath.unLocalize(), title + ".mp3");
         //键数
-        localizedMapInfo.addInfo(imdUnLocalized.unLocalize("imdKeyCount"), fileName.substring(fileName.indexOf("_") + 1, fileName.lastIndexOf("_")).replaceAll("k", ""));
+        localizedMapInfo.addInfo(ImdInfos.ImdKeyCount.unLocalize(), fileName.substring(fileName.indexOf("_") + 1, fileName.lastIndexOf("_")).replaceAll("k", ""));
         //版本
-        localizedMapInfo.addInfo(imdUnLocalized.unLocalize("imdVersion"), fileName.substring(fileName.lastIndexOf("_") + 1, fileName.lastIndexOf(".imd")));
+        localizedMapInfo.addInfo(ImdInfos.ImdVersion.unLocalize(), fileName.substring(fileName.lastIndexOf("_") + 1, fileName.lastIndexOf(".imd")));
         //图长度
-        localizedMapInfo.addInfo(imdUnLocalized.unLocalize("mapLength"), String.valueOf(bf.getInt()));
+        localizedMapInfo.addInfo(ImdInfos.MapLength.unLocalize(), String.valueOf(bf.getInt()));
 
         //图时间点数
         int timingAmount = bf.getInt();
-        localizedMapInfo.addInfo(imdUnLocalized.unLocalize("timingCount"), String.valueOf(timingAmount));
-
+        localizedMapInfo.addInfo(ImdInfos.TimingCount.unLocalize(), String.valueOf(timingAmount));
 
         //读取首时间点bpm作为基准bpm
         //从第13字节读取double
@@ -70,13 +75,11 @@ public class ImdReader {
                     )
             );
         }
-
         //03 03
         bf.getShort();
-
         //表格行数
         int tabRows = bf.getInt();
-        localizedMapInfo.addInfo(imdUnLocalized.unLocalize("tabRows"), String.valueOf(tabRows));
+        localizedMapInfo.addInfo(ImdInfos.TabRows.unLocalize(), String.valueOf(tabRows));
 
         ComplexNote tempComplexNote = null;
         //11字节为一组,读取所有按键
@@ -151,26 +154,10 @@ public class ImdReader {
 
     public static void main(String[] args) {
         try {
-            ZXMap map = readFile(Path.of("docs/reference/Corruption/Corruption_4k_ez.imd"));
+            ZXMap map = readFile(Path.of("docs/reference/Contrapasso -paradiso-/t+pazolite - Contrapasso -paradiso-_4k_hd.imd"));
             System.out.println(map);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
-}
-
-class ImdUnLocalized implements LocalizedMapInfo.UnLocalizing {
-    @Override
-    public String unLocalize(String name) {
-        switch (ImdInfos.valueOf(name)) {
-            case mapLength: return "mapLength";
-            case timingCount: return "timingCount";
-            case tabRows: return "tabRows";
-            case imdTitle: return "title";
-            case imdBgPath: return "bgPath";
-            case imdKeyCount: return "keyCount";
-            case imdVersion: return "version";
-        }
-        return null;
     }
 }

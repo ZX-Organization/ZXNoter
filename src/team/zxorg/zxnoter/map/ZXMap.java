@@ -5,6 +5,9 @@ import team.zxorg.zxnoter.note.Timing;
 
 import java.util.ArrayList;
 
+/**
+ * zx谱面类
+ */
 public class ZXMap {
     /**
      * 所有打击物件
