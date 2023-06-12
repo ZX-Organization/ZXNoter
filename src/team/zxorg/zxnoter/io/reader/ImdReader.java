@@ -44,7 +44,7 @@ public class ImdReader {
         //截取文件标题
         String title = fileName.substring(0, fileName.indexOf("_"));
         //谱面标题
-        localizedMapInfo.addInfo(ImdInfos.ImdTitle.name(), title);
+        localizedMapInfo.addInfo(ImdInfos.ImdTitle.unLocalize(), title);
         //图片路径
         localizedMapInfo.addInfo(ImdInfos.ImdBgPath.unLocalize(), "{"+title + ".png}{" + title + ".jpg}");
         //音频路径
