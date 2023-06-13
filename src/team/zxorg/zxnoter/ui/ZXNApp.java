@@ -25,6 +25,12 @@ public class ZXNApp extends Application {
      * 正文容器
      */
     HBox bodyPane = new HBox();
+
+    /**
+     * 菜单栏
+     */
+    MenuBar menuBar = new MenuBar();
+
     /**
      * 根容器
      */
@@ -51,9 +57,11 @@ public class ZXNApp extends Application {
         ImageView zxnIcon = new ImageView(ZXResources.getImage("img.zxnoter.zxnoter-x26"));
         HBox.setMargin(zxnIcon, new Insets(2, 4, 2, 4));
 
-        MenuBar menuBar = new MenuBar();
+
         Menu menu = new Menu("az");
-        menu.getItems().addAll(new MenuItem("wdnmd"),new MenuItem("wdnmd2",ZXResources.getSvgPane("svg.zxnoter.file-notemap-line",16,Color.AQUA)));
+        Menu menuItem=new Menu("wdnmd2",ZXResources.getSvgPane("svg.zxnoter.file-notemap-line",16,Color.AQUA));
+        menuItem.getItems().add(new MenuItem("@#$%^"));
+        menu.getItems().addAll(new MenuItem("wdnmd"),menuItem);
         Menu menu2 = new Menu("666");
         menuBar.getMenus().addAll(menu,menu2);
         menuBar.setPadding(new Insets(0));
@@ -64,6 +72,12 @@ public class ZXNApp extends Application {
         bodyPane.setBackground(Background.fill(Color.GREEN));
         bodyPane.setPrefSize(Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE);
         VBox.setVgrow(bodyPane, Priority.ALWAYS);
+
+
+        //VBox activityBar
+        bodyPane.getChildren().add();
+
+
 
 
         Scene mainScene = new Scene(rootPane);
