@@ -154,14 +154,4 @@ public class ImdReader {
 
         return zxMap;
     }
-
-    public static void main(String[] args) {
-        try {
-            ZXMap map = readFile(Path.of("docs/reference/xi - Blue Zenith/xi - Blue Zenith_4k_hd.imd"));
-            System.out.println(map);
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
 }

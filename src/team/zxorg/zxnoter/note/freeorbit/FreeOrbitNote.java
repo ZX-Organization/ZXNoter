@@ -6,4 +6,9 @@ public class FreeOrbitNote extends BaseNote {
     public FreeOrbitNote(long timeStamp) {
         super(timeStamp);
     }
+
+    @Override
+    public BaseNote clone() {
+        return null;
+    }
 }

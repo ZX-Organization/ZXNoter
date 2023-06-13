@@ -10,5 +10,8 @@ public class ImdWriter {
     public static void writeOut(ZXMap zxMap, Path path){
         LocalizedMapInfo localizedMapInfo = zxMap.localizedMapInfo;
         Set<String> keyset = localizedMapInfo.allInfo.keySet();
+        for (String key : keyset){
+            System.out.println(key);
+        }
     }
 }

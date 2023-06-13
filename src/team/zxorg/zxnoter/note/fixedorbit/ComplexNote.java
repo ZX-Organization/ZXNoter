@@ -1,5 +1,7 @@
 package team.zxorg.zxnoter.note.fixedorbit;
 
+import team.zxorg.zxnoter.note.BaseNote;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -31,6 +33,7 @@ public class ComplexNote extends FixedOrbitNote implements Cloneable{
         }
         return new ComplexNote(timeStamp,orbit,newNotes);
     }
+
 
     @Override
     public String toString() {

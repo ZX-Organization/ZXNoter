@@ -15,7 +15,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * osu读取器(osu!mania)
@@ -196,11 +195,4 @@ public class OsuReader {
         return zxMap;
     }
 
-    public static void main(String[] args) {
-        try {
-            ZXMap map = readFile(Path.of("docs/reference/LeaF - NANO DEATH!!!!!/LeaF - NANO DEATH!!!!! (nowsmart) [DEATH].osu"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
 }
