@@ -1,0 +1,40 @@
+.title-bar {
+    -fx-background-color: #3E3E3E;
+    -fx-border-color: #505050;
+    -fx-border-width: 0 0 1 0;
+}
+
+.menu-bar > .container > .menu {
+    -fx-background-color: transparent;
+}
+.menu-bar > .container > .menu:hover,
+.menu-bar > .container > .menu:showing {
+    -fx-background-color: #545454;
+}
+.menu-bar > .container > .menu > .label > .text {
+    -fx-fill: #9A9A9A;
+}
+.menu-bar > .container > .menu:hover > .label > .text,
+.menu-bar > .container > .menu:showing > .label > .text {
+    -fx-fill: #C8C8C8;
+}
+
+
+.context-menu {
+    -fx-background-color: #3E3E3E;
+    -fx-border-color: #505050;
+    -fx-padding: 1 0 1 0;
+}
+
+.menu-item {
+    -fx-background-color: #3E3E3E;
+}
+.menu-item:hover {
+    -fx-background-color: #545454;
+}
+.menu-item > .label > .text {
+    -fx-fill: #9A9A9A;
+}
+.menu-item:hover > .label > .text {
+    -fx-fill: #C8C8C8;
+}
