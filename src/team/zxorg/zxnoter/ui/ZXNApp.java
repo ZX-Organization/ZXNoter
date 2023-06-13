@@ -2,7 +2,6 @@ package team.zxorg.zxnoter.ui;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
@@ -131,7 +130,7 @@ public class ZXNApp extends Application {
 
             try {
                 ZXMap zxMap = ImdReader.readFile(Paths.get("docs/reference/Contrapasso -paradiso-/t+pazolite - Contrapasso -paradiso-_4k_hd.imd"));
-                Tab tab1 = new Tab(zxMap.localizedMapInfo.getInfo("Title"));
+                Tab tab1 = new Tab(zxMap.unLocalizedMapInfo.getInfo("Title"));
                 tab1.setGraphic(ZXResources.getSvgPane("svg.icons.zxnoter.file-notemap-line", 18, Color.DARKGREEN));
                 HBox editor = new MapEditor(zxMap);
                 tab1.setContent(editor);

@@ -4,11 +4,11 @@ public class Timing {
     /**
      * 时间点时间戳
      */
-    long timingStamp;
+    public long timingStamp;
     /**
      * bpm倍率
      */
-    double bpmRatio;
+    public double bpmRatio;
 
     public Timing(long timingStamp, double bpmRatio) {
         this.timingStamp = timingStamp;

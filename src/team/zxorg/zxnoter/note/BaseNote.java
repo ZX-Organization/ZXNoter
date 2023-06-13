@@ -17,4 +17,5 @@ public abstract class BaseNote implements Cloneable{
     public abstract BaseNote clone();
     public abstract int getOrbit();
     public abstract void setOrbit(int orbit);
+    public abstract int getImdNoteType();
 }

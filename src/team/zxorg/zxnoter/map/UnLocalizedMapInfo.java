@@ -5,10 +5,10 @@ import java.util.HashMap;
 /**
  * 本地化信息类
  */
-public class LocalizedMapInfo{
+public class UnLocalizedMapInfo {
     public HashMap<String , String > allInfo;
 
-    public LocalizedMapInfo() {
+    public UnLocalizedMapInfo() {
         allInfo  = new HashMap<>();
     }
 

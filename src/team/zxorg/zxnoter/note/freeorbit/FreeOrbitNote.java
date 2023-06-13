@@ -19,4 +19,9 @@ public class FreeOrbitNote extends BaseNote {
 
     @Override
     public void setOrbit(int orbit) {}
+
+    @Override
+    public int getImdNoteType() {
+        return -1;
+    }
 }

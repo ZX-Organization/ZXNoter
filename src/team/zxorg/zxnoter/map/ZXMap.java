@@ -21,7 +21,7 @@ public class ZXMap {
      * 所有时间点
      */
     public ArrayList<Timing> timingPoints;
-    public LocalizedMapInfo localizedMapInfo;
+    public UnLocalizedMapInfo unLocalizedMapInfo;
 
     /**
      * 二分查找到一个时间戳离得最近的按键
@@ -183,7 +183,7 @@ public class ZXMap {
         return "ZXMap{" +
                 "物件列表=" + notes + '\n' +
                 ", 时间点=" + timingPoints + '\n' +
-                ", 本地化信息=" + localizedMapInfo + '\n' +
+                ", 本地化信息=" + unLocalizedMapInfo + '\n' +
                 '}';
     }
 }

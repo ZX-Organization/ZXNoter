@@ -1,7 +1,7 @@
 package team.zxorg.zxnoter.io.reader;
 
-import team.zxorg.zxnoter.map.mapInfos.ImdInfos;
-import team.zxorg.zxnoter.map.LocalizedMapInfo;
+import team.zxorg.zxnoter.map.mapInfos.ImdInfo;
+import team.zxorg.zxnoter.map.UnLocalizedMapInfo;
 import team.zxorg.zxnoter.map.ZXMap;
 import team.zxorg.zxnoter.note.BaseNote;
 import team.zxorg.zxnoter.note.timing.Timing;
@@ -40,33 +40,33 @@ public class ImdReader {
 
         //初始化
         ZXMap zxMap = new ZXMap();
-        LocalizedMapInfo localizedMapInfo = new LocalizedMapInfo();
+        UnLocalizedMapInfo unLocalizedMapInfo = new UnLocalizedMapInfo();
         ArrayList<BaseNote> allNotes = new ArrayList<>();
 
         //截取文件标题
         String title = fileName.substring(0, fileName.indexOf("_"));
         //谱面标题
-        localizedMapInfo.addInfo(ImdInfos.ImdTitle.unLocalize(), title);
+        unLocalizedMapInfo.addInfo(ImdInfo.ImdTitle.unLocalize(), title);
         //图片路径
-        localizedMapInfo.addInfo(ImdInfos.ImdBgPath.unLocalize(), "{"+title + ".png}{" + title + ".jpg}");
+        unLocalizedMapInfo.addInfo(ImdInfo.ImdBgPath.unLocalize(), "{"+title + ".png}{" + title + ".jpg}");
         //音频路径
-        localizedMapInfo.addInfo(ImdInfos.ImdAudioPath.unLocalize(), title + ".mp3");
+        unLocalizedMapInfo.addInfo(ImdInfo.ImdAudioPath.unLocalize(), title + ".mp3");
         //键数
-        localizedMapInfo.addInfo(ImdInfos.ImdKeyCount.unLocalize(), fileName.substring(fileName.indexOf("_") + 1, fileName.lastIndexOf("_")).replaceAll("k", ""));
+        unLocalizedMapInfo.addInfo(ImdInfo.ImdKeyCount.unLocalize(), fileName.substring(fileName.indexOf("_") + 1, fileName.lastIndexOf("_")).replaceAll("k", ""));
         //版本
-        localizedMapInfo.addInfo(ImdInfos.ImdVersion.unLocalize(), fileName.substring(fileName.lastIndexOf("_") + 1, fileName.lastIndexOf(".imd")));
+        unLocalizedMapInfo.addInfo(ImdInfo.ImdVersion.unLocalize(), fileName.substring(fileName.lastIndexOf("_") + 1, fileName.lastIndexOf(".imd")));
         //图长度
-        localizedMapInfo.addInfo(ImdInfos.MapLength.unLocalize(), String.valueOf(bf.getInt()));
+        unLocalizedMapInfo.addInfo(ImdInfo.MapLength.unLocalize(), String.valueOf(bf.getInt()));
 
         //图时间点数
         int timingAmount = bf.getInt();
-        localizedMapInfo.addInfo(ImdInfos.TimingCount.unLocalize(), String.valueOf(timingAmount));
+        unLocalizedMapInfo.addInfo(ImdInfo.TimingCount.unLocalize(), String.valueOf(timingAmount));
 
         //读取首时间点bpm作为基准bpm
         //从第13字节读取double
         bf.position(12);
         double baseBpm = bf.getDouble();
-        localizedMapInfo.addInfo(ImdInfos.valueOf("ImdBpm").unLocalize(),String.valueOf(baseBpm));
+        unLocalizedMapInfo.addInfo(ImdInfo.valueOf("ImdBpm").unLocalize(),String.valueOf(baseBpm));
 
         //跳回首timingPoint处
         bf.position(8);
@@ -82,7 +82,7 @@ public class ImdReader {
         bf.getShort();
         //表格行数
         int tabRows = bf.getInt();
-        localizedMapInfo.addInfo(ImdInfos.TabRows.unLocalize(), String.valueOf(tabRows));
+        unLocalizedMapInfo.addInfo(ImdInfo.TabRows.unLocalize(), String.valueOf(tabRows));
 
         ComplexNote tempComplexNote = null;
         //11字节为一组,读取所有按键
@@ -149,7 +149,7 @@ public class ImdReader {
             }
         }
         zxMap.notes = allNotes;
-        zxMap.localizedMapInfo = localizedMapInfo;
+        zxMap.unLocalizedMapInfo = unLocalizedMapInfo;
         zxMap.timingPoints = timingPoints;
 
         return zxMap;

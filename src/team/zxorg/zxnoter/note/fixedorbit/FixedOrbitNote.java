@@ -38,6 +38,11 @@ public class FixedOrbitNote extends BaseNote implements Cloneable{
         this.orbit = orbit;
     }
 
+    @Override
+    public int getImdNoteType() {
+        return 0;
+    }
+
 
     @Override
     public String toString() {

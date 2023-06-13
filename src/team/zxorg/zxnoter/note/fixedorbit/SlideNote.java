@@ -21,6 +21,11 @@ public class SlideNote extends FixedOrbitNote implements Cloneable{
     }
 
     @Override
+    public int getImdNoteType() {
+        return 1;
+    }
+
+    @Override
     public String toString() {
         return '\n' +"SlideNote{" +
                 "滑动=" + slideArg +

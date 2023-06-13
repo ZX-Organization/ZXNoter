@@ -1,8 +1,8 @@
 package team.zxorg.zxnoter.io.reader;
 
-import team.zxorg.zxnoter.map.LocalizedMapInfo;
+import team.zxorg.zxnoter.map.UnLocalizedMapInfo;
 import team.zxorg.zxnoter.map.ZXMap;
-import team.zxorg.zxnoter.map.mapInfos.OsuInfos;
+import team.zxorg.zxnoter.map.mapInfos.OsuInfo;
 import team.zxorg.zxnoter.note.BaseNote;
 import team.zxorg.zxnoter.note.fixedorbit.FixedOrbitNote;
 import team.zxorg.zxnoter.note.fixedorbit.OsuCustomLongNote;
@@ -31,15 +31,16 @@ public class OsuReader {
         String eventNameTemp = "";
         //获取基准bpm
         boolean getBaseBpm = true;
+        double baseBpm = 0.;
 
         ZXMap zxMap = new ZXMap();
         ArrayList<BaseNote> allNotes = new ArrayList<>();
         ArrayList<Timing> timingPoints = new ArrayList<>();
-        LocalizedMapInfo localizedMapInfo = new LocalizedMapInfo();
+        UnLocalizedMapInfo unLocalizedMapInfo = new UnLocalizedMapInfo();
         readTemp = bfReader.readLine();
 
-        localizedMapInfo.addInfo(
-                OsuInfos.valueOf(readTemp.substring(0 , readTemp.lastIndexOf("v")).replaceAll(" ","")).unLocalize(),
+        unLocalizedMapInfo.addInfo(
+                OsuInfo.valueOf(readTemp.substring(0 , readTemp.lastIndexOf("v")).replaceAll(" ","")).unLocalize(),
                 readTemp.substring(readTemp.lastIndexOf("v"))
         );
         int keyCount = 0;
@@ -48,7 +49,7 @@ public class OsuReader {
             if (readTemp.startsWith("[")){
                 //处理事件属性末尾未定义情况
                 if (eventValueMode){
-                    localizedMapInfo.addInfo(eventNameTemp , "");
+                    unLocalizedMapInfo.addInfo(eventNameTemp , "");
                 }
                 //设置读取模式
                 if ("[Events]".equals(readTemp)){
@@ -76,8 +77,8 @@ public class OsuReader {
                     //带冒号属性
                     String name = readTemp.substring(0 , readTemp.indexOf(":"));
                     String value = readTemp.substring(readTemp.lastIndexOf(":") + 1);
-                    localizedMapInfo.addInfo(
-                            name ,
+                    unLocalizedMapInfo.addInfo(
+                            OsuInfo.valueOf(name).unLocalize() ,
                             value
                     );
                     if ("CircleSize".equals(name))
@@ -96,17 +97,17 @@ public class OsuReader {
                         //事件值读取模式
                         if (readTemp.startsWith("//")){
                             //值读取模式又一次读到事件名
-                            localizedMapInfo.addInfo(eventNameTemp , "");
-                            eventNameTemp = OsuInfos.valueOf(key).unLocalize();
+                            unLocalizedMapInfo.addInfo(eventNameTemp , "");
+                            eventNameTemp = OsuInfo.valueOf(key).unLocalize();
                         }else {
                             //值读取
-                            localizedMapInfo.addInfo(eventNameTemp , readTemp);
+                            unLocalizedMapInfo.addInfo(eventNameTemp , readTemp);
                             eventValueMode = false;
                         }
                     }else {
                         if (readTemp.startsWith("//")){
                             eventValueMode = true;
-                            eventNameTemp = OsuInfos.valueOf(key).unLocalize();
+                            eventNameTemp = OsuInfo.valueOf(key).unLocalize();
                         }
                     }
                     continue;
@@ -116,11 +117,12 @@ public class OsuReader {
                     String[] allPars = readTemp.split(",");
                     boolean isExtendTiming = (Integer.parseInt(allPars[6]) == 1);
                     if (getBaseBpm){
+                        baseBpm = 60000/Double.parseDouble(allPars[1]);
                         //基准bpm时间点添加
                         timingPoints.add(
                                 new ZxTiming(
                                         Integer.parseInt(allPars[0]),
-                                        60000/Double.parseDouble(allPars[1]),
+                                        1,
                                         Integer.parseInt(allPars[2]),
                                         Integer.parseInt(allPars[3]),
                                         Integer.parseInt(allPars[4]),
@@ -185,11 +187,11 @@ public class OsuReader {
                     continue;
                 }
             }
-
         }
+        unLocalizedMapInfo.addInfo("BaseBpm",String.valueOf(baseBpm));
         zxMap.notes = allNotes;
         zxMap.timingPoints = timingPoints;
-        zxMap.localizedMapInfo = localizedMapInfo;
+        zxMap.unLocalizedMapInfo = unLocalizedMapInfo;
 
 
         return zxMap;
