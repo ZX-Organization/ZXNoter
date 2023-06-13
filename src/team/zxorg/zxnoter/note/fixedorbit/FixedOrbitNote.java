@@ -29,6 +29,17 @@ public class FixedOrbitNote extends BaseNote implements Cloneable{
     }
 
     @Override
+    public int getOrbit() {
+        return orbit;
+    }
+
+    @Override
+    public void setOrbit(int orbit) {
+        this.orbit = orbit;
+    }
+
+
+    @Override
     public String toString() {
         return '\n' +"FixedOrbitNote{" +
                 "轨道=" + orbit +

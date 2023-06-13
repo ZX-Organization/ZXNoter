@@ -102,17 +102,50 @@ public class ZXMap {
     }
 
     /**
-     * 移动一个按键
+     * 移动一个按键到指定时间戳
      * @param note 要移动的按键
      * @param time 要移动到的时间戳
      * @return 移动后所处的下标
      */
     public int moveNote(BaseNote note , long time){
         BaseNote newNote = note.clone();
+        if (note instanceof ComplexNote complexNote){
+            long previousTime = complexNote.timeStamp;
+            for (BaseNote baseNote : complexNote.notes){
+                baseNote.timeStamp += (time - previousTime);
+            }
+        }
         newNote.timeStamp = time;
         notes.remove(note);
         return insertNote(newNote);
     }
+
+    /**
+     * 移动一个按键到指定的轨道
+     * @param note 要移动的按键
+     * @param orbit 要移动到的轨道
+     */
+    public void moveNote(BaseNote note , int orbit){
+        if (orbit == note.getOrbit()){
+            //轨道与原先相同
+            return;
+        }
+        if (note instanceof ComplexNote complexNote){
+            //判断为组合键
+            int previousOrbit = complexNote.orbit;
+            for (BaseNote baseNote : complexNote.notes){
+                baseNote.setOrbit(baseNote.getOrbit() + (orbit - previousOrbit));
+            }
+        }
+        note.setOrbit(orbit);
+    }
+
+    /**
+     * 编辑组合键(imd组合键)[折线]
+     * @param complexNote 要编辑的组合键
+     * @param willBeEditNote 组合键中要编辑的键(长键或者滑键)
+     * @param parameter 要修改的最终参数
+     */
     public void modifyComplexNote(ComplexNote complexNote , BaseNote willBeEditNote , int parameter){
         //查找到要编辑的物件在组合键中的下标
         int index = complexNote.notes.indexOf(willBeEditNote) + 1;

@@ -11,4 +11,12 @@ public class FreeOrbitNote extends BaseNote {
     public BaseNote clone() {
         return null;
     }
+
+    @Override
+    public int getOrbit() {
+        return -1;
+    }
+
+    @Override
+    public void setOrbit(int orbit) {}
 }
