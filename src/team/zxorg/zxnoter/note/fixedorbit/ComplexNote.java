@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class ComplexNote extends FixedOrbitNote implements Cloneable{
-    ArrayList<FixedOrbitNote> notes = new ArrayList<>();
+    public ArrayList<FixedOrbitNote> notes = new ArrayList<>();
     public ComplexNote(long timeStamp, int orbit, ArrayList<FixedOrbitNote> notes) {
         super(timeStamp, orbit);
         this.notes = notes;

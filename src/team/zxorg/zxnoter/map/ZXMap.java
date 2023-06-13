@@ -1,7 +1,7 @@
 package team.zxorg.zxnoter.map;
 
 import team.zxorg.zxnoter.note.BaseNote;
-import team.zxorg.zxnoter.note.Timing;
+import team.zxorg.zxnoter.note.timing.Timing;
 
 import java.util.ArrayList;
 

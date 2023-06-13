@@ -8,6 +8,7 @@ public enum ImdInfos{
     MapLength("MapLength"),
     TimingCount("TimingCount"),
     TabRows("TabRows"),
+    ImdBpm("BaseBpm"),
     ImdTitle("Title"),
     ImdVersion("Version"),
     ImdKeyCount("KeyCount"),

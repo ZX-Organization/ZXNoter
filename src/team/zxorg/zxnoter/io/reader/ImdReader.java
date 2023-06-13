@@ -3,7 +3,7 @@ package team.zxorg.zxnoter.io.reader;
 import team.zxorg.zxnoter.map.mapInfos.ImdInfos;
 import team.zxorg.zxnoter.map.LocalizedMapInfo;
 import team.zxorg.zxnoter.map.ZXMap;
-import team.zxorg.zxnoter.note.Timing;
+import team.zxorg.zxnoter.note.timing.Timing;
 import team.zxorg.zxnoter.note.fixedorbit.ComplexNote;
 import team.zxorg.zxnoter.note.fixedorbit.FixedOrbitNote;
 import team.zxorg.zxnoter.note.fixedorbit.LongNote;
@@ -64,6 +64,7 @@ public class ImdReader {
         //从第13字节读取double
         bf.position(12);
         double baseBpm = bf.getDouble();
+        localizedMapInfo.addInfo(ImdInfos.valueOf("ImdBpm").unLocalize(),String.valueOf(baseBpm));
 
         //跳回首timingPoint处
         bf.position(8);

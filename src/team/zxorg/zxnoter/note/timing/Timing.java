@@ -1,4 +1,4 @@
-package team.zxorg.zxnoter.note;
+package team.zxorg.zxnoter.note.timing;
 
 public class Timing {
     /**

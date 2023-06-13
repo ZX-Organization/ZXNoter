@@ -8,6 +8,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.Arrays;
 
 /**
  * osu读取器(osu!mania)
@@ -21,7 +22,9 @@ public class OsuReader {
         //是否进入事件值读取模式
         boolean eventValueMode = false;
         //事件缓存
-        String eventNameTemp = "",eventValueTemp = "";
+        String eventNameTemp = "";
+        //获取基准bpm
+        boolean getBaseBpm = true;
 
         LocalizedMapInfo localizedMapInfo = new LocalizedMapInfo();
         readTemp = bfReader.readLine();
@@ -95,7 +98,12 @@ public class OsuReader {
                 }
                 case 1->{
                     //时间点处理
+                    String[] allPars = readTemp.split(",");
+                    if (getBaseBpm){
 
+                        getBaseBpm = false;
+                    }
+                    System.out.println(Arrays.toString(allPars));
                     continue;
                 }
                 case 2->{
