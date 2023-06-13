@@ -6,7 +6,7 @@
   <component name="jsonEditor">
     <option name="stateMap">
       <map>
-        <entry key="ZXNoter" value="{&#10;  &quot;localized.rm.bg&quot;: &quot;BG&quot;&#10;}" />
+        <entry key="ZXNoter" value="{&#10;  &quot;localized.rm.bg&quot;: &quot;BG&quot;&#10;}&#10;1 2 3 4 5 6&#10;0 1 2 3 4 5" />
       </map>
     </option>
   </component>

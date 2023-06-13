@@ -3,7 +3,7 @@ package team.zxorg.zxnoter.note;
 /**
  * 基本键
  */
-public class BaseNote {
+public abstract class BaseNote {
     /**
      * 按键或按键头部时间戳
      */

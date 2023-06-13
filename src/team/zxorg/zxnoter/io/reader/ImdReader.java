@@ -154,8 +154,14 @@ public class ImdReader {
 
     public static void main(String[] args) {
         try {
-            ZXMap map = readFile(Path.of("docs/reference/Contrapasso -paradiso-/t+pazolite - Contrapasso -paradiso-_4k_hd.imd"));
-            System.out.println(map.findClosestNote(4000));
+            ZXMap map = readFile(Path.of("docs/reference/xi - Blue Zenith/xi - Blue Zenith_4k_hd.imd"));
+            System.out.println("notes size:" + map.notes.size());
+            System.out.println(map.notes);
+
+            map.insertNote(new FixedOrbitNote(6500 , 2));
+            System.out.println("notes size:" + map.notes.size());
+            System.out.println(map.notes);
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

@@ -65,12 +65,25 @@ public class ZXMap {
             if (lowIndex == highIndex){
                 return highIndex;
             }else {
-                highIndex = mid - 1;
+                highIndex = mid;
             }
         }
+        System.out.println("low->"+lowIndex);
+        System.out.println("high->"+highIndex);
         return binarySearch(time,lowIndex , highIndex);
     }
 
+    public int insertNote(BaseNote note){
+        int index = binarySearch(note.timeStamp , 0 , notes.size()-1);
+        ArrayList<BaseNote> backNotes = new ArrayList<>();
+        while (index < notes.size()){
+            backNotes.add(notes.get(index));
+            notes.remove(index);
+        }
+        notes.add(note);
+        notes.addAll(backNotes);
+        return index;
+    }
     @Override
     public String toString() {
         return "ZXMap{" +
