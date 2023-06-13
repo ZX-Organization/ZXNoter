@@ -75,7 +75,7 @@ public class ZXNApp extends Application {
 
 
         //VBox activityBar
-        bodyPane.getChildren().add();
+        //bodyPane.getChildren().add();
 
 
 

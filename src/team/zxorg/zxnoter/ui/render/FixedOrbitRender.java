@@ -26,6 +26,9 @@ public class FixedOrbitRender extends Render {
         double canvasWidth = canvas.getWidth();
         double canvasHeight = canvas.getHeight();
         graphics.clearRect(0, 0, canvasWidth, canvasHeight);
+        long stageHintTimeOffset = (long) (canvasHeight * stageHintPos / renderInfo.timelineZoom);
+
+
     }
 
     @Override
