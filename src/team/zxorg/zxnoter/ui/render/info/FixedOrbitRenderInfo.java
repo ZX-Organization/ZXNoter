@@ -4,13 +4,27 @@ import javafx.scene.image.Image;
 import team.zxorg.zxnoter.resource.ZXResources;
 
 public class FixedOrbitRenderInfo extends RenderInfo {
-    public Image judgedLineImage = ZXResources.getImage("img.graphics.note.judgedline");
-    public Image leftImage = ZXResources.getImage("img.graphics.note.left");
-    public Image longImage = ZXResources.getImage("img.graphics.note.long");
-    public Image nodeImage = ZXResources.getImage("img.graphics.note.node");
-    public Image noteImage = ZXResources.getImage("img.graphics.note.note");
-    public Image rightImage = ZXResources.getImage("img.graphics.note.right");
-    public Image slideImage = ZXResources.getImage("img.graphics.note.slide");
+    public Image judgedLineImage;
+    public Image leftImage;
+    public Image longImage;
+    public Image nodeImage;
+    public Image endImage;
+    public Image noteImage;
+    public Image rightImage;
+    public Image slideImage;
+
+    public FixedOrbitRenderInfo(String key) {
+        if (key == null)
+            key = "default";
+        judgedLineImage = ZXResources.getImage("img.note.theme." + key + ".judgedline");
+        leftImage = ZXResources.getImage("img.note.theme." + key + ".left");
+        longImage = ZXResources.getImage("img.note.theme." + key + ".long");
+        nodeImage = ZXResources.getImage("img.note.theme." + key + ".node");
+        endImage = ZXResources.getImage("img.note.theme." + key + ".end");
+        noteImage = ZXResources.getImage("img.note.theme." + key + ".note");
+        rightImage = ZXResources.getImage("img.note.theme." + key + ".right");
+        slideImage = ZXResources.getImage("img.note.theme." + key + ".slide");
+    }
 
     /**
      * 轨道数
@@ -18,7 +32,7 @@ public class FixedOrbitRenderInfo extends RenderInfo {
     public int orbits = 0;
 
     /**
-     * 判定线偏移
+     * 判定线偏移百分比
      */
-    public long judgedLine = 10;
+    public float judgedLinePosition = 0.95f;
 }

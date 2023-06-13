@@ -7,13 +7,16 @@
 .menu-bar > .container > .menu {
     -fx-background-color: transparent;
 }
+
 .menu-bar > .container > .menu:hover,
 .menu-bar > .container > .menu:showing {
     -fx-background-color: #545454;
 }
+
 .menu-bar > .container > .menu > .label > .text {
     -fx-fill: #9A9A9A;
 }
+
 .menu-bar > .container > .menu:hover > .label > .text,
 .menu-bar > .container > .menu:showing > .label > .text {
     -fx-fill: #C8C8C8;
@@ -29,12 +32,48 @@
 .menu-item {
     -fx-background-color: #3E3E3E;
 }
+
 .menu-item:hover {
     -fx-background-color: #545454;
 }
+
 .menu-item > .label > .text {
     -fx-fill: #9A9A9A;
 }
+
 .menu-item:hover > .label > .text {
     -fx-fill: #C8C8C8;
+}
+
+.activity-bar {
+    -fx-background-color: #3C3C3C;
+    -fx-border-color: #505050;
+    -fx-border-width: 0 1 0 0;
+}
+
+.editor {
+    -fx-background-color: #2D2D2D;
+}
+
+.side-bar {
+    -fx-background-color: #292929;
+    -fx-border-color: #505050;
+    -fx-border-width: 0 1 0 0;
+}
+
+.workspace > .icon {
+    -fx-background-color: #2E2E2E;
+}
+
+.body {
+    -fx-background-color: #232323;
+}
+
+.scroll-bar{
+    -fx-background-color: #232323;
+}
+.scroll-pane{
+    -fx-background-color: #ffffff11;
+    -fx-border-color: #505050;
+    -fx-border-width: 2 0 2 0;
 }

@@ -1,22 +1,23 @@
 package team.zxorg.zxnoter.ui.render;
 
+import javafx.scene.canvas.Canvas;
 import team.zxorg.zxnoter.map.ZXMap;
 import team.zxorg.zxnoter.note.BaseNote;
+import team.zxorg.zxnoter.note.fixedorbit.FixedOrbitNote;
 import team.zxorg.zxnoter.ui.render.info.RenderInfo;
 
 import java.util.ArrayList;
+import java.util.function.Consumer;
 
-public abstract class Render {
+public abstract class MapRender {
+    protected Canvas canvas;
     protected ZXMap renderZXMap;
     protected RenderInfo renderInfo;
 
-    /**
-     * 记录的渲染物件列表
-     */
-    protected ArrayList<BaseNote> renderNotes = new ArrayList<>();
 
 
-    public Render(ZXMap renderZXMap) {
+
+    public MapRender(ZXMap renderZXMap) {
         this.renderZXMap = renderZXMap;
     }
 
@@ -26,6 +27,11 @@ public abstract class Render {
     public void render() {
 
         renderHandle();
+    }
+
+    public void clearRect() {
+        //清除区域
+        canvas.getGraphicsContext2D().clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
     }
 
 

@@ -84,7 +84,7 @@ public class ZXResources {
     public static ArrayList<String> themes = new ArrayList<>();
 
     public static String getLanguageContent(String key, String code) {
-        if (allThings.get("lang." + code + "." + key) instanceof String string)
+        if (getObject("lang." + code + "." + key) instanceof String string)
             return string;
         else
             return getLanguageContent("language.loss", code);
@@ -92,13 +92,26 @@ public class ZXResources {
 
 
     public static Path getPath(String key) {
-        if (allThings.get(key) instanceof Path path) {
+        if (getObject(key) instanceof Path path) {
             if (Files.exists(path))
                 return path;
             throw new RuntimeException("引用的文件不存在。");
         } else
             throw new RuntimeException("引用未知文件。");
     }
+
+    public static Object getObject(String key) {
+        return allThings.get(key.toLowerCase());
+    }
+
+
+    public static Shape getSvg(String key) {
+        if (getObject(key) instanceof Shape shape)
+            return shape;
+        else
+            return getSvg("svg.icons.system.question-line");
+    }
+
 
     /**
      * 获取矢量图图标
@@ -108,17 +121,14 @@ public class ZXResources {
      */
     public static Pane getSvgPane(String key) {
         Pane iconPane = new Pane();
-        if (allThings.get(key) instanceof Shape shape)
-            iconPane.setShape(shape);
-        else
-            iconPane = getSvgPane("svg.icons.system.question-line");
+        iconPane.setShape(getSvg(key));
         return iconPane;
     }
 
 
     public static Pane getSvgPane(String key, double size, Color color) {
-        Pane svg=getSvgPane(key);
-        svg.setPrefSize(size,size);
+        Pane svg = getSvgPane(key);
+        svg.setPrefSize(size, size);
         svg.setBackground(Background.fill(color));
         return svg;
     }
