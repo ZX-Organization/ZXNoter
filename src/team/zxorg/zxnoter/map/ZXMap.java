@@ -122,7 +122,6 @@ public class ZXMap {
             backNotes.add(complexNote.notes.get(index));
             complexNote.notes.remove(index);
         }
-
         //处理编辑结果
         if (willBeEditNote instanceof LongNote longNote){
             //编辑的是组合键中的长键
