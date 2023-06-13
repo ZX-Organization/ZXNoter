@@ -42,7 +42,8 @@ public enum OsuInfos{
     StoryboardLayer1Fail("StoryboardLayer1Fail"),
     StoryboardLayer2Pass("Storyboard Layer2 (Pass)"),
     StoryboardLayer3Foreground("Storyboard Layer3 (Foreground)"),
-    StoryboardSoundSamples("Storyboard Sound Samples");
+    StoryboardSoundSamples("Storyboard Sound Samples")
+    ;
     private final String unLocalizedName;
 
     OsuInfos(String unLocalizedName) {
