@@ -2,6 +2,8 @@ package team.zxorg.zxnoter.note.fixedorbit;
 
 import team.zxorg.zxnoter.note.BaseNote;
 
+import java.nio.file.Path;
+
 /**
  * 定轨按键
  */
@@ -10,11 +12,17 @@ public class FixedOrbitNote extends BaseNote implements Cloneable{
      * 轨道
      */
     public int orbit;
+    String soundKey;
     public FixedOrbitNote(long timeStamp , int orbit) {
         super(timeStamp);
         this.orbit = orbit;
     }
-
+    public void setSound(String path){
+        if (path.contains("."))
+            soundKey = path.substring(0,path.lastIndexOf(".")).replaceAll("/",".");
+        else
+            soundKey = path.replaceAll("/",".");
+    }
     @Override
     public FixedOrbitNote clone(){
         return new FixedOrbitNote(timeStamp , orbit);

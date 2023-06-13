@@ -3,6 +3,7 @@ package team.zxorg.zxnoter.io.reader;
 import team.zxorg.zxnoter.map.mapInfos.ImdInfos;
 import team.zxorg.zxnoter.map.LocalizedMapInfo;
 import team.zxorg.zxnoter.map.ZXMap;
+import team.zxorg.zxnoter.note.BaseNote;
 import team.zxorg.zxnoter.note.timing.Timing;
 import team.zxorg.zxnoter.note.fixedorbit.ComplexNote;
 import team.zxorg.zxnoter.note.fixedorbit.FixedOrbitNote;
@@ -40,6 +41,7 @@ public class ImdReader {
         //初始化
         ZXMap zxMap = new ZXMap();
         LocalizedMapInfo localizedMapInfo = new LocalizedMapInfo();
+        ArrayList<BaseNote> allNotes = new ArrayList<>();
 
         //截取文件标题
         String title = fileName.substring(0, fileName.indexOf("_"));
@@ -136,17 +138,17 @@ public class ImdReader {
                     case 0x0A->{
                         //组合键尾部,先将尾按键加入组合键,然后克隆组合键加入zxMap,然后清空缓存给下一个组合键使用
                         tempComplexNote.addNote(tempNote);
-                        zxMap.notes.add(tempComplexNote.clone());
+                        allNotes.add(tempComplexNote.clone());
                         tempComplexNote.clearNote();
                         tempComplexNote = null;
                     }
                 }
             else {
                 //组合参数为0,直接加入zxMap
-                zxMap.notes.add(tempNote);
+                allNotes.add(tempNote);
             }
         }
-
+        zxMap.notes = allNotes;
         zxMap.localizedMapInfo = localizedMapInfo;
         zxMap.timingPoints = timingPoints;
 
@@ -156,7 +158,7 @@ public class ImdReader {
     public static void main(String[] args) {
         try {
             ZXMap map = readFile(Path.of("docs/reference/xi - Blue Zenith/xi - Blue Zenith_4k_hd.imd"));
-
+            System.out.println(map);
 
         } catch (IOException e) {
             throw new RuntimeException(e);

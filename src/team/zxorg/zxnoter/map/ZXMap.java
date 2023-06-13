@@ -12,7 +12,7 @@ public class ZXMap {
     /**
      * 所有打击物件
      */
-    public ArrayList<BaseNote> notes = new ArrayList<>();
+    public ArrayList<BaseNote> notes;
     /**
      * 所有时间点
      */
