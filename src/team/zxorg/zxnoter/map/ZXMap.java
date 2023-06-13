@@ -109,7 +109,7 @@ public class ZXMap {
      */
     public int moveNote(BaseNote note , long time){
         BaseNote newNote = note.clone();
-        if (note instanceof ComplexNote complexNote){
+        if (newNote instanceof ComplexNote complexNote){
             long previousTime = complexNote.timeStamp;
             for (BaseNote baseNote : complexNote.notes){
                 baseNote.timeStamp += (time - previousTime);
