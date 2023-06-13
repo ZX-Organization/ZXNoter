@@ -7,7 +7,7 @@ public class LongNote extends FixedOrbitNote implements Cloneable{
     /**
      *  持续时间
      */
-    long sustainedTime;
+    public long sustainedTime;
     public LongNote(long timeStamp, int orbit , long sustainedTime) {
         super(timeStamp, orbit);
         this.sustainedTime = sustainedTime;

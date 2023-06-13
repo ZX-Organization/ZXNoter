@@ -9,7 +9,7 @@ public class SlideNote extends FixedOrbitNote implements Cloneable{
      * 值大小为滑动轨道数
      * 0参数不合法
      */
-    int slideArg;
+    public int slideArg;
     public SlideNote(long timeStamp, int orbit, int slideArg) {
         super(timeStamp, orbit);
         this.slideArg = slideArg;
