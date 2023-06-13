@@ -135,14 +135,14 @@ public class ImdReader {
                     case 0x0A->{
                         //组合键尾部,先将尾按键加入组合键,然后克隆组合键加入zxMap,然后清空缓存给下一个组合键使用
                         tempComplexNote.addNote(tempNote);
-                        zxMap.hitObjects.add(tempComplexNote.clone());
+                        zxMap.notes.add(tempComplexNote.clone());
                         tempComplexNote.clearNote();
                         tempComplexNote = null;
                     }
                 }
             else {
                 //组合参数为0,直接加入zxMap
-                zxMap.hitObjects.add(tempNote);
+                zxMap.notes.add(tempNote);
             }
         }
 
@@ -155,7 +155,7 @@ public class ImdReader {
     public static void main(String[] args) {
         try {
             ZXMap map = readFile(Path.of("docs/reference/Contrapasso -paradiso-/t+pazolite - Contrapasso -paradiso-_4k_hd.imd"));
-            System.out.println(map);
+            System.out.println(map.findClosestNote(4000));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
