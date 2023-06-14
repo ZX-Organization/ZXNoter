@@ -1,5 +1,6 @@
 package team.zxorg.zxnoter.ui;
 
+import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -132,15 +133,27 @@ public class ZXNApp extends Application {
                 ZXMap zxMap = ImdReader.readFile(Paths.get("docs/reference/Contrapasso -paradiso-/t+pazolite - Contrapasso -paradiso-_4k_hd.imd"));
                 Tab tab1 = new Tab(zxMap.unLocalizedMapInfo.getInfo("Title"));
                 tab1.setGraphic(ZXResources.getSvgPane("svg.icons.zxnoter.file-notemap-line", 18, Color.DARKGREEN));
-                HBox editor = new MapEditor(zxMap);
+                MapEditor editor = new MapEditor(zxMap);
                 tab1.setContent(editor);
                 workspaceTabPane.getTabs().add(tab1);
+
+
+                //画布更新线程常驻
+                AnimationTimer animationTimer = new AnimationTimer() {
+                    @Override
+                    public void handle(long l) {
+                        editor.render();
+                    }
+                };
+                animationTimer.start();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
 
 
         }
+
+
 
 
         //正文容器 添加控件

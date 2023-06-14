@@ -12,3 +12,6 @@
 .context-menu {
     -fx-padding: 1 2 1 2;
 }
+.tab-pane:top .tab-header-area {
+    -fx-padding: 0;
+}

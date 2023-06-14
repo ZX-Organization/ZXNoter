@@ -35,33 +35,37 @@ public class ZXResources {
                         //计算资源路径
                         key = key.substring(0, key.lastIndexOf(".")).replaceAll("[\\\\/]", ".").toLowerCase();
 
-                        if (type.equals("png") || type.equals("jpg")) {//载入图片
-                            Image image = new Image(path.toRealPath().toUri().toURL().toString());
-                            allThings.put(key, image);
-                        } else if (type.equals("json")) {//载入json
-                            JSONObject json = JSONObject.parse(Files.readString(path));
-                            String jsonType = json.getString("type");
-                            if (jsonType.equals("language")) {//语言
-                                String languageCode = json.getString("languageCode");
-                                JSONObject languagesJSON = json.getJSONObject("languages");
-                                Set<Map.Entry<String, Object>> languageSet = languagesJSON.entrySet();
-                                for (Map.Entry<String, Object> entry : languageSet) {
-                                    allThings.put("lang." + languageCode + "." + entry.getKey(), entry.getValue());
-                                }
-                            } else if (jsonType.equals("guide")) {
+                        switch (type) {
+                            case "png", "jpg" -> { //载入图片
+                                Image image = new Image(path.toRealPath().toUri().toURL().toString());
+                                allThings.put(key, image);
+                            }
+                            case "json" -> { //载入json
+                                JSONObject json = JSONObject.parse(Files.readString(path));
+                                String jsonType = json.getString("type");
+                                if (jsonType.equals("language")) {//语言
+                                    String languageCode = json.getString("languageCode");
+                                    JSONObject languagesJSON = json.getJSONObject("languages");
+                                    Set<Map.Entry<String, Object>> languageSet = languagesJSON.entrySet();
+                                    for (Map.Entry<String, Object> entry : languageSet) {
+                                        allThings.put("lang." + languageCode + "." + entry.getKey(), entry.getValue());
+                                    }
+                                } else if (jsonType.equals("guide")) {
 
+                                }
                             }
-                        } else if (type.equals("svg")) {//载入矢量图
-                            SVGPath svg = new SVGPath();
-                            svg.setContent(Utils.readSvg(path));
-                            allThings.put(key, svg);
-                        } else if (type.equals("css")) {//载入样式表
-                            if (key.startsWith("css.theme")) {//主题样式
-                                themes.add(key);
+                            case "svg" -> { //载入矢量图
+                                SVGPath svg = new SVGPath();
+                                svg.setContent(Utils.readSvg(path));
+                                allThings.put(key, svg);
                             }
-                            allThings.put(key, path.toRealPath());
-                        } else {
-                            allThings.put(key, path);
+                            case "css" -> { //载入样式表
+                                if (key.startsWith("css.theme")) {//主题样式
+                                    themes.add(key);
+                                }
+                                allThings.put(key, path.toRealPath());
+                            }
+                            default -> allThings.put(key, path);
                         }
                     }
                 } catch (IOException e) {
@@ -116,8 +120,6 @@ public class ZXResources {
     /**
      * 获取矢量图图标
      *
-     * @param key
-     * @return
      */
     public static Pane getSvgPane(String key) {
         Pane iconPane = new Pane();
@@ -136,8 +138,6 @@ public class ZXResources {
     /**
      * 获取图片资源
      *
-     * @param key
-     * @return
      */
     public static Image getImage(String key) {
         if (allThings.get(key) instanceof Image image)

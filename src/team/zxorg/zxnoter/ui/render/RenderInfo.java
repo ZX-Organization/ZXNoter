@@ -1,4 +1,4 @@
-package team.zxorg.zxnoter.ui.render.info;
+package team.zxorg.zxnoter.ui.render;
 
 public class RenderInfo {
     /**
