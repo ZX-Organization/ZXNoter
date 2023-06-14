@@ -2,13 +2,13 @@ package team.zxorg.zxnoter.ui.editor;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
+import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import team.zxorg.zxnoter.map.ZXMap;
 import team.zxorg.zxnoter.resource.ZXResources;
 import team.zxorg.zxnoter.ui.component.CanvasPane;
+import team.zxorg.zxnoter.ui.component.ToolGroupBar;
 import team.zxorg.zxnoter.ui.render.fixedorbit.FixedOrbitBackgroundRender;
 import team.zxorg.zxnoter.ui.render.fixedorbit.FixedOrbitMapRender;
 import team.zxorg.zxnoter.ui.render.Render;
@@ -26,7 +26,8 @@ public class MapEditor extends BaseEditor {
     FixedOrbitMapRender previewMapRender;//预览渲染器
     FixedOrbitMapRender selectedMapRender;//选中渲染器
     FixedOrbitMapRender mainMapRender;//主渲染器
-    FixedOrbitBackgroundRender backgroundRender;
+    FixedOrbitBackgroundRender backgroundRender;//主背景渲染器
+
 
     long timeline = 0;
 
@@ -76,7 +77,8 @@ public class MapEditor extends BaseEditor {
         mainMapRender.getRenderInfo().timelinePosition = 103950;
         mainMapRender.getRenderInfo().timelineZoom = 1.2f;
 
-        selectedMapRender=new FixedOrbitMapRender(mainMapRender.getRenderInfo(),mapCanvas,zxMap,"selected","default");
+        //选中渲染器
+        selectedMapRender = new FixedOrbitMapRender(mainMapRender.getRenderInfo(), mapCanvas, zxMap, "selected", "default");
 
 
         //背景渲染器
@@ -101,16 +103,63 @@ public class MapEditor extends BaseEditor {
         HBox bodyPane = new HBox(mapCanvas, scrollBar, tabPane);
         VBox.setVgrow(bodyPane, Priority.ALWAYS);
 
-        //布局栏
-        HBox layoutBar = new HBox();
-        layoutBar.setPrefHeight(26);
-        layoutBar.setMinHeight(Region.USE_PREF_SIZE);
-        layoutBar.getStyleClass().add("layout");
+
+        //工具组栏
+        ToolGroupBar toolBar = new ToolGroupBar();
+        {//状态
+            //跳转开头
+            toolBar.addButton("state", "svg.icons.media.skip-back-line", "跳转开头");
+            //播放
+            toolBar.addButton("state", "svg.icons.media.play-line", "播放");
+            //暂停
+            toolBar.addButton("state", "svg.icons.media.pause-line", "暂停");
+            //跳转末尾
+            toolBar.addButton("state", "svg.icons.media.skip-forward-line", "跳转末尾");
+            //时间
+            TextField textField = new TextField("WDNMD");
+            toolBar.addNode("state", textField);
+
+            //播放变速
+            toolBar.addButton("state", "svg.icons.media.slow-down-line", "播放变速");
+
+
+        }
+
+
+        {//工具
+            //显示测量
+            toolBar.addToggleButton("tool", "svg.icons.design.ruler-line", "测量");
+            //吸附编辑
+            toolBar.addToggleButton("tool", "svg.icons.design.pencil-ruler-2-line", "吸附");
+        }
+
+        {//模式
+            ToggleGroup toggleGroup = new ToggleGroup();
+            ToggleButton toggleButton;
+            //编辑模式
+            toggleButton = toolBar.addToggleButton("mode", "svg.icons.design.edit-line", "编辑模式");
+            toggleButton.setSelected(true);
+            toggleButton.setToggleGroup(toggleGroup);
+            //选择模式
+            toggleButton = toolBar.addToggleButton("mode", "svg.icons.development.cursor-line", "选择模式");
+            toggleButton.setToggleGroup(toggleGroup);
+            //只读模式
+            toggleButton = toolBar.addToggleButton("mode", "svg.icons.system.eye-line", "只读模式");
+            toggleButton.setToggleGroup(toggleGroup);
+        }
+
+        {//布局
+            //左侧扩展
+            toolBar.addToggleButton("layout", "svg.icons.design.layout-left-line", "扩展");
+            //滚动栏
+            toolBar.addToggleButton("layout", "svg.icons.design.layout-right-2-line", "滚动栏");
+            //右侧属性布局
+            toolBar.addToggleButton("layout", "svg.icons.design.layout-right-line", "属性栏");
+        }
+
 
         //添加给自己
-        this.getChildren().addAll(layoutBar, bodyPane);
-
-
+        this.getChildren().addAll(toolBar, bodyPane);
     }
 
 

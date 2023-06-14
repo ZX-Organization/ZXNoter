@@ -114,7 +114,8 @@
     -fx-border-color: transparent;
     -fx-border-width: 0;
 }
-.tab-pane:top .tab-header-area .control-buttons-tab{
+
+.tab-pane:top .tab-header-area .control-buttons-tab {
     -fx-pref-width: 18px;
     -fx-pref-height: 32px;
 }
@@ -135,8 +136,46 @@
 }
 
 
-.editor .layout {
+.tool-group-bar {
     -fx-background-color: #323232;
     -fx-border-color: #505050;
     -fx-border-width: 0 0 1 0;
+}
+
+
+.tool-group-bar > .group > .button {
+    -fx-padding: 2;
+    -fx-background-color: #9A9A9A;
+    -fx-background-insets: 0;
+}
+
+.tool-group-bar > .group > .button:selected, .tool-group-bar > .group > .button:pressed {
+    -fx-background-color: #C8C8C8;
+}
+
+.tool-group-bar > .group > .button:selected, .tool-group-bar > .group > .button:pressed, .tool-group-bar > .group > .button:focused {
+    -fx-padding: 2;
+    -fx-border-width: 0;
+    -fx-background-insets: 0;
+}
+
+.tool-group-bar > .group {
+    -fx-padding: 0 4 0 4;
+    -fx-border-color: #505050;
+    -fx-border-width: 0 1 0 0;
+}
+
+.text-field {
+    -fx-padding: 5;
+    -fx-background-radius: 0;
+    -fx-background-color: #292929;
+    -fx-text-fill: #9A9A9A;
+    -fx-highlight-fill: #093939;
+}
+
+
+.text-field:focused {
+
+    -fx-background-radius: 0;
+    -fx-text-fill: #C8C8C8;
 }

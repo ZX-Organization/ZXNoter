@@ -12,19 +12,4 @@ public class FixedOrbitRenderInfo extends RenderInfo {
      */
     public float judgedLinePosition = 0.95f;
 
-
-    public enum RenderState {
-        NORMAL("normal"),
-        SELECTED("selected"),
-        SMALL("small");
-        private final String name;
-
-        RenderState(String name) {
-            this.name = name;
-        }
-    }
-
-
-
-
 }

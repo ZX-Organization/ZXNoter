@@ -18,7 +18,13 @@ public class FixedOrbitBackgroundRender extends FixedOrbitRender {
     protected void renderHandle() {
         Image image;
 
+        //绘制轨道
+        image = getImage(FixedOrbitObjectKey.ORBIT);
+        for (int i = 0; i < orbits; i++) {
+            graphics.drawImage(image, i * (canvasWidth / orbits), 0, canvasWidth / orbits, canvasHeight);
+        }
 
+        //绘制判定线
         image = getImage(FixedOrbitObjectKey.JUDGED_LINE);
         graphics.drawImage(image, 0, canvasHeight * getRenderInfo().judgedLinePosition - image.getHeight() / 2, canvasWidth, image.getHeight());
 
