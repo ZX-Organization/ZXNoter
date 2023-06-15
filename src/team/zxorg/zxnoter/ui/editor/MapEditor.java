@@ -38,7 +38,8 @@ public class MapEditor extends BaseEditor {
 
         //谱面画板
         CanvasPane mapCanvas = new CanvasPane();
-        mapCanvas.setMaxWidth(1000);
+        mapCanvas.setMinWidth(200);
+        mapCanvas.setMaxWidth(800);
         HBox.setHgrow(mapCanvas, Priority.ALWAYS);
 
         StackPane scrollBar = new StackPane();
@@ -85,11 +86,9 @@ public class MapEditor extends BaseEditor {
         backgroundRender = new FixedOrbitBackgroundRender(mainMapRender.getRenderInfo(), zxMap, mapCanvas.canvas, "default");
 
 
-        //编辑栏
+        //属性栏
         TabPane tabPane = new TabPane();
-        tabPane.setMinWidth(240);
-        tabPane.setPrefWidth(240);
-        tabPane.setMaxWidth(360);
+
         HBox.setHgrow(tabPane, Priority.SOMETIMES);
 
         for (int i = 0; i < 4; i++) {
@@ -153,6 +152,8 @@ public class MapEditor extends BaseEditor {
             toolBar.addToggleButton("layout", "svg.icons.design.layout-left-line", "扩展");
             //滚动栏
             toolBar.addToggleButton("layout", "svg.icons.design.layout-right-2-line", "滚动栏");
+
+
             //右侧属性布局
             toolBar.addToggleButton("layout", "svg.icons.design.layout-right-line", "属性栏");
         }
