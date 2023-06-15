@@ -1,8 +1,10 @@
 package team.zxorg.zxnoter.ui.editor;
 
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import team.zxorg.zxnoter.map.ZXMap;
@@ -21,7 +23,10 @@ public class MapEditor extends BaseEditor {
      * 需要对应的zxmap
      */
     ZXMap zxMap;
-    ArrayList<Render> renders = new ArrayList<>();
+
+    ZXMap selectedNoteMap = new ZXMap();//选中的ZXMap
+
+    //ArrayList<Render> renders = new ArrayList<>();
 
     FixedOrbitMapRender previewMapRender;//预览渲染器
     FixedOrbitMapRender previewSelectedMapRender;//预览选中渲染器
@@ -37,6 +42,9 @@ public class MapEditor extends BaseEditor {
         this.setPrefSize(Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE);
         this.zxMap = zxMap;
 
+        //初始化选中的歌姬
+        selectedNoteMap.unLocalizedMapInfo = zxMap.unLocalizedMapInfo;
+        selectedNoteMap.notes = new ArrayList<>();
 
         //谱面画板
         CanvasPane mapCanvas = new CanvasPane();
@@ -51,8 +59,16 @@ public class MapEditor extends BaseEditor {
 
         //谱面画板事件
         mapCanvas.setOnMouseClicked(event -> {
-            System.out.println(event);
-            System.out.println(mainMapRender.getPositionTime(event.getY()));
+            long time = mainMapRender.getPositionTime(event.getY());
+            int index = zxMap.findClosestNote(time);
+            selectedNoteMap.notes.clear();
+            selectedNoteMap.notes.add(zxMap.notes.get(index));
+        });
+
+        //滚轮监听
+        mapCanvas.setOnScroll(event -> {
+            double deltaY = event.getDeltaY();
+            updateTimeline(timeline += deltaY);
         });
 
 
@@ -65,6 +81,7 @@ public class MapEditor extends BaseEditor {
         StackPane.setAlignment(scrollPane, Pos.CENTER);
         StackPane.setMargin(scrollPane, new Insets(0, 0, 50, 0));
 
+
         //预览画板
         CanvasPane scrollCanvas = new CanvasPane();
 
@@ -76,7 +93,7 @@ public class MapEditor extends BaseEditor {
 
 
         //预览选中渲染器
-        previewSelectedMapRender = new FixedOrbitMapRender(previewMapRender.getRenderInfo(), scrollCanvas, zxMap, "preview-selected", "default");
+        previewSelectedMapRender = new FixedOrbitMapRender(previewMapRender.getRenderInfo(), scrollCanvas, selectedNoteMap, "preview-selected", "default");
 
 
         scrollBar.getChildren().addAll(scrollCanvas, scrollPane);
@@ -88,9 +105,6 @@ public class MapEditor extends BaseEditor {
         mainMapRender.getRenderInfo().timelineZoom = 1.2f;
 
         //选中渲染器
-        ZXMap selectedNoteMap = new ZXMap();
-        selectedNoteMap.unLocalizedMapInfo=zxMap.unLocalizedMapInfo;
-        selectedNoteMap.notes=new ArrayList<>();
         mainSelectedMapRender = new FixedOrbitMapRender(mainMapRender.getRenderInfo(), mapCanvas, selectedNoteMap, "selected", "default");
 
 

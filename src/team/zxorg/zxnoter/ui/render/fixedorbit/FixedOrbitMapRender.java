@@ -38,10 +38,10 @@ public class FixedOrbitMapRender extends FixedOrbitRender {
     }
 
     public long getPositionTime(double y) {
-        long topTime = (long) (getRenderInfo().timelinePosition - canvasHeight * getRenderInfo().judgedLinePosition / renderInfo.timelineZoom);
+        long topTime = (long) (getRenderInfo().timelinePosition - (canvasHeight-canvasHeight * getRenderInfo().judgedLinePosition) / renderInfo.timelineZoom);
 
 
-        long time = (long) (getRenderInfo().timelinePosition - (canvasHeight - y) / renderInfo.timelineZoom);
+        long time = (long) (topTime + (canvasHeight - y) / renderInfo.timelineZoom);
 
         return time;
     }
