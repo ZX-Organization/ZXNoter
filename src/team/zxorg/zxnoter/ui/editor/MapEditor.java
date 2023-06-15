@@ -52,6 +52,7 @@ public class MapEditor extends BaseEditor {
         //谱面画板事件
         mapCanvas.setOnMouseClicked(event -> {
             System.out.println(event);
+            System.out.println(mainMapRender.getPositionTime(event.getY()));
         });
 
 
@@ -83,12 +84,13 @@ public class MapEditor extends BaseEditor {
 
         //谱面编辑渲染器
         mainMapRender = new FixedOrbitMapRender(new FixedOrbitRenderInfo(), mapCanvas, zxMap, "normal", "default");
-        mainMapRender.getRenderInfo().timelinePosition = 103950;
+        mainMapRender.getRenderInfo().timelinePosition = 0;
         mainMapRender.getRenderInfo().timelineZoom = 1.2f;
 
         //选中渲染器
         ZXMap selectedNoteMap = new ZXMap();
         selectedNoteMap.unLocalizedMapInfo=zxMap.unLocalizedMapInfo;
+        selectedNoteMap.notes=new ArrayList<>();
         mainSelectedMapRender = new FixedOrbitMapRender(mainMapRender.getRenderInfo(), mapCanvas, selectedNoteMap, "selected", "default");
 
 

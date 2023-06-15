@@ -15,14 +15,14 @@ import java.util.ArrayList;
 
 public class FixedOrbitMapRender extends FixedOrbitRender {
     String state;//状态
-    ArrayList<BaseNote> notesBuffer = new ArrayList<>();
+    //ArrayList<BaseNote> notesBuffer = new ArrayList<>();
 
 
     public FixedOrbitMapRender(FixedOrbitRenderInfo renderInfo, CanvasPane canvas, ZXMap zxMap, String state, String theme) {
         super(renderInfo, zxMap, canvas.canvas, theme);
         this.state = state;
 
-        updateNoteBuffer();
+        //updateNoteBuffer();
     }
 
     public void updateNoteBuffer() {
@@ -30,11 +30,20 @@ public class FixedOrbitMapRender extends FixedOrbitRender {
 
 
         long topTime = (long) (getRenderInfo().timelinePosition - canvasHeight * getRenderInfo().judgedLinePosition / renderInfo.timelineZoom);
-        System.out.println(topTime);
+        //System.out.println(topTime);
         long bottomTime = (long) (canvasHeight * getRenderInfo().judgedLinePosition / renderInfo.timelineZoom);
 
         //(renderInfo.timelinePosition - note.timeStamp + judgedLineTimeOffset) * renderInfo.timelineZoom;
         //renderZXMap.findClosestNote()
+    }
+
+    public long getPositionTime(double y) {
+        long topTime = (long) (getRenderInfo().timelinePosition - canvasHeight * getRenderInfo().judgedLinePosition / renderInfo.timelineZoom);
+
+
+        long time = (long) (getRenderInfo().timelinePosition - (canvasHeight - y) / renderInfo.timelineZoom);
+
+        return time;
     }
 
     @Override
@@ -45,8 +54,8 @@ public class FixedOrbitMapRender extends FixedOrbitRender {
         //判定线时间偏移
         long judgedLineTimeOffset = (long) (canvasHeight * getRenderInfo().judgedLinePosition / renderInfo.timelineZoom);
 
-        for (int i = 0; i < notesBuffer.size(); i++) {
-            if (notesBuffer.get(i) instanceof FixedOrbitNote note) {
+        for (int i = 0; i < renderZXMap.notes.size(); i++) {
+            if (renderZXMap.notes.get(i) instanceof FixedOrbitNote note) {
 
 
                 //检查是否在显示区域
