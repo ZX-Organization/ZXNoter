@@ -24,8 +24,10 @@ public class MapEditor extends BaseEditor {
     ArrayList<Render> renders = new ArrayList<>();
 
     FixedOrbitMapRender previewMapRender;//预览渲染器
-    FixedOrbitMapRender selectedMapRender;//选中渲染器
+    FixedOrbitMapRender previewSelectedMapRender;//预览选中渲染器
+
     FixedOrbitMapRender mainMapRender;//主渲染器
+    FixedOrbitMapRender mainSelectedMapRender;//选中渲染器
     FixedOrbitBackgroundRender backgroundRender;//主背景渲染器
 
 
@@ -70,6 +72,14 @@ public class MapEditor extends BaseEditor {
         previewMapRender.getRenderInfo().timelinePosition = 103950;
         previewMapRender.getRenderInfo().timelineZoom = 0.2f;
         previewMapRender.getRenderInfo().judgedLinePosition = 0.5f;
+
+
+        //预览选中渲染器
+       previewSelectedMapRender = new FixedOrbitMapRender( previewMapRender.getRenderInfo(), scrollCanvas, zxMap, "preview-selected", "default");
+
+
+
+
         scrollBar.getChildren().addAll(scrollCanvas, scrollPane);
 
 
@@ -79,7 +89,7 @@ public class MapEditor extends BaseEditor {
         mainMapRender.getRenderInfo().timelineZoom = 1.2f;
 
         //选中渲染器
-        selectedMapRender = new FixedOrbitMapRender(mainMapRender.getRenderInfo(), mapCanvas, zxMap, "selected", "default");
+        mainSelectedMapRender = new FixedOrbitMapRender(mainMapRender.getRenderInfo(), mapCanvas, zxMap, "selected", "default");
 
 
         //背景渲染器
@@ -167,18 +177,21 @@ public class MapEditor extends BaseEditor {
     public void updateTimeline(long t) {
         timeline = t;
         mainMapRender.renderInfo.timelinePosition = t;
-        previewMapRender.renderInfo.timelinePosition = t;
+        previewSelectedMapRender.renderInfo.timelinePosition = t;
     }
 
 
     @Override
     public void render() {
-        previewMapRender.clearRect();
+        previewSelectedMapRender.clearRect();
         mainMapRender.clearRect();
 
         backgroundRender.render();
+
         previewMapRender.render();
-        selectedMapRender.render();
+        previewSelectedMapRender.render();
+
+        mainSelectedMapRender.render();
         mainMapRender.render();
 
 

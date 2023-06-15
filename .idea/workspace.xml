@@ -5,11 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="295bcb0d-2118-4e02-b35e-a9da4569b815" name="更改" comment="update">
+      <change afterPath="$PROJECT_DIR$/resourcespackage/img/note/theme/default/preview-selected/end.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resourcespackage/img/note/theme/default/preview-selected/left.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resourcespackage/img/note/theme/default/preview-selected/long.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resourcespackage/img/note/theme/default/preview-selected/node.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resourcespackage/img/note/theme/default/preview-selected/note.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resourcespackage/img/note/theme/default/preview-selected/right.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resourcespackage/img/note/theme/default/preview-selected/slide.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2023_6_11_2_09____.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/_2023_6_11_2_09____.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2023_6_11__2_05____.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/_2023_6_11__2_05____.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2023_6_11__2_25____.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/_2023_6_11__2_25____.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2023_6_11__4_29____.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/_2023_6_11__4_29____.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2023_6_11__4_43____.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/_2023_6_11__4_43____.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2023_6_12__12_41____.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/_2023_6_12__12_41____.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2023_6_12__12_41____1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/_2023_6_12__12_41____1.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/io/reader/ImdReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/io/reader/ImdReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/io/writer/ImdWriter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/io/writer/ImdWriter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/map/ZXMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/map/ZXMap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/map/mapInfos/OsuInfos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/map/mapInfos/OsuInfos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/editor/MapEditor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/editor/MapEditor.java" afterDir="false" />
     </list>
     <list id="9563a533-f70b-4cf6-9026-5fb6bd4d4309" name="zedoC 进行的更改" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -22,6 +34,7 @@
       <list>
         <option value="AnnotationType" />
         <option value="Enum" />
+        <option value="CSS File" />
         <option value="Interface" />
         <option value="Class" />
       </list>
@@ -40,29 +53,39 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "last_opened_file_path": "F:/AllProjects/ZXNoter-advance",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "settings.editor.selected.configurable": "vcs.Git"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;F:/AllProjects/ZXNoter-advance&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;项目&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mongo"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mongo&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Projects\ZXNoter\resourcespackage\svg" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\Projects\ZXNoter\resourcespackage\image\graphics" />
+      <recent name="D:\Projects\ZXNoter\resourcespackage\img\note\theme\default" />
+      <recent name="D:\Projects\ZXNoter\resourcespackage\img" />
+      <recent name="D:\Projects\ZXNoter\resourcespackage\css\theme" />
+      <recent name="D:\Projects\ZXNoter\resourcespackage\css" />
+      <recent name="D:\Projects\ZXNoter\resourcespackage\css\default" />
     </key>
   </component>
-  <component name="RunManager" selected="应用程序.ImdReader">
+  <component name="RunManager" selected="应用程序.Main">
     <configuration name="ImdReader" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="team.zxorg.zxnoter.io.reader.ImdReader" />
       <module name="ZXNoter" />
@@ -102,11 +125,25 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="ZXNApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="team.zxorg.zxnoter.ui.ZXNApp" />
+      <module name="ZXNoter" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="team.zxorg.zxnoter.ui.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="应用程序.Main" />
+        <item itemvalue="应用程序.ZXNApp" />
         <item itemvalue="应用程序.ImdReader" />
         <item itemvalue="应用程序.OsuReader" />
-        <item itemvalue="应用程序.Main" />
       </list>
     </recent_temporary>
   </component>
@@ -118,7 +155,14 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1686584331234</updated>
-      <workItem from="1686584332351" duration="25351000" />
+      <workItem from="1686584332351" duration="17020000" />
+      <workItem from="1686614821331" duration="40000000" />
+      <workItem from="1686675965846" duration="10000" />
+      <workItem from="1686675984923" duration="56000" />
+      <workItem from="1686676054836" duration="444000" />
+      <workItem from="1686719208556" duration="1804000" />
+      <workItem from="1686722063313" duration="78000" />
+      <workItem from="1686723075574" duration="35640000" />
     </task>
     <task id="LOCAL-00001" summary="update ImdReader">
       <created>1686590292141</created>
@@ -148,14 +192,70 @@
       <option name="project" value="LOCAL" />
       <updated>1686605674100</updated>
     </task>
-    <task id="LOCAL-00005" summary="update">
-      <created>1686605960610</created>
+    <task id="LOCAL-00005" summary="update localize method">
+      <created>1686636391491</created>
       <option name="number" value="00005" />
       <option name="presentableId" value="LOCAL-00005" />
       <option name="project" value="LOCAL" />
-      <updated>1686605960610</updated>
+      <updated>1686636391491</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="update localize method">
+      <created>1686643727193</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1686643727193</updated>
+    </task>
+    <task id="LOCAL-00007" summary="update localize method">
+      <created>1686644908586</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1686644908586</updated>
+    </task>
+    <task id="LOCAL-00008" summary="update localize method">
+      <created>1686644926322</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1686644926322</updated>
+    </task>
+    <task id="LOCAL-00009" summary="update">
+      <created>1686676229960</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1686676229960</updated>
+    </task>
+    <task id="LOCAL-00010" summary="update localize method">
+      <created>1686721226799</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1686721226799</updated>
+    </task>
+    <task id="LOCAL-00011" summary="update">
+      <created>1686749724323</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1686749724323</updated>
+    </task>
+    <task id="LOCAL-00012" summary="update">
+      <created>1686769484319</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1686769484319</updated>
+    </task>
+    <task id="LOCAL-00013" summary="update">
+      <created>1686807320176</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1686807320176</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -173,6 +273,7 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="update ImdReader" />
     <MESSAGE value="fix ComplexNote" />
     <MESSAGE value="update toString" />
