@@ -6,7 +6,7 @@ import team.zxorg.zxnoter.map.ZXMap;
 
 public abstract class Render {
     public final Canvas canvas;
-    public double canvasWidth,canvasHeight;
+    public double canvasWidth, canvasHeight;
     public final GraphicsContext graphics;
     public final ZXMap renderZXMap;
     public RenderInfo renderInfo;
@@ -25,9 +25,10 @@ public abstract class Render {
      * 执行渲染操作
      */
     public void render() {
-        canvasWidth= canvas.getWidth();
-        canvasHeight= canvas.getHeight();
-        renderHandle();
+        canvasWidth = canvas.getWidth();
+        canvasHeight = canvas.getHeight();
+        if (!(canvasHeight == 0 || canvasWidth == 0) && canvas.isVisible())
+            renderHandle();
     }
 
     public void clearRect() {

@@ -75,9 +75,7 @@ public class MapEditor extends BaseEditor {
 
 
         //预览选中渲染器
-       previewSelectedMapRender = new FixedOrbitMapRender( previewMapRender.getRenderInfo(), scrollCanvas, zxMap, "preview-selected", "default");
-
-
+        previewSelectedMapRender = new FixedOrbitMapRender(previewMapRender.getRenderInfo(), scrollCanvas, zxMap, "preview-selected", "default");
 
 
         scrollBar.getChildren().addAll(scrollCanvas, scrollPane);
@@ -89,7 +87,9 @@ public class MapEditor extends BaseEditor {
         mainMapRender.getRenderInfo().timelineZoom = 1.2f;
 
         //选中渲染器
-        mainSelectedMapRender = new FixedOrbitMapRender(mainMapRender.getRenderInfo(), mapCanvas, zxMap, "selected", "default");
+        ZXMap selectedNoteMap = new ZXMap();
+        selectedNoteMap.unLocalizedMapInfo=zxMap.unLocalizedMapInfo;
+        mainSelectedMapRender = new FixedOrbitMapRender(mainMapRender.getRenderInfo(), mapCanvas, selectedNoteMap, "selected", "default");
 
 
         //背景渲染器

@@ -2,6 +2,7 @@ package team.zxorg.zxnoter.ui.render.fixedorbit;
 
 import javafx.scene.image.Image;
 import team.zxorg.zxnoter.map.ZXMap;
+import team.zxorg.zxnoter.note.BaseNote;
 import team.zxorg.zxnoter.note.fixedorbit.ComplexNote;
 import team.zxorg.zxnoter.note.fixedorbit.FixedOrbitNote;
 import team.zxorg.zxnoter.note.fixedorbit.LongNote;
@@ -9,42 +10,43 @@ import team.zxorg.zxnoter.note.fixedorbit.SlideNote;
 import team.zxorg.zxnoter.ui.component.CanvasPane;
 import team.zxorg.zxnoter.ui.render.fixedorbit.key.FixedOrbitNotesKey;
 
+import java.util.ArrayList;
+
 
 public class FixedOrbitMapRender extends FixedOrbitRender {
     String state;//状态
+    ArrayList<BaseNote> notesBuffer = new ArrayList<>();
 
 
     public FixedOrbitMapRender(FixedOrbitRenderInfo renderInfo, CanvasPane canvas, ZXMap zxMap, String state, String theme) {
         super(renderInfo, zxMap, canvas.canvas, theme);
         this.state = state;
-        renderInfo = new FixedOrbitRenderInfo();
 
-        /**
-         *
-         *         judgedLineImage = ZXResources.getImage("img.note.theme." + key + ".judgedline");
-         *         leftImage = ZXResources.getImage("img.note.theme." + key + ".left");
-         *         longImage = ZXResources.getImage("img.note.theme." + key + ".long");
-         *         nodeImage = ZXResources.getImage("img.note.theme." + key + ".node");
-         *         endImage = ZXResources.getImage("img.note.theme." + key + ".end");
-         *         noteImage = ZXResources.getImage("img.note.theme." + key + ".note");
-         *         rightImage = ZXResources.getImage("img.note.theme." + key + ".right");
-         *         slideImage = ZXResources.getImage("img.note.theme." + key + ".slide");
-         *
-         */
+        updateNoteBuffer();
+    }
+
+    public void updateNoteBuffer() {
+        //noyesBuffer
 
 
+        long topTime = (long) (getRenderInfo().timelinePosition - canvasHeight * getRenderInfo().judgedLinePosition / renderInfo.timelineZoom);
+        System.out.println(topTime);
+        long bottomTime = (long) (canvasHeight * getRenderInfo().judgedLinePosition / renderInfo.timelineZoom);
+
+        //(renderInfo.timelinePosition - note.timeStamp + judgedLineTimeOffset) * renderInfo.timelineZoom;
+        //renderZXMap.findClosestNote()
     }
 
     @Override
     public void renderHandle() {
-
+        //updateNoteBuffer();
         Image image;//临时存储图片
 
         //判定线时间偏移
         long judgedLineTimeOffset = (long) (canvasHeight * getRenderInfo().judgedLinePosition / renderInfo.timelineZoom);
 
-        for (int i = 0; i < renderZXMap.notes.size(); i++) {
-            if (renderZXMap.notes.get(i) instanceof FixedOrbitNote note) {
+        for (int i = 0; i < notesBuffer.size(); i++) {
+            if (notesBuffer.get(i) instanceof FixedOrbitNote note) {
 
 
                 //检查是否在显示区域
