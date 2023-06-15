@@ -221,7 +221,6 @@ public class ZXMap {
                 }
             }else if (tempNote instanceof ComplexNote complexNote){
                 FixedOrbitNote[] convertNotes = complexNote.convertNote(imdConvert);
-                System.out.println(Arrays.toString(convertNotes));
                 for (FixedOrbitNote fixedOrbitNote:convertNotes){
                     tempMap.insertNote(fixedOrbitNote);
                 }

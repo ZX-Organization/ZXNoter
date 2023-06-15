@@ -20,7 +20,7 @@ import java.util.Arrays;
 public class IoTest {
     public static void main(String[] args) {
         try {
-            ZXMap map = ImdReader.readFile(Path.of("docs/reference/Contrapasso -paradiso-/t+pazolite - Contrapasso -paradiso-_4k_hd.imd"));
+            ZXMap map = ImdReader.readFile(Path.of("docs/reference/Corruption/Corruption_4k_ez.imd"));
             //System.out.println(map.notes.get(19));
             //System.out.println(map.notes.size());
             System.out.println();
@@ -34,7 +34,8 @@ public class IoTest {
             System.out.println(ImdWriter.checkLocalizedInfos(map));*/
             ImdWriter.writeOut(convertMap , ImdWriter.checkLocalizedInfos(convertMap) , Path.of("G:/desktop"));
             //System.out.println(map.timingPoints);
-            //OsuWriter.writeOut(map,OsuWriter.checkLocalizedInfos(map),Path.of("G:/desktop"));
+            //OsuWriter.writeOut(convertMap,OsuWriter.checkLocalizedInfos(convertMap),Path.of("G:/desktop"));
+            //System.out.println(OsuWriter.checkLocalizedInfos(convertMap));
             //System.out.println(map.notes);
         } catch (IOException e) {
             throw new RuntimeException(e);

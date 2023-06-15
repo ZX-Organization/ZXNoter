@@ -48,7 +48,7 @@ public class ImdReader {
         //谱面标题
         unLocalizedMapInfo.addInfo(ImdInfo.ImdTitle.unLocalize(), title);
         //图片路径
-        unLocalizedMapInfo.addInfo(ImdInfo.ImdBgPath.unLocalize(), "{"+title + ".png}{" + title + ".jpg}");
+        unLocalizedMapInfo.addInfo(ImdInfo.ImdBgPath.unLocalize(), title + ".png");
         //音频路径
         unLocalizedMapInfo.addInfo(ImdInfo.ImdAudioPath.unLocalize(), title + ".mp3");
         //键数

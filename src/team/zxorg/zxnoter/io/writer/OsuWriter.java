@@ -111,15 +111,18 @@ public class OsuWriter {
         int index = 1;
         for (Timing timing: zxMap.timingPoints){
             StringBuilder strB = new StringBuilder();
-            strB.append(timing.timingStamp).append(",");
             //判断是否属于ZxTiming,是则细分
+            long firstTiming = zxMap.notes.get(0).timeStamp;
+            if (index == 1)
+                strB.append(firstTiming).append(",").append(1/(baseBpm/60000)).append(",");
+            else {
+                if (timing.timingStamp>firstTiming)
+                    strB.append(timing.timingStamp).append(",").append("-").append(100/timing.bpmRatio).append(",");
+                else continue;
+            }
             if (timing instanceof ZxTiming zxTiming){
+
                 //属于ZxTiming,直接使用其已有值
-                if (index == 1)
-                    strB.append(1/(baseBpm/60000)).append(",");
-                else {
-                    strB.append("-").append(100/zxTiming.bpmRatio).append(",");
-                }
                 strB.append(zxTiming.beats).append(",").
                         append(zxTiming.sampleSet).append(",").
                         append(zxTiming.soundPar).append(",").
@@ -133,8 +136,12 @@ public class OsuWriter {
             }
             //不属于ZxTiming,自动适配默认值
             strB.append(4).append(",").append(0).append(",").
-                    append(0).append(",").append(75).append(",").
-                    append(1).append(",").append(0);
+                    append(0).append(",").append(75).append(",");
+            if (index==1){
+                strB.append(1).append(",").append(0);
+            }else {
+                strB.append(0).append(",").append(0);
+            }
             bW.write(strB.toString());
             bW.newLine();
             index++;
@@ -224,8 +231,11 @@ public class OsuWriter {
         for (OsuInfo osuInfo : infos) {
             localizeMap.put(osuInfo, null);
         }
-        //列举需要的的本地化信息
-        Set<OsuInfo> localizedInfoSet = localizeMap.keySet();
+        //防止null,先初始化BgPath
+        localizeMap.put(
+                OsuInfo.valueOf("BgPath"),
+                unLocalizedMapInfo.getInfo(OsuInfo.valueOf("BgPath").unLocalize())
+        );
         //列举目前有的反本地化信息,判断有无和上面所需信息表反本地化信息相同的信息,直接使用
         for (OsuInfo localizedInfo : infos) {
             //System.out.println(localizedInfo);
@@ -245,7 +255,7 @@ public class OsuWriter {
                         continue;
                     }
                     case BackgroundandVideoevents -> {
-                        tempValue = "0,0,\"" + localizeMap.get(OsuInfo.valueOf("Title")) + "\",0,0";
+                        tempValue = "0,0,\"" + localizeMap.get(OsuInfo.valueOf("BgPath")) + "\",0,0";
                         localizeMap.put(localizedInfo, tempValue);
                         continue;
                     }
