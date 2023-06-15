@@ -83,6 +83,7 @@ public class ImdReader {
         //表格行数
         int tabRows = bf.getInt();
         unLocalizedMapInfo.addInfo(ImdInfo.TabRows.unLocalize(), String.valueOf(tabRows));
+        //组合键转换模式
 
         ComplexNote tempComplexNote = null;
         //11字节为一组,读取所有按键

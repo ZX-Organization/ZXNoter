@@ -1,5 +1,6 @@
 package team.zxorg.zxnoter.map;
 
+import team.zxorg.zxnoter.map.mapInfos.ImdInfo;
 import team.zxorg.zxnoter.note.BaseNote;
 import team.zxorg.zxnoter.note.fixedorbit.ComplexNote;
 import team.zxorg.zxnoter.note.fixedorbit.FixedOrbitNote;
@@ -8,6 +9,7 @@ import team.zxorg.zxnoter.note.fixedorbit.SlideNote;
 import team.zxorg.zxnoter.note.timing.Timing;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * zx谱面类
@@ -22,6 +24,12 @@ public class ZXMap {
      */
     public ArrayList<Timing> timingPoints;
     public UnLocalizedMapInfo unLocalizedMapInfo;
+    public ZXMap(){}
+    public ZXMap(ArrayList<BaseNote> notes, ArrayList<Timing> timingPoints, UnLocalizedMapInfo unLocalizedMapInfo) {
+        this.notes = notes;
+        this.timingPoints = timingPoints;
+        this.unLocalizedMapInfo = unLocalizedMapInfo;
+    }
 
     /**
      * 二分查找到一个时间戳离得最近的按键
@@ -81,6 +89,11 @@ public class ZXMap {
      * @return 插入后所处下标
      */
     public int insertNote(BaseNote note){
+
+        if (notes.size()==0||notes.get(notes.size()-1).timeStamp <= note.timeStamp){
+            notes.add(note);
+            return notes.size()-1;
+        }
         int index = binarySearch(note.timeStamp , 0 , notes.size()-1);
         ArrayList<BaseNote> backNotes = new ArrayList<>();
         while (index < notes.size()){
@@ -177,6 +190,47 @@ public class ZXMap {
         }
         //将修改好的缓存列表加回组合键
         complexNote.notes.addAll(backNotes);
+    }
+
+    /**
+     * 编辑按键参数
+     * @param fixedOrbitNote 要修改的按键
+     * @param parameter 参数
+     * @return 修改是否成功
+     */
+    public boolean editNotePar(FixedOrbitNote fixedOrbitNote,int parameter){
+        if (fixedOrbitNote instanceof LongNote longNote){
+            longNote.sustainedTime = parameter;
+            return true;
+        }
+        if (fixedOrbitNote instanceof SlideNote slideNote){
+            slideNote.slideArg = parameter;
+            return true;
+        }
+        return false;
+    }
+    public ZXMap imdConvertNoComplex(ImdInfo.ConvertMethod imdConvert){
+        ZXMap tempMap = new ZXMap(notes,timingPoints,unLocalizedMapInfo);
+        tempMap.notes =  new ArrayList<>();
+
+        for (BaseNote tempNote:notes){
+            if (tempNote instanceof SlideNote slideNote){
+                FixedOrbitNote[] convertNotes = slideNote.convertNote(imdConvert);
+                for (FixedOrbitNote fixedOrbitNote:convertNotes){
+                    tempMap.insertNote(fixedOrbitNote);
+                }
+            }else if (tempNote instanceof ComplexNote complexNote){
+                FixedOrbitNote[] convertNotes = complexNote.convertNote(imdConvert);
+                System.out.println(Arrays.toString(convertNotes));
+                for (FixedOrbitNote fixedOrbitNote:convertNotes){
+                    tempMap.insertNote(fixedOrbitNote);
+                }
+            }else {
+                tempMap.insertNote(tempNote);
+            }
+        }
+        tempMap.unLocalizedMapInfo.addInfo("TabRows",String.valueOf(tempMap.notes.size()));
+        return tempMap;
     }
     @Override
     public String toString() {

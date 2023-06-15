@@ -111,6 +111,8 @@ public class ImdWriter {
             String fileName = checkedLocalizedInfos.get(ImdInfo.ImdTitle)+
                     "_"+checkedLocalizedInfos.get(ImdInfo.ImdKeyCount)+
                     "k_"+checkedLocalizedInfos.get(ImdInfo.ImdVersion)+".imd";
+            if (fileName.contains("?"))
+                fileName=fileName.replaceAll("\\?","");
             fos = new FileOutputStream(path.toAbsolutePath()+"/"+fileName);
         }
         fos.write(bf.array());
@@ -188,6 +190,9 @@ public class ImdWriter {
                         }
                         tempValue = String.valueOf(tabRows);
                         break;
+                    }
+                    case ImdVersion -> {
+                        tempValue = ImdInfo.ImdVersion.getDefaultValue();
                     }
                     case ImdBgPath -> {
                         //自动使用标题名

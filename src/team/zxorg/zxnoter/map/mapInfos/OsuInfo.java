@@ -48,6 +48,7 @@ public enum OsuInfo {
     StoryboardLayer1Fail("Storyboard Layer 1 (Fail)", ""),
     StoryboardLayer2Pass("Storyboard Layer 2 (Pass)", ""),
     StoryboardLayer3Foreground("Storyboard Layer 3 (Foreground)", ""),
+    StoryboardLayer4Overlay("Storyboard Layer 4 (Overlay)", ""),
     StoryboardSoundSamples("Storyboard Sound Samples", ""),
     BaseBpm("BaseBpm", ""),
     ;
