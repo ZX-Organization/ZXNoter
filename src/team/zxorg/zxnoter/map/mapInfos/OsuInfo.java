@@ -25,7 +25,7 @@ public enum OsuInfo {
     DistanceSpacing("DistanceSpacing", "1"),
     BeatDivisor("BeatDivisor", "12"),
     GridSize("GridSize", "4"),
-    TimelineZoom("TimelineZoom", "2.5s"),
+    TimelineZoom("TimelineZoom", "2.5"),
     Title("Title", ""),
     TitleUnicode("TitleUnicode", ""),
     Artist("Artist", ""),
@@ -48,8 +48,10 @@ public enum OsuInfo {
     StoryboardLayer1Fail("Storyboard Layer 1 (Fail)", ""),
     StoryboardLayer2Pass("Storyboard Layer 2 (Pass)", ""),
     StoryboardLayer3Foreground("Storyboard Layer 3 (Foreground)", ""),
+    StoryboardLayer4Overlay("Storyboard Layer 4 (Overlay)", ""),
     StoryboardSoundSamples("Storyboard Sound Samples", ""),
     BaseBpm("BaseBpm", ""),
+    BgPath("BgPath","")
     ;
     private final String unLocalizedName;
     private final String defaultValue;

@@ -5,8 +5,8 @@ import team.zxorg.zxnoter.map.ZXMap;
 import team.zxorg.zxnoter.map.mapInfos.OsuInfo;
 import team.zxorg.zxnoter.note.BaseNote;
 import team.zxorg.zxnoter.note.fixedorbit.FixedOrbitNote;
-import team.zxorg.zxnoter.note.fixedorbit.OsuCustomLongNote;
-import team.zxorg.zxnoter.note.fixedorbit.OsuCustomNote;
+import team.zxorg.zxnoter.note.fixedorbit.CustomLongNote;
+import team.zxorg.zxnoter.note.fixedorbit.CustomNote;
 import team.zxorg.zxnoter.note.timing.ZxTiming;
 import team.zxorg.zxnoter.note.timing.Timing;
 
@@ -116,12 +116,18 @@ public class OsuReader {
                     //时间点处理
                     String[] allPars = readTemp.split(",");
                     boolean isExtendTiming = (Integer.parseInt(allPars[6]) == 1);
+                    int timeStamp;
+                    if (allPars[0].contains(".")){
+                        timeStamp = (int) Double.parseDouble(allPars[0]);
+                    }else {
+                        timeStamp = Integer.parseInt(allPars[0]);
+                    }
                     if (getBaseBpm){
                         baseBpm = 60000/Double.parseDouble(allPars[1]);
                         //基准bpm时间点添加
                         timingPoints.add(
                                 new ZxTiming(
-                                        Integer.parseInt(allPars[0]),
+                                        timeStamp,
                                         1,
                                         Integer.parseInt(allPars[2]),
                                         Integer.parseInt(allPars[3]),
@@ -132,10 +138,12 @@ public class OsuReader {
                                 )
                         );
                         getBaseBpm = false;
+                        continue;
                     }
+
                     timingPoints.add(
                             new ZxTiming(
-                                    Integer.parseInt(allPars[0]),
+                                    timeStamp,
                                     100/Math.abs(Double.parseDouble(allPars[1])),
                                     Integer.parseInt(allPars[2]),
                                     Integer.parseInt(allPars[3]),
@@ -149,19 +157,39 @@ public class OsuReader {
                 }
                 case 2->{
                     //物件处理
+                    String noteStr = readTemp.substring(0 , readTemp.lastIndexOf(","));
+                    String sampleStr = readTemp.substring(noteStr.length()+1);
+                    //System.out.println("base->"+noteStr);
+                    //System.out.println("temp->"+sampleStr);
+                    //检查tempStr中是否有五个冒号,有五个冒号证明此物件为长条,且tempStr中包含长条参数
+
+                    int colonSymCount = sampleStr.length() - sampleStr.replaceAll(":","").length();
+
+                    if (colonSymCount == 5){
+                        //包含长条参数
+                        //取出参数
+                        String longNotePar = sampleStr.split(":")[0];
+                        //拼接到基础参数字符串
+                        noteStr = noteStr +","+ longNotePar;
+                        //从原字符串中删除
+                        sampleStr = sampleStr.replaceFirst(longNotePar+":","");
+                    }
 
                     //分割物件参数集
-                    String[] notePars = readTemp.substring(0 , readTemp.indexOf(":") ).split(",");
+                    String[] notePars = noteStr.split(",");
+                    //System.out.println("源->"+readTemp);
                     //分割物件音效组参数集
-                    String[] sampleSetPars = readTemp.substring(readTemp.indexOf(":")-1).split(":");
+                    String[] sampleSetPars = sampleStr.split(":");
 
                     //预定义物件
                     FixedOrbitNote note;
-
+                    //System.out.println("音效组->"+Arrays.toString(sampleSetPars));
+                    //System.out.println("物件参数->"+Arrays.toString(notePars));
+                    //System.out.println();
                     //通过参数列表长度区分长键单键
                     if (notePars.length == 5 ){
                         //单键
-                        note = new OsuCustomNote(
+                        note = new CustomNote(
                                 Integer.parseInt(notePars[2]),//时间戳
                                 (int)Math.floor((double) (Integer.parseInt(notePars[0]) * keyCount) / 512),//轨道
                                 Integer.parseInt(notePars[3]),
@@ -170,12 +198,14 @@ public class OsuReader {
                                 );
                     }else{
                         //长键
-                        note = new OsuCustomLongNote(
-                                Integer.parseInt(notePars[2]),
+                        int timeStamp = Integer.parseInt(notePars[2]);
+                        int endTime = Integer.parseInt(notePars[5]);
+                        note = new CustomLongNote(
+                                timeStamp,
                                 (int)Math.floor((double) (Integer.parseInt(notePars[0]) * keyCount) / 512),
                                 Integer.parseInt(notePars[3]),
                                 Integer.parseInt(notePars[4]),
-                                Integer.parseInt(notePars[5]),
+                                endTime-timeStamp,
                                 sampleSetPars
                         );
                     }

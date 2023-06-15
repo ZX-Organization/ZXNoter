@@ -1,5 +1,7 @@
 package team.zxorg.zxnoter.note.fixedorbit;
 
+import team.zxorg.zxnoter.map.mapInfos.ImdInfo;
+
 /**
  * 滑键
  */
@@ -13,6 +15,32 @@ public class SlideNote extends FixedOrbitNote implements Cloneable{
     public SlideNote(long timeStamp, int orbit, int slideArg) {
         super(timeStamp, orbit);
         this.slideArg = slideArg;
+    }
+    public FixedOrbitNote[] convertNote(ImdInfo.ConvertMethod convertMethod){
+        FixedOrbitNote[] convertNotes = null;
+        //转换按键
+        switch (convertMethod){
+            case BASE -> {
+                convertNotes = new FixedOrbitNote[1];
+                convertNotes[0] = new FixedOrbitNote(timeStamp,orbit);
+                return convertNotes;
+            }
+            case BASE_SLIDE -> {
+                convertNotes = new FixedOrbitNote[Math.abs(slideArg)+1];
+                for (int i = 0; i <= Math.abs(slideArg); i++) {
+                    convertNotes[i] = new FixedOrbitNote(timeStamp , orbit + (slideArg > 0 ? i : -i));
+                }
+                return convertNotes;
+            }
+            case ADVANCE_SLIDE -> {
+                convertNotes = new FixedOrbitNote[Math.abs(slideArg)+1];
+                for (int i = 0; i <= Math.abs(slideArg); i++) {
+                    convertNotes[i] = new FixedOrbitNote(timeStamp + (int)(i * ((double)25 / (Math.abs(slideArg) + 1))) , orbit + (slideArg > 0 ? i : -i));
+                }
+                return convertNotes;
+            }
+        }
+        return null;
     }
 
     @Override
