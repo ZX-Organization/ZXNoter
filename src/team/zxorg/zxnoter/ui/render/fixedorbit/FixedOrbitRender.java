@@ -35,4 +35,37 @@ public abstract class FixedOrbitRender extends Render {
         return Integer.parseInt(renderZXMap.unLocalizedMapInfo.getInfo("KeyCount"));
     }
 
+
+
+    /**
+     * 获取时间到y位置
+     *
+     * @param time
+     * @return
+     */
+    public double getTimeToPosition(long time) {
+        //判定线时间偏移
+        long judgedLineTimeOffset = getJudgedLineTimeOffset();
+        return (renderInfo.timelinePosition - time + judgedLineTimeOffset) * renderInfo.timelineZoom;
+    }
+
+    /**
+     * 获取判断线时间偏移位置
+     * @return 偏移时间
+     */
+
+    public long getJudgedLineTimeOffset() {
+        return (long) (canvasHeight * getRenderInfo().judgedLinePosition / renderInfo.timelineZoom);
+    }
+
+    /**
+     * 获取y位置到时间
+     * @param y
+     * @return
+     */
+    public long getPositionToTime(double y) {
+        long topTime = (long) (getRenderInfo().timelinePosition - (canvasHeight - canvasHeight * getRenderInfo().judgedLinePosition) / renderInfo.timelineZoom);
+        return (long) (topTime + (canvasHeight - y) / renderInfo.timelineZoom);
+    }
+
 }

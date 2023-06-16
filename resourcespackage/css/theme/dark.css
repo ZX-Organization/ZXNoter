@@ -70,10 +70,24 @@
 }
 
 .scroll-bar {
+    -fx-background-color: #262626;
+    -fx-border-color: #505050;
+    -fx-border-width: 0 1 0 1;
+}
+.scroll-bar:vertical .thumb{
+    -fx-background-color: #45474a;
+    -fx-background-radius: 2;
+}
+.scroll-bar:vertical .thumb:hover,.scroll-bar:vertical .thumb:pressed{
+    -fx-background-color: #55575a;
+}
+
+.preview-bar {
     -fx-background-color: #232323;
 }
 
-.scroll-pane {
+
+.preview-pane {
     -fx-background-color: #ffffff11;
     -fx-border-color: #505050;
     -fx-border-width: 2 0 2 0;
@@ -171,6 +185,8 @@
     -fx-background-color: #292929;
     -fx-text-fill: #9A9A9A;
     -fx-highlight-fill: #093939;
+    -fx-border-color: #505050;
+    -fx-border-width: 0 1 0 1;
 }
 
 

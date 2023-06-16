@@ -2,7 +2,6 @@ package team.zxorg.zxnoter.ui.render.fixedorbit;
 
 import javafx.scene.image.Image;
 import team.zxorg.zxnoter.map.ZXMap;
-import team.zxorg.zxnoter.note.BaseNote;
 import team.zxorg.zxnoter.note.fixedorbit.ComplexNote;
 import team.zxorg.zxnoter.note.fixedorbit.FixedOrbitNote;
 import team.zxorg.zxnoter.note.fixedorbit.LongNote;
@@ -10,41 +9,19 @@ import team.zxorg.zxnoter.note.fixedorbit.SlideNote;
 import team.zxorg.zxnoter.ui.component.CanvasPane;
 import team.zxorg.zxnoter.ui.render.fixedorbit.key.FixedOrbitNotesKey;
 
-import java.util.ArrayList;
-
 
 public class FixedOrbitMapRender extends FixedOrbitRender {
     String state;//状态
-    //ArrayList<BaseNote> notesBuffer = new ArrayList<>();
 
 
     public FixedOrbitMapRender(FixedOrbitRenderInfo renderInfo, CanvasPane canvas, ZXMap zxMap, String state, String theme) {
         super(renderInfo, zxMap, canvas.canvas, theme);
         this.state = state;
 
-        //updateNoteBuffer();
     }
 
-    public void updateNoteBuffer() {
-        //noyesBuffer
 
 
-        long topTime = (long) (getRenderInfo().timelinePosition - canvasHeight * getRenderInfo().judgedLinePosition / renderInfo.timelineZoom);
-        //System.out.println(topTime);
-        long bottomTime = (long) (canvasHeight * getRenderInfo().judgedLinePosition / renderInfo.timelineZoom);
-
-        //(renderInfo.timelinePosition - note.timeStamp + judgedLineTimeOffset) * renderInfo.timelineZoom;
-        //renderZXMap.findClosestNote()
-    }
-
-    public long getPositionTime(double y) {
-        long topTime = (long) (getRenderInfo().timelinePosition - (canvasHeight-canvasHeight * getRenderInfo().judgedLinePosition) / renderInfo.timelineZoom);
-
-
-        long time = (long) (topTime + (canvasHeight - y) / renderInfo.timelineZoom);
-
-        return time;
-    }
 
     @Override
     public void renderHandle() {
@@ -52,7 +29,7 @@ public class FixedOrbitMapRender extends FixedOrbitRender {
         Image image;//临时存储图片
 
         //判定线时间偏移
-        long judgedLineTimeOffset = (long) (canvasHeight * getRenderInfo().judgedLinePosition / renderInfo.timelineZoom);
+        long judgedLineTimeOffset = getJudgedLineTimeOffset();
 
         for (int i = 0; i < renderZXMap.notes.size(); i++) {
             if (renderZXMap.notes.get(i) instanceof FixedOrbitNote note) {
