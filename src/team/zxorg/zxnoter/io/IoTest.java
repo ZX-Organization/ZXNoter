@@ -21,10 +21,11 @@ public class IoTest {
     public static void main(String[] args) {
         try {
             ZXMap map = ImdReader.readFile(Path.of("docs/reference/Corruption/Corruption_4k_ez.imd"));
+            map.findClosestNote(1000);
             //System.out.println(map.notes.get(19));
             //System.out.println(map.notes.size());
-            System.out.println();
-            ZXMap convertMap = map.imdConvertNoComplex(ImdInfo.ConvertMethod.BASE_SLIDE);
+            //System.out.println();
+            //ZXMap convertMap = map.imdConvertNoComplex(ImdInfo.ConvertMethod.BASE_SLIDE);
             //System.out.println(convertMap.notes);
             //System.out.println(Arrays.toString(((ComplexNote)map.notes.get(19)).convertNote(ImdInfo.ConvertMethod.BASE_SLIDE)));
             //System.out.println(map.imdConvertNoComplex(ImdInfo.ConvertMethod.BASE_SLIDE));
@@ -32,7 +33,7 @@ public class IoTest {
             //System.out.println(map.timingPoints);
             /*System.out.println(map.unLocalizedMapInfo);
             System.out.println(ImdWriter.checkLocalizedInfos(map));*/
-            ImdWriter.writeOut(convertMap , ImdWriter.checkLocalizedInfos(convertMap) , Path.of("G:/desktop"));
+            //ImdWriter.writeOut(convertMap , ImdWriter.checkLocalizedInfos(convertMap) , Path.of("G:/desktop"));
             //System.out.println(map.timingPoints);
             //OsuWriter.writeOut(convertMap,OsuWriter.checkLocalizedInfos(convertMap),Path.of("G:/desktop"));
             //System.out.println(OsuWriter.checkLocalizedInfos(convertMap));
@@ -40,9 +41,9 @@ public class IoTest {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        catch (NoSuchFieldException e) {
+        /*catch (NoSuchFieldException e) {
             throw new RuntimeException(e);
-        }
+        }*/
 
     }
 }

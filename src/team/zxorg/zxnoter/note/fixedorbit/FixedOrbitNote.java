@@ -7,7 +7,7 @@ import java.nio.file.Path;
 /**
  * 定轨按键
  */
-public class FixedOrbitNote extends BaseNote implements Cloneable{
+public class FixedOrbitNote extends BaseNote implements Cloneable,Comparable<BaseNote>{
     /**
      * 轨道
      */
@@ -56,5 +56,13 @@ public class FixedOrbitNote extends BaseNote implements Cloneable{
                 "轨道=" + orbit +
                 ", 时间戳=" + timeStamp +
                 '}';
+    }
+    @Override
+    public int compareTo(BaseNote baseNote) {
+        if (timeStamp<baseNote.timeStamp) return -1;
+        else if (timeStamp> baseNote.timeStamp) return 1;
+        else if (baseNote instanceof FixedOrbitNote fixedOrbitNote){
+            return Integer.compare(orbit, fixedOrbitNote.orbit);
+        }else return 0;
     }
 }
