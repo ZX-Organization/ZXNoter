@@ -51,7 +51,7 @@ public class OsuWriter {
         //General
         OsuInfo[] generalInfos = Arrays.copyOfRange(allInfo,1,17);//不含尾
         //Editor
-        OsuInfo[] editorInfos = Arrays.copyOfRange(allInfo,17,22);
+        OsuInfo[] editorInfos = Arrays.copyOfRange(allInfo,18,22);
         //Metadata
         OsuInfo[] metadataInfos = Arrays.copyOfRange(allInfo,22,32);
         //Difficulty

@@ -3,7 +3,7 @@ package team.zxorg.zxnoter.note;
 /**
  * 基本键
  */
-public abstract class BaseNote implements Cloneable{
+public abstract class BaseNote implements Cloneable,Comparable<BaseNote>{
     /**
      * 按键或按键头部时间戳
      */
@@ -18,4 +18,11 @@ public abstract class BaseNote implements Cloneable{
     public abstract int getOrbit();
     public abstract void setOrbit(int orbit);
     public abstract int getImdNoteType();
+
+    @Override
+    public int compareTo(BaseNote o) {
+        if (timeStamp<o.timeStamp) return -1;
+        else if (timeStamp>o.timeStamp) return 1;
+        else return 0;
+    }
 }

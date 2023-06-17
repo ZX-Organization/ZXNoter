@@ -36,7 +36,29 @@ public class ZXMap {
      * @param time
      * @return
      */
-    public int findClosestNote(long time){
+    public ArrayList<BaseNote> findClosestNote(long time){
+        ArrayList<BaseNote> findResults = new ArrayList<>();
+        int res = findClosestNoteIndex(time,notes);
+        BaseNote resNote = notes.get(res);
+        int tempIndex=res;
+        BaseNote tempNote;
+        //向前查找
+        while (tempIndex>0&&(tempNote = notes.get(--tempIndex)).timeStamp == resNote.timeStamp){
+            findResults.add(tempNote);
+        }
+        //加入自身结果
+        findResults.add(resNote);
+        //复原索引
+        tempIndex = res;
+        //向后查找
+        while (tempIndex<notes.size()-1&&(tempNote=notes.get(++tempIndex)).timeStamp == resNote.timeStamp){
+            findResults.add(tempNote);
+        }
+        //排序
+        findResults.sort(BaseNote::compareTo);
+        return findResults;
+    }
+    private int findClosestNoteIndex(long time,ArrayList<BaseNote> notes){
         if (0 > time) return 0;
         if (notes.get(notes.size()-1).timeStamp < time) return notes.size()-1;
 
@@ -59,6 +81,7 @@ public class ZXMap {
             int next = searchRes + 1;
             if (Math.abs(notes.get(previous).timeStamp-time) < Math.abs(notes.get(searchRes).timeStamp-time)) res = previous;
             if (Math.abs(notes.get(next).timeStamp-time) < Math.abs(notes.get(searchRes).timeStamp-time)) res = next;
+
             return res;
         }
     }
@@ -220,7 +243,7 @@ public class ZXMap {
                     tempMap.insertNote(fixedOrbitNote);
                 }
             }else if (tempNote instanceof ComplexNote complexNote){
-                FixedOrbitNote[] convertNotes = complexNote.convertNote(imdConvert);
+                ArrayList<FixedOrbitNote> convertNotes = complexNote.convertNote(imdConvert);
                 for (FixedOrbitNote fixedOrbitNote:convertNotes){
                     tempMap.insertNote(fixedOrbitNote);
                 }
