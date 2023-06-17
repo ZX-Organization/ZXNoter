@@ -10,6 +10,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import team.zxorg.zxnoter.io.reader.ImdReader;
+import team.zxorg.zxnoter.io.reader.OsuReader;
 import team.zxorg.zxnoter.map.ZXMap;
 import team.zxorg.zxnoter.resource.ZXResources;
 import team.zxorg.zxnoter.ui.editor.MapEditor;
@@ -131,6 +132,32 @@ public class ZXNApp extends Application {
 
             try {
                 ZXMap zxMap = ImdReader.readFile(Paths.get("docs/reference/Contrapasso -paradiso-/t+pazolite - Contrapasso -paradiso-_4k_hd.imd"));
+                Tab tab1 = new Tab(zxMap.unLocalizedMapInfo.getInfo("Title"));
+                tab1.setGraphic(ZXResources.getSvgPane("svg.icons.zxnoter.file-notemap-line", 18, Color.DARKGREEN));
+                MapEditor editor = new MapEditor(zxMap);
+                tab1.setContent(editor);
+                workspaceTabPane.getTabs().add(tab1);
+
+
+                //画布更新线程常驻
+                AnimationTimer animationTimer = new AnimationTimer() {
+                    @Override
+                    public void handle(long l) {
+                        editor.render();
+                    }
+                };
+                animationTimer.start();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+
+        }
+
+        {//添加编辑器
+
+            try {
+                ZXMap zxMap = OsuReader.readFile(Paths.get("docs/reference/896710 VA - 6k High Speed Ultimate Pack Vol3/V.A. - 6k High Speed Ultimate Pack Vol.3 (_IceRain) [Camellia - Blastix Riotz x1.1].osu"));
                 Tab tab1 = new Tab(zxMap.unLocalizedMapInfo.getInfo("Title"));
                 tab1.setGraphic(ZXResources.getSvgPane("svg.icons.zxnoter.file-notemap-line", 18, Color.DARKGREEN));
                 MapEditor editor = new MapEditor(zxMap);

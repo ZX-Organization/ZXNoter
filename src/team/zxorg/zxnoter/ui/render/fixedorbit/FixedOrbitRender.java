@@ -3,6 +3,9 @@ package team.zxorg.zxnoter.ui.render.fixedorbit;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
 import team.zxorg.zxnoter.map.ZXMap;
+import team.zxorg.zxnoter.note.BaseNote;
+import team.zxorg.zxnoter.note.fixedorbit.ComplexNote;
+import team.zxorg.zxnoter.note.fixedorbit.LongNote;
 import team.zxorg.zxnoter.resource.ZXResources;
 import team.zxorg.zxnoter.ui.render.Render;
 import team.zxorg.zxnoter.ui.render.fixedorbit.key.FixedOrbitNotesKey;
@@ -24,6 +27,7 @@ public abstract class FixedOrbitRender extends Render {
     }
 
     public Image getImage(String state, FixedOrbitNotesKey notesKey) {
+
         return ZXResources.getImage("img.note.theme." + theme + "." + state + "." + notesKey.name);
     }
 
@@ -32,40 +36,27 @@ public abstract class FixedOrbitRender extends Render {
     }
 
     private int getOrbits() {
-        return Integer.parseInt(renderZXMap.unLocalizedMapInfo.getInfo("KeyCount"));
+        return Integer.parseInt(zxMap.unLocalizedMapInfo.getInfo("KeyCount"));
     }
 
-
-
     /**
-     * 获取时间到y位置
+     * 获取最后的键位置
      *
-     * @param time
-     * @return
+     * @return 时间戳
      */
-    public double getTimeToPosition(long time) {
-        //判定线时间偏移
-        long judgedLineTimeOffset = getJudgedLineTimeOffset();
-        return (renderInfo.timelinePosition - time + judgedLineTimeOffset) * renderInfo.timelineZoom;
+    public long getLastTime() {
+        BaseNote lastNote = zxMap.notes.get(zxMap.notes.size() - 1);
+        long time;
+        if (lastNote instanceof ComplexNote complexNote) {
+            time = complexNote.notes.get(complexNote.notes.size() - 1).timeStamp;
+        } else if (lastNote instanceof LongNote longNote) {
+            time = longNote.timeStamp + longNote.sustainedTime;
+        } else {
+            time = zxMap.notes.get(zxMap.notes.size() - 1).timeStamp;
+        }
+        getRenderInfo().noteLastTime.set(time);
+        return time;
     }
 
-    /**
-     * 获取判断线时间偏移位置
-     * @return 偏移时间
-     */
-
-    public long getJudgedLineTimeOffset() {
-        return (long) (canvasHeight * getRenderInfo().judgedLinePosition / renderInfo.timelineZoom);
-    }
-
-    /**
-     * 获取y位置到时间
-     * @param y
-     * @return
-     */
-    public long getPositionToTime(double y) {
-        long topTime = (long) (getRenderInfo().timelinePosition - (canvasHeight - canvasHeight * getRenderInfo().judgedLinePosition) / renderInfo.timelineZoom);
-        return (long) (topTime + (canvasHeight - y) / renderInfo.timelineZoom);
-    }
 
 }

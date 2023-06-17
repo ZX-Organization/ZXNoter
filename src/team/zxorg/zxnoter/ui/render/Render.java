@@ -6,28 +6,27 @@ import team.zxorg.zxnoter.map.ZXMap;
 
 public abstract class Render {
     public final Canvas canvas;
-    public double canvasWidth, canvasHeight;
     public final GraphicsContext graphics;
-    public final ZXMap renderZXMap;
+    public final ZXMap zxMap;
     public RenderInfo renderInfo;
 
     protected abstract RenderInfo getRenderInfo();
 
 
-    public Render(RenderInfo renderInfo, ZXMap renderZXMap, Canvas canvas) {
+    public Render(RenderInfo renderInfo, ZXMap zxMap, Canvas canvas) {
         this.renderInfo = renderInfo;
         this.canvas = canvas;
         graphics = canvas.getGraphicsContext2D();
-        this.renderZXMap = renderZXMap;
+        this.zxMap = zxMap;
+        renderInfo.canvasWidth.bind(canvas.widthProperty());
+        renderInfo.canvasHeight.bind(canvas.heightProperty());
     }
 
     /**
      * 执行渲染操作
      */
     public void render() {
-        canvasWidth = canvas.getWidth();
-        canvasHeight = canvas.getHeight();
-        if (!(canvasHeight == 0 || canvasWidth == 0) && canvas.isVisible())
+        if (!(canvas.getWidth() == 0 ||  canvas.getHeight() == 0) && canvas.isVisible())
             renderHandle();
     }
 
