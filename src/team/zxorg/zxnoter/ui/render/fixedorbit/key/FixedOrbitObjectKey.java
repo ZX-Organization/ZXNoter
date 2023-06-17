@@ -6,7 +6,8 @@ public enum FixedOrbitObjectKey {
     BEAT_LINE("beat-line"),
     BOTTOM_LINE("bottom-line"),
     SUB_BEAT_LINE("sub-beat-line"),
-    TOP_LINE("top-line");
+    TOP_LINE("top-line"),
+    TIMING_LINE("timing-line");
 
     FixedOrbitObjectKey(String name) {
         this.name = name;

@@ -1,11 +1,10 @@
 package team.zxorg.zxnoter.ui.editor;
 
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import team.zxorg.zxnoter.map.ZXMap;
@@ -75,7 +74,7 @@ public class MapEditor extends BaseEditor {
 
             //谱面画板事件
             mapCanvas.setOnMouseClicked(event -> {
-                long time = mainMapRender.getPositionToTime(event.getY());
+                long time = mainMapRender.getRenderInfo().getPositionToTime(event.getY());
                 int index = zxMap.findClosestNote(time);
                 selectedNoteMap.notes.clear();
                 selectedNoteMap.notes.add(zxMap.notes.get(index));
@@ -84,13 +83,14 @@ public class MapEditor extends BaseEditor {
             //滚轮监听
             mapCanvas.setOnScroll(event -> {
                 double deltaY = event.getDeltaY();
-                setTimelinePosition(getTimelinePosition() + (long) deltaY);
+                mainMapRender.getRenderInfo().timelinePosition.set(mainMapRender.getRenderInfo().timelinePosition.get() + (long) (deltaY / mainMapRender.getRenderInfo().timelineZoom.get()));
+                //setTimelinePosition(getTimelinePosition() + (long) deltaY);
             });
 
             //滚轮监听
             previewCanvas.setOnScroll(event -> {
                 double deltaY = event.getDeltaY();
-                setTimelineZoom((float) (getTimelineZoom() * (deltaY < 0 ? 1.1 : 0.9)));
+                mainMapRender.getRenderInfo().timelineZoom.set(mainMapRender.getRenderInfo().timelineZoom.get() * (deltaY < 0 ? 1.1f : 0.9f));
             });
 
 
@@ -99,8 +99,8 @@ public class MapEditor extends BaseEditor {
 
         //预览渲染器
         previewMapRender = new FixedOrbitMapRender(new FixedOrbitRenderInfo(), previewCanvas, zxMap, "preview", "default");
-        previewMapRender.getRenderInfo().judgedLinePosition = 0.5f;
-        previewMapRender.getRenderInfo().timelineZoom = 0.18f;
+        previewMapRender.getRenderInfo().judgedLinePositionPercentage.setValue(0.5f);
+        previewMapRender.getRenderInfo().timelineZoom.setValue(0.18f);
 
 
         //预览选中渲染器
@@ -112,9 +112,12 @@ public class MapEditor extends BaseEditor {
 
         //谱面编辑渲染器
         mainMapRender = new FixedOrbitMapRender(new FixedOrbitRenderInfo(), mapCanvas, zxMap, "normal", "default");
-        mainMapRender.getRenderInfo().timelinePosition = 0;
-        mainMapRender.getRenderInfo().timelineZoom = 1.2f;
-        mainMapRender.getRenderInfo().judgedLinePosition = 0.95f;
+        mainMapRender.getRenderInfo().timelineZoom.setValue(1.2f);
+        mainMapRender.getRenderInfo().judgedLinePositionPercentage.setValue(0.95f);
+
+
+        //绑定部分属性
+        previewMapRender.getRenderInfo().timelinePosition.bind(mainMapRender.getRenderInfo().timelinePosition);
 
         //选中渲染器
         mainSelectedMapRender = new FixedOrbitMapRender(mainMapRender.getRenderInfo(), mapCanvas, selectedNoteMap, "normal-selected", "default");
@@ -138,12 +141,22 @@ public class MapEditor extends BaseEditor {
         //滚动栏
         ScrollBar scrollBar = new ScrollBar();
         scrollBar.setOrientation(Orientation.VERTICAL);
-        //scrollBar.setRotate(180);
-        //scrollBar.valueProperty()
-        DoubleProperty a = new SimpleDoubleProperty(10);
-        DoubleProperty b = new SimpleDoubleProperty();
-        b.bind(a.multiply(2));
-        System.out.println(b.getValue());
+
+
+        scrollBar.valueProperty().bindBidirectional(mainMapRender.getRenderInfo().timelinePosition);
+        scrollBar.setMin(0);
+        scrollBar.maxProperty().bind(mainMapRender.getRenderInfo().noteLastTime);
+
+        scrollBar.setBlockIncrement(10);
+        scrollBar.setUnitIncrement(100);
+        scrollBar.setRotate(180);
+        scrollBar.addEventFilter(ScrollEvent.SCROLL, event -> {
+            if (event.getDeltaY() != 0 || event.getDeltaX() != 0) {
+                scrollBar.setValue(scrollBar.getValue() + event.getDeltaY());
+                event.consume(); // 阻止事件传播
+            }
+        });
+
 
         //主体
         HBox bodyPane = new HBox(mapCanvas, previewBar, scrollBar, tabPane);
@@ -206,27 +219,8 @@ public class MapEditor extends BaseEditor {
         }
 
 
-        setTimelinePosition(5000);
-
         //添加给自己
         this.getChildren().addAll(toolBar, bodyPane);
-    }
-
-    public long getTimelinePosition() {
-        return mainMapRender.renderInfo.timelinePosition;
-    }
-
-    public void setTimelinePosition(long t) {
-        mainMapRender.renderInfo.timelinePosition = t;
-        previewSelectedMapRender.renderInfo.timelinePosition = t;
-    }
-
-    public float getTimelineZoom() {
-        return mainMapRender.renderInfo.timelineZoom;
-    }
-
-    public void setTimelineZoom(float zoom) {
-        mainMapRender.renderInfo.timelineZoom = zoom;
     }
 
 

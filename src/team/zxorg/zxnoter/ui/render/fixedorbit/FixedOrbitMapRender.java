@@ -21,40 +21,39 @@ public class FixedOrbitMapRender extends FixedOrbitRender {
     }
 
 
-
-
     @Override
     public void renderHandle() {
         //updateNoteBuffer();
         Image image;//临时存储图片
 
         //判定线时间偏移
-        long judgedLineTimeOffset = getJudgedLineTimeOffset();
+        long judgedLineTimeOffset = getRenderInfo().getJudgedLineTimeOffset();
 
-        for (int i = 0; i < renderZXMap.notes.size(); i++) {
-            if (renderZXMap.notes.get(i) instanceof FixedOrbitNote note) {
+        for (int i = 0; i < zxMap.notes.size(); i++) {
+            if (zxMap.notes.get(i) instanceof FixedOrbitNote note) {
 
 
                 //检查是否在显示区域
 
                 image = getImage(state, FixedOrbitNotesKey.NODE);
 
-                double x = (canvasWidth / (orbits)) * note.orbit;
-                double y = (renderInfo.timelinePosition - note.timeStamp + judgedLineTimeOffset) * renderInfo.timelineZoom;
-                double w = (canvasWidth / (orbits));
+                double x = (renderInfo.canvasWidth.get() / (orbits)) * note.orbit;
+                double y = (renderInfo.timelinePosition.doubleValue() - note.timeStamp + judgedLineTimeOffset) * renderInfo.timelineZoom.doubleValue();
+                double w = (renderInfo.canvasWidth.get() / (orbits));
                 double h = w * (image.getHeight() / image.getWidth());
 
 
                 //渲染对应键的额外内容
                 if (note instanceof ComplexNote complexNote) {
                     for (int j = 0; j < complexNote.notes.size(); j++) {
-                        drawNote(complexNote.notes.get(j), canvasWidth, (j >= complexNote.notes.size() - 1 ? DrawMode.ALL : DrawMode.ONLY_LINE), judgedLineTimeOffset);
+
+                        drawNote(complexNote.notes.get(j), renderInfo.canvasWidth.get(), (j >= complexNote.notes.size() - 1 ? DrawMode.ALL : DrawMode.ONLY_LINE), judgedLineTimeOffset);
                     }
                     for (int j = 0; j < complexNote.notes.size() - 1; j++) {
-                        drawNote(complexNote.notes.get(j), canvasWidth, DrawMode.ONLY_NODE, judgedLineTimeOffset);
+                        drawNote(complexNote.notes.get(j), renderInfo.canvasWidth.get(), DrawMode.ONLY_NODE, judgedLineTimeOffset);
                     }
                 } else {
-                    drawNote(note, canvasWidth, DrawMode.ALL, judgedLineTimeOffset);
+                    drawNote(note, renderInfo.canvasWidth.get(), DrawMode.ALL, judgedLineTimeOffset);
                 }
 
 
@@ -78,7 +77,7 @@ public class FixedOrbitMapRender extends FixedOrbitRender {
         image = getImage(state, FixedOrbitNotesKey.NOTE);
 
         double x = (canvasWidth / (orbits)) * note.orbit;
-        double y = (renderInfo.timelinePosition - note.timeStamp + judgedLineTimeOffset) * renderInfo.timelineZoom;
+        double y = (renderInfo.timelinePosition.doubleValue() - note.timeStamp + judgedLineTimeOffset) * renderInfo.timelineZoom.doubleValue();
         double w = (canvasWidth / (orbits));
         double h = w * (image.getHeight() / image.getWidth());
 
@@ -87,16 +86,16 @@ public class FixedOrbitMapRender extends FixedOrbitRender {
             //画线
             image = getImage(state, FixedOrbitNotesKey.LONG);
             if (!drawMode.equals(DrawMode.ONLY_NODE)) {
-                if (isInRenderRange(x, y - longNote.sustainedTime * renderInfo.timelineZoom, w, longNote.sustainedTime * renderInfo.timelineZoom))
-                    graphics.drawImage(image, x, y - longNote.sustainedTime * renderInfo.timelineZoom, w, longNote.sustainedTime * renderInfo.timelineZoom);
+                if (isInRenderRange(x, y - longNote.sustainedTime * renderInfo.timelineZoom.doubleValue(), w, longNote.sustainedTime * renderInfo.timelineZoom.doubleValue()))
+                    graphics.drawImage(image, x, y - longNote.sustainedTime * renderInfo.timelineZoom.doubleValue(), w, longNote.sustainedTime * renderInfo.timelineZoom.doubleValue());
             }
 
             //末尾节点
             if (!drawMode.equals(DrawMode.ONLY_LINE)) {
                 h2 = w * (image.getHeight() / image.getWidth());
-                if (isInRenderRange(x, y - longNote.sustainedTime * renderInfo.timelineZoom - h2 / 2, w, h2)) {
+                if (isInRenderRange(x, y - longNote.sustainedTime * renderInfo.timelineZoom.doubleValue() - h2 / 2, w, h2)) {
                     image = getImage(state, (drawMode.equals(DrawMode.ONLY_NODE) ? FixedOrbitNotesKey.NODE : FixedOrbitNotesKey.END));
-                    graphics.drawImage(image, x, y - longNote.sustainedTime * renderInfo.timelineZoom - h2 / 2, w, h2);
+                    graphics.drawImage(image, x, y - longNote.sustainedTime * renderInfo.timelineZoom.doubleValue() - h2 / 2, w, h2);
                 }
 
             }
