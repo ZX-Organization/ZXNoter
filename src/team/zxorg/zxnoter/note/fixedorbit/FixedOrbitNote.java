@@ -49,6 +49,11 @@ public class FixedOrbitNote extends BaseNote implements Cloneable,Comparable<Bas
         return 0;
     }
 
+    @Override
+    public long getLength() {
+        return 0;
+    }
+
 
     @Override
     public String toString() {

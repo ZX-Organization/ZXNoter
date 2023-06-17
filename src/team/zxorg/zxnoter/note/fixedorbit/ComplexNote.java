@@ -193,6 +193,17 @@ public class ComplexNote extends FixedOrbitNote implements Cloneable{
         return new ComplexNote(timeStamp,orbit,newNotes);
     }
 
+    @Override
+    public long getLength() {
+        long length=0;
+        for (FixedOrbitNote fixedOrbitNote:notes){
+            if (fixedOrbitNote instanceof LongNote longNote){
+                length+= longNote.sustainedTime;
+            }
+        }
+        return length;
+    }
+
 
     @Override
     public String toString() {

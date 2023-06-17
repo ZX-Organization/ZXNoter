@@ -24,6 +24,11 @@ public class LongNote extends FixedOrbitNote implements Cloneable{
     }
 
     @Override
+    public long getLength() {
+        return sustainedTime;
+    }
+
+    @Override
     public String toString() {
         return '\n' +"LongNote{" +
                 "持续时间=" + sustainedTime +

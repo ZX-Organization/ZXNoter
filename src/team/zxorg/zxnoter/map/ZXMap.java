@@ -9,7 +9,6 @@ import team.zxorg.zxnoter.note.fixedorbit.SlideNote;
 import team.zxorg.zxnoter.note.timing.Timing;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * zx谱面类
@@ -62,7 +61,7 @@ public class ZXMap {
         if (0 > time) return 0;
         if (notes.get(notes.size()-1).timeStamp < time) return notes.size()-1;
 
-        int searchRes = binarySearch(time , 0 , notes.size()-1);
+        int searchRes = binarySearchNote(time , 0 , notes.size()-1);
 
         //判断最近的
         if (searchRes == 0 ){
@@ -85,7 +84,7 @@ public class ZXMap {
             return res;
         }
     }
-    private int binarySearch(long time , int lowIndex , int highIndex){
+    private int binarySearchNote(long time , int lowIndex , int highIndex){
         int mid = (lowIndex + highIndex) / 2;
         if (time > notes.get(mid).timeStamp){
             //查找的时间在中点之后
@@ -103,7 +102,7 @@ public class ZXMap {
                 highIndex = mid;
             }
         }
-        return binarySearch(time,lowIndex , highIndex);
+        return binarySearchNote(time,lowIndex , highIndex);
     }
 
     /**
@@ -117,7 +116,7 @@ public class ZXMap {
             notes.add(note);
             return notes.size()-1;
         }
-        int index = binarySearch(note.timeStamp , 0 , notes.size()-1);
+        int index = binarySearchNote(note.timeStamp , 0 , notes.size()-1);
         ArrayList<BaseNote> backNotes = new ArrayList<>();
         while (index < notes.size()){
             backNotes.add(notes.get(index));
