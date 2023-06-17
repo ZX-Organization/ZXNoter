@@ -18,7 +18,7 @@ public abstract class BaseNote implements Cloneable,Comparable<BaseNote>{
     public abstract int getOrbit();
     public abstract void setOrbit(int orbit);
     public abstract int getImdNoteType();
-
+    public abstract long getLength();
     @Override
     public int compareTo(BaseNote o) {
         if (timeStamp<o.timeStamp) return -1;

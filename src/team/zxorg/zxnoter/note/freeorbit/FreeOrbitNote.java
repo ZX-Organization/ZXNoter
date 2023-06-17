@@ -24,4 +24,10 @@ public class FreeOrbitNote extends BaseNote {
     public int getImdNoteType() {
         return -1;
     }
+
+    @Override
+    public long getLength() {
+        //待重写
+        return 0;
+    }
 }

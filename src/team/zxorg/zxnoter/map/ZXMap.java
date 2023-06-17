@@ -9,7 +9,6 @@ import team.zxorg.zxnoter.note.fixedorbit.SlideNote;
 import team.zxorg.zxnoter.note.timing.Timing;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * zx谱面类
@@ -32,11 +31,36 @@ public class ZXMap {
     }
 
     /**
-     * 二分查找到一个时间戳离得最近的按键
-     * @param time
-     * @return
+     * 二分查找到离指定时间戳最近的Timing(可能一个时间戳上有多个Timing)
+     * @param time 指定时间戳
+     * @return 结果时间戳列表
      */
-    public ArrayList<BaseNote> findClosestNote(long time){
+    public ArrayList<Timing> findClosestTimings(long time){
+        ArrayList<Timing> findResults = new ArrayList<>();
+        int res = findClosestTimingIndex(time);
+        Timing resTiming = timingPoints.get(res);
+        int tempIndex=res;
+        Timing tempTiming;
+        //向前查找
+        while (tempIndex>0&&(tempTiming = timingPoints.get(--tempIndex)).timingStamp == resTiming.timingStamp){
+            findResults.add(tempTiming);
+        }
+        //加入自身结果
+        findResults.add(resTiming);
+        //复原索引
+        tempIndex = res;
+        //向后查找
+        while (tempIndex<notes.size()-1&&(tempTiming=timingPoints.get(++tempIndex)).timingStamp == resTiming.timingStamp){
+            findResults.add(tempTiming);
+        }
+        return findResults;
+    }
+    /**
+     * 二分查找到一个时间戳离得最近的按键
+     * @param time 指定时间戳
+     * @return 结果物件列表
+     */
+    public ArrayList<BaseNote> findClosestNotes(long time){
         ArrayList<BaseNote> findResults = new ArrayList<>();
         int res = findClosestNoteIndex(time,notes);
         BaseNote resNote = notes.get(res);
@@ -58,12 +82,17 @@ public class ZXMap {
         findResults.sort(BaseNote::compareTo);
         return findResults;
     }
+
+    /**
+     *  寻找指定按键列表中距离指定时间戳最近的按键下标
+     * @param time 指定时间戳
+     * @param notes 指定列表
+     * @return 按键下标
+     */
     private int findClosestNoteIndex(long time,ArrayList<BaseNote> notes){
         if (0 > time) return 0;
         if (notes.get(notes.size()-1).timeStamp < time) return notes.size()-1;
-
-        int searchRes = binarySearch(time , 0 , notes.size()-1);
-
+        int searchRes = binarySearchNote(time , 0 , notes.size()-1);
         //判断最近的
         if (searchRes == 0 ){
             int next = searchRes + 1;
@@ -85,7 +114,37 @@ public class ZXMap {
             return res;
         }
     }
-    private int binarySearch(long time , int lowIndex , int highIndex){
+    /**
+     *  寻找指定按键列表中距离指定时间戳最近的timing下标
+     * @param time 指定时间戳
+     * @return 时间点下标
+     */
+    private int findClosestTimingIndex(long time){
+        if (0 > time) return 0;
+        if (timingPoints.get(timingPoints.size()-1).timingStamp< time) return timingPoints.size()-1;
+        int searchRes = binarySearchTiming(time , 0 , timingPoints.size()-1);
+        //判断最近的
+        if (searchRes == 0 ){
+            int next = searchRes + 1;
+            if (Math.abs(timingPoints.get(next).timingStamp-time) < Math.abs(timingPoints.get(searchRes).timingStamp-time))
+                return next;
+            else return searchRes;
+        } else if (searchRes == timingPoints.size()-1){
+            int previous = searchRes-1;
+            if (Math.abs(timingPoints.get(previous).timingStamp-time) < Math.abs(timingPoints.get(searchRes).timingStamp-time))
+                return previous;
+            else return searchRes;
+        } else {
+            int res = searchRes;
+            int previous = searchRes-1;
+            int next = searchRes + 1;
+            if (Math.abs(timingPoints.get(previous).timingStamp-time) < Math.abs(timingPoints.get(searchRes).timingStamp-time)) res = previous;
+            if (Math.abs(timingPoints.get(next).timingStamp-time) < Math.abs(timingPoints.get(searchRes).timingStamp-time)) res = next;
+
+            return res;
+        }
+    }
+    private int binarySearchNote(long time , int lowIndex , int highIndex){
         int mid = (lowIndex + highIndex) / 2;
         if (time > notes.get(mid).timeStamp){
             //查找的时间在中点之后
@@ -103,9 +162,28 @@ public class ZXMap {
                 highIndex = mid;
             }
         }
-        return binarySearch(time,lowIndex , highIndex);
+        return binarySearchNote(time,lowIndex , highIndex);
     }
+    private int binarySearchTiming(long time , int lowIndex , int highIndex){
+        int mid = (lowIndex + highIndex) / 2;
+        if (time > timingPoints.get(mid).timingStamp){
+            //查找的时间在中点之后
+            if (lowIndex == highIndex){
+                return lowIndex;
+            }else {
+                lowIndex = mid + 1;
+            }
 
+        }else {
+            //查找的时间在中点之前
+            if (lowIndex == highIndex){
+                return highIndex;
+            }else {
+                highIndex = mid;
+            }
+        }
+        return binarySearchTiming(time,lowIndex , highIndex);
+    }
     /**
      * 插入按键,向按键列表中插入一个新按键,返回插入后所处的下标
      * @param note
@@ -117,7 +195,7 @@ public class ZXMap {
             notes.add(note);
             return notes.size()-1;
         }
-        int index = binarySearch(note.timeStamp , 0 , notes.size()-1);
+        int index = binarySearchNote(note.timeStamp , 0 , notes.size()-1);
         ArrayList<BaseNote> backNotes = new ArrayList<>();
         while (index < notes.size()){
             backNotes.add(notes.get(index));
@@ -136,6 +214,7 @@ public class ZXMap {
     public boolean deleteNote(BaseNote note){
         return notes.remove(note);
     }
+
 
     /**
      * 移动一个按键到指定时间戳
