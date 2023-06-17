@@ -123,14 +123,18 @@ public class OsuReader {
                         timeStamp = Integer.parseInt(allPars[0]);
                     }
                     double beatPar = Double.parseDouble(allPars[1]);
-                    if (beatPar >=0){
+                    if(beatPar > 0){
                         baseBpm = 60000/beatPar;
-                        //基准bpm时间点添加
+                    }
+                    if (isExtendTiming){
+                        //继承
+                        //变速bpm时间点添加
                         timingPoints.add(
                                 new ZxTiming(
                                         timeStamp,
                                         baseBpm,
                                         true,
+                                        baseBpm,
                                         Integer.parseInt(allPars[2]),
                                         Integer.parseInt(allPars[3]),
                                         Integer.parseInt(allPars[4]),
@@ -140,12 +144,14 @@ public class OsuReader {
                                 )
                         );
                     }else {
-                        //变速bpm时间点添加
+                        double speed = 100/Math.abs(beatPar) * baseBpm;
+                        //不继承(变速)
                         timingPoints.add(
                                 new ZxTiming(
                                         timeStamp,
-                                        100/Math.abs(beatPar) * baseBpm,
+                                        speed,
                                         true,
+                                        baseBpm,
                                         Integer.parseInt(allPars[2]),
                                         Integer.parseInt(allPars[3]),
                                         Integer.parseInt(allPars[4]),

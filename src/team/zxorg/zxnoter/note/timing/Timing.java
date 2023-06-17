@@ -8,13 +8,15 @@ public class Timing {
     /**
      * bpm倍率
      */
-    public double bpm;
+    public double bpmSpeed;
     public boolean isNewBaseBpm;
+    public double absBpm;
 
-    public Timing(long timingStamp, double bpm, boolean isNewBaseBpm) {
+    public Timing(long timingStamp, double bpmSpeed,boolean isNewBaseBpm, double absBpm) {
         this.timingStamp = timingStamp;
-        this.bpm = bpm;
+        this.bpmSpeed = bpmSpeed;
         this.isNewBaseBpm = isNewBaseBpm;
+        this.absBpm = absBpm;
     }
 
 
@@ -22,7 +24,8 @@ public class Timing {
     public String toString() {
         return '\n' +"Timing{" +
                 "时间戳=" + timingStamp +
-                ", bpm=" + bpm +
+                ", bpmSpeed=" + bpmSpeed +
+                ", 绝对bpm=" + absBpm +
                 '}';
     }
 }

@@ -75,9 +75,9 @@ public class MapEditor extends BaseEditor {
             //谱面画板事件
             mapCanvas.setOnMouseClicked(event -> {
                 long time = mainMapRender.getRenderInfo().getPositionToTime(event.getY());
-                int index = zxMap.findClosestNote(time);
+                //int index = zxMap.findClosestNote(time);
                 selectedNoteMap.notes.clear();
-                selectedNoteMap.notes.add(zxMap.notes.get(index));
+                //selectedNoteMap.notes.add(zxMap.notes.get(index));
             });
 
             //滚轮监听

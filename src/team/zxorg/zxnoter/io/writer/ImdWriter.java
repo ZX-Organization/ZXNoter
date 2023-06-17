@@ -62,7 +62,7 @@ public class ImdWriter {
         //时间点
         for (Timing timing: zxMap.timingPoints){
             bf.putInt((int)timing.timingStamp);//时间戳
-            bf.putDouble(timing.bpm);//bpm
+            bf.putDouble(timing.bpmSpeed);//bpm
         }
 
         bf.putShort((short) 771);// 03 03

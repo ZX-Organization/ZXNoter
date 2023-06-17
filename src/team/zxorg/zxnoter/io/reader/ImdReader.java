@@ -72,9 +72,10 @@ public class ImdReader {
         bf.position(8);
         ArrayList<Timing> timingPoints = new ArrayList<>(timingAmount);
         for (int i = 0; i < timingAmount; i++) {
+            double bpm = bf.getDouble();
             timingPoints.add(
                     new Timing(
-                            bf.getInt(), bf.getDouble(),false
+                            bf.getInt(), bpm,false,bpm
                     )
             );
         }

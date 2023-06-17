@@ -36,13 +36,13 @@ public class FixedOrbitBackgroundRender extends FixedOrbitRender {
 
 
         for (long time = getRenderInfo().getPositionToTime(canvas.getHeight()); time < getRenderInfo().getPositionToTime(0); time++) {
-            Timing timing = findAfterTiming(time);
-            beatTime = 60000. / (baseBpm * timing.bpmRatio);
+            //Timing timing = findAfterTiming(time);
+            //beatTime = 60000. / (baseBpm * timing.bpmRatio);
 
             if (time < 0)
                 continue;
-            long offsetTime = (long) (timing.timingStamp % beatTime);
-            if (time % (beatTime / subBeats) < 1) {
+            //long offsetTime = (long) (timing.timingStamp % beatTime);
+            /*if (time % (beatTime / subBeats) < 1) {
                 image = getImage(FixedOrbitObjectKey.SUB_BEAT_LINE);
                 graphics.drawImage(image, 0, getRenderInfo().getTimeToPosition(time) - image.getHeight() / 2, renderInfo.canvasWidth.get(), image.getHeight());
                 graphics.setFill(Color.WHEAT);
@@ -51,7 +51,7 @@ public class FixedOrbitBackgroundRender extends FixedOrbitRender {
             if (time % beatTime < 1) {
                 image = getImage(FixedOrbitObjectKey.BEAT_LINE);
                 graphics.drawImage(image, 0, getRenderInfo().getTimeToPosition(time) - image.getHeight() / 2, renderInfo.canvasWidth.get(), image.getHeight());
-            }
+            }*/
 
         }
 
@@ -84,7 +84,7 @@ public class FixedOrbitBackgroundRender extends FixedOrbitRender {
      *
      * @return
      */
-    public Timing findAfterTiming(long time) {
+    /*public Timing findAfterTiming(long time) {
         //找到上一个timing
         Timing timing = new Timing(0, 1);
         for (int i = 0; i < zxMap.timingPoints.size(); i++) {
@@ -94,5 +94,5 @@ public class FixedOrbitBackgroundRender extends FixedOrbitRender {
             timing = zxMap.timingPoints.get(i);
         }
         return timing;
-    }
+    }*/
 }
