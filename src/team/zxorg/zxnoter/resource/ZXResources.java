@@ -36,7 +36,7 @@ public class ZXResources {
                         key = key.substring(0, key.lastIndexOf(".")).replaceAll("[\\\\/]", ".").toLowerCase();
 
                         switch (type) {
-                            case "png", "jpg" -> { //载入图片
+                            case "png", "jpg", "gif" -> { //载入图片
                                 Image image = new Image(path.toRealPath().toUri().toURL().toString());
                                 allThings.put(key, image);
                             }
@@ -119,7 +119,6 @@ public class ZXResources {
 
     /**
      * 获取矢量图图标
-     *
      */
     public static Pane getSvgPane(String key) {
         Pane iconPane = new Pane();
@@ -137,7 +136,6 @@ public class ZXResources {
 
     /**
      * 获取图片资源
-     *
      */
     public static Image getImage(String key) {
         if (allThings.get(key) instanceof Image image)

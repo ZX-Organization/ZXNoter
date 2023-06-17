@@ -1,5 +1,6 @@
 package team.zxorg.zxnoter.ui.render.fixedorbit;
 
+import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
 import team.zxorg.zxnoter.map.ZXMap;
 import team.zxorg.zxnoter.note.fixedorbit.ComplexNote;
@@ -27,7 +28,7 @@ public class FixedOrbitMapRender extends FixedOrbitRender {
         Image image;//临时存储图片
 
         //判定线时间偏移
-        long judgedLineTimeOffset = getRenderInfo().getJudgedLineTimeOffset();
+        double judgedLineTimeOffset = getRenderInfo().getJudgedLineTimeOffset();
 
         for (int i = 0; i < zxMap.notes.size(); i++) {
             if (zxMap.notes.get(i) instanceof FixedOrbitNote note) {
@@ -86,17 +87,14 @@ public class FixedOrbitMapRender extends FixedOrbitRender {
             //画线
             image = getImage(state, FixedOrbitNotesKey.LONG);
             if (!drawMode.equals(DrawMode.ONLY_NODE)) {
-                if (isInRenderRange(x, y - longNote.sustainedTime * renderInfo.timelineZoom.doubleValue(), w, longNote.sustainedTime * renderInfo.timelineZoom.doubleValue()))
-                    graphics.drawImage(image, x, y - longNote.sustainedTime * renderInfo.timelineZoom.doubleValue(), w, longNote.sustainedTime * renderInfo.timelineZoom.doubleValue());
+                drawImage(image, new Rectangle2D(x, y - longNote.sustainedTime * renderInfo.timelineZoom.doubleValue(), w, longNote.sustainedTime * renderInfo.timelineZoom.doubleValue()));
             }
 
             //末尾节点
             if (!drawMode.equals(DrawMode.ONLY_LINE)) {
                 h2 = w * (image.getHeight() / image.getWidth());
-                if (isInRenderRange(x, y - longNote.sustainedTime * renderInfo.timelineZoom.doubleValue() - h2 / 2, w, h2)) {
-                    image = getImage(state, (drawMode.equals(DrawMode.ONLY_NODE) ? FixedOrbitNotesKey.NODE : FixedOrbitNotesKey.END));
-                    graphics.drawImage(image, x, y - longNote.sustainedTime * renderInfo.timelineZoom.doubleValue() - h2 / 2, w, h2);
-                }
+                image = getImage(state, (drawMode.equals(DrawMode.ONLY_NODE) ? FixedOrbitNotesKey.NODE : FixedOrbitNotesKey.END));
+                drawImage(image, new Rectangle2D(x, y - longNote.sustainedTime * renderInfo.timelineZoom.doubleValue() - h2 / 2, w, h2));
 
             }
         } else if (note instanceof SlideNote slideNote) {
@@ -107,8 +105,7 @@ public class FixedOrbitMapRender extends FixedOrbitRender {
             x2 = x + (slideNote.slideArg < 0 ? slideNote.slideArg * w : 0);
             w2 = Math.abs(slideNote.slideArg) * w;
             if (!drawMode.equals(DrawMode.ONLY_NODE)) {
-                if (isInRenderRange(x2 + w / 2, y - h2 / 2, w2, h2))
-                    graphics.drawImage(image, x2 + w / 2, y - h2 / 2, w2, h2);
+                drawImage(image, new Rectangle2D(x2 + w / 2, y - h2 / 2, w2, h2));
             }
 
             //画箭头
@@ -124,8 +121,7 @@ public class FixedOrbitMapRender extends FixedOrbitRender {
 
                 h2 = w * (image.getHeight() / image.getWidth());
                 x2 = (slideNote.slideArg < 0 ? x2 - w / 2 : x2 + w / 2);
-                if (isInRenderRange(x2 + w / 2, y - h2 / 2, w, h2))
-                    graphics.drawImage(image, x2 + w / 2, y - h2 / 2, w, h2);
+                drawImage(image, new Rectangle2D(x2 + w / 2, y - h2 / 2, w, h2));
             }
         }
     }

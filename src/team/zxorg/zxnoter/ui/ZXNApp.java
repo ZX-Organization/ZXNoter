@@ -157,6 +157,33 @@ public class ZXNApp extends Application {
         {//添加编辑器
 
             try {
+                ZXMap zxMap = OsuReader.readFile(Paths.get("docs/reference/LeaF - NANO DEATH!!!!!/LeaF - NANO DEATH!!!!! (nowsmart) [DEATH].osu"));
+                Tab tab1 = new Tab(zxMap.unLocalizedMapInfo.getInfo("Title"));
+                tab1.setGraphic(ZXResources.getSvgPane("svg.icons.zxnoter.file-notemap-line", 18, Color.DARKGREEN));
+                MapEditor editor = new MapEditor(zxMap);
+                tab1.setContent(editor);
+                workspaceTabPane.getTabs().add(tab1);
+
+
+                //画布更新线程常驻
+                AnimationTimer animationTimer = new AnimationTimer() {
+                    @Override
+                    public void handle(long l) {
+                        editor.render();
+                    }
+                };
+                animationTimer.start();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+
+        }
+
+
+        {//添加编辑器
+
+            try {
                 ZXMap zxMap = OsuReader.readFile(Paths.get("docs/reference/896710 VA - 6k High Speed Ultimate Pack Vol3/V.A. - 6k High Speed Ultimate Pack Vol.3 (_IceRain) [Camellia - Blastix Riotz x1.1].osu"));
                 Tab tab1 = new Tab(zxMap.unLocalizedMapInfo.getInfo("Title"));
                 tab1.setGraphic(ZXResources.getSvgPane("svg.icons.zxnoter.file-notemap-line", 18, Color.DARKGREEN));
@@ -179,6 +206,7 @@ public class ZXNApp extends Application {
 
 
         }
+
 
 
 

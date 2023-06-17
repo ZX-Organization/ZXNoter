@@ -34,9 +34,9 @@ public class FixedOrbitRenderInfo extends RenderInfo {
      * @param time
      * @return
      */
-    public double getTimeToPosition(long time) {
+    public double getTimeToPosition(double time) {
         //判定线时间偏移
-        long judgedLineTimeOffset = getJudgedLineTimeOffset();
+        double judgedLineTimeOffset = getJudgedLineTimeOffset();
         return (timelinePosition.get() - time + judgedLineTimeOffset) * timelineZoom.get();
     }
 
@@ -46,8 +46,8 @@ public class FixedOrbitRenderInfo extends RenderInfo {
      * @return 偏移时间
      */
 
-    public long getJudgedLineTimeOffset() {
-        return (long) (canvasHeight.get() * judgedLinePositionPercentage.get() / timelineZoom.get());
+    public double getJudgedLineTimeOffset() {
+        return (canvasHeight.get() * judgedLinePositionPercentage.get() / timelineZoom.get());
     }
 
     /**

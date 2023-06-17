@@ -8,6 +8,7 @@ import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import team.zxorg.zxnoter.map.ZXMap;
+import team.zxorg.zxnoter.note.BaseNote;
 import team.zxorg.zxnoter.resource.ZXResources;
 import team.zxorg.zxnoter.ui.component.CanvasPane;
 import team.zxorg.zxnoter.ui.component.ToolGroupBar;
@@ -43,7 +44,7 @@ public class MapEditor extends BaseEditor {
         this.setPrefSize(Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE);
         this.zxMap = zxMap;
 
-        //初始化选中的歌姬
+        //初始化选中的歌姬  虚影Map
         selectedNoteMap.unLocalizedMapInfo = zxMap.unLocalizedMapInfo;
         selectedNoteMap.notes = new ArrayList<>();
 
@@ -75,9 +76,9 @@ public class MapEditor extends BaseEditor {
             //谱面画板事件
             mapCanvas.setOnMouseClicked(event -> {
                 long time = mainMapRender.getRenderInfo().getPositionToTime(event.getY());
-                //int index = zxMap.findClosestNote(time);
-                selectedNoteMap.notes.clear();
-                //selectedNoteMap.notes.add(zxMap.notes.get(index));
+                ArrayList<BaseNote> index = zxMap.findClosestNote(time);
+                //selectedNoteMap.notes.clear();
+                selectedNoteMap.notes.addAll(index);
             });
 
             //滚轮监听
@@ -90,7 +91,7 @@ public class MapEditor extends BaseEditor {
             //滚轮监听
             previewCanvas.setOnScroll(event -> {
                 double deltaY = event.getDeltaY();
-                mainMapRender.getRenderInfo().timelineZoom.set(mainMapRender.getRenderInfo().timelineZoom.get() * (deltaY < 0 ? 1.1f : 0.9f));
+                mainMapRender.getRenderInfo().timelineZoom.set(mainMapRender.getRenderInfo().timelineZoom.get() * (deltaY < 0 ? 0.9f : 1.1f));
             });
 
 
