@@ -74,7 +74,7 @@ public class ImdReader {
         for (int i = 0; i < timingAmount; i++) {
             timingPoints.add(
                     new Timing(
-                            bf.getInt(), bf.getDouble() / baseBpm
+                            bf.getInt(), bf.getDouble(),false
                     )
             );
         }

@@ -8,8 +8,8 @@ public class ZxTiming extends Timing{
     public boolean isExtendTiming;
     public int effect;
 
-    public ZxTiming(long timingStamp, double bpmRatio, int beats, int sampleSet, int soundPar, int volume, boolean isExtendTiming, int effect) {
-        super(timingStamp, bpmRatio);
+    public ZxTiming(long timingStamp, double bpm,boolean isNewBaseBpm, int beats, int sampleSet, int soundPar, int volume, boolean isExtendTiming, int effect) {
+        super(timingStamp, bpm, isNewBaseBpm);
         this.beats = beats;
         this.sampleSet = sampleSet;
         this.soundPar = soundPar;
@@ -28,7 +28,7 @@ public class ZxTiming extends Timing{
                 ", 是否继承时间点=" + isExtendTiming +
                 ", 效果=" + effect +
                 ", 时间戳=" + timingStamp +
-                ", bpm倍率=" + bpmRatio +
+                ", bpm=" + bpm +
                 '}';
     }
 }

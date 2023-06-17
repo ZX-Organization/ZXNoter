@@ -20,8 +20,8 @@ import java.util.Arrays;
 public class IoTest {
     public static void main(String[] args) {
         try {
-            ZXMap map = ImdReader.readFile(Path.of("docs/reference/Corruption/Corruption_4k_ez.imd"));
-            map.findClosestNote(1000);
+            //ZXMap map = ImdReader.readFile(Path.of("docs/reference/Corruption/Corruption_4k_ez.imd"));
+            //map.findClosestNote(1000);
             //System.out.println(map.notes.get(19));
             //System.out.println(map.notes.size());
             //System.out.println();
@@ -29,7 +29,8 @@ public class IoTest {
             //System.out.println(convertMap.notes);
             //System.out.println(Arrays.toString(((ComplexNote)map.notes.get(19)).convertNote(ImdInfo.ConvertMethod.BASE_SLIDE)));
             //System.out.println(map.imdConvertNoComplex(ImdInfo.ConvertMethod.BASE_SLIDE));
-            //ZXMap map = OsuReader.readFile(Path.of("docs/reference/LeaF - NANO DEATH!!!!!/LeaF - NANO DEATH!!!!! (nowsmart) [DEATH].osu"));
+            ZXMap map = OsuReader.readFile(Path.of("docs/reference/Risshuu feat. Choko - Take/Risshuu feat. Choko - Take (LNP-) [Beyond].osu"));
+            System.out.println( map.timingPoints);
             //System.out.println(map.timingPoints);
             /*System.out.println(map.unLocalizedMapInfo);
             System.out.println(ImdWriter.checkLocalizedInfos(map));*/

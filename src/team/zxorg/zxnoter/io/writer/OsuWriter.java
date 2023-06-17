@@ -117,7 +117,7 @@ public class OsuWriter {
                 strB.append(firstTiming).append(",").append(1/(baseBpm/60000)).append(",");
             else {
                 if (timing.timingStamp>firstTiming)
-                    strB.append(timing.timingStamp).append(",").append("-").append(100/timing.bpmRatio).append(",");
+                    strB.append(timing.timingStamp).append(",").append("-").append(100/timing.bpm).append(",");
                 else continue;
             }
             if (timing instanceof ZxTiming zxTiming){

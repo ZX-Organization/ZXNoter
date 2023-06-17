@@ -8,18 +8,21 @@ public class Timing {
     /**
      * bpm倍率
      */
-    public double bpmRatio;
+    public double bpm;
+    public boolean isNewBaseBpm;
 
-    public Timing(long timingStamp, double bpmRatio) {
+    public Timing(long timingStamp, double bpm, boolean isNewBaseBpm) {
         this.timingStamp = timingStamp;
-        this.bpmRatio = bpmRatio;
+        this.bpm = bpm;
+        this.isNewBaseBpm = isNewBaseBpm;
     }
+
 
     @Override
     public String toString() {
         return '\n' +"Timing{" +
                 "时间戳=" + timingStamp +
-                ", bpm倍率=" + bpmRatio +
+                ", bpm=" + bpm +
                 '}';
     }
 }

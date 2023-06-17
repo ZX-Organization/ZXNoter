@@ -122,13 +122,15 @@ public class OsuReader {
                     }else {
                         timeStamp = Integer.parseInt(allPars[0]);
                     }
-                    if (getBaseBpm){
-                        baseBpm = 60000/Double.parseDouble(allPars[1]);
+                    double beatPar = Double.parseDouble(allPars[1]);
+                    if (beatPar >=0){
+                        baseBpm = 60000/beatPar;
                         //基准bpm时间点添加
                         timingPoints.add(
                                 new ZxTiming(
                                         timeStamp,
-                                        1,
+                                        baseBpm,
+                                        true,
                                         Integer.parseInt(allPars[2]),
                                         Integer.parseInt(allPars[3]),
                                         Integer.parseInt(allPars[4]),
@@ -137,22 +139,22 @@ public class OsuReader {
                                         Integer.parseInt(allPars[7])
                                 )
                         );
-                        getBaseBpm = false;
-                        continue;
+                    }else {
+                        //变速bpm时间点添加
+                        timingPoints.add(
+                                new ZxTiming(
+                                        timeStamp,
+                                        100/Math.abs(beatPar) * baseBpm,
+                                        true,
+                                        Integer.parseInt(allPars[2]),
+                                        Integer.parseInt(allPars[3]),
+                                        Integer.parseInt(allPars[4]),
+                                        Integer.parseInt(allPars[5]),
+                                        isExtendTiming,
+                                        Integer.parseInt(allPars[7])
+                                )
+                        );
                     }
-
-                    timingPoints.add(
-                            new ZxTiming(
-                                    timeStamp,
-                                    100/Math.abs(Double.parseDouble(allPars[1])),
-                                    Integer.parseInt(allPars[2]),
-                                    Integer.parseInt(allPars[3]),
-                                    Integer.parseInt(allPars[4]),
-                                    Integer.parseInt(allPars[5]),
-                                    isExtendTiming,
-                                    Integer.parseInt(allPars[7])
-                            )
-                    );
                     continue;
                 }
                 case 2->{
