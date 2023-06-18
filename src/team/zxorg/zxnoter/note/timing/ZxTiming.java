@@ -30,6 +30,7 @@ public class ZxTiming extends Timing{
                 ", 时间戳=" + timestamp +
                 ", bpmSpeed=" + bpmSpeed +
                 ", 绝对bpm=" + absBpm +
+                ", 是否为新基准bpm=" + isNewBaseBpm +
                 '}';
     }
 }

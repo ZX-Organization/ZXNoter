@@ -150,7 +150,7 @@ public class OsuReader {
                                 new ZxTiming(
                                         timeStamp,
                                         speed,
-                                        true,
+                                        false,
                                         baseBpm,
                                         Integer.parseInt(allPars[2]),
                                         Integer.parseInt(allPars[3]),
