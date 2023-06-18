@@ -54,13 +54,9 @@ public class FixedOrbitNote extends BaseNote implements Cloneable,Comparable<Bas
         return 0;
     }
 
-
     @Override
-    public String toString() {
-        return '\n' +"FixedOrbitNote{" +
-                "轨道=" + orbit +
-                ", 时间戳=" + timeStamp +
-                '}';
+    public ComplexNote getParent() {
+        return null;
     }
     @Override
     public int compareTo(BaseNote baseNote) {
@@ -70,4 +66,14 @@ public class FixedOrbitNote extends BaseNote implements Cloneable,Comparable<Bas
             return Integer.compare(orbit, fixedOrbitNote.orbit);
         }else return 0;
     }
+
+
+    @Override
+    public String toString() {
+        return '\n' +"FixedOrbitNote{" +
+                "轨道=" + orbit +
+                ", 时间戳=" + timeStamp +
+                '}';
+    }
+
 }

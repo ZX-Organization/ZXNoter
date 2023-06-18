@@ -1,6 +1,7 @@
 package team.zxorg.zxnoter.note.freeorbit;
 
 import team.zxorg.zxnoter.note.BaseNote;
+import team.zxorg.zxnoter.note.fixedorbit.ComplexNote;
 
 public class FreeOrbitNote extends BaseNote {
     public FreeOrbitNote(long timeStamp) {
@@ -29,5 +30,10 @@ public class FreeOrbitNote extends BaseNote {
     public long getLength() {
         //待重写
         return 0;
+    }
+
+    @Override
+    public ComplexNote getParent() {
+        return null;
     }
 }

@@ -2,7 +2,6 @@ package team.zxorg.zxnoter.io.writer;
 
 import team.zxorg.zxnoter.map.UnLocalizedMapInfo;
 import team.zxorg.zxnoter.map.ZXMap;
-import team.zxorg.zxnoter.map.mapInfos.ImdInfo;
 import team.zxorg.zxnoter.map.mapInfos.OsuInfo;
 import team.zxorg.zxnoter.note.BaseNote;
 import team.zxorg.zxnoter.note.fixedorbit.*;
@@ -10,14 +9,11 @@ import team.zxorg.zxnoter.note.fixedorbit.*;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Set;
 
-import team.zxorg.zxnoter.map.mapInfos.OsuInfo;
 import team.zxorg.zxnoter.note.timing.Timing;
 import team.zxorg.zxnoter.note.timing.ZxTiming;
 
@@ -103,7 +99,7 @@ public class OsuWriter {
             }
         }
         //[TimingPoints]
-        double baseBpm = Double.parseDouble(checkedLocalizedInfos.get(OsuInfo.BaseBpm));
+        double baseBpm = zxMap.timingPoints.get(0).absBpm;
         bW.newLine();
         bW.write("[TimingPoints]");
         bW.newLine();
@@ -111,15 +107,31 @@ public class OsuWriter {
         int index = 1;
         for (Timing timing: zxMap.timingPoints){
             StringBuilder strB = new StringBuilder();
+            strB.append(timing.timestamp).append(",");
             //判断是否属于ZxTiming,是则细分
-            long firstTiming = zxMap.notes.get(0).timeStamp;
-            if (index == 1)
-                strB.append(firstTiming).append(",").append(1/(baseBpm/60000)).append(",");
-            else {
-                if (timing.timingStamp>firstTiming)
-                    strB.append(timing.timingStamp).append(",").append("-").append(100/timing.bpmSpeed).append(",");
-                else continue;
+            if (timing instanceof ZxTiming zxTiming){
+                if (zxTiming.isExtendTiming)
+                    strB.append(1/(baseBpm/60000)).append(",");
+                else {
+                    //变速
+                    strB.append("-");
+                    double tempBeatPar = 100/(zxTiming.bpmSpeed / zxTiming.absBpm);
+                    if (((tempBeatPar % 1) == 0)){
+                        strB.append((int)tempBeatPar).append(",");
+                    }else {
+                        strB.append(tempBeatPar).append(",");
+                    }
+                    //System.out.println( ( (tempBeatPar % 1) == 0) ? (int)tempBeatPar : tempBeatPar);
+
+                }
+            }else {
+                if (timing.bpmSpeed == timing.absBpm)
+                    strB.append(1/(baseBpm/60000)).append(",");
+                else {
+                    strB.append("-").append(100/(timing.bpmSpeed / timing.absBpm)).append(",");
+                }
             }
+
             if (timing instanceof ZxTiming zxTiming){
 
                 //属于ZxTiming,直接使用其已有值

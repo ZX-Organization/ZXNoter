@@ -158,6 +158,7 @@ public class ZXNApp extends Application {
 
             try {
                 ZXMap zxMap = OsuReader.readFile(Paths.get("docs/reference/LeaF - NANO DEATH!!!!!/LeaF - NANO DEATH!!!!! (nowsmart) [DEATH].osu"));
+                System.out.println(zxMap.timingPoints);
                 Tab tab1 = new Tab(zxMap.unLocalizedMapInfo.getInfo("Title"));
                 tab1.setGraphic(ZXResources.getSvgPane("svg.icons.zxnoter.file-notemap-line", 18, Color.DARKGREEN));
                 MapEditor editor = new MapEditor(zxMap);

@@ -4,7 +4,7 @@ public class Timing {
     /**
      * 时间点时间戳
      */
-    public long timingStamp;
+    public long timestamp;
     /**
      * bpm倍率
      */
@@ -13,7 +13,7 @@ public class Timing {
     public double absBpm;
 
     public Timing(long timingStamp, double bpmSpeed,boolean isNewBaseBpm, double absBpm) {
-        this.timingStamp = timingStamp;
+        this.timestamp = timingStamp;
         this.bpmSpeed = bpmSpeed;
         this.isNewBaseBpm = isNewBaseBpm;
         this.absBpm = absBpm;
@@ -23,7 +23,7 @@ public class Timing {
     @Override
     public String toString() {
         return '\n' +"Timing{" +
-                "时间戳=" + timingStamp +
+                "时间戳=" + timestamp +
                 ", bpmSpeed=" + bpmSpeed +
                 ", 绝对bpm=" + absBpm +
                 '}';

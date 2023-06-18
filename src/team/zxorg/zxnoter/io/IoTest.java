@@ -31,21 +31,21 @@ public class IoTest {
             //System.out.println(map.imdConvertNoComplex(ImdInfo.ConvertMethod.BASE_SLIDE));
             ZXMap map = OsuReader.readFile(Path.of("docs/reference/LeaF - NANO DEATH!!!!!/LeaF - NANO DEATH!!!!! (nowsmart) [DEATH].osu"));
             //System.out.println( map.timingPoints);
-            System.out.println(map.findClosestTimings(30000));
+            //System.out.println(map.findClosestTimings(30000));
             //System.out.println(map.timingPoints);
             /*System.out.println(map.unLocalizedMapInfo);
             System.out.println(ImdWriter.checkLocalizedInfos(map));*/
             //ImdWriter.writeOut(convertMap , ImdWriter.checkLocalizedInfos(convertMap) , Path.of("G:/desktop"));
             //System.out.println(map.timingPoints);
-            //OsuWriter.writeOut(convertMap,OsuWriter.checkLocalizedInfos(convertMap),Path.of("G:/desktop"));
+            OsuWriter.writeOut(map,OsuWriter.checkLocalizedInfos(map),Path.of("G:/desktop"));
             //System.out.println(OsuWriter.checkLocalizedInfos(convertMap));
             //System.out.println(map.notes);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        /*catch (NoSuchFieldException e) {
+        catch (NoSuchFieldException e) {
             throw new RuntimeException(e);
-        }*/
+        }
 
     }
 }
