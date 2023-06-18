@@ -11,6 +11,7 @@ import team.zxorg.zxnoter.note.fixedorbit.FixedOrbitNote;
 import team.zxorg.zxnoter.note.fixedorbit.LongNote;
 import team.zxorg.zxnoter.note.fixedorbit.SlideNote;
 import team.zxorg.zxnoter.ui.component.CanvasPane;
+import team.zxorg.zxnoter.ui.render.basis.RenderRectangle;
 import team.zxorg.zxnoter.ui.render.fixedorbit.key.FixedOrbitNotesKey;
 
 
@@ -65,7 +66,7 @@ public class FixedOrbitMapRender extends FixedOrbitRender {
 
                 //绘制第一个键  (最后绘制)
                 image = getImage(state, FixedOrbitNotesKey.NOTE);
-                drawImage(image, new Rectangle2D(x, y - h / 2, w, h));
+                drawImage(image, new RenderRectangle(x, y - h / 2, w, h));
 
             }
         }
@@ -95,14 +96,14 @@ public class FixedOrbitMapRender extends FixedOrbitRender {
             //画线
             image = getImage(state, FixedOrbitNotesKey.LONG);
             if (!drawMode.equals(DrawMode.ONLY_NODE)) {
-                drawImage(image, new Rectangle2D(x, y - longNote.sustainedTime * renderInfo.timelineZoom.doubleValue(), w, longNote.sustainedTime * renderInfo.timelineZoom.doubleValue()));
+                drawImage(image, new RenderRectangle(x, y - longNote.sustainedTime * renderInfo.timelineZoom.doubleValue(), w, longNote.sustainedTime * renderInfo.timelineZoom.doubleValue()));
             }
 
             //末尾节点
             if (!drawMode.equals(DrawMode.ONLY_LINE)) {
                 h2 = w * (image.getHeight() / image.getWidth());
                 image = getImage(state, (drawMode.equals(DrawMode.ONLY_NODE) ? FixedOrbitNotesKey.NODE : FixedOrbitNotesKey.END));
-                drawImage(image, new Rectangle2D(x, y - longNote.sustainedTime * renderInfo.timelineZoom.doubleValue() - h2 / 2, w, h2));
+                drawImage(image, new RenderRectangle(x, y - longNote.sustainedTime * renderInfo.timelineZoom.doubleValue() - h2 / 2, w, h2));
 
             }
         } else if (note instanceof SlideNote slideNote) {
@@ -113,7 +114,7 @@ public class FixedOrbitMapRender extends FixedOrbitRender {
             x2 = x + (slideNote.slideArg < 0 ? slideNote.slideArg * w : 0);
             w2 = Math.abs(slideNote.slideArg) * w;
             if (!drawMode.equals(DrawMode.ONLY_NODE)) {
-                drawImage(image, new Rectangle2D(x2 + w / 2, y - h2 / 2, w2, h2));
+                drawImage(image, new RenderRectangle(x2 + w / 2, y - h2 / 2, w2, h2));
             }
 
             //画箭头
@@ -129,7 +130,7 @@ public class FixedOrbitMapRender extends FixedOrbitRender {
 
                 h2 = w * (image.getHeight() / image.getWidth());
                 x2 = (slideNote.slideArg < 0 ? x2 - w / 2 : x2 + w / 2);
-                drawImage(image, new Rectangle2D(x2 + w / 2, y - h2 / 2, w, h2));
+                drawImage(image, new RenderRectangle(x2 + w / 2, y - h2 / 2, w, h2));
             }
         }
     }

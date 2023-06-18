@@ -1,5 +1,8 @@
 package team.zxorg.zxnoter.ui.render.basis;
 
+/**
+ * 渲染点坐标
+ */
 public class RenderPoint {
     protected double x, y;
 
@@ -27,5 +30,13 @@ public class RenderPoint {
 
     public void setY(double y) {
         this.y = y;
+    }
+
+    @Override
+    public String toString() {
+        return "坐标[" +
+                "x: " + x +
+                ", y: " + y +
+                ']';
     }
 }

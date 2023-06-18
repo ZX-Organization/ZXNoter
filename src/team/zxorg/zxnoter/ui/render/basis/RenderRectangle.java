@@ -1,16 +1,27 @@
 package team.zxorg.zxnoter.ui.render.basis;
 
+import javafx.geometry.Pos;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.image.Image;
+
+/**
+ * 渲染矩形 提供更加快捷的矩形运算
+ */
 public class RenderRectangle {
-    private final RenderPoint min = new RenderPoint();
-    private final RenderPoint max = new RenderPoint();
+    @Override
+    public String toString() {
+        return "矩形{ " + pos + " 宽: " + width + " 高: " + height + " }";
+    }
+
+    private final RenderPoint pos = new RenderPoint();
     private double width, height;
 
     public double getX() {
-        return min.x;
+        return pos.x;
     }
 
     public double getY() {
-        return min.y;
+        return pos.y;
     }
 
     public double getWidth() {
@@ -22,57 +33,63 @@ public class RenderRectangle {
     }
 
     public void setX(double x) {
-        min.x = Math.min(x, x + width);
-        max.x = Math.max(x, x + width);
+        pos.x = x;
     }
 
     public void setY(double y) {
-        min.y = Math.min(y, y + height);
-        max.y = Math.max(y, y + height);
+        pos.y = y;
     }
 
 
     public void setWidth(double width) {
         this.width = width;
-        min.x = Math.min(min.x, min.x + width);
-        max.x = Math.max(max.x, max.x + width);
     }
 
     public void setHeight(double height) {
         this.height = height;
-        min.y = Math.min(min.y, min.y + height);
-        max.y = Math.max(max.y, max.y + height);
+    }
+
+    public RenderRectangle(Image image) {
+        pos.x = 0;
+        pos.y = 0;
+        this.width = image.getWidth();
+        this.height = image.getHeight();
+    }
+
+    public RenderRectangle(Canvas canvas) {
+        pos.x = 0;
+        pos.y = 0;
+        this.width = canvas.getWidth();
+        this.height = canvas.getHeight();
     }
 
     public RenderRectangle(double x, double y, double width, double height) {
-        min.x = Math.min(x, x + width);
-        max.x = Math.max(x, x + width);
-        min.y = Math.min(y, y + height);
-        max.y = Math.max(y, y + height);
-        this.width = Math.abs(width);
-        this.height = Math.abs(height);
+        pos.x = x;
+        pos.y = y;
+        this.width = width;
+        this.height = height;
     }
 
     /**
      * 检查坐标是否在矩形内
      */
     public boolean contains(double x, double y) {
-        return x >= min.x && x <= max.x && y >= min.y && y <= max.y;
+        return x >= pos.x && x <= pos.x + width && y >= pos.y && y <= pos.y + height;
     }
 
     /**
      * 检查矩形是否和此矩形相交
      */
     public boolean intersects(RenderRectangle r) {
-        return r.max.x > min.x && r.max.y > min.y && r.min.x < max.x && r.min.y < max.y;
+        return r.pos.x + width > pos.x && r.pos.y + height > pos.y && r.pos.x < pos.x + width && r.pos.y < pos.y + height;
     }
 
     /**
      * 获取矩形中心点
      */
     public RenderPoint getCenterPoint() {
-        double centerX = (min.x + max.x) / 2;
-        double centerY = (min.y + max.y) / 2;
+        double centerX = pos.x + width / 2;
+        double centerY = pos.y + height / 2;
         return new RenderPoint(centerX, centerY);
     }
 
@@ -87,44 +104,60 @@ public class RenderRectangle {
      * 矩形平移
      */
     public void translate(double deltaX, double deltaY) {
-        min.x += deltaX;
-        max.x += deltaX;
-        min.y += deltaY;
-        max.y += deltaY;
+        pos.x += deltaX;
+        pos.y += deltaY;
     }
 
     /**
      * 矩形缩放
+     *
      * @param scaleX 缩放系数X
      * @param scaleY 缩放系数Y
      */
     public void scale(double scaleX, double scaleY) {
-        double centerX = (min.x + max.x) / 2;
-        double centerY = (min.y + max.y) / 2;
-        double newWidth = width * scaleX;
-        double newHeight = height * scaleY;
-        min.x = centerX - newWidth / 2;
-        max.x = centerX + newWidth / 2;
-        min.y = centerY - newHeight / 2;
-        max.y = centerY + newHeight / 2;
-        width = newWidth;
-        height = newHeight;
+        RenderPoint centerPos = getCenterPoint();
+        width *= scaleX;
+        height *= scaleY;
+        pos.x = centerPos.x - width / 2;
+        pos.y = centerPos.y - height / 2;
     }
 
-    public void rotate(double angle) {
-        double centerX = (min.x + max.x) / 2;
-        double centerY = (min.y + max.y) / 2;
-        double cosTheta = Math.cos(angle);
-        double sinTheta = Math.sin(angle);
-        double newX1 = centerX + (min.x - centerX) * cosTheta - (min.y - centerY) * sinTheta;
-        double newY1 = centerY + (min.x - centerX) * sinTheta + (min.y - centerY) * cosTheta;
-        double newX2 = centerX + (max.x - centerX) * cosTheta - (max.y - centerY) * sinTheta;
-        double newY2 = centerY + (max.x - centerX) * sinTheta + (max.y - centerY) * cosTheta;
-        min.x = Math.min(newX1, newX2);
-        max.x = Math.max(newX1, newX2);
-        min.y = Math.min(newY1, newY2);
-        max.y = Math.max(newY1, newY2);
-        width = max.x - min.x;
-        height = max.y - min.y;
+
+    /**
+     * 根据源区域的相对位置变更区域
+     *
+     * @param sourceRectangle 源对齐区域
+     * @param pos             相对位置
+     */
+    public void setRelativePosition(RenderRectangle sourceRectangle, Pos pos) {
+        switch (pos.getHpos()) {
+            case CENTER -> this.pos.x = sourceRectangle.pos.x + (sourceRectangle.width - width) / 2; // 居中对齐
+            case LEFT -> this.pos.x = sourceRectangle.pos.x; // 左对齐
+            case RIGHT -> this.pos.x = sourceRectangle.pos.x + sourceRectangle.width - width; // 右对齐
+        }
+
+        switch (pos.getVpos()) {
+            case CENTER -> this.pos.y = sourceRectangle.pos.y + (sourceRectangle.height - height) / 2; // 居中对齐
+            case TOP -> this.pos.y = sourceRectangle.pos.y; // 上对齐
+            case BOTTOM -> this.pos.y = sourceRectangle.pos.y + sourceRectangle.height - height; // 下对齐
+        }
     }
+
+
+    /**
+     * 区域半偏移
+     *
+     * @param pos 偏移方向
+     */
+    public void offsetPositionByHalf(Pos pos) {
+        switch (pos.getHpos()) {
+            case LEFT -> this.pos.x -= width / 2;
+            case RIGHT -> this.pos.x += width / 2;
+        }
+        switch (pos.getVpos()) {
+            case TOP -> this.pos.y -= height / 2;
+            case BOTTOM -> this.pos.y += height / 2;
+        }
+    }
+
 }

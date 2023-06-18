@@ -14,6 +14,7 @@ import team.zxorg.zxnoter.ui.component.CanvasPane;
 import team.zxorg.zxnoter.ui.component.ToolGroupBar;
 import team.zxorg.zxnoter.ui.render.fixedorbit.FixedOrbitBackgroundRender;
 import team.zxorg.zxnoter.ui.render.fixedorbit.FixedOrbitMapRender;
+import team.zxorg.zxnoter.ui.render.fixedorbit.FixedOrbitPreviewBackgroundRender;
 import team.zxorg.zxnoter.ui.render.fixedorbit.FixedOrbitRenderInfo;
 
 import java.util.ArrayList;
@@ -29,7 +30,8 @@ public class MapEditor extends BaseEditor {
     //ArrayList<Render> renders = new ArrayList<>();
 
     FixedOrbitMapRender previewMapRender;//预览渲染器
-    FixedOrbitMapRender previewSelectedMapRender;//预览选中渲染器
+    FixedOrbitPreviewBackgroundRender previewBackgroundRender;//预览背景渲染器
+    FixedOrbitMapRender previewSelectedMapRender;//预览渲染器
 
     FixedOrbitMapRender mainMapRender;//主渲染器
     FixedOrbitMapRender mainSelectedMapRender;//选中渲染器
@@ -67,7 +69,7 @@ public class MapEditor extends BaseEditor {
         previewPane.setMinSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
         previewPane.setMaxSize(Region.USE_COMPUTED_SIZE, Region.USE_PREF_SIZE);
         StackPane.setAlignment(previewPane, Pos.CENTER);
-        StackPane.setMargin(previewPane, new Insets(0, 0, 50, 0));
+        StackPane.setMargin(previewPane, new Insets(0, 0, 0, 0));
 
 
         {//事件监听
@@ -85,13 +87,25 @@ public class MapEditor extends BaseEditor {
             mapCanvas.setOnScroll(event -> {
                 double deltaY = event.getDeltaY();
                 mainMapRender.getRenderInfo().timelinePosition.set(mainMapRender.getRenderInfo().timelinePosition.get() + (long) (deltaY / mainMapRender.getRenderInfo().timelineZoom.get()));
-                //setTimelinePosition(getTimelinePosition() + (long) deltaY);
             });
 
+
+            previewCanvas.setOnScroll(mapCanvas.getOnScroll());
+
+
             //滚轮监听
-            previewCanvas.setOnScroll(event -> {
+            previewPane.setOnScroll(event -> {
                 double deltaY = event.getDeltaY();
                 mainMapRender.getRenderInfo().timelineZoom.set(mainMapRender.getRenderInfo().timelineZoom.get() * (deltaY < 0 ? 0.9f : 1.1f));
+
+                long topTime = mainMapRender.getRenderInfo().getPositionToTime(mainMapRender.getHeight());
+                long bottomTime = mainMapRender.getRenderInfo().getPositionToTime(0);
+
+                double topPos = previewSelectedMapRender.getRenderInfo().getTimeToPosition(topTime);
+                double bottomPos = previewSelectedMapRender.getRenderInfo().getTimeToPosition(bottomTime);
+
+                previewPane.setPrefHeight(topPos - bottomPos);
+                //StackPane.setMargin(previewPane, new Insets(bottomPos, 0, 0, 0));
             });
 
 
@@ -108,6 +122,9 @@ public class MapEditor extends BaseEditor {
         previewSelectedMapRender = new FixedOrbitMapRender(previewMapRender.getRenderInfo(), previewCanvas, selectedNoteMap, "preview-selected", "default");
 
 
+        previewBackgroundRender = new FixedOrbitPreviewBackgroundRender(previewMapRender.getRenderInfo(), zxMap, previewCanvas.canvas, "default");
+
+
         previewBar.getChildren().addAll(previewCanvas, previewPane);
 
 
@@ -116,9 +133,6 @@ public class MapEditor extends BaseEditor {
         mainMapRender.getRenderInfo().timelineZoom.setValue(1.2f);
         mainMapRender.getRenderInfo().judgedLinePositionPercentage.setValue(0.95f);
 
-
-        //绑定部分属性
-        previewMapRender.getRenderInfo().timelinePosition.bind(mainMapRender.getRenderInfo().timelinePosition);
 
         //选中渲染器
         mainSelectedMapRender = new FixedOrbitMapRender(mainMapRender.getRenderInfo(), mapCanvas, selectedNoteMap, "normal-selected", "default");
@@ -230,15 +244,21 @@ public class MapEditor extends BaseEditor {
         previewSelectedMapRender.clearRect();
         mainMapRender.clearRect();
 
-        backgroundRender.render();
 
+        previewBackgroundRender.render();
         previewMapRender.render();
         previewSelectedMapRender.render();
 
+        backgroundRender.render();
         mainSelectedMapRender.render();
         mainMapRender.render();
 
+        //计算
 
+        previewBackgroundRender.mainJudgedLinePositionPercentage.setValue(
+                mainMapRender.getRenderInfo().timelinePosition.get()
+        );
+        previewMapRender.getRenderInfo().timelinePosition.setValue(mainMapRender.getRenderInfo().getPositionToTime(mainMapRender.getHeight() / 2));
     }
 
     @Override
