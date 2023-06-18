@@ -37,7 +37,7 @@ public class FixedOrbitPreviewBackgroundRender extends FixedOrbitRender {
             beatTime = time;
 
             //绘制拍
-            if ((beatTime - timing.timingStamp) % beatCycleTime < 1) {
+            if ((beatTime - (timing.isNewBaseBpm ? timing.timingStamp : 0)) % beatCycleTime < 1) {
                 image = getImage(FixedOrbitObjectKey.PREVIEW_BEAT_LINE);
                 graphics.drawImage(image, 0, getRenderInfo().getTimeToPosition(beatTime) - image.getHeight() / 2, renderInfo.canvasWidth.get(), image.getHeight());
                 //graphics.setFill(Color.WHEAT);
