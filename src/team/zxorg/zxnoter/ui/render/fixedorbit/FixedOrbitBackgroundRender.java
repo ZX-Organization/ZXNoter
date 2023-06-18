@@ -33,7 +33,6 @@ public class FixedOrbitBackgroundRender extends FixedOrbitRender {
 
         //绘制拍线
 
-        double baseBpm = Double.parseDouble(zxMap.unLocalizedMapInfo.getInfo("BaseBpm"));
         double beatCycleTime;
         long beatTime;
 
@@ -49,15 +48,15 @@ public class FixedOrbitBackgroundRender extends FixedOrbitRender {
             beatTime = time;
 
             //绘制分拍
-            if ((beatTime - timing.timingStamp) % (beatCycleTime / subBeats) < 1) {
+            if ((beatTime - (timing.isNewBaseBpm ? timing.timingStamp : 0)) % (beatCycleTime / subBeats) < 1) {
                 image = getImage(FixedOrbitObjectKey.SUB_BEAT_LINE);
                 graphics.drawImage(image, 0, getRenderInfo().getTimeToPosition(beatTime) - image.getHeight() / 2, renderInfo.canvasWidth.get(), image.getHeight());
                 graphics.setFill(Color.WHEAT);
-                graphics.fillText(beatTime + "ms" + " t:" + Math.round(beatCycleTime) + " b:" + (baseBpm * timing.absBpm), 10, getRenderInfo().getTimeToPosition(beatTime));
+                graphics.fillText(beatTime + "ms" + " t:" + Math.round(beatCycleTime) + " b:" + (timing.absBpm), 10, getRenderInfo().getTimeToPosition(beatTime));
             }
 
             //绘制拍
-            if ((beatTime - timing.timingStamp) % beatCycleTime < 1) {
+            if ((beatTime - (timing.isNewBaseBpm ? timing.timingStamp : 0)) % beatCycleTime < 1) {
                 image = getImage(FixedOrbitObjectKey.BEAT_LINE);
                 graphics.drawImage(image, 0, getRenderInfo().getTimeToPosition(beatTime) - image.getHeight() / 2, renderInfo.canvasWidth.get(), image.getHeight());
                 //graphics.setFill(Color.WHEAT);
