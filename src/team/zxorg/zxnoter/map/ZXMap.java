@@ -42,7 +42,7 @@ public class ZXMap {
         int tempIndex=res;
         Timing tempTiming;
         //向前查找
-        while (tempIndex>0&&(tempTiming = timingPoints.get(--tempIndex)).timingStamp == resTiming.timingStamp){
+        while (tempIndex>0&&(tempTiming = timingPoints.get(--tempIndex)).timestamp == resTiming.timestamp){
             findResults.add(tempTiming);
         }
         //加入自身结果
@@ -50,7 +50,7 @@ public class ZXMap {
         //复原索引
         tempIndex = res;
         //向后查找
-        while (tempIndex<notes.size()-1&&(tempTiming=timingPoints.get(++tempIndex)).timingStamp == resTiming.timingStamp){
+        while (tempIndex<notes.size()-1&&(tempTiming=timingPoints.get(++tempIndex)).timestamp == resTiming.timestamp){
             findResults.add(tempTiming);
         }
         return findResults;
@@ -121,25 +121,25 @@ public class ZXMap {
      */
     private int findClosestTimingIndex(long time){
         if (0 > time) return 0;
-        if (timingPoints.get(timingPoints.size()-1).timingStamp< time) return timingPoints.size()-1;
+        if (timingPoints.get(timingPoints.size()-1).timestamp < time) return timingPoints.size()-1;
         int searchRes = binarySearchTiming(time , 0 , timingPoints.size()-1);
         //判断最近的
         if (searchRes == 0 ){
             int next = searchRes + 1;
-            if (Math.abs(timingPoints.get(next).timingStamp-time) < Math.abs(timingPoints.get(searchRes).timingStamp-time))
+            if (Math.abs(timingPoints.get(next).timestamp -time) < Math.abs(timingPoints.get(searchRes).timestamp -time))
                 return next;
             else return searchRes;
         } else if (searchRes == timingPoints.size()-1){
             int previous = searchRes-1;
-            if (Math.abs(timingPoints.get(previous).timingStamp-time) < Math.abs(timingPoints.get(searchRes).timingStamp-time))
+            if (Math.abs(timingPoints.get(previous).timestamp -time) < Math.abs(timingPoints.get(searchRes).timestamp -time))
                 return previous;
             else return searchRes;
         } else {
             int res = searchRes;
             int previous = searchRes-1;
             int next = searchRes + 1;
-            if (Math.abs(timingPoints.get(previous).timingStamp-time) < Math.abs(timingPoints.get(searchRes).timingStamp-time)) res = previous;
-            if (Math.abs(timingPoints.get(next).timingStamp-time) < Math.abs(timingPoints.get(searchRes).timingStamp-time)) res = next;
+            if (Math.abs(timingPoints.get(previous).timestamp -time) < Math.abs(timingPoints.get(searchRes).timestamp -time)) res = previous;
+            if (Math.abs(timingPoints.get(next).timestamp -time) < Math.abs(timingPoints.get(searchRes).timestamp -time)) res = next;
 
             return res;
         }
@@ -166,7 +166,7 @@ public class ZXMap {
     }
     private int binarySearchTiming(long time , int lowIndex , int highIndex){
         int mid = (lowIndex + highIndex) / 2;
-        if (time > timingPoints.get(mid).timingStamp){
+        if (time > timingPoints.get(mid).timestamp){
             //查找的时间在中点之后
             if (lowIndex == highIndex){
                 return lowIndex;
@@ -296,17 +296,28 @@ public class ZXMap {
 
     /**
      * 编辑按键参数
-     * @param fixedOrbitNote 要修改的按键
+     * @param basicNote 要修改的按键
      * @param parameter 参数
      * @return 修改是否成功
      */
-    public boolean editNotePar(FixedOrbitNote fixedOrbitNote,int parameter){
-        if (fixedOrbitNote instanceof LongNote longNote){
-            longNote.sustainedTime = parameter;
+    public boolean editNotePar(BaseNote basicNote,int parameter){
+        if (basicNote instanceof LongNote longNote){
+            //按键持续时间修改结果为0
+            if (longNote.sustainedTime+parameter==0){
+                //插入单键,删除原键
+                insertNote(new FixedOrbitNote(longNote.timeStamp,longNote.orbit));
+                notes.remove(longNote);
+            }else
+                longNote.sustainedTime += parameter;
             return true;
         }
-        if (fixedOrbitNote instanceof SlideNote slideNote){
-            slideNote.slideArg = parameter;
+        if (basicNote instanceof SlideNote slideNote){
+            if (slideNote.slideArg+parameter==0){
+                //插入单键,删除原键
+                insertNote(new FixedOrbitNote(slideNote.timeStamp,slideNote.orbit));
+                notes.remove(slideNote);
+            }else
+                slideNote.slideArg+= parameter;
             return true;
         }
         return false;

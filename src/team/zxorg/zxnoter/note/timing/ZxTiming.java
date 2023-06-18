@@ -27,7 +27,7 @@ public class ZxTiming extends Timing{
                 ", 音量=" + volume +
                 ", 是否继承时间点=" + isExtendTiming +
                 ", 效果=" + effect +
-                ", 时间戳=" + timingStamp +
+                ", 时间戳=" + timestamp +
                 ", bpmSpeed=" + bpmSpeed +
                 ", 绝对bpm=" + absBpm +
                 '}';

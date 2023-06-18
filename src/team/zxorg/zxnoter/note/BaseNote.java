@@ -1,5 +1,7 @@
 package team.zxorg.zxnoter.note;
 
+import team.zxorg.zxnoter.note.fixedorbit.ComplexNote;
+
 /**
  * 基本键
  */
@@ -19,6 +21,7 @@ public abstract class BaseNote implements Cloneable,Comparable<BaseNote>{
     public abstract void setOrbit(int orbit);
     public abstract int getImdNoteType();
     public abstract long getLength();
+    public abstract ComplexNote getParent();
     @Override
     public int compareTo(BaseNote o) {
         if (timeStamp<o.timeStamp) return -1;
