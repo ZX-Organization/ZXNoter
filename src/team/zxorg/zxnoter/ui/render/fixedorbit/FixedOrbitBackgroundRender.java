@@ -44,11 +44,16 @@ public class FixedOrbitBackgroundRender extends FixedOrbitRender {
             if (time < 0)
                 continue;
 
+
+            graphics.setFill(Color.WHEAT);
+            graphics.fillText("beatBase:" + timing.timestamp, 240, getRenderInfo().getTimeToPosition(timing.timestamp));
+
+
             //拥有基准
             beatTime = time;
 
             //绘制分拍
-            if ((beatTime -   timing.timestamp) % (beatCycleTime / subBeats) < 1) {
+            if ((beatTime - timing.timestamp) % (beatCycleTime / subBeats) < 1) {
                 image = getImage(FixedOrbitObjectKey.SUB_BEAT_LINE);
                 graphics.drawImage(image, 0, getRenderInfo().getTimeToPosition(beatTime) - image.getHeight() / 2, renderInfo.canvasWidth.get(), image.getHeight());
                 graphics.setFill(Color.WHEAT);
@@ -56,11 +61,11 @@ public class FixedOrbitBackgroundRender extends FixedOrbitRender {
             }
 
             //绘制拍
-            if ((beatTime -   timing.timestamp) % beatCycleTime < 1) {
+            if ((beatTime - timing.timestamp) % beatCycleTime < 1) {
                 image = getImage(FixedOrbitObjectKey.BEAT_LINE);
                 graphics.drawImage(image, 0, getRenderInfo().getTimeToPosition(beatTime) - image.getHeight() / 2, renderInfo.canvasWidth.get(), image.getHeight());
                 //graphics.setFill(Color.WHEAT);
-                //graphics.fillText("bt:" + beatCycleTime, 240, getRenderInfo().getTimeToPosition(beatTime));
+                //graphics.fillText("beat:" + timing.timestamp, 240, getRenderInfo().getTimeToPosition(beatTime));
             }
 
 /*
@@ -99,18 +104,13 @@ public class FixedOrbitBackgroundRender extends FixedOrbitRender {
         rectangle.offsetPositionByHalf(Pos.BOTTOM_LEFT);
 
         //rectangle.setRelativePosition(Pos.TOP_LEFT);
-        drawImage(image, rectangle);
+        //drawImage(image, rectangle);
         //drawImageWithPosition(image, getWidth(), 100, Pos.BOTTOM_CENTER);
         //drawImageWithRelativePosition(image, 0, 0,100,100, Pos.TOP_LEFT);
         //System.out.println(bpm);
 
     }
 
-    /**
-     * 寻找之后的Timing
-     *
-     * @return
-     */
     /**
      * 寻找之后的Timing
      *
@@ -124,11 +124,13 @@ public class FixedOrbitBackgroundRender extends FixedOrbitRender {
             if (timing.isNewBaseBpm)
                 timingStampOffset = timing.timestamp;
             if (zxMap.timingPoints.get(i).timestamp > time) {
+
+                timing.timestamp = timingStampOffset;
                 return timing;
             }
             timing = zxMap.timingPoints.get(i);
+
         }
-        timing.timestamp = timingStampOffset;
         return timing;
     }
 
