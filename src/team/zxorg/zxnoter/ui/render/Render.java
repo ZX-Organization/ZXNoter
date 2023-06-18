@@ -1,12 +1,16 @@
 package team.zxorg.zxnoter.ui.render;
 
+import javafx.css.converter.EffectConverter;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.geometry.VPos;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.effect.ColorAdjust;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 import team.zxorg.zxnoter.map.ZXMap;
 
 
@@ -136,6 +140,7 @@ public abstract class Render {
         if (new Rectangle2D(0, 0, canvas.getWidth(), canvas.getHeight()).intersects(rectangle)) {
             graphics.drawImage(image, rectangle.getMinX(), rectangle.getMinY(), rectangle.getWidth(), rectangle.getHeight());
         }
+
     }
 
 }

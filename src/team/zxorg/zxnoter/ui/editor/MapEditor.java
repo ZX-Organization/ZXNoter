@@ -76,7 +76,7 @@ public class MapEditor extends BaseEditor {
             //谱面画板事件
             mapCanvas.setOnMouseClicked(event -> {
                 long time = mainMapRender.getRenderInfo().getPositionToTime(event.getY());
-                ArrayList<BaseNote> index = zxMap.findClosestNote(time);
+                ArrayList<BaseNote> index = zxMap.findClosestNotes(time);
                 //selectedNoteMap.notes.clear();
                 selectedNoteMap.notes.addAll(index);
             });

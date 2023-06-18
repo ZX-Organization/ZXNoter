@@ -1,7 +1,10 @@
 package team.zxorg.zxnoter.ui.render.fixedorbit;
 
 import javafx.geometry.Rectangle2D;
+import javafx.scene.effect.ColorAdjust;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 import team.zxorg.zxnoter.map.ZXMap;
 import team.zxorg.zxnoter.note.fixedorbit.ComplexNote;
 import team.zxorg.zxnoter.note.fixedorbit.FixedOrbitNote;
@@ -24,8 +27,11 @@ public class FixedOrbitMapRender extends FixedOrbitRender {
 
     @Override
     public void renderHandle() {
+
         //updateNoteBuffer();
         Image image;//临时存储图片
+
+
 
         //判定线时间偏移
         double judgedLineTimeOffset = getRenderInfo().getJudgedLineTimeOffset();
@@ -57,12 +63,14 @@ public class FixedOrbitMapRender extends FixedOrbitRender {
                     drawNote(note, renderInfo.canvasWidth.get(), DrawMode.ALL, judgedLineTimeOffset);
                 }
 
-
                 //绘制第一个键  (最后绘制)
                 image = getImage(state, FixedOrbitNotesKey.NOTE);
-                graphics.drawImage(image, x, y - h / 2, w, h);
+                drawImage(image, new Rectangle2D(x, y - h / 2, w, h));
+
             }
         }
+
+
 
 
     }
