@@ -15,6 +15,8 @@ public class FixedOrbitPreviewBackgroundRender extends FixedOrbitRender {
         super(renderInfo, renderZXMap, canvas, theme);
     }
 
+    long timingStampOffset = 0;
+
     @Override
     protected void renderHandle() {
         Image image;
@@ -37,7 +39,7 @@ public class FixedOrbitPreviewBackgroundRender extends FixedOrbitRender {
             beatTime = time;
 
             //绘制拍
-            if ((beatTime - (timing.isNewBaseBpm ? timing.timingStamp : 0)) % beatCycleTime < 1) {
+            if ((beatTime - timing.timingStamp) % beatCycleTime < 1) {
                 image = getImage(FixedOrbitObjectKey.PREVIEW_BEAT_LINE);
                 graphics.drawImage(image, 0, getRenderInfo().getTimeToPosition(beatTime) - image.getHeight() / 2, renderInfo.canvasWidth.get(), image.getHeight());
                 //graphics.setFill(Color.WHEAT);
@@ -76,13 +78,17 @@ public class FixedOrbitPreviewBackgroundRender extends FixedOrbitRender {
      */
     public Timing findAfterTiming(long time) {
         //找到上一个timing
+        long timingStampOffset = 0;
         Timing timing = new Timing(0, 1, false, 0);
         for (int i = 0; i < zxMap.timingPoints.size(); i++) {
+            if (timing.isNewBaseBpm)
+                timingStampOffset = timing.timingStamp;
             if (zxMap.timingPoints.get(i).timingStamp > time) {
                 return timing;
             }
             timing = zxMap.timingPoints.get(i);
         }
+        timing.timingStamp = timingStampOffset;
         return timing;
     }
 

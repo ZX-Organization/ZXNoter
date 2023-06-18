@@ -48,7 +48,7 @@ public class FixedOrbitBackgroundRender extends FixedOrbitRender {
             beatTime = time;
 
             //绘制分拍
-            if ((beatTime - (timing.isNewBaseBpm ? timing.timingStamp : 0)) % (beatCycleTime / subBeats) < 1) {
+            if ((beatTime -   timing.timingStamp) % (beatCycleTime / subBeats) < 1) {
                 image = getImage(FixedOrbitObjectKey.SUB_BEAT_LINE);
                 graphics.drawImage(image, 0, getRenderInfo().getTimeToPosition(beatTime) - image.getHeight() / 2, renderInfo.canvasWidth.get(), image.getHeight());
                 graphics.setFill(Color.WHEAT);
@@ -56,7 +56,7 @@ public class FixedOrbitBackgroundRender extends FixedOrbitRender {
             }
 
             //绘制拍
-            if ((beatTime - (timing.isNewBaseBpm ? timing.timingStamp : 0)) % beatCycleTime < 1) {
+            if ((beatTime -   timing.timingStamp) % beatCycleTime < 1) {
                 image = getImage(FixedOrbitObjectKey.BEAT_LINE);
                 graphics.drawImage(image, 0, getRenderInfo().getTimeToPosition(beatTime) - image.getHeight() / 2, renderInfo.canvasWidth.get(), image.getHeight());
                 //graphics.setFill(Color.WHEAT);
@@ -111,15 +111,24 @@ public class FixedOrbitBackgroundRender extends FixedOrbitRender {
      *
      * @return
      */
+    /**
+     * 寻找之后的Timing
+     *
+     * @return
+     */
     public Timing findAfterTiming(long time) {
         //找到上一个timing
+        long timingStampOffset = 0;
         Timing timing = new Timing(0, 1, false, 0);
         for (int i = 0; i < zxMap.timingPoints.size(); i++) {
+            if (timing.isNewBaseBpm)
+                timingStampOffset = timing.timingStamp;
             if (zxMap.timingPoints.get(i).timingStamp > time) {
                 return timing;
             }
             timing = zxMap.timingPoints.get(i);
         }
+        timing.timingStamp = timingStampOffset;
         return timing;
     }
 
