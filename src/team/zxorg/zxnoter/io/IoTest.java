@@ -29,7 +29,7 @@ public class IoTest {
             //System.out.println(convertMap.notes);
             //System.out.println(Arrays.toString(((ComplexNote)map.notes.get(19)).convertNote(ImdInfo.ConvertMethod.BASE_SLIDE)));
             //System.out.println(map.imdConvertNoComplex(ImdInfo.ConvertMethod.BASE_SLIDE));
-            ZXMap map = OsuReader.readFile(Path.of("docs/reference/LeaF - NANO DEATH!!!!!/LeaF - NANO DEATH!!!!! (nowsmart) [DEATH].osu"));
+            ZXMap map = OsuReader.readFile(Path.of("docs/reference/Dan reform jackmap mashup/1.osu"));
             //System.out.println( map.timingPoints);
             //System.out.println(map.findClosestTimings(30000));
             //System.out.println(map.timingPoints);

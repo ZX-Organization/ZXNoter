@@ -15,6 +15,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * osu读取器(osu!mania)
@@ -165,24 +166,31 @@ public class OsuReader {
                 }
                 case 2->{
                     //物件处理
-                    String noteStr = readTemp.substring(0 , readTemp.lastIndexOf(","));
-                    String sampleStr = readTemp.substring(noteStr.length()+1);
-                    //System.out.println("base->"+noteStr);
-                    //System.out.println("temp->"+sampleStr);
-                    //检查tempStr中是否有五个冒号,有五个冒号证明此物件为长条,且tempStr中包含长条参数
+                    String noteStr;
+                    String sampleStr;
+                    if (readTemp.contains(":")){
+                        //物件处理
+                        noteStr = readTemp.substring(0 , readTemp.lastIndexOf(","));
+                        sampleStr = readTemp.substring(noteStr.length()+1);
+                        //System.out.println("base->"+noteStr);
+                        //System.out.println("temp->"+sampleStr);
+                        //检查tempStr中是否有五个冒号,有五个冒号证明此物件为长条,且tempStr中包含长条参数
 
-                    int colonSymCount = sampleStr.length() - sampleStr.replaceAll(":","").length();
+                        int colonSymCount = sampleStr.length() - sampleStr.replaceAll(":","").length();
 
-                    if (colonSymCount == 5){
-                        //包含长条参数
-                        //取出参数
-                        String longNotePar = sampleStr.split(":")[0];
-                        //拼接到基础参数字符串
-                        noteStr = noteStr +","+ longNotePar;
-                        //从原字符串中删除
-                        sampleStr = sampleStr.replaceFirst(longNotePar+":","");
+                        if (colonSymCount == 5){
+                            //包含长条参数
+                            //取出参数
+                            String longNotePar = sampleStr.split(":")[0];
+                            //拼接到基础参数字符串
+                            noteStr = noteStr +","+ longNotePar;
+                            //从原字符串中删除
+                            sampleStr = sampleStr.replaceFirst(longNotePar+":","");
+                        }
+                    }else {
+                        noteStr = readTemp;
+                        sampleStr = "0:0:0:0:";
                     }
-
                     //分割物件参数集
                     String[] notePars = noteStr.split(",");
                     //System.out.println("源->"+readTemp);

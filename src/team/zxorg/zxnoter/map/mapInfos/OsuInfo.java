@@ -50,6 +50,7 @@ public enum OsuInfo {
     StoryboardLayer3Foreground("Storyboard Layer 3 (Foreground)", ""),
     StoryboardLayer4Overlay("Storyboard Layer 4 (Overlay)", ""),
     StoryboardSoundSamples("Storyboard Sound Samples", ""),
+    BackgroundColourTransformations("Background Colour Transformations", ""),
     BaseBpm("BaseBpm", ""),
     BgPath("BgPath","")
     ;
