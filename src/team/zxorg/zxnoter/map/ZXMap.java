@@ -253,6 +253,7 @@ public class ZXMap {
             }
         }
         note.setOrbit(orbit);
+        System.out.println(note);
     }
 
     /**

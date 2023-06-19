@@ -5,8 +5,10 @@ import team.zxorg.zxnoter.io.reader.OsuReader;
 import team.zxorg.zxnoter.io.writer.ImdWriter;
 import team.zxorg.zxnoter.io.writer.OsuWriter;
 import team.zxorg.zxnoter.map.ZXMap;
+import team.zxorg.zxnoter.map.editor.ZXFixedOrbitMapEditor;
 import team.zxorg.zxnoter.map.mapInfos.ImdInfo;
 import team.zxorg.zxnoter.note.fixedorbit.ComplexNote;
+import team.zxorg.zxnoter.note.fixedorbit.FixedOrbitNote;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -20,7 +22,7 @@ import java.util.Arrays;
 public class IoTest {
     public static void main(String[] args) {
         try {
-            //ZXMap map = ImdReader.readFile(Path.of("docs/reference/Corruption/Corruption_4k_ez.imd"));
+            ZXMap map = ImdReader.readFile(Path.of("docs/reference/xi - Blue Zenith/xi - Blue Zenith_4k_hd.imd"));
             //map.findClosestNote(1000);
             //System.out.println(map.notes.get(19));
             //System.out.println(map.notes.size());
@@ -29,7 +31,18 @@ public class IoTest {
             //System.out.println(convertMap.notes);
             //System.out.println(Arrays.toString(((ComplexNote)map.notes.get(19)).convertNote(ImdInfo.ConvertMethod.BASE_SLIDE)));
             //System.out.println(map.imdConvertNoComplex(ImdInfo.ConvertMethod.BASE_SLIDE));
-            ZXMap map = OsuReader.readFile(Path.of("docs/reference/Dan reform jackmap mashup/1.osu"));
+            //ZXMap map = OsuReader.readFile(Path.of("docs/reference/Dan reform jackmap mashup/1.osu"));
+            ZXFixedOrbitMapEditor editor = new ZXFixedOrbitMapEditor(map);
+            System.out.println("第一个->"+map.notes.get(0));
+            System.out.println("第二个->"+map.notes.get(1));
+            editor.move((FixedOrbitNote)map.notes.get(0),1);
+            editor.modifyDone();
+            System.out.println("第一个->"+map.notes.get(0));
+            System.out.println("第二个->"+map.notes.get(1));
+            editor.move((FixedOrbitNote)map.notes.get(0),1);
+            editor.modifyDone();
+            System.out.println("第一个->"+map.notes.get(0));
+            System.out.println("第二个->"+map.notes.get(1));
             //System.out.println( map.timingPoints);
             //System.out.println(map.findClosestTimings(30000));
             //System.out.println(map.timingPoints);
@@ -37,15 +50,15 @@ public class IoTest {
             System.out.println(ImdWriter.checkLocalizedInfos(map));*/
             //ImdWriter.writeOut(convertMap , ImdWriter.checkLocalizedInfos(convertMap) , Path.of("G:/desktop"));
             //System.out.println(map.timingPoints);
-            OsuWriter.writeOut(map,OsuWriter.checkLocalizedInfos(map),Path.of("G:/desktop"));
+            //OsuWriter.writeOut(map,OsuWriter.checkLocalizedInfos(map),Path.of("G:/desktop"));
             //System.out.println(OsuWriter.checkLocalizedInfos(convertMap));
             //System.out.println(map.notes);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        catch (NoSuchFieldException e) {
+        /*catch (NoSuchFieldException e) {
             throw new RuntimeException(e);
-        }
+        }*/
 
     }
 }

@@ -49,6 +49,7 @@ public class ZXFixedOrbitMapEditor {
         //将虚影按键加入虚影map中
         shadowMap.insertNote(shadowNote);
         shadows.add(shadowNote);
+
         //对虚影按键进行编辑
         shadowMap.moveNote(shadowNote, shadowNote.orbit += orbit);
         //添加操作结果(上一次也是操作此按键时覆盖)
@@ -213,6 +214,7 @@ public class ZXFixedOrbitMapEditor {
         }
         //添加到操作堆栈
         operateStack.add(tempMapOperate);
+        tempMapOperate = null;
 
     }
 
