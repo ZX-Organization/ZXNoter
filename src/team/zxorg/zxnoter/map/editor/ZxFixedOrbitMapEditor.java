@@ -106,23 +106,25 @@ public class ZxFixedOrbitMapEditor {
                     }
                 }
                 //检查此子键下一个按键
-                if (childIndex == shadowNote.notes.size() - 1){
+                if (childIndex == shadowNote.notes.size() - 1) {
                     //子键处于组合键尾部
-                }else {
+                } else {
                     FixedOrbitNote next = shadowNote.notes.get(childIndex + 1);
-                    if (next instanceof SlideNote slideNote){
-                        if (childLongNote.orbit != slideNote.orbit){
+                    if (next instanceof SlideNote slideNote) {
+                        if (childLongNote.orbit != slideNote.orbit) {
                             //编辑的按键和下一个按键轨道错位
                             //缓存下下个物件的轨道位置
                             int nextNextOrbit = slideNote.orbit + slideNote.slideArg;
                             slideNote.orbit = childLongNote.orbit;
-                            slideNote.slideArg = nextNextOrbit-slideNote.orbit;
+                            slideNote.slideArg = nextNextOrbit - slideNote.orbit;
                         }
                     }
                 }
             } else {
                 //跟随
-
+                for (int i = childIndex; i < shadowNote.notes.size()-1; i++) {
+                    
+                }
             }
         }
     }
@@ -171,28 +173,10 @@ public class ZxFixedOrbitMapEditor {
      */
     public void modifyDone() {
         //完成修改,同步到原zxMap中
-        //检查按键是否为组合键,修复其中多余节点和0参滑键
+        //检查按键是否为组合键
         if (tempEditNote instanceof ComplexNote complexNote){
-            ArrayList<FixedOrbitNote> deleteList = new ArrayList<>();
-            for (int i = 1; i < complexNote.notes.size(); i++) {
-                FixedOrbitNote child = complexNote.notes.get(i);
-                if (child instanceof SlideNote slideNote){
-                    //滑子键
-                    if (slideNote.slideArg == 0){
-                        //将零参滑加入删除列表
-                        deleteList.add(slideNote);
-                    }
-                }else if (child instanceof LongNote thisLongNote){
-                    //长子键
-                    if (complexNote.notes.get(i-1) instanceof LongNote previousLongNote){
-                        //检查到此长子键前一个也是长子键
-                        previousLongNote.sustainedTime+= thisLongNote.sustainedTime;
-                        deleteList.add(thisLongNote);
-                        /*if ()*/
-                    }
-                }
-            }
-            complexNote.notes.removeAll(deleteList);
+            checkComplexNote(complexNote);
+            tempMapOperate.desNote = tempEditNote;
         }
         //克隆结果插入原map
         srcMap.insertNote(tempMapOperate.desNote.clone());
@@ -201,6 +185,34 @@ public class ZxFixedOrbitMapEditor {
         //添加到操作堆栈
         operateStack.add(tempMapOperate);
 
+    }
+
+    private void checkComplexNote(ComplexNote note) {
+        //检查按键是否为组合键,修复其中多余节点和0参滑键
+        ArrayList<FixedOrbitNote> deleteList = new ArrayList<>();
+        for (int i = 1; i < note.notes.size(); i++) {
+            FixedOrbitNote child = note.notes.get(i);
+            if (child instanceof SlideNote slideNote) {
+                //滑子键
+                if (slideNote.slideArg == 0) {
+                    //将零参滑加入删除列表
+                    deleteList.add(slideNote);
+                }
+            } else if (child instanceof LongNote thisLongNote) {
+                LongNote tempLongNote = thisLongNote;
+                //长子键
+                //向前检查所有同轨长键
+                int index = i - 1;
+                while (note.notes.get(index--) instanceof LongNote temp) {
+                    //检查到此长子键前一个也是长子键
+                    temp.sustainedTime += tempLongNote.sustainedTime;
+                    deleteList.add(tempLongNote);
+                    //向前移动
+                    tempLongNote = temp;
+                }
+            }
+        }
+        note.notes.removeAll(deleteList);
     }
 
 }

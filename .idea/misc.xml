@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_X" default="true" project-jdk-name="20" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_20" default="true" project-jdk-name="20" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
   <component name="jsonEditor">
     <option name="stateMap">
       <map>
-        <entry key="ZXNoter" value="{&#10;  &quot;localized.rm.bg&quot;: &quot;BG&quot;&#10;}&#10;1 2 3 4 5 6&#10;0 1 2 3 4 5" />
+        <entry key="ZXNoter" value="{&#10;  &quot;localized.rm.bg&quot;: &quot;BG&quot;&#10;}" />
       </map>
     </option>
   </component>

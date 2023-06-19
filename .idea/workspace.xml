@@ -4,24 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="295bcb0d-2118-4e02-b35e-a9da4569b815" name="更改" comment="update">
-      <change afterPath="$PROJECT_DIR$/resourcespackage/img/note/theme/default/preview-selected/end.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcespackage/img/note/theme/default/preview-selected/left.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcespackage/img/note/theme/default/preview-selected/long.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcespackage/img/note/theme/default/preview-selected/node.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcespackage/img/note/theme/default/preview-selected/note.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcespackage/img/note/theme/default/preview-selected/right.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcespackage/img/note/theme/default/preview-selected/slide.png" afterDir="false" />
+    <list default="true" id="295bcb0d-2118-4e02-b35e-a9da4569b815" name="更改" comment="fixed OsuReader">
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2023_6_11_2_09____.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/_2023_6_11_2_09____.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2023_6_11__2_05____.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/_2023_6_11__2_05____.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2023_6_11__2_25____.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/_2023_6_11__2_25____.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2023_6_11__4_29____.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/_2023_6_11__4_29____.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2023_6_11__4_43____.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/_2023_6_11__4_43____.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2023_6_12__12_41____.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/_2023_6_12__12_41____.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2023_6_12__12_41____1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/_2023_6_12__12_41____1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2023_6_11_2_09____.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2023_6_11__2_05____.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2023_6_11__2_25____.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2023_6_11__4_29____.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2023_6_11__4_43____.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2023_6_12__12_41____1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2023_6_12_上午_12_41_取消提交了更改_[更改]1/shelved.patch" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/editor/MapEditor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/editor/MapEditor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/io/reader/ImdReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/io/reader/ImdReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/map/editor/ZxFixedOrbitMapEditor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/map/editor/ZxFixedOrbitMapEditor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/note/timing/Timing.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/note/timing/Timing.java" afterDir="false" />
     </list>
     <list id="9563a533-f70b-4cf6-9026-5fb6bd4d4309" name="zedoC 进行的更改" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -41,6 +36,7 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="PUSH_AUTO_UPDATE" value="true" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -57,7 +53,7 @@
   &quot;keyToString&quot;: {
     &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;F:/AllProjects/ZXNoter-advance&quot;,
+    &quot;last_opened_file_path&quot;: &quot;F:/AllProjects/ZX-Organization/ZXNoter/docs/reference&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -65,7 +61,8 @@
     &quot;project.structure.last.edited&quot;: &quot;项目&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
   &quot;keyToStringList&quot;: {
     &quot;DatabaseDriversLRU&quot;: [
@@ -75,6 +72,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\AllProjects\ZX-Organization\ZXNoter\docs\reference" />
       <recent name="D:\Projects\ZXNoter\resourcespackage\svg" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -85,13 +83,26 @@
       <recent name="D:\Projects\ZXNoter\resourcespackage\css\default" />
     </key>
   </component>
-  <component name="RunManager" selected="应用程序.Main">
+  <component name="RunManager" selected="应用程序.IoTest">
     <configuration name="ImdReader" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="team.zxorg.zxnoter.io.reader.ImdReader" />
       <module name="ZXNoter" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="team.zxorg.zxnoter.map.mapInfos.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="IoTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="team.zxorg.zxnoter.io.IoTest" />
+      <module name="ZXNoter" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="team.zxorg.zxnoter.io.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -138,8 +149,16 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="应用程序.IoTest" />
+      <item itemvalue="应用程序.ImdReader" />
+      <item itemvalue="应用程序.OsuReader" />
+      <item itemvalue="应用程序.ZXNApp" />
+      <item itemvalue="应用程序.Main" />
+    </list>
     <recent_temporary>
       <list>
+        <item itemvalue="应用程序.IoTest" />
         <item itemvalue="应用程序.Main" />
         <item itemvalue="应用程序.ZXNApp" />
         <item itemvalue="应用程序.ImdReader" />
@@ -163,6 +182,16 @@
       <workItem from="1686719208556" duration="1804000" />
       <workItem from="1686722063313" duration="78000" />
       <workItem from="1686723075574" duration="35640000" />
+      <workItem from="1686873811831" duration="1361000" />
+      <workItem from="1686877085193" duration="1885000" />
+      <workItem from="1686928346288" duration="6784000" />
+      <workItem from="1686977575163" duration="14601000" />
+      <workItem from="1687016076843" duration="5629000" />
+      <workItem from="1687094716678" duration="8804000" />
+      <workItem from="1687105436136" duration="4452000" />
+      <workItem from="1687114761990" duration="19000" />
+      <workItem from="1687129804181" duration="1455000" />
+      <workItem from="1687157175936" duration="12296000" />
     </task>
     <task id="LOCAL-00001" summary="update ImdReader">
       <created>1686590292141</created>
@@ -255,7 +284,70 @@
       <option name="project" value="LOCAL" />
       <updated>1686807320176</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="update">
+      <created>1686935242507</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1686935242507</updated>
+    </task>
+    <task id="LOCAL-00015" summary="update bpm">
+      <created>1686987490289</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1686987490289</updated>
+    </task>
+    <task id="LOCAL-00016" summary="update bpm">
+      <created>1686990134766</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1686990134766</updated>
+    </task>
+    <task id="LOCAL-00017" summary="fixed ImdReader">
+      <created>1686990820755</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1686990820755</updated>
+    </task>
+    <task id="LOCAL-00018" summary="update">
+      <created>1686991534989</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1686991534989</updated>
+    </task>
+    <task id="LOCAL-00019" summary="update findTiming">
+      <created>1686993525360</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1686993525360</updated>
+    </task>
+    <task id="LOCAL-00020" summary="update editor">
+      <created>1687107463126</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1687107463126</updated>
+    </task>
+    <task id="LOCAL-00021" summary="fixed timing bug">
+      <created>1687108752350</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1687108752350</updated>
+    </task>
+    <task id="LOCAL-00022" summary="fixed OsuReader">
+      <created>1687173110282</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1687173110282</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -278,7 +370,13 @@
     <MESSAGE value="fix ComplexNote" />
     <MESSAGE value="update toString" />
     <MESSAGE value="update localize method" />
+    <MESSAGE value="update bpm" />
+    <MESSAGE value="fixed ImdReader" />
     <MESSAGE value="update" />
-    <option name="LAST_COMMIT_MESSAGE" value="update" />
+    <MESSAGE value="update findTiming" />
+    <MESSAGE value="update editor" />
+    <MESSAGE value="fixed timing bug" />
+    <MESSAGE value="fixed OsuReader" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed OsuReader" />
   </component>
 </project>
