@@ -199,16 +199,18 @@ public class ZXFixedOrbitMapEditor {
                 checkComplexNote(complexNote);
             }
         }
-        //克隆结果插入原map
-        for (FixedOrbitNote note:tempMapOperate.desNotes)
-            srcMap.insertNote(note.clone());
         //删除原按键
         for (FixedOrbitNote note:tempMapOperate.srcNotes)
             srcMap.deleteNote(note);
+        //克隆结果插入原map
+        for (FixedOrbitNote note:tempMapOperate.desNotes)
+            srcMap.insertNote(note.clone());
+
         //清除此次编辑产生的所有虚影
         for (int i = 0; i < shadows.size(); i++) {
             shadowMap.deleteNote(shadows.get(i));
         }
+        shadows.clear();
         //添加到操作堆栈
         operateStack.add(tempMapOperate);
         tempMapOperate = null;
