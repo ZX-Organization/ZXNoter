@@ -16,6 +16,13 @@ public class SlideNote extends FixedOrbitNote implements Cloneable{
         super(timeStamp, orbit);
         this.slideArg = slideArg;
     }
+
+    public SlideNote(SlideNote slideNote) {
+        super(slideNote.timeStamp, slideNote.orbit);
+        slideArg = slideNote.slideArg;
+        hash = slideNote.hash;
+    }
+
     public FixedOrbitNote[] convertNote(ImdInfo.ConvertMethod convertMethod){
         FixedOrbitNote[] convertNotes = null;
         //转换按键
@@ -45,7 +52,7 @@ public class SlideNote extends FixedOrbitNote implements Cloneable{
 
     @Override
     public SlideNote clone(){
-        return new SlideNote(timeStamp , orbit , slideArg);
+        return new SlideNote(this);
     }
 
     @Override

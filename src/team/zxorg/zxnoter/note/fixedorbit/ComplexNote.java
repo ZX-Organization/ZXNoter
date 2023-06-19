@@ -16,6 +16,15 @@ public class ComplexNote extends FixedOrbitNote implements Cloneable {
         this.isRelativeHead = isRelativeHead;
     }
 
+    public ComplexNote(ComplexNote complexNote) {
+        super(complexNote.timeStamp, complexNote.orbit);
+        for (int i = 0; i < notes.size(); i++) {
+            notes.add(notes.get(i).clone());
+        }
+        isRelativeHead = complexNote.isRelativeHead;
+        hash = complexNote.hash;
+    }
+
     public ComplexNote(long timeStamp, int orbit) {
         super(timeStamp, orbit);
     }
@@ -224,11 +233,7 @@ public class ComplexNote extends FixedOrbitNote implements Cloneable {
 
     @Override
     public ComplexNote clone() {
-        ArrayList<FixedOrbitNote> newNotes = new ArrayList<>();
-        for (int i = 0; i < notes.size(); i++) {
-            newNotes.add(notes.get(i).clone());
-        }
-        return new ComplexNote(timeStamp, orbit, newNotes, isRelativeHead);
+        return new ComplexNote(this);
     }
 
     @Override

@@ -10,12 +10,19 @@ public class LongNote extends FixedOrbitNote implements Cloneable{
     public long sustainedTime;
     public LongNote(long timeStamp, int orbit , long sustainedTime) {
         super(timeStamp, orbit);
+
         this.sustainedTime = sustainedTime;
+    }
+
+    public LongNote(LongNote longNote) {
+        super(longNote.timeStamp,longNote. orbit);
+        sustainedTime = longNote.sustainedTime;
+        hash = longNote.hash;
     }
 
     @Override
     public LongNote clone() {
-        return new LongNote(timeStamp , orbit , sustainedTime);
+        return new LongNote(this);
     }
 
     @Override

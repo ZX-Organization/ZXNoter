@@ -15,12 +15,13 @@ public class FixedOrbitNote extends BaseNote implements Cloneable,Comparable<Bas
     public int orbit;
     String soundKey;
     private String soundPath = "";
-    private int hash;
+    protected int hash;
     public FixedOrbitNote(long timeStamp , int orbit) {
         super(timeStamp);
         hash = new Random().nextInt();
         this.orbit = orbit;
     }
+
     public void setSound(String path){
         soundPath = path;
         if (path.contains("."))
