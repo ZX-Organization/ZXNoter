@@ -1,16 +1,13 @@
 package team.zxorg.zxnoter.ui.render.fixedorbit;
 
-import javafx.beans.binding.Bindings;
-import javafx.beans.binding.FloatBinding;
-import javafx.beans.binding.LongBinding;
-import javafx.beans.property.FloatProperty;
-import javafx.beans.property.ReadOnlyFloatProperty;
-import javafx.beans.property.ReadOnlyLongProperty;
-import javafx.beans.property.SimpleFloatProperty;
+import javafx.beans.binding.*;
+import javafx.beans.property.*;
 import team.zxorg.zxnoter.note.BaseNote;
 import team.zxorg.zxnoter.note.fixedorbit.ComplexNote;
 import team.zxorg.zxnoter.note.fixedorbit.LongNote;
 import team.zxorg.zxnoter.ui.render.RenderInfo;
+
+import java.util.concurrent.Callable;
 
 public class FixedOrbitRenderInfo extends RenderInfo {
 
@@ -24,6 +21,8 @@ public class FixedOrbitRenderInfo extends RenderInfo {
      */
     public LongBinding judgedLinePositionTimeOffset = Bindings.createLongBinding(() -> (long) (canvasHeight.get() * judgedLinePositionPercentage.get() / timelineZoom.get()),
             canvasHeight, judgedLinePositionPercentage, timelineZoom);
+
+    public DoubleBinding orbitWidth = Bindings.createDoubleBinding(() -> canvasWidth.get() / orbits.get());
 
     public FixedOrbitRenderInfo() {
     }

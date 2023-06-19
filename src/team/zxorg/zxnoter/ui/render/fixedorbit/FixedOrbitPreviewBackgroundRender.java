@@ -22,39 +22,6 @@ public class FixedOrbitPreviewBackgroundRender extends FixedOrbitRender {
         Image image;
 
 
-        //绘制拍线
-
-        double beatCycleTime;
-        long beatTime;
-
-
-        for (long time = getRenderInfo().getPositionToTime(canvas.getHeight()); time < getRenderInfo().getPositionToTime(0); time++) {
-            Timing timing = findAfterTiming(time);
-            beatCycleTime = 60000. / (timing.absBpm);
-
-            if (time < 0)
-                continue;
-
-            //拥有基准
-            beatTime = time;
-
-            //绘制拍
-            if ((beatTime - timing.timestamp) % beatCycleTime < 1) {
-                image = getImage(FixedOrbitObjectKey.PREVIEW_BEAT_LINE);
-                graphics.drawImage(image, 0, getRenderInfo().getTimeToPosition(beatTime) - image.getHeight() / 2, renderInfo.canvasWidth.get(), image.getHeight());
-                //graphics.setFill(Color.WHEAT);
-                //graphics.fillText("bt:" + beatCycleTime, 240, getRenderInfo().getTimeToPosition(beatTime));
-            }
-
-        }
-
-        //绘制Timing线
-        image = getImage(FixedOrbitObjectKey.TIMING_LINE);
-        for (int i = 0; i < zxMap.timingPoints.size(); i++) {
-            Timing timing = zxMap.timingPoints.get(i);
-            graphics.drawImage(image, 0, getRenderInfo().getTimeToPosition(timing.timestamp) - image.getHeight() / 2, renderInfo.canvasWidth.get(), image.getHeight());
-        }
-
 
         //绘制判定线
         image = getImage(FixedOrbitObjectKey.PREVIEW_JUDGED_LINE);
@@ -71,27 +38,5 @@ public class FixedOrbitPreviewBackgroundRender extends FixedOrbitRender {
 
     }
 
-    /**
-     * 寻找之后的Timing
-     *
-     * @return
-     */
-    public Timing findAfterTiming(long time) {
-        //找到上一个timing
-        long timingStampOffset = 0;
-        Timing timing = new Timing(0, 1, false, 0);
-        for (int i = 0; i < zxMap.timingPoints.size(); i++) {
-            if (timing.isNewBaseBpm)
-                timingStampOffset = timing.timestamp;
-            if (zxMap.timingPoints.get(i).timestamp > time) {
-
-                timing.timestamp = timingStampOffset;
-                return timing;
-            }
-            timing = zxMap.timingPoints.get(i);
-
-        }
-        return timing;
-    }
 
 }

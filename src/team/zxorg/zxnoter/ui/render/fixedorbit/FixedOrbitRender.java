@@ -6,6 +6,7 @@ import team.zxorg.zxnoter.map.ZXMap;
 import team.zxorg.zxnoter.note.BaseNote;
 import team.zxorg.zxnoter.note.fixedorbit.ComplexNote;
 import team.zxorg.zxnoter.note.fixedorbit.LongNote;
+import team.zxorg.zxnoter.note.timing.Timing;
 import team.zxorg.zxnoter.resource.ZXResources;
 import team.zxorg.zxnoter.ui.render.Render;
 import team.zxorg.zxnoter.ui.render.fixedorbit.key.FixedOrbitNotesKey;
@@ -36,7 +37,8 @@ public abstract class FixedOrbitRender extends Render {
     }
 
     private int getOrbits() {
-        return Integer.parseInt(zxMap.unLocalizedMapInfo.getInfo("KeyCount"));
+        getRenderInfo().orbits.set(Integer.parseInt(zxMap.unLocalizedMapInfo.getInfo("KeyCount")));
+        return getRenderInfo().orbits.get();
     }
 
     /**
@@ -56,6 +58,28 @@ public abstract class FixedOrbitRender extends Render {
         }
         getRenderInfo().noteLastTime.set(time);
         return time;
+    }
+
+
+    /**
+     * 寻找之后的Timing
+     *
+     * @return
+     */
+    public Timing findAfterTiming(long time) {
+        //找到上一个基准timing
+        Timing baseTiming = new Timing(0, 1, false, 0);
+        Timing timing = new Timing(0, 1, false, 0);
+        for (int i = 0; i < zxMap.timingPoints.size(); i++) {
+            if (timing.isNewBaseBpm)
+                baseTiming = timing;
+            if (zxMap.timingPoints.get(i).timestamp > time) {
+                return baseTiming;
+            }
+            timing = zxMap.timingPoints.get(i);
+
+        }
+        return timing;
     }
 
 

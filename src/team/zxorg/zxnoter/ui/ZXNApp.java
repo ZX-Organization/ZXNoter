@@ -130,7 +130,7 @@ public class ZXNApp extends Application {
         VBox.setVgrow(workspaceTabPane, Priority.ALWAYS);
 
 
-        {//添加编辑器
+       /* {//添加编辑器
 
             try {
                 ZXMap zxMap = ImdReader.readFile(Paths.get("docs/reference/Contrapasso -paradiso-/t+pazolite - Contrapasso -paradiso-_4k_hd.imd"));
@@ -155,7 +155,7 @@ public class ZXNApp extends Application {
 
 
         }
-
+*/
         {//添加编辑器
 
             try {
@@ -165,7 +165,6 @@ public class ZXNApp extends Application {
                 MapEditor editor = new MapEditor(zxMap);
                 tab1.setContent(editor);
                 workspaceTabPane.getTabs().add(tab1);
-
 
                 //画布更新线程常驻
                 AnimationTimer animationTimer = new AnimationTimer() {
@@ -235,7 +234,7 @@ public class ZXNApp extends Application {
 
         }
 
-        /*{//添加编辑器
+        {//添加编辑器
 
             try {
                 ZXMap zxMap = OsuReader.readFile(Paths.get("docs/reference/Dan reform jackmap mashup/1.osu"));
@@ -259,7 +258,7 @@ public class ZXNApp extends Application {
             }
 
 
-        }*/
+        }
 
 
 

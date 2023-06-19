@@ -50,6 +50,13 @@ public class RenderRectangle {
         this.height = height;
     }
 
+    public RenderRectangle() {
+        pos.x = 0;
+        pos.y = 0;
+        width = 0;
+        height = 0;
+    }
+
     public RenderRectangle(Image image) {
         pos.x = 0;
         pos.y = 0;
@@ -71,11 +78,32 @@ public class RenderRectangle {
         this.height = height;
     }
 
+    public void setSize(Image image) {
+        pos.x = 0;
+        pos.y = 0;
+        width = image.getWidth();
+        height = image.getHeight();
+    }
+
+    public void setSize(Canvas canvas) {
+        pos.x = 0;
+        pos.y = 0;
+        width = canvas.getWidth();
+        height = canvas.getHeight();
+    }
+
     /**
      * 检查坐标是否在矩形内
      */
     public boolean contains(double x, double y) {
         return x >= pos.x && x <= pos.x + width && y >= pos.y && y <= pos.y + height;
+    }
+
+    /**
+     * 检查坐标是否在矩形内
+     */
+    public boolean contains(RenderPoint point) {
+        return contains(point.x, point.y);
     }
 
     /**
@@ -125,8 +153,9 @@ public class RenderRectangle {
 
     /**
      * 强制水平或垂直等比缩放
-     * @param image 图片尺寸
-     * @param value 目标宽、高尺寸
+     *
+     * @param image       图片尺寸
+     * @param value       目标宽、高尺寸
      * @param orientation 水平或垂直
      */
     public void scale(Image image, double value, Orientation orientation) {

@@ -12,22 +12,19 @@ import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.ScrollEvent;
+import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import team.zxorg.zxnoter.map.ZXMap;
+import team.zxorg.zxnoter.map.editor.ZXFixedOrbitMapEditor;
 import team.zxorg.zxnoter.note.BaseNote;
 import team.zxorg.zxnoter.resource.ZXResources;
 import team.zxorg.zxnoter.ui.TimeUtils;
 import team.zxorg.zxnoter.ui.component.CanvasPane;
 import team.zxorg.zxnoter.ui.component.HToolGroupBar;
 import team.zxorg.zxnoter.ui.component.VToolGroupBar;
-import team.zxorg.zxnoter.ui.render.fixedorbit.FixedOrbitBackgroundRender;
-import team.zxorg.zxnoter.ui.render.fixedorbit.FixedOrbitMapRender;
-import team.zxorg.zxnoter.ui.render.fixedorbit.FixedOrbitPreviewBackgroundRender;
-import team.zxorg.zxnoter.ui.render.fixedorbit.FixedOrbitRenderInfo;
+import team.zxorg.zxnoter.ui.render.basis.RenderPoint;
+import team.zxorg.zxnoter.ui.render.fixedorbit.*;
 
 import java.sql.Time;
 import java.util.ArrayList;
@@ -38,7 +35,6 @@ public class MapEditor extends BaseEditor {
      */
     ZXMap zxMap;
 
-    ZXMap selectedNoteMap = new ZXMap();//选中的ZXMap
 
     //ArrayList<Render> renders = new ArrayList<>();
 
@@ -46,9 +42,14 @@ public class MapEditor extends BaseEditor {
     FixedOrbitPreviewBackgroundRender previewBackgroundRender;//预览背景渲染器
     FixedOrbitMapRender previewSelectedMapRender;//预览渲染器
 
+    FixedOrbitTimingRender previewTimingRender;//时间点渲染器
+    FixedOrbitBeatLineRender previewBeatLineRender;//节拍线渲染器
+
     FixedOrbitMapRender mainMapRender;//主渲染器
     FixedOrbitMapRender mainSelectedMapRender;//选中渲染器
     FixedOrbitBackgroundRender backgroundRender;//主背景渲染器
+    FixedOrbitTimingRender timingRender;//时间点渲染器
+    FixedOrbitBeatLineRender beatLineRender;//节拍线渲染器
     //谱面画板
     CanvasPane mapCanvas = new CanvasPane();
     //预览画板
@@ -57,13 +58,17 @@ public class MapEditor extends BaseEditor {
     BooleanProperty timelineIsFormat = new SimpleBooleanProperty(true);
 
 
+    ZXFixedOrbitMapEditor zxFixedOrbitMapEditor;
+    RenderNote renderNote;//当前选择的键
+    MouseEvent editMouseEvent;//编辑鼠标事件
+
     public MapEditor(ZXMap zxMap) {
         this.setPrefSize(Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE);
         this.zxMap = zxMap;
 
-        //初始化选中的歌姬  虚影Map
-        selectedNoteMap.unLocalizedMapInfo = zxMap.unLocalizedMapInfo;
-        selectedNoteMap.notes = new ArrayList<>();
+
+        zxFixedOrbitMapEditor = new ZXFixedOrbitMapEditor(zxMap);
+
 
         //谱面画板
         mapCanvas.setMinWidth(200);
@@ -90,13 +95,53 @@ public class MapEditor extends BaseEditor {
         {//事件监听
 
 
-            //谱面画板事件
-            mapCanvas.setOnMouseClicked(event -> {
-                long time = mainMapRender.getRenderInfo().getPositionToTime(event.getY());
-                ArrayList<BaseNote> index = zxMap.findClosestNotes(time);
-                //selectedNoteMap.notes.clear();
-                selectedNoteMap.notes.addAll(index);
+            //移动事件
+            mapCanvas.setOnMouseMoved(event -> {
+
             });
+
+            //按下事件
+            mapCanvas.setOnMousePressed(event -> {
+                editMouseEvent = event;
+                renderNote = mainMapRender.drawAllNote(new RenderPoint(event.getX(), event.getY()));
+            });
+
+            //拖拽事件
+            mapCanvas.setOnMouseDragged(event -> {
+                int orbit = (int) (event.getX() / mainMapRender.getRenderInfo().orbitWidth.get());
+                if (renderNote != null) {
+                    //zxFixedOrbitMapEditor.shadowMap.notes.clear();
+                    System.out.println("将" + renderNote.note + "的轨道移动到" + (orbit - renderNote.note.orbit));
+
+                    zxFixedOrbitMapEditor.move(renderNote.note, orbit - renderNote.note.orbit,false);
+                }
+
+                //zxFixedOrbitMapEditor.shadowMap.notes.clear();
+
+                //zxFixedOrbitMapEditor.move(renderNote.note, 1);
+            });
+
+            //松开事件
+            mapCanvas.setOnMouseReleased(event -> {
+                System.out.println("完成编辑");
+                try {
+                    System.out.println(zxFixedOrbitMapEditor.shadowMap.notes);
+                    zxFixedOrbitMapEditor.modifyDone();
+                    System.out.println(zxFixedOrbitMapEditor.shadowMap.notes);
+                } catch (Exception e) {
+                    System.out.println("急了");
+                }
+            });
+
+
+            /*mapCanvas.setOnMouseClicked(event -> {
+                RenderNote renderNote = mainMapRender.drawAllNote(new RenderPoint(event.getX(), event.getY()));
+                //selectedNoteMap.notes.clear();
+                if (renderNote != null) {
+                    zxFixedOrbitMapEditor.move(renderNote.note, 1);
+                    zxFixedOrbitMapEditor.modifyDone();
+                }
+            });*/
 
             //滚轮监听
             mapCanvas.setOnScroll(event -> {
@@ -134,11 +179,14 @@ public class MapEditor extends BaseEditor {
 
 
         //预览选中渲染器
-        previewSelectedMapRender = new FixedOrbitMapRender(previewMapRender.getRenderInfo(), previewCanvas, selectedNoteMap, "preview-selected", "default");
-
+        previewSelectedMapRender = new FixedOrbitMapRender(previewMapRender.getRenderInfo(), previewCanvas, zxFixedOrbitMapEditor.shadowMap, "preview-selected", "default");
 
         previewBackgroundRender = new FixedOrbitPreviewBackgroundRender(previewMapRender.getRenderInfo(), zxMap, previewCanvas.canvas, "default");
 
+        previewTimingRender = new FixedOrbitTimingRender(previewMapRender.getRenderInfo(), zxMap, previewCanvas.canvas, "default");
+
+        previewBeatLineRender = new FixedOrbitBeatLineRender(previewMapRender.getRenderInfo(), zxMap, previewCanvas.canvas, "default");
+        previewBeatLineRender.beats = 0;
 
         previewBar.getChildren().addAll(previewCanvas, previewPane);
 
@@ -150,12 +198,15 @@ public class MapEditor extends BaseEditor {
 
 
         //选中渲染器
-        mainSelectedMapRender = new FixedOrbitMapRender(mainMapRender.getRenderInfo(), mapCanvas, selectedNoteMap, "normal-selected", "default");
+        mainSelectedMapRender = new FixedOrbitMapRender(mainMapRender.getRenderInfo(), mapCanvas, zxFixedOrbitMapEditor.shadowMap, "normal-selected", "default");
 
 
         //背景渲染器
         backgroundRender = new FixedOrbitBackgroundRender(mainMapRender.getRenderInfo(), zxMap, mapCanvas.canvas, "default");
 
+        timingRender = new FixedOrbitTimingRender(mainMapRender.getRenderInfo(), zxMap, mapCanvas.canvas, "default");
+
+        beatLineRender = new FixedOrbitBeatLineRender(mainMapRender.getRenderInfo(), zxMap, mapCanvas.canvas, "default");
 
         //属性栏
         TabPane tabPane = new TabPane();
@@ -254,7 +305,7 @@ public class MapEditor extends BaseEditor {
             textField.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
                 if (event.getCode().equals(KeyCode.ENTER)) {
                     textField.getParent().requestFocus();
-                    mainMapRender.getRenderInfo().timelinePosition.set((timelineIsFormat.get() ? TimeUtils.parseTime(textField.getText()) : Long.parseLong(textField.getText())));
+                    mainMapRender.getRenderInfo().timelinePosition.set((timelineIsFormat.get() ? TimeUtils.parseTime(textField.getText()) : Long.parseLong(textField.getText().replaceAll("ms", "").replaceAll(" ", ""))));
                     event.consume();
                 }
             });
@@ -276,7 +327,17 @@ public class MapEditor extends BaseEditor {
             //播放变速
             topToolBar.addButton("state", "svg.icons.media.slow-down-line", "播放变速");
             //分拍
-            topToolBar.addButton("state", "svg.icons.zxnoter.beat-16", "分拍");
+            Button button = topToolBar.addButton("state", "svg.icons.zxnoter.beat-16", "分拍");
+            button.setOnScroll(new EventHandler<ScrollEvent>() {
+                @Override
+                public void handle(ScrollEvent event) {
+                    if (event.getDeltaY() > 0)
+                        beatLineRender.beats++;
+                    else
+                        beatLineRender.beats--;
+                    button.setShape(ZXResources.getSvg("svg.icons.zxnoter.beat-" + beatLineRender.beats));
+                }
+            });
         }
 
 
@@ -310,12 +371,17 @@ public class MapEditor extends BaseEditor {
 
 
         previewBackgroundRender.render();
+        previewBeatLineRender.render();
         previewMapRender.render();
         previewSelectedMapRender.render();
+        previewTimingRender.render();
 
         backgroundRender.render();
+        beatLineRender.render();
         mainSelectedMapRender.render();
         mainMapRender.render();
+        timingRender.render();
+
 
         //计算
 

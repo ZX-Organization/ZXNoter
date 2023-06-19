@@ -1,6 +1,7 @@
 package team.zxorg.zxnoter.ui.render;
 
 import javafx.geometry.HPos;
+import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.canvas.Canvas;
@@ -15,6 +16,10 @@ public abstract class Render {
     public final GraphicsContext graphics;
     public final ZXMap zxMap;
     public RenderInfo renderInfo;
+
+    public RenderRectangle renderRectangle = new RenderRectangle();
+    public RenderRectangle canvasRectangle = new RenderRectangle();
+    private Image renderImage;
 
     protected abstract RenderInfo getRenderInfo();
 
@@ -32,7 +37,8 @@ public abstract class Render {
      * 执行渲染操作
      */
     public void render() {
-        if (!(canvas.getWidth() == 0 || canvas.getHeight() == 0) && canvas.isVisible())
+        canvasRectangle.setSize(canvas);
+        if (!(canvasRectangle.getWidth() == 0 || canvasRectangle.getHeight() == 0) && canvas.isVisible())
             renderHandle();
     }
 
@@ -46,10 +52,6 @@ public abstract class Render {
      * 渲染处理
      */
     protected abstract void renderHandle();
-
-
-
-
 
 
     /**
@@ -84,4 +86,43 @@ public abstract class Render {
 
     }
 
+    /**
+     * 载入渲染图片
+     *
+     * @param image 图片
+     */
+    public void loadRenderImage(Image image) {
+        renderImage = image;
+        renderRectangle.setSize(image);
+    }
+
+    /**
+     * 使用内置绘制图片
+     */
+    public void drawImage() {
+        drawImage(renderImage, renderRectangle);
+    }
+
+    /**
+     * 设置渲染区域比例缩放
+     *
+     * @param value       值
+     * @param orientation 缩放策略
+     */
+    public void renderRectangleScale(double value, Orientation orientation) {
+        renderRectangle.scale(renderImage, value, orientation);
+    }
+
+    /**
+     * 设置渲染区域偏移一半
+     */
+    public void renderRectangleOffsetPositionByHalf(Pos pos) {
+        renderRectangle.offsetPositionByHalf(pos);
+    }
+    public void renderRectangleSetX(double x) {
+        renderRectangle.setX(x);
+    }
+    public void renderRectangleSetY(double y) {
+        renderRectangle.setY(y);
+    }
 }

@@ -7,10 +7,14 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import team.zxorg.zxnoter.map.ZXMap;
 import team.zxorg.zxnoter.note.timing.Timing;
+import team.zxorg.zxnoter.ui.TimeUtils;
 import team.zxorg.zxnoter.ui.render.basis.RenderRectangle;
+import team.zxorg.zxnoter.ui.render.fixedorbit.key.FixedOrbitNotesKey;
 import team.zxorg.zxnoter.ui.render.fixedorbit.key.FixedOrbitObjectKey;
 
 public class FixedOrbitBackgroundRender extends FixedOrbitRender {
+
+    //分拍数 Minutes
 
 
     public FixedOrbitBackgroundRender(FixedOrbitRenderInfo renderInfo, ZXMap renderZXMap, Canvas canvas, String theme) {
@@ -22,73 +26,44 @@ public class FixedOrbitBackgroundRender extends FixedOrbitRender {
         Image image;
 
 
-        image = getImage(FixedOrbitObjectKey.LOGO);
-        RenderRectangle rectangle = new RenderRectangle(image);
-        rectangle.setRelativePosition(new RenderRectangle(canvas), Pos.CENTER);
-        rectangle.scale(image,getWidth()*1, Orientation.HORIZONTAL);
-        drawImage(image, rectangle);
+        loadRenderImage(getImage(FixedOrbitObjectKey.LOGO));
+        renderRectangleScale((renderInfo.canvasWidth.get() * 0.8), Orientation.HORIZONTAL);
+        renderRectangle.setRelativePosition(canvasRectangle, Pos.CENTER);
+        drawImage();
+
 
         //绘制轨道
-        image = getImage(FixedOrbitObjectKey.ORBIT);
-        for (int i = 0; i < orbits; i++) {
-            graphics.drawImage(image, i * (renderInfo.canvasWidth.get() / orbits), 0, renderInfo.canvasWidth.get() / orbits, renderInfo.canvasHeight.get());
+        loadRenderImage(getImage(FixedOrbitObjectKey.ORBIT_LINE));
+        //计算尺寸
+        renderRectangle.setHeight(canvasRectangle.getHeight());
+        renderRectangleSetY(0);
+        double orbitWidth = (renderInfo.canvasWidth.get() / orbits);
+        for (int i = 1; i < orbits; i++) {
+            //计算位置
+            renderRectangleSetX(orbitWidth * i);
+            //X偏移中间
+            renderRectangleOffsetPositionByHalf(Pos.CENTER_LEFT);
+            drawImage();
         }
 
 
-        int subBeats = 12;
 
 
-        //绘制拍线
+        //绘制Timing点
 
-        double beatCycleTime;
-        long beatTime;
-
-
-        for (long time = getRenderInfo().getPositionToTime(canvas.getHeight()); time < getRenderInfo().getPositionToTime(0); time++) {
-            Timing timing = findAfterTiming(time);
-            beatCycleTime = 60000. / (timing.absBpm);
-
-            if (time < 0)
-                continue;
-
-
-            graphics.setFill(Color.WHEAT);
-            graphics.fillText("beatBase:" + timing.timestamp, 240, getRenderInfo().getTimeToPosition(timing.timestamp));
-
-
-            //拥有基准
-            beatTime = time;
-
-            //绘制分拍
-            if ((beatTime - timing.timestamp) % (beatCycleTime / subBeats) < 1) {
-                image = getImage(FixedOrbitObjectKey.SUB_BEAT_LINE);
-                graphics.drawImage(image, 0, getRenderInfo().getTimeToPosition(beatTime) - image.getHeight() / 2, renderInfo.canvasWidth.get(), image.getHeight());
-                graphics.setFill(Color.WHEAT);
-                graphics.fillText(beatTime + "ms" + " t:" + Math.round(beatCycleTime) + " b:" + (timing.absBpm), 10, getRenderInfo().getTimeToPosition(beatTime));
-            }
-
-            //绘制拍
-            if ((beatTime - timing.timestamp) % beatCycleTime < 1) {
-                image = getImage(FixedOrbitObjectKey.BEAT_LINE);
-                graphics.drawImage(image, 0, getRenderInfo().getTimeToPosition(beatTime) - image.getHeight() / 2, renderInfo.canvasWidth.get(), image.getHeight());
-                //graphics.setFill(Color.WHEAT);
-                //graphics.fillText("beat:" + timing.timestamp, 240, getRenderInfo().getTimeToPosition(beatTime));
-            }
-
-/*
-            //绘制拍 （测试）
-            if ((beatTime - timing.timingStamp) % beatCycleTime < 1) {
-                image = getImage(FixedOrbitObjectKey.RED_LINE);
-                graphics.drawImage(image, 0, getRenderInfo().getTimeToPosition(beatTime) - image.getHeight() / 2, renderInfo.canvasWidth.get(), image.getHeight());
-            }*/
-
-        }
-
-        //绘制Timing线
-        image = getImage(FixedOrbitObjectKey.TIMING_LINE);
         for (int i = 0; i < zxMap.timingPoints.size(); i++) {
             Timing timing = zxMap.timingPoints.get(i);
-            graphics.drawImage(image, 0, getRenderInfo().getTimeToPosition(timing.timestamp) - image.getHeight() / 2, renderInfo.canvasWidth.get(), image.getHeight());
+            if (timing.isNewBaseBpm) {//基准BPM
+                loadRenderImage(getImage(FixedOrbitObjectKey.TIMING_BASE));
+            } else {
+                loadRenderImage(getImage(FixedOrbitObjectKey.TIMING));
+            }
+
+            renderRectangle.setY(getRenderInfo().getTimeToPosition(timing.timestamp));
+            renderRectangle.setX(0);
+            renderRectangle.offsetPositionByHalf(Pos.TOP_CENTER);
+            drawImage();
+
         }
 
 
@@ -104,44 +79,8 @@ public class FixedOrbitBackgroundRender extends FixedOrbitRender {
         image = getImage(FixedOrbitObjectKey.TOP_LINE);
         graphics.drawImage(image, 0, getRenderInfo().getTimeToPosition(getLastTime() + getRenderInfo().judgedLinePositionTimeOffset.get()) - image.getHeight() / 2, renderInfo.canvasWidth.get(), image.getHeight());
 
-        /*image = getImage(FixedOrbitObjectKey.IKUN);
-        RenderRectangle rectangle = new RenderRectangle(image);
-
-        rectangle.setRelativePosition(new RenderRectangle(canvas), Pos.CENTER);
-        rectangle.offsetPositionByHalf(Pos.BOTTOM_LEFT);*/
-
-
-
-
-        //rectangle.setRelativePosition(Pos.TOP_LEFT);
-        //drawImage(image, rectangle);
-        //drawImageWithPosition(image, getWidth(), 100, Pos.BOTTOM_CENTER);
-        //drawImageWithRelativePosition(image, 0, 0,100,100, Pos.TOP_LEFT);
-        //System.out.println(bpm);
-
     }
 
-    /**
-     * 寻找之后的Timing
-     *
-     * @return
-     */
-    public Timing findAfterTiming(long time) {
-        //找到上一个timing
-        long timingStampOffset = 0;
-        Timing timing = new Timing(0, 1, false, 0);
-        for (int i = 0; i < zxMap.timingPoints.size(); i++) {
-            if (timing.isNewBaseBpm)
-                timingStampOffset = timing.timestamp;
-            if (zxMap.timingPoints.get(i).timestamp > time) {
 
-                timing.timestamp = timingStampOffset;
-                return timing;
-            }
-            timing = zxMap.timingPoints.get(i);
-
-        }
-        return timing;
-    }
 
 }
