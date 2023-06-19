@@ -41,12 +41,15 @@ public class ZXFixedOrbitMapEditor {
      * @param note  要编辑的按键
      * @param orbit 轨道变化值
      */
-    public void move(FixedOrbitNote note, int orbit) {
+    public void move(FixedOrbitNote note, int orbit, boolean isAbsolute) {
 
         FixedOrbitNote shadowNote = checkOperate(note);
 
         //对虚影按键进行编辑
-        shadowMap.moveNote(shadowNote, shadowNote.orbit += orbit);
+        if (isAbsolute)
+            shadowMap.moveNote(shadowNote, orbit);
+        else
+            shadowMap.moveNote(shadowNote, shadowNote.orbit += orbit);
         //添加操作结果(上一次也是操作此按键时覆盖)
         if (shadows.contains(note)){
             tempMapOperate.desNotes.remove(shadowNote);
