@@ -84,11 +84,13 @@ public class FixedOrbitPreviewBackgroundRender extends FixedOrbitRender {
             if (timing.isNewBaseBpm)
                 timingStampOffset = timing.timestamp;
             if (zxMap.timingPoints.get(i).timestamp > time) {
+
+                timing.timestamp = timingStampOffset;
                 return timing;
             }
             timing = zxMap.timingPoints.get(i);
+
         }
-        timing.timestamp = timingStampOffset;
         return timing;
     }
 
