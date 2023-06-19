@@ -32,6 +32,7 @@ public class ZXFixedOrbitMapEditor {
         this.shadowMap = new ZXMap(new ArrayList<>(), map.timingPoints, map.unLocalizedMapInfo);
         operateStack = new Stack<>();
         withdrawStack = new Stack<>();
+        shadows =new ArrayList<>();
     }
 
     /**
