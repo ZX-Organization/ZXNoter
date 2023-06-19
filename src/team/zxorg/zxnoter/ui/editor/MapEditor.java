@@ -1,22 +1,35 @@
 package team.zxorg.zxnoter.ui.editor;
 
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import team.zxorg.zxnoter.map.ZXMap;
 import team.zxorg.zxnoter.note.BaseNote;
 import team.zxorg.zxnoter.resource.ZXResources;
+import team.zxorg.zxnoter.ui.TimeUtils;
 import team.zxorg.zxnoter.ui.component.CanvasPane;
-import team.zxorg.zxnoter.ui.component.ToolGroupBar;
+import team.zxorg.zxnoter.ui.component.HToolGroupBar;
+import team.zxorg.zxnoter.ui.component.VToolGroupBar;
 import team.zxorg.zxnoter.ui.render.fixedorbit.FixedOrbitBackgroundRender;
 import team.zxorg.zxnoter.ui.render.fixedorbit.FixedOrbitMapRender;
 import team.zxorg.zxnoter.ui.render.fixedorbit.FixedOrbitPreviewBackgroundRender;
 import team.zxorg.zxnoter.ui.render.fixedorbit.FixedOrbitRenderInfo;
 
+import java.sql.Time;
 import java.util.ArrayList;
 
 public class MapEditor extends BaseEditor {
@@ -40,6 +53,8 @@ public class MapEditor extends BaseEditor {
     CanvasPane mapCanvas = new CanvasPane();
     //预览画板
     CanvasPane previewCanvas = new CanvasPane();
+
+    BooleanProperty timelineIsFormat = new SimpleBooleanProperty(true);
 
 
     public MapEditor(ZXMap zxMap) {
@@ -173,69 +188,118 @@ public class MapEditor extends BaseEditor {
         });
 
 
-        //主体
-        HBox bodyPane = new HBox(mapCanvas, previewBar, scrollBar, tabPane);
-        VBox.setVgrow(bodyPane, Priority.ALWAYS);
+        //侧边工具组栏
+        VToolGroupBar sideToolBar = new VToolGroupBar();
 
-
-        //工具组栏
-        ToolGroupBar toolBar = new ToolGroupBar();
-        {//状态
-            //跳转开头
-            toolBar.addButton("state", "svg.icons.media.skip-back-line", "跳转开头");
-            //播放
-            toolBar.addButton("state", "svg.icons.media.play-line", "播放");
-            //暂停
-            toolBar.addButton("state", "svg.icons.media.pause-line", "暂停");
-            //跳转末尾
-            toolBar.addButton("state", "svg.icons.media.skip-forward-line", "跳转末尾");
-            //时间
-            TextField textField = new TextField("WDNMD");
-            toolBar.addNode("state", textField);
-
-            //播放变速
-            toolBar.addButton("state", "svg.icons.media.slow-down-line", "播放变速");
-
-
-        }
-
-
-        {//工具
-            //显示测量
-            toolBar.addToggleButton("tool", "svg.icons.design.ruler-line", "测量");
-            //吸附编辑
-            toolBar.addToggleButton("tool", "svg.icons.design.pencil-ruler-2-line", "吸附");
-        }
 
         {//模式
             ToggleGroup toggleGroup = new ToggleGroup();
             ToggleButton toggleButton;
             //编辑模式
-            toggleButton = toolBar.addToggleButton("mode", "svg.icons.design.edit-line", "编辑模式");
+            toggleButton = sideToolBar.addToggleButton("mode", "svg.icons.design.edit-line", "编辑模式");
             toggleButton.setSelected(true);
             toggleButton.setToggleGroup(toggleGroup);
             //选择模式
-            toggleButton = toolBar.addToggleButton("mode", "svg.icons.development.cursor-line", "选择模式");
+            toggleButton = sideToolBar.addToggleButton("mode", "svg.icons.development.cursor-line", "选择模式");
             toggleButton.setToggleGroup(toggleGroup);
             //只读模式
-            toggleButton = toolBar.addToggleButton("mode", "svg.icons.system.eye-line", "只读模式");
+            toggleButton = sideToolBar.addToggleButton("mode", "svg.icons.system.eye-line", "只读模式");
             toggleButton.setToggleGroup(toggleGroup);
         }
 
+
+        {//状态
+            //跳转开头
+            sideToolBar.addButton("state", "svg.icons.editor.align-top", "跳转开头");
+            //播放
+            sideToolBar.addButton("state", "svg.icons.media.play-line", "播放");
+            //暂停
+            sideToolBar.addButton("state", "svg.icons.media.pause-line", "暂停");
+            //跳转末尾
+            sideToolBar.addButton("state", "svg.icons.editor.align-bottom", "跳转末尾");
+
+        }
+
+        {//工具
+            //吸附编辑
+            sideToolBar.addToggleButton("tool", "svg.icons.design.pencil-ruler-2-line", "吸附");
+            //判定线对齐
+            sideToolBar.addToggleButton("tool", "svg.icons.zxnoter.judged-line-align", "判定线对齐");
+        }
+
+
+        //主体
+        HBox bodyPane = new HBox(sideToolBar, mapCanvas, previewBar, scrollBar, tabPane);
+        VBox.setVgrow(bodyPane, Priority.ALWAYS);
+
+        //顶部工具组栏
+        HToolGroupBar topToolBar = new HToolGroupBar();
+
+
+        {//时间
+            Button button;
+            //单位切换
+            button = topToolBar.addButton("time", "svg.icons.zxnoter.time-format-line", "格式化时间/总毫秒时间");
+            button.setOnAction(event -> {
+                timelineIsFormat.set(!timelineIsFormat.get());
+                if (timelineIsFormat.get()) {
+                    button.setShape(ZXResources.getSvg("svg.icons.zxnoter.time-format-line"));
+                } else {
+                    button.setShape(ZXResources.getSvg("svg.icons.zxnoter.time-ms-line"));
+                }
+            });
+            TextField textField = new TextField("00.000");
+            textField.setPrefWidth(80);
+            textField.setAlignment(Pos.CENTER);
+            textField.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+                if (event.getCode().equals(KeyCode.ENTER)) {
+                    textField.getParent().requestFocus();
+                    mainMapRender.getRenderInfo().timelinePosition.set((timelineIsFormat.get() ? TimeUtils.parseTime(textField.getText()) : Long.parseLong(textField.getText())));
+                    event.consume();
+                }
+            });
+
+
+            //格式化时间转换同步到文本框
+            ChangeListener<Object> updateTimelinePosition = (observable, oldValue, newValue) -> textField.setText((timelineIsFormat.get() ? TimeUtils.formatTime(mainMapRender.getRenderInfo().timelinePosition.get()) : mainMapRender.getRenderInfo().timelinePosition.get() + " ms"));
+
+            mainMapRender.getRenderInfo().timelinePosition.addListener(updateTimelinePosition);
+            timelineIsFormat.addListener(updateTimelinePosition);
+
+
+            topToolBar.addNode("time", textField);
+
+        }
+
+        {//状态
+
+            //播放变速
+            topToolBar.addButton("state", "svg.icons.media.slow-down-line", "播放变速");
+            //分拍
+            topToolBar.addButton("state", "svg.icons.zxnoter.beat-16", "分拍");
+        }
+
+
+        {//显示工具
+            //显示测量
+            topToolBar.addToggleButton("tool", "svg.icons.design.ruler-line", "显示时间");
+        }
+
+
         {//布局
             //左侧扩展
-            toolBar.addToggleButton("layout", "svg.icons.design.layout-left-line", "扩展");
+            topToolBar.addToggleButton("layout", "svg.icons.design.layout-left-line", "扩展");
             //滚动栏
-            toolBar.addToggleButton("layout", "svg.icons.design.layout-right-2-line", "滚动栏");
+            topToolBar.addToggleButton("layout", "svg.icons.design.layout-right-2-line", "滚动栏");
 
 
             //右侧属性布局
-            toolBar.addToggleButton("layout", "svg.icons.design.layout-right-line", "属性栏");
+            topToolBar.addToggleButton("layout", "svg.icons.design.layout-right-line", "属性栏");
         }
 
 
         //添加给自己
-        this.getChildren().addAll(toolBar, bodyPane);
+        this.getChildren().addAll(topToolBar, bodyPane);
     }
 
 

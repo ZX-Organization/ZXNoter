@@ -109,6 +109,8 @@ public class ZXNApp extends Application {
         //sideBar.setBackground(Background.fill(Color.YELLOW));
         sideBar.setPrefWidth(180);
         sideBar.setMinWidth(Region.USE_PREF_SIZE);
+        sideBar.setVisible(false);
+        sideBar.setPrefWidth(0);
 
         //工作空间
         workspace.getStyleClass().add("workspace");
@@ -158,7 +160,6 @@ public class ZXNApp extends Application {
 
             try {
                 ZXMap zxMap = OsuReader.readFile(Paths.get("docs/reference/LeaF - NANO DEATH!!!!!/LeaF - NANO DEATH!!!!! (nowsmart) [DEATH].osu"));
-                System.out.println(zxMap.timingPoints);
                 Tab tab1 = new Tab(zxMap.unLocalizedMapInfo.getInfo("Title"));
                 tab1.setGraphic(ZXResources.getSvgPane("svg.icons.zxnoter.file-notemap-line", 18, Color.DARKGREEN));
                 MapEditor editor = new MapEditor(zxMap);
@@ -207,6 +208,58 @@ public class ZXNApp extends Application {
 
 
         }
+
+        {//添加编辑器
+
+            try {
+                ZXMap zxMap = OsuReader.readFile(Paths.get("docs/reference/Risshuu feat. Choko - Take/Risshuu feat. Choko - Take (LNP-) [Beyond].osu"));
+                Tab tab1 = new Tab(zxMap.unLocalizedMapInfo.getInfo("Title"));
+                tab1.setGraphic(ZXResources.getSvgPane("svg.icons.zxnoter.file-notemap-line", 18, Color.DARKGREEN));
+                MapEditor editor = new MapEditor(zxMap);
+                tab1.setContent(editor);
+                workspaceTabPane.getTabs().add(tab1);
+
+
+                //画布更新线程常驻
+                AnimationTimer animationTimer = new AnimationTimer() {
+                    @Override
+                    public void handle(long l) {
+                        editor.render();
+                    }
+                };
+                animationTimer.start();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+
+        }
+
+        /*{//添加编辑器
+
+            try {
+                ZXMap zxMap = OsuReader.readFile(Paths.get("docs/reference/Dan reform jackmap mashup/1.osu"));
+                Tab tab1 = new Tab(zxMap.unLocalizedMapInfo.getInfo("Title"));
+                tab1.setGraphic(ZXResources.getSvgPane("svg.icons.zxnoter.file-notemap-line", 18, Color.DARKGREEN));
+                MapEditor editor = new MapEditor(zxMap);
+                tab1.setContent(editor);
+                workspaceTabPane.getTabs().add(tab1);
+
+
+                //画布更新线程常驻
+                AnimationTimer animationTimer = new AnimationTimer() {
+                    @Override
+                    public void handle(long l) {
+                        editor.render();
+                    }
+                };
+                animationTimer.start();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+
+        }*/
 
 
 
