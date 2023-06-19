@@ -18,7 +18,7 @@ public class ZXFixedOrbitMapEditor {
     /**
      * 虚影map
      */
-    ZXMap shadowMap;
+    public ZXMap shadowMap;
     /**
      * 操作队列
      */
@@ -55,7 +55,6 @@ public class ZXFixedOrbitMapEditor {
 
     /**
      * 编辑组合键中某一子键的轨道变化(此子键必须是长条)
-     *
      * @param note          要编辑的子键的所属组合键
      * @param orbit         轨道变化值
      * @param childIndex    子键下标
@@ -63,7 +62,6 @@ public class ZXFixedOrbitMapEditor {
      */
     public boolean move(ComplexNote note, int orbit, int childIndex, boolean keepAfterNote) {
         checkOperate(note);
-
         //克隆获得虚影按键
         ComplexNote shadowNote = note.clone();
         int desNoteIndex = shadowMap.insertNote(shadowNote);
@@ -92,7 +90,6 @@ public class ZXFixedOrbitMapEditor {
                     }
                 }
             }
-
             //区分是否保持后方子键位置与时间戳
             if (keepAfterNote) {
                 //保持(后方不需要移动)
@@ -137,7 +134,6 @@ public class ZXFixedOrbitMapEditor {
 
     /**
      * 编辑按键的时间戳变化(自动排序)
-     *
      * @param note 要编辑的按键
      * @param time 时间戳变化值
      * @return 编辑后按键所处的下标位置
@@ -201,8 +197,6 @@ public class ZXFixedOrbitMapEditor {
                 checkComplexNote(complexNote);
             }
         }
-
-
         //克隆结果插入原map
         for (FixedOrbitNote note:tempMapOperate.desNotes)
             srcMap.insertNote(note.clone());
