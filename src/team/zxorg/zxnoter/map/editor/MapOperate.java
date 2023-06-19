@@ -2,20 +2,32 @@ package team.zxorg.zxnoter.map.editor;
 
 import team.zxorg.zxnoter.note.fixedorbit.FixedOrbitNote;
 
+import java.util.ArrayList;
+
 public class MapOperate {
-    FixedOrbitNote srcNote;
-    FixedOrbitNote desNote;
+    /**
+     * 同时操作的所有按键,应与结果同样大小
+     */
+    ArrayList<FixedOrbitNote> srcNotes;
+    ArrayList<FixedOrbitNote> desNotes;
 
     /**
      * 构建操作
-     * @param srcNote 原Note
      */
-    public MapOperate(FixedOrbitNote srcNote) {
-        this.srcNote = srcNote;
+    public MapOperate() {
+        srcNotes = new ArrayList<>();
+        desNotes = new ArrayList<>();
     }
     private MapOperate(MapOperate withdrawOperate){
-        srcNote = withdrawOperate.desNote.clone();
-        desNote = withdrawOperate.srcNote.clone();
+        //深拷贝
+        ArrayList<FixedOrbitNote> srcNotes = new ArrayList<>();
+        ArrayList<FixedOrbitNote> desNotes = new ArrayList<>();
+        for (FixedOrbitNote note:withdrawOperate.desNotes){
+            srcNotes.add(note.clone());
+        }
+        for (FixedOrbitNote note:withdrawOperate.srcNotes){
+            desNotes.add(note.clone());
+        }
     }
 
     /**
@@ -29,10 +41,18 @@ public class MapOperate {
     @Override
     public boolean equals(Object o) {
         if (o instanceof MapOperate mapOperate) {
-            if (srcNote.equals(mapOperate.srcNote)){
-                return true;
-            }
+            if (srcNotes.size() == mapOperate.srcNotes.size()){
+                //大小相同
+                for (int i = 0; i < srcNotes.size(); i++) {
+                    //判断每一个是否都相同
+                    if (!mapOperate.srcNotes.get(i).equals(srcNotes.get(i))){
+                        return false;
+                    }
+                }
+            }else {
                 return false;
+            }
+                return true;
         } else
             return false;
     }

@@ -7,7 +7,7 @@ import team.zxorg.zxnoter.note.BaseNote;
 import team.zxorg.zxnoter.note.fixedorbit.FixedOrbitNote;
 import team.zxorg.zxnoter.note.fixedorbit.CustomLongNote;
 import team.zxorg.zxnoter.note.fixedorbit.CustomNote;
-import team.zxorg.zxnoter.note.timing.ZxTiming;
+import team.zxorg.zxnoter.note.timing.ZXTiming;
 import team.zxorg.zxnoter.note.timing.Timing;
 
 import java.io.BufferedReader;
@@ -15,7 +15,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * osu读取器(osu!mania)
@@ -131,7 +130,7 @@ public class OsuReader {
                         //继承
                         //变速bpm时间点添加
                         timingPoints.add(
-                                new ZxTiming(
+                                new ZXTiming(
                                         timeStamp,
                                         baseBpm,
                                         true,
@@ -148,7 +147,7 @@ public class OsuReader {
                         double speed = 100/Math.abs(beatPar) * baseBpm;
                         //不继承(变速)
                         timingPoints.add(
-                                new ZxTiming(
+                                new ZXTiming(
                                         timeStamp,
                                         speed,
                                         false,

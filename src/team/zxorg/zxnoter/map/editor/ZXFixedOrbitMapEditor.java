@@ -1,19 +1,16 @@
 package team.zxorg.zxnoter.map.editor;
 
 import team.zxorg.zxnoter.map.ZXMap;
-import team.zxorg.zxnoter.note.BaseNote;
+import team.zxorg.zxnoter.map.mapInfos.ImdInfo;
 import team.zxorg.zxnoter.note.fixedorbit.ComplexNote;
 import team.zxorg.zxnoter.note.fixedorbit.FixedOrbitNote;
 import team.zxorg.zxnoter.note.fixedorbit.LongNote;
 import team.zxorg.zxnoter.note.fixedorbit.SlideNote;
 
-import java.awt.geom.Rectangle2D;
-import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Stack;
 
-public class ZxFixedOrbitMapEditor {
+public class ZXFixedOrbitMapEditor {
     /**
      * 实际zxMap
      */
@@ -28,10 +25,8 @@ public class ZxFixedOrbitMapEditor {
     Stack<MapOperate> operateStack;
     Stack<MapOperate> withdrawStack;
     private MapOperate tempMapOperate;
-    private FixedOrbitNote tempEditNote;
-    private FixedOrbitNote tempShadowNote;
 
-    public ZxFixedOrbitMapEditor(ZXMap map) {
+    public ZXFixedOrbitMapEditor(ZXMap map) {
         srcMap = map;
         this.shadowMap = new ZXMap(new ArrayList<>(), map.timingPoints, map.unLocalizedMapInfo);
         operateStack = new Stack<>();
@@ -45,20 +40,17 @@ public class ZxFixedOrbitMapEditor {
      * @param orbit 轨道变化值
      */
     public void move(FixedOrbitNote note, int orbit) {
-        if (tempMapOperate == null || !tempMapOperate.srcNote.equals(note)) {
-            //上一次操作的不是此按键,新建
-            tempMapOperate = new MapOperate(note);
-            //获得原按键引用
-            tempEditNote = note;
-            //克隆获得虚影按键
-            tempShadowNote = note.clone();
-        }
+
+        checkOperate(note);
+        //克隆获得虚影按键
+        FixedOrbitNote shadowNote = note.clone();
         //将虚影按键加入虚影map中
-        int desNoteIndex = shadowMap.insertNote(tempShadowNote);
+        shadowMap.insertNote(shadowNote);
         //对虚影按键进行编辑
-        shadowMap.moveNote(tempShadowNote, tempShadowNote.orbit += orbit);
-        //设置操作结果(上一次也是操作此按键时覆盖)
-        tempMapOperate.desNote = (FixedOrbitNote) shadowMap.notes.get(desNoteIndex);
+        shadowMap.moveNote(shadowNote, shadowNote.orbit += orbit);
+        //添加操作结果(上一次也是操作此按键时覆盖)
+        tempMapOperate.desNotes.add(shadowNote);
+
     }
 
     /**
@@ -67,14 +59,11 @@ public class ZxFixedOrbitMapEditor {
      * @param note          要编辑的子键的所属组合键
      * @param orbit         轨道变化值
      * @param childIndex    子键下标
-     * @param keepAfterNote 是否保持此子键之后的子键属性
+     * @param keepAfterNote 是否保持此子键之后所有按键的绝对位置
      */
-    public void move(ComplexNote note, int orbit, int childIndex, boolean keepAfterNote) {
-        if (tempMapOperate == null || !tempMapOperate.srcNote.equals(note)) {
-            //上一次操作的不是此按键,新建
-            tempMapOperate = new MapOperate(note);
-            tempEditNote = note;
-        }
+    public boolean move(ComplexNote note, int orbit, int childIndex, boolean keepAfterNote) {
+        checkOperate(note);
+
         //克隆获得虚影按键
         ComplexNote shadowNote = note.clone();
         int desNoteIndex = shadowMap.insertNote(shadowNote);
@@ -82,32 +71,34 @@ public class ZxFixedOrbitMapEditor {
         //编辑子键
         FixedOrbitNote child = shadowNote.notes.get(childIndex);
         if (child instanceof LongNote childLongNote) {
-            //区分是否保持后方子键位置与时间戳
-            if (keepAfterNote) {
-                //保持
-                //直接编辑子键
-                childLongNote.orbit += orbit;
-                //检查组合键是否有断裂(从此子键上一个子键检查到此子键的下一个子键)
-                //检查此子键前一个按键
-                if (childIndex == 0) {
-                    //子键处于组合键头部(头部按键只能编辑长键[拉出])
-                    //头部添加一个滑键
-                    shadowNote.notes.add(new SlideNote(shadowNote.timeStamp, shadowNote.orbit, childLongNote.orbit - shadowNote.orbit));
-                    //排序
-                    shadowNote.notes.sort(FixedOrbitNote::compareTo);
-                } else {
-                    FixedOrbitNote previous = shadowNote.notes.get(childIndex - 1);
-                    if (previous instanceof SlideNote slideNote) {
-                        //编辑的(child)是长条,前一个(previous)一定是滑键
-                        if (slideNote.orbit + slideNote.slideArg != child.orbit) {
-                            //修正前一个滑键参数
-                            slideNote.slideArg = child.orbit - slideNote.orbit;
-                        }
+            //直接编辑子键
+            childLongNote.orbit += orbit;
+            //检查组合键是否有断裂(从此子键上一个子键检查到此子键的下一个子键)
+
+            //检查此子键前一个按键
+            if (childIndex == 0) {
+                //子键处于组合键头部(头部按键只能编辑长键[拉出])
+                //头部添加一个滑键
+                shadowNote.notes.add(new SlideNote(shadowNote.timeStamp, shadowNote.orbit, childLongNote.orbit - shadowNote.orbit));
+                //排序
+                shadowNote.notes.sort(FixedOrbitNote::compareTo);
+            } else {
+                FixedOrbitNote previous = shadowNote.notes.get(childIndex - 1);
+                if (previous instanceof SlideNote slideNote) {
+                    //编辑的(child)是长条,前一个(previous)一定是滑键
+                    if (slideNote.orbit + slideNote.slideArg != child.orbit) {
+                        //修正前一个滑键参数
+                        slideNote.slideArg = child.orbit - slideNote.orbit;
                     }
                 }
+            }
+
+            //区分是否保持后方子键位置与时间戳
+            if (keepAfterNote) {
+                //保持(后方不需要移动)
                 //检查此子键下一个按键
                 if (childIndex == shadowNote.notes.size() - 1) {
-                    //子键处于组合键尾部
+                    //子键处于组合键尾部无需操作
                 } else {
                     FixedOrbitNote next = shadowNote.notes.get(childIndex + 1);
                     if (next instanceof SlideNote slideNote) {
@@ -121,12 +112,27 @@ public class ZxFixedOrbitMapEditor {
                     }
                 }
             } else {
+                if (childIndex == shadowNote.notes.size() - 1){
+                    tempMapOperate.desNotes.add(shadowNote);
+                    return true;
+                }
                 //跟随
-                for (int i = childIndex; i < shadowNote.notes.size()-1; i++) {
-                    
+                //检查
+                for (int i = childIndex+1; i < shadowNote.notes.size()-1; i++) {
+                    int resOrb = shadowNote.notes.get(i).orbit + orbit;
+                    if (resOrb >= Integer.parseInt(shadowMap.unLocalizedMapInfo.getInfo(ImdInfo.ImdKeyCount.unLocalize()))){
+                        return false;
+                    }
+                }
+                //未return
+                for (int i = childIndex+1; i < shadowNote.notes.size()-1; i++) {
+                    shadowNote.notes.get(i).orbit += orbit;
                 }
             }
+            tempMapOperate.desNotes.add(shadowNote);
+            return true;
         }
+        return false;
     }
 
     /**
@@ -137,7 +143,11 @@ public class ZxFixedOrbitMapEditor {
      * @return 编辑后按键所处的下标位置
      */
     public int move(FixedOrbitNote note, long time) {
+        checkOperate(note);
+        //克隆获得虚影按键
         FixedOrbitNote shadowNote = note.clone();
+        int desNoteIndex = shadowMap.insertNote(shadowNote);
+
         shadowMap.insertNote(shadowNote);
         //操作时间戳并排序
         return shadowMap.moveNote(note, time + note.timeStamp);
@@ -149,7 +159,7 @@ public class ZxFixedOrbitMapEditor {
      * @param note          要编辑的子键的所属组合键
      * @param time          要编辑的子键的时间戳变化
      * @param childIndex    要编辑的子键索引
-     * @param keepAfterNote 是否保持此子键之后的子键属性
+     * @param keepAfterNote 是否保持此子键之后所有按键的绝对位置
      * @return 编辑是否成功
      */
     public boolean move(ComplexNote note, long time, int childIndex, boolean keepAfterNote) {
@@ -159,7 +169,7 @@ public class ZxFixedOrbitMapEditor {
     }
 
     /**
-     * 编辑按键参数(编辑,非直接修改)
+     * 编辑按键参数(变化,非直接修改)
      *
      * @param parameter 参数变化值
      * @return 编辑是否成功
@@ -169,24 +179,58 @@ public class ZxFixedOrbitMapEditor {
     }
 
     /**
+     * 编辑组合键中指定下标子键的参数(编辑,非直接修改)
+     * @param complexNote 要编辑的组合键
+     * @param childIndex 要编辑的组合键中的子键的下标
+     * @param keepAfterNote 是否保持此子键之后所有按键的绝对位置
+     * @return
+     */
+    public boolean modifyPar(ComplexNote complexNote, int childIndex, boolean keepAfterNote){
+        return true;
+    }
+
+    /**
      * 完成修改,同步原map,操作栈
      */
     public void modifyDone() {
         //完成修改,同步到原zxMap中
-        //检查按键是否为组合键
-        if (tempEditNote instanceof ComplexNote complexNote){
-            checkComplexNote(complexNote);
-            tempMapOperate.desNote = tempEditNote;
+
+        //检查操作结果中是否包含组合键
+        for (FixedOrbitNote tempEditNote:tempMapOperate.desNotes){
+            if (tempEditNote instanceof ComplexNote complexNote){
+                checkComplexNote(complexNote);
+            }
         }
+
+
         //克隆结果插入原map
-        srcMap.insertNote(tempMapOperate.desNote.clone());
+        for (FixedOrbitNote note:tempMapOperate.desNotes)
+            srcMap.insertNote(note.clone());
         //删除原按键
-        srcMap.deleteNote(tempEditNote);
+        for (FixedOrbitNote note:tempMapOperate.srcNotes)
+            srcMap.deleteNote(note);
         //添加到操作堆栈
         operateStack.add(tempMapOperate);
 
     }
 
+    /**
+     * 检查操作(检查是否初始化和是否已包含此按键相关操作)
+     * @param srcNote 要检查的按键
+     */
+    private void checkOperate(FixedOrbitNote srcNote) {
+        if (tempMapOperate == null) {
+            //上一次无操作新建
+            tempMapOperate = new MapOperate();
+            //加入操作源中
+            tempMapOperate.srcNotes.add(srcNote);
+        }else if (!tempMapOperate.srcNotes.contains(srcNote)){
+            //上一次有操作,但操作对象不包含传入按键
+            //加入操作源中
+            tempMapOperate.srcNotes.add(srcNote);
+        }
+
+    }
     private void checkComplexNote(ComplexNote note) {
         //检查按键是否为组合键,修复其中多余节点和0参滑键
         ArrayList<FixedOrbitNote> deleteList = new ArrayList<>();

@@ -1,6 +1,6 @@
 package team.zxorg.zxnoter.note.timing;
 
-public class ZxTiming extends Timing{
+public class ZXTiming extends Timing{
     public int beats;
     public int sampleSet;
     public int soundPar;
@@ -8,7 +8,7 @@ public class ZxTiming extends Timing{
     public boolean isExtendTiming;
     public int effect;
 
-    public ZxTiming(long timingStamp, double bpm,boolean isNewBaseBpm,double absBpm, int beats, int sampleSet, int soundPar, int volume, boolean isExtendTiming, int effect) {
+    public ZXTiming(long timingStamp, double bpm, boolean isNewBaseBpm, double absBpm, int beats, int sampleSet, int soundPar, int volume, boolean isExtendTiming, int effect) {
         super(timingStamp, bpm, isNewBaseBpm,absBpm);
         this.beats = beats;
         this.sampleSet = sampleSet;

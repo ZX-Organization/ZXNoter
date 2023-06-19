@@ -15,7 +15,7 @@ import java.util.Collection;
 import java.util.HashMap;
 
 import team.zxorg.zxnoter.note.timing.Timing;
-import team.zxorg.zxnoter.note.timing.ZxTiming;
+import team.zxorg.zxnoter.note.timing.ZXTiming;
 
 public class OsuWriter {
     private static HashMap<OsuInfo, String> allInfos;
@@ -109,7 +109,7 @@ public class OsuWriter {
             StringBuilder strB = new StringBuilder();
             strB.append(timing.timestamp).append(",");
             //判断是否属于ZxTiming,是则细分
-            if (timing instanceof ZxTiming zxTiming){
+            if (timing instanceof ZXTiming zxTiming){
                 if (zxTiming.isExtendTiming)
                     strB.append(1/(baseBpm/60000)).append(",");
                 else {
@@ -132,7 +132,7 @@ public class OsuWriter {
                 }
             }
 
-            if (timing instanceof ZxTiming zxTiming){
+            if (timing instanceof ZXTiming zxTiming){
 
                 //属于ZxTiming,直接使用其已有值
                 strB.append(zxTiming.beats).append(",").
