@@ -3,6 +3,7 @@ package team.zxorg.zxnoter.note.fixedorbit;
 import team.zxorg.zxnoter.note.BaseNote;
 
 import java.nio.file.Path;
+import java.util.Random;
 
 /**
  * 定轨按键
@@ -14,8 +15,10 @@ public class FixedOrbitNote extends BaseNote implements Cloneable,Comparable<Bas
     public int orbit;
     String soundKey;
     private String soundPath = "";
+    private int hash;
     public FixedOrbitNote(long timeStamp , int orbit) {
         super(timeStamp);
+        hash = new Random().nextInt();
         this.orbit = orbit;
     }
     public void setSound(String path){
@@ -31,7 +34,9 @@ public class FixedOrbitNote extends BaseNote implements Cloneable,Comparable<Bas
 
     @Override
     public FixedOrbitNote clone(){
-        return new FixedOrbitNote(timeStamp , orbit);
+        FixedOrbitNote fixedOrbitNote = new FixedOrbitNote(timeStamp , orbit);
+        fixedOrbitNote.hash = hash;
+        return fixedOrbitNote;
     }
 
     @Override
@@ -67,6 +72,17 @@ public class FixedOrbitNote extends BaseNote implements Cloneable,Comparable<Bas
         }else return 0;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof FixedOrbitNote fixedOrbitNote)
+            return hash == fixedOrbitNote.hash;
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return hash;
+    }
 
     @Override
     public String toString() {

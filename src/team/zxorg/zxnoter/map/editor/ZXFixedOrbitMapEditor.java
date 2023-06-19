@@ -43,18 +43,15 @@ public class ZXFixedOrbitMapEditor {
      */
     public void move(FixedOrbitNote note, int orbit) {
 
-        checkOperate(note);
-        //克隆获得虚影按键
-        FixedOrbitNote shadowNote = note.clone();
-        //将虚影按键加入虚影map中
-        shadowMap.insertNote(shadowNote);
-        shadows.add(shadowNote);
+        FixedOrbitNote shadowNote = checkOperate(note);
 
         //对虚影按键进行编辑
         shadowMap.moveNote(shadowNote, shadowNote.orbit += orbit);
         //添加操作结果(上一次也是操作此按键时覆盖)
+        if (shadows.contains(note)){
+            tempMapOperate.desNotes.remove(shadowNote);
+        }
         tempMapOperate.desNotes.add(shadowNote);
-
     }
 
     /**
@@ -65,12 +62,7 @@ public class ZXFixedOrbitMapEditor {
      * @param keepAfterNote 是否保持此子键之后所有按键的绝对位置
      */
     public boolean move(ComplexNote note, int orbit, int childIndex, boolean keepAfterNote) {
-        checkOperate(note);
-        //克隆获得虚影按键
-        ComplexNote shadowNote = note.clone();
-        shadows.add(shadowNote);
-        int desNoteIndex = shadowMap.insertNote(shadowNote);
-        //shadowNote.setRelatively(true);
+        ComplexNote shadowNote = (ComplexNote) checkOperate(note);
         //编辑子键
         FixedOrbitNote child = shadowNote.notes.get(childIndex);
         if (child instanceof LongNote childLongNote) {
@@ -224,7 +216,7 @@ public class ZXFixedOrbitMapEditor {
      * 检查操作(检查是否初始化和是否已包含此按键相关操作)
      * @param srcNote 要检查的按键
      */
-    private void checkOperate(FixedOrbitNote srcNote) {
+    private FixedOrbitNote checkOperate(FixedOrbitNote srcNote) {
         if (tempMapOperate == null) {
             //上一次无操作新建
             tempMapOperate = new MapOperate();
@@ -235,7 +227,14 @@ public class ZXFixedOrbitMapEditor {
             //加入操作源中
             tempMapOperate.srcNotes.add(srcNote);
         }
-
+        //克隆获得虚影按键
+        FixedOrbitNote shadowNote = srcNote.clone();
+        if (!shadows.contains(srcNote)){
+            //将虚影按键加入虚影map中
+            shadowMap.insertNote(shadowNote);
+            shadows.add(shadowNote);
+        }
+        return shadowNote;
     }
     private void checkComplexNote(ComplexNote note) {
         //检查按键是否为组合键,修复其中多余节点和0参滑键
