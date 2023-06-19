@@ -195,7 +195,9 @@ public class ZXFixedOrbitMapEditor {
      */
     public void modifyDone() {
         //完成修改,同步到原zxMap中
-
+        if (tempMapOperate == null){
+            return;
+        }
         //检查操作结果中是否包含组合键
         for (FixedOrbitNote tempEditNote:tempMapOperate.desNotes){
             if (tempEditNote instanceof ComplexNote complexNote){
