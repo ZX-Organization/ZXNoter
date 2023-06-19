@@ -11,6 +11,7 @@ public enum FixedOrbitObjectKey {
     TOP_LINE("top-line"),
     TIMING_LINE("timing-line"),
     RED_LINE("red-line"),
+    LOGO("logo"),
     IKUN("ikun");
 
     FixedOrbitObjectKey(String name) {

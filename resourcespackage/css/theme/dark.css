@@ -74,11 +74,13 @@
     -fx-border-color: #505050;
     -fx-border-width: 0 1 0 1;
 }
-.scroll-bar:vertical .thumb{
+
+.scroll-bar:vertical .thumb {
     -fx-background-color: #45474a;
     -fx-background-radius: 2;
 }
-.scroll-bar:vertical .thumb:hover,.scroll-bar:vertical .thumb:pressed{
+
+.scroll-bar:vertical .thumb:hover, .scroll-bar:vertical .thumb:pressed {
     -fx-background-color: #55575a;
 }
 
@@ -89,7 +91,7 @@
 
 .preview-pane {
     -fx-background-color: #ffffff11;
-    -fx-border-color: #505050;
+    -fx-border-color: #7c7c7c;
     -fx-border-width: 2 0 2 0;
 }
 
@@ -150,34 +152,68 @@
 }
 
 
-.tool-group-bar {
+.h-tool-group-bar {
     -fx-background-color: #323232;
     -fx-border-color: #505050;
     -fx-border-width: 0 0 1 0;
 }
 
 
-.tool-group-bar > .group > .button {
+.h-tool-group-bar > .group > * {
     -fx-padding: 2;
+}
+
+.h-tool-group-bar > .group > .button, .h-tool-group-bar > .group > .icon {
     -fx-background-color: #9A9A9A;
     -fx-background-insets: 0;
 }
 
-.tool-group-bar > .group > .button:selected, .tool-group-bar > .group > .button:pressed {
+.h-tool-group-bar > .group > .button:selected, .h-tool-group-bar > .group > .button:pressed {
     -fx-background-color: #C8C8C8;
 }
 
-.tool-group-bar > .group > .button:selected, .tool-group-bar > .group > .button:pressed, .tool-group-bar > .group > .button:focused {
+.h-tool-group-bar > .group > .button:selected, .h-tool-group-bar > .group > .button:pressed, .h-tool-group-bar > .group > .button:focused {
     -fx-padding: 2;
     -fx-border-width: 0;
     -fx-background-insets: 0;
 }
 
-.tool-group-bar > .group {
+.h-tool-group-bar > .group {
     -fx-padding: 0 4 0 4;
     -fx-border-color: #505050;
     -fx-border-width: 0 1 0 0;
 }
+
+
+.v-tool-group-bar {
+    -fx-background-color: #323232;
+    -fx-border-color: #505050;
+    -fx-border-width: 0 1 1 0;
+}
+
+
+.v-tool-group-bar > .group > .button {
+    -fx-padding: 2;
+    -fx-background-color: #9A9A9A;
+    -fx-background-insets: 0;
+}
+
+.v-tool-group-bar > .group > .button:selected, .v-tool-group-bar > .group > .button:pressed {
+    -fx-background-color: #C8C8C8;
+}
+
+.v-tool-group-bar > .group > .button:selected, .v-tool-group-bar > .group > .button:pressed, .v-tool-group-bar > .group > .button:focused {
+    -fx-padding: 2;
+    -fx-border-width: 0;
+    -fx-background-insets: 0;
+}
+
+.v-tool-group-bar > .group {
+    -fx-padding: 4 0 4 0;
+    -fx-border-color: #505050;
+    -fx-border-width: 0 0 1 0;
+}
+
 
 .text-field {
     -fx-padding: 5;
@@ -186,7 +222,7 @@
     -fx-text-fill: #9A9A9A;
     -fx-highlight-fill: #093939;
     -fx-border-color: #505050;
-    -fx-border-width: 0 1 0 1;
+    -fx-border-width: 1 1 1 1;
 }
 
 

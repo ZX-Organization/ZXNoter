@@ -1,5 +1,6 @@
 package team.zxorg.zxnoter.ui.render.fixedorbit;
 
+import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
@@ -20,6 +21,12 @@ public class FixedOrbitBackgroundRender extends FixedOrbitRender {
     protected void renderHandle() {
         Image image;
 
+
+        image = getImage(FixedOrbitObjectKey.LOGO);
+        RenderRectangle rectangle = new RenderRectangle(image);
+        rectangle.setRelativePosition(new RenderRectangle(canvas), Pos.CENTER);
+        rectangle.scale(image,getWidth()*1, Orientation.HORIZONTAL);
+        drawImage(image, rectangle);
 
         //绘制轨道
         image = getImage(FixedOrbitObjectKey.ORBIT);
@@ -97,11 +104,14 @@ public class FixedOrbitBackgroundRender extends FixedOrbitRender {
         image = getImage(FixedOrbitObjectKey.TOP_LINE);
         graphics.drawImage(image, 0, getRenderInfo().getTimeToPosition(getLastTime() + getRenderInfo().judgedLinePositionTimeOffset.get()) - image.getHeight() / 2, renderInfo.canvasWidth.get(), image.getHeight());
 
-        image = getImage(FixedOrbitObjectKey.IKUN);
+        /*image = getImage(FixedOrbitObjectKey.IKUN);
         RenderRectangle rectangle = new RenderRectangle(image);
 
         rectangle.setRelativePosition(new RenderRectangle(canvas), Pos.CENTER);
-        rectangle.offsetPositionByHalf(Pos.BOTTOM_LEFT);
+        rectangle.offsetPositionByHalf(Pos.BOTTOM_LEFT);*/
+
+
+
 
         //rectangle.setRelativePosition(Pos.TOP_LEFT);
         //drawImage(image, rectangle);

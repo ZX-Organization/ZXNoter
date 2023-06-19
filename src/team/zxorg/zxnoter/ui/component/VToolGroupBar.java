@@ -1,29 +1,30 @@
+
 package team.zxorg.zxnoter.ui.component;
 
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ToggleButton;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.layout.Region;
 import team.zxorg.zxnoter.resource.ZXResources;
 import team.zxorg.zxnoter.ui.ComponentFactory;
 
 import java.util.HashMap;
 
-public class ToolGroupBar extends HBox {
-    public ToolGroupBar() {
-        setPrefHeight(26);
-        setMinHeight(Region.USE_PREF_SIZE);
-        getStyleClass().add("tool-group-bar");
+public class VToolGroupBar extends VBox {
+    public VToolGroupBar() {
+        setPrefWidth(26);
+        setMinWidth(Region.USE_PREF_SIZE);
+        getStyleClass().add("v-tool-group-bar");
     }
 
-    HashMap<String, HBox> groups = new HashMap<>();
+    HashMap<String, VBox> groups = new HashMap<>();
 
-    public HBox getGroup(String groupName) {
-        HBox aGroup = groups.get(groupName);
+    public VBox getGroup(String groupName) {
+        VBox aGroup = groups.get(groupName);
         if (aGroup == null) {
-            aGroup = new HBox();
+            aGroup = new VBox();
             aGroup.getStyleClass().add("group");
             groups.put(groupName, aGroup);
             getChildren().add(aGroup);
@@ -40,7 +41,7 @@ public class ToolGroupBar extends HBox {
         button.setShape(ZXResources.getSvg(key));
         button.setPrefSize(22, 22);
         button.getStyleClass().add("button");
-        HBox.setMargin(button, new Insets(2));
+        VBox.setMargin(button, new Insets(2));
         if (toolTip != null) {
             button.setTooltip(ComponentFactory.getTooltip(toolTip));
         }
@@ -56,7 +57,7 @@ public class ToolGroupBar extends HBox {
         button.setShape(ZXResources.getSvg(key));
         button.setPrefSize(22, 22);
         button.getStyleClass().add("button");
-        HBox.setMargin(button, new Insets(2));
+        VBox.setMargin(button, new Insets(2));
         if (toolTip != null) {
             button.setTooltip(ComponentFactory.getTooltip(toolTip));
         }

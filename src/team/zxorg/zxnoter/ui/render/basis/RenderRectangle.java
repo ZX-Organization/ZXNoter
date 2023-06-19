@@ -1,5 +1,6 @@
 package team.zxorg.zxnoter.ui.render.basis;
 
+import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
@@ -122,6 +123,32 @@ public class RenderRectangle {
         pos.y = centerPos.y - height / 2;
     }
 
+    /**
+     * 强制水平或垂直等比缩放
+     * @param image 图片尺寸
+     * @param value 目标宽、高尺寸
+     * @param orientation 水平或垂直
+     */
+    public void scale(Image image, double value, Orientation orientation) {
+        double scaleX = 1.0;
+        double scaleY = 1.0;
+
+        if (orientation.equals(Orientation.HORIZONTAL)) {
+            double originalWidth = image.getWidth();
+            scaleX = value / originalWidth;
+            scaleY = scaleX;
+        } else if (orientation.equals(Orientation.VERTICAL)) {
+            double originalHeight = image.getHeight();
+            scaleY = value / originalHeight;
+            scaleX = scaleY;
+        }
+
+        // 判断缩放系数，取较小的值保持等比缩放
+        double scale = Math.min(scaleX, scaleY);
+
+        // 根据计算的缩放系数对矩形进行缩放操作
+        scale(scale, scale);
+    }
 
     /**
      * 根据源区域的相对位置变更区域
@@ -159,5 +186,6 @@ public class RenderRectangle {
             case BOTTOM -> this.pos.y += height / 2;
         }
     }
+
 
 }
