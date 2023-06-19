@@ -24,6 +24,7 @@ public class ZXFixedOrbitMapEditor {
      */
     Stack<MapOperate> operateStack;
     Stack<MapOperate> withdrawStack;
+    private ArrayList<FixedOrbitNote> shadows;
     private MapOperate tempMapOperate;
 
     public ZXFixedOrbitMapEditor(ZXMap map) {
@@ -46,6 +47,7 @@ public class ZXFixedOrbitMapEditor {
         FixedOrbitNote shadowNote = note.clone();
         //将虚影按键加入虚影map中
         shadowMap.insertNote(shadowNote);
+        shadows.add(shadowNote);
         //对虚影按键进行编辑
         shadowMap.moveNote(shadowNote, shadowNote.orbit += orbit);
         //添加操作结果(上一次也是操作此按键时覆盖)
@@ -64,6 +66,7 @@ public class ZXFixedOrbitMapEditor {
         checkOperate(note);
         //克隆获得虚影按键
         ComplexNote shadowNote = note.clone();
+        shadows.add(shadowNote);
         int desNoteIndex = shadowMap.insertNote(shadowNote);
         //shadowNote.setRelatively(true);
         //编辑子键
@@ -203,6 +206,10 @@ public class ZXFixedOrbitMapEditor {
         //删除原按键
         for (FixedOrbitNote note:tempMapOperate.srcNotes)
             srcMap.deleteNote(note);
+        //清除此次编辑产生的所有虚影
+        for (int i = 0; i < shadows.size(); i++) {
+            shadowMap.deleteNote(shadows.get(i));
+        }
         //添加到操作堆栈
         operateStack.add(tempMapOperate);
 
