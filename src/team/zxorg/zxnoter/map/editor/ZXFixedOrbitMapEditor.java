@@ -40,6 +40,7 @@ public class ZXFixedOrbitMapEditor {
      *
      * @param note  要编辑的按键
      * @param orbit 轨道变化值
+     * @param isAbsolute    是否使用绝对轨道
      */
     public void move(FixedOrbitNote note, int orbit, boolean isAbsolute) {
 
@@ -50,8 +51,7 @@ public class ZXFixedOrbitMapEditor {
             shadowMap.moveNote(shadowNote, orbit);
         else
             shadowMap.moveNote(shadowNote, shadowNote.orbit += orbit);
-        //添加操作结果(上一次也是操作此按键时覆盖)
-        System.out.println("move中->"+ shadowMap.notes.contains(shadowNote));
+
         if (shadows.contains(note)){
             tempMapOperate.desNotes.remove(shadowNote);
         }
@@ -63,15 +63,21 @@ public class ZXFixedOrbitMapEditor {
      * @param note          要编辑的子键的所属组合键
      * @param orbit         轨道变化值
      * @param childIndex    子键下标
+     * @param isAbsolute    是否使用绝对轨道
      * @param keepAfterNote 是否保持此子键之后所有按键的绝对位置
      */
-    public boolean move(ComplexNote note, int orbit, int childIndex, boolean keepAfterNote) {
+    public boolean move(ComplexNote note, int orbit, int childIndex, boolean keepAfterNote, boolean isAbsolute) {
         ComplexNote shadowNote = (ComplexNote) checkOperate(note);
         //编辑子键
         FixedOrbitNote child = shadowNote.notes.get(childIndex);
         if (child instanceof LongNote childLongNote) {
             //直接编辑子键
-            childLongNote.orbit += orbit;
+            if (isAbsolute){
+                childLongNote.orbit = orbit;
+            }else {
+                childLongNote.orbit += orbit;
+            }
+
             //检查组合键是否有断裂(从此子键上一个子键检查到此子键的下一个子键)
 
             //检查此子键前一个按键
@@ -112,6 +118,10 @@ public class ZXFixedOrbitMapEditor {
             } else {
                 if (childIndex == shadowNote.notes.size() - 1){
                     tempMapOperate.desNotes.add(shadowNote);
+                    if (shadows.contains(note)){
+                        tempMapOperate.desNotes.remove(shadowNote);
+                    }
+                    tempMapOperate.desNotes.add(shadowNote);
                     return true;
                 }
                 //跟随
@@ -128,6 +138,10 @@ public class ZXFixedOrbitMapEditor {
                 }
             }
             tempMapOperate.desNotes.add(shadowNote);
+            if (shadows.contains(note)){
+                tempMapOperate.desNotes.remove(shadowNote);
+            }
+            tempMapOperate.desNotes.add(shadowNote);
             return true;
         }
         return false;
@@ -137,10 +151,13 @@ public class ZXFixedOrbitMapEditor {
      * 编辑按键的时间戳变化(自动排序)
      * @param note 要编辑的按键
      * @param time 时间戳变化值
+     * @param isAbsolute 是否使用绝对时间戳
      * @return 编辑后按键所处的下标位置
      */
-    public int move(FixedOrbitNote note, long time) {
+    public int move(FixedOrbitNote note, long time, boolean isAbsolute) {
+
         checkOperate(note);
+
         //克隆获得虚影按键
         FixedOrbitNote shadowNote = note.clone();
         int desNoteIndex = shadowMap.insertNote(shadowNote);
@@ -157,9 +174,10 @@ public class ZXFixedOrbitMapEditor {
      * @param time          要编辑的子键的时间戳变化
      * @param childIndex    要编辑的子键索引
      * @param keepAfterNote 是否保持此子键之后所有按键的绝对位置
+     * @param isAbsolute 是否使用绝对时间戳
      * @return 编辑是否成功
      */
-    public boolean move(ComplexNote note, long time, int childIndex, boolean keepAfterNote) {
+    public boolean move(ComplexNote note, long time, int childIndex, boolean keepAfterNote, boolean isAbsolute) {
         //操作时间戳并排序
         shadowMap.moveNote(note, time + note.timeStamp);
         return false;
