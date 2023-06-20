@@ -1,6 +1,7 @@
 package team.zxorg.zxnoter.audiochannel;
 
-import top.zedo.audiochannel.channel.AudioInputChannel;
+
+import team.zxorg.zxnoter.audiochannel.channel.AudioInputChannel;
 
 import javax.sound.sampled.AudioFormat;
 import java.io.IOException;
