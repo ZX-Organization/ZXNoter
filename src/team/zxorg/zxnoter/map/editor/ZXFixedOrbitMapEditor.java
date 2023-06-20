@@ -51,6 +51,7 @@ public class ZXFixedOrbitMapEditor {
         else
             shadowMap.moveNote(shadowNote, shadowNote.orbit += orbit);
         //添加操作结果(上一次也是操作此按键时覆盖)
+        System.out.println("move中->"+ shadowMap.notes.contains(shadowNote));
         if (shadows.contains(note)){
             tempMapOperate.desNotes.remove(shadowNote);
         }
@@ -232,12 +233,16 @@ public class ZXFixedOrbitMapEditor {
             //加入操作源中
             tempMapOperate.srcNotes.add(srcNote);
         }
+
+
         //克隆获得虚影按键
         FixedOrbitNote shadowNote = srcNote.clone();
         if (!shadows.contains(srcNote)){
             //将虚影按键加入虚影map中
             shadowMap.insertNote(shadowNote);
             shadows.add(shadowNote);
+        }else {
+            return (FixedOrbitNote) shadowMap.notes.get(shadowMap.notes.indexOf(shadowNote));
         }
         return shadowNote;
     }

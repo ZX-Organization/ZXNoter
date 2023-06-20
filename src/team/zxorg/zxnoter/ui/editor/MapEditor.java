@@ -111,9 +111,10 @@ public class MapEditor extends BaseEditor {
                 int orbit = (int) (event.getX() / mainMapRender.getRenderInfo().orbitWidth.get());
                 if (renderNote != null) {
                     //zxFixedOrbitMapEditor.shadowMap.notes.clear();
-                    System.out.println("将" + renderNote.note + "的轨道移动到" + (orbit - renderNote.note.orbit));
+                    System.out.println("将" + renderNote.note + "的轨道移动到" + orbit);
 
-                    zxFixedOrbitMapEditor.move(renderNote.note, orbit - renderNote.note.orbit,false);
+                    zxFixedOrbitMapEditor.move(renderNote.note, orbit ,true);
+                    System.out.println(zxFixedOrbitMapEditor.shadowMap.notes);
                 }
 
                 //zxFixedOrbitMapEditor.shadowMap.notes.clear();
@@ -125,9 +126,9 @@ public class MapEditor extends BaseEditor {
             mapCanvas.setOnMouseReleased(event -> {
                 System.out.println("完成编辑");
                 try {
-                    System.out.println(zxFixedOrbitMapEditor.shadowMap.notes);
+                    //System.out.println(zxFixedOrbitMapEditor.shadowMap.notes);
                     zxFixedOrbitMapEditor.modifyDone();
-                    System.out.println(zxFixedOrbitMapEditor.shadowMap.notes);
+                    //System.out.println(zxFixedOrbitMapEditor.shadowMap.notes);
                 } catch (Exception e) {
                     System.out.println("急了");
                 }

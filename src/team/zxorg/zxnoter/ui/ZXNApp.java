@@ -130,7 +130,7 @@ public class ZXNApp extends Application {
         VBox.setVgrow(workspaceTabPane, Priority.ALWAYS);
 
 
-       /* {//添加编辑器
+        {//添加编辑器
 
             try {
                 ZXMap zxMap = ImdReader.readFile(Paths.get("docs/reference/Contrapasso -paradiso-/t+pazolite - Contrapasso -paradiso-_4k_hd.imd"));
@@ -155,7 +155,6 @@ public class ZXNApp extends Application {
 
 
         }
-*/
         {//添加编辑器
 
             try {

@@ -18,8 +18,8 @@ public class ComplexNote extends FixedOrbitNote implements Cloneable {
 
     public ComplexNote(ComplexNote complexNote) {
         super(complexNote.timeStamp, complexNote.orbit);
-        for (int i = 0; i < notes.size(); i++) {
-            notes.add(notes.get(i).clone());
+        for (int i = 0; i < complexNote.notes.size(); i++) {
+            notes.add(complexNote.notes.get(i).clone());
         }
         isRelativeHead = complexNote.isRelativeHead;
         hash = complexNote.hash;
