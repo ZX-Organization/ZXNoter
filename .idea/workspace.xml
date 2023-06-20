@@ -4,14 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="295bcb0d-2118-4e02-b35e-a9da4569b815" name="更改" comment="update">
-      <change afterPath="$PROJECT_DIR$/.idea/cssdialects.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/AudioChannel.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/AudioChannel-Doc.zip" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/AudioChannel.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="295bcb0d-2118-4e02-b35e-a9da4569b815" name="更改" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/AudioChannel.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2023_6_12__12_41____.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/_2023_6_12__12_41____.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ZXNoter.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ZXNoter.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/AudioChannel-Doc.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/AudioChannel.jar" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/ZXNApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/ZXNApp.java" afterDir="false" />
     </list>
     <list id="9563a533-f70b-4cf6-9026-5fb6bd4d4309" name="zedoC 进行的更改" comment="" />
@@ -49,13 +47,13 @@
     "ASKED_ADD_EXTERNAL_FILES": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/Projects/ZXNoter/lib/AudioChannel-Doc.zip",
+    "last_opened_file_path": "D:/Projects/ZXNoter/lib/AudioChannel-Doc.jar",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "project.structure.last.edited": "库",
-    "project.structure.proportion": "0.0",
+    "project.structure.proportion": "0.17292577",
     "project.structure.side.proportion": "0.317217",
     "settings.editor.selected.configurable": "preferences.pluginManager"
   },
@@ -164,7 +162,7 @@
       <workItem from="1687018987219" duration="15241000" />
       <workItem from="1687076381286" duration="17635000" />
       <workItem from="1687110635483" duration="3060000" />
-      <workItem from="1687113737848" duration="40933000" />
+      <workItem from="1687113737848" duration="41513000" />
     </task>
     <task id="LOCAL-00001" summary="update ImdReader">
       <created>1686590292141</created>
@@ -355,7 +353,14 @@
       <option name="project" value="LOCAL" />
       <updated>1687197297555</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="update">
+      <created>1687248307960</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1687248307960</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
