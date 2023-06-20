@@ -4,19 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="295bcb0d-2118-4e02-b35e-a9da4569b815" name="更改" comment="fixed OsuReader">
+    <list default="true" id="295bcb0d-2118-4e02-b35e-a9da4569b815" name="更改" comment="update">
+      <change afterPath="$PROJECT_DIR$/.idea/cssdialects.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/AudioChannel.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/AudioChannel-Doc.zip" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/AudioChannel.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2023_6_11_2_09____.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2023_6_11__2_05____.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2023_6_11__2_25____.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2023_6_11__4_29____.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2023_6_11__4_43____.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2023_6_12__12_41____1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2023_6_12_上午_12_41_取消提交了更改_[更改]1/shelved.patch" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/io/reader/ImdReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/io/reader/ImdReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/map/editor/ZxFixedOrbitMapEditor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/map/editor/ZxFixedOrbitMapEditor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/note/timing/Timing.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/note/timing/Timing.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ZXNoter.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ZXNoter.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/ZXNApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/ZXNApp.java" afterDir="false" />
     </list>
     <list id="9563a533-f70b-4cf6-9026-5fb6bd4d4309" name="zedoC 进行的更改" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -36,7 +32,6 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="PUSH_AUTO_UPDATE" value="true" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -49,60 +44,51 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;F:/AllProjects/ZX-Organization/ZXNoter/docs/reference&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;项目&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "D:/Projects/ZXNoter/lib/AudioChannel-Doc.zip",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "库",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.317217",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;mongo&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mongo"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="F:\AllProjects\ZX-Organization\ZXNoter\docs\reference" />
+      <recent name="D:\Projects\ZXNoter\lib" />
       <recent name="D:\Projects\ZXNoter\resourcespackage\svg" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Projects\ZXNoter\lib" />
       <recent name="D:\Projects\ZXNoter\resourcespackage\img\note\theme\default" />
       <recent name="D:\Projects\ZXNoter\resourcespackage\img" />
       <recent name="D:\Projects\ZXNoter\resourcespackage\css\theme" />
       <recent name="D:\Projects\ZXNoter\resourcespackage\css" />
-      <recent name="D:\Projects\ZXNoter\resourcespackage\css\default" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="team.zxorg.zxnoter.ui.component" />
+      <recent name="team.zxorg.zxnoter.ui.render.fixedorbit" />
     </key>
   </component>
-  <component name="RunManager" selected="应用程序.IoTest">
+  <component name="RunManager" selected="应用程序.Main">
     <configuration name="ImdReader" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="team.zxorg.zxnoter.io.reader.ImdReader" />
       <module name="ZXNoter" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="team.zxorg.zxnoter.map.mapInfos.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="IoTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="team.zxorg.zxnoter.io.IoTest" />
-      <module name="ZXNoter" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="team.zxorg.zxnoter.io.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -149,16 +135,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <list>
-      <item itemvalue="应用程序.IoTest" />
-      <item itemvalue="应用程序.ImdReader" />
-      <item itemvalue="应用程序.OsuReader" />
-      <item itemvalue="应用程序.ZXNApp" />
-      <item itemvalue="应用程序.Main" />
-    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="应用程序.IoTest" />
         <item itemvalue="应用程序.Main" />
         <item itemvalue="应用程序.ZXNApp" />
         <item itemvalue="应用程序.ImdReader" />
@@ -181,17 +159,12 @@
       <workItem from="1686676054836" duration="444000" />
       <workItem from="1686719208556" duration="1804000" />
       <workItem from="1686722063313" duration="78000" />
-      <workItem from="1686723075574" duration="35640000" />
-      <workItem from="1686873811831" duration="1361000" />
-      <workItem from="1686877085193" duration="1885000" />
-      <workItem from="1686928346288" duration="6784000" />
-      <workItem from="1686977575163" duration="14601000" />
-      <workItem from="1687016076843" duration="5629000" />
-      <workItem from="1687094716678" duration="8804000" />
-      <workItem from="1687105436136" duration="4452000" />
-      <workItem from="1687114761990" duration="19000" />
-      <workItem from="1687129804181" duration="1455000" />
-      <workItem from="1687157175936" duration="12296000" />
+      <workItem from="1686723075574" duration="38587000" />
+      <workItem from="1686849707076" duration="47473000" />
+      <workItem from="1687018987219" duration="15241000" />
+      <workItem from="1687076381286" duration="17635000" />
+      <workItem from="1687110635483" duration="3060000" />
+      <workItem from="1687113737848" duration="40933000" />
     </task>
     <task id="LOCAL-00001" summary="update ImdReader">
       <created>1686590292141</created>
@@ -285,69 +258,104 @@
       <updated>1686807320176</updated>
     </task>
     <task id="LOCAL-00014" summary="update">
-      <created>1686935242507</created>
+      <created>1686811249229</created>
       <option name="number" value="00014" />
       <option name="presentableId" value="LOCAL-00014" />
       <option name="project" value="LOCAL" />
-      <updated>1686935242507</updated>
+      <updated>1686811249229</updated>
     </task>
-    <task id="LOCAL-00015" summary="update bpm">
-      <created>1686987490289</created>
+    <task id="LOCAL-00015" summary="update">
+      <created>1686849714759</created>
       <option name="number" value="00015" />
       <option name="presentableId" value="LOCAL-00015" />
       <option name="project" value="LOCAL" />
-      <updated>1686987490289</updated>
+      <updated>1686849714759</updated>
     </task>
-    <task id="LOCAL-00016" summary="update bpm">
-      <created>1686990134766</created>
+    <task id="LOCAL-00016" summary="update">
+      <created>1686924819145</created>
       <option name="number" value="00016" />
       <option name="presentableId" value="LOCAL-00016" />
       <option name="project" value="LOCAL" />
-      <updated>1686990134766</updated>
+      <updated>1686924819145</updated>
     </task>
-    <task id="LOCAL-00017" summary="fixed ImdReader">
-      <created>1686990820755</created>
+    <task id="LOCAL-00017" summary="update">
+      <created>1686971816662</created>
       <option name="number" value="00017" />
       <option name="presentableId" value="LOCAL-00017" />
       <option name="project" value="LOCAL" />
-      <updated>1686990820755</updated>
+      <updated>1686971816662</updated>
     </task>
     <task id="LOCAL-00018" summary="update">
-      <created>1686991534989</created>
+      <created>1687023175762</created>
       <option name="number" value="00018" />
       <option name="presentableId" value="LOCAL-00018" />
       <option name="project" value="LOCAL" />
-      <updated>1686991534989</updated>
+      <updated>1687023175762</updated>
     </task>
-    <task id="LOCAL-00019" summary="update findTiming">
-      <created>1686993525360</created>
+    <task id="LOCAL-00019" summary="update">
+      <created>1687076547179</created>
       <option name="number" value="00019" />
       <option name="presentableId" value="LOCAL-00019" />
       <option name="project" value="LOCAL" />
-      <updated>1686993525360</updated>
+      <updated>1687076547179</updated>
     </task>
-    <task id="LOCAL-00020" summary="update editor">
-      <created>1687107463126</created>
+    <task id="LOCAL-00020" summary="update">
+      <created>1687105404155</created>
       <option name="number" value="00020" />
       <option name="presentableId" value="LOCAL-00020" />
       <option name="project" value="LOCAL" />
-      <updated>1687107463126</updated>
+      <updated>1687105404155</updated>
     </task>
-    <task id="LOCAL-00021" summary="fixed timing bug">
-      <created>1687108752350</created>
+    <task id="LOCAL-00021" summary="update">
+      <created>1687106284906</created>
       <option name="number" value="00021" />
       <option name="presentableId" value="LOCAL-00021" />
       <option name="project" value="LOCAL" />
-      <updated>1687108752350</updated>
+      <updated>1687106284906</updated>
     </task>
-    <task id="LOCAL-00022" summary="fixed OsuReader">
-      <created>1687173110282</created>
+    <task id="LOCAL-00022" summary="update">
+      <created>1687106351502</created>
       <option name="number" value="00022" />
       <option name="presentableId" value="LOCAL-00022" />
       <option name="project" value="LOCAL" />
-      <updated>1687173110282</updated>
+      <updated>1687106351502</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="update">
+      <created>1687107736159</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1687107736159</updated>
+    </task>
+    <task id="LOCAL-00024" summary="update">
+      <created>1687107867650</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1687107867650</updated>
+    </task>
+    <task id="LOCAL-00025" summary="update">
+      <created>1687109637981</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1687109637981</updated>
+    </task>
+    <task id="LOCAL-00026" summary="update">
+      <created>1687173172339</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1687173172339</updated>
+    </task>
+    <task id="LOCAL-00027" summary="update">
+      <created>1687197297555</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1687197297555</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -370,13 +378,7 @@
     <MESSAGE value="fix ComplexNote" />
     <MESSAGE value="update toString" />
     <MESSAGE value="update localize method" />
-    <MESSAGE value="update bpm" />
-    <MESSAGE value="fixed ImdReader" />
     <MESSAGE value="update" />
-    <MESSAGE value="update findTiming" />
-    <MESSAGE value="update editor" />
-    <MESSAGE value="fixed timing bug" />
-    <MESSAGE value="fixed OsuReader" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed OsuReader" />
+    <option name="LAST_COMMIT_MESSAGE" value="update" />
   </component>
 </project>

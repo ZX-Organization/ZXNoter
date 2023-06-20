@@ -14,6 +14,8 @@ import team.zxorg.zxnoter.io.reader.OsuReader;
 import team.zxorg.zxnoter.map.ZXMap;
 import team.zxorg.zxnoter.resource.ZXResources;
 import team.zxorg.zxnoter.ui.editor.MapEditor;
+import top.zedo.audiochannel.FFT;
+import top.zedo.audiochannel.channel.MemoryAudioInputChannel;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -64,7 +66,6 @@ public class ZXNApp extends Application {
 
     @Override
     public void start(Stage stage) {
-
 
         //载入资源
         ZXResources.loadResourcePackage(Path.of("./resourcespackage/"));
@@ -258,9 +259,6 @@ public class ZXNApp extends Application {
 
 
         }
-
-
-
 
 
         //正文容器 添加控件

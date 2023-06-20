@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="AudioChannel">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/AudioChannel.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/lib/AudioChannel-Doc.zip!/" />
+    </JAVADOC>
+    <SOURCES />
+  </library>
+</component>
