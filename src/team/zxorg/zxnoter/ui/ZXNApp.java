@@ -14,8 +14,6 @@ import team.zxorg.zxnoter.io.reader.OsuReader;
 import team.zxorg.zxnoter.map.ZXMap;
 import team.zxorg.zxnoter.resource.ZXResources;
 import team.zxorg.zxnoter.ui.editor.MapEditor;
-import top.zedo.audiochannel.FFT;
-import top.zedo.audiochannel.channel.MemoryAudioInputChannel;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -126,7 +124,6 @@ public class ZXNApp extends Application {
         //workspacePane.setBackground(Background.fill(Color.GREEN));
         HBox.setHgrow(workspace, Priority.ALWAYS);
         //workspace.setShape(ZXResources.getSvg("svg.icons.zxnoter.zxnoter"));
-
 
         VBox.setVgrow(workspaceTabPane, Priority.ALWAYS);
 
