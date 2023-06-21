@@ -19,8 +19,21 @@ import java.util.ArrayList;
 /**
  * osu读取器(osu!mania)
  */
-public class OsuReader {
-    public static ZXMap readFile(Path path) throws IOException {
+public class OsuReader implements MapReader{
+    Path readPath;
+
+    @Override
+    public String getSupportFileExtension() {
+        return "osu";
+    }
+
+    @Override
+    public Path getReadPath() {
+        return readPath;
+    }
+
+    @Override
+    public ZXMap read(Path path) throws IOException {
         BufferedReader bfReader = new BufferedReader(new FileReader(path.toFile()));
         String readTemp;
         //读取模式[General]等
@@ -210,7 +223,7 @@ public class OsuReader {
                                 Integer.parseInt(notePars[3]),
                                 Integer.parseInt(notePars[4]),
                                 sampleSetPars//音效组参数
-                                );
+                        );
                     }else{
                         //长键
                         int timeStamp = Integer.parseInt(notePars[2]);
@@ -238,8 +251,11 @@ public class OsuReader {
         zxMap.timingPoints = timingPoints;
         zxMap.unLocalizedMapInfo = unLocalizedMapInfo;
 
-
         return zxMap;
     }
 
+    @Override
+    public UnLocalizedMapInfo completeInfo() {
+        return null;
+    }
 }

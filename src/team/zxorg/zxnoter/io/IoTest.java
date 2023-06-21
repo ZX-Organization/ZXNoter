@@ -21,8 +21,8 @@ import java.util.Arrays;
 
 public class IoTest {
     public static void main(String[] args) {
-        try {
-            ZXMap map = ImdReader.readFile(Path.of("docs/reference/Contrapasso -paradiso-/t+pazolite - Contrapasso -paradiso-_4k_hd.imd"));
+        //try {
+            //ZXMap map = ImdReader.readFile(Path.of("docs/reference/Contrapasso -paradiso-/t+pazolite - Contrapasso -paradiso-_4k_hd.imd"));
             //System.out.println(map.notes);
             //map.findClosestNote(1000);
             //System.out.println(map.notes.get(19));
@@ -59,9 +59,9 @@ public class IoTest {
             //OsuWriter.writeOut(map,OsuWriter.checkLocalizedInfos(map),Path.of("G:/desktop"));
             //System.out.println(OsuWriter.checkLocalizedInfos(convertMap));
             //System.out.println(map.notes);
-        } catch (IOException e) {
+        /*} catch (IOException e) {
             throw new RuntimeException(e);
-        }
+        }*/
         /*catch (NoSuchFieldException e) {
             throw new RuntimeException(e);
         }*/

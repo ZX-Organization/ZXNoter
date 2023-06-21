@@ -21,10 +21,21 @@ import java.util.ArrayList;
 /**
  * imd读取器(节奏大师)
  */
-public class ImdReader {
+public class ImdReader implements MapReader{
+    private Path readPath;
 
-    public static ZXMap readFile(Path path) throws IOException {
+    @Override
+    public String getSupportFileExtension() {
+        return "imd";
+    }
 
+    @Override
+    public Path getReadPath() {
+        return readPath;
+    }
+
+    @Override
+    public ZXMap read(Path path) throws IOException {
         String fileName = path.getFileName().toString();
         //检查合法性
         boolean illegalFile = !fileName.endsWith(".imd") && !((fileName.length() - fileName.replaceAll("_", "").length()) == 2);
@@ -39,7 +50,7 @@ public class ImdReader {
         bf.order(ByteOrder.LITTLE_ENDIAN);
 
         //初始化
-        ZXMap zxMap = new ZXMap();
+        ZXMap map = new ZXMap();
         UnLocalizedMapInfo unLocalizedMapInfo = new UnLocalizedMapInfo();
         ArrayList<BaseNote> allNotes = new ArrayList<>();
 
@@ -154,10 +165,15 @@ public class ImdReader {
                 allNotes.add(tempNote);
             }
         }
-        zxMap.notes = allNotes;
-        zxMap.unLocalizedMapInfo = unLocalizedMapInfo;
-        zxMap.timingPoints = timingPoints;
+        map.notes = allNotes;
+        map.unLocalizedMapInfo = unLocalizedMapInfo;
+        map.timingPoints = timingPoints;
 
-        return zxMap;
+        return map;
+    }
+
+    @Override
+    public UnLocalizedMapInfo completeInfo() {
+        return new UnLocalizedMapInfo();
     }
 }
