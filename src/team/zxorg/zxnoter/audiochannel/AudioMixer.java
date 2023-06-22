@@ -5,8 +5,8 @@ import java.io.Closeable;
 import java.io.IOException;
 
 public abstract class AudioMixer implements Closeable {
-    AudioFormat audioFormat;//音频格式
-    int[] mixerByteBuffer;
+    protected AudioFormat audioFormat;//音频格式
+    protected int[] mixerByteBuffer;
 
     /*public ByteBuffer readMixerBuffer() {
         mixerByteBuffer.asIntBuffer().put(mixerBuffer);

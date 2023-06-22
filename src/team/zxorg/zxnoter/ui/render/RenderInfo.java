@@ -1,6 +1,7 @@
 package team.zxorg.zxnoter.ui.render;
 
 import javafx.beans.property.*;
+import javafx.scene.canvas.Canvas;
 
 public class RenderInfo {
     /**
@@ -30,4 +31,9 @@ public class RenderInfo {
     public LongProperty noteLastTime = new SimpleLongProperty();
 
     public IntegerProperty orbits=new SimpleIntegerProperty();
+
+    public RenderInfo(Canvas canvas) {
+        canvasWidth.bind(canvas.widthProperty());
+        canvasHeight.bind(canvas.heightProperty());
+    }
 }

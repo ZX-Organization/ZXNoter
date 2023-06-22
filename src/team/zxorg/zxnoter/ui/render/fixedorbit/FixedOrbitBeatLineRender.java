@@ -1,63 +1,48 @@
 package team.zxorg.zxnoter.ui.render.fixedorbit;
 
+import javafx.geometry.HPos;
 import javafx.geometry.Pos;
+import javafx.geometry.VPos;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.paint.Color;
 import team.zxorg.zxnoter.map.ZXMap;
-import team.zxorg.zxnoter.note.timing.Timing;
 import team.zxorg.zxnoter.ui.TimeUtils;
 import team.zxorg.zxnoter.ui.render.fixedorbit.key.FixedOrbitObjectKey;
 
+import java.util.ArrayList;
+
 public class FixedOrbitBeatLineRender extends FixedOrbitRender {
 
-    public int beats = 12;
+    ArrayList<RenderBeat> renderBeats;
 
-    public FixedOrbitBeatLineRender(FixedOrbitRenderInfo renderInfo, ZXMap renderZXMap, Canvas canvas, String theme) {
+    public FixedOrbitBeatLineRender(FixedOrbitRenderInfo renderInfo, ZXMap renderZXMap, Canvas canvas, String theme, ArrayList<RenderBeat> renderBeats) {
         super(renderInfo, renderZXMap, canvas, theme);
+        this.renderBeats = renderBeats;
     }
 
     @Override
     protected void renderHandle() {
-//绘制拍线和分拍线
-        double beatCycleTime;
-        long beatTime;
+        //绘制拍线和分拍线
 
-
-        for (long time = getRenderInfo().getPositionToTime(canvas.getHeight()); time < getRenderInfo().getPositionToTime(0); time++) {
-            Timing timing = findAfterTiming(time);
-            beatCycleTime = 60000. / (timing.absBpm);
-
-            if (time < 0)
-                continue;
-
-
-            //拥有基准
-            beatTime = time;
-
-            //绘制分拍
-            if ((beatTime - timing.timestamp) % (beatCycleTime / beats) < 1) {
-                loadRenderImage(getImage(FixedOrbitObjectKey.SUB_BEAT_LINE));
-                renderRectangle.setWidth(canvasRectangle.getWidth());
-                renderRectangle.setX(0);
-                renderRectangle.setY(getRenderInfo().getTimeToPosition(beatTime));
-                renderRectangleOffsetPositionByHalf(Pos.TOP_CENTER);
+        for (RenderBeat renderBeat : renderBeats) {
+            double beatCycleTime = 60000. / (renderBeat.timing.absBpm);
+            for (int i = 0; i < renderBeat.measure; i++) {
+                loadImage(getImage(FixedOrbitObjectKey.SUB_BEAT_LINE));
+                renderRectangle.setWidth(HPos.LEFT, canvasRectangle.getWidth());
+                renderRectangle.setY(VPos.CENTER, getInfo().getTimeToPosition(renderBeat.time + (beatCycleTime / renderBeat.measure) * i));
                 drawImage();
-                graphics.setFill(Color.WHEAT);
-                graphics.fillText(TimeUtils.formatTime(time), 0, getRenderInfo().getTimeToPosition(time));
             }
 
             //绘制拍
-            if ((beatTime - timing.timestamp) % beatCycleTime < 1) {
-                loadRenderImage(getImage(FixedOrbitObjectKey.BEAT_LINE));
-                renderRectangle.setWidth(canvasRectangle.getWidth());
-                renderRectangle.setX(0);
-                renderRectangle.setY(getRenderInfo().getTimeToPosition(beatTime));
-                renderRectangleOffsetPositionByHalf(Pos.TOP_CENTER);
-                drawImage();
-                graphics.setFill(Color.WHEAT);
-                graphics.fillText(TimeUtils.formatTime(time), 0, getRenderInfo().getTimeToPosition(time));
-            }
+            loadImage(getImage(FixedOrbitObjectKey.BEAT_LINE));
+            renderRectangle.setWidth(HPos.LEFT,canvasRectangle.getWidth());
+            renderRectangle.setY(VPos.CENTER,getInfo().getTimeToPosition(renderBeat.time));
+            drawImage();
+            graphics.setFill(Color.WHEAT);
+            graphics.fillText(TimeUtils.formatTime(renderBeat.time), 0, getInfo().getTimeToPosition(renderBeat.time));
 
         }
     }
+
+
 }

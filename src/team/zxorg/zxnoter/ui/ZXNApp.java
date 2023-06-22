@@ -9,15 +9,20 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import team.zxorg.zxnoter.audiochannel.ThreadAudioMixer;
+import team.zxorg.zxnoter.audiochannel.channel.SourceAudioOutputChannel;
 import team.zxorg.zxnoter.io.reader.ImdReader;
 import team.zxorg.zxnoter.io.reader.OsuReader;
 import team.zxorg.zxnoter.map.ZXMap;
 import team.zxorg.zxnoter.resource.ZXResources;
 import team.zxorg.zxnoter.ui.editor.MapEditor;
 
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.LineUnavailableException;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 
 public class ZXNApp extends Application {
     /**
@@ -62,8 +67,25 @@ public class ZXNApp extends Application {
      */
     VBox rootPane = new VBox(titleBar, bodyPane);
 
+
+    public static SourceAudioOutputChannel audioOutputChannel;//音频播放通道
+    public static AudioFormat audioFormat = new AudioFormat(44100, 16, 2, true, false);//音频格式
+    public static ThreadAudioMixer audioMixer = new ThreadAudioMixer(audioFormat, 2048, buf -> {
+        audioOutputChannel.writeSamples(buf);
+    });
+
     @Override
     public void start(Stage stage) {
+
+        try {
+            audioOutputChannel = new SourceAudioOutputChannel(audioFormat, 4096);
+            audioOutputChannel.open();
+            audioMixer.start();
+        } catch (LineUnavailableException e) {
+            System.out.println("音频播放设备载入失败");
+            throw new RuntimeException(e);
+        }
+
 
         //载入资源
         ZXResources.loadResourcePackage(Path.of("./resourcespackage/"));
@@ -128,7 +150,7 @@ public class ZXNApp extends Application {
         VBox.setVgrow(workspaceTabPane, Priority.ALWAYS);
 
 
-        {//添加编辑器
+        /*{//添加编辑器
 
             try {
                 ZXMap zxMap = ImdReader.readFile(Paths.get("docs/reference/Contrapasso -paradiso-/t+pazolite - Contrapasso -paradiso-_4k_hd.imd"));
@@ -152,33 +174,55 @@ public class ZXNApp extends Application {
             }
 
 
-        }
+        }*/
+
         {//添加编辑器
 
-            try {
-                ZXMap zxMap = OsuReader.readFile(Paths.get("docs/reference/LeaF - NANO DEATH!!!!!/LeaF - NANO DEATH!!!!! (nowsmart) [DEATH].osu"));
-                Tab tab1 = new Tab(zxMap.unLocalizedMapInfo.getInfo("Title"));
-                tab1.setGraphic(ZXResources.getSvgPane("svg.icons.zxnoter.file-notemap-line", 18, Color.DARKGREEN));
-                MapEditor editor = new MapEditor(zxMap);
-                tab1.setContent(editor);
-                workspaceTabPane.getTabs().add(tab1);
 
-                //画布更新线程常驻
-                AnimationTimer animationTimer = new AnimationTimer() {
-                    @Override
-                    public void handle(long l) {
-                        editor.render();
-                    }
-                };
-                animationTimer.start();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            MapEditor editor = new MapEditor(Paths.get("docs/reference/Contrapasso -paradiso-/t+pazolite - Contrapasso -paradiso-_4k_hd.imd"));
+
+            Tab tab1 = new Tab(editor.zxMap.unLocalizedMapInfo.getInfo("Title"));
+            tab1.setGraphic(ZXResources.getSvgPane("svg.icons.zxnoter.file-notemap-line", 18, Color.DARKGREEN));
+
+            tab1.setContent(editor);
+            workspaceTabPane.getTabs().add(tab1);
+
+            //画布更新线程常驻
+            AnimationTimer animationTimer = new AnimationTimer() {
+                @Override
+                public void handle(long l) {
+                    editor.render();
+                }
+            };
+            animationTimer.start();
 
 
         }
 
+        {//添加编辑器
 
+
+            MapEditor editor = new MapEditor(Paths.get("docs/reference/LeaF - NANO DEATH!!!!!/LeaF - NANO DEATH!!!!! (nowsmart) [DEATH].osu"));
+
+            Tab tab1 = new Tab(editor.zxMap.unLocalizedMapInfo.getInfo("Title"));
+            tab1.setGraphic(ZXResources.getSvgPane("svg.icons.zxnoter.file-notemap-line", 18, Color.DARKGREEN));
+
+            tab1.setContent(editor);
+            workspaceTabPane.getTabs().add(tab1);
+
+            //画布更新线程常驻
+            AnimationTimer animationTimer = new AnimationTimer() {
+                @Override
+                public void handle(long l) {
+                    editor.render();
+                }
+            };
+            animationTimer.start();
+
+
+        }
+
+/*
         {//添加编辑器
 
             try {
@@ -255,7 +299,7 @@ public class ZXNApp extends Application {
             }
 
 
-        }
+        }*/
 
 
         //正文容器 添加控件

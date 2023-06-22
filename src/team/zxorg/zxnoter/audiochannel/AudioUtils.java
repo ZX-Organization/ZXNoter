@@ -16,4 +16,15 @@ public class AudioUtils {
         AudioFormat targetFormat = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED, destSampleRate, destSampleSizeInBits, destChannels, destSampleSizeInBits / 8 * destChannels, destSampleRate, false);
         return AudioSystem.getAudioInputStream(targetFormat, audioInputStream);
     }
+
+    /**
+     * 音频流转换到目标格式
+     *
+     * @param audioInputStream 原始音频数据
+     * @param audioFormat   要转换的格式
+     * @return 处理后的音频数据
+     */
+    public static AudioInputStream audioStreamConvert(AudioInputStream audioInputStream, AudioFormat audioFormat) {
+        return AudioSystem.getAudioInputStream(audioFormat, audioInputStream);
+    }
 }

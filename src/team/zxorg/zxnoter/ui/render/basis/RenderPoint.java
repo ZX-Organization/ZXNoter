@@ -4,7 +4,7 @@ package team.zxorg.zxnoter.ui.render.basis;
  * 渲染点坐标
  */
 public class RenderPoint {
-    protected double x, y;
+    private double x, y;
 
     public RenderPoint() {
         x = 0;
@@ -36,7 +36,7 @@ public class RenderPoint {
     public String toString() {
         return "坐标[" +
                 "x: " + x +
-                ", y: " + y +
+                " y: " + y +
                 ']';
     }
 }

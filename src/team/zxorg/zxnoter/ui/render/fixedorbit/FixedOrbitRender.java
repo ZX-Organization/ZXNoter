@@ -14,16 +14,14 @@ import team.zxorg.zxnoter.ui.render.fixedorbit.key.FixedOrbitObjectKey;
 
 public abstract class FixedOrbitRender extends Render {
     String theme;//主题
-    public int orbits;
 
     public FixedOrbitRender(FixedOrbitRenderInfo renderInfo, ZXMap renderZXMap, Canvas canvas, String theme) {
         super(renderInfo, renderZXMap, canvas);
         this.theme = theme;
-        orbits = getOrbits();
     }
 
     @Override
-    public FixedOrbitRenderInfo getRenderInfo() {
+    public FixedOrbitRenderInfo getInfo() {
         return (FixedOrbitRenderInfo) renderInfo;
     }
 
@@ -37,8 +35,8 @@ public abstract class FixedOrbitRender extends Render {
     }
 
     private int getOrbits() {
-        getRenderInfo().orbits.set(Integer.parseInt(zxMap.unLocalizedMapInfo.getInfo("KeyCount")));
-        return getRenderInfo().orbits.get();
+        getInfo().orbits.set(Integer.parseInt(zxMap.unLocalizedMapInfo.getInfo("KeyCount")));
+        return getInfo().orbits.get();
     }
 
     /**
@@ -56,31 +54,11 @@ public abstract class FixedOrbitRender extends Render {
         } else {
             time = zxMap.notes.get(zxMap.notes.size() - 1).timeStamp;
         }
-        getRenderInfo().noteLastTime.set(time);
+        getInfo().noteLastTime.set(time);
         return time;
     }
 
 
-    /**
-     * 寻找之后的Timing
-     *
-     * @return
-     */
-    public Timing findAfterTiming(long time) {
-        //找到上一个基准timing
-        Timing baseTiming = new Timing(0, 1, false, 0);
-        Timing timing = new Timing(0, 1, false, 0);
-        for (int i = 0; i < zxMap.timingPoints.size(); i++) {
-            if (timing.isNewBaseBpm)
-                baseTiming = timing;
-            if (zxMap.timingPoints.get(i).timestamp > time) {
-                return baseTiming;
-            }
-            timing = zxMap.timingPoints.get(i);
-
-        }
-        return timing;
-    }
 
 
 }

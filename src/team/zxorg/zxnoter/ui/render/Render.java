@@ -1,7 +1,8 @@
 package team.zxorg.zxnoter.ui.render;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.HPos;
-import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.canvas.Canvas;
@@ -19,9 +20,14 @@ public abstract class Render {
 
     public RenderRectangle renderRectangle = new RenderRectangle();
     public RenderRectangle canvasRectangle = new RenderRectangle();
-    private Image renderImage;
+    public Image renderImage;
 
-    protected abstract RenderInfo getRenderInfo();
+    /**
+     * 获取渲染信息
+     *
+     * @return 渲染信息
+     */
+    protected abstract RenderInfo getInfo();
 
 
     public Render(RenderInfo renderInfo, ZXMap zxMap, Canvas canvas) {
@@ -31,17 +37,21 @@ public abstract class Render {
         this.zxMap = zxMap;
         renderInfo.canvasWidth.bind(canvas.widthProperty());
         renderInfo.canvasHeight.bind(canvas.heightProperty());
+        renderInfo.canvasWidth.addListener((observable, oldValue, newValue) -> canvasRectangle.setWidth(HPos.LEFT, newValue.doubleValue()));
+        renderInfo.canvasHeight.addListener((observable, oldValue, newValue) -> canvasRectangle.setHeight(VPos.TOP, newValue.doubleValue()));
     }
 
     /**
      * 执行渲染操作
      */
     public void render() {
-        canvasRectangle.setSize(canvas);
         if (!(canvasRectangle.getWidth() == 0 || canvasRectangle.getHeight() == 0) && canvas.isVisible())
             renderHandle();
     }
 
+    /**
+     * 清除画布
+     */
     public void clearRect() {
         //清除区域
         canvas.getGraphicsContext2D().clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
@@ -80,8 +90,8 @@ public abstract class Render {
      */
     public void drawImage(Image image, RenderRectangle rectangle) {
         //检查是否包含在画布内
-        if (new RenderRectangle(0, 0, canvas.getWidth(), canvas.getHeight()).intersects(rectangle)) {
-            graphics.drawImage(image, rectangle.getX(), rectangle.getY(), rectangle.getWidth(), rectangle.getHeight());
+        if (canvasRectangle.isIntersection(rectangle)) {
+            graphics.drawImage(image, rectangle.getLeft(), rectangle.getTop(), rectangle.getWidth(), rectangle.getHeight());
         }
 
     }
@@ -91,9 +101,10 @@ public abstract class Render {
      *
      * @param image 图片
      */
-    public void loadRenderImage(Image image) {
+    public void loadImage(Image image) {
         renderImage = image;
-        renderRectangle.setSize(image);
+        renderRectangle.setXY(Pos.TOP_LEFT, 0, 0);
+        renderRectangle.setSize(Pos.TOP_LEFT, image.getWidth(), image.getHeight());
     }
 
     /**
@@ -103,26 +114,4 @@ public abstract class Render {
         drawImage(renderImage, renderRectangle);
     }
 
-    /**
-     * 设置渲染区域比例缩放
-     *
-     * @param value       值
-     * @param orientation 缩放策略
-     */
-    public void renderRectangleScale(double value, Orientation orientation) {
-        renderRectangle.scale(renderImage, value, orientation);
-    }
-
-    /**
-     * 设置渲染区域偏移一半
-     */
-    public void renderRectangleOffsetPositionByHalf(Pos pos) {
-        renderRectangle.offsetPositionByHalf(pos);
-    }
-    public void renderRectangleSetX(double x) {
-        renderRectangle.setX(x);
-    }
-    public void renderRectangleSetY(double y) {
-        renderRectangle.setY(y);
-    }
 }

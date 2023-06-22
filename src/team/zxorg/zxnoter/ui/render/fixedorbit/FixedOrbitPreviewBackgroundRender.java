@@ -5,7 +5,6 @@ import javafx.beans.property.SimpleFloatProperty;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
 import team.zxorg.zxnoter.map.ZXMap;
-import team.zxorg.zxnoter.note.timing.Timing;
 import team.zxorg.zxnoter.ui.render.fixedorbit.key.FixedOrbitObjectKey;
 
 public class FixedOrbitPreviewBackgroundRender extends FixedOrbitRender {
@@ -25,15 +24,15 @@ public class FixedOrbitPreviewBackgroundRender extends FixedOrbitRender {
 
         //绘制判定线
         image = getImage(FixedOrbitObjectKey.PREVIEW_JUDGED_LINE);
-        graphics.drawImage(image, 0, getRenderInfo().getTimeToPosition(mainJudgedLinePositionPercentage.doubleValue()) - image.getHeight() / 2, renderInfo.canvasWidth.get(), image.getHeight());
+        graphics.drawImage(image, 0, getInfo().getTimeToPosition(mainJudgedLinePositionPercentage.doubleValue()) - image.getHeight() / 2, renderInfo.canvasWidth.get(), image.getHeight());
 
         //绘制底部线
         image = getImage(FixedOrbitObjectKey.BOTTOM_LINE);
-        graphics.drawImage(image, 0, getRenderInfo().getTimeToPosition(0) - image.getHeight() / 2, renderInfo.canvasWidth.get(), image.getHeight());
+        graphics.drawImage(image, 0, getInfo().getTimeToPosition(0) - image.getHeight() / 2, renderInfo.canvasWidth.get(), image.getHeight());
 
         //绘制头部线
         image = getImage(FixedOrbitObjectKey.TOP_LINE);
-        graphics.drawImage(image, 0, getRenderInfo().getTimeToPosition(getLastTime() + getRenderInfo().judgedLinePositionTimeOffset.get()) - image.getHeight() / 2, renderInfo.canvasWidth.get(), image.getHeight());
+        graphics.drawImage(image, 0, getInfo().getTimeToPosition(getLastTime() + getInfo().judgedLinePositionTimeOffset.get()) - image.getHeight() / 2, renderInfo.canvasWidth.get(), image.getHeight());
 
 
     }

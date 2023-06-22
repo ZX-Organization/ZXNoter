@@ -6,6 +6,7 @@ import team.zxorg.zxnoter.audiochannel.channel.AudioInputChannel;
 import javax.sound.sampled.AudioFormat;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class ThreadAudioMixer extends AudioMixer {
     public interface AudioMixerHandler {
@@ -32,12 +33,12 @@ public class ThreadAudioMixer extends AudioMixer {
 
     @Override
     void mixer() {
-        /*//将所有通道电平混合
-        for (AudioChannel channel : mixerChannels) {
-            channel.read(mixerBuffer, true);
+        //将所有通道电平混合
+        for (AudioInputChannel channel : mixerChannels) {
+            channel.read(mixerByteBuffer, true);
         }
-        mixerHandler.handleSample(readMixerBuffer());//处理电平
-        Arrays.fill(mixerBuffer, 0);*/
+        mixerHandler.handleSample(mixerByteBuffer);//处理电平
+        Arrays.fill(mixerByteBuffer, 0);
     }
 
 
