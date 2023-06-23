@@ -14,6 +14,7 @@ import team.zxorg.zxnoter.io.reader.ImdReader;
 import team.zxorg.zxnoter.io.reader.OsuReader;
 import team.zxorg.zxnoter.map.ZXMap;
 import team.zxorg.zxnoter.map.editor.ZXFixedOrbitMapEditor;
+import team.zxorg.zxnoter.map.mapInfo.ZXMInfo;
 import team.zxorg.zxnoter.resource.ZXResources;
 import team.zxorg.zxnoter.ui_old.TimeUtils;
 import team.zxorg.zxnoter.ui_old.component.CanvasPane;
@@ -75,17 +76,15 @@ public class MapEditor extends BaseEditor {
 
     public MapEditor(Path mapPath) {
 
-
-        /*try {
-            this.zxMap = OsuReader.readFile(mapPath);
+        try {
+            this.zxMap = new OsuReader().read(mapPath);
         } catch (Exception e) {
-            //e.printStackTrace();
             try {
-                this.zxMap = ImdReader.readFile(mapPath);
+                this.zxMap = new ImdReader().read(mapPath);
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
-        }*/
+        }
 
         this.mapResourcePath = mapPath.getParent();
         this.setPrefSize(Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE);
@@ -241,7 +240,6 @@ public class MapEditor extends BaseEditor {
         mainMapRender = new FixedOrbitMapRender(new FixedOrbitRenderInfo(mapCanvas.canvas), mapCanvas, zxMap, "normal", "default");
         mainMapRender.getInfo().timelineZoom.setValue(1.2f);
         mainMapRender.getInfo().judgedLinePositionPercentage.setValue(0.95f);
-        mainMapRender.getInfo().orbits.set(Integer.parseInt(zxMap.unLocalizedMapInfo.getInfo("KeyCount")));
 
         //绑定预览和主部分渲染信息
         previewMapRender.getInfo().orbits.bind(mainMapRender.getInfo().orbits);
@@ -400,7 +398,7 @@ public class MapEditor extends BaseEditor {
                         orbits++;
                     else
                         orbits--;
-                    zxMap.unLocalizedMapInfo.addInfo("", String.valueOf(orbits));
+                    zxMap.unLocalizedMapInfo.addInfo(ZXMInfo.KeyCount, String.valueOf(orbits));
                     button.setShape(ZXResources.getSvg("svg.icons.zxnoter." + orbits + "k"));
                     mainMapRender.getInfo().orbits.set(orbits);
                 });

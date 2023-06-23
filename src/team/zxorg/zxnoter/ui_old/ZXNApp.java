@@ -11,6 +11,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import team.zxorg.zxnoter.audiochannel.ThreadAudioMixer;
 import team.zxorg.zxnoter.audiochannel.channel.SourceAudioOutputChannel;
+import team.zxorg.zxnoter.map.mapInfo.ZXMInfo;
 import team.zxorg.zxnoter.resource.ZXResources;
 import team.zxorg.zxnoter.ui_old.editor.MapEditor;
 
@@ -176,7 +177,7 @@ public class ZXNApp extends Application {
 
             MapEditor editor = new MapEditor(Paths.get("docs/reference/Contrapasso -paradiso-/t+pazolite - Contrapasso -paradiso-_4k_hd.imd"));
 
-            Tab tab1 = new Tab(editor.zxMap.unLocalizedMapInfo.getInfo("Title"));
+            Tab tab1 = new Tab(editor.zxMap.unLocalizedMapInfo.getInfo(ZXMInfo.Title));
             tab1.setGraphic(ZXResources.getSvgPane("svg.icons.zxnoter.file-notemap-line", 18, Color.DARKGREEN));
 
             tab1.setContent(editor);
@@ -199,7 +200,7 @@ public class ZXNApp extends Application {
 
             MapEditor editor = new MapEditor(Paths.get("docs/reference/LeaF - NANO DEATH!!!!!/LeaF - NANO DEATH!!!!! (nowsmart) [DEATH].osu"));
 
-            Tab tab1 = new Tab(editor.zxMap.unLocalizedMapInfo.getInfo("Title"));
+            Tab tab1 = new Tab(editor.zxMap.unLocalizedMapInfo.getInfo(ZXMInfo.Title));
             tab1.setGraphic(ZXResources.getSvgPane("svg.icons.zxnoter.file-notemap-line", 18, Color.DARKGREEN));
 
             tab1.setContent(editor);

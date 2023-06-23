@@ -1,3 +1,31 @@
+
+:root {
+  --color-blue: #498ba7;
+  --color-light-blue: #519aba;
+  --color-red: #b8383d;
+  --color-dark-red: #cc3e44;
+  --color-purple: #9068b0;
+  --color-light-purple: #a074c4;
+  --color-green: #b7b73b;
+  --color-light-green: #cbcb41;
+  --color-olive: #7fae42;
+  --color-light-olive: #8dc149;
+  --color-dark-gray: #455155;
+  --color-medium-gray: #4d5a5e;
+  --color-orange: #cc6d2e;
+  --color-light-orange: #e37933;
+  --color-dark-gray-2: #627379;
+  --color-medium-gray-2: #6d8086;
+  --color-light-gray: #bfc2c1;
+  --color-medium-light-gray: #d4d7d6;
+  --color-pink: #dd4b78;
+  --color-light-pink: #f55385;
+  
+}
+
+
+
+
 .title-bar {
     -fx-background-color: #3E3E3E;
     -fx-border-color: #505050;
@@ -230,185 +258,4 @@
 
     -fx-background-radius: 0;
     -fx-text-fill: #C8C8C8;
-}
-
-
-/* 背景颜色 */
-.background-color-red {
-    -fx-background-color: #dd4444;
-}
-
-.background-color-blue {
-    -fx-background-color: #3465a4;
-}
-
-.background-color-green {
-    -fx-background-color: #73d216;
-}
-
-.background-color-yellow {
-    -fx-background-color: #edd400;
-}
-
-.background-color-orange {
-    -fx-background-color: #f57900;
-}
-
-.background-color-purple {
-    -fx-background-color: #75507b;
-}
-
-.background-color-pink {
-    -fx-background-color: #d33682;
-}
-
-.background-color-gray {
-    -fx-background-color: #888888;
-}
-
-.background-color-black {
-    -fx-background-color: #1e1e1e;
-}
-
-.background-color-cyan {
-    -fx-background-color: #2aa198;
-}
-
-.background-color-teal {
-    -fx-background-color: #008b8b;
-}
-
-.background-color-indigo {
-    -fx-background-color: #4b0082;
-}
-
-.background-color-brown {
-    -fx-background-color: #8b4513;
-}
-
-.background-color-navy {
-    -fx-background-color: #000080;
-}
-
-.background-color-olive {
-    -fx-background-color: #808000;
-}
-
-.background-color-silver {
-    -fx-background-color: #c0c0c0;
-}
-
-.background-color-gold {
-    -fx-background-color: #ffd700;
-}
-
-.background-color-lime {
-    -fx-background-color: #00ff00;
-}
-
-.background-color-magenta {
-    -fx-background-color: #ff00ff;
-}
-
-.background-color-slategray {
-    -fx-background-color: #708090;
-}
-
-.background-color-darkslategray {
-    -fx-background-color: #2f4f4f;
-}
-
-.background-color-lightsalmon {
-    -fx-background-color: #ffa07a;
-}
-
-.background-color-lightsteelblue {
-    -fx-background-color: #b0c4de;
-}
-
-.background-color-darkkhaki {
-    -fx-background-color: #bdb76b;
-}
-
-
-/* 文本颜色 */
-.text-color-white {
-    -fx-text-fill: #ffffff;
-}
-
-.text-color-red {
-    -fx-text-fill: #dd4444;
-}
-
-.text-color-green {
-    -fx-text-fill: #73d216;
-}
-
-.text-color-blue {
-    -fx-text-fill: #3465a4;
-}
-
-.text-color-yellow {
-    -fx-text-fill: #edd400;
-}
-
-.text-color-orange {
-    -fx-text-fill: #f57900;
-}
-
-.text-color-purple {
-    -fx-text-fill: #75507b;
-}
-
-.text-color-pink {
-    -fx-text-fill: #d33682;
-}
-
-.text-color-gray {
-    -fx-text-fill: #888888;
-}
-
-.text-color-black {
-    -fx-text-fill: #1e1e1e;
-}
-
-/* 边框颜色 */
-.border-color-white {
-    -fx-border-color: #ffffff;
-}
-
-.border-color-red {
-    -fx-border-color: #dd4444;
-}
-
-.border-color-green {
-    -fx-border-color: #73d216;
-}
-
-.border-color-blue {
-    -fx-border-color: #3465a4;
-}
-
-.border-color-yellow {
-    -fx-border-color: #edd400;
-}
-
-.border-color-orange {
-    -fx-border-color: #f57900;
-}
-
-.border-color-purple {
-    -fx-border-color: #75507b;
-}
-
-.border-color-pink {
-    -fx-border-color: #d33682;
-}
-
-.border-color-gray {
-    -fx-border-color: #888888;
-}
-
-.border-color-black {
-    -fx-border-color: #1e1e1e;
 }

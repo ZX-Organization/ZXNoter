@@ -1,6 +1,6 @@
 package team.zxorg.zxnoter;
 
-import team.zxorg.zxnoter.ui.ZXNApp;
+import team.zxorg.zxnoter.ui_old.ZXNApp;
 
 public class Main {
     public static void main(String[] args) {

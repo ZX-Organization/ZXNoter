@@ -1,7 +1,14 @@
 package team.zxorg.zxnoter.io;
 
+import team.zxorg.zxnoter.io.reader.ImdReader;
+import team.zxorg.zxnoter.io.reader.OsuReader;
+import team.zxorg.zxnoter.map.ZXMap;
+
+import java.io.IOException;
+import java.nio.file.Path;
+
 public class IoTest {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         //try {
             //ZXMap map = ImdReader.readFile(Path.of("docs/reference/Contrapasso -paradiso-/t+pazolite - Contrapasso -paradiso-_4k_hd.imd"));
             //System.out.println(map.notes);

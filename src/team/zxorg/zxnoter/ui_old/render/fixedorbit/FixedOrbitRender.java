@@ -3,6 +3,7 @@ package team.zxorg.zxnoter.ui_old.render.fixedorbit;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
 import team.zxorg.zxnoter.map.ZXMap;
+import team.zxorg.zxnoter.map.mapInfo.ZXMInfo;
 import team.zxorg.zxnoter.note.BaseNote;
 import team.zxorg.zxnoter.note.fixedorbit.ComplexNote;
 import team.zxorg.zxnoter.note.fixedorbit.LongNote;
@@ -17,6 +18,7 @@ public abstract class FixedOrbitRender extends Render {
     public FixedOrbitRender(FixedOrbitRenderInfo renderInfo, ZXMap renderZXMap, Canvas canvas, String theme) {
         super(renderInfo, renderZXMap, canvas);
         this.theme = theme;
+        getOrbits();
     }
 
     @Override
@@ -33,8 +35,8 @@ public abstract class FixedOrbitRender extends Render {
         return ZXResources.getImage("img.note.theme." + theme + "." + objectKey.name);
     }
 
-    private int getOrbits() {
-        getInfo().orbits.set(Integer.parseInt(zxMap.unLocalizedMapInfo.getInfo("KeyCount")));
+    public int getOrbits() {
+        getInfo().orbits.set(Integer.parseInt(zxMap.unLocalizedMapInfo.getInfo(ZXMInfo.KeyCount)));
         return getInfo().orbits.get();
     }
 

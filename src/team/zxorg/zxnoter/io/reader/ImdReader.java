@@ -36,6 +36,7 @@ public class ImdReader implements MapReader{
 
     @Override
     public ZXMap read(Path path) throws IOException {
+        System.out.println(path);
         String fileName = path.getFileName().toString();
         //检查合法性
         boolean illegalFile = !fileName.endsWith(".imd") && !((fileName.length() - fileName.replaceAll("_", "").length()) == 2);
