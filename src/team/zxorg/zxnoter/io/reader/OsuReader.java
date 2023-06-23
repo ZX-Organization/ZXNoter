@@ -41,7 +41,7 @@ public class OsuReader implements MapReader{
         //是否进入事件值读取模式
         boolean eventValueMode = false;
         //事件缓存
-        String eventNameTemp = "";
+        OsuInfo eventInfo = null;
         //获取基准bpm
         boolean getBaseBpm = true;
         double baseBpm = 0.;
@@ -58,11 +58,16 @@ public class OsuReader implements MapReader{
         );
         int keyCount = 0;
         while ((readTemp = bfReader.readLine()) != null){
+            //按照设置的读取模式读取信息
+            if ("".equals(readTemp)){
+                //跳过空行
+                continue;
+            }
             //读取谱面信息
             if (readTemp.startsWith("[")){
                 //处理事件属性末尾未定义情况
                 if (eventValueMode){
-                    unLocalizedMapInfo.addInfo(OsuInfo.valueOf(eventNameTemp).unLocalize() , "");
+                    unLocalizedMapInfo.addInfo(eventInfo.unLocalize() , "");
                 }
                 //设置读取模式
                 if ("[Events]".equals(readTemp)){
@@ -80,11 +85,7 @@ public class OsuReader implements MapReader{
                 mode = -1;
                 continue;
             }
-            //按照设置的读取模式读取信息
-            if ("".equals(readTemp)){
-                //跳过空行
-                continue;
-            }
+
             switch (mode){
                 case -1->{
                     //带冒号属性
@@ -110,17 +111,17 @@ public class OsuReader implements MapReader{
                         //事件值读取模式
                         if (readTemp.startsWith("//")){
                             //值读取模式又一次读到事件名
-                            unLocalizedMapInfo.addInfo(OsuInfo.valueOf(eventNameTemp).unLocalize() , "");
-                            eventNameTemp = OsuInfo.valueOf(key).getOriginName();
+                            unLocalizedMapInfo.addInfo(eventInfo.unLocalize() , "");
+                            eventInfo = OsuInfo.valueOf(key);
                         }else {
                             //值读取
-                            unLocalizedMapInfo.addInfo(OsuInfo.valueOf(eventNameTemp).unLocalize() , readTemp);
+                            unLocalizedMapInfo.addInfo(eventInfo.unLocalize() , readTemp);
                             eventValueMode = false;
                         }
                     }else {
                         if (readTemp.startsWith("//")){
                             eventValueMode = true;
-                            eventNameTemp = OsuInfo.valueOf(key).getOriginName();
+                            eventInfo = OsuInfo.valueOf(key);
                         }
                     }
                     continue;

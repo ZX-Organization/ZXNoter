@@ -1,6 +1,5 @@
 package team.zxorg.zxnoter.io;
 
-import team.zxorg.zxnoter.io.reader.ImdReader;
 import team.zxorg.zxnoter.io.reader.OsuReader;
 import team.zxorg.zxnoter.map.ZXMap;
 
@@ -20,7 +19,8 @@ public class IoTest {
             //System.out.println(convertMap.notes);
             //System.out.println(Arrays.toString(((ComplexNote)map.notes.get(19)).convertNote(ImdInfo.ConvertMethod.BASE_SLIDE)));
             //System.out.println(map.imdConvertNoComplex(ImdInfo.ConvertMethod.BASE_SLIDE));
-            //ZXMap map = OsuReader.readFile(Path.of("docs/reference/Dan reform jackmap mashup/1.osu"));
+            ZXMap map = new OsuReader().read(Path.of("docs/reference/Dan reform jackmap mashup/1.osu"));
+        System.out.println(map);
             /*ZXFixedOrbitMapEditor editor = new ZXFixedOrbitMapEditor(map);
             System.out.println("第一个->"+map.notes.get(0));
             System.out.println("第二个->"+map.notes.get(1));
