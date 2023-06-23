@@ -15,6 +15,7 @@ import team.zxorg.zxnoter.io.reader.OsuReader;
 import team.zxorg.zxnoter.map.ZXMap;
 import team.zxorg.zxnoter.map.editor.ZXFixedOrbitMapEditor;
 import team.zxorg.zxnoter.map.mapInfo.ZXMInfo;
+import team.zxorg.zxnoter.note.fixedorbit.ComplexNote;
 import team.zxorg.zxnoter.resource.ZXResources;
 import team.zxorg.zxnoter.ui_old.TimeUtils;
 import team.zxorg.zxnoter.ui_old.component.CanvasPane;
@@ -173,10 +174,16 @@ public class MapEditor extends BaseEditor {
                 time = RenderBeat.alignBeatsTime(renderBeats, time);
                 if (renderNote != null) {
                     //zxFixedOrbitMapEditor.shadowMap.notes.clear();
-                    if (renderNote.get() != null) {
-                        zxFixedOrbitMapEditor.move(renderNote.get().note, orbit, true);
+
+                    RenderNote renderNote1 = renderNote.get();
+                    if (renderNote1 != null) {
+                        if (renderNote1.complexNote == null)
+                            zxFixedOrbitMapEditor.move(renderNote1.note, orbit, true);
+                        else {//组合键
+                            System.out.println(zxMap.notes.indexOf(renderNote1.complexNote));
+                            zxFixedOrbitMapEditor.move(renderNote1.complexNote,orbit, renderNote1.complexNote.notes.indexOf(renderNote1.note) ,true, true);
+                        }
                         //zxFixedOrbitMapEditor.move(renderNote.note, time);
-                        System.out.println(TimeUtils.formatTime(time));
                     }
                 }
 
