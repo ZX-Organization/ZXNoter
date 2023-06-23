@@ -92,7 +92,7 @@ public class OsuReader implements MapReader{
                     String value = readTemp.substring(readTemp.lastIndexOf(":") + 1);
                     unLocalizedMapInfo.addInfo(
                             OsuInfo.valueOf(name).unLocalize() ,
-                            value
+                            value.trim()
                     );
                     if ("CircleSize".equals(name))
                         keyCount = Integer.parseInt(value);

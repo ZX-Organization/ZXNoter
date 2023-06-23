@@ -2,6 +2,7 @@ package team.zxorg.zxnoter.map;
 
 import team.zxorg.zxnoter.map.mapInfo.ImdInfo;
 import team.zxorg.zxnoter.map.mapInfo.UnLocalizedMapInfo;
+import team.zxorg.zxnoter.map.mapInfo.ZXMInfo;
 import team.zxorg.zxnoter.note.BaseNote;
 import team.zxorg.zxnoter.note.fixedorbit.ComplexNote;
 import team.zxorg.zxnoter.note.fixedorbit.FixedOrbitNote;
@@ -342,7 +343,7 @@ public class ZXMap {
                 tempMap.insertNote(tempNote);
             }
         }
-        tempMap.unLocalizedMapInfo.addInfo("TabRows",String.valueOf(tempMap.notes.size()));
+        tempMap.unLocalizedMapInfo.addInfo(ZXMInfo.ObjectCount,String.valueOf(tempMap.notes.size()));
         return tempMap;
     }
     @Override
