@@ -1,5 +1,6 @@
 package team.zxorg.zxnoter.map.editor;
 
+import team.zxorg.zxnoter.note.BaseNote;
 import team.zxorg.zxnoter.note.fixedorbit.FixedOrbitNote;
 
 import java.util.ArrayList;
@@ -9,7 +10,7 @@ public class MapOperate {
      * 同时操作的所有按键,应与结果同样大小
      */
     ArrayList<FixedOrbitNote> srcNotes;
-    ArrayList<FixedOrbitNote> desNotes;
+    ArrayList<BaseNote> desNotes;
 
     /**
      * 构建操作
@@ -20,9 +21,9 @@ public class MapOperate {
     }
     private MapOperate(MapOperate withdrawOperate){
         //深拷贝
-        ArrayList<FixedOrbitNote> srcNotes = new ArrayList<>();
-        ArrayList<FixedOrbitNote> desNotes = new ArrayList<>();
-        for (FixedOrbitNote note:withdrawOperate.desNotes){
+        ArrayList<BaseNote> srcNotes = new ArrayList<>();
+        ArrayList<BaseNote> desNotes = new ArrayList<>();
+        for (BaseNote note:withdrawOperate.desNotes){
             srcNotes.add(note.clone());
         }
         for (FixedOrbitNote note:withdrawOperate.srcNotes){

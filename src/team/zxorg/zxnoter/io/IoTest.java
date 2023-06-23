@@ -5,6 +5,8 @@ import team.zxorg.zxnoter.io.reader.OsuReader;
 import team.zxorg.zxnoter.map.ZXMap;
 import team.zxorg.zxnoter.map.editor.ZXFixedOrbitMapEditor;
 import team.zxorg.zxnoter.note.fixedorbit.ComplexNote;
+import team.zxorg.zxnoter.note.fixedorbit.LongNote;
+import team.zxorg.zxnoter.note.fixedorbit.SlideNote;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -27,15 +29,26 @@ public class IoTest {
             System.out.println("第"+i+"个键->"+map.notes.get(i));
         }*/
         //System.out.println(map.notes.get(4));
-        System.out.println("原->"+map.notes.get(4));
+
+
+
+        System.out.println("原->"+map.notes.get(127));
         ZXFixedOrbitMapEditor editor = new ZXFixedOrbitMapEditor(map);
-        editor.move((ComplexNote) map.notes.get(4),2,0,true,true);
-        //editor.modifyDone();
-        //System.out.println("编辑完成第一次->"+map.notes.get(4));
-        //System.out.println(editor.shadowMap.notes);
-        editor.move((ComplexNote) map.notes.get(4),1,0,true,true);
+        editor.move((ComplexNote) map.notes.get(127),-1,4,true,false);
         editor.modifyDone();
-        System.out.println("最终结果->"+map.notes.get(4));
+        System.out.println("最终结果->"+map.notes.get(127));
+
+/*
+
+        System.out.println(
+                new SlideNote(10617,3,-2).compareTo(
+                        new LongNote(10617,1,247)
+                )
+        );
+*/
+
+
+
         /*System.out.println("编辑完成第二次->"+map.notes.get(4));
         for (int i = 0; i < 10; i++) {
             System.out.println("第"+i+"个键->"+map.notes.get(i));

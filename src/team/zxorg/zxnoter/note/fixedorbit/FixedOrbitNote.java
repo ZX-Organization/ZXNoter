@@ -66,11 +66,26 @@ public class FixedOrbitNote extends BaseNote implements Cloneable,Comparable<Bas
     }
     @Override
     public int compareTo(BaseNote baseNote) {
+        //首先检查时间戳是否不相同
+
+/*        System.out.println(this+"与"+baseNote+"比较");
+        System.out.println();*/
+        //传入时间戳大于当前时间戳
         if (timeStamp<baseNote.timeStamp) return -1;
         else if (timeStamp> baseNote.timeStamp) return 1;
+
         else if (baseNote instanceof FixedOrbitNote fixedOrbitNote){
-            return -Integer.compare(orbit, fixedOrbitNote.orbit);
-        }else return 0;
+
+            if (baseNote instanceof SlideNote && this instanceof LongNote){
+                return 1;
+            }
+            if (baseNote instanceof LongNote && this instanceof SlideNote){
+                return -1;
+            }
+            return Integer.compare(orbit, fixedOrbitNote.orbit);
+        }
+        //相同
+        else return 0;
     }
 
     @Override
