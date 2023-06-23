@@ -1,24 +1,5 @@
 package team.zxorg.zxnoter.io;
 
-import team.zxorg.zxnoter.io.reader.ImdReader;
-import team.zxorg.zxnoter.io.reader.OsuReader;
-import team.zxorg.zxnoter.io.writer.ImdWriter;
-import team.zxorg.zxnoter.io.writer.OsuWriter;
-import team.zxorg.zxnoter.map.ZXMap;
-import team.zxorg.zxnoter.map.editor.ZXFixedOrbitMapEditor;
-import team.zxorg.zxnoter.map.mapInfos.ImdInfo;
-import team.zxorg.zxnoter.note.fixedorbit.ComplexNote;
-import team.zxorg.zxnoter.note.fixedorbit.FixedOrbitNote;
-
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.nio.file.Path;
-import java.util.Arrays;
-
 public class IoTest {
     public static void main(String[] args) {
         //try {

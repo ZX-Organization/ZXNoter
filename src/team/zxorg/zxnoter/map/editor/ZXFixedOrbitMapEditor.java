@@ -1,7 +1,7 @@
 package team.zxorg.zxnoter.map.editor;
 
 import team.zxorg.zxnoter.map.ZXMap;
-import team.zxorg.zxnoter.map.mapInfos.ImdInfo;
+import team.zxorg.zxnoter.map.mapInfo.ImdInfo;
 import team.zxorg.zxnoter.note.fixedorbit.ComplexNote;
 import team.zxorg.zxnoter.note.fixedorbit.FixedOrbitNote;
 import team.zxorg.zxnoter.note.fixedorbit.LongNote;
@@ -70,10 +70,13 @@ public class ZXFixedOrbitMapEditor {
         ComplexNote shadowNote = (ComplexNote) checkOperate(note);
         //编辑子键
         FixedOrbitNote child = shadowNote.notes.get(childIndex);
+        int orbitChanges = orbit;
         if (child instanceof LongNote childLongNote) {
             //直接编辑子键
             if (isAbsolute){
+                orbitChanges = orbit - childLongNote.orbit;
                 childLongNote.orbit = orbit;
+
             }else {
                 childLongNote.orbit += orbit;
             }
@@ -111,6 +114,7 @@ public class ZXFixedOrbitMapEditor {
                             //缓存下下个物件的轨道位置
                             int nextNextOrbit = slideNote.orbit + slideNote.slideArg;
                             slideNote.orbit = childLongNote.orbit;
+                            //连接断开的滑键
                             slideNote.slideArg = nextNextOrbit - slideNote.orbit;
                         }
                     }
@@ -127,14 +131,14 @@ public class ZXFixedOrbitMapEditor {
                 //跟随
                 //检查
                 for (int i = childIndex+1; i < shadowNote.notes.size()-1; i++) {
-                    int resOrb = shadowNote.notes.get(i).orbit + orbit;
+                    int resOrb = shadowNote.notes.get(i).orbit + orbitChanges;
                     if (resOrb >= Integer.parseInt(shadowMap.unLocalizedMapInfo.getInfo(ImdInfo.ImdKeyCount.unLocalize()))){
                         return false;
                     }
                 }
                 //未return
                 for (int i = childIndex+1; i < shadowNote.notes.size()-1; i++) {
-                    shadowNote.notes.get(i).orbit += orbit;
+                    shadowNote.notes.get(i).orbit += orbitChanges;
                 }
             }
             tempMapOperate.desNotes.add(shadowNote);

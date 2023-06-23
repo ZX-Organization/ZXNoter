@@ -1,6 +1,6 @@
 package team.zxorg.zxnoter.note.fixedorbit;
 
-import team.zxorg.zxnoter.map.mapInfos.ImdInfo;
+import team.zxorg.zxnoter.map.mapInfo.ImdInfo;
 
 /**
  * 滑键

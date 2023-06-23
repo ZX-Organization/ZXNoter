@@ -1,4 +1,4 @@
-package team.zxorg.zxnoter.map.mapInfos;
+package team.zxorg.zxnoter.map.mapInfo;
 
 /**
  * osu词条及反本地化名,一些带有空格的词条反本地化名与本地化名一致

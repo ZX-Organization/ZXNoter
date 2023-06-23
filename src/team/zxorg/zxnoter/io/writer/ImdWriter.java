@@ -1,9 +1,9 @@
 package team.zxorg.zxnoter.io.writer;
 
-import team.zxorg.zxnoter.map.UnLocalizedMapInfo;
+import team.zxorg.zxnoter.map.mapInfo.UnLocalizedMapInfo;
 import team.zxorg.zxnoter.map.ZXMap;
-import team.zxorg.zxnoter.map.mapInfos.ImdInfo;
-import team.zxorg.zxnoter.map.mapInfos.ZXMInfo;
+import team.zxorg.zxnoter.map.mapInfo.ImdInfo;
+import team.zxorg.zxnoter.map.mapInfo.ZXMInfo;
 import team.zxorg.zxnoter.note.BaseNote;
 import team.zxorg.zxnoter.note.fixedorbit.ComplexNote;
 import team.zxorg.zxnoter.note.fixedorbit.FixedOrbitNote;

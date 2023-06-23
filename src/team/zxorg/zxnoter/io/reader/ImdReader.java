@@ -1,7 +1,7 @@
 package team.zxorg.zxnoter.io.reader;
 
-import team.zxorg.zxnoter.map.mapInfos.ImdInfo;
-import team.zxorg.zxnoter.map.UnLocalizedMapInfo;
+import team.zxorg.zxnoter.map.mapInfo.ImdInfo;
+import team.zxorg.zxnoter.map.mapInfo.UnLocalizedMapInfo;
 import team.zxorg.zxnoter.map.ZXMap;
 import team.zxorg.zxnoter.note.BaseNote;
 import team.zxorg.zxnoter.note.timing.Timing;

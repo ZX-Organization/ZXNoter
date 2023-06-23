@@ -1,10 +1,8 @@
 package team.zxorg.zxnoter.note.fixedorbit;
 
-import team.zxorg.zxnoter.map.mapInfos.ImdInfo;
-import team.zxorg.zxnoter.note.BaseNote;
+import team.zxorg.zxnoter.map.mapInfo.ImdInfo;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class ComplexNote extends FixedOrbitNote implements Cloneable {
     public ArrayList<FixedOrbitNote> notes = new ArrayList<>();

@@ -1,4 +1,4 @@
-package team.zxorg.zxnoter.map.mapInfos;
+package team.zxorg.zxnoter.map.mapInfo;
 
 public enum ZXMInfo{
 

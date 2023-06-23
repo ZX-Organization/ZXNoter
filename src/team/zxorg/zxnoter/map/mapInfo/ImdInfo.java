@@ -1,4 +1,4 @@
-package team.zxorg.zxnoter.map.mapInfos;
+package team.zxorg.zxnoter.map.mapInfo;
 
 /**
  * imd词条及反本地化名

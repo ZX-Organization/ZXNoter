@@ -1,9 +1,5 @@
-package team.zxorg.zxnoter.map;
+package team.zxorg.zxnoter.map.mapInfo;
 
-import team.zxorg.zxnoter.map.mapInfos.ImdInfo;
-import team.zxorg.zxnoter.map.mapInfos.ZXMInfo;
-
-import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
