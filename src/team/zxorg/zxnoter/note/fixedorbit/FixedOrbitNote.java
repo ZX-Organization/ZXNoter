@@ -69,7 +69,7 @@ public class FixedOrbitNote extends BaseNote implements Cloneable,Comparable<Bas
         if (timeStamp<baseNote.timeStamp) return -1;
         else if (timeStamp> baseNote.timeStamp) return 1;
         else if (baseNote instanceof FixedOrbitNote fixedOrbitNote){
-            return Integer.compare(orbit, fixedOrbitNote.orbit);
+            return -Integer.compare(orbit, fixedOrbitNote.orbit);
         }else return 0;
     }
 

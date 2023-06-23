@@ -68,6 +68,11 @@ public class ZXFixedOrbitMapEditor {
      */
     public boolean move(ComplexNote note, int orbit, int childIndex, boolean keepAfterNote, boolean isAbsolute) {
         ComplexNote shadowNote = (ComplexNote) checkOperate(note);
+        //缓存子键对象
+        FixedOrbitNote tempChild = note.notes.get(childIndex);
+        //排序
+        shadowNote.notes.sort(FixedOrbitNote::compareTo);
+        childIndex = shadowNote.notes.indexOf(tempChild);
         //编辑子键
         FixedOrbitNote child = shadowNote.notes.get(childIndex);
         int orbitChanges = orbit;
@@ -88,8 +93,6 @@ public class ZXFixedOrbitMapEditor {
                 //子键处于组合键头部(头部按键只能编辑长键[拉出])
                 //头部添加一个滑键
                 shadowNote.notes.add(new SlideNote(shadowNote.timeStamp, shadowNote.orbit, childLongNote.orbit - shadowNote.orbit));
-                //排序
-                shadowNote.notes.sort(FixedOrbitNote::compareTo);
             } else {
                 FixedOrbitNote previous = shadowNote.notes.get(childIndex - 1);
                 if (previous instanceof SlideNote slideNote) {
@@ -116,12 +119,19 @@ public class ZXFixedOrbitMapEditor {
                             slideNote.orbit = childLongNote.orbit;
                             //连接断开的滑键
                             slideNote.slideArg = nextNextOrbit - slideNote.orbit;
+
+                            if (shadowNote.notes.size()-1 == childIndex +1){
+                                //下一个按键即为尾按键
+
+                            }
                         }
                     }
                 }
             } else {
+                //后段子键跟随编辑
+
                 if (childIndex == shadowNote.notes.size() - 1){
-                    tempMapOperate.desNotes.add(shadowNote);
+                    //判断编辑的子键是否为尾子键,是直接结束编辑
                     if (shadows.contains(note)){
                         tempMapOperate.desNotes.remove(shadowNote);
                     }
@@ -141,11 +151,12 @@ public class ZXFixedOrbitMapEditor {
                     shadowNote.notes.get(i).orbit += orbitChanges;
                 }
             }
-            tempMapOperate.desNotes.add(shadowNote);
             if (shadows.contains(note)){
                 tempMapOperate.desNotes.remove(shadowNote);
             }
             tempMapOperate.desNotes.add(shadowNote);
+
+
             return true;
         }
         return false;
@@ -230,6 +241,8 @@ public class ZXFixedOrbitMapEditor {
         //检查操作结果中是否包含组合键
         for (FixedOrbitNote tempEditNote:tempMapOperate.desNotes){
             if (tempEditNote instanceof ComplexNote complexNote){
+                //排序
+                complexNote.notes.sort(FixedOrbitNote::compareTo);
                 checkComplexNote(complexNote);
             }
         }
@@ -237,8 +250,11 @@ public class ZXFixedOrbitMapEditor {
         for (FixedOrbitNote note:tempMapOperate.srcNotes)
             srcMap.deleteNote(note);
         //克隆结果插入原map
-        for (FixedOrbitNote note:tempMapOperate.desNotes)
+        for (FixedOrbitNote note:tempMapOperate.desNotes){
+            //System.out.println(note);
             srcMap.insertNote(note.clone());
+        }
+
 
         //清除此次编辑产生的所有虚影
         for (int i = 0; i < shadows.size(); i++) {
@@ -275,6 +291,10 @@ public class ZXFixedOrbitMapEditor {
             shadowMap.insertNote(shadowNote);
             shadows.add(shadowNote);
         }else {
+            shadows.remove(srcNote);
+            shadows.add(srcNote.clone());
+            shadowMap.notes.remove(srcNote);
+            shadowMap.insertNote(srcNote.clone());
             return (FixedOrbitNote) shadowMap.notes.get(shadowMap.notes.indexOf(shadowNote));
         }
         return shadowNote;
