@@ -3,27 +3,27 @@ package team.zxorg.zxnoter.map.mapInfos;
 /**
  * imd词条及反本地化名
  */
-public enum ImdInfo {
+public enum ImdInfo{
 
-    MapLength("MapLength", ""),
-    TimingCount("TimingCount", ""),
-    TabRows("TabRows", ""),
-    ImdBpm("BaseBpm", ""),
-    ImdTitle("Title", ""),
-    ImdVersion("Version", "ez"),
-    ImdKeyCount("KeyCount", ""),
-    ImdBgPath("BgPath", ""),
-    ImdAudioPath("AudioPath", "");
-    private final String unLocalizedName;
+    MapLength(ZXMInfo.MapLength, ""),
+    TimingCount(ZXMInfo.TimingCount, ""),
+    TabRows(ZXMInfo.ObjectCount, ""),
+    ImdBpm(ZXMInfo.Bpm, ""),
+    ImdTitle(ZXMInfo.Title, ""),
+    ImdVersion(ZXMInfo.Version, "ez"),
+    ImdKeyCount(ZXMInfo.KeyCount, ""),
+    ImdBgPath(ZXMInfo.BgPath, ""),
+    ImdAudioPath(ZXMInfo.AudioPath, "");
+    private final ZXMInfo unLocalizedInfo;
     private final String defaultValue;
 
-    ImdInfo(String unLocalizedName, String defaultValue) {
-        this.unLocalizedName = unLocalizedName;
+    ImdInfo(ZXMInfo unLocalizedInfo, String defaultValue) {
+        this.unLocalizedInfo = unLocalizedInfo;
         this.defaultValue = defaultValue;
     }
 
-    public String unLocalize() {
-        return unLocalizedName;
+    public ZXMInfo unLocalize() {
+        return unLocalizedInfo;
     }
 
     public String getDefaultValue() {

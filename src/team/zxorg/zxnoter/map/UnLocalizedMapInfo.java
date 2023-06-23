@@ -1,21 +1,25 @@
 package team.zxorg.zxnoter.map;
 
+import team.zxorg.zxnoter.map.mapInfos.ImdInfo;
+import team.zxorg.zxnoter.map.mapInfos.ZXMInfo;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
  * 本地化信息类
  */
 public class UnLocalizedMapInfo {
-    public HashMap<String , String > allInfo;
+    public HashMap<ZXMInfo, String > allInfo;
 
     public UnLocalizedMapInfo() {
         allInfo  = new HashMap<>();
     }
 
-    public void addInfo(String key , String value){
+    public void addInfo(ZXMInfo key , String value){
         allInfo.put(key , value);
     }
-    public String getInfo(String key){
+    public String getInfo(ZXMInfo key){
         return allInfo.get(key);
     }
 

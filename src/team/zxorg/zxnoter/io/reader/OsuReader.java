@@ -62,7 +62,7 @@ public class OsuReader implements MapReader{
             if (readTemp.startsWith("[")){
                 //处理事件属性末尾未定义情况
                 if (eventValueMode){
-                    unLocalizedMapInfo.addInfo(eventNameTemp , "");
+                    unLocalizedMapInfo.addInfo(OsuInfo.valueOf(eventNameTemp).unLocalize() , "");
                 }
                 //设置读取模式
                 if ("[Events]".equals(readTemp)){
@@ -110,17 +110,17 @@ public class OsuReader implements MapReader{
                         //事件值读取模式
                         if (readTemp.startsWith("//")){
                             //值读取模式又一次读到事件名
-                            unLocalizedMapInfo.addInfo(eventNameTemp , "");
-                            eventNameTemp = OsuInfo.valueOf(key).unLocalize();
+                            unLocalizedMapInfo.addInfo(OsuInfo.valueOf(eventNameTemp).unLocalize() , "");
+                            eventNameTemp = OsuInfo.valueOf(key).getOriginName();
                         }else {
                             //值读取
-                            unLocalizedMapInfo.addInfo(eventNameTemp , readTemp);
+                            unLocalizedMapInfo.addInfo(OsuInfo.valueOf(eventNameTemp).unLocalize() , readTemp);
                             eventValueMode = false;
                         }
                     }else {
                         if (readTemp.startsWith("//")){
                             eventValueMode = true;
-                            eventNameTemp = OsuInfo.valueOf(key).unLocalize();
+                            eventNameTemp = OsuInfo.valueOf(key).getOriginName();
                         }
                     }
                     continue;
@@ -246,7 +246,7 @@ public class OsuReader implements MapReader{
                 }
             }
         }
-        unLocalizedMapInfo.addInfo("BaseBpm",String.valueOf(baseBpm));
+        unLocalizedMapInfo.addInfo(OsuInfo.Bpm.unLocalize(),String.valueOf(baseBpm));
         zxMap.notes = allNotes;
         zxMap.timingPoints = timingPoints;
         zxMap.unLocalizedMapInfo = unLocalizedMapInfo;

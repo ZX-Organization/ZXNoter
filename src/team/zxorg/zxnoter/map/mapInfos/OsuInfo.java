@@ -3,69 +3,78 @@ package team.zxorg.zxnoter.map.mapInfos;
 /**
  * osu词条及反本地化名,一些带有空格的词条反本地化名与本地化名一致
  */
-public enum OsuInfo {
-    osufileformat("osu file format", "v14"),
-    AudioFilename("AudioPath", ""),
-    AudioLeadIn("AudioLeadIn", "0"),
-    PreviewTime("PreviewTime", "-1"),
-    Countdown("Countdown", "1"),
-    SampleSet("SampleSet", "Normal"),
-    StackLeniency("StackLeniency", "0.7"),
-    Mode("OsuMode", "3"),
-    LetterboxInBreaks("LetterboxInBreaks", "0"),
-    UseSkinSprites("UseSkinSprites", "0"),
-    OverlayPosition("OverlayPosition", "NoChange"),
-    SkinPreference("SkinPreference", ""),
-    EpilepsyWarning("EpilepsyWarning", "0"),
-    CountdownOffset("CountdownOffset", "0"),
-    SpecialStyle("SpecialStyle", "0"),
-    WidescreenStoryboard("WidescreenStoryboard", "0"),
-    SamplesMatchPlaybackRate("SamplesMatchPlaybackRate", "0"),
-    Bookmarks("Bookmarks", ""),
-    DistanceSpacing("DistanceSpacing", "1"),
-    BeatDivisor("BeatDivisor", "12"),
-    GridSize("GridSize", "4"),
-    TimelineZoom("TimelineZoom", "2.5"),
-    Title("Title", ""),
-    TitleUnicode("TitleUnicode", ""),
-    Artist("Artist", ""),
-    ArtistUnicode("ArtistUnicode", ""),
-    Creator("MapCreator", "zxn_"),
-    Version("Version", "Insane"),
-    Source("AudioSource", ""),
-    Tags("SearchingTags", ""),
-    BeatmapID("OsuBeatmapID", "-1"),
-    BeatmapSetID("OsuBeatmapSetID", "-1"),
-    HPDrainRate("HPDrainRate", "9"),
-    CircleSize("KeyCount", "4"),
-    OverallDifficulty("Difficulty", "8.5"),
-    ApproachRate("ApproachRate", "5"),
-    SliderMultiplier("SliderMultiplier", "1.4"),
-    SliderTickRate("SliderTickRate", "1"),
-    BackgroundandVideoevents("Background and Video events", "0,0,\"bg.png\",0,0"),
-    BreakPeriods("Break Periods", ""),
-    StoryboardLayer0Background("Storyboard Layer 0 (Background)", ""),
-    StoryboardLayer1Fail("Storyboard Layer 1 (Fail)", ""),
-    StoryboardLayer2Pass("Storyboard Layer 2 (Pass)", ""),
-    StoryboardLayer3Foreground("Storyboard Layer 3 (Foreground)", ""),
-    StoryboardLayer4Overlay("Storyboard Layer 4 (Overlay)", ""),
-    StoryboardSoundSamples("Storyboard Sound Samples", ""),
-    BackgroundColourTransformations("Background Colour Transformations", ""),
-    BaseBpm("BaseBpm", ""),
-    BgPath("BgPath","")
+public enum OsuInfo{
+    osufileformat(ZXMInfo.osufileformat, "osu file format", "v14"),
+    //general
+    AudioFilename(ZXMInfo.AudioPath, "AudioFilename", ""),
+    AudioLeadIn(ZXMInfo.AudioLeadIn, "AudioLeadIn", "0"),
+    PreviewTime(ZXMInfo.PreviewTime, "PreviewTime", "-1"),
+    Countdown(ZXMInfo.Countdown, "Countdown", "1"),
+    SampleSet(ZXMInfo.SampleSet, "SampleSet", "Normal"),
+    StackLeniency(ZXMInfo.StackLeniency, "StackLeniency", "0.7"),
+    Mode(ZXMInfo.OsuMode, "Mode", "3"),
+    LetterboxInBreaks(ZXMInfo.LetterboxInBreaks, "LetterboxInBreaks", "0"),
+    UseSkinSprites(ZXMInfo.UseSkinSprites, "UseSkinSprites", "0"),
+    OverlayPosition(ZXMInfo.OverlayPosition, "OverlayPosition", "NoChange"),
+    SkinPreference(ZXMInfo.SkinPreference, "SkinPreference", ""),
+    EpilepsyWarning(ZXMInfo.EpilepsyWarning, "EpilepsyWarning", "0"),
+    CountdownOffset(ZXMInfo.CountdownOffset, "CountdownOffset", "0"),
+    SpecialStyle(ZXMInfo.SpecialStyle, "SpecialStyle", "0"),
+    WidescreenStoryboard(ZXMInfo.WidescreenStoryboard, "WidescreenStoryboard", "0"),
+    SamplesMatchPlaybackRate(ZXMInfo.SamplesMatchPlaybackRate, "SamplesMatchPlaybackRate", "0"),
+    //editor
+    Bookmarks(ZXMInfo.Bookmarks, "Bookmarks", ""),
+    DistanceSpacing(ZXMInfo.DistanceSpacing, "DistanceSpacing", "1"),
+    BeatDivisor(ZXMInfo.BeatDivisor, "BeatDivisor", "12"),
+    GridSize(ZXMInfo.GridSize, "GridSize", "4"),
+    TimelineZoom(ZXMInfo.TimelineZoom, "TimelineZoom", "2.5"),
+    //metadata
+    Title(ZXMInfo.Title, "Title", ""),
+    TitleUnicode(ZXMInfo.TitleUnicode, "TitleUnicode", ""),
+    Artist(ZXMInfo.Artist, "Artist", ""),
+    ArtistUnicode(ZXMInfo.ArtistUnicode, "ArtistUnicode", ""),
+    Creator(ZXMInfo.MapCreator, "Creator", "zxn_"),
+    Version(ZXMInfo.Version, "Version", "Insane"),
+    Source(ZXMInfo.Source, "Source", ""),
+    Tags(ZXMInfo.Tags, "Tags", ""),
+    BeatmapID(ZXMInfo.OsuBeatmapID, "BeatmapID", "-1"),
+    BeatmapSetID(ZXMInfo.OsuBeatmapSetID, "BeatmapSetID", "-1"),
+    HPDrainRate(ZXMInfo.HPDrainRate, "HPDrainRate", "9"),
+    CircleSize(ZXMInfo.KeyCount, "CircleSize", "4"),
+    OverallDifficulty(ZXMInfo.Difficulty, "OverallDifficulty", "8.5"),
+    ApproachRate(ZXMInfo.ApproachRate, "ApproachRate", "5"),
+    SliderMultiplier(ZXMInfo.SliderMultiplier, "SliderMultiplier", "1.4"),
+    SliderTickRate(ZXMInfo.SliderTickRate, "SliderTickRate", "1"),
+    BackgroundandVideoevents(ZXMInfo.BackgroundandVideoevents, "Background and Videoevents", "0,0,\"bg.png\",0,0"),
+    BreakPeriods(ZXMInfo.BreakPeriods, "Break Periods", ""),
+    StoryboardLayer0Background(ZXMInfo.StoryboardLayer0Background, "Storyboard Layer 0 (Background)", ""),
+    StoryboardLayer1Fail(ZXMInfo.StoryboardLayer1Fail, "Storyboard Layer 1 (Fail)", ""),
+    StoryboardLayer2Pass(ZXMInfo.StoryboardLayer2Pass, "Storyboard Layer 2 (Pass)", ""),
+    StoryboardLayer3Foreground(ZXMInfo.StoryboardLayer3Foreground, "Storyboard Layer 3 (Foreground)", ""),
+    StoryboardLayer4Overlay(ZXMInfo.StoryboardLayer4Overlay, "Storyboard Layer 4 (Overlay)", ""),
+    StoryboardSoundSamples(ZXMInfo.StoryboardSoundSamples, "Storyboard Sound Samples", ""),
+    BackgroundColourTransformations(ZXMInfo.BackgroundColourTransformations, "Background Colour Transformations", ""),
+    Bpm(ZXMInfo.Bpm, "", ""),
+    BgPath(ZXMInfo.BgPath, "", "")
     ;
-    private final String unLocalizedName;
+    private final ZXMInfo unLocalizedInfo;
+    private final String originName;
     private final String defaultValue;
 
-    OsuInfo(String unLocalizedName, String defaultValue) {
-        this.unLocalizedName = unLocalizedName;
+    OsuInfo(ZXMInfo unLocalizedInfo, String originName, String defaultValue) {
+        this.unLocalizedInfo = unLocalizedInfo;
+        this.originName = originName;
         this.defaultValue = defaultValue;
     }
-    public String unLocalize() {
-        return unLocalizedName;
+    public ZXMInfo unLocalize() {
+        return unLocalizedInfo;
     }
 
     public String getDefaultValue() {
         return defaultValue;
+    }
+
+    public String getOriginName() {
+        return originName;
     }
 }
