@@ -160,16 +160,14 @@ public class ZXFixedOrbitMapEditor {
      */
     public int move(FixedOrbitNote note, long time, boolean isAbsolute) {
 
-        checkOperate(note);
+        FixedOrbitNote shadowNote=checkOperate(note);
 
-        //克隆获得虚影按键
-        FixedOrbitNote shadowNote = note.clone();
-
+        int res = 0;
         //对虚影按键进行编辑
         if (isAbsolute)
-            shadowMap.moveNote(shadowNote, time);
+            res=shadowMap.moveNote(shadowNote, time);
         else
-            shadowMap.moveNote(shadowNote, shadowNote.timeStamp + time);
+            res=shadowMap.moveNote(shadowNote, shadowNote.timeStamp + time);
 
         if (shadows.contains(note)){
             tempMapOperate.desNotes.remove(shadowNote);
@@ -181,6 +179,7 @@ public class ZXFixedOrbitMapEditor {
         shadowMap.insertNote(shadowNote);
         //操作时间戳并排序
         return shadowMap.moveNote(note, time + note.timeStamp);*/
+        return res;
     }
 
     /**
