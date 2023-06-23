@@ -2,6 +2,7 @@ package team.zxorg.zxnoter.resource;
 
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
+import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.Pane;
@@ -126,6 +127,16 @@ public class ZXResources {
         return iconPane;
     }
 
+    public static Pane getSvgPane(String key, double size, String colorID) {
+        Pane svg = getSvgPane(key);
+        svg.setPrefSize(size, size);
+        setBackground(svg, colorID);
+        return svg;
+    }
+
+    public static void setBackground(Node node, String colorID) {
+        node.getStyleClass().add("background-color-" + colorID);
+    }
 
     public static Pane getSvgPane(String key, double size, Color color) {
         Pane svg = getSvgPane(key);
@@ -147,7 +158,7 @@ public class ZXResources {
     public static void main(String[] args) {
         /*System.out.println(ZXResources.getLanguageContent("languageCode.zh_cn","zh_cn"));
         System.out.println(ZXResources.getLanguageContent("titleBar.menu.file","zh_cn"));
-        System.out.println(ZXResources.getLanguageContent("cnmd","zh_cn"));
+        System.out.println(ZXResources.getLanguageContent("titleBar.menu.file","zh_cn"));
 
         System.out.println(ZXResources.getLanguageContent("languageCode.en_us","en_us"));
         System.out.println(ZXResources.getLanguageContent("titleBar.menu.file","en_us"));

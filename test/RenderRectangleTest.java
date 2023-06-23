@@ -1,7 +1,6 @@
-import javafx.geometry.HPos;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
-import team.zxorg.zxnoter.ui.render.basis.RenderRectangle;
+import team.zxorg.zxnoter.ui_old.render.basis.RenderRectangle;
 
 public class RenderRectangleTest {
     public static void main(String[] args) {
