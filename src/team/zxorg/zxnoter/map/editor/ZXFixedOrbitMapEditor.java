@@ -221,7 +221,7 @@ public class ZXFixedOrbitMapEditor {
         }
         return true;
     }
-    public void convertToComplexNote(FixedOrbitNote note,int convertMode){
+    public ComplexNote convertToComplexNote(FixedOrbitNote note,int convertMode){
         if (!(note instanceof ComplexNote)){
             FixedOrbitNote shadowNote = checkOperate(note);
             ComplexNote complexNote = new ComplexNote(shadowNote.timeStamp, shadowNote.orbit);
@@ -236,6 +236,9 @@ public class ZXFixedOrbitMapEditor {
 
             shadowMap.insertNote(complexNote);
             shadowMap.deleteNote(shadowNote);
+            return complexNote;
+        }else {
+            return (ComplexNote) note;
         }
     }
     /**
@@ -304,7 +307,6 @@ public class ZXFixedOrbitMapEditor {
         if (tempMapOperate == null) {
             return;
         }
-        System.out.println("虚影" + shadowMap.notes);
         tempMapOperate.desNotes.addAll(shadowMap.notes);
         //检查操作结果中是否包含组合键
         for (BaseNote tempEditNote : tempMapOperate.desNotes) {
@@ -312,11 +314,8 @@ public class ZXFixedOrbitMapEditor {
                 //排序
                 complexNote.notes.sort(FixedOrbitNote::compareTo);
                 checkComplexNote(complexNote,false);
-                System.out.println("首次检查" + complexNote);
                 checkComplexNote(complexNote,true);
-                System.out.println("二次检查" + complexNote);
                 complexNote.notes.sort(FixedOrbitNote::compareTo);
-                System.out.println(complexNote);
             }else if (tempEditNote instanceof LongNote longNote){
                 //检查长键参数
                 if (longNote.sustainedTime == 0){
@@ -338,7 +337,6 @@ public class ZXFixedOrbitMapEditor {
             }
         }
         tempMapOperate.desNotes.clear();
-        System.out.println("虚影" + shadowMap.notes);
         tempMapOperate.desNotes.addAll(shadowMap.notes);
         //删除原按键
         for (FixedOrbitNote note : tempMapOperate.srcNotes)
