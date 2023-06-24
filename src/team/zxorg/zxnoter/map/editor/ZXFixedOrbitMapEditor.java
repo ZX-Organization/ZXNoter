@@ -37,7 +37,7 @@ public class ZXFixedOrbitMapEditor {
     }
 
     /**
-     * 编辑按键的轨道变化(可直接编辑shadowMap中的按键)
+     * 编辑按键的时间与轨道变化(可直接编辑shadowMap中的按键)
      *
      * @param note       要编辑的按键
      * @param orbit      轨道
@@ -62,15 +62,16 @@ public class ZXFixedOrbitMapEditor {
             res = shadowMap.moveNote(shadowNote, time);
         else
             res = shadowMap.moveNote(shadowNote, shadowNote.timeStamp + time);
+
         return res;
 
     }
 
     /**
-     * 编辑组合键中某一子键的轨道变化(此子键必须是长条)
+     * 编辑组合键中某一子键的时间与轨道变化(此子键必须是长条)
      *
      * @param note          要编辑的子键的所属组合键
-     * @param orbit         轨道变化值
+     * @param orbit         轨道
      * @param childIndex    子键下标
      * @param isAbsolute    是否使用绝对轨道
      * @param keepAfterNote 是否保持此子键之后所有按键的绝对位置
@@ -80,6 +81,7 @@ public class ZXFixedOrbitMapEditor {
         //编辑子键
         FixedOrbitNote child = shadowNote.notes.get(childIndex);
         int orbitChanges = orbit;
+
         if (child instanceof LongNote childLongNote) {
             //直接编辑子键
             if (isAbsolute) {
@@ -158,27 +160,6 @@ public class ZXFixedOrbitMapEditor {
     }
 
     /**
-     * 编辑按键的时间戳变化(自动排序)
-     *
-     * @param note       要编辑的按键
-     * @param time       时间戳变化值
-     * @param isAbsolute 是否使用绝对时间戳
-     * @return 编辑后按键所处的下标位置
-     */
-    /*public int move(FixedOrbitNote note, long time, boolean isAbsolute) {
-        FixedOrbitNote shadowNote = checkOperate(note);
-
-
-
-        *//*int desNoteIndex = shadowMap.insertNote(shadowNote);
-
-        shadowMap.insertNote(shadowNote);
-        //操作时间戳并排序
-        return shadowMap.moveNote(note, time + note.timeStamp);*//*
-        return res;
-    }*/
-
-    /**
      * 编辑组合键中某一子键的时间戳变化(自动适配)
      *
      * @param note          要编辑的子键的所属组合键
@@ -195,7 +176,6 @@ public class ZXFixedOrbitMapEditor {
         FixedOrbitNote child = shadowNote.notes.get(childIndex);
 
         long timeChange = time;
-
         //此子键必定为滑键
         if (child instanceof SlideNote childSlideNote){
             //直接修改
@@ -206,8 +186,6 @@ public class ZXFixedOrbitMapEditor {
 
                 childSlideNote.timeStamp+=time;
             }
-
-
             if (keepAfterNote){
                 if (childIndex == shadowNote.notes.size()-1){
                     //此滑键处于组合键尾部
@@ -225,10 +203,9 @@ public class ZXFixedOrbitMapEditor {
             }else {
                 //跟随编辑
                 for (int index = childIndex+1; index < shadowNote.notes.size(); index++) {
-
+                    shadowNote.notes.get(index).timeStamp += timeChange;
                 }
             }
-
             //检查组合键是否有断裂(从此子键上一个子键检查到此子键的下一个子键)
             //最后检查,防止打乱下标
             //检查此子键前一个按键
@@ -247,14 +224,8 @@ public class ZXFixedOrbitMapEditor {
                     }
                 }
             }
-            //检查前后是否断裂
-            FixedOrbitNote previousNote = shadowNote.notes.get(childIndex-1);
-
-
-
         }
-
-        return false;
+        return true;
     }
 
     /**
@@ -263,8 +234,24 @@ public class ZXFixedOrbitMapEditor {
      * @param parameter 参数变化值
      * @return 编辑是否成功
      */
-    public boolean modifyPar(FixedOrbitNote note, int parameter) {
-        return shadowMap.editNotePar(note, parameter);
+    public boolean modifyPar(FixedOrbitNote note, int parameter, boolean isAbsolute) {
+        FixedOrbitNote shadowNote = checkOperate(note);
+        if (shadowNote instanceof SlideNote slideNote){
+            if (isAbsolute){
+                slideNote.slideArg = parameter;
+            }else {
+                slideNote.slideArg+=parameter;
+            }
+            return true;
+        }else if (shadowNote instanceof LongNote longNote){
+            if (isAbsolute){
+                longNote.sustainedTime = parameter;
+            }else {
+                longNote.sustainedTime+=parameter;
+            }
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -274,11 +261,16 @@ public class ZXFixedOrbitMapEditor {
      * @param childIndex    要编辑的组合键中的子键的下标
      * @param parameter     要编辑的参数
      * @param keepAfterNote 是否保持此子键之后所有按键的绝对位置
+     * @param isAbsolute 是否使用绝对
      * @return
      */
-    public boolean modifyPar(ComplexNote complexNote, int childIndex,long parameter, boolean keepAfterNote) {
+    /*public boolean modifyPar(ComplexNote complexNote, int childIndex,long parameter, boolean keepAfterNote, boolean isAbsolute) {
+
+
+
+
         return true;
-    }
+    }*/
 
     /**
      * 完成修改,同步原map,操作栈
