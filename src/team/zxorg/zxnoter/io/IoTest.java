@@ -32,14 +32,14 @@ public class IoTest {
 
 
 
-        System.out.println("原->"+map.notes.get(147));
+        System.out.println("原->"+map.notes.get(4));
         ZXFixedOrbitMapEditor editor = new ZXFixedOrbitMapEditor(map);
-        editor.move((ComplexNote) map.notes.get(147),1,2,false,false);
+        editor.move((ComplexNote) map.notes.get(4),5000L,1,true,true);
+        /*editor.modifyDone();
+        System.out.println("修改一次结果->"+map.notes.get(4));
+        editor.move((ComplexNote) map.notes.get(4),1,1,false,false);*/
         editor.modifyDone();
-        System.out.println("修改一次结果->"+map.notes.get(147));
-        editor.move((ComplexNote) map.notes.get(147),1,2,false,false);
-        editor.modifyDone();
-        System.out.println("最终结果->"+map.notes.get(147));
+        System.out.println("最终结果->"+map.notes.get(4));
 
 /*
 
