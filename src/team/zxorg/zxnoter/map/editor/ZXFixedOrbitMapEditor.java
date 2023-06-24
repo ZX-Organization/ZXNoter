@@ -220,7 +220,24 @@ public class ZXFixedOrbitMapEditor {
         }
         return true;
     }
+    public void convertToComplexNote(FixedOrbitNote note,boolean toLong){
+        if (!(note instanceof ComplexNote)){
+            FixedOrbitNote shadowNote = checkOperate(note);
+            ComplexNote complexNote = new ComplexNote(shadowNote.timeStamp, shadowNote.orbit);
+            if (!(shadowNote instanceof LongNote) && !(shadowNote instanceof SlideNote)){
+                if (toLong)
+                    complexNote.addNote(new LongNote(shadowNote.timeStamp,shadowNote.orbit,0));
+                else
+                    complexNote.addNote(new SlideNote(shadowNote.timeStamp,shadowNote.orbit,0));
+            }else {
+                complexNote.addNote(shadowNote);
+            }
 
+            shadowMap.insertNote(complexNote);
+            shadowMap.deleteNote(shadowNote);
+            modifyDone();
+        }
+    }
     /**
      * 编辑按键参数(变化,非直接修改)
      *
@@ -264,6 +281,7 @@ public class ZXFixedOrbitMapEditor {
             }else {
                 slideNote.slideArg+=(int)parameter;
             }
+            checkComplexNote(complexNote,true);
             return true;
         }else if (endChildNote instanceof LongNote longNote){
             if (isAbsolute){
@@ -271,6 +289,7 @@ public class ZXFixedOrbitMapEditor {
             }else {
                 longNote.sustainedTime+=parameter;
             }
+            checkComplexNote(complexNote,true);
             return true;
         }
         return false;
@@ -374,7 +393,7 @@ public class ZXFixedOrbitMapEditor {
         return shadowNote;
     }
 
-    
+
 
     /**
      * 检查组合键合法性,自动修正

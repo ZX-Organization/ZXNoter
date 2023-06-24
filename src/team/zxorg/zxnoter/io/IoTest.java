@@ -5,6 +5,7 @@ import team.zxorg.zxnoter.io.reader.OsuReader;
 import team.zxorg.zxnoter.map.ZXMap;
 import team.zxorg.zxnoter.map.editor.ZXFixedOrbitMapEditor;
 import team.zxorg.zxnoter.note.fixedorbit.ComplexNote;
+import team.zxorg.zxnoter.note.fixedorbit.FixedOrbitNote;
 import team.zxorg.zxnoter.note.fixedorbit.LongNote;
 import team.zxorg.zxnoter.note.fixedorbit.SlideNote;
 
@@ -31,9 +32,9 @@ public class IoTest {
         //System.out.println(map.notes.get(4));
 
 
-
-        /*System.out.println("原->"+map.notes.get(4));
         ZXFixedOrbitMapEditor editor = new ZXFixedOrbitMapEditor(map);
+        /*System.out.println("原->"+map.notes.get(4));
+
         editor.move((ComplexNote) map.notes.get(4),5000L,1,true,true);
         *//*editor.modifyDone();
         System.out.println("修改一次结果->"+map.notes.get(4));
@@ -41,9 +42,9 @@ public class IoTest {
         editor.modifyDone();
         System.out.println("最终结果->"+map.notes.get(4));*/
         System.out.println(
-                map.getScaleNotes(123703,247)
+                map.getScaleNotes(1000,10000,true)
         );
-
+        //editor.convertToComplexNote((FixedOrbitNote) map.notes.get(0));
 /*
 
         System.out.println(
