@@ -223,9 +223,10 @@ public class ZXFixedOrbitMapEditor {
     }
 
     /**
-     * @param note
-     * @param convertMode
-     * @return
+     * 打包长键或滑键为组合键,并且加入操作源
+     * @param note 只能是长键或滑键
+     * @param convertMode 转换模式
+     * @return 打包的组合键
      */
     public ComplexNote convertToComplexNote(FixedOrbitNote note, int convertMode) {
         if (!(note instanceof ComplexNote)) {
@@ -251,6 +252,12 @@ public class ZXFixedOrbitMapEditor {
         }
     }
 
+    /**
+     * 转换按键,并加入源
+     * @param srcNote 只能是单键
+     * @param convertMode 转换模式
+     * @return 转换结果
+     */
     public FixedOrbitNote convertNote(FixedOrbitNote srcNote, int convertMode) {
         FixedOrbitNote shadowNote = checkOperate(srcNote);
         FixedOrbitNote desNote;
