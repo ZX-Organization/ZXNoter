@@ -32,7 +32,7 @@ public class RenderNote {
     }
 
     public enum RenderNoteObject {
-        HAND,//头部
+        HEAD,//头部
         BODY,//身体
         FOOT//尾部
     }

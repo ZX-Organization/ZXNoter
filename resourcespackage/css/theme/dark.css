@@ -27,20 +27,19 @@
     -color-dark-white: #a1a3a3; /* 深白色 */
     -color-white: #d4d7d6; /* 白色 */
     -color-light-white: #f9fdfc; /* 浅白色 */
+    -color-font-usually: #9A9A9A; /* 通常字体 */
+    -color-font-light: #C8C8C8; /* 浅字体 */
 
-    -color-font-usually: #9A9A9A;
-    -color-font-light: #C8C8C8;
+    -color-border-window: #505050; /* 边框颜色 */
 
-    -color-border-window: #505050;
+    -color-theme-1: #3c3c3c; /* 主题颜色-1 */
+    -color-theme-2: #323232; /* 主题颜色-2 */
+    -color-theme-3: #2d2d2d; /* 主题颜色-3 */
+    -color-theme-4: #292929; /* 主题颜色-4 */
 
-    -color-theme-1: #3c3c3c;
-    -color-theme-2: #323232;
-    -color-theme-3: #2d2d2d;
-    -color-theme-4: #292929;
+    -color-theme-1-light: #545454; /* 主题颜色-1-浅色 */
 
-    -color-theme-1-light: #545454;
-
-    /*-color-font-usually: #0c539a;
+  /*  -color-font-usually: #0c539a;
     -color-font-light: #116fcd;
 
     -color-border-window: #bacce1;
@@ -202,7 +201,7 @@
 }
 
 .menu-item:hover {
-    -fx-background-color: #545454;
+    -fx-background-color: -color-theme-3;
 }
 
 .menu-item > .label > .text {
@@ -230,7 +229,7 @@
 }
 
 .workspace > .icon {
-    -fx-background-color: #2E2E2E;
+    -fx-background-color: -color-theme-3;
 }
 
 .body {
@@ -261,7 +260,7 @@
 
 .preview-pane {
     -fx-background-color: #ffffff11;
-    -fx-border-color: #7c7c7c;
+    -fx-border-color: -color-theme-3;
     -fx-border-width: 2 0 2 0;
 }
 

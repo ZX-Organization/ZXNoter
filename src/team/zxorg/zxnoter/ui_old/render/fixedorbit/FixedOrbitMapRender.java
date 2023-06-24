@@ -74,7 +74,7 @@ public class FixedOrbitMapRender extends FixedOrbitRender {
                 //计算位置
                 if (point != null) {
                     if (renderRectangle.containPoint(point))
-                        return new RenderNote(RenderNote.RenderNoteObject.BODY, note, null, FixedOrbitNotesKey.NOTE, renderRectangle);
+                        return new RenderNote(RenderNote.RenderNoteObject.HEAD, note, null, FixedOrbitNotesKey.NOTE, renderRectangle);
                 } else
                     drawImage();
 
