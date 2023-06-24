@@ -65,11 +65,6 @@ public class ZXFixedOrbitMapEditor {
      */
     public boolean move(ComplexNote note, int orbit, int childIndex, boolean keepAfterNote, boolean isAbsolute) {
         ComplexNote shadowNote = (ComplexNote) checkOperate(note);
-        /*//缓存子键对象
-        FixedOrbitNote tempChild = note.notes.get(childIndex);
-        //排序
-        shadowNote.notes.sort(FixedOrbitNote::compareTo);
-        childIndex = shadowNote.notes.indexOf(tempChild);*/
         //编辑子键
         FixedOrbitNote child = shadowNote.notes.get(childIndex);
         int orbitChanges = orbit;
@@ -83,23 +78,7 @@ public class ZXFixedOrbitMapEditor {
                 childLongNote.orbit += orbit;
             }
 
-            //检查组合键是否有断裂(从此子键上一个子键检查到此子键的下一个子键)
 
-            //检查此子键前一个按键
-            if (childIndex == 0) {
-                //子键处于组合键头部(头部按键只能编辑长键[拉出])
-                //头部添加一个滑键
-                shadowNote.notes.add(new SlideNote(shadowNote.timeStamp, shadowNote.orbit, childLongNote.orbit - shadowNote.orbit));
-            } else {
-                FixedOrbitNote previous = shadowNote.notes.get(childIndex - 1);
-                if (previous instanceof SlideNote slideNote) {
-                    //编辑的(child)是长条,前一个(previous)一定是滑键
-                    if (slideNote.orbit + slideNote.slideArg != child.orbit) {
-                        //修正前一个滑键参数
-                        slideNote.slideArg = child.orbit - slideNote.orbit;
-                    }
-                }
-            }
             //区分是否保持后方子键位置与时间戳
             if (keepAfterNote) {
                 //保持(后方不需要移动)
@@ -125,6 +104,7 @@ public class ZXFixedOrbitMapEditor {
                     }
                 }
             } else {
+
                 //后段子键跟随编辑
 
                 if (childIndex == shadowNote.notes.size() - 1) {
@@ -136,16 +116,27 @@ public class ZXFixedOrbitMapEditor {
                     return true;
                 }
                 //跟随
-                //检查
-                for (int i = childIndex + 1; i < shadowNote.notes.size() - 1; i++) {
-                    int resOrb = shadowNote.notes.get(i).orbit + orbitChanges;
-                    if (resOrb >= Integer.parseInt(shadowMap.unLocalizedMapInfo.getInfo(ImdInfo.ImdKeyCount.unLocalize()))) {
-                        return false;
-                    }
-                }
-                //未return
-                for (int i = childIndex + 1; i < shadowNote.notes.size() - 1; i++) {
+
+                for (int i = childIndex + 1; i < shadowNote.notes.size() ; i++) {
                     shadowNote.notes.get(i).orbit += orbitChanges;
+                }
+            }
+
+            //检查组合键是否有断裂(从此子键上一个子键检查到此子键的下一个子键)
+            //最后检查,防止打乱下标
+            //检查此子键前一个按键
+            if (childIndex == 0) {
+                //子键处于组合键头部(头部按键只能编辑长键[拉出])
+                //头部添加一个滑键
+                shadowNote.notes.add(new SlideNote(shadowNote.timeStamp, shadowNote.orbit, childLongNote.orbit - shadowNote.orbit));
+            } else {
+                FixedOrbitNote previous = shadowNote.notes.get(childIndex - 1);
+                if (previous instanceof SlideNote slideNote) {
+                    //编辑的(child)是长条,前一个(previous)一定是滑键
+                    if (slideNote.orbit + slideNote.slideArg != child.orbit) {
+                        //修正前一个滑键参数
+                        slideNote.slideArg = child.orbit - slideNote.orbit;
+                    }
                 }
             }
 

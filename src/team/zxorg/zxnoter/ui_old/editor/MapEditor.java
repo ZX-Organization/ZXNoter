@@ -181,7 +181,7 @@ public class MapEditor extends BaseEditor {
                             zxFixedOrbitMapEditor.move(renderNote1.note, orbit, true);
                         else {//组合键
                             System.out.println(zxMap.notes.indexOf(renderNote1.complexNote));
-                            zxFixedOrbitMapEditor.move(renderNote1.complexNote,orbit, renderNote1.complexNote.notes.indexOf(renderNote1.note) ,true, true);
+                            zxFixedOrbitMapEditor.move(renderNote1.complexNote,orbit, renderNote1.complexNote.notes.indexOf(renderNote1.note) ,false, true);
                         }
                         //zxFixedOrbitMapEditor.move(renderNote.note, time);
                     }
