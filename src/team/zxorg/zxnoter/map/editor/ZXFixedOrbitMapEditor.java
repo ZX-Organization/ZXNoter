@@ -225,7 +225,7 @@ public class ZXFixedOrbitMapEditor {
             }else {
                 //跟随编辑
                 for (int index = childIndex+1; index < shadowNote.notes.size(); index++) {
-
+                    shadowNote.notes.get(index).timeStamp += timeChange;
                 }
             }
 
@@ -247,14 +247,10 @@ public class ZXFixedOrbitMapEditor {
                     }
                 }
             }
-            //检查前后是否断裂
-            FixedOrbitNote previousNote = shadowNote.notes.get(childIndex-1);
-
-
 
         }
 
-        return false;
+        return true;
     }
 
     /**
