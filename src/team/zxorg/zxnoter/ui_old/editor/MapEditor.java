@@ -5,6 +5,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
+import javafx.geometry.Side;
 import javafx.scene.control.*;
 import javafx.scene.input.*;
 import javafx.scene.layout.*;
@@ -128,7 +129,22 @@ public class MapEditor extends BaseEditor {
                 double topPos = previewShadowMapRender.getInfo().getTimeToPosition(topTime);
                 double bottomPos = previewShadowMapRender.getInfo().getTimeToPosition(bottomTime);
                 previewPane.setPrefHeight(topPos - bottomPos);
+                event.consume();
             });
+
+            //滚轮监听
+            previewBar.setOnScroll(event -> {
+                double deltaY = event.getDeltaY();
+                previewMapRender.getInfo().timelineZoom.set(previewMapRender.getInfo().timelineZoom.get() * (deltaY < 0 ? 0.9f : 1.1f));
+
+                long topTime = mainMapRender.getInfo().getPositionToTime(mainMapRender.getHeight());
+                long bottomTime = mainMapRender.getInfo().getPositionToTime(0);
+
+                double topPos = previewShadowMapRender.getInfo().getTimeToPosition(topTime);
+                double bottomPos = previewShadowMapRender.getInfo().getTimeToPosition(bottomTime);
+                previewPane.setPrefHeight(topPos - bottomPos);
+            });
+
             //按下时的原始位置
             LongProperty previewPanePressedTime = new SimpleLongProperty();
             previewPane.setOnMousePressed(event -> {
@@ -181,7 +197,7 @@ public class MapEditor extends BaseEditor {
                             zxFixedOrbitMapEditor.move(renderNote1.note, orbit, true);
                         else {//组合键
                             System.out.println(zxMap.notes.indexOf(renderNote1.complexNote));
-                            zxFixedOrbitMapEditor.move(renderNote1.complexNote,orbit, renderNote1.complexNote.notes.indexOf(renderNote1.note) ,false, true);
+                            zxFixedOrbitMapEditor.move(renderNote1.complexNote, orbit, renderNote1.complexNote.notes.indexOf(renderNote1.note), true, true);
                         }
                         //zxFixedOrbitMapEditor.move(renderNote.note, time);
                     }
@@ -265,14 +281,37 @@ public class MapEditor extends BaseEditor {
 
         //属性栏
         TabPane tabPane = new TabPane();
+        tabPane.setSide(Side.RIGHT);
+        tabPane.setPrefWidth(180);
 
         HBox.setHgrow(tabPane, Priority.SOMETIMES);
 
-        for (int i = 0; i < 4; i++) {
-            Tab tab = new Tab("WDNMD");
+        {
+            Tab tab = new Tab("常用");
+            tab.setGraphic(ZXResources.getSvgPane("svg.icons.System.information-line", 18,"red"));
+            tabPane.getTabs().addAll(tab);
+        }
+        {
+            Tab tab = new Tab("OSU");
             tab.setGraphic(ZXResources.getSvgPane("svg.icons.System.information-line", 18, Color.DARKGREEN));
             tabPane.getTabs().addAll(tab);
         }
+        {
+            Tab tab = new Tab("IMD");
+            tab.setGraphic(ZXResources.getSvgPane("svg.icons.System.information-line", 18, Color.DARKGREEN));
+            tabPane.getTabs().addAll(tab);
+        }
+        {
+            Tab tab = new Tab("全部");
+            tab.setGraphic(ZXResources.getSvgPane("svg.icons.System.information-line", 18, Color.DARKGREEN));
+            tabPane.getTabs().addAll(tab);
+        }
+
+        /*for (int i = 0; i < 4; i++) {
+            Tab tab = new Tab("WDNMD");
+            tab.setGraphic(ZXResources.getSvgPane("svg.icons.System.information-line", 18, Color.DARKGREEN));
+            tabPane.getTabs().addAll(tab);
+        }*/
 
         //滚动栏
         ScrollBar scrollBar = new ScrollBar();

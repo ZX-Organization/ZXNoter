@@ -135,7 +135,7 @@ public class ZXResources {
     }
 
     public static void setBackground(Node node, String colorID) {
-        node.getStyleClass().add("background-color-" + colorID);
+        node.getStyleClass().add("bg-color-" + colorID);
     }
 
     public static Pane getSvgPane(String key, double size, Color color) {
