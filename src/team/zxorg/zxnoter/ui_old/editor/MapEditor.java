@@ -15,6 +15,7 @@ import team.zxorg.zxnoter.io.reader.OsuReader;
 import team.zxorg.zxnoter.map.ZXMap;
 import team.zxorg.zxnoter.map.editor.ZXFixedOrbitMapEditor;
 import team.zxorg.zxnoter.map.mapInfo.ZXMInfo;
+import team.zxorg.zxnoter.note.fixedorbit.FixedOrbitNote;
 import team.zxorg.zxnoter.note.fixedorbit.LongNote;
 import team.zxorg.zxnoter.note.fixedorbit.SlideNote;
 import team.zxorg.zxnoter.resource.ZXResources;
@@ -194,15 +195,41 @@ public class MapEditor extends BaseEditor {
 
                     RenderNote renderNote1 = renderNote.get();
                     if (renderNote1 != null) {
-                        if (renderNote1.complexNote == null) {
+                        if (renderNote1.complexNote == null) {//不是组合键
                             if (renderNote1.pos.equals(RenderNote.RenderNoteObject.FOOT)) {//头节点  对长键编辑属性
                                 if (renderNote1.note instanceof LongNote) {//长键
                                     zxFixedOrbitMapEditor.modifyPar(renderNote1.note, (int) (time - renderNote1.note.timeStamp), true);
                                 } else if (renderNote1.note instanceof SlideNote) {//滑键
                                     zxFixedOrbitMapEditor.modifyPar(renderNote1.note, orbit, true);
                                 }
-                            } else if (renderNote1.pos.equals(RenderNote.RenderNoteObject.HEAD)) {//身体
-                                zxFixedOrbitMapEditor.move(renderNote1.note, orbit, time, true);
+                            } else if (renderNote1.pos.equals(RenderNote.RenderNoteObject.HEAD)) {//头部编辑 (移动、转换)
+                                if (event.isAltDown()) {//单键转换
+                                    if (renderNote1.note.timeStamp != time) {//时间改变 (长键)
+                                        zxFixedOrbitMapEditor.modifyPar(
+                                                zxFixedOrbitMapEditor.convertNote(renderNote1.note, ZXFixedOrbitMapEditor.TO_LONG_NOTE)
+                                                , time - renderNote1.note.timeStamp
+                                                , true
+                                        );
+                                    } else if (renderNote1.note.orbit != orbit) {//轨道改变 (滑键)
+                                        zxFixedOrbitMapEditor.modifyPar(
+                                                zxFixedOrbitMapEditor.convertNote(renderNote1.note, ZXFixedOrbitMapEditor.TO_SLIDE_NOTE)
+                                                , orbit - renderNote1.note.orbit
+                                                , true
+                                        );
+                                    }
+
+                                } else {//移动
+                                    zxFixedOrbitMapEditor.move(renderNote1.note, orbit, time, true);
+                                }
+                            } else if (renderNote1.pos.equals(RenderNote.RenderNoteObject.BODY)) {//拖动身体
+                                /*if (renderNote1.note instanceof LongNote longNote) {//长键
+                                    zxFixedOrbitMapEditor.convertToComplexNote(longNote, Z);
+                                } else if (renderNote1.note instanceof SlideNote slideNote) {//滑键
+                                    zxFixedOrbitMapEditor.convertToComplexNote(slideNote, 2);
+                                }else {//单键
+
+                                    zxFixedOrbitMapEditor.convertToComplexNote(slideNote, 2);
+                                }*/
                             }
 
 
@@ -232,9 +259,7 @@ public class MapEditor extends BaseEditor {
                                 if (renderNote1.complexNote.notes.get(renderNote1.complexNote.notes.size() - 1).equals(renderNote1.note))
                                     if (renderNote1.pos.equals(RenderNote.RenderNoteObject.FOOT)) {//头节点  对长键编辑属性
                                         if (renderNote1.note instanceof LongNote longNote) {//长键
-                                            System.out.println("前："+renderNote1.complexNote);
                                             zxFixedOrbitMapEditor.modifyEndPar(renderNote1.complexNote, (int) (time - renderNote1.note.timeStamp), true);
-                                            System.out.println("后："+zxFixedOrbitMapEditor.shadowMap.notes);
                                         } else if (renderNote1.note instanceof SlideNote slideNote) {//滑键
                                             zxFixedOrbitMapEditor.modifyEndPar(renderNote1.complexNote, orbit - slideNote.orbit, true);
                                         }
