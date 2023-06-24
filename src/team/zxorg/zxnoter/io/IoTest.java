@@ -4,6 +4,7 @@ import team.zxorg.zxnoter.io.reader.ImdReader;
 import team.zxorg.zxnoter.io.reader.OsuReader;
 import team.zxorg.zxnoter.map.ZXMap;
 import team.zxorg.zxnoter.map.editor.ZXFixedOrbitMapEditor;
+import team.zxorg.zxnoter.note.BaseNote;
 import team.zxorg.zxnoter.note.fixedorbit.ComplexNote;
 import team.zxorg.zxnoter.note.fixedorbit.FixedOrbitNote;
 import team.zxorg.zxnoter.note.fixedorbit.LongNote;
@@ -11,11 +12,16 @@ import team.zxorg.zxnoter.note.fixedorbit.SlideNote;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.ArrayList;
 
 public class IoTest {
     public static void main(String[] args) throws IOException {
         //try {
             ZXMap map = new ImdReader().read(Path.of("docs/reference/Contrapasso -paradiso-/t+pazolite - Contrapasso -paradiso-_4k_hd.imd"));
+
+
+        ArrayList<BaseNote> notes = map.getScaleNotes(112590, 200, true);
+        System.out.println(notes);
             //System.out.println(map.notes);
             //map.findClosestNote(1000);
             //System.out.println(map.notes.get(19));
@@ -32,7 +38,7 @@ public class IoTest {
         //System.out.println(map.notes.get(4));
 
 
-        ZXFixedOrbitMapEditor editor = new ZXFixedOrbitMapEditor(map);
+//        ZXFixedOrbitMapEditor editor = new ZXFixedOrbitMapEditor(map);
         /*System.out.println("原->"+map.notes.get(4));
 
         editor.move((ComplexNote) map.notes.get(4),5000L,1,true,true);
@@ -41,9 +47,9 @@ public class IoTest {
         editor.move((ComplexNote) map.notes.get(4),1,1,false,false);*//*
         editor.modifyDone();
         System.out.println("最终结果->"+map.notes.get(4));*/
-        System.out.println(
+       /* System.out.println(
                 map.getScaleNotes(1000,10000,true)
-        );
+        );*/
         //editor.convertToComplexNote((FixedOrbitNote) map.notes.get(0));
 /*
 

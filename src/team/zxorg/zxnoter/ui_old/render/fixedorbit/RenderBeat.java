@@ -3,6 +3,7 @@ package team.zxorg.zxnoter.ui_old.render.fixedorbit;
 import team.zxorg.zxnoter.map.ZXMap;
 import team.zxorg.zxnoter.note.BaseNote;
 import team.zxorg.zxnoter.note.fixedorbit.ComplexNote;
+import team.zxorg.zxnoter.note.fixedorbit.FixedOrbitNote;
 import team.zxorg.zxnoter.note.fixedorbit.LongNote;
 import team.zxorg.zxnoter.note.timing.Timing;
 
@@ -47,11 +48,49 @@ public class RenderBeat {
                 //计算 之前的和现在 中间节拍
                 if (previousBaseTiming != null) {
                     //之前的基准BPM时间
+                    //一拍所花时间
                     double beatCycleTime = 60000. / (previousBaseTiming.absBpm);
                     int counts = (int) ((double) (nowBaseTiming.timestamp - previousBaseTiming.timestamp) / beatCycleTime);
                     //System.out.println(counts);
                     for (int i = 0; i < counts; i++) {
-                        renderBeats.add(new RenderBeat(previousBaseTiming.timestamp + (long) (i * beatCycleTime), previousBaseTiming, (i == 0)));
+                        long time = previousBaseTiming.timestamp + (long) (i * beatCycleTime);
+                        RenderBeat renderBeat = new RenderBeat(time, previousBaseTiming, (i == 0));
+                        ArrayList<BaseNote> notes = zxMap.getScaleNotes(time - (long) beatCycleTime * 2, Math.round(beatCycleTime) + 2 * (long) beatCycleTime, true);
+                        ArrayList<Long> keyPoints = keyPoint(notes,true);
+                        boolean isTrue = false;
+                        renderBeat.measure = 0;
+                        if (notes.size() > 1) {
+                            for (int measure = 1; measure < 33; measure++) {//尝试拍计算
+                                isTrue = true;
+                                for (long note : keyPoints) {
+                                    if ((note - time + 2) % (beatCycleTime / measure) > 4) {
+                                        isTrue = false;
+                                        break;
+                                    }
+                                }
+                                if (isTrue) {
+                                    renderBeat.measure = measure;
+                                    break;
+                                }
+                            }
+                            if (!isTrue) {//只计算键头
+                                keyPoints = keyPoint(notes,false);
+                                for (int measure = 1; measure < 33; measure++) {//尝试拍计算
+                                    isTrue = true;
+                                    for (long note : keyPoints) {
+                                        if ((note - time + 2) % (beatCycleTime / measure) > 4) {
+                                            isTrue = false;
+                                            break;
+                                        }
+                                    }
+                                    if (isTrue) {
+                                        renderBeat.measure = measure;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                        renderBeats.add(renderBeat);
                     }
                 }
                 //赋值之前基准
@@ -60,6 +99,18 @@ public class RenderBeat {
 
         }
 
+    }
+
+
+    public static ArrayList<Long> keyPoint(ArrayList<BaseNote> baseNotes, boolean andLongEnd) {
+        ArrayList<Long> keyPoint = new ArrayList<Long>();//记录关键点
+        for (BaseNote note : baseNotes) {
+            keyPoint.add(note.timeStamp);
+            if (note instanceof LongNote longNote && andLongEnd) {
+                keyPoint.add(note.timeStamp + longNote.sustainedTime);
+            }
+        }
+        return keyPoint;
     }
 
 

@@ -232,7 +232,9 @@ public class MapEditor extends BaseEditor {
                                 if (renderNote1.complexNote.notes.get(renderNote1.complexNote.notes.size() - 1).equals(renderNote1.note))
                                     if (renderNote1.pos.equals(RenderNote.RenderNoteObject.FOOT)) {//头节点  对长键编辑属性
                                         if (renderNote1.note instanceof LongNote longNote) {//长键
-                                            zxFixedOrbitMapEditor.modifyEndPar(renderNote1.complexNote, (int) (time - renderNote1.note.timeStamp) , true);
+                                            System.out.println("前："+renderNote1.complexNote);
+                                            zxFixedOrbitMapEditor.modifyEndPar(renderNote1.complexNote, (int) (time - renderNote1.note.timeStamp), true);
+                                            System.out.println("后："+zxFixedOrbitMapEditor.shadowMap.notes);
                                         } else if (renderNote1.note instanceof SlideNote slideNote) {//滑键
                                             zxFixedOrbitMapEditor.modifyEndPar(renderNote1.complexNote, orbit - slideNote.orbit, true);
                                         }
