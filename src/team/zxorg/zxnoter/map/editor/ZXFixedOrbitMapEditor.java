@@ -24,8 +24,17 @@ public class ZXFixedOrbitMapEditor {
      * 操作栈
      */
     Stack<MapOperate> operateStack;
+    /**
+     * 撤回栈
+     */
     Stack<MapOperate> withdrawStack;
+    /**
+     * 虚影缓存
+     */
     private ArrayList<FixedOrbitNote> shadows;
+    /**
+     * 操作缓存
+     */
     private MapOperate tempMapOperate;
 
     public ZXFixedOrbitMapEditor(ZXMap map) {
@@ -160,7 +169,7 @@ public class ZXFixedOrbitMapEditor {
     }
 
     /**
-     * 编辑组合键中某一子键的时间戳变化(自动适配)
+     * 编辑组合键中某一子键的时间戳变化(此子键必须是滑键)
      *
      * @param note          要编辑的子键的所属组合键
      * @param time          要编辑的子键的时间戳变化
@@ -234,13 +243,13 @@ public class ZXFixedOrbitMapEditor {
      * @param parameter 参数变化值
      * @return 编辑是否成功
      */
-    public boolean modifyPar(FixedOrbitNote note, int parameter, boolean isAbsolute) {
+    public boolean modifyPar(FixedOrbitNote note, long parameter, boolean isAbsolute) {
         FixedOrbitNote shadowNote = checkOperate(note);
         if (shadowNote instanceof SlideNote slideNote){
             if (isAbsolute){
-                slideNote.slideArg = parameter;
+                slideNote.slideArg = (int)parameter;
             }else {
-                slideNote.slideArg+=parameter;
+                slideNote.slideArg+=(int)parameter;
             }
             return true;
         }else if (shadowNote instanceof LongNote longNote){
@@ -255,22 +264,33 @@ public class ZXFixedOrbitMapEditor {
     }
 
     /**
-     * 编辑组合键中指定下标子键的参数(编辑,非直接修改)
+     * 编辑组合键中尾部子键的参数(编辑,非直接修改)
      *
      * @param complexNote   要编辑的组合键
-     * @param childIndex    要编辑的组合键中的子键的下标
      * @param parameter     要编辑的参数
-     * @param keepAfterNote 是否保持此子键之后所有按键的绝对位置
      * @param isAbsolute 是否使用绝对
      * @return
      */
-    /*public boolean modifyPar(ComplexNote complexNote, int childIndex,long parameter, boolean keepAfterNote, boolean isAbsolute) {
-
-
-
-
-        return true;
-    }*/
+    public boolean modifyEndPar(ComplexNote complexNote,long parameter, boolean isAbsolute) {
+        ComplexNote shadowNote = (ComplexNote)checkOperate(complexNote);
+        FixedOrbitNote endChildNote = shadowNote.notes.get(shadowNote.notes.size()-1);
+        if (endChildNote instanceof SlideNote slideNote){
+            if (isAbsolute){
+                slideNote.slideArg = (int)parameter;
+            }else {
+                slideNote.slideArg+=(int)parameter;
+            }
+            return true;
+        }else if (endChildNote instanceof LongNote longNote){
+            if (isAbsolute){
+                longNote.sustainedTime = parameter;
+            }else {
+                longNote.sustainedTime+=parameter;
+            }
+            return true;
+        }
+        return false;
+    }
 
     /**
      * 完成修改,同步原map,操作栈
@@ -291,9 +311,26 @@ public class ZXFixedOrbitMapEditor {
                 System.out.println("首次检查" + complexNote);
                 checkComplexNote(complexNote,true);
                 System.out.println("二次检查" + complexNote);
-
                 complexNote.notes.sort(FixedOrbitNote::compareTo);
                 System.out.println(complexNote);
+            }else if (tempEditNote instanceof LongNote longNote){
+                //检查长键参数
+                if (longNote.sustainedTime == 0){
+                    shadowMap.notes.remove(longNote);
+                    shadows.remove(longNote);
+                    FixedOrbitNote fixedOrbitNote = new FixedOrbitNote(longNote.timeStamp, longNote.orbit);
+                    shadowMap.insertNote(fixedOrbitNote);
+                    shadows.add(fixedOrbitNote);
+                }
+            } else if (tempEditNote instanceof SlideNote slideNote) {
+                //检查滑键参数
+                if (slideNote.slideArg == 0){
+                    shadowMap.notes.remove(slideNote);
+                    shadows.remove(slideNote);
+                    FixedOrbitNote fixedOrbitNote = new FixedOrbitNote(slideNote.timeStamp, slideNote.orbit);
+                    shadowMap.insertNote(fixedOrbitNote);
+                    shadows.add(fixedOrbitNote);
+                }
             }
         }
         tempMapOperate.desNotes.clear();
@@ -402,10 +439,6 @@ public class ZXFixedOrbitMapEditor {
         if (note.notes.size() == 1&&flag) {
             shadowMap.notes.remove(note);
             shadows.remove(note);
-            /*if (shadowMap.notes.size()>=0){
-                System.out.println();
-            }*/
-
             shadowMap.insertNote(note.notes.get(0).clone());
             shadows.add(note.notes.get(0).clone());
         }
