@@ -154,16 +154,14 @@ public class ZXFixedOrbitMapEditor {
      * @return 编辑后按键所处的下标位置
      */
     public int move(FixedOrbitNote note, long time, boolean isAbsolute) {
-
         FixedOrbitNote shadowNote = checkOperate(note);
 
-        int res = 0;
+        int res;
         //对虚影按键进行编辑
         if (isAbsolute)
             res = shadowMap.moveNote(shadowNote, time);
         else
             res = shadowMap.moveNote(shadowNote, shadowNote.timeStamp + time);
-
 
         /*int desNoteIndex = shadowMap.insertNote(shadowNote);
 
