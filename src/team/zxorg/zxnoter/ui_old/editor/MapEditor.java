@@ -193,10 +193,11 @@ public class MapEditor extends BaseEditor {
 
                     RenderNote renderNote1 = renderNote.get();
                     if (renderNote1 != null) {
-                        if (renderNote1.complexNote == null)
+                        if (renderNote1.complexNote == null) {
+                            zxFixedOrbitMapEditor.move(renderNote1.note, time, true);
                             zxFixedOrbitMapEditor.move(renderNote1.note, orbit, true);
-                        else {//组合键
-                            System.out.println(zxMap.notes.indexOf(renderNote1.complexNote));
+                        } else {//组合键
+                            //System.out.println(zxMap.notes.indexOf(renderNote1.complexNote));
                             zxFixedOrbitMapEditor.move(renderNote1.complexNote, orbit, renderNote1.complexNote.notes.indexOf(renderNote1.note), true, true);
                         }
                         //zxFixedOrbitMapEditor.move(renderNote.note, time);
@@ -283,27 +284,24 @@ public class MapEditor extends BaseEditor {
         TabPane tabPane = new TabPane();
         tabPane.setSide(Side.RIGHT);
         tabPane.setPrefWidth(180);
+        tabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
 
         HBox.setHgrow(tabPane, Priority.SOMETIMES);
 
         {
             Tab tab = new Tab("常用");
-            tab.setGraphic(ZXResources.getSvgPane("svg.icons.System.information-line", 18,"red"));
             tabPane.getTabs().addAll(tab);
         }
         {
             Tab tab = new Tab("OSU");
-            tab.setGraphic(ZXResources.getSvgPane("svg.icons.System.information-line", 18, Color.DARKGREEN));
             tabPane.getTabs().addAll(tab);
         }
         {
             Tab tab = new Tab("IMD");
-            tab.setGraphic(ZXResources.getSvgPane("svg.icons.System.information-line", 18, Color.DARKGREEN));
             tabPane.getTabs().addAll(tab);
         }
         {
             Tab tab = new Tab("全部");
-            tab.setGraphic(ZXResources.getSvgPane("svg.icons.System.information-line", 18, Color.DARKGREEN));
             tabPane.getTabs().addAll(tab);
         }
 

@@ -39,6 +39,18 @@
     -color-theme-4: #292929;
 
     -color-theme-1-light: #545454;
+
+    /*-color-font-usually: #0c539a;
+    -color-font-light: #116fcd;
+
+    -color-border-window: #bacce1;
+
+    -color-theme-1: #116ecc;
+    -color-theme-2: #f5f8fc;
+    -color-theme-3: #f5f8fd;
+    -color-theme-4: #c9dcf3;
+
+    -color-theme-1-light: #ffffff;*/
 }
 
 .bg-color-dark-blue {
@@ -270,20 +282,20 @@
 
 .tab-pane:top .tab-header-area .headers-region .tab {
     -fx-background-color: -color-theme-4;
-    -fx-border-color: #3b3b3b;
+    -fx-border-color: -color-border-window;
     -fx-border-width: 0 1 0 0;
 }
 
 .tab-pane:right .tab-header-area .headers-region .tab {
     -fx-background-color: -color-theme-4;
-    -fx-border-color: #3b3b3b;
+    -fx-border-color: -color-border-window;
     -fx-border-width: 0 1 0 0;
 }
 
 
 .tab-pane .tab-header-area .headers-region .tab:selected {
     -fx-background-color: -color-theme-2;
-    -fx-border-color: #4b4b4b;
+    -fx-border-color: -color-border-window;
 }
 
 
