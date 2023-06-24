@@ -86,6 +86,37 @@ public class ZXMap {
     }
 
     /**
+     * 获取指定时间段内的全部按键
+     * @param time 指定时间头
+     * @param scale 指定时间长度范围
+     * @return 查询到的全部按键
+     */
+    public ArrayList<BaseNote> getScaleNotes(long time,long scale){
+        //查找到最近结果
+        ArrayList<BaseNote> timeNotes = findClosestNotes(time);
+        //结果预定义
+        ArrayList<BaseNote> desNotes = new ArrayList<>();
+
+        //结果首按键
+        BaseNote firstNote = timeNotes.get(0);
+        //遍历起始下标
+        int startIndex=notes.indexOf(firstNote);
+
+        //向后找到时间范围内的按键
+        while (notes.get(startIndex).timeStamp < time ){
+            startIndex++;
+        }
+
+        //从指定位置向后遍历范围内按键
+        for (int i = startIndex; i < notes.size(); i++) {
+            BaseNote note = notes.get(i);
+            if (note.timeStamp <= time+scale){
+                desNotes.add(note);
+            }
+        }
+        return desNotes;
+    }
+    /**
      *  寻找指定按键列表中距离指定时间戳最近的按键下标
      * @param time 指定时间戳
      * @param notes 指定列表

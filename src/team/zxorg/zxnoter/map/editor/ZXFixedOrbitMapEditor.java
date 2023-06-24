@@ -90,17 +90,14 @@ public class ZXFixedOrbitMapEditor {
         //编辑子键
         FixedOrbitNote child = shadowNote.notes.get(childIndex);
         int orbitChanges = orbit;
-
         if (child instanceof LongNote childLongNote) {
             //直接编辑子键
             if (isAbsolute) {
                 orbitChanges = orbit - childLongNote.orbit;
                 childLongNote.orbit = orbit;
-
             } else {
                 childLongNote.orbit += orbit;
             }
-
             //区分是否保持后方子键位置与时间戳
             if (keepAfterNote) {
                 //保持(后方不需要移动)
@@ -117,33 +114,22 @@ public class ZXFixedOrbitMapEditor {
                             slideNote.orbit = childLongNote.orbit;
                             //连接断开的滑键
                             slideNote.slideArg = nextNextOrbit - slideNote.orbit;
-
                             if (shadowNote.notes.size() - 1 == childIndex + 1) {
                                 //下一个按键即为尾按键
-
                             }
                         }
                     }
                 }
             } else {
-
                 //后段子键跟随编辑
-
                 if (childIndex == shadowNote.notes.size() - 1) {
-                    //判断编辑的子键是否为尾子键,是直接结束编辑
-                    if (shadows.contains(note)) {
-                        tempMapOperate.desNotes.remove(shadowNote);
-                    }
-                    tempMapOperate.desNotes.add(shadowNote);
-                    return true;
+                    //判断编辑的子键是否为尾子键
                 }
                 //跟随
-
                 for (int i = childIndex + 1; i < shadowNote.notes.size() ; i++) {
                     shadowNote.notes.get(i).orbit += orbitChanges;
                 }
             }
-
             //检查组合键是否有断裂(从此子键上一个子键检查到此子键的下一个子键)
             //最后检查,防止打乱下标
             //检查此子键前一个按键
@@ -162,7 +148,6 @@ public class ZXFixedOrbitMapEditor {
                     }
                 }
             }
-
             return true;
         }
         return false;
@@ -192,7 +177,6 @@ public class ZXFixedOrbitMapEditor {
                 timeChange = time - childSlideNote.timeStamp;
                 childSlideNote.timeStamp = time;
             }else {
-
                 childSlideNote.timeStamp+=time;
             }
             if (keepAfterNote){
@@ -292,6 +276,7 @@ public class ZXFixedOrbitMapEditor {
         return false;
     }
 
+
     /**
      * 完成修改,同步原map,操作栈
      */
@@ -356,6 +341,7 @@ public class ZXFixedOrbitMapEditor {
 
     }
 
+
     /**
      * 检查操作(检查是否初始化和是否已包含此按键相关操作)
      *
@@ -372,8 +358,6 @@ public class ZXFixedOrbitMapEditor {
             //加入操作源中
             tempMapOperate.srcNotes.add(srcNote);
         }
-
-
         //克隆获得虚影按键
         FixedOrbitNote shadowNote = srcNote.clone();
         if (!shadows.contains(srcNote)) {
@@ -389,6 +373,8 @@ public class ZXFixedOrbitMapEditor {
         }
         return shadowNote;
     }
+
+    
 
     /**
      * 检查组合键合法性,自动修正
@@ -443,5 +429,6 @@ public class ZXFixedOrbitMapEditor {
             shadows.add(note.notes.get(0).clone());
         }
     }
+
 
 }
