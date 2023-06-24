@@ -55,7 +55,7 @@ public class ZXFixedOrbitMapEditor {
      * @param isAbsolute 是否使用绝对
      * @return 移动后按键所处的下标位置
      */
-    public int move(FixedOrbitNote note, int orbit,long time, boolean isAbsolute) {
+    public int move(FixedOrbitNote note, int orbit, long time, boolean isAbsolute) {
 
         FixedOrbitNote shadowNote = checkOperate(note);
 
@@ -127,7 +127,7 @@ public class ZXFixedOrbitMapEditor {
                     //判断编辑的子键是否为尾子键
                 }
                 //跟随
-                for (int i = childIndex + 1; i < shadowNote.notes.size() ; i++) {
+                for (int i = childIndex + 1; i < shadowNote.notes.size(); i++) {
                     shadowNote.notes.get(i).orbit += orbitChanges;
                 }
             }
@@ -172,31 +172,31 @@ public class ZXFixedOrbitMapEditor {
 
         long timeChange = time;
         //此子键必定为滑键
-        if (child instanceof SlideNote childSlideNote){
+        if (child instanceof SlideNote childSlideNote) {
             //直接修改
-            if (isAbsolute){
+            if (isAbsolute) {
                 timeChange = time - childSlideNote.timeStamp;
                 childSlideNote.timeStamp = time;
-            }else {
-                childSlideNote.timeStamp+=time;
+            } else {
+                childSlideNote.timeStamp += time;
             }
-            if (keepAfterNote){
-                if (childIndex == shadowNote.notes.size()-1){
+            if (keepAfterNote) {
+                if (childIndex == shadowNote.notes.size() - 1) {
                     //此滑键处于组合键尾部
-                }else {
+                } else {
                     //修改后一子键参数
-                    FixedOrbitNote nextNote = shadowNote.notes.get(childIndex+1);
-                    if (nextNote instanceof LongNote nextLongNote){
-                        if (nextLongNote.timeStamp != childSlideNote.timeStamp){
+                    FixedOrbitNote nextNote = shadowNote.notes.get(childIndex + 1);
+                    if (nextNote instanceof LongNote nextLongNote) {
+                        if (nextLongNote.timeStamp != childSlideNote.timeStamp) {
                             nextLongNote.timeStamp = childSlideNote.timeStamp;
                             //同步缩减持续时间
                             nextLongNote.sustainedTime -= timeChange;
                         }
                     }
                 }
-            }else {
+            } else {
                 //跟随编辑
-                for (int index = childIndex+1; index < shadowNote.notes.size(); index++) {
+                for (int index = childIndex + 1; index < shadowNote.notes.size(); index++) {
                     shadowNote.notes.get(index).timeStamp += timeChange;
                 }
             }
@@ -212,35 +212,56 @@ public class ZXFixedOrbitMapEditor {
                 FixedOrbitNote previous = shadowNote.notes.get(childIndex - 1);
                 if (previous instanceof LongNote previousLongNote) {
                     //编辑的(child)是滑键,前一个(previous)一定是长键
-                    if (previousLongNote.timeStamp+previousLongNote.sustainedTime != childSlideNote.timeStamp) {
+                    if (previousLongNote.timeStamp + previousLongNote.sustainedTime != childSlideNote.timeStamp) {
                         //修正前一个长键参数
-                        previousLongNote.sustainedTime = childSlideNote.timeStamp-previousLongNote.timeStamp;
+                        previousLongNote.sustainedTime = childSlideNote.timeStamp - previousLongNote.timeStamp;
                     }
                 }
             }
         }
         return true;
     }
-    public ComplexNote convertToComplexNote(FixedOrbitNote note,int convertMode){
-        if (!(note instanceof ComplexNote)){
+
+    /**
+     * @param note
+     * @param convertMode
+     * @return
+     */
+    public ComplexNote convertToComplexNote(FixedOrbitNote note, int convertMode) {
+        if (!(note instanceof ComplexNote)) {
+
             FixedOrbitNote shadowNote = checkOperate(note);
+
             ComplexNote complexNote = new ComplexNote(shadowNote.timeStamp, shadowNote.orbit);
-            if (!(shadowNote instanceof LongNote) && !(shadowNote instanceof SlideNote)){
+
+            if (!(shadowNote instanceof LongNote) && !(shadowNote instanceof SlideNote)) {
                 if (convertMode == 1)
-                    complexNote.addNote(new LongNote(shadowNote.timeStamp,shadowNote.orbit,0));
+                    complexNote.addNote(new LongNote(shadowNote.timeStamp, shadowNote.orbit, 0));
                 else
-                    complexNote.addNote(new SlideNote(shadowNote.timeStamp,shadowNote.orbit,0));
-            }else {
+                    complexNote.addNote(new SlideNote(shadowNote.timeStamp, shadowNote.orbit, 0));
+            } else {
                 complexNote.addNote(shadowNote);
             }
 
             shadowMap.insertNote(complexNote);
             shadowMap.deleteNote(shadowNote);
             return complexNote;
-        }else {
+        } else {
             return (ComplexNote) note;
         }
     }
+
+    public FixedOrbitNote convertNote(FixedOrbitNote srcNote, int convertMode) {
+        FixedOrbitNote shadowNote = checkOperate(srcNote);
+        FixedOrbitNote desNote;
+        //转换按键
+        if (convertMode == 1)
+            desNote = new LongNote(shadowNote.timeStamp, shadowNote.orbit, 0);
+        else
+            desNote = new SlideNote(shadowNote.timeStamp, shadowNote.orbit, 0);
+        return desNote;
+    }
+
     /**
      * 编辑按键参数(变化,非直接修改)
      *
@@ -249,18 +270,18 @@ public class ZXFixedOrbitMapEditor {
      */
     public boolean modifyPar(FixedOrbitNote note, long parameter, boolean isAbsolute) {
         FixedOrbitNote shadowNote = checkOperate(note);
-        if (shadowNote instanceof SlideNote slideNote){
-            if (isAbsolute){
-                slideNote.slideArg = (int)parameter;
-            }else {
-                slideNote.slideArg+=(int)parameter;
+        if (shadowNote instanceof SlideNote slideNote) {
+            if (isAbsolute) {
+                slideNote.slideArg = (int) parameter;
+            } else {
+                slideNote.slideArg += (int) parameter;
             }
             return true;
-        }else if (shadowNote instanceof LongNote longNote){
-            if (isAbsolute){
+        } else if (shadowNote instanceof LongNote longNote) {
+            if (isAbsolute) {
                 longNote.sustainedTime = parameter;
-            }else {
-                longNote.sustainedTime+=parameter;
+            } else {
+                longNote.sustainedTime += parameter;
             }
             return true;
         }
@@ -270,29 +291,29 @@ public class ZXFixedOrbitMapEditor {
     /**
      * 编辑组合键中尾部子键的参数(编辑,非直接修改)
      *
-     * @param complexNote   要编辑的组合键
-     * @param parameter     要编辑的参数
-     * @param isAbsolute 是否使用绝对
+     * @param complexNote 要编辑的组合键
+     * @param parameter   要编辑的参数
+     * @param isAbsolute  是否使用绝对
      * @return
      */
-    public boolean modifyEndPar(ComplexNote complexNote,long parameter, boolean isAbsolute) {
-        ComplexNote shadowNote = (ComplexNote)checkOperate(complexNote);
-        FixedOrbitNote endChildNote = shadowNote.notes.get(shadowNote.notes.size()-1);
-        if (endChildNote instanceof SlideNote slideNote){
-            if (isAbsolute){
-                slideNote.slideArg = (int)parameter;
-            }else {
-                slideNote.slideArg+=(int)parameter;
+    public boolean modifyEndPar(ComplexNote complexNote, long parameter, boolean isAbsolute) {
+        ComplexNote shadowNote = (ComplexNote) checkOperate(complexNote);
+        FixedOrbitNote endChildNote = shadowNote.notes.get(shadowNote.notes.size() - 1);
+        if (endChildNote instanceof SlideNote slideNote) {
+            if (isAbsolute) {
+                slideNote.slideArg = (int) parameter;
+            } else {
+                slideNote.slideArg += (int) parameter;
             }
-            checkComplexNote(complexNote,true);
+            checkComplexNote(complexNote, true);
             return true;
-        }else if (endChildNote instanceof LongNote longNote){
-            if (isAbsolute){
+        } else if (endChildNote instanceof LongNote longNote) {
+            if (isAbsolute) {
                 longNote.sustainedTime = parameter;
-            }else {
-                longNote.sustainedTime+=parameter;
+            } else {
+                longNote.sustainedTime += parameter;
             }
-            checkComplexNote(complexNote,true);
+            checkComplexNote(complexNote, true);
             return true;
         }
         return false;
@@ -313,12 +334,12 @@ public class ZXFixedOrbitMapEditor {
             if (tempEditNote instanceof ComplexNote complexNote) {
                 //排序
                 complexNote.notes.sort(FixedOrbitNote::compareTo);
-                checkComplexNote(complexNote,false);
-                checkComplexNote(complexNote,true);
+                checkComplexNote(complexNote, false);
+                checkComplexNote(complexNote, true);
                 complexNote.notes.sort(FixedOrbitNote::compareTo);
-            }else if (tempEditNote instanceof LongNote longNote){
+            } else if (tempEditNote instanceof LongNote longNote) {
                 //检查长键参数
-                if (longNote.sustainedTime == 0){
+                if (longNote.sustainedTime == 0) {
                     shadowMap.notes.remove(longNote);
                     shadows.remove(longNote);
                     FixedOrbitNote fixedOrbitNote = new FixedOrbitNote(longNote.timeStamp, longNote.orbit);
@@ -327,7 +348,7 @@ public class ZXFixedOrbitMapEditor {
                 }
             } else if (tempEditNote instanceof SlideNote slideNote) {
                 //检查滑键参数
-                if (slideNote.slideArg == 0){
+                if (slideNote.slideArg == 0) {
                     shadowMap.notes.remove(slideNote);
                     shadows.remove(slideNote);
                     FixedOrbitNote fixedOrbitNote = new FixedOrbitNote(slideNote.timeStamp, slideNote.orbit);
@@ -365,22 +386,31 @@ public class ZXFixedOrbitMapEditor {
      * @param srcNote 要检查的按键
      */
     private FixedOrbitNote checkOperate(FixedOrbitNote srcNote) {
+        boolean containsOldNote = false;
         if (tempMapOperate == null) {
             //上一次无操作新建
             tempMapOperate = new MapOperate();
             //加入操作源中
             tempMapOperate.srcNotes.add(srcNote);
         } else if (!tempMapOperate.srcNotes.contains(srcNote)) {
+
             //上一次有操作,但操作对象不包含传入按键
 
-            //判断是否含有转换前的原按键
-            if (srcNote instanceof ComplexNote complexNote){
-                if (complexNote.notes.size() != 1){
+            //判断是否含有转换前的原按键(长键或滑键)
+            if (srcNote instanceof ComplexNote complexNote) {
+                if (complexNote.notes.size() != 1) {
                     //长度为1的组合键
-                    //加入操作源中
-                    tempMapOperate.srcNotes.add(srcNote);
+                    containsOldNote = true;
                 }
             }else {
+                //检查操作源是否有同轨同时间按键
+                for (FixedOrbitNote operateNote : tempMapOperate.srcNotes){
+                    if (operateNote.timeStamp == srcNote.timeStamp && operateNote.orbit == srcNote.orbit){
+                        containsOldNote = true;
+                    }
+                }
+            }
+            if (!containsOldNote){
                 //加入操作源中
                 tempMapOperate.srcNotes.add(srcNote);
             }
@@ -403,9 +433,9 @@ public class ZXFixedOrbitMapEditor {
     }
 
 
-
     /**
      * 检查组合键合法性,自动修正
+     *
      * @param note 组合键
      * @param flag 当组合键中只有一个子键时是否转化单键
      */
@@ -445,13 +475,13 @@ public class ZXFixedOrbitMapEditor {
                         break;
                     }
                 }
-                if (thisLongNote.sustainedTime == 0){
+                if (thisLongNote.sustainedTime == 0) {
                     deleteList.add(thisLongNote);
                 }
             }
         }
         note.notes.removeAll(deleteList);
-        if (note.notes.size() == 1&&flag) {
+        if (note.notes.size() == 1 && flag) {
             shadowMap.notes.remove(note);
             shadows.remove(note);
             shadowMap.insertNote(note.notes.get(0).clone());
