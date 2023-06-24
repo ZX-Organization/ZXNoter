@@ -1,7 +1,6 @@
 package team.zxorg.zxnoter.map.editor;
 
 import team.zxorg.zxnoter.map.ZXMap;
-import team.zxorg.zxnoter.map.mapInfo.ImdInfo;
 import team.zxorg.zxnoter.note.BaseNote;
 import team.zxorg.zxnoter.note.fixedorbit.ComplexNote;
 import team.zxorg.zxnoter.note.fixedorbit.FixedOrbitNote;
@@ -31,6 +30,8 @@ public class ZXFixedOrbitMapEditor {
     /**
      * 虚影缓存
      */
+    public static final int TO_LONG_NOTE = 1;
+    public static final int TO_SLIDE_NOTE = 2;
     private ArrayList<FixedOrbitNote> shadows;
     /**
      * 操作缓存
@@ -220,12 +221,12 @@ public class ZXFixedOrbitMapEditor {
         }
         return true;
     }
-    public void convertToComplexNote(FixedOrbitNote note,boolean toLong){
+    public void convertToComplexNote(FixedOrbitNote note,int convertMode){
         if (!(note instanceof ComplexNote)){
             FixedOrbitNote shadowNote = checkOperate(note);
             ComplexNote complexNote = new ComplexNote(shadowNote.timeStamp, shadowNote.orbit);
             if (!(shadowNote instanceof LongNote) && !(shadowNote instanceof SlideNote)){
-                if (toLong)
+                if (convertMode == 1)
                     complexNote.addNote(new LongNote(shadowNote.timeStamp,shadowNote.orbit,0));
                 else
                     complexNote.addNote(new SlideNote(shadowNote.timeStamp,shadowNote.orbit,0));
@@ -235,7 +236,6 @@ public class ZXFixedOrbitMapEditor {
 
             shadowMap.insertNote(complexNote);
             shadowMap.deleteNote(shadowNote);
-            modifyDone();
         }
     }
     /**
@@ -374,8 +374,19 @@ public class ZXFixedOrbitMapEditor {
             tempMapOperate.srcNotes.add(srcNote);
         } else if (!tempMapOperate.srcNotes.contains(srcNote)) {
             //上一次有操作,但操作对象不包含传入按键
-            //加入操作源中
-            tempMapOperate.srcNotes.add(srcNote);
+
+            //判断是否含有转换前的原按键
+            if (srcNote instanceof ComplexNote complexNote){
+                if (complexNote.notes.size() != 1){
+                    //长度为1的组合键
+                    //加入操作源中
+                    tempMapOperate.srcNotes.add(srcNote);
+                }
+            }else {
+                //加入操作源中
+                tempMapOperate.srcNotes.add(srcNote);
+            }
+
         }
         //克隆获得虚影按键
         FixedOrbitNote shadowNote = srcNote.clone();
