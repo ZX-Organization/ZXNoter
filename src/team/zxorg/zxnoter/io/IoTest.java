@@ -20,8 +20,6 @@ public class IoTest {
             ZXMap map = new ImdReader().read(Path.of("docs/reference/Contrapasso -paradiso-/t+pazolite - Contrapasso -paradiso-_4k_hd.imd"));
 
 
-        ArrayList<BaseNote> notes = map.getScaleNotes(112590, 200, true);
-        System.out.println(notes);
             //System.out.println(map.notes);
             //map.findClosestNote(1000);
             //System.out.println(map.notes.get(19));
@@ -37,8 +35,17 @@ public class IoTest {
         }*/
         //System.out.println(map.notes.get(4));
 
-
-//        ZXFixedOrbitMapEditor editor = new ZXFixedOrbitMapEditor(map);
+        ZXFixedOrbitMapEditor editor = new ZXFixedOrbitMapEditor(map);
+        System.out.println("原->"+map.findClosestNotes(27872).get(1));
+        editor.modifyEndPar(
+                (ComplexNote) map.findClosestNotes(27872).get(1),0L,true
+        );
+        editor.modifyDone();
+        editor.modifyEndPar(
+                (ComplexNote) map.findClosestNotes(27872).get(1),0L,true
+        );
+        editor.modifyDone();
+        System.out.println("后->"+ map.findClosestNotes(27872).get(1));
         /*System.out.println("原->"+map.notes.get(4));
 
         editor.move((ComplexNote) map.notes.get(4),5000L,1,true,true);

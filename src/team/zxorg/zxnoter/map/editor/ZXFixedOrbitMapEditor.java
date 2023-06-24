@@ -444,9 +444,10 @@ public class ZXFixedOrbitMapEditor {
                     } else {
                         break;
                     }
-
                 }
-
+                if (thisLongNote.sustainedTime == 0){
+                    deleteList.add(thisLongNote);
+                }
             }
         }
         note.notes.removeAll(deleteList);
