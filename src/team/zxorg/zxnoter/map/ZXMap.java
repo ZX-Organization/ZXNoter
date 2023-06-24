@@ -103,7 +103,7 @@ public class ZXMap {
         int startIndex=notes.indexOf(firstNote);
 
         //向后找到时间范围内的按键
-        while (notes.get(startIndex).timeStamp < time ){
+        while (startIndex <= notes.size()-1 && notes.get(startIndex).timeStamp < time ){
             startIndex++;
         }
 
