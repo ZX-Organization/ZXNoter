@@ -1,6 +1,9 @@
 package team.zxorg.zxnoter.ui_old.render.fixedorbit;
 
 import team.zxorg.zxnoter.map.ZXMap;
+import team.zxorg.zxnoter.note.BaseNote;
+import team.zxorg.zxnoter.note.fixedorbit.ComplexNote;
+import team.zxorg.zxnoter.note.fixedorbit.LongNote;
 import team.zxorg.zxnoter.note.timing.Timing;
 
 import java.util.ArrayList;
@@ -34,10 +37,10 @@ public class RenderBeat {
         //现在的基准
         Timing nowBaseTiming;
         //遍历用
-        long time = 0;//当前处理的时间
-
+        ArrayList<Timing> timingPoints = new ArrayList<>(zxMap.timingPoints);
+        timingPoints.add(new Timing(getLastTime(zxMap), 0, true, 0));
         //遍历所以Timing
-        for (Timing timing : zxMap.timingPoints) {
+        for (Timing timing : timingPoints) {
             //记录新基准
             if (timing.isNewBaseBpm) {
                 nowBaseTiming = timing;
@@ -59,6 +62,25 @@ public class RenderBeat {
 
     }
 
+
+    /**
+     * 获取最后的键位置
+     *
+     * @return 时间戳
+     */
+    public static long getLastTime(ZXMap zxMap) {
+        BaseNote lastNote = zxMap.notes.get(zxMap.notes.size() - 1);
+        long time;
+        if (lastNote instanceof ComplexNote complexNote) {
+            time = complexNote.notes.get(complexNote.notes.size() - 1).timeStamp;
+        } else if (lastNote instanceof LongNote longNote) {
+            time = longNote.timeStamp + longNote.sustainedTime;
+        } else {
+            time = zxMap.notes.get(zxMap.notes.size() - 1).timeStamp;
+        }
+        return time;
+    }
+
     public static RenderBeat findTime(ArrayList<RenderBeat> renderBeats, long time) {
         //遍历所以Timing
         for (int i = 0; i < renderBeats.size(); i++) {
@@ -71,7 +93,7 @@ public class RenderBeat {
         return null;
     }
 
-    public static long alignBeatsTime(ArrayList<RenderBeat> renderBeats,long time) {
+    public static long alignBeatsTime(ArrayList<RenderBeat> renderBeats, long time) {
         long closestTime = Long.MAX_VALUE; // 最接近时间的初始值设为最大值
         for (RenderBeat renderBeat : renderBeats) {
             double beatCycleTime = 60000.0 / renderBeat.timing.absBpm;
