@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class IoTest {
     public static void main(String[] args) throws IOException {
         //try {
-            ZXMap map = new ImdReader().read(Path.of("docs/reference/Contrapasso -paradiso-/t+pazolite - Contrapasso -paradiso-_4k_hd.imd"));
+            ZXMap map = new ImdReader().read(Path.of("docs/reference/Corruption/Corruption_4k_ez.imd"));
 
 
             //System.out.println(map.notes);
@@ -36,16 +36,19 @@ public class IoTest {
         //System.out.println(map.notes.get(4));
 
         ZXFixedOrbitMapEditor editor = new ZXFixedOrbitMapEditor(map);
-        System.out.println("原->"+map.findClosestNotes(27872).get(1));
-        editor.modifyEndPar(
-                (ComplexNote) map.findClosestNotes(27872).get(1),0L,true
+
+        System.out.println("原->"+(ComplexNote) map.findClosestNotes(27882).get(0));
+
+        System.out.println("结果"+map.findClosestNotes(27882).get(0));
+        /*editor.modifyEndPar(
+                (ComplexNote) map.findClosestNotes(27882).get(1),0L,true
         );
         editor.modifyDone();
         editor.modifyEndPar(
-                (ComplexNote) map.findClosestNotes(27872).get(1),0L,true
+                (ComplexNote) map.findClosestNotes(27882).get(1),0L,true
         );
         editor.modifyDone();
-        System.out.println("后->"+ map.findClosestNotes(27872).get(1));
+        System.out.println("后->"+ map.findClosestNotes(27882).get(1));*/
         /*System.out.println("原->"+map.notes.get(4));
 
         editor.move((ComplexNote) map.notes.get(4),5000L,1,true,true);

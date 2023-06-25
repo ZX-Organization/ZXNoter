@@ -222,12 +222,16 @@ public class ZXFixedOrbitMapEditor {
         return true;
     }
 
+
+
     /**
      * 打包长键或滑键为组合键,并且加入操作源
-     * @param note 只能是长键或滑键
+     *
+     * @param note        只能是长键或滑键
      * @param convertMode 转换模式
      * @return 打包的组合键
      */
+    @Deprecated
     public ComplexNote convertToComplexNote(FixedOrbitNote note, int convertMode) {
         if (!(note instanceof ComplexNote)) {
 
@@ -236,10 +240,10 @@ public class ZXFixedOrbitMapEditor {
             ComplexNote complexNote = new ComplexNote(shadowNote.timeStamp, shadowNote.orbit);
 
             if (!(shadowNote instanceof LongNote) && !(shadowNote instanceof SlideNote)) {
-                if (convertMode == 1)
+                /*if (convertMode == 1)
                     complexNote.addNote(new LongNote(shadowNote.timeStamp, shadowNote.orbit, 0));
                 else
-                    complexNote.addNote(new SlideNote(shadowNote.timeStamp, shadowNote.orbit, 0));
+                    complexNote.addNote(new SlideNote(shadowNote.timeStamp, shadowNote.orbit, 0));*/
             } else {
                 complexNote.addNote(shadowNote);
             }
@@ -254,18 +258,26 @@ public class ZXFixedOrbitMapEditor {
 
     /**
      * 转换按键,并加入源
-     * @param srcNote 只能是单键
+     *
+     * @param srcNote     只能是单键
      * @param convertMode 转换模式
      * @return 转换结果
      */
+    @Deprecated
     public FixedOrbitNote convertNote(FixedOrbitNote srcNote, int convertMode) {
         FixedOrbitNote shadowNote = checkOperate(srcNote);
         FixedOrbitNote desNote;
+
+        if (!shadowMap.notes.contains(srcNote)){
+
+        }
+
         //转换按键
         if (convertMode == 1)
             desNote = new LongNote(shadowNote.timeStamp, shadowNote.orbit, 0);
         else
             desNote = new SlideNote(shadowNote.timeStamp, shadowNote.orbit, 0);
+
         return desNote;
     }
 
@@ -342,6 +354,7 @@ public class ZXFixedOrbitMapEditor {
                 //排序
                 complexNote.notes.sort(FixedOrbitNote::compareTo);
                 checkComplexNote(complexNote, false);
+                checkComplexNote(complexNote, false);
                 checkComplexNote(complexNote, true);
                 complexNote.notes.sort(FixedOrbitNote::compareTo);
             } else if (tempEditNote instanceof LongNote longNote) {
@@ -409,15 +422,15 @@ public class ZXFixedOrbitMapEditor {
                     //长度为1的组合键
                     containsOldNote = true;
                 }
-            }else {
+            } else {
                 //检查操作源是否有同轨同时间按键
-                for (FixedOrbitNote operateNote : tempMapOperate.srcNotes){
-                    if (operateNote.timeStamp == srcNote.timeStamp && operateNote.orbit == srcNote.orbit){
+                for (FixedOrbitNote operateNote : tempMapOperate.srcNotes) {
+                    if (operateNote.timeStamp == srcNote.timeStamp && operateNote.orbit == srcNote.orbit) {
                         containsOldNote = true;
                     }
                 }
             }
-            if (!containsOldNote){
+            if (!containsOldNote) {
                 //加入操作源中
                 tempMapOperate.srcNotes.add(srcNote);
             }
@@ -447,30 +460,31 @@ public class ZXFixedOrbitMapEditor {
      * @param flag 当组合键中只有一个子键时是否转化单键
      */
     private void checkComplexNote(ComplexNote note, boolean flag) {
-        //检查按键是否为组合键,修复其中多余节点和0参滑键
+        //检查按键是否为组合键,修复其中多余节点,0参滑键以及非法参数按键
         ArrayList<FixedOrbitNote> deleteList = new ArrayList<>();
         for (int i = 0; i < note.notes.size(); i++) {
             FixedOrbitNote child = note.notes.get(i);
             if (child instanceof SlideNote slideNote) {
+                //检测同时间戳滑键
+                //向后检查
+                for (int index = i + 1; index < note.notes.size(); index++) {
+                    if (note.notes.get(index) instanceof SlideNote nextSlideNote) {
+                        //修正误差3ms
+                        if (!(Math.abs(slideNote.timeStamp - nextSlideNote.timeStamp) <=3))
+                            break;
+                        slideNote.slideArg += nextSlideNote.slideArg;
+                        deleteList.add(nextSlideNote);
+                    } else {
+                        break;
+                    }
+                }
                 //滑子键
                 if (slideNote.slideArg == 0) {
                     //将零参滑加入删除列表
                     deleteList.add(slideNote);
                 }
             } else if (child instanceof LongNote thisLongNote) {
-                //LongNote tempLongNote = thisLongNote;
-                /*//长子键
-                //向前检查所有同轨长键
-                int index = i - 1;
-                while (note.notes.get(index--) instanceof LongNote temp) {
-                    //检查到此长子键前一个也是长子键
-                    temp.sustainedTime += tempLongNote.sustainedTime;
-                    deleteList.add(tempLongNote);
-                    //向前移动
-                    tempLongNote = temp;
-                }*/
-
-
+                //检测同轨长键
                 //向后检查
                 for (int index = i + 1; index < note.notes.size(); index++) {
                     if (note.notes.get(index) instanceof LongNote nextLongNote) {
@@ -482,7 +496,8 @@ public class ZXFixedOrbitMapEditor {
                         break;
                     }
                 }
-                if (thisLongNote.sustainedTime == 0) {
+                if (Math.abs(thisLongNote.sustainedTime ) <= 3) {
+                    //修正误差3ms
                     deleteList.add(thisLongNote);
                 }
             }

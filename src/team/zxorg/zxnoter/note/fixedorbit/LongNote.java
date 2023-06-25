@@ -1,9 +1,11 @@
 package team.zxorg.zxnoter.note.fixedorbit;
 
+import team.zxorg.zxnoter.note.BaseNote;
+
 /**
  * 长键
  */
-public class LongNote extends FixedOrbitNote implements Cloneable{
+public class LongNote extends FixedOrbitNote implements Cloneable,Comparable<BaseNote>{
     /**
      *  持续时间
      */
@@ -33,6 +35,16 @@ public class LongNote extends FixedOrbitNote implements Cloneable{
     @Override
     public long getLength() {
         return sustainedTime;
+    }
+
+    @Override
+    public int compareTo(BaseNote baseNote) {
+        if (baseNote instanceof SlideNote slideNote){
+            if (Math.abs(timeStamp- slideNote.timeStamp) <= 3){
+                return Long.compare(timeStamp+sustainedTime, slideNote.timeStamp);
+            }
+        }
+        return super.compareTo(baseNote);
     }
 
     @Override

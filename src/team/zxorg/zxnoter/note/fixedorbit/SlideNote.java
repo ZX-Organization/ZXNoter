@@ -1,11 +1,12 @@
 package team.zxorg.zxnoter.note.fixedorbit;
 
 import team.zxorg.zxnoter.map.mapInfo.ImdInfo;
+import team.zxorg.zxnoter.note.BaseNote;
 
 /**
  * 滑键
  */
-public class SlideNote extends FixedOrbitNote implements Cloneable{
+public class SlideNote extends FixedOrbitNote implements Cloneable,Comparable<BaseNote>{
     /**
      * 滑键参数,正右负左
      * 值大小为滑动轨道数
@@ -59,7 +60,19 @@ public class SlideNote extends FixedOrbitNote implements Cloneable{
     public int getImdNoteType() {
         return 1;
     }
-
+    @Override
+    public int compareTo(BaseNote baseNote) {
+        if (baseNote instanceof SlideNote slideNote){
+            if (Math.abs(timeStamp-slideNote.timeStamp) <= 3)
+                return 0;
+        }
+        if (baseNote instanceof LongNote longNote){
+            if (Math.abs(timeStamp- longNote.timeStamp) <= 3){
+                return Long.compare( timeStamp,longNote.timeStamp+longNote.sustainedTime);
+            }
+        }
+        return super.compareTo(baseNote);
+    }
     @Override
     public String toString() {
         return '\n' +"SlideNote{" +

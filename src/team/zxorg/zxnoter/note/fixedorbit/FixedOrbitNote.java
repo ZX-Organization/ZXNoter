@@ -82,6 +82,9 @@ public class FixedOrbitNote extends BaseNote implements Cloneable,Comparable<Bas
             if (baseNote instanceof LongNote && this instanceof SlideNote){
                 return -1;
             }
+            if (baseNote instanceof SlideNote && this instanceof SlideNote){
+                return 0;
+            }
             return Integer.compare(orbit, fixedOrbitNote.orbit);
         }
         //相同
