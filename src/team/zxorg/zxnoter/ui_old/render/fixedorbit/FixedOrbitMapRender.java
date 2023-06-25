@@ -18,8 +18,8 @@ import team.zxorg.zxnoter.ui_old.render.fixedorbit.key.FixedOrbitNotesKey;
 
 public class FixedOrbitMapRender extends FixedOrbitRender {
     String state;//状态
-
-    public ObjectProperty<RenderNote> singleRenderNote = new SimpleObjectProperty<>();//单个渲染键
+    public RenderPoint renderPoint = new RenderPoint();//当前的鼠标位置
+    public RenderNote renderNote = new RenderNote();//当前的鼠标位置
 
 
     public FixedOrbitMapRender(FixedOrbitRenderInfo renderInfo, CanvasPane canvas, ZXMap zxMap, String state, String theme) {
@@ -30,11 +30,19 @@ public class FixedOrbitMapRender extends FixedOrbitRender {
 
     @Override
     public void renderHandle() {
-        drawAllNote(null);
+        drawAllNote();
     }
 
-    public RenderNote drawAllNote(RenderPoint point) {
-        RenderNote renderNote = null;
+    public void drawAllNote() {
+        {//全部初始化
+            renderNote.pos = null;
+            renderNote.note = null;
+            renderNote.complexNote = null;
+            renderNote.key = null;
+            renderNote.renderRectangle = null;
+        }
+
+
         for (int i = 0; i < zxMap.notes.size(); i++) {
             if (zxMap.notes.get(i) instanceof FixedOrbitNote note) {
 
@@ -44,24 +52,13 @@ public class FixedOrbitMapRender extends FixedOrbitRender {
                 //渲染对应键的额外内容
                 if (note instanceof ComplexNote complexNote) {
                     for (int j = 0; j < complexNote.notes.size(); j++) {
-                        renderNote = drawNote(complexNote.notes.get(j), (j >= complexNote.notes.size() - 1 ? DrawMode.ALL : DrawMode.ONLY_LINE), point);
-                        if (renderNote != null) {
-                            renderNote.complexNote = complexNote;
-                            return renderNote;
-                        }
-
+                        drawNote(complexNote.notes.get(j), (j >= complexNote.notes.size() - 1 ? DrawMode.ALL : DrawMode.ONLY_LINE), complexNote);
                     }
                     for (int j = 0; j < complexNote.notes.size() - 1; j++) {
-                        renderNote = drawNote(complexNote.notes.get(j), DrawMode.ONLY_NODE, point);
-                        if (renderNote != null) {
-                            renderNote.complexNote = complexNote;
-                            return renderNote;
-                        }
+                        drawNote(complexNote.notes.get(j), DrawMode.ONLY_NODE, complexNote);
                     }
                 } else {
-                    renderNote = drawNote(note, DrawMode.ALL, point);
-                    if (renderNote != null)
-                        return renderNote;
+                    drawNote(note, DrawMode.ALL, null);
                 }
 
                 loadImage(getImage(state, FixedOrbitNotesKey.NOTE));
@@ -72,30 +69,25 @@ public class FixedOrbitMapRender extends FixedOrbitRender {
                 renderRectangle.scale(Pos.CENTER, orbitWidth * 0.8, Orientation.HORIZONTAL);
 
                 //计算位置
-                if (point != null) {
-                    if (renderRectangle.containPoint(point))
-                        return new RenderNote(RenderNote.RenderNoteObject.HEAD, note, null, FixedOrbitNotesKey.NOTE, renderRectangle);
-                } else
-                    drawImage();
-
-            }
-        }
-
-        if (point == null) {
-
-            renderNote = singleRenderNote.get();
-            if (renderNote != null) {
-                loadImage(getImage(state, renderNote.key));
-                renderRectangle.copyOf(renderNote.renderRectangle);
-                //renderRectangle.scale(Pos.CENTER, 1.2);
+                if (renderRectangle.containPoint(renderPoint)) {
+                    renderNote.pos = RenderNote.RenderNoteObject.HEAD;
+                    renderNote.note = note;
+                    renderNote.complexNote = null;
+                    renderNote.key = FixedOrbitNotesKey.NOTE;
+                    renderNote.renderRectangle = renderRectangle.clone();
+                }
                 drawImage();
             }
         }
 
-        return null;
+        if (renderNote.key != null) {
+            loadImage(getImage("normal-selected", renderNote.key));
+            renderRectangle.copyOf(renderNote.renderRectangle);
+            drawImage();
+        }
     }
 
-    private RenderNote drawNote(FixedOrbitNote note, DrawMode drawMode, RenderPoint point) {
+    private void drawNote(FixedOrbitNote note, DrawMode drawMode, ComplexNote complexNote) {
         double orbitWidth = (renderInfo.canvasWidth.get() / getInfo().orbits.get());
         double noteXPos = (getInfo().canvasWidth.get() / getInfo().orbits.get()) * note.orbit + orbitWidth / 2;
         double noteYPos = (renderInfo.timelinePosition.doubleValue() - note.timeStamp + getInfo().getJudgedLineTimeOffset()) * renderInfo.timelineZoom.doubleValue();
@@ -113,11 +105,14 @@ public class FixedOrbitMapRender extends FixedOrbitRender {
                 renderRectangle.setXY(Pos.BASELINE_CENTER,
                         noteXPos,
                         noteYPos - longNote.sustainedTime * renderInfo.timelineZoom.doubleValue());
-                if (point != null) {
-                    if (renderRectangle.containPoint(point))
-                        return new RenderNote(RenderNote.RenderNoteObject.BODY, longNote, null, fixedOrbitNotesKey, renderRectangle);
-                } else
-                    drawImage();
+                if (renderRectangle.containPoint(renderPoint)) {
+                    renderNote.pos = RenderNote.RenderNoteObject.BODY;
+                    renderNote.note = longNote;
+                    renderNote.complexNote = complexNote;
+                    renderNote.key = fixedOrbitNotesKey;
+                    renderNote.renderRectangle = renderRectangle.clone();
+                }
+                drawImage();
             }
 
             //末尾节点
@@ -131,11 +126,14 @@ public class FixedOrbitMapRender extends FixedOrbitRender {
                 //计算尺寸
                 renderRectangle.scale(Pos.CENTER, orbitWidth * (fixedOrbitNotesKey.equals(FixedOrbitNotesKey.NODE) ? 0.2 : 0.3), Orientation.HORIZONTAL);
                 //计算位置
-                if (point != null) {
-                    if (renderRectangle.containPoint(point))
-                        return new RenderNote(RenderNote.RenderNoteObject.FOOT, longNote, null, fixedOrbitNotesKey, renderRectangle);
-                } else
-                    drawImage();
+                if (renderRectangle.containPoint(renderPoint)) {
+                    renderNote.pos = RenderNote.RenderNoteObject.FOOT;
+                    renderNote.note = longNote;
+                    renderNote.complexNote = complexNote;
+                    renderNote.key = fixedOrbitNotesKey;
+                    renderNote.renderRectangle = renderRectangle.clone();
+                }
+                drawImage();
             }
         } else if (note instanceof SlideNote slideNote) {
             //画线
@@ -150,11 +148,14 @@ public class FixedOrbitMapRender extends FixedOrbitRender {
                         noteYPos);
                 renderRectangle.setWidth(HPos.LEFT, orbitWidth * (Math.abs(slideNote.slideArg)));
                 //计算位置
-                if (point != null) {
-                    if (renderRectangle.containPoint(point))
-                        return new RenderNote(RenderNote.RenderNoteObject.BODY, slideNote, null, fixedOrbitNotesKey, renderRectangle);
-                } else
-                    drawImage();
+                if (renderRectangle.containPoint(renderPoint)) {
+                    renderNote.pos = RenderNote.RenderNoteObject.BODY;
+                    renderNote.note = slideNote;
+                    renderNote.complexNote = complexNote;
+                    renderNote.key = fixedOrbitNotesKey;
+                    renderNote.renderRectangle = renderRectangle.clone();
+                }
+                drawImage();
             }
 
             //画箭头
@@ -172,14 +173,16 @@ public class FixedOrbitMapRender extends FixedOrbitRender {
                         noteXPos + slideNote.slideArg * orbitWidth,
                         noteYPos);
                 renderRectangle.scale(Pos.CENTER, orbitWidth * (fixedOrbitNotesKey.equals(FixedOrbitNotesKey.NODE) ? 0.2 : 0.4), Orientation.HORIZONTAL);
-                if (point != null) {
-                    if (renderRectangle.containPoint(point))
-                        return new RenderNote(RenderNote.RenderNoteObject.FOOT, slideNote, null, fixedOrbitNotesKey, renderRectangle);
-                } else
-                    drawImage();
+                if (renderRectangle.containPoint(renderPoint)) {
+                    renderNote.pos = RenderNote.RenderNoteObject.FOOT;
+                    renderNote.note = slideNote;
+                    renderNote.complexNote = complexNote;
+                    renderNote.key = fixedOrbitNotesKey;
+                    renderNote.renderRectangle = renderRectangle.clone();
+                }
+                drawImage();
             }
         }
-        return null;
     }
 
     private enum DrawMode {

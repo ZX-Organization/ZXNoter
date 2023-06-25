@@ -25,20 +25,21 @@ public class FixedOrbitBeatLineRender extends FixedOrbitRender {
 
         for (RenderBeat renderBeat : renderBeats) {
             double beatCycleTime = 60000. / (renderBeat.timing.absBpm);
-            for (int i = 0; i < renderBeat.measure; i++) {
+
+            for (int i = 0; i < renderBeat.measure; i++) {//分拍线
                 loadImage(getImage(FixedOrbitObjectKey.SUB_BEAT_LINE));
                 renderRectangle.setWidth(HPos.LEFT, canvasRectangle.getWidth());
                 renderRectangle.setY(VPos.CENTER, getInfo().getTimeToPosition(renderBeat.time + (beatCycleTime / renderBeat.measure) * i));
                 drawImage();
             }
 
-            //绘制拍
+            //绘制拍线
             loadImage(getImage(FixedOrbitObjectKey.BEAT_LINE));
-            renderRectangle.setWidth(HPos.LEFT,canvasRectangle.getWidth());
-            renderRectangle.setY(VPos.CENTER,getInfo().getTimeToPosition(renderBeat.time));
+            renderRectangle.setWidth(HPos.LEFT, canvasRectangle.getWidth());
+            renderRectangle.setY(VPos.CENTER, getInfo().getTimeToPosition(renderBeat.time));
             drawImage();
             graphics.setFill(Color.WHEAT);
-            graphics.fillText(TimeUtils.formatTime(renderBeat.time), 0, getInfo().getTimeToPosition(renderBeat.time));
+            graphics.fillText(TimeUtils.formatTime(renderBeat.time) + " " + renderBeat.measure, 0, getInfo().getTimeToPosition(renderBeat.time));
 
         }
     }

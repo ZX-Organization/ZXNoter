@@ -32,6 +32,10 @@ public class RenderPoint {
         this.y = y;
     }
 
+    public void setXY(double x,double y){
+        this.x = x;
+        this.y = y;
+    }
     @Override
     public String toString() {
         return "坐标[" +

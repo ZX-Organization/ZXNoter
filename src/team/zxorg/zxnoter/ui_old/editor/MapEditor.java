@@ -2,6 +2,9 @@ package team.zxorg.zxnoter.ui_old.editor;
 
 import javafx.beans.property.*;
 import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
@@ -12,9 +15,12 @@ import javafx.scene.layout.*;
 import team.zxorg.zxnoter.audiochannel.channel.MemoryAudioInputChannel;
 import team.zxorg.zxnoter.io.reader.ImdReader;
 import team.zxorg.zxnoter.io.reader.OsuReader;
+import team.zxorg.zxnoter.io.writer.ImdWriter;
+import team.zxorg.zxnoter.io.writer.OsuWriter;
 import team.zxorg.zxnoter.map.ZXMap;
 import team.zxorg.zxnoter.map.editor.ZXFixedOrbitMapEditor;
 import team.zxorg.zxnoter.map.mapInfo.ZXMInfo;
+import team.zxorg.zxnoter.note.fixedorbit.ComplexNote;
 import team.zxorg.zxnoter.note.fixedorbit.FixedOrbitNote;
 import team.zxorg.zxnoter.note.fixedorbit.LongNote;
 import team.zxorg.zxnoter.note.fixedorbit.SlideNote;
@@ -24,10 +30,12 @@ import team.zxorg.zxnoter.ui_old.component.CanvasPane;
 import team.zxorg.zxnoter.ui_old.component.HToolGroupBar;
 import team.zxorg.zxnoter.ui_old.component.VToolGroupBar;
 import team.zxorg.zxnoter.ui_old.render.basis.RenderPoint;
+import team.zxorg.zxnoter.ui_old.render.basis.RenderRectangle;
 import team.zxorg.zxnoter.ui_old.render.fixedorbit.*;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class MapEditor extends BaseEditor {
@@ -60,7 +68,7 @@ public class MapEditor extends BaseEditor {
 
 
     ZXFixedOrbitMapEditor zxFixedOrbitMapEditor;
-    ObjectProperty<RenderNote> renderNote = new SimpleObjectProperty<>();//当前选择的键
+
     MouseEvent pressedMouseEvent = new MouseDragEvent(null, null, null, 0, 0, 0, 0, null, 0, false, false, false, false, false, false, false, false, false, null, null);//鼠标按下事件
 
     MemoryAudioInputChannel audioInputChannel;//音频文件通道
@@ -76,6 +84,8 @@ public class MapEditor extends BaseEditor {
 
     //预览堆叠
     StackPane previewBar = new StackPane();
+
+    boolean judgeLineAlign = false;//判定线对齐分拍线
 
     public MapEditor(Path mapPath) {
 
@@ -171,60 +181,58 @@ public class MapEditor extends BaseEditor {
 
             //移动事件
             mapCanvas.setOnMouseMoved(event -> {
-                RenderNote renderNote1 = mainMapRender.drawAllNote(new RenderPoint(event.getX(), event.getY()));
-                if (renderNote1 != null)
-                    if (renderNote.get() != null)
-                        if (!renderNote1.note.equals(renderNote.get().note))
-                            renderNote.set(renderNote1);
+                mainMapRender.renderPoint.setXY(event.getX(), event.getY());
             });
 
             //按下事件
             mapCanvas.setOnMousePressed(event -> {
                 pressedMouseEvent = event;
-                renderNote.set(mainMapRender.drawAllNote(new RenderPoint(event.getX(), event.getY())));
+                //获取鼠标位置实体键
+                mainMapRender.renderPoint.setXY(event.getX(), event.getY());
             });
 
             //拖拽事件
             mapCanvas.setOnMouseDragged(event -> {
+                RenderNote renderNote = mainMapRender.renderNote;//当前选择的键
                 int orbit = (int) (event.getX() / mainMapRender.getInfo().orbitWidth.get());
                 long time = mainMapRender.getInfo().getPositionToTime(event.getY());
-                time = RenderBeat.alignBeatsTime(renderBeats, time);
-                boolean isKeep = event.isShiftDown();
-                if (renderNote != null) {
-                    //zxFixedOrbitMapEditor.shadowMap.notes.clear();
 
-                    RenderNote renderNote1 = renderNote.get();
-                    if (renderNote1 != null) {
-                        if (renderNote1.complexNote == null) {//不是组合键
-                            if (renderNote1.pos.equals(RenderNote.RenderNoteObject.FOOT)) {//头节点  对长键编辑属性
-                                if (renderNote1.note instanceof LongNote) {//长键
-                                    zxFixedOrbitMapEditor.modifyPar(renderNote1.note, (int) (time - renderNote1.note.timeStamp), true);
-                                } else if (renderNote1.note instanceof SlideNote) {//滑键
-                                    zxFixedOrbitMapEditor.modifyPar(renderNote1.note, orbit, true);
+                if (!event.isControlDown())//时间对齐分拍
+                    time = RenderBeat.alignBeatsTime(renderBeats, time);
+                boolean isKeep = event.isShiftDown();
+                {
+                    //zxFixedOrbitMapEditor.shadowMap.notes.clear();
+                    if (renderNote.note != null) {
+                        if (renderNote.complexNote == null) {//不是组合键
+                            if (renderNote.pos.equals(RenderNote.RenderNoteObject.FOOT)) {//头节点  对长键编辑属性
+                                if (renderNote.note instanceof LongNote) {//长键
+                                    zxFixedOrbitMapEditor.modifyPar(renderNote.note, (int) (time - renderNote.note.timeStamp), true);
+                                } else if (renderNote.note instanceof SlideNote) {//滑键
+                                    zxFixedOrbitMapEditor.modifyPar(renderNote.note, orbit, true);
                                 }
-                            } else if (renderNote1.pos.equals(RenderNote.RenderNoteObject.HEAD)) {//头部编辑 (移动、转换)
+                            } else if (renderNote.pos.equals(RenderNote.RenderNoteObject.HEAD)) {//头部编辑 (移动、转换)
                                 if (event.isAltDown()) {//单键转换
-                                    if (renderNote1.note.timeStamp != time) {//时间改变 (长键)
+                                    if (renderNote.note.timeStamp != time) {//时间改变 (长键)
                                         zxFixedOrbitMapEditor.modifyPar(
-                                                zxFixedOrbitMapEditor.convertNote(renderNote1.note, ZXFixedOrbitMapEditor.TO_LONG_NOTE)
-                                                , time - renderNote1.note.timeStamp
+                                                renderNote.note
+                                                , time - renderNote.note.timeStamp
                                                 , true
                                         );
-                                    } else if (renderNote1.note.orbit != orbit) {//轨道改变 (滑键)
+                                    } else if (renderNote.note.orbit != orbit) {//轨道改变 (滑键)
                                         zxFixedOrbitMapEditor.modifyPar(
-                                                zxFixedOrbitMapEditor.convertNote(renderNote1.note, ZXFixedOrbitMapEditor.TO_SLIDE_NOTE)
-                                                , orbit - renderNote1.note.orbit
+                                                renderNote.note
+                                                , orbit - renderNote.note.orbit
                                                 , true
                                         );
                                     }
 
                                 } else {//移动
-                                    zxFixedOrbitMapEditor.move(renderNote1.note, orbit, time, true);
+                                    zxFixedOrbitMapEditor.move(renderNote.note, orbit, time, true);
                                 }
-                            } else if (renderNote1.pos.equals(RenderNote.RenderNoteObject.BODY)) {//拖动身体
-                                /*if (renderNote1.note instanceof LongNote longNote) {//长键
+                            } else if (renderNote.pos.equals(RenderNote.RenderNoteObject.BODY)) {//拖动身体
+                                /*if (renderNote.note instanceof LongNote longNote) {//长键
                                     zxFixedOrbitMapEditor.convertToComplexNote(longNote, Z);
-                                } else if (renderNote1.note instanceof SlideNote slideNote) {//滑键
+                                } else if (renderNote.note instanceof SlideNote slideNote) {//滑键
                                     zxFixedOrbitMapEditor.convertToComplexNote(slideNote, 2);
                                 }else {//单键
 
@@ -233,38 +241,38 @@ public class MapEditor extends BaseEditor {
                             }
 
 
-                            //zxFixedOrbitMapEditor.move(renderNote1.note, orbit, true);
+                            //zxFixedOrbitMapEditor.move(renderNote.note, orbit, true);
                         } else {
                             //组合键
 
-                            if (renderNote1.note instanceof LongNote) {//长键
-                                if (renderNote1.pos.equals(RenderNote.RenderNoteObject.FOOT)) {//尾部节点  对滑键编辑时间
-                                    int index = renderNote1.complexNote.notes.indexOf(renderNote1.note) + 1;
-                                    if (index < renderNote1.complexNote.notes.size())//检查越界
-                                        zxFixedOrbitMapEditor.move(renderNote1.complexNote, time, index, isKeep, true);
+                            if (renderNote.note instanceof LongNote) {//长键
+                                if (renderNote.pos.equals(RenderNote.RenderNoteObject.FOOT)) {//尾部节点  对滑键编辑时间
+                                    int index = renderNote.complexNote.notes.indexOf(renderNote.note) + 1;
+                                    if (index < renderNote.complexNote.notes.size())//检查越界
+                                        zxFixedOrbitMapEditor.move(renderNote.complexNote, time, index, isKeep, true);
                                 } else {
                                     //身体  对长键编辑轨道
-                                    zxFixedOrbitMapEditor.move(renderNote1.complexNote, orbit, renderNote1.complexNote.notes.indexOf(renderNote1.note), isKeep, true);
+                                    zxFixedOrbitMapEditor.move(renderNote.complexNote, orbit, renderNote.complexNote.notes.indexOf(renderNote.note), isKeep, true);
                                 }
-                            } else if (renderNote1.note instanceof SlideNote) {//滑键
-                                if (renderNote1.pos.equals(RenderNote.RenderNoteObject.BODY)) {//身体
+                            } else if (renderNote.note instanceof SlideNote) {//滑键
+                                if (renderNote.pos.equals(RenderNote.RenderNoteObject.BODY)) {//身体
                                     //对滑键修改时间
-                                    zxFixedOrbitMapEditor.move(renderNote1.complexNote, time, renderNote1.complexNote.notes.indexOf(renderNote1.note), isKeep, true);
+                                    zxFixedOrbitMapEditor.move(renderNote.complexNote, time, renderNote.complexNote.notes.indexOf(renderNote.note), isKeep, true);
                                 }
                             }
 
 
                             {
                                 //如果是末尾键
-                                if (renderNote1.complexNote.notes.get(renderNote1.complexNote.notes.size() - 1).equals(renderNote1.note))
-                                    if (renderNote1.pos.equals(RenderNote.RenderNoteObject.FOOT)) {//头节点  对长键编辑属性
-                                        if (renderNote1.note instanceof LongNote longNote) {//长键
-                                            zxFixedOrbitMapEditor.modifyEndPar(renderNote1.complexNote, (int) (time - renderNote1.note.timeStamp), true);
-                                        } else if (renderNote1.note instanceof SlideNote slideNote) {//滑键
-                                            zxFixedOrbitMapEditor.modifyEndPar(renderNote1.complexNote, orbit - slideNote.orbit, true);
+                                if (renderNote.complexNote.notes.get(renderNote.complexNote.notes.size() - 1).equals(renderNote.note))
+                                    if (renderNote.pos.equals(RenderNote.RenderNoteObject.FOOT)) {//头节点  对长键编辑属性
+                                        if (renderNote.note instanceof LongNote longNote) {//长键
+                                            zxFixedOrbitMapEditor.modifyEndPar(renderNote.complexNote, (int) (time - renderNote.note.timeStamp), true);
+                                        } else if (renderNote.note instanceof SlideNote slideNote) {//滑键
+                                            zxFixedOrbitMapEditor.modifyEndPar(renderNote.complexNote, orbit - slideNote.orbit, true);
                                         }
-                                    } else if (renderNote1.pos.equals(RenderNote.RenderNoteObject.HEAD)) {//身体
-                                        zxFixedOrbitMapEditor.move(renderNote1.note, orbit, time, true);
+                                    } else if (renderNote.pos.equals(RenderNote.RenderNoteObject.HEAD)) {//身体
+                                        zxFixedOrbitMapEditor.move(renderNote.note, orbit, time, true);
                                     }
 
 
@@ -302,7 +310,30 @@ public class MapEditor extends BaseEditor {
             //滚轮监听
             mapCanvas.setOnScroll(event -> {
                 double deltaY = event.getDeltaY();
-                mainMapRender.getInfo().timelinePosition.set(mainMapRender.getInfo().timelinePosition.get() + (long) (deltaY / mainMapRender.getInfo().timelineZoom.get()));
+                if (event.isAltDown()) {//修改分拍
+                    RenderBeat renderBeat = RenderBeat.findTime(renderBeats, mainMapRender.getInfo().getPositionToTime(event.getY()));
+                    if (renderBeat != null) {
+                        if (renderBeat.measure < 1)
+                            renderBeat.measure = 1;
+                        if (event.getDeltaY() > 0)
+                            renderBeat.measure++;
+                        else
+                            renderBeat.measure--;
+                    }
+                } else {
+
+                    if (judgeLineAlign) {//判定线对齐分拍
+                        long timeNow = (long) (mainMapRender.getInfo().timelinePosition.get() + deltaY);
+                        RenderBeat renderBeat = RenderBeat.findTime(renderBeats, timeNow);
+                        if (renderBeat != null) {
+                            double beatTime = 60000 / renderBeat.timing.absBpm;
+                            double measureTime = beatTime / renderBeat.measure;
+                            mainMapRender.getInfo().timelinePosition.set(RenderBeat.alignBeatsTime(renderBeats, (long) (mainMapRender.getInfo().timelinePosition.get() + measureTime * (deltaY > 0 ? 1 : -1))));
+                        }
+                    } else//正常滚动
+                        mainMapRender.getInfo().timelinePosition.set(mainMapRender.getInfo().timelinePosition.get() + (long) (deltaY / mainMapRender.getInfo().timelineZoom.get()));
+                }
+
             });
 
 
@@ -320,7 +351,7 @@ public class MapEditor extends BaseEditor {
         previewMapRender.getInfo().timelineZoom.setValue(0.18f);
 
 
-        //预览选中渲染器
+        //预览虚影渲染器
         previewShadowMapRender = new FixedOrbitMapRender(previewMapRender.getInfo(), previewCanvas, zxFixedOrbitMapEditor.shadowMap, "preview-selected", "default");
 
         previewBackgroundRender = new FixedOrbitPreviewBackgroundRender(previewMapRender.getInfo(), zxMap, previewCanvas.canvas, "default");
@@ -335,15 +366,14 @@ public class MapEditor extends BaseEditor {
         //谱面编辑渲染器
         mainMapRender = new FixedOrbitMapRender(new FixedOrbitRenderInfo(mapCanvas.canvas), mapCanvas, zxMap, "normal", "default");
         mainMapRender.getInfo().timelineZoom.setValue(1.2f);
-        mainMapRender.getInfo().judgedLinePositionPercentage.setValue(0.95f);
+        mainMapRender.getInfo().judgedLinePositionPercentage.setValue(0.75f);
 
         //绑定预览和主部分渲染信息
         previewMapRender.getInfo().orbits.bind(mainMapRender.getInfo().orbits);
 
 
-        //选中渲染器
-        mainShadowMapRender = new FixedOrbitMapRender(mainMapRender.getInfo(), mapCanvas, zxFixedOrbitMapEditor.shadowMap, "normal-selected", "default");
-        mainShadowMapRender.singleRenderNote.bind(renderNote);
+        //虚影渲染器
+        mainShadowMapRender = new FixedOrbitMapRender(mainMapRender.getInfo(), mapCanvas, zxFixedOrbitMapEditor.shadowMap, "normal-shadow", "default");
 
         //背景渲染器
         backgroundRender = new FixedOrbitBackgroundRender(mainMapRender.getInfo(), zxMap, mapCanvas.canvas, "default");
@@ -437,9 +467,22 @@ public class MapEditor extends BaseEditor {
 
         {//工具
             //吸附编辑
-            sideToolBar.addToggleButton("tool", "svg.icons.design.pencil-ruler-2-line", "吸附");
+            //sideToolBar.addToggleButton("tool", "svg.icons.design.pencil-ruler-2-line", "吸附");
+
+            ChangeListener<Number> changeListener = (observable, oldValue, newValue) -> {
+                mainMapRender.getInfo().timelinePosition.set(RenderBeat.alignBeatsTime(renderBeats, newValue.longValue()));
+            };
+
             //判定线对齐
-            sideToolBar.addToggleButton("tool", "svg.icons.zxnoter.judged-line-align", "判定线对齐");
+            ToggleButton toggleButton = sideToolBar.addToggleButton("tool", "svg.icons.zxnoter.judged-line-align", "判定线对齐");
+            toggleButton.setOnAction(event -> {
+                judgeLineAlign = toggleButton.isSelected();
+                if (judgeLineAlign) {
+                    mainMapRender.getInfo().timelinePosition.addListener(changeListener);
+                } else {
+                    mainMapRender.getInfo().timelinePosition.removeListener(changeListener);
+                }
+            });
         }
 
 
@@ -449,6 +492,21 @@ public class MapEditor extends BaseEditor {
 
         //顶部工具组栏
         HToolGroupBar topToolBar = new HToolGroupBar();
+
+
+        {//文件
+            Button button;
+            //保存文件
+            button = topToolBar.addButton("file", "svg.icons.device.save-line", "保存为");
+            button.setOnAction(event -> {
+                try {
+                    OsuWriter.writeOut(zxMap, OsuWriter.checkLocalizedInfos(zxMap), Paths.get("./docs/output"));
+                    ImdWriter.writeOut(zxMap, ImdWriter.checkLocalizedInfos(zxMap), Paths.get("./docs/output"));
+                } catch (NoSuchFieldException | IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+        }
 
 
         {//时间
@@ -491,7 +549,7 @@ public class MapEditor extends BaseEditor {
             //播放变速
             topToolBar.addButton("state", "svg.icons.media.slow-down-line", "播放变速");
             {
-                //分拍
+               /* //分拍
                 Button button = topToolBar.addButton("state", "svg.icons.zxnoter.beat-16", "分拍");
                 button.setOnScroll(event -> {
                     RenderBeat renderBeat = RenderBeat.findTime(renderBeats, mainMapRender.getInfo().timelinePosition.get());
@@ -502,7 +560,7 @@ public class MapEditor extends BaseEditor {
                             renderBeat.measure--;
                         button.setShape(ZXResources.getSvg("svg.icons.zxnoter.beat-" + renderBeat.measure));
                     }
-                });
+                });*/
             }
 
             {
@@ -582,6 +640,7 @@ public class MapEditor extends BaseEditor {
             previewTimingRender.render();
         }
 
+        // mainMapRender.graphics.rotate(1);
         backgroundRender.render();
         beatLineRender.render();
         mainMapRender.render();

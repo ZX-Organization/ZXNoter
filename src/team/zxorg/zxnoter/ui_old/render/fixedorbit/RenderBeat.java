@@ -19,6 +19,7 @@ public class RenderBeat {
         this.time = time;
         this.timing = timing;
         this.isBase = isBase;
+        this.measure = 1;
     }
 
     @Override
@@ -58,7 +59,7 @@ public class RenderBeat {
                         ArrayList<BaseNote> notes = zxMap.getScaleNotes(time - (long) beatCycleTime * 2, Math.round(beatCycleTime) + 2 * (long) beatCycleTime, true);
                         ArrayList<Long> keyPoints = keyPoint(notes,true);
                         boolean isTrue = false;
-                        renderBeat.measure = 0;
+                        renderBeat.measure = 1;
                         if (notes.size() > 1) {
                             for (int measure = 1; measure < 33; measure++) {//尝试拍计算
                                 isTrue = true;

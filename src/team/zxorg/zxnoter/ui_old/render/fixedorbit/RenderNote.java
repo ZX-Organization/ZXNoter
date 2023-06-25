@@ -12,6 +12,9 @@ public class RenderNote {
     public FixedOrbitNotesKey key;
     public RenderRectangle renderRectangle;
 
+    public RenderNote() {
+    }
+
     public RenderNote(RenderNoteObject pos, FixedOrbitNote note, ComplexNote complexNote, FixedOrbitNotesKey key, RenderRectangle renderRectangle) {
         this.pos = pos;
         this.note = note;

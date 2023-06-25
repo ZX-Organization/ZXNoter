@@ -17,6 +17,11 @@ public class RenderRectangle {
     public RenderRectangle() {
     }
 
+    @Override
+    public RenderRectangle clone() {
+        return new RenderRectangle(left, top, right, bottom);
+    }
+
     public RenderRectangle(double left, double top, double right, double bottom) {
         this.left = left;
         this.top = top;
