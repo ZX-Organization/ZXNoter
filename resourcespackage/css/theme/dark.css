@@ -1,3 +1,6 @@
+
+
+
 .root {
     -color-dark-blue: #498ba7; /* 深蓝色 */
     -color-blue: #519aba; /* 蓝色 */
@@ -39,17 +42,17 @@
 
     -color-theme-1-light: #545454; /* 主题颜色-1-浅色 */
 
-  /*  -color-font-usually: #0c539a;
-    -color-font-light: #116fcd;
+    /*  -color-font-usually: #0c539a;
+      -color-font-light: #116fcd;
 
-    -color-border-window: #bacce1;
+      -color-border-window: #bacce1;
 
-    -color-theme-1: #116ecc;
-    -color-theme-2: #f5f8fc;
-    -color-theme-3: #f5f8fd;
-    -color-theme-4: #c9dcf3;
+      -color-theme-1: #116ecc;
+      -color-theme-2: #f5f8fc;
+      -color-theme-3: #f5f8fd;
+      -color-theme-4: #c9dcf3;
 
-    -color-theme-1-light: #ffffff;*/
+      -color-theme-1-light: #ffffff;*/
 }
 
 .bg-color-dark-blue {

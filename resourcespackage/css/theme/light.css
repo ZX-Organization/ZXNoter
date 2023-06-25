@@ -1,0 +1,420 @@
+
+.root {
+    -color-dark-blue: #498ba7; /* 深蓝色 */
+    -color-blue: #519aba; /* 蓝色 */
+    -color-light-blue: #61b9e0; /* 浅蓝色 */
+    -color-dark-red: #b8383d; /* 深红色 */
+    -color-red: #b8383d; /* 红色 */
+    -color-light-red: #cc3e44; /* 浅红色 */
+    -color-dark-purple: #9068b0; /* 深紫色 */
+    -color-purple: #a074c4; /* 紫色 */
+    -color-light-purple: #bf8aea; /* 浅紫色 */
+    -color-dark-yellow: #b7b73b; /* 深黄色 */
+    -color-yellow: #cbcb41; /* 黄色 */
+    -color-light-yellow: #f1f14d; /* 浅黄色 */
+    -color-dark-green: #7fae42; /* 深绿色 */
+    -color-green: #8dc149; /* 绿色 */
+    -color-light-green: #a8e757; /* 浅绿色 */
+    -color-dark-orange: #cc6d2e; /* 深橙色 */
+    -color-orange: #e37933; /* 橙色 */
+    -color-light-orange: #ff9539; /* 浅橙色 */
+    -color-dark-pink: #dd4b78; /* 深粉色 */
+    -color-pink: #f55385; /* 粉色 */
+    -color-light-pink: #ff567f; /* 浅粉色 */
+    -color-dark-gray: #455155; /* 深灰色 */
+    -color-medium-gray: #4d5a5e; /* 中灰色 */
+    -color-gray: #6d8086; /* 灰色 */
+    -color-light-gray: #8ca4ac; /* 浅灰色 */
+    -color-dark-white: #a1a3a3; /* 深白色 */
+    -color-white: #d4d7d6; /* 白色 */
+    -color-light-white: #f9fdfc; /* 浅白色 */
+
+
+    -color-font-usually: #5e5e5e; /* 通常字体 */
+    -color-font-light: #1f1f1f; /* 浅字体 */
+
+    -color-border-window: #dfdfdf; /* 边框颜色 */
+
+    -color-theme-1: #f8f8f8; /* 主题颜色-1 */
+    -color-theme-2: #f2f2f2; /* 主题颜色-2 */
+    -color-theme-3: #f2f2f2; /* 主题颜色-3 */
+    -color-theme-4: #ffffff; /* 主题颜色-4 */
+
+    -color-theme-1-light: #ffffff; /* 主题颜色-1-浅色 */
+
+    /*  -color-font-usually: #0c539a;
+      -color-font-light: #116fcd;
+
+      -color-border-window: #bacce1;
+
+      -color-theme-1: #116ecc;
+      -color-theme-2: #f5f8fc;
+      -color-theme-3: #f5f8fd;
+      -color-theme-4: #c9dcf3;
+
+      -color-theme-1-light: #ffffff;*/
+}
+
+.bg-color-dark-blue {
+    -fx-background-color: -color-dark-blue;
+}
+
+.bg-color-blue {
+    -fx-background-color: -color-blue;
+}
+
+.bg-color-light-blue {
+    -fx-background-color: -color-light-blue;
+}
+
+.bg-color-dark-red {
+    -fx-background-color: -color-dark-red;
+}
+
+.bg-color-red {
+    -fx-background-color: -color-red;
+}
+
+.bg-color-light-red {
+    -fx-background-color: -color-light-red;
+}
+
+.bg-color-dark-purple {
+    -fx-background-color: -color-dark-purple;
+}
+
+.bg-color-purple {
+    -fx-background-color: -color-purple;
+}
+
+.bg-color-light-purple {
+    -fx-background-color: -color-light-purple;
+}
+
+.bg-color-dark-yellow {
+    -fx-background-color: -color-dark-yellow;
+}
+
+.bg-color-yellow {
+    -fx-background-color: -color-yellow;
+}
+
+.bg-color-light-yellow {
+    -fx-background-color: -color-light-yellow;
+}
+
+.bg-color-dark-green {
+    -fx-background-color: -color-dark-green;
+}
+
+.bg-color-green {
+    -fx-background-color: -color-green;
+}
+
+.bg-color-light-green {
+    -fx-background-color: -color-light-green;
+}
+
+.bg-color-dark-orange {
+    -fx-background-color: -color-dark-orange;
+}
+
+.bg-color-orange {
+    -fx-background-color: -color-orange;
+}
+
+.bg-color-light-orange {
+    -fx-background-color: -color-light-orange;
+}
+
+.bg-color-dark-pink {
+    -fx-background-color: -color-dark-pink;
+}
+
+.bg-color-pink {
+    -fx-background-color: -color-pink;
+}
+
+.bg-color-light-pink {
+    -fx-background-color: -color-light-pink;
+}
+
+.bg-color-dark-gray {
+    -fx-background-color: -color-dark-gray;
+}
+
+.bg-color-medium-gray {
+    -fx-background-color: -color-medium-gray;
+}
+
+.bg-color-gray {
+    -fx-background-color: -color-gray;
+}
+
+.bg-color-light-gray {
+    -fx-background-color: -color-light-gray;
+}
+
+.bg-color-dark-white {
+    -fx-background-color: -color-dark-white;
+}
+
+.bg-color-white {
+    -fx-background-color: -color-white;
+}
+
+.bg-color-light-white {
+    -fx-background-color: -color-light-white;
+}
+
+
+.title-bar {
+    -fx-background-color: -color-theme-1;
+    -fx-border-color: -color-border-window;
+    -fx-border-width: 0 0 1 0;
+}
+
+.menu-bar > .container > .menu {
+    -fx-background-color: -color-theme-1;
+}
+
+.menu-bar > .container > .menu:hover,
+.menu-bar > .container > .menu:showing {
+    -fx-background-color: -color-theme-1-light;
+}
+
+.menu-bar > .container > .menu > .label > .text {
+    -fx-fill: -color-font-usually;
+}
+
+.menu-bar > .container > .menu:hover > .label > .text,
+.menu-bar > .container > .menu:showing > .label > .text {
+    -fx-fill: -color-font-light;
+}
+
+
+.context-menu {
+    -fx-background-color: -color-theme-1;
+    -fx-border-color: -color-border-window;
+    -fx-padding: 1 0 1 0;
+}
+
+.menu-item {
+    -fx-background-color: -color-theme-1;
+}
+
+.menu-item:hover {
+    -fx-background-color: -color-theme-3;
+}
+
+.menu-item > .label > .text {
+    -fx-fill: -color-font-usually;
+}
+
+.menu-item:hover > .label > .text {
+    -fx-fill: -color-font-light;
+}
+
+.activity-bar {
+    -fx-background-color: -color-theme-1;
+    -fx-border-color: -color-border-window;
+    -fx-border-width: 0 1 0 0;
+}
+
+.editor {
+    -fx-background-color: -color-theme-4;
+}
+
+.side-bar {
+    -fx-background-color: -color-theme-1;
+    -fx-border-color: -color-border-window;
+    -fx-border-width: 0 1 0 0;
+}
+
+.workspace > .icon {
+    -fx-background-color: -color-theme-3;
+}
+
+.body {
+    -fx-background-color: -color-theme-4;
+}
+
+.scroll-bar {
+    -fx-background-color: -color-theme-4;
+    -fx-border-color: -color-border-window;
+    -fx-border-width: 0 1 0 1;
+}
+
+.scroll-bar:vertical .thumb {
+    -fx-background-color: -color-theme-1;
+    -fx-background-radius: 2;
+}
+
+.scroll-bar:vertical .thumb:hover, .scroll-bar:vertical .thumb:pressed {
+    -fx-background-color: -color-theme-1-light;
+}
+
+.preview-bar {
+    -fx-background-color: -color-theme-4;
+    -fx-border-color: -color-border-window;
+    -fx-border-width: 0 0 0 1;
+}
+
+
+.preview-pane {
+    -fx-background-color: #ffffff11;
+    -fx-border-color: -color-theme-3;
+    -fx-border-width: 2 0 2 0;
+}
+
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-background-color: -color-theme-4;
+    -fx-border-color: -color-border-window;
+    -fx-border-width: 0 0 1 0;
+}
+
+
+.tab-pane .tab-header-area .headers-region .tab .tab-container .tab-label > .text {
+    -fx-fill: -color-font-usually;
+}
+
+.tab-pane .tab-header-area .headers-region .tab:selected .tab-container .tab-label > .text {
+    -fx-fill: -color-font-light;
+}
+
+.tab-pane:top .tab-header-area .headers-region .tab {
+    -fx-background-color: -color-theme-4;
+    -fx-border-color: -color-border-window;
+    -fx-border-width: 0 1 0 0;
+}
+
+.tab-pane:right .tab-header-area .headers-region .tab {
+    -fx-background-color: -color-theme-4;
+    -fx-border-color: -color-border-window;
+    -fx-border-width: 0 1 0 0;
+}
+
+
+.tab-pane .tab-header-area .headers-region .tab:selected {
+    -fx-background-color: -color-theme-2;
+    -fx-border-color: -color-border-window;
+}
+
+
+.tab-pane:top .tab-header-area .headers-region .tab:selected:top .tab-container .tab-close-button {
+
+}
+
+.tab-pane:focused > .tab-header-area > .headers-region > .tab:selected .focus-indicator {
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+}
+
+.tab-pane .tab-header-area .control-buttons-tab {
+    -fx-pref-width: 18px;
+    -fx-pref-height: 32px;
+}
+
+
+.tab-pane .tab-header-area .control-buttons-tab .container {
+    -fx-background-color: -color-theme-4;
+    -fx-border-color: -color-border-window;
+    -fx-border-width: 1;
+    -fx-background-radius: 0;
+}
+
+.tab-pane .tab-header-area .control-buttons-tab .container .tab-down-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-background-radius: 0;
+    -fx-padding: 8;
+}
+
+
+.h-tool-group-bar {
+    -fx-background-color: -color-theme-2;
+    -fx-border-color: -color-border-window;
+    -fx-border-width: 0 0 1 0;
+}
+
+
+.h-tool-group-bar > .group > * {
+    -fx-padding: 2;
+}
+
+.h-tool-group-bar > .group > .button, .h-tool-group-bar > .group > .icon {
+    -fx-background-color: -color-font-usually;
+    -fx-background-insets: 0;
+}
+
+.h-tool-group-bar > .group > .button:selected, .h-tool-group-bar > .group > .button:pressed {
+    -fx-background-color: -color-font-light;
+}
+
+.h-tool-group-bar > .group > .button:selected, .h-tool-group-bar > .group > .button:pressed, .h-tool-group-bar > .group > .button:focused {
+    -fx-padding: 2;
+    -fx-border-width: 0;
+    -fx-background-insets: 0;
+}
+
+.h-tool-group-bar > .group {
+    -fx-padding: 0 4 0 4;
+    -fx-border-color: -color-border-window;
+    -fx-border-width: 0 1 0 0;
+}
+
+
+.v-tool-group-bar {
+    -fx-background-color: -color-theme-2;
+    -fx-border-color: -color-border-window;
+    -fx-border-width: 0 1 1 0;
+}
+
+
+.v-tool-group-bar > .group > .button {
+    -fx-padding: 2;
+    -fx-background-color: -color-font-usually;
+    -fx-background-insets: 0;
+}
+
+.v-tool-group-bar > .group > .button:selected, .v-tool-group-bar > .group > .button:pressed {
+    -fx-background-color: -color-font-light;
+}
+
+.v-tool-group-bar > .group > .button:selected, .v-tool-group-bar > .group > .button:pressed, .v-tool-group-bar > .group > .button:focused {
+    -fx-padding: 2;
+    -fx-border-width: 0;
+    -fx-background-insets: 0;
+}
+
+.v-tool-group-bar > .group {
+    -fx-padding: 4 0 4 0;
+    -fx-border-color: -color-border-window;
+    -fx-border-width: 0 0 1 0;
+}
+
+
+.text-field {
+    -fx-padding: 5;
+    -fx-background-radius: 0;
+    -fx-background-color: -color-theme-4;
+    -fx-text-fill: -color-font-usually;
+    -fx-highlight-fill: #093939;
+    -fx-border-color: -color-border-window;
+    -fx-border-width: 1 1 1 1;
+}
+
+
+.text-field:focused {
+
+    -fx-background-radius: 0;
+    -fx-text-fill: -color-font-light;
+}
+
+.separator:horizontal .line {
+    -fx-padding: 1 4 0 4;
+    -fx-border-color: -color-border-window;
+    -fx-border-width: 1 0 0 0;
+}
+

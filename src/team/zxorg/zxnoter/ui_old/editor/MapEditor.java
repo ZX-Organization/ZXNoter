@@ -2,9 +2,6 @@ package team.zxorg.zxnoter.ui_old.editor;
 
 import javafx.beans.property.*;
 import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
@@ -12,7 +9,8 @@ import javafx.geometry.Side;
 import javafx.scene.control.*;
 import javafx.scene.input.*;
 import javafx.scene.layout.*;
-import team.zxorg.zxnoter.audiochannel.channel.MemoryAudioInputChannel;
+import team.zxorg.zxnoter.audiomixer.AudioChannel;
+import team.zxorg.zxnoter.audiomixer.FFmpeg;
 import team.zxorg.zxnoter.io.reader.ImdReader;
 import team.zxorg.zxnoter.io.reader.OsuReader;
 import team.zxorg.zxnoter.io.writer.ImdWriter;
@@ -20,20 +18,21 @@ import team.zxorg.zxnoter.io.writer.OsuWriter;
 import team.zxorg.zxnoter.map.ZXMap;
 import team.zxorg.zxnoter.map.editor.ZXFixedOrbitMapEditor;
 import team.zxorg.zxnoter.map.mapInfo.ZXMInfo;
-import team.zxorg.zxnoter.note.fixedorbit.ComplexNote;
+import team.zxorg.zxnoter.note.BaseNote;
 import team.zxorg.zxnoter.note.fixedorbit.FixedOrbitNote;
 import team.zxorg.zxnoter.note.fixedorbit.LongNote;
 import team.zxorg.zxnoter.note.fixedorbit.SlideNote;
 import team.zxorg.zxnoter.resource.ZXResources;
 import team.zxorg.zxnoter.ui_old.TimeUtils;
+import team.zxorg.zxnoter.ui_old.ZXNApp;
 import team.zxorg.zxnoter.ui_old.component.CanvasPane;
 import team.zxorg.zxnoter.ui_old.component.HToolGroupBar;
 import team.zxorg.zxnoter.ui_old.component.VToolGroupBar;
-import team.zxorg.zxnoter.ui_old.render.basis.RenderPoint;
-import team.zxorg.zxnoter.ui_old.render.basis.RenderRectangle;
 import team.zxorg.zxnoter.ui_old.render.fixedorbit.*;
 
+import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -71,7 +70,6 @@ public class MapEditor extends BaseEditor {
 
     MouseEvent pressedMouseEvent = new MouseDragEvent(null, null, null, 0, 0, 0, 0, null, 0, false, false, false, false, false, false, false, false, false, null, null);//鼠标按下事件
 
-    MemoryAudioInputChannel audioInputChannel;//音频文件通道
 
     ArrayList<RenderBeat> renderBeats = new ArrayList<>();//节拍时间点列表
 
@@ -86,6 +84,14 @@ public class MapEditor extends BaseEditor {
     StackPane previewBar = new StackPane();
 
     boolean judgeLineAlign = false;//判定线对齐分拍线
+
+    AudioChannel audioChannel = null;
+    int hitAudioID = 0;
+
+
+    ArrayList<BaseNote> hitsNotes = new ArrayList<>();
+    //long synchronisedTime = 0;//现实同步时间
+    //long synchroniseTime = 0;//音频同步时间
 
     public MapEditor(Path mapPath) {
 
@@ -457,9 +463,23 @@ public class MapEditor extends BaseEditor {
             //跳转开头
             sideToolBar.addButton("state", "svg.icons.editor.align-top", "跳转开头");
             //播放
-            sideToolBar.addButton("state", "svg.icons.media.play-line", "播放");
+            {
+                Button button = sideToolBar.addButton("state", "svg.icons.media.play-line", "播放");
+                button.setOnAction(event -> {
+                    if (audioChannel != null)
+                        audioChannel.play();
+                });
+            }
+
+
             //暂停
-            sideToolBar.addButton("state", "svg.icons.media.pause-line", "暂停");
+            {
+                Button button = sideToolBar.addButton("state", "svg.icons.media.pause-line", "暂停");
+                button.setOnAction(event -> {
+                    if (audioChannel != null)
+                        audioChannel.pause();
+                });
+            }
             //跳转末尾
             sideToolBar.addButton("state", "svg.icons.editor.align-bottom", "跳转末尾");
 
@@ -600,19 +620,23 @@ public class MapEditor extends BaseEditor {
         this.getChildren().addAll(topToolBar, bodyPane);
 
 
-        /*{//初始化音频
+        {//初始化音频
             try {
 
-                Path audioPath = mapResourcePath.resolve(zxMap.unLocalizedMapInfo.getInfo("AudioPath").trim());
+                Path audioPath = mapResourcePath.resolve(zxMap.unLocalizedMapInfo.getInfo(ZXMInfo.AudioPath));
                 if (Files.exists(audioPath)) {
                     Path workAudioPath = audioPath.getParent().resolve("work.wav");
                     //格式转换
+                    System.out.println("格式转化");
                     if (FFmpeg.audioFormatConversion(audioPath, workAudioPath) != 0)
                         throw new RuntimeException("音频转换失败");
+                    int id = ZXNApp.audioMixer.addAudio(workAudioPath);
+                    audioChannel = ZXNApp.audioMixer.createChannel(id);
+                    audioChannel.setVolume(0.1f);
+
+                    hitAudioID = ZXNApp.audioMixer.addAudio(ZXResources.getPath("audio.hitnormal"));
 
 
-                    audioInputChannel = new MemoryAudioInputChannel(ZXNApp.audioFormat, workAudioPath);
-                    audioInputChannel.setFramePosition(500);
                     //ZXNApp.audioMixer.addAudioChannel(audioInputChannel);
                 }
             } catch (Exception e) {
@@ -621,15 +645,42 @@ public class MapEditor extends BaseEditor {
             }
 
 
-        }*/
+        }
 
     }
 
 
     @Override
     public void render() {
+        //if (audioChannel.getPlayState().equals(AudioChannel.PlayState.PLAY))
+        //mainMapRender.getInfo().timelinePosition.set(System.currentTimeMillis() - synchroniseTime);
 
-        mainMapRender.clearRect();
+        if (audioChannel.getPlayState().equals(AudioChannel.PlayState.PLAY))
+            mainMapRender.getInfo().timelinePosition.set(audioChannel.getTime());
+
+        ArrayList<BaseNote> findsNotes = zxMap.getScaleNotes(mainMapRender.getInfo().timelinePosition.get() - 100, 100, false);
+
+        for (BaseNote note:findsNotes){
+            if (!hitsNotes.contains(note)){
+                hitsNotes.add(note);
+                AudioChannel audioChannel1 = null;
+                try {
+                    audioChannel1 = ZXNApp.audioMixer.createChannel(hitAudioID);
+                } catch (UnsupportedAudioFileException e) {
+                    throw new RuntimeException(e);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                audioChannel1.setEndBehavior(AudioChannel.EndBehavior.CLOSE);
+                audioChannel1.setVolume(0.05f);
+                audioChannel1.play();
+            }
+
+        }
+
+
+
+            mainMapRender.clearRect();
 
         if (StackPane.getMargin(previewPane).getTop() == 0) {
             previewShadowMapRender.clearRect();
@@ -649,7 +700,6 @@ public class MapEditor extends BaseEditor {
 
 
         //计算
-
         previewBackgroundRender.mainJudgedLinePositionPercentage.setValue(
                 mainMapRender.getInfo().timelinePosition.get()
         );

@@ -9,8 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import team.zxorg.zxnoter.audiochannel.ThreadAudioMixer;
-import team.zxorg.zxnoter.audiochannel.channel.SourceAudioOutputChannel;
+import team.zxorg.zxnoter.audiomixer.AudioMixer;
 import team.zxorg.zxnoter.map.mapInfo.ZXMInfo;
 import team.zxorg.zxnoter.resource.ZXResources;
 import team.zxorg.zxnoter.ui_old.editor.MapEditor;
@@ -64,19 +63,16 @@ public class ZXNApp extends Application {
     VBox rootPane = new VBox(titleBar, bodyPane);
 
 
-    public static SourceAudioOutputChannel audioOutputChannel;//音频播放通道
     public static AudioFormat audioFormat = new AudioFormat(44100, 16, 2, true, false);//音频格式
-    public static ThreadAudioMixer audioMixer = new ThreadAudioMixer(audioFormat, 2048, buf -> {
-        audioOutputChannel.writeSamples(buf);
-    });
+    public static AudioMixer audioMixer;
+
 
     @Override
     public void start(Stage stage) {
 
         try {
-            audioOutputChannel = new SourceAudioOutputChannel(audioFormat, 4096);
-            audioOutputChannel.open();
-            audioMixer.start();
+            audioMixer = new AudioMixer(44100,2048);
+
         } catch (LineUnavailableException e) {
             System.out.println("音频播放设备载入失败");
             throw new RuntimeException(e);
@@ -195,7 +191,7 @@ public class ZXNApp extends Application {
 
         }
 
-        {//添加编辑器
+        /*{//添加编辑器
 
 
             MapEditor editor = new MapEditor(Paths.get("docs/reference/LeaF - NANO DEATH!!!!!/LeaF - NANO DEATH!!!!! (nowsmart) [DEATH].osu"));
@@ -216,7 +212,7 @@ public class ZXNApp extends Application {
             animationTimer.start();
 
 
-        }
+        }*/
 
 /*
         {//添加编辑器
