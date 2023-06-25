@@ -71,7 +71,7 @@ public class ZXNApp extends Application {
     public void start(Stage stage) {
 
         try {
-            audioMixer = new AudioMixer(44100,2048);
+            audioMixer = new AudioMixer(44100,256);
 
         } catch (LineUnavailableException e) {
             System.out.println("音频播放设备载入失败");

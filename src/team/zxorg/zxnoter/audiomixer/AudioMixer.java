@@ -135,7 +135,7 @@ public class AudioMixer {
         AudioFormat audioFormat = new AudioFormat(sampleRate, 16, 2, true, false);
         line = AudioSystem.getSourceDataLine(audioFormat);
         this.mixerBufSize = mixerBufSize;
-        line.open(audioFormat, 2048);
+        line.open(audioFormat, mixerBufSize * 8);
         line.start();
         mixerPlayThread.start();
 
