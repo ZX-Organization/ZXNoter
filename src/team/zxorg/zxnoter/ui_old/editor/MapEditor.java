@@ -634,7 +634,7 @@ public class MapEditor extends BaseEditor {
                     audioChannel = ZXNApp.audioMixer.createChannel(id);
                     audioChannel.setVolume(0.1f);
 
-                    hitAudioID = ZXNApp.audioMixer.addAudio(ZXResources.getPath("audio.hitnormal"));
+                    hitAudioID = ZXNApp.audioMixer.addAudio(ZXResources.getPath("audio.soft-hitnormal"));
 
 
                     //ZXNApp.audioMixer.addAudioChannel(audioInputChannel);
