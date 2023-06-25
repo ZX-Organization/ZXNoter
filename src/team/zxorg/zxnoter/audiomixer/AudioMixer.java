@@ -138,7 +138,6 @@ public class AudioMixer {
         line.open(audioFormat, mixerBufSize * 8);
         line.start();
         mixerPlayThread.start();
-
     }
 
     private void writeToLine(short[] buf) {

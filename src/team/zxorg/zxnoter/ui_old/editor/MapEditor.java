@@ -672,24 +672,25 @@ public class MapEditor extends BaseEditor {
         if (audioChannel.getPlayState().equals(AudioChannel.PlayState.PLAY))
             mainMapRender.getInfo().timelinePosition.set(audioChannel.getTime());
 
-        ArrayList<BaseNote> findsNotes = zxMap.getScaleNotes(mainMapRender.getInfo().timelinePosition.get() - 100, 100, false);
-        ArrayList<Long> keyPoints = new ArrayList<>();
-        for (BaseNote note : findsNotes) {
-            if (Math.abs(note.timeStamp - mainMapRender.getInfo().timelinePosition.get()) < 20)
-                if (!hitsNotes.contains(note)) {
-                    hitsNotes.add(note);
-                    AudioChannel audioChannel1;
-                    try {
-                        audioChannel1 = ZXNApp.audioMixer.createChannel(hitAudioID);
-                    } catch (UnsupportedAudioFileException | IOException e) {
-                        throw new RuntimeException(e);
+        new Thread(() -> {
+            ArrayList<BaseNote> findsNotes = zxMap.getScaleNotes(mainMapRender.getInfo().timelinePosition.get() - 100, 100, false);
+            for (BaseNote note : findsNotes) {
+                if (Math.abs(note.timeStamp - mainMapRender.getInfo().timelinePosition.get()) < 20)
+                    if (!hitsNotes.contains(note)) {
+                        hitsNotes.add(note);
+                        AudioChannel audioChannel1;
+                        try {
+                            audioChannel1 = ZXNApp.audioMixer.createChannel(hitAudioID);
+                        } catch (UnsupportedAudioFileException | IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                        audioChannel1.setEndBehavior(AudioChannel.EndBehavior.CLOSE);
+                        audioChannel1.setVolume(0.18f);
+                        audioChannel1.play();
                     }
-                    audioChannel1.setEndBehavior(AudioChannel.EndBehavior.CLOSE);
-                    audioChannel1.setVolume(0.18f);
-                    audioChannel1.play();
-                }
 
-        }
+            }
+        }).start();
 
 
         mainMapRender.clearRect();
