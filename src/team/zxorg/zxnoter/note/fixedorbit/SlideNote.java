@@ -1,5 +1,6 @@
 package team.zxorg.zxnoter.note.fixedorbit;
 
+import team.zxorg.zxnoter.map.editor.ZXFixedOrbitMapEditor;
 import team.zxorg.zxnoter.map.mapInfo.ImdInfo;
 import team.zxorg.zxnoter.note.BaseNote;
 
@@ -63,11 +64,11 @@ public class SlideNote extends FixedOrbitNote implements Cloneable,Comparable<Ba
     @Override
     public int compareTo(BaseNote baseNote) {
         if (baseNote instanceof SlideNote slideNote){
-            if (Math.abs(timeStamp-slideNote.timeStamp) <= 3)
+            if (Math.abs(timeStamp-slideNote.timeStamp) <= ZXFixedOrbitMapEditor.AUTO_FIX_MISTAKE)
                 return 0;
         }
         if (baseNote instanceof LongNote longNote){
-            if (Math.abs(timeStamp- longNote.timeStamp) <= 3){
+            if (Math.abs(timeStamp- longNote.timeStamp) <= ZXFixedOrbitMapEditor.AUTO_FIX_MISTAKE){
                 return Long.compare( timeStamp,longNote.timeStamp+longNote.sustainedTime);
             }
         }

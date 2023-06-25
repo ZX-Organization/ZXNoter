@@ -1,5 +1,6 @@
 package team.zxorg.zxnoter.note.fixedorbit;
 
+import team.zxorg.zxnoter.map.editor.ZXFixedOrbitMapEditor;
 import team.zxorg.zxnoter.note.BaseNote;
 
 /**
@@ -40,7 +41,7 @@ public class LongNote extends FixedOrbitNote implements Cloneable,Comparable<Bas
     @Override
     public int compareTo(BaseNote baseNote) {
         if (baseNote instanceof SlideNote slideNote){
-            if (Math.abs(timeStamp- slideNote.timeStamp) <= 3){
+            if (Math.abs(timeStamp- slideNote.timeStamp) <= ZXFixedOrbitMapEditor.AUTO_FIX_MISTAKE){
                 return Long.compare(timeStamp+sustainedTime, slideNote.timeStamp);
             }
         }

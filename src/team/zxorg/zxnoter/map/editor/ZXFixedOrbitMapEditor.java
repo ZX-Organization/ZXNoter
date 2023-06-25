@@ -32,6 +32,8 @@ public class ZXFixedOrbitMapEditor {
      */
     public static final int TO_LONG_NOTE = 1;
     public static final int TO_SLIDE_NOTE = 2;
+
+    public static int AUTO_FIX_MISTAKE = 3;
     private ArrayList<FixedOrbitNote> shadows;
     /**
      * 操作缓存
@@ -353,9 +355,14 @@ public class ZXFixedOrbitMapEditor {
             if (tempEditNote instanceof ComplexNote complexNote) {
                 //排序
                 complexNote.notes.sort(FixedOrbitNote::compareTo);
+
+                //第一遍基本修正0参和非法长条
                 checkComplexNote(complexNote, false);
+                //第二遍基本修正重合滑键和同时间滑键
                 checkComplexNote(complexNote, false);
+                //第三遍修正由于删除同时滑键出现的同轨长条,最后合并
                 checkComplexNote(complexNote, true);
+
                 complexNote.notes.sort(FixedOrbitNote::compareTo);
             } else if (tempEditNote instanceof LongNote longNote) {
                 //检查长键参数
