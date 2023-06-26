@@ -57,4 +57,12 @@ public class MapOperate {
         } else
             return false;
     }
+
+    @Override
+    public String toString() {
+        return "MapOperate{" +
+                "srcNotes=" + srcNotes +
+                ", desNotes=" + desNotes +
+                '}';
+    }
 }

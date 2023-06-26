@@ -1,18 +1,13 @@
 package team.zxorg.zxnoter.io;
 
 import team.zxorg.zxnoter.io.reader.ImdReader;
-import team.zxorg.zxnoter.io.reader.OsuReader;
 import team.zxorg.zxnoter.map.ZXMap;
 import team.zxorg.zxnoter.map.editor.ZXFixedOrbitMapEditor;
-import team.zxorg.zxnoter.note.BaseNote;
 import team.zxorg.zxnoter.note.fixedorbit.ComplexNote;
 import team.zxorg.zxnoter.note.fixedorbit.FixedOrbitNote;
-import team.zxorg.zxnoter.note.fixedorbit.LongNote;
-import team.zxorg.zxnoter.note.fixedorbit.SlideNote;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.ArrayList;
 
 public class IoTest {
     public static void main(String[] args) throws IOException {
@@ -37,18 +32,25 @@ public class IoTest {
 
         ZXFixedOrbitMapEditor editor = new ZXFixedOrbitMapEditor(map);
 
-        System.out.println("原->"+(ComplexNote) map.findClosestNotes(27882).get(0));
+        System.out.println("原->"+ map.findClosestNotes(27882).get(0));
 
-        System.out.println("结果"+map.findClosestNotes(27882).get(0));
-        /*editor.modifyEndPar(
-                (ComplexNote) map.findClosestNotes(27882).get(1),0L,true
+
+/*        editor.move(
+                (ComplexNote) map.findClosestNotes(27882).get(0),3,3,true,true
         );
-        editor.modifyDone();
-        editor.modifyEndPar(
-                (ComplexNote) map.findClosestNotes(27882).get(1),0L,true
+        editor.move(
+                (ComplexNote) map.findClosestNotes(27882).get(0),1,3,true,true
         );
+        editor.modifyDone();*/
+        editor.addEndOfNote((FixedOrbitNote) map.findClosestNotes(27882).get(0),40L,ZXFixedOrbitMapEditor.LONG_NOTE);
+        editor.addEndOfNote((FixedOrbitNote) map.findClosestNotes(27882).get(0),1,ZXFixedOrbitMapEditor.SLIDE_NOTE);
+
+
+
         editor.modifyDone();
-        System.out.println("后->"+ map.findClosestNotes(27882).get(1));*/
+        System.out.println("后->"+ map.findClosestNotes(27882).get(0));
+
+        //System.out.println(editor.operateStack.get(0));
         /*System.out.println("原->"+map.notes.get(4));
 
         editor.move((ComplexNote) map.notes.get(4),5000L,1,true,true);
