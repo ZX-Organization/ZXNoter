@@ -10,8 +10,6 @@ import javafx.geometry.Side;
 import javafx.scene.control.*;
 import javafx.scene.input.*;
 import javafx.scene.layout.*;
-import team.zxorg.zxnoter.audiomixer.AudioChannel;
-import team.zxorg.zxnoter.audiomixer.FFmpeg;
 import team.zxorg.zxnoter.io.reader.ImdReader;
 import team.zxorg.zxnoter.io.reader.OsuReader;
 import team.zxorg.zxnoter.io.writer.ImdWriter;
@@ -86,7 +84,7 @@ public class MapEditor extends BaseEditor {
 
     boolean judgeLineAlign = false;//判定线对齐分拍线
 
-    AudioChannel audioChannel = null;
+   // AudioChannel audioChannel = null;
     int hitAudioID = 0;
 
 
@@ -467,8 +465,8 @@ public class MapEditor extends BaseEditor {
             {
                 Button button = sideToolBar.addButton("state", "svg.icons.media.play-line", "播放");
                 button.setOnAction(event -> {
-                    if (audioChannel != null)
-                        audioChannel.play();
+                    /*if (audioChannel != null)
+                        audioChannel.play();*/
                 });
             }
 
@@ -477,8 +475,8 @@ public class MapEditor extends BaseEditor {
             {
                 Button button = sideToolBar.addButton("state", "svg.icons.media.pause-line", "暂停");
                 button.setOnAction(event -> {
-                    if (audioChannel != null)
-                        audioChannel.pause();
+                    /*if (audioChannel != null)
+                        audioChannel.pause();*/
                 });
             }
             //跳转末尾
@@ -621,7 +619,7 @@ public class MapEditor extends BaseEditor {
         this.getChildren().addAll(topToolBar, bodyPane);
 
 
-        {//初始化音频
+        /*{//初始化音频
             try {
 
                 Path audioPath = mapResourcePath.resolve(zxMap.unLocalizedMapInfo.getInfo(ZXMInfo.AudioPath));
@@ -659,7 +657,7 @@ public class MapEditor extends BaseEditor {
             }
 
 
-        }
+        }*/
 
     }
 
@@ -669,7 +667,7 @@ public class MapEditor extends BaseEditor {
         //if (audioChannel.getPlayState().equals(AudioChannel.PlayState.PLAY))
         //mainMapRender.getInfo().timelinePosition.set(System.currentTimeMillis() - synchroniseTime);
 
-        if (audioChannel.getPlayState().equals(AudioChannel.PlayState.PLAY))
+        /*if (audioChannel.getPlayState().equals(AudioChannel.PlayState.PLAY))
             mainMapRender.getInfo().timelinePosition.set(audioChannel.getTime());
 
         new Thread(() -> {
@@ -688,9 +686,8 @@ public class MapEditor extends BaseEditor {
                         audioChannel1.setVolume(0.18f);
                         audioChannel1.play();
                     }
-
             }
-        }).start();
+        }).start();*/
 
 
         mainMapRender.clearRect();

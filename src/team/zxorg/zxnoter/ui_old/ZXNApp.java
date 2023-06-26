@@ -9,7 +9,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import team.zxorg.zxnoter.audiomixer.AudioMixer;
 import team.zxorg.zxnoter.map.mapInfo.ZXMInfo;
 import team.zxorg.zxnoter.resource.ZXResources;
 import team.zxorg.zxnoter.ui_old.editor.MapEditor;
@@ -64,16 +63,14 @@ public class ZXNApp extends Application {
 
 
     public static AudioFormat audioFormat = new AudioFormat(44100, 16, 2, true, false);//音频格式
-    public static AudioMixer audioMixer;
 
 
     @Override
     public void start(Stage stage) {
 
         try {
-            audioMixer = new AudioMixer(44100,256);
 
-        } catch (LineUnavailableException e) {
+        } catch (Exception e) {
             System.out.println("音频播放设备载入失败");
             throw new RuntimeException(e);
         }
