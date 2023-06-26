@@ -6,7 +6,6 @@
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/old" />
       <excludeFolder url="file://$MODULE_DIR$/test/audiochannel/audiomixer_t" />
-      <excludeFolder url="file://$MODULE_DIR$/src/team/zxorg/zxnoter/audiochannel" />
       <excludeFolder url="file://$MODULE_DIR$/test" />
     </content>
     <orderEntry type="inheritedJdk" />
@@ -17,5 +16,6 @@
     <orderEntry type="library" name="openjfx.javafx.base" level="project" />
     <orderEntry type="library" name="openjfx.javafx.controls" level="project" />
     <orderEntry type="library" name="AudioChannel" level="project" />
+    <orderEntry type="library" name="openjfx.javafx.fxml" level="project" />
   </component>
 </module>
