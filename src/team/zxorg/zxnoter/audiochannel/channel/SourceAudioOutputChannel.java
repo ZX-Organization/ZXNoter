@@ -25,7 +25,7 @@ public class SourceAudioOutputChannel extends AudioOutputChannel {
     @Override
     public void open() {
         try {
-            sourceDataLine.open(audioFormat);
+            sourceDataLine.open(audioFormat, 2048 * 4);
         } catch (LineUnavailableException e) {
             throw new RuntimeException(e);
         }

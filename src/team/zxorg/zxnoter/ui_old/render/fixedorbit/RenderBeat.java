@@ -56,15 +56,17 @@ public class RenderBeat {
                     for (int i = 0; i < counts; i++) {
                         long time = previousBaseTiming.timestamp + (long) (i * beatCycleTime);
                         RenderBeat renderBeat = new RenderBeat(time, previousBaseTiming, (i == 0));
-                        ArrayList<BaseNote> notes = zxMap.getScaleNotes(time - (long) beatCycleTime * 2, Math.round(beatCycleTime) + 2 * (long) beatCycleTime, true);
-                        ArrayList<Long> keyPoints = keyPoint(notes,true);
+                        ArrayList<BaseNote> notes = zxMap.getScaleNotes(time - 10, Math.round(beatCycleTime) + 20, true);
+                        ArrayList<Long> keyPoints = keyPoint(notes, true);
+                        keyPoints.add(time);
+                        keyPoints.add(time + Math.round(beatCycleTime));
                         boolean isTrue = false;
                         renderBeat.measure = 1;
-                        if (notes.size() > 1) {
-                            for (int measure = 1; measure < 33; measure++) {//尝试拍计算
+                        if (notes.size() > 0) {
+                            for (int measure = 0; measure < 33; measure++) {//尝试拍计算
                                 isTrue = true;
                                 for (long note : keyPoints) {
-                                    if ((note - time + 2) % (beatCycleTime / measure) > 4) {
+                                    if ((note - time + 10) % (beatCycleTime / measure) > 20) {
                                         isTrue = false;
                                         break;
                                     }
@@ -75,11 +77,11 @@ public class RenderBeat {
                                 }
                             }
                             if (!isTrue) {//只计算键头
-                                keyPoints = keyPoint(notes,false);
-                                for (int measure = 1; measure < 33; measure++) {//尝试拍计算
+                                keyPoints = keyPoint(notes, false);
+                                for (int measure = 0; measure < 33; measure++) {//尝试拍计算
                                     isTrue = true;
                                     for (long note : keyPoints) {
-                                        if ((note - time + 2) % (beatCycleTime / measure) > 4) {
+                                        if ((note - time + 10) % (beatCycleTime / measure) > 20) {
                                             isTrue = false;
                                             break;
                                         }

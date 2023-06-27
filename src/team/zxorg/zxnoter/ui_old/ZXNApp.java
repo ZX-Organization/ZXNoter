@@ -2,15 +2,14 @@ package team.zxorg.zxnoter.ui_old;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import team.zxorg.zxnoter.audiomixer.AudioMixer;
 import team.zxorg.zxnoter.map.mapInfo.ZXMInfo;
 import team.zxorg.zxnoter.resource.ZXResources;
 import team.zxorg.zxnoter.ui_old.editor.MapEditor;
@@ -19,6 +18,7 @@ import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.LineUnavailableException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 
 public class ZXNApp extends Application {
     /**
@@ -66,6 +66,15 @@ public class ZXNApp extends Application {
 
     public static AudioFormat audioFormat = new AudioFormat(44100, 16, 2, true, false);//音频格式
 
+    public static AudioMixer audioMixer;
+
+    static {
+        try {
+            audioMixer = new AudioMixer(44100,1024);
+        } catch (LineUnavailableException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     @Override
     public void start(Stage stage) {
@@ -168,10 +177,7 @@ public class ZXNApp extends Application {
         }*/
 
 
-
-
         {//添加编辑器
-
 
             MapEditor editor = new MapEditor(Paths.get("docs/reference/xiuluo/Fracture Ray_4k_ez.imd"));
 
@@ -182,8 +188,6 @@ public class ZXNApp extends Application {
             workspaceTabPane.getTabs().add(tab1);
 
             rootPane.setOnKeyPressed(editor.getOnKeyPressed());
-
-
 
 
             //画布更新线程常驻

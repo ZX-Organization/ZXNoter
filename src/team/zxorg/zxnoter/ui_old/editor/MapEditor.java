@@ -11,12 +11,15 @@ import javafx.geometry.Side;
 import javafx.scene.control.*;
 import javafx.scene.input.*;
 import javafx.scene.layout.*;
+import team.zxorg.zxnoter.audiomixer.AudioChannel;
+import team.zxorg.zxnoter.audiomixer.FFmpeg;
 import team.zxorg.zxnoter.io.reader.ImdReader;
 import team.zxorg.zxnoter.io.reader.OsuReader;
 import team.zxorg.zxnoter.io.writer.ImdWriter;
 import team.zxorg.zxnoter.io.writer.OsuWriter;
 import team.zxorg.zxnoter.map.ZXMap;
 import team.zxorg.zxnoter.map.editor.ZXFixedOrbitMapEditor;
+import team.zxorg.zxnoter.map.mapInfo.UnLocalizedMapInfo;
 import team.zxorg.zxnoter.map.mapInfo.ZXMInfo;
 import team.zxorg.zxnoter.note.BaseNote;
 import team.zxorg.zxnoter.note.fixedorbit.ComplexNote;
@@ -91,11 +94,16 @@ public class MapEditor extends BaseEditor {
 
 
     ArrayList<BaseNote> hitsNotes = new ArrayList<>();
-    //long synchronisedTime = 0;//现实同步时间
-    //long synchroniseTime = 0;//音频同步时间
+
+
+    long synchronisedTime = 0;//现实同步时间
+    long synchroniseTime = 0;//音频同步时间
 
 
     FixedOrbitNote tempNote;
+
+
+    AudioChannel audioChannel;
 
 
     public MapEditor(Path mapPath) {
@@ -109,6 +117,15 @@ public class MapEditor extends BaseEditor {
                 e1.printStackTrace();
             }
         }
+        if (!Files.exists(mapPath)) {
+            this.zxMap = new ZXMap();
+            zxMap.unLocalizedMapInfo = new UnLocalizedMapInfo();
+            zxMap.notes = new ArrayList<>();
+            zxMap.timingPoints = new ArrayList<>();
+
+
+        }
+
 
         this.mapResourcePath = mapPath.getParent();
         this.setPrefSize(Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE);
@@ -265,8 +282,8 @@ public class MapEditor extends BaseEditor {
                                         if (isSide) {
                                             tempNote = zxFixedOrbitMapEditor.addEndOfNote(renderNote.note, tempOrbit, ZXFixedOrbitMapEditor.SLIDE_NOTE);
                                         } else {
-                                            if (tempTime != 0)
-                                                tempNote = zxFixedOrbitMapEditor.addEndOfNote(renderNote.note, Math.max(tempTime, 0), ZXFixedOrbitMapEditor.LONG_NOTE);
+                                            if (Math.max(tempTime, 0) != 0)
+                                                tempNote = zxFixedOrbitMapEditor.addEndOfNote(renderNote.note, tempTime, ZXFixedOrbitMapEditor.LONG_NOTE);
                                         }
 
 
@@ -317,8 +334,8 @@ public class MapEditor extends BaseEditor {
                                             if (isSide) {
                                                 tempNote = zxFixedOrbitMapEditor.addEndOfNote(renderNote.note, tempOrbit, ZXFixedOrbitMapEditor.SLIDE_NOTE);
                                             } else {
-                                                if (tempTime != 0)
-                                                    tempNote = zxFixedOrbitMapEditor.addEndOfNote(renderNote.note, Math.max(tempTime, 0), ZXFixedOrbitMapEditor.LONG_NOTE);
+                                                if (Math.max(tempTime, 0) != 0)
+                                                    tempNote = zxFixedOrbitMapEditor.addEndOfNote(renderNote.note, tempTime, ZXFixedOrbitMapEditor.LONG_NOTE);
                                             }
                                         } else
                                             zxFixedOrbitMapEditor.move(renderNote.note, orbit, time, true);
@@ -355,8 +372,8 @@ public class MapEditor extends BaseEditor {
                                         if (isSide) {
                                             tempNote = zxFixedOrbitMapEditor.addEndOfNote(renderNote.complexNote, tempOrbit, ZXFixedOrbitMapEditor.SLIDE_NOTE);
                                         } else {
-                                            if (tempTime != 0)
-                                                tempNote = zxFixedOrbitMapEditor.addEndOfNote(renderNote.complexNote, (tempTime > 0 ? tempTime : 0), ZXFixedOrbitMapEditor.LONG_NOTE);
+                                            if (Math.max(tempTime, 0) != 0)
+                                                tempNote = zxFixedOrbitMapEditor.addEndOfNote(renderNote.complexNote, tempTime, ZXFixedOrbitMapEditor.LONG_NOTE);
                                         }
                                     } else {
                                         if (renderNote.complexNote.notes.get(renderNote.complexNote.notes.size() - 1).equals(renderNote.note)) {//头节点  对长键编辑属性
@@ -564,8 +581,17 @@ public class MapEditor extends BaseEditor {
             {
                 Button button = sideToolBar.addButton("state", "svg.icons.media.play-line", "播放");
                 button.setOnAction(event -> {
-                    /*if (audioChannel != null)
-                        audioChannel.play();*/
+                    if (audioChannel != null) {
+                        synchroniseTime = System.currentTimeMillis();
+                        synchronisedTime = mainMapRender.getInfo().timelinePosition.get();
+
+                        try {
+                            audioChannel.setTime(mainMapRender.getInfo().timelinePosition.get());
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                        audioChannel.play();
+                    }
                 });
             }
 
@@ -574,8 +600,8 @@ public class MapEditor extends BaseEditor {
             {
                 Button button = sideToolBar.addButton("state", "svg.icons.media.pause-line", "暂停");
                 button.setOnAction(event -> {
-                    /*if (audioChannel != null)
-                        audioChannel.pause();*/
+                    if (audioChannel != null)
+                        audioChannel.pause();
                 });
             }
             //跳转末尾
@@ -718,7 +744,7 @@ public class MapEditor extends BaseEditor {
         this.getChildren().addAll(topToolBar, bodyPane);
 
 
-        /*{//初始化音频
+        {//初始化音频
             try {
 
                 Path audioPath = mapResourcePath.resolve(zxMap.unLocalizedMapInfo.getInfo(ZXMInfo.AudioPath));
@@ -726,27 +752,47 @@ public class MapEditor extends BaseEditor {
                     Path workAudioPath = audioPath.getParent().resolve("work.wav");
                     //格式转换
                     System.out.println("格式转化");
-                    if (FFmpeg.audioFormatConversion(audioPath, workAudioPath) != 0)
+                    if (!FFmpeg.audioToWav(audioPath, workAudioPath))
                         throw new RuntimeException("音频转换失败");
                     int id = ZXNApp.audioMixer.addAudio(workAudioPath);
                     audioChannel = ZXNApp.audioMixer.createChannel(id);
-                    audioChannel.setVolume(0.15f);
-
-                    hitAudioID = ZXNApp.audioMixer.addAudio(ZXResources.getPath("audio.soft-hitnormal"));
+                    audioChannel.setVolume(0.2f);
+                    audioChannel.setPlaySpeed(true, 0.5f);
 
                     mainMapRender.getInfo().timelinePosition.addListener((observable, oldValue, newValue) -> {
                         if (audioChannel.getPlayState().equals(AudioChannel.PlayState.PAUSE)) {
                             try {
                                 hitsNotes.clear();
-                                audioChannel.setTime(newValue.longValue());
-                                audioChannel.play();
-                                audioChannel.pause();
+                                audioChannel.setTime(mainMapRender.getInfo().timelinePosition.get());
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+                    });
+
+
+                    /*ZXNApp.threadAudioMixer.addAudioChannel();*/
+                    /*if (FFmpeg.audioFormatConversion(audioPath, workAudioPath) != 0)
+                        throw new RuntimeException("音频转换失败");
+                    int id = ZXNApp.audioMixer.addAudio(workAudioPath);
+                    audioChannel = ZXNApp.audioMixer.createChannel(id);
+                    audioChannel.setVolume(0.15f);*/
+
+                    hitAudioID = ZXNApp.audioMixer.addAudio(ZXResources.getPath("audio.soft-hitnormal"));
+
+                   /* mainMapRender.getInfo().timelinePosition.addListener((observable, oldValue, newValue) -> {
+                        if (audioChannel.getPlayState().equals(AudioChannel.PlayState.PAUSE)) {
+                            try {
+
+                                //audioChannel.setTime(newValue.longValue());
+                                //audioChannel.play();
+                                //audioChannel.pause();
                             } catch (IOException e) {
                                 throw new RuntimeException(e);
                             }
                         }
 
-                    });
+                    });*/
 
                     //ZXNApp.audioMixer.addAudioChannel(audioInputChannel);
                 }
@@ -756,7 +802,8 @@ public class MapEditor extends BaseEditor {
             }
 
 
-        }*/
+        }
+
 
     }
 
@@ -766,11 +813,11 @@ public class MapEditor extends BaseEditor {
         //if (audioChannel.getPlayState().equals(AudioChannel.PlayState.PLAY))
         //mainMapRender.getInfo().timelinePosition.set(System.currentTimeMillis() - synchroniseTime);
 
-        /*if (audioChannel.getPlayState().equals(AudioChannel.PlayState.PLAY))
+        if (audioChannel.getPlayState().equals(AudioChannel.PlayState.PLAY))
             mainMapRender.getInfo().timelinePosition.set(audioChannel.getTime());
 
         new Thread(() -> {
-            ArrayList<BaseNote> findsNotes = zxMap.getScaleNotes(mainMapRender.getInfo().timelinePosition.get() - 100, 100, false);
+            ArrayList<BaseNote> findsNotes = zxMap.getScaleNotes(mainMapRender.getInfo().timelinePosition.get() - 100, 100, true);
             for (BaseNote note : findsNotes) {
                 if (Math.abs(note.timeStamp - mainMapRender.getInfo().timelinePosition.get()) < 20)
                     if (!hitsNotes.contains(note)) {
@@ -786,7 +833,13 @@ public class MapEditor extends BaseEditor {
                         audioChannel1.play();
                     }
             }
-        }).start();*/
+        }).start();
+
+        if (audioChannel != null) {
+            if (!audioChannel.getPlayState().equals(AudioChannel.PlayState.PAUSE)) {
+                mainMapRender.getInfo().timelinePosition.set((long) (synchronisedTime + (System.currentTimeMillis() - synchroniseTime) * audioChannel.getPlaySpeed()));
+            }
+        }
 
 
         mainMapRender.clearRect();

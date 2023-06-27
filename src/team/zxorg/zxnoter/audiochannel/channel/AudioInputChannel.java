@@ -4,9 +4,9 @@ import javax.sound.sampled.AudioFormat;
 import java.nio.ByteBuffer;
 
 public abstract class AudioInputChannel {
-    ByteBuffer sampleBuffer;//采样缓冲区
-    AudioFormat audioFormat;//音频格式
-    boolean isPaused = false;//暂停状态
+    public ByteBuffer sampleBuffer;//采样缓冲区
+    public AudioFormat audioFormat;//音频格式
+    public boolean isPaused = false;//暂停状态
 
     public AudioInputChannel(AudioFormat audioFormat) {
         this.audioFormat = audioFormat;
