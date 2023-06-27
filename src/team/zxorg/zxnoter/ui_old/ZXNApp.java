@@ -179,7 +179,7 @@ public class ZXNApp extends Application {
 
         {//添加编辑器
 
-            MapEditor editor = new MapEditor(Paths.get("docs/reference/xiuluo/Fracture Ray_4k_ez.imd"));
+            MapEditor editor = new MapEditor(Paths.get("docs/reference/Corruption/Corruption_4k_ez.imd"));
 
             Tab tab1 = new Tab(editor.zxMap.unLocalizedMapInfo.getInfo(ZXMInfo.Title));
             tab1.setGraphic(ZXResources.getSvgPane("svg.icons.zxnoter.file-osu-line", 18, Color.DARKGREEN));

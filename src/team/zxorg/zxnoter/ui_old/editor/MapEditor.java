@@ -756,8 +756,8 @@ public class MapEditor extends BaseEditor {
                         throw new RuntimeException("音频转换失败");
                     int id = ZXNApp.audioMixer.addAudio(workAudioPath);
                     audioChannel = ZXNApp.audioMixer.createChannel(id);
-                    audioChannel.setVolume(0.2f);
-                    audioChannel.setPlaySpeed(true, 0.5f);
+                    audioChannel.setVolume(0.13f);
+                    audioChannel.setPlaySpeed(false, 0.8f);
 
                     mainMapRender.getInfo().timelinePosition.addListener((observable, oldValue, newValue) -> {
                         if (audioChannel.getPlayState().equals(AudioChannel.PlayState.PAUSE)) {
@@ -778,7 +778,7 @@ public class MapEditor extends BaseEditor {
                     audioChannel = ZXNApp.audioMixer.createChannel(id);
                     audioChannel.setVolume(0.15f);*/
 
-                    hitAudioID = ZXNApp.audioMixer.addAudio(ZXResources.getPath("audio.soft-hitnormal"));
+                    hitAudioID = ZXNApp.audioMixer.addAudio(ZXResources.getPath("audio.drum-hitfinish"));
 
                    /* mainMapRender.getInfo().timelinePosition.addListener((observable, oldValue, newValue) -> {
                         if (audioChannel.getPlayState().equals(AudioChannel.PlayState.PAUSE)) {
@@ -829,7 +829,7 @@ public class MapEditor extends BaseEditor {
                             throw new RuntimeException(e);
                         }
                         audioChannel1.setEndBehavior(AudioChannel.EndBehavior.CLOSE);
-                        audioChannel1.setVolume(0.18f);
+                        audioChannel1.setVolume(0.23f);
                         audioChannel1.play();
                     }
             }
