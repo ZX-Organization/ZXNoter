@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class IoTest {
     public static void main(String[] args) throws IOException {
         //try {
-            ZXMap map = new ImdReader().read(Path.of("docs/reference/xi - Blue Zenith/xi - Blue Zenith_4k_hd.imd"));
+            ZXMap map = new ImdReader().read(Path.of("docs/reference/xiuluo/Fracture Ray_4k_ez.imd"));
 
 
             //System.out.println(map.notes);
@@ -33,14 +33,15 @@ public class IoTest {
 
         ZXFixedOrbitMapEditor editor = new ZXFixedOrbitMapEditor(map);
 
-        System.out.println("原map->"+map.notes);
+        /*System.out.println("原map->"+map.notes);
         editor.addNote(100,1);
         editor.modifyDone();
         System.out.println("操作后map->"+map.notes);
         editor.withdraw();
         System.out.println("撤回后map->"+map.notes);
         editor.redo();
-        System.out.println("重做后map->"+map.notes);
+        System.out.println("重做后map->"+map.notes);*/
+        System.out.println(map.getScaleNotes(5548,100,true));
         /*System.out.println("原->"+ map.findClosestNotes(5818).get(0));
 
 

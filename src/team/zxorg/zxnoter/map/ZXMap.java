@@ -118,15 +118,16 @@ public class ZXMap {
             startIndex = notes.indexOf(firstNote);
         }
 
-        //向后找到时间范围内的按键
-        while (startIndex <= notes.size() - 1 && notes.get(startIndex).timeStamp < time) {
-            startIndex++;
-        }
+
 
         //从指定位置向后遍历范围内按键
         if (isDeepFind) {
             //深度查询
-
+//向后找到时间范围内的按键
+            startIndex = 0;
+            while (startIndex <= separateNotes.size() - 1 && separateNotes.get(startIndex).timeStamp < time) {
+                startIndex++;
+            }
             for (int i = startIndex; i < separateNotes.size(); i++) {
                 BaseNote note = separateNotes.get(i);
                 if (note.timeStamp <= time + scale) {
@@ -136,6 +137,10 @@ public class ZXMap {
                 }
             }
         } else {
+            //向后找到时间范围内的按键
+            while (startIndex <= notes.size() - 1 && notes.get(startIndex).timeStamp < time) {
+                startIndex++;
+            }
             for (int i = startIndex; i < notes.size(); i++) {
                 BaseNote note = notes.get(i);
                 if (note.timeStamp <= time + scale) {
