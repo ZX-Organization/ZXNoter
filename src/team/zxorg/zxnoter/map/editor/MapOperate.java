@@ -1,7 +1,6 @@
 package team.zxorg.zxnoter.map.editor;
 
 import team.zxorg.zxnoter.note.BaseNote;
-import team.zxorg.zxnoter.note.fixedorbit.FixedOrbitNote;
 
 import java.util.ArrayList;
 
@@ -9,7 +8,7 @@ public class MapOperate {
     /**
      * 同时操作的所有按键,应与结果同样大小
      */
-    ArrayList<FixedOrbitNote> srcNotes;
+    ArrayList<BaseNote> srcNotes;
     ArrayList<BaseNote> desNotes;
 
     /**
@@ -19,25 +18,29 @@ public class MapOperate {
         srcNotes = new ArrayList<>();
         desNotes = new ArrayList<>();
     }
-    private MapOperate(MapOperate withdrawOperate){
+    private MapOperate(MapOperate srcOperate){
         //深拷贝
         ArrayList<BaseNote> srcNotes = new ArrayList<>();
         ArrayList<BaseNote> desNotes = new ArrayList<>();
-        for (BaseNote note:withdrawOperate.desNotes){
-            srcNotes.add(note.clone());
+        for (BaseNote note:srcOperate.desNotes){
+            if (note != null) srcNotes.add(note.clone());
+            else srcNotes.add(null);
         }
-        for (FixedOrbitNote note:withdrawOperate.srcNotes){
-            desNotes.add(note.clone());
+        for (BaseNote note:srcOperate.srcNotes){
+            if (note != null) desNotes.add(note.clone());
+            else desNotes.add(null);
+
         }
+        this.srcNotes = srcNotes;
+        this.desNotes = desNotes;
     }
 
     /**
-     * 获得重做操作
-     * @param withdrawOperate 撤销操作
-     * @return 重做操作
+     * 获得相反操作
+     * @return 相反操作
      */
-    public MapOperate getRedoOperate(MapOperate withdrawOperate){
-        return new MapOperate(withdrawOperate);
+    public MapOperate getReverseOperate(){
+        return new MapOperate(this);
     }
     @Override
     public boolean equals(Object o) {

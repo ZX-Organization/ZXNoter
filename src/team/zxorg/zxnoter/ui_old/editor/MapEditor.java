@@ -3,6 +3,7 @@ package team.zxorg.zxnoter.ui_old.editor;
 import javafx.beans.property.*;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
@@ -18,6 +19,7 @@ import team.zxorg.zxnoter.map.ZXMap;
 import team.zxorg.zxnoter.map.editor.ZXFixedOrbitMapEditor;
 import team.zxorg.zxnoter.map.mapInfo.ZXMInfo;
 import team.zxorg.zxnoter.note.BaseNote;
+import team.zxorg.zxnoter.note.fixedorbit.ComplexNote;
 import team.zxorg.zxnoter.note.fixedorbit.FixedOrbitNote;
 import team.zxorg.zxnoter.note.fixedorbit.LongNote;
 import team.zxorg.zxnoter.note.fixedorbit.SlideNote;
@@ -84,13 +86,17 @@ public class MapEditor extends BaseEditor {
 
     boolean judgeLineAlign = false;//判定线对齐分拍线
 
-   // AudioChannel audioChannel = null;
+    // AudioChannel audioChannel = null;
     int hitAudioID = 0;
 
 
     ArrayList<BaseNote> hitsNotes = new ArrayList<>();
     //long synchronisedTime = 0;//现实同步时间
     //long synchroniseTime = 0;//音频同步时间
+
+
+    FixedOrbitNote tempNote;
+
 
     public MapEditor(Path mapPath) {
 
@@ -191,10 +197,34 @@ public class MapEditor extends BaseEditor {
 
             //按下事件
             mapCanvas.setOnMousePressed(event -> {
-                pressedMouseEvent = event;
                 //获取鼠标位置实体键
                 mainMapRender.renderPoint.setXY(event.getX(), event.getY());
+                mainMapRender.render();
+                RenderNote renderNote = mainMapRender.renderNote;//当前选择的键
+
+                if (event.getButton().equals(MouseButton.PRIMARY)) {
+                    pressedMouseEvent = event;
+
+
+                    int orbit = (int) (event.getX() / mainMapRender.getInfo().orbitWidth.get());
+                    long time = mainMapRender.getInfo().getPositionToTime(event.getY());
+
+                    if (!event.isControlDown())//时间对齐分拍
+                        time = RenderBeat.alignBeatsTime(renderBeats, time);
+                    if (renderNote.note == null) {
+                        zxFixedOrbitMapEditor.addNote(time, orbit);
+                        zxFixedOrbitMapEditor.modifyDone();
+                    }
+                } else if (event.getButton().equals(MouseButton.SECONDARY)) {
+                    if (renderNote.complexNote == null) {
+                        zxFixedOrbitMapEditor.deleteNote(renderNote.note);
+                    } else {
+                        zxFixedOrbitMapEditor.deleteChildNote(renderNote.complexNote, renderNote.complexNote.notes.indexOf(renderNote.note));
+                    }
+                    zxFixedOrbitMapEditor.modifyDone();
+                }
             });
+
 
             //拖拽事件
             mapCanvas.setOnMouseDragged(event -> {
@@ -202,90 +232,147 @@ public class MapEditor extends BaseEditor {
                 int orbit = (int) (event.getX() / mainMapRender.getInfo().orbitWidth.get());
                 long time = mainMapRender.getInfo().getPositionToTime(event.getY());
 
-                if (!event.isControlDown())//时间对齐分拍
-                    time = RenderBeat.alignBeatsTime(renderBeats, time);
-                boolean isKeep = event.isShiftDown();
-                {
-                    //zxFixedOrbitMapEditor.shadowMap.notes.clear();
-                    if (renderNote.note != null) {
-                        if (renderNote.complexNote == null) {//不是组合键
-                            if (renderNote.pos.equals(RenderNote.RenderNoteObject.FOOT)) {//头节点  对长键编辑属性
-                                if (renderNote.note instanceof LongNote) {//长键
-                                    zxFixedOrbitMapEditor.modifyPar(renderNote.note, (int) (time - renderNote.note.timeStamp), true);
-                                } else if (renderNote.note instanceof SlideNote) {//滑键
-                                    zxFixedOrbitMapEditor.modifyPar(renderNote.note, orbit, true);
-                                }
-                            } else if (renderNote.pos.equals(RenderNote.RenderNoteObject.HEAD)) {//头部编辑 (移动、转换)
-                                if (event.isAltDown()) {//单键转换
-                                    if (renderNote.note.timeStamp != time) {//时间改变 (长键)
-                                        zxFixedOrbitMapEditor.modifyPar(
-                                                renderNote.note
-                                                , time - renderNote.note.timeStamp
-                                                , true
-                                        );
-                                    } else if (renderNote.note.orbit != orbit) {//轨道改变 (滑键)
-                                        zxFixedOrbitMapEditor.modifyPar(
-                                                renderNote.note
-                                                , orbit - renderNote.note.orbit
-                                                , true
-                                        );
-                                    }
+                if (event.getButton().equals(MouseButton.PRIMARY)) {
+                    if (!event.isControlDown())//时间对齐分拍
+                        time = RenderBeat.alignBeatsTime(renderBeats, time);
+                    boolean isKeep = event.isShiftDown();
+                    {
+                        //zxFixedOrbitMapEditor.shadowMap.notes.clear();
+                        if (renderNote.note != null) {
+                            if (renderNote.complexNote == null) {//不是组合键   简单键
+                                if (renderNote.pos.equals(RenderNote.RenderNoteObject.FOOT)) {//尾部 对长键编辑属性
 
-                                } else {//移动
-                                    zxFixedOrbitMapEditor.move(renderNote.note, orbit, time, true);
-                                }
-                            } else if (renderNote.pos.equals(RenderNote.RenderNoteObject.BODY)) {//拖动身体
-                                /*if (renderNote.note instanceof LongNote longNote) {//长键
-                                    zxFixedOrbitMapEditor.convertToComplexNote(longNote, Z);
-                                } else if (renderNote.note instanceof SlideNote slideNote) {//滑键
-                                    zxFixedOrbitMapEditor.convertToComplexNote(slideNote, 2);
-                                }else {//单键
-
-                                    zxFixedOrbitMapEditor.convertToComplexNote(slideNote, 2);
-                                }*/
-                            }
+                                    if (event.isShiftDown()) {
 
 
-                            //zxFixedOrbitMapEditor.move(renderNote.note, orbit, true);
-                        } else {
-                            //组合键
+                                        int tempOrbit = orbit - renderNote.note.orbit;
+                                        long tempTime = time - renderNote.note.timeStamp;
+                                        boolean isSide = (tempOrbit != 0);
 
-                            if (renderNote.note instanceof LongNote) {//长键
-                                if (renderNote.pos.equals(RenderNote.RenderNoteObject.FOOT)) {//尾部节点  对滑键编辑时间
-                                    int index = renderNote.complexNote.notes.indexOf(renderNote.note) + 1;
-                                    if (index < renderNote.complexNote.notes.size())//检查越界
-                                        zxFixedOrbitMapEditor.move(renderNote.complexNote, time, index, isKeep, true);
-                                } else {
-                                    //身体  对长键编辑轨道
-                                    zxFixedOrbitMapEditor.move(renderNote.complexNote, orbit, renderNote.complexNote.notes.indexOf(renderNote.note), isKeep, true);
-                                }
-                            } else if (renderNote.note instanceof SlideNote) {//滑键
-                                if (renderNote.pos.equals(RenderNote.RenderNoteObject.BODY)) {//身体
-                                    //对滑键修改时间
-                                    zxFixedOrbitMapEditor.move(renderNote.complexNote, time, renderNote.complexNote.notes.indexOf(renderNote.note), isKeep, true);
-                                }
-                            }
+                                        if (tempNote instanceof ComplexNote complexNote) {
+                                            if (complexNote.notes.size() > 0) {
+                                                FixedOrbitNote latestNote = complexNote.notes.get(complexNote.notes.size() - 1);
+                                                tempOrbit = orbit - latestNote.orbit;//相对之前键的绝对轨道
+                                                tempTime = time - latestNote.timeStamp;//相对之前键的绝对时间
 
-
-                            {
-                                //如果是末尾键
-                                if (renderNote.complexNote.notes.get(renderNote.complexNote.notes.size() - 1).equals(renderNote.note))
-                                    if (renderNote.pos.equals(RenderNote.RenderNoteObject.FOOT)) {//头节点  对长键编辑属性
-                                        if (renderNote.note instanceof LongNote longNote) {//长键
-                                            zxFixedOrbitMapEditor.modifyEndPar(renderNote.complexNote, (int) (time - renderNote.note.timeStamp), true);
-                                        } else if (renderNote.note instanceof SlideNote slideNote) {//滑键
-                                            zxFixedOrbitMapEditor.modifyEndPar(renderNote.complexNote, orbit - slideNote.orbit, true);
+                                                isSide = (latestNote.orbit != orbit);
+                                                if (latestNote instanceof SlideNote slideNote) {
+                                                    isSide = (latestNote.orbit + slideNote.slideArg != orbit);
+                                                }
+                                            }
                                         }
-                                    } else if (renderNote.pos.equals(RenderNote.RenderNoteObject.HEAD)) {//身体
-                                        zxFixedOrbitMapEditor.move(renderNote.note, orbit, time, true);
+
+                                        if (isSide) {
+                                            tempNote = zxFixedOrbitMapEditor.addEndOfNote(renderNote.note, tempOrbit, ZXFixedOrbitMapEditor.SLIDE_NOTE);
+                                        } else {
+                                            if (tempTime != 0)
+                                                tempNote = zxFixedOrbitMapEditor.addEndOfNote(renderNote.note, Math.max(tempTime, 0), ZXFixedOrbitMapEditor.LONG_NOTE);
+                                        }
+
+
+                                    } else {
+
+
+                                        if (renderNote.note instanceof LongNote) {//长键
+                                            zxFixedOrbitMapEditor.modifyPar(renderNote.note, Math.max((int) (time - renderNote.note.timeStamp), 0), true);
+                                        } else if (renderNote.note instanceof SlideNote) {//滑键
+                                            zxFixedOrbitMapEditor.modifyPar(renderNote.note, orbit - renderNote.note.orbit, true);
+                                        }
                                     }
+                                } else if (renderNote.pos.equals(RenderNote.RenderNoteObject.HEAD)) {//头部编辑 (移动、转换)
+                                    if (event.isAltDown()) {//单键转换
+                                        if (renderNote.note.timeStamp != time) {//时间改变 (长键)
+                                            zxFixedOrbitMapEditor.modifyPar(
+                                                    renderNote.note
+                                                    , time - Math.max(renderNote.note.timeStamp, 0)
+                                                    , true
+                                            );
+                                        } else if (renderNote.note.orbit != orbit) {//轨道改变 (滑键)
+                                            zxFixedOrbitMapEditor.modifyPar(
+                                                    renderNote.note
+                                                    , orbit - renderNote.note.orbit
+                                                    , true
+                                            );
+                                        }
+
+                                    } else {//移动
+                                        if (event.isShiftDown()) {
+                                            int tempOrbit = orbit - renderNote.note.orbit;
+                                            long tempTime = time - renderNote.note.timeStamp;
+                                            boolean isSide = (tempOrbit != 0);
+
+                                            if (tempNote instanceof ComplexNote complexNote) {
+                                                if (complexNote.notes.size() > 0) {
+                                                    FixedOrbitNote latestNote = complexNote.notes.get(complexNote.notes.size() - 1);
+                                                    tempOrbit = orbit - latestNote.orbit;//相对之前键的绝对轨道
+                                                    tempTime = time - latestNote.timeStamp;//相对之前键的绝对时间
+
+                                                    isSide = (latestNote.orbit != orbit);
+                                                    if (latestNote instanceof SlideNote slideNote) {
+                                                        isSide = (latestNote.orbit + slideNote.slideArg != orbit);
+                                                    }
+                                                }
+                                            }
+
+                                            if (isSide) {
+                                                tempNote = zxFixedOrbitMapEditor.addEndOfNote(renderNote.note, tempOrbit, ZXFixedOrbitMapEditor.SLIDE_NOTE);
+                                            } else {
+                                                if (tempTime != 0)
+                                                    tempNote = zxFixedOrbitMapEditor.addEndOfNote(renderNote.note, Math.max(tempTime, 0), ZXFixedOrbitMapEditor.LONG_NOTE);
+                                            }
+                                        } else
+                                            zxFixedOrbitMapEditor.move(renderNote.note, orbit, time, true);
+                                    }
+                                }
+                            } else { //组合键
+                                if (renderNote.pos.equals(RenderNote.RenderNoteObject.BODY)) {//身体
+                                    if (renderNote.note instanceof LongNote) {//长键
+                                        //身体  对长键编辑轨道
+                                        zxFixedOrbitMapEditor.move(renderNote.complexNote, orbit, renderNote.complexNote.notes.indexOf(renderNote.note), isKeep, true);
+                                    } else if (renderNote.note instanceof SlideNote) {//滑键
+                                        //对滑键修改时间
+                                        zxFixedOrbitMapEditor.move(renderNote.complexNote, Math.max(time, renderNote.complexNote.notes.get(renderNote.complexNote.notes.indexOf(renderNote.note) - 1).timeStamp), renderNote.complexNote.notes.indexOf(renderNote.note), isKeep, true);
+                                    }
+                                } else if (renderNote.pos.equals(RenderNote.RenderNoteObject.FOOT)) {//如果是末尾键
+                                    if (event.isShiftDown()) {
+
+                                        int tempOrbit = orbit - renderNote.note.orbit;
+                                        long tempTime = time - renderNote.note.timeStamp;
+                                        boolean isSide = (tempOrbit != 0);
+
+                                        if (tempNote instanceof ComplexNote complexNote) {
+                                            if (complexNote.notes.size() > 0) {
+                                                FixedOrbitNote latestNote = complexNote.notes.get(complexNote.notes.size() - 1);
+                                                tempOrbit = orbit - latestNote.orbit;//相对之前键的绝对轨道
+                                                tempTime = time - latestNote.timeStamp;//相对之前键的绝对时间
+
+                                                isSide = (latestNote.orbit != orbit);
+                                                if (latestNote instanceof SlideNote slideNote) {
+                                                    isSide = (latestNote.orbit + slideNote.slideArg != orbit);
+                                                }
+                                            }
+                                        }
+                                        if (isSide) {
+                                            tempNote = zxFixedOrbitMapEditor.addEndOfNote(renderNote.complexNote, tempOrbit, ZXFixedOrbitMapEditor.SLIDE_NOTE);
+                                        } else {
+                                            if (tempTime != 0)
+                                                tempNote = zxFixedOrbitMapEditor.addEndOfNote(renderNote.complexNote, (tempTime > 0 ? tempTime : 0), ZXFixedOrbitMapEditor.LONG_NOTE);
+                                        }
+                                    } else {
+                                        if (renderNote.complexNote.notes.get(renderNote.complexNote.notes.size() - 1).equals(renderNote.note)) {//头节点  对长键编辑属性
+                                            if (renderNote.note instanceof LongNote longNote) {//长键
+                                                zxFixedOrbitMapEditor.modifyEndPar(renderNote.complexNote, (Math.max((int) (time - renderNote.note.timeStamp), 0)), true);
+                                            } else if (renderNote.note instanceof SlideNote slideNote) {//滑键
+                                                zxFixedOrbitMapEditor.modifyEndPar(renderNote.complexNote, orbit - slideNote.orbit, true);
+                                            }
+                                        }
+                                    }
+                                }
 
 
                             }
-
-
+                            //zxFixedOrbitMapEditor.move(renderNote.note, time);
                         }
-                        //zxFixedOrbitMapEditor.move(renderNote.note, time);
                     }
                 }
 
@@ -298,9 +385,21 @@ public class MapEditor extends BaseEditor {
             mapCanvas.setOnMouseReleased(event -> {
                 //System.out.println(zxFixedOrbitMapEditor.shadowMap.notes);
                 zxFixedOrbitMapEditor.modifyDone();
+                tempNote = null;
                 //System.out.println(zxFixedOrbitMapEditor.shadowMap.notes);
 
             });
+
+            this.setOnKeyPressed(event -> {
+                if (event.isControlDown()) {
+                    if (event.getCode().equals(KeyCode.Z)) {
+                        zxFixedOrbitMapEditor.withdraw();
+                    } else if (event.getCode().equals(KeyCode.Y)) {
+                        zxFixedOrbitMapEditor.redo();
+                    }
+                }
+            });
+
 
 
             /*mapCanvas.setOnMouseClicked(event -> {

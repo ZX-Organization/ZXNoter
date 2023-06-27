@@ -2,10 +2,12 @@ package team.zxorg.zxnoter.ui_old;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -165,16 +167,24 @@ public class ZXNApp extends Application {
 
         }*/
 
+
+
+
         {//添加编辑器
 
 
-            MapEditor editor = new MapEditor(Paths.get("docs/reference/Corruption/Corruption_4k_ez.imd"));
+            MapEditor editor = new MapEditor(Paths.get("docs/reference/xiuluo/Fracture Ray_4k_ez.imd"));
 
             Tab tab1 = new Tab(editor.zxMap.unLocalizedMapInfo.getInfo(ZXMInfo.Title));
             tab1.setGraphic(ZXResources.getSvgPane("svg.icons.zxnoter.file-osu-line", 18, Color.DARKGREEN));
 
             tab1.setContent(editor);
             workspaceTabPane.getTabs().add(tab1);
+
+            rootPane.setOnKeyPressed(editor.getOnKeyPressed());
+
+
+
 
             //画布更新线程常驻
             AnimationTimer animationTimer = new AnimationTimer() {
@@ -187,6 +197,8 @@ public class ZXNApp extends Application {
 
 
         }
+
+
 
         /*{//添加编辑器
 

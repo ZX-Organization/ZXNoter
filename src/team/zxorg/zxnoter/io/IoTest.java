@@ -8,11 +8,12 @@ import team.zxorg.zxnoter.note.fixedorbit.FixedOrbitNote;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.ArrayList;
 
 public class IoTest {
     public static void main(String[] args) throws IOException {
         //try {
-            ZXMap map = new ImdReader().read(Path.of("docs/reference/Corruption/Corruption_4k_ez.imd"));
+            ZXMap map = new ImdReader().read(Path.of("docs/reference/xi - Blue Zenith/xi - Blue Zenith_4k_hd.imd"));
 
 
             //System.out.println(map.notes);
@@ -32,24 +33,43 @@ public class IoTest {
 
         ZXFixedOrbitMapEditor editor = new ZXFixedOrbitMapEditor(map);
 
-        System.out.println("原->"+ map.findClosestNotes(27882).get(0));
+        System.out.println("原map->"+map.notes);
+        editor.addNote(100,1);
+        editor.modifyDone();
+        System.out.println("操作后map->"+map.notes);
+        editor.withdraw();
+        System.out.println("撤回后map->"+map.notes);
+        editor.redo();
+        System.out.println("重做后map->"+map.notes);
+        /*System.out.println("原->"+ map.findClosestNotes(5818).get(0));
 
 
-/*        editor.move(
+*//*        editor.move(
                 (ComplexNote) map.findClosestNotes(27882).get(0),3,3,true,true
         );
         editor.move(
                 (ComplexNote) map.findClosestNotes(27882).get(0),1,3,true,true
         );
-        editor.modifyDone();*/
-        editor.addEndOfNote((FixedOrbitNote) map.findClosestNotes(27882).get(0),40L,ZXFixedOrbitMapEditor.LONG_NOTE);
-        editor.addEndOfNote((FixedOrbitNote) map.findClosestNotes(27882).get(0),1,ZXFixedOrbitMapEditor.SLIDE_NOTE);
+        editor.modifyDone();*//*
+        editor.addEndOfNote((FixedOrbitNote) map.findClosestNotes(5818).get(0),1,ZXFixedOrbitMapEditor.SLIDE_NOTE);
+        editor.addEndOfNote((FixedOrbitNote) map.findClosestNotes(5818).get(0),2,ZXFixedOrbitMapEditor.SLIDE_NOTE);
+//        editor.addEndOfNote((FixedOrbitNote) map.findClosestNotes(400).get(0),40L,ZXFixedOrbitMapEditor.LONG_NOTE);
 
+        //System.out.println("全部->" + map.findClosestNotes(5818));
 
 
         editor.modifyDone();
-        System.out.println("后->"+ map.findClosestNotes(27882).get(0));
-
+        System.out.println("全部->" + map.findClosestNotes(5818));
+        System.out.println("后->"+ map.findClosestNotes(5818).get(0));*/
+        /*ArrayList<String> strList = new ArrayList<>();
+        strList.add(null);
+        strList.add(null);
+        strList.add(null);
+        strList.add(null);
+        strList.add(null);
+        strList.add(null);
+        strList.add(null);
+        System.out.println(strList);*/
         //System.out.println(editor.operateStack.get(0));
         /*System.out.println("原->"+map.notes.get(4));
 

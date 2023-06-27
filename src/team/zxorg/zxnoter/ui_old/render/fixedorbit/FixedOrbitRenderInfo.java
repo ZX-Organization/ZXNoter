@@ -18,6 +18,14 @@ public class FixedOrbitRenderInfo extends RenderInfo {
     public LongBinding judgedLinePositionTimeOffset = Bindings.createLongBinding(() -> (long) (canvasHeight.get() * judgedLinePositionPercentage.get() / timelineZoom.get()),
             canvasHeight, judgedLinePositionPercentage, timelineZoom);
 
+
+    /**
+     * 获取某个轨道中间X  (只读)
+     */
+    public double getOrbitCenterX(int orbit) {
+        return orbit * orbitWidth.get() + orbitWidth.get() / 2;
+    }
+
     /**
      * 单个轨道宽度
      */

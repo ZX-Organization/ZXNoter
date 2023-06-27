@@ -20,6 +20,7 @@ public class TitleBar extends HBox {
     public MenuBar menuBar = new MenuBar();
 
     public TitleBar() {
+
         //标题栏
         setBackground(Background.fill(Color.RED));
         setPrefSize(Region.USE_COMPUTED_SIZE, 30);
