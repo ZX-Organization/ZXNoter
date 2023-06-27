@@ -112,13 +112,12 @@ public class ZXMap {
         if (isDeepFind) {
             if (separateNotes == null) {
                 initSeparateNotes();
+                separateNotes.sort(BaseNote::compareTo);
             }
             startIndex = separateNotes.indexOf(firstNote);
         } else {
             startIndex = notes.indexOf(firstNote);
         }
-
-
 
         //从指定位置向后遍历范围内按键
         if (isDeepFind) {
