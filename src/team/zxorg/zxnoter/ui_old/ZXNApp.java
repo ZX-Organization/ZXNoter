@@ -70,7 +70,7 @@ public class ZXNApp extends Application {
 
     static {
         try {
-            audioMixer = new AudioMixer(44100,1024);
+            audioMixer = new AudioMixer(44100,2048);
         } catch (LineUnavailableException e) {
             throw new RuntimeException(e);
         }

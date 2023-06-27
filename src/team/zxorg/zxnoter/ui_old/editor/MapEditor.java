@@ -87,6 +87,9 @@ public class MapEditor extends BaseEditor {
     //预览堆叠
     StackPane previewBar = new StackPane();
 
+
+    long hitTime = 0;
+
     boolean judgeLineAlign = false;//判定线对齐分拍线
 
     // AudioChannel audioChannel = null;
@@ -95,9 +98,14 @@ public class MapEditor extends BaseEditor {
 
     ArrayList<BaseNote> hitsNotes = new ArrayList<>();
 
-
-    long synchronisedTime = 0;//现实同步时间
-    long synchroniseTime = 0;//音频同步时间
+    /**
+     * 音频同步时间
+     */
+    long synchronisedTime = 0;
+    /**
+     * 现实同步时间
+     */
+    long synchroniseTime = 0;
 
 
     FixedOrbitNote tempNote;
@@ -813,8 +821,8 @@ public class MapEditor extends BaseEditor {
         //if (audioChannel.getPlayState().equals(AudioChannel.PlayState.PLAY))
         //mainMapRender.getInfo().timelinePosition.set(System.currentTimeMillis() - synchroniseTime);
 
-        if (audioChannel.getPlayState().equals(AudioChannel.PlayState.PLAY))
-            mainMapRender.getInfo().timelinePosition.set(audioChannel.getTime());
+        /*if (audioChannel.getPlayState().equals(AudioChannel.PlayState.PLAY))
+            mainMapRender.getInfo().timelinePosition.set(audioChannel.getTime());*/
 
         new Thread(() -> {
             ArrayList<BaseNote> findsNotes = zxMap.getScaleNotes(mainMapRender.getInfo().timelinePosition.get() - 100, 100, true);
@@ -822,15 +830,18 @@ public class MapEditor extends BaseEditor {
                 if (Math.abs(note.timeStamp - mainMapRender.getInfo().timelinePosition.get()) < 20)
                     if (!hitsNotes.contains(note)) {
                         hitsNotes.add(note);
-                        AudioChannel audioChannel1;
-                        try {
-                            audioChannel1 = ZXNApp.audioMixer.createChannel(hitAudioID);
-                        } catch (UnsupportedAudioFileException | IOException e) {
-                            throw new RuntimeException(e);
+                        if (System.currentTimeMillis() - hitTime > 10) {
+                            AudioChannel audioChannel1;
+                            try {
+                                audioChannel1 = ZXNApp.audioMixer.createChannel(hitAudioID);
+                            } catch (UnsupportedAudioFileException | IOException e) {
+                                throw new RuntimeException(e);
+                            }
+                            audioChannel1.setEndBehavior(AudioChannel.EndBehavior.CLOSE);
+                            audioChannel1.setVolume(0.23f);
+                            audioChannel1.play();
+                            hitTime = System.currentTimeMillis();
                         }
-                        audioChannel1.setEndBehavior(AudioChannel.EndBehavior.CLOSE);
-                        audioChannel1.setVolume(0.23f);
-                        audioChannel1.play();
                     }
             }
         }).start();
