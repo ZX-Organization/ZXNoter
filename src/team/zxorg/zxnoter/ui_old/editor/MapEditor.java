@@ -698,8 +698,22 @@ public class MapEditor extends BaseEditor {
 
         {//状态
 
-            //播放变速
-            topToolBar.addButton("state", "svg.icons.media.slow-down-line", "播放变速");
+
+            {//播放变速
+                Button button = topToolBar.addButton("state", "svg.icons.media.slow-down-line", "播放变速");
+                button.setOnScroll(event -> {
+                    if (audioChannel.getPlayState() == AudioChannel.PlayState.PAUSE) {
+                        double speed = audioChannel.getPlaySpeed();
+                        if (event.getDeltaY() > 0)
+                            speed += 0.2;
+                        else
+                            speed -= 0.2;
+                        audioChannel.setPlaySpeed(false, speed);
+                        button.getTooltip().setText("播放变速" + Math.round(speed * 100) + "%");
+                    }
+                });
+            }
+
             {
                /* //分拍
                 Button button = topToolBar.addButton("state", "svg.icons.zxnoter.beat-16", "分拍");
@@ -749,7 +763,11 @@ public class MapEditor extends BaseEditor {
 
 
         //添加给自己
-        this.getChildren().addAll(topToolBar, bodyPane);
+        this.
+
+                getChildren().
+
+                addAll(topToolBar, bodyPane);
 
 
         {//初始化音频
@@ -765,7 +783,7 @@ public class MapEditor extends BaseEditor {
                     int id = ZXNApp.audioMixer.addAudio(workAudioPath);
                     audioChannel = ZXNApp.audioMixer.createChannel(id);
                     audioChannel.setVolume(0.13f);
-                    audioChannel.setPlaySpeed(false, 0.8f);
+                    //audioChannel.setPlaySpeed(false, 0.8f);
 
                     mainMapRender.getInfo().timelinePosition.addListener((observable, oldValue, newValue) -> {
                         if (audioChannel.getPlayState().equals(AudioChannel.PlayState.PAUSE)) {
@@ -848,7 +866,8 @@ public class MapEditor extends BaseEditor {
 
         if (audioChannel != null) {
             if (!audioChannel.getPlayState().equals(AudioChannel.PlayState.PAUSE)) {
-                mainMapRender.getInfo().timelinePosition.set((long) (synchronisedTime + (System.currentTimeMillis() - synchroniseTime) * audioChannel.getPlaySpeed()));
+                mainMapRender.getInfo().timelinePosition.set(audioChannel.getTime());
+                //System.out.println(audioChannel.getTime());
             }
         }
 

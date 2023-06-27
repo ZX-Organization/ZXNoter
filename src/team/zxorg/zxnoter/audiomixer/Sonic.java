@@ -74,10 +74,10 @@ public class Sonic {
     private short outputBuffer[];
     private short pitchBuffer[];
     private short downSampleBuffer[];
-    private float speed;
+    private double speed;
     private float volume;
     private float pitch;
-    private float rate;
+    private double rate;
     private int oldRatePosition;
     private int newRatePosition;
     private boolean useChordPitch;
@@ -143,13 +143,13 @@ public class Sonic {
     }
 
     // Get the speed of the stream.
-    public float getSpeed() {
+    public double getSpeed() {
         return speed;
     }
 
     // Set the speed of the stream.
     public void setSpeed(
-            float speed) {
+            double speed) {
         this.speed = speed;
     }
 
@@ -165,13 +165,13 @@ public class Sonic {
     }
 
     // Get the rate of the stream.
-    public float getRate() {
+    public double getRate() {
         return rate;
     }
 
     // Set the playback rate of the stream. This scales pitch and speed at the same time.
     public void setRate(
-            float rate) {
+            double rate) {
         this.rate = rate;
         this.oldRatePosition = 0;
         this.newRatePosition = 0;
@@ -474,8 +474,8 @@ public class Sonic {
     // words could introduce distortion.
     public void flushStream() {
         int remainingSamples = numInputSamples;
-        float s = speed / pitch;
-        float r = rate * pitch;
+        double s = speed / pitch;
+        double r = rate * pitch;
         int expectedOutputSamples = numOutputSamples + (int) ((remainingSamples / s + numPitchSamples) / r + 0.5f);
 
         // Add enough silence to flush both input and pitch buffers.
@@ -807,7 +807,7 @@ public class Sonic {
 
     // Change the rate.
     private void adjustRate(
-            float rate,
+            double rate,
             int originalNumOutputSamples) {
         int newSampleRate = (int) (sampleRate / rate);
         int oldSampleRate = sampleRate;
@@ -852,7 +852,7 @@ public class Sonic {
     private int skipPitchPeriod(
             short samples[],
             int position,
-            float speed,
+            double speed,
             int period) {
         int newSamples;
 
@@ -873,7 +873,7 @@ public class Sonic {
     private int insertPitchPeriod(
             short samples[],
             int position,
-            float speed,
+            double speed,
             int period) {
         int newSamples;
 
@@ -894,7 +894,7 @@ public class Sonic {
     // Resample as many pitch periods as we have buffered on the input.  Return 0 if
     // we fail to resize an input or output buffer.  Also scale the output by the volume.
     private void changeSpeed(
-            float speed) {
+            double speed) {
         int numSamples = numInputSamples;
         int position = 0, period, newSamples;
 
@@ -922,8 +922,8 @@ public class Sonic {
     // Resample as many pitch periods as we have buffered on the input.  Scale the output by the volume.
     private void processStreamInput() {
         int originalNumOutputSamples = numOutputSamples;
-        float s = speed / pitch;
-        float r = rate;
+        double s = speed / pitch;
+        double r = rate;
 
         if (!useChordPitch) {
             r *= pitch;
@@ -985,7 +985,7 @@ public class Sonic {
     public static int changeFloatSpeed(
             float samples[],
             int numSamples,
-            float speed,
+            double speed,
             float pitch,
             float rate,
             float volume,
@@ -1010,7 +1010,7 @@ public class Sonic {
     public int sonicChangeShortSpeed(
             short samples[],
             int numSamples,
-            float speed,
+            double speed,
             float pitch,
             float rate,
             float volume,

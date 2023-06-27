@@ -117,7 +117,8 @@ public class AudioChannel {
      * @throws IOException
      */
     public void setTime(long time) throws IOException {
-        setProgress((double) time / audioLength);
+        sonic.flushStream();
+        setFrame((long) (time / 1000 * audioFormat.getSampleRate()));
     }
 
     /**
@@ -161,7 +162,11 @@ public class AudioChannel {
      * @return 单位ms
      */
     private long getTime_() {
-        return (long) (getProgress_() * audioLength);
+
+        return (long) ((frameLength - (inputStream.available() / audioFormat.getFrameSize())) / (audioFormat.getSampleRate() / 1000));
+
+
+        // return (long) (getProgress_() * audioLength);
     }
 
 
@@ -189,6 +194,7 @@ public class AudioChannel {
      * 播放
      */
     public void play() {
+        sonic.flushStream();
         playState = PlayState.PLAY;
     }
 
@@ -239,7 +245,7 @@ public class AudioChannel {
     protected long lastTimeStamp;//记录播放时间戳
 
 
-    private long audioLength;//音频时长 ms
+    private final long audioLength;//音频时长 ms
 
 
     /**
@@ -248,7 +254,7 @@ public class AudioChannel {
      * @param v         1f为原速
      * @param transpose 变调
      */
-    public void setPlaySpeed(boolean transpose, float v) {
+    public void setPlaySpeed(boolean transpose, double v) {
         if (transpose) {
             sonic.setRate(v);
             sonic.setSpeed(1f);
@@ -259,7 +265,7 @@ public class AudioChannel {
 
     }
 
-    public float getPlaySpeed() {
+    public double getPlaySpeed() {
         return sonic.getSpeed() * sonic.getRate();
     }
 
