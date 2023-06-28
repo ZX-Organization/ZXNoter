@@ -266,6 +266,26 @@ public class ZXMap {
         }
         return binarySearchNote(time, lowIndex, highIndex);
     }
+    private int binarySearchSeparateNotes(long time, int lowIndex, int highIndex) {
+        int mid = (lowIndex + highIndex) / 2;
+        if (time > separateNotes.get(mid).timeStamp) {
+            //查找的时间在中点之后
+            if (lowIndex == highIndex) {
+                return lowIndex;
+            } else {
+                lowIndex = mid + 1;
+            }
+
+        } else {
+            //查找的时间在中点之前
+            if (lowIndex == highIndex) {
+                return highIndex;
+            } else {
+                highIndex = mid;
+            }
+        }
+        return binarySearchNote(time, lowIndex, highIndex);
+    }
 
     private int binarySearchTiming(long time, int lowIndex, int highIndex) {
         int mid = (lowIndex + highIndex) / 2;
@@ -292,23 +312,44 @@ public class ZXMap {
      * 插入按键,向按键列表中插入一个新按键,返回插入后所处的下标
      *
      * @param note
-     * @return 插入后所处下标
+     * @return 插入后大小变化
      */
     public int insertNote(BaseNote note) {
 
         if (notes.size() == 0 || notes.get(notes.size() - 1).timeStamp <= note.timeStamp) {
             notes.add(note);
+            if (separateNotes == null||separateNotes.size()==0) {
+                initSeparateNotes();
+            }
+            separateNotes.add(note);
             return notes.size() - 1;
         }
-        int index = binarySearchNote(note.timeStamp, 0, notes.size() - 1);
-        ArrayList<BaseNote> backNotes = new ArrayList<>();
-        while (index < notes.size()) {
-            backNotes.add(notes.get(index));
-            notes.remove(index);
+        int indexInNotes = binarySearchNote(note.timeStamp, 0, notes.size() - 1);
+        ArrayList<BaseNote> backNotesInNotes = new ArrayList<>();
+        while (indexInNotes < notes.size()) {
+            backNotesInNotes.add(notes.get(indexInNotes));
+            notes.remove(indexInNotes);
         }
         notes.add(note);
-        notes.addAll(backNotes);
-        return index;
+        notes.addAll(backNotesInNotes);
+
+        int indexInSeparateNotes = binarySearchSeparateNotes(note.timeStamp, 0, notes.size() - 1);
+        ArrayList<BaseNote> backNotesInSeparateNotes = new ArrayList<>();
+        while (indexInSeparateNotes < separateNotes.size()) {
+            backNotesInSeparateNotes.add(separateNotes.get(indexInSeparateNotes));
+            separateNotes.remove(indexInSeparateNotes);
+        }
+        separateNotes.add(note);
+        separateNotes.addAll(backNotesInSeparateNotes);
+
+        int count=0;
+        if (note instanceof ComplexNote complexNote){
+            for (FixedOrbitNote ignored: complexNote.notes)
+                count++;
+        }
+        count++;
+
+        return count;
     }
 
     /**
@@ -317,8 +358,16 @@ public class ZXMap {
      * @param note
      * @return 删除是否成功
      */
-    public boolean deleteNote(BaseNote note) {
-        return notes.remove(note);
+    public int deleteNote(BaseNote note) {
+        int count=0;
+        if(note instanceof ComplexNote complexNote){
+            for (FixedOrbitNote ignored: complexNote.notes)
+                count++;
+        }
+        count++;
+        separateNotes.remove(note);
+        notes.remove(note);
+        return count;
     }
 
 
