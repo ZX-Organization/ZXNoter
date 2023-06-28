@@ -1,6 +1,6 @@
 package team.zxorg.zxnoter.note.timing;
 
-public class Timing {
+public class Timing implements Comparable<Timing>{
     /**
      * 时间点时间戳
      */
@@ -33,5 +33,13 @@ public class Timing {
                 ", bpmSpeed=" + bpmSpeed +
                 ", 绝对bpm=" + absBpm +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Timing o) {
+        if (o.timestamp>timestamp)return 1;
+        else if (o.timestamp<timestamp)return 1;
+        else if (o.isNewBaseBpm) return -1;
+        else return 0;
     }
 }

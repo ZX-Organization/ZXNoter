@@ -3,6 +3,7 @@ package team.zxorg.zxnoter.io.reader;
 import team.zxorg.zxnoter.map.mapInfo.UnLocalizedMapInfo;
 import team.zxorg.zxnoter.map.ZXMap;
 import team.zxorg.zxnoter.map.mapInfo.OsuInfo;
+import team.zxorg.zxnoter.map.mapInfo.ZXMInfo;
 import team.zxorg.zxnoter.note.BaseNote;
 import team.zxorg.zxnoter.note.fixedorbit.FixedOrbitNote;
 import team.zxorg.zxnoter.note.fixedorbit.CustomLongNote;
@@ -248,6 +249,7 @@ public class OsuReader implements MapReader{
             }
         }
         unLocalizedMapInfo.addInfo(OsuInfo.Bpm.unLocalize(),String.valueOf(baseBpm));
+        unLocalizedMapInfo.addInfo(ZXMInfo.ObjectCount,String.valueOf(allNotes.size()));
         zxMap.notes = allNotes;
         zxMap.timingPoints = timingPoints;
         zxMap.unLocalizedMapInfo = unLocalizedMapInfo;
