@@ -539,17 +539,28 @@ public class MapEditor extends BaseEditor {
         //属性栏
         TabPane tabPane = new TabPane();
         tabPane.setSide(Side.RIGHT);
-        tabPane.setPrefWidth(180);
+        tabPane.setMinWidth(240);
+        tabPane.setPrefWidth(240);
+        tabPane.setMaxWidth(400);
         tabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
 
         HBox.setHgrow(tabPane, Priority.SOMETIMES);
 
+
+        zxMap.unLocalizedMapInfo.addAddInterface((info, value) -> {
+            if (info.equals(ZXMInfo.KeyCount)) {
+                mainMapRender.getInfo().orbits.set(Integer.parseInt(value));
+            }
+        });
+
+
         {
             Tab tab1 = new Tab("常用");
-            InfoPane infoPane=new InfoPane(zxMap.unLocalizedMapInfo,new ZXMInfo[]{ZXMInfo.KeyCount});
 
-
-            tab1.setContent(infoPane);
+            InfoPane infoPane = new InfoPane(zxMap.unLocalizedMapInfo, new ZXMInfo[]{ZXMInfo.KeyCount});
+            ScrollPane scrollPane = new ScrollPane(infoPane);
+            scrollPane.setFitToWidth(true);
+            tab1.setContent(scrollPane);
 
             tabPane.getTabs().addAll(tab1);
 
@@ -564,6 +575,10 @@ public class MapEditor extends BaseEditor {
         }
         {
             Tab tab1 = new Tab("全部");
+            InfoPane infoPane = new InfoPane(zxMap.unLocalizedMapInfo, ZXMInfo.values());
+            ScrollPane scrollPane = new ScrollPane(infoPane);
+            scrollPane.setFitToWidth(true);
+            tab1.setContent(scrollPane);
             tabPane.getTabs().addAll(tab1);
         }
 
@@ -868,6 +883,10 @@ public class MapEditor extends BaseEditor {
                 Button button = topToolBar.addButton("tool", "svg.icons.zxnoter.4k", "轨道数");
                 button.getTooltip().setText("轨道数" + mainMapRender.getInfo().orbits.get() + "k");
                 button.setShape(ZXResources.getSvg("svg.icons.zxnoter." + mainMapRender.getInfo().orbits.get() + "k"));
+                mainMapRender.getInfo().orbits.addListener((observable, oldValue, newValue) -> {
+                    button.getTooltip().setText("轨道数" + newValue + "k");
+                    button.setShape(ZXResources.getSvg("svg.icons.zxnoter." + newValue + "k"));
+                });
                 button.setOnScroll(event -> {
                     int orbits = mainMapRender.getInfo().orbits.get();
                     if (event.getDeltaY() > 0)
@@ -875,9 +894,6 @@ public class MapEditor extends BaseEditor {
                     else
                         orbits--;
                     zxMap.unLocalizedMapInfo.addInfo(ZXMInfo.KeyCount, String.valueOf(orbits));
-                    button.getTooltip().setText("轨道数" + orbits + "k");
-                    button.setShape(ZXResources.getSvg("svg.icons.zxnoter." + orbits + "k"));
-                    mainMapRender.getInfo().orbits.set(orbits);
                 });
             }
 

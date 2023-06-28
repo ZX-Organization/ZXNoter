@@ -16,3 +16,6 @@
     -fx-padding: 0;
 }
 
+.scroll-pane,.scroll-pane .viewport{
+    -fx-background-color: transparent;
+}

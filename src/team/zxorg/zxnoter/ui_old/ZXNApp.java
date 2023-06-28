@@ -186,8 +186,9 @@ public class ZXNApp extends Application {
         //sideBar.setBackground(Background.fill(Color.YELLOW));
         sideBar.setPrefWidth(180);
         sideBar.setMinWidth(Region.USE_PREF_SIZE);
-        sideBar.setVisible(false);
-        sideBar.setPrefWidth(0);
+        HBox.setHgrow(sideBar,Priority.ALWAYS);
+        //sideBar.setVisible(false);
+        //sideBar.setPrefWidth(0);
 
         //工作空间
         workspace.getStyleClass().add("workspace");
