@@ -456,7 +456,7 @@ public class ZXMap {
         return tempMap;
     }
 
-    private void initSeparateNotes() {
+    public void initSeparateNotes() {
         separateNotes = new ArrayList<>();
         for (BaseNote note : notes) {
             if (note instanceof ComplexNote complexNote) {
@@ -466,7 +466,12 @@ public class ZXMap {
         }
         notes.sort(BaseNote::compareTo);
     }
-
+    public int getObjectCount() {
+        if (separateNotes == null) {
+            initSeparateNotes();
+        }
+        return separateNotes.size();
+    }
     @Override
     public String toString() {
         return "ZXMap{" +
@@ -475,4 +480,6 @@ public class ZXMap {
                 ", 本地化信息=" + unLocalizedMapInfo + '\n' +
                 '}';
     }
+
+
 }

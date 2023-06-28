@@ -1,6 +1,7 @@
 package team.zxorg.zxnoter.map.editor;
 
 import team.zxorg.zxnoter.map.ZXMap;
+import team.zxorg.zxnoter.map.mapInfo.ZXMInfo;
 import team.zxorg.zxnoter.note.BaseNote;
 import team.zxorg.zxnoter.note.fixedorbit.ComplexNote;
 import team.zxorg.zxnoter.note.fixedorbit.FixedOrbitNote;
@@ -498,6 +499,8 @@ public class ZXFixedOrbitMapEditor {
             //System.out.println(note);
             srcMap.insertNote(note.clone());
         }
+        //修改信息
+        srcMap.unLocalizedMapInfo.addInfo(ZXMInfo.ObjectCount,String.valueOf(srcMap.getObjectCount()));
         //清空添加列表
         if (tempAddList.size() > 0) {
             tempAddList.clear();
@@ -675,6 +678,8 @@ public class ZXFixedOrbitMapEditor {
                     srcMap.insertNote(srcNote);
                 }
             }
+            //修改信息
+            srcMap.unLocalizedMapInfo.addInfo(ZXMInfo.ObjectCount,String.valueOf(srcMap.getObjectCount()));
             withdrawStack.add(operate.getReverseOperate());
             if (withdrawStack.size() > 32)
                 withdrawStack.pollFirst();
@@ -698,6 +703,8 @@ public class ZXFixedOrbitMapEditor {
                     srcMap.insertNote(srcNote);
                 }
             }
+            //修改信息
+            srcMap.unLocalizedMapInfo.addInfo(ZXMInfo.ObjectCount,String.valueOf(srcMap.getObjectCount()));
             operateStack.add(operate.getReverseOperate());
             if (operateStack.size() > 32)
                 operateStack.pollFirst();
