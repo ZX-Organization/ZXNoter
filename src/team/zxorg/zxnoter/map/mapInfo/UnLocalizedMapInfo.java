@@ -1,5 +1,6 @@
 package team.zxorg.zxnoter.map.mapInfo;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -7,17 +8,18 @@ import java.util.HashMap;
  */
 public class UnLocalizedMapInfo {
     public HashMap<ZXMInfo, String> allInfo;
-    AddCallBack addInterface;
+    ArrayList<AddCallBack> addInterfaceList;
 
     public UnLocalizedMapInfo() {
         allInfo = new HashMap<>();
+        addInterfaceList = new ArrayList<>();
     }
 
     public void addInfo(ZXMInfo key, String value) {
 
         allInfo.put(key, value);
-        if (addInterface != null)
-            addInterface.callInfo(key,value);
+        for (AddCallBack addCallBack:addInterfaceList)
+            addCallBack.callInfo(key,value);
     }
 
     public String getInfo(ZXMInfo key) {
@@ -43,8 +45,8 @@ public class UnLocalizedMapInfo {
      *  设置一个添加接口
      * @param addInterface 添加接口
      */
-    public void setAddInterface(AddCallBack addInterface) {
-        this.addInterface = addInterface;
+    public void addAddInterface(AddCallBack addInterface) {
+        this.addInterfaceList.add(addInterface) ;
     }
 
     @Override
