@@ -174,18 +174,22 @@ public class ZXMap {
      * @return 按键下标
      */
     private int findClosestNoteIndex(long time, ArrayList<BaseNote> notes) {
-        if (0 > time) return 0;
         if (notes.size()==0)return -1;
+        if (0 > time) return 0;
         if (notes.get(notes.size() - 1).timeStamp < time) return notes.size() - 1;
         int searchRes = binarySearchNote(time, 0, notes.size() - 1);
         //判断最近的
-        if (searchRes == 0) {
+        if (searchRes == 0) {//找到头部
             int next = searchRes + 1;
+            if (next>= notes.size())//既是头也是尾
+                return searchRes;
             if (Math.abs(notes.get(next).timeStamp - time) < Math.abs(notes.get(searchRes).timeStamp - time))
                 return next;
             else return searchRes;
-        } else if (searchRes == notes.size() - 1) {
+        } else if (searchRes == notes.size() - 1) {//找到尾部
             int previous = searchRes - 1;
+            if (previous<=0)//既是尾也是头
+                return searchRes;
             if (Math.abs(notes.get(previous).timeStamp - time) < Math.abs(notes.get(searchRes).timeStamp - time))
                 return previous;
             else return searchRes;
