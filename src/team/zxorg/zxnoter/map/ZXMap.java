@@ -57,8 +57,10 @@ public class ZXMap {
         //复原索引
         tempIndex = res;
         //向后查找
-        while (tempIndex < notes.size() - 1 && (tempTiming = timingPoints.get(++tempIndex)).timestamp == resTiming.timestamp) {
-            findResults.add(tempTiming);
+
+        while (tempIndex + 1 < timingPoints.size()) {
+            if (tempIndex < notes.size() - 1 && (tempTiming = timingPoints.get(++tempIndex)).timestamp == resTiming.timestamp)
+                findResults.add(tempTiming);
         }
         return findResults;
     }
