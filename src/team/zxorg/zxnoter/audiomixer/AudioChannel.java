@@ -30,7 +30,7 @@ public class AudioChannel {
 
         sonic = new Sonic((int) audioFormat.getSampleRate(), audioFormat.getChannels());
         sonic.setQuality(100);
-        channelBufSize = 512;
+        channelBufSize = 64;
         inBuffer = new byte[channelBufSize];//输入缓冲区
         frameLength = inputStream.available() / 4;//帧长度
 
@@ -114,10 +114,10 @@ public class AudioChannel {
      * @throws IOException
      */
     public void setTime(long time) throws IOException {
-        sonic.flushStream();
-        setFrame((long) (time / 1000 * audioFormat.getSampleRate()));
-        lastTime = getTime_();//获取时间
-        lastTimeStamp = System.currentTimeMillis();//获取时间戳
+        //sonic.flushStream();
+        setFrame((long) (time * audioFormat.getSampleRate() / 1000));
+        //lastTime = getTime_();//获取时间
+        //lastTimeStamp = System.currentTimeMillis();//获取时间戳
     }
 
     /**
@@ -131,25 +131,6 @@ public class AudioChannel {
         inputStream.skip(frame * audioFormat.getFrameSize());
     }
 
-    /**
-     * 设置进度
-     *
-     * @param progress 播放进度
-     * @throws IOException
-     */
-    public void setProgress(double progress) {
-        sonic.flushStream();
-        setFrame((long) (progress * frameLength));
-    }
-
-    /**
-     * 获取播放进度
-     *
-     * @return 返回 0. - 1. 的进度
-     */
-    private double getProgress_() {
-        return ((double) (frameLength - inputStream.available() / 4) / (double) frameLength);
-    }
 
     public void setVolume(float volume) {
         sonic.setVolume(volume);
@@ -161,24 +142,22 @@ public class AudioChannel {
 
 
     /**
-     * 获取当前播放时间
+     * 获取当前播放时间 (实时)
      *
      * @return 单位ms
      */
     private long getTime_() {
-        return (long) ((frameLength - (inputStream.available() / audioFormat.getFrameSize())) / (audioFormat.getSampleRate() / 1000));
+        return (long) ((frameLength - (inputStream.available() / audioFormat.getFrameSize())) / ((audioFormat.getSampleRate() / 1000)));
     }
 
 
     /**
-     * 获取当前播放时间
+     * 获取当前播放时间 (变速)
      *
      * @return 单位ms
      */
     public long getTime() {
-        if (lastPlayState.equals(PlayState.PLAY))
-            pauseTime = (long) (lastTime + (System.currentTimeMillis() - lastTimeStamp) * sonic.getRate() * sonic.getSpeed());
-        return pauseTime;
+        return (long) (getTime_() * sonic.getRate() * sonic.getSpeed());
     }
 
 
@@ -196,6 +175,10 @@ public class AudioChannel {
     public void play() {
         sonic.flushStream();
         playState = PlayState.PLAY;
+        //lastTimeStamp = System.currentTimeMillis();
+        //lastTime=getTime_();
+       // lastTime = getTime_();//获取时间
+        //lastTimeStamp = System.currentTimeMillis();//获取时间戳
     }
 
     /**

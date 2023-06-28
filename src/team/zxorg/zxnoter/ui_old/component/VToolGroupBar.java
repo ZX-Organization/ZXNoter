@@ -41,6 +41,7 @@ public class VToolGroupBar extends VBox {
         button.setShape(ZXResources.getSvg(key));
         button.setPrefSize(22, 22);
         button.getStyleClass().add("button");
+        button.setFocusTraversable(false);
         VBox.setMargin(button, new Insets(2));
         if (toolTip != null) {
             button.setTooltip(ComponentFactory.getTooltip(toolTip));
@@ -50,13 +51,12 @@ public class VToolGroupBar extends VBox {
     }
 
 
-
-
     public ToggleButton addToggleButton(String groupName, String key, String toolTip) {
         ToggleButton button = new ToggleButton();
         button.setShape(ZXResources.getSvg(key));
         button.setPrefSize(22, 22);
         button.getStyleClass().add("button");
+        button.setFocusTraversable(false);
         VBox.setMargin(button, new Insets(2));
         if (toolTip != null) {
             button.setTooltip(ComponentFactory.getTooltip(toolTip));

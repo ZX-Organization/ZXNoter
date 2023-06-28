@@ -50,6 +50,7 @@ public class HToolGroupBar extends HBox {
         Button button = new Button();
         button.setShape(ZXResources.getSvg(key));
         button.setPrefSize(22, 22);
+        button.setFocusTraversable(false);
         //button.getStyleClass().add("button");
         //HBox.setMargin(button, new Insets(2));
         if (toolTip != null) {
@@ -65,6 +66,7 @@ public class HToolGroupBar extends HBox {
         button.setShape(ZXResources.getSvg(key));
         button.setPrefSize(22, 22);
         button.getStyleClass().add("button");
+        button.setFocusTraversable(false);
        // HBox.setMargin(button, new Insets(2));
         if (toolTip != null) {
             button.setTooltip(ComponentFactory.getTooltip(toolTip));

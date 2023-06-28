@@ -184,21 +184,33 @@ public class MapEditor extends BaseEditor {
             //滚轮监听
             previewPane.setOnScroll(event -> {
                 double deltaY = event.getDeltaY();
-                mainMapRender.getInfo().timelineZoom.set(mainMapRender.getInfo().timelineZoom.get() * (deltaY < 0 ? 0.9f : 1.1f));
+                float zoom = mainMapRender.getInfo().timelineZoom.get() * (deltaY < 0 ? 0.9f : 1.1f);
+                zoom = Math.max(zoom, 0.1f);
+                zoom = Math.min(zoom, 1.0f);
+                mainMapRender.getInfo().timelineZoom.set(zoom);
 
                 long topTime = mainMapRender.getInfo().getPositionToTime(mainMapRender.getHeight());
                 long bottomTime = mainMapRender.getInfo().getPositionToTime(0);
 
                 double topPos = previewShadowMapRender.getInfo().getTimeToPosition(topTime);
                 double bottomPos = previewShadowMapRender.getInfo().getTimeToPosition(bottomTime);
-                previewPane.setPrefHeight(topPos - bottomPos);
+                double height = topPos - bottomPos;
+                if (height > previewBar.getHeight())
+                    height = previewBar.getHeight();
+                previewPane.setPrefHeight(height);
                 event.consume();
             });
 
             //滚轮监听
             previewBar.setOnScroll(event -> {
                 double deltaY = event.getDeltaY();
-                previewMapRender.getInfo().timelineZoom.set(previewMapRender.getInfo().timelineZoom.get() * (deltaY < 0 ? 0.9f : 1.1f));
+
+
+                float zoom = previewMapRender.getInfo().timelineZoom.get() * (deltaY < 0 ? 0.9f : 1.1f);
+                zoom = Math.max(zoom, 0.1f);
+                zoom = Math.min(zoom, 0.3f);
+
+                previewMapRender.getInfo().timelineZoom.set(zoom);
 
                 long topTime = mainMapRender.getInfo().getPositionToTime(mainMapRender.getHeight());
                 long bottomTime = mainMapRender.getInfo().getPositionToTime(0);
@@ -431,17 +443,13 @@ public class MapEditor extends BaseEditor {
 
             });
 
+
             this.setOnKeyPressed(event -> {
                 if (event.getCode().equals(KeyCode.SPACE)) {
                     if (audioChannel != null) {
                         if (audioChannel.getPlayState() == AudioChannel.PlayState.PLAY) {
                             audioChannel.pause();
                         } else {
-                            try {
-                                audioChannel.setTime(mainMapRender.getInfo().timelinePosition.get());
-                            } catch (IOException e) {
-                                throw new RuntimeException(e);
-                            }
                             audioChannel.play();
                         }
                     }
@@ -499,7 +507,7 @@ public class MapEditor extends BaseEditor {
             });
 
 
-            previewCanvas.setOnScroll(mapCanvas.getOnScroll());
+            //previewCanvas.setOnScroll(mapCanvas.getOnScroll());
 
 
         }
@@ -659,14 +667,6 @@ public class MapEditor extends BaseEditor {
                 Button button = sideToolBar.addButton("state", "svg.icons.media.play-line", "播放");
                 button.setOnAction(event -> {
                     if (audioChannel != null) {
-                        //synchroniseTime = System.currentTimeMillis();
-                        //synchronisedTime = mainMapRender.getInfo().timelinePosition.get();
-
-                        try {
-                            audioChannel.setTime(mainMapRender.getInfo().timelinePosition.get());
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
-                        }
                         audioChannel.play();
                     }
                 });
@@ -691,7 +691,8 @@ public class MapEditor extends BaseEditor {
             //sideToolBar.addToggleButton("tool", "svg.icons.design.pencil-ruler-2-line", "吸附");
 
             ChangeListener<Number> changeListener = (observable, oldValue, newValue) -> {
-                mainMapRender.getInfo().timelinePosition.set(RenderBeat.alignBeatsTime(renderBeats, newValue.longValue()));
+                if (audioChannel == null || audioChannel.getPlayState().equals(AudioChannel.PlayState.PAUSE))
+                    mainMapRender.getInfo().timelinePosition.set(RenderBeat.alignBeatsTime(renderBeats, newValue.longValue()));
             };
 
             { //判定线对齐
@@ -1005,7 +1006,7 @@ public class MapEditor extends BaseEditor {
                     zxMap.timingPoints.add(timing);
                     zxMap.unLocalizedMapInfo.addInfo(ZXMInfo.TimingCount, String.valueOf(zxMap.timingPoints.size()));
                     RenderBeat.upDateBeats(zxMap, renderBeats);
-                    if (zxMap.timingPoints.size()==2){
+                    if (zxMap.timingPoints.size() == 2) {
                         globalSubbeatButton.getOnScroll().handle(null);
                     }
                 });
@@ -1170,40 +1171,44 @@ public class MapEditor extends BaseEditor {
         /*if (audioChannel.getPlayState().equals(AudioChannel.PlayState.PLAY))
             mainMapRender.getInfo().timelinePosition.set(audioChannel.getTime());*/
 
-        new Thread(() -> {
-            if (zxMap.notes.size() == 0)
-                return;
-            ArrayList<BaseNote> findsNotes = zxMap.getScaleNotes(mainMapRender.getInfo().timelinePosition.get() - 200, 400, true);
-            for (BaseNote note : findsNotes) {
-                if (Math.abs(note.timeStamp - mainMapRender.getInfo().timelinePosition.get()) < 20)
-                    if (!hitsNotes.contains(note)) {
-                        hitsNotes.add(note);
-                        if (System.currentTimeMillis() - hitTime > 10) {
-                            int count = 0;
-                            for (BaseNote sameNote : findsNotes) {
-                                if (Math.abs(note.timeStamp - sameNote.timeStamp) < 5)
-                                    count++;
-                            }
-
-
-                            AudioChannel audioChannel1;
-                            try {
-                                audioChannel1 = ZXNApp.audioMixer.createChannel(hitAudioID);
-                            } catch (UnsupportedAudioFileException | IOException e) {
-                                throw new RuntimeException(e);
-                            }
-                            audioChannel1.setEndBehavior(AudioChannel.EndBehavior.CLOSE);
-                            audioChannel1.setVolume(hitKeyVolume + count * 0.12f * hitKeyVolume);
-                            audioChannel1.play();
-                            hitTime = System.currentTimeMillis();
-                        }
-                    }
-            }
-        }).start();
 
         if (audioChannel != null) {
             if (!audioChannel.getPlayState().equals(AudioChannel.PlayState.PAUSE)) {
                 mainMapRender.getInfo().timelinePosition.set(audioChannel.getTime());
+
+
+                new Thread(() -> {
+                    if (zxMap.notes.size() == 0)
+                        return;
+                    ArrayList<BaseNote> findsNotes = zxMap.getScaleNotes(mainMapRender.getInfo().timelinePosition.get() - 200, 400, true);
+                    for (BaseNote note : findsNotes) {
+                        if (Math.abs(note.timeStamp - mainMapRender.getInfo().timelinePosition.get()) < 20)
+                            if (!hitsNotes.contains(note)) {
+                                hitsNotes.add(note);
+                                if (System.currentTimeMillis() - hitTime > 10) {
+                                    int count = 0;
+                                    for (BaseNote sameNote : findsNotes) {
+                                        if (Math.abs(note.timeStamp - sameNote.timeStamp) < 5)
+                                            count++;
+                                    }
+
+
+                                    AudioChannel audioChannel1;
+                                    try {
+                                        audioChannel1 = ZXNApp.audioMixer.createChannel(hitAudioID);
+                                    } catch (UnsupportedAudioFileException | IOException e) {
+                                        throw new RuntimeException(e);
+                                    }
+                                    audioChannel1.setEndBehavior(AudioChannel.EndBehavior.CLOSE);
+                                    audioChannel1.setVolume(hitKeyVolume + count * 0.12f * hitKeyVolume);
+                                    audioChannel1.play();
+                                    hitTime = System.currentTimeMillis();
+                                }
+                            }
+                    }
+                }).start();
+
+
                 //System.out.println(audioChannel.getTime());
             }
         }

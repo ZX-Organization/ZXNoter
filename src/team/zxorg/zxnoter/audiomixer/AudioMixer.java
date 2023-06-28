@@ -65,7 +65,7 @@ public class AudioMixer {
                                     switch (audioChannel.endBehavior) {
                                         case CLOSE -> audioChannel.playState = AudioChannel.PlayState.CLOSE;
                                         case LOOP -> {
-                                            audioChannel.setProgress(0);
+                                            audioChannel.setTime(0);
                                             audioChannel.playState = AudioChannel.PlayState.PLAY;
                                         }
                                         case PAUSE -> audioChannel.playState = AudioChannel.PlayState.PAUSE;
