@@ -782,7 +782,7 @@ public class MapEditor extends BaseEditor {
                         throw new RuntimeException("音频转换失败");
                     int id = ZXNApp.audioMixer.addAudio(workAudioPath);
                     audioChannel = ZXNApp.audioMixer.createChannel(id);
-                    audioChannel.setVolume(0.13f);
+                    audioChannel.setVolume(0.15f);
                     //audioChannel.setPlaySpeed(false, 0.8f);
 
                     mainMapRender.getInfo().timelinePosition.addListener((observable, oldValue, newValue) -> {
@@ -863,7 +863,7 @@ public class MapEditor extends BaseEditor {
                                 throw new RuntimeException(e);
                             }
                             audioChannel1.setEndBehavior(AudioChannel.EndBehavior.CLOSE);
-                            audioChannel1.setVolume(0.23f * count);
+                            audioChannel1.setVolume(0.18f + (count * 0.08f));
                             audioChannel1.play();
                             hitTime = System.currentTimeMillis();
                         }
