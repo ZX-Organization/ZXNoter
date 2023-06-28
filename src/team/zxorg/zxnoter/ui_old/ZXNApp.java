@@ -12,6 +12,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import team.zxorg.zxnoter.audiomixer.AudioMixer;
 import team.zxorg.zxnoter.map.mapInfo.OsuInfo;
 import team.zxorg.zxnoter.map.mapInfo.ZXMInfo;
@@ -403,7 +404,9 @@ public class ZXNApp extends Application {
         stage.setWidth(800);
         stage.setHeight(600);
         stage.show();
-
+        stage.setOnCloseRequest(event -> {
+            System.exit(0);
+        });
 
     }
 
