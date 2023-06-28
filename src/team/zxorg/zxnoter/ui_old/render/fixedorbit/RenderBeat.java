@@ -123,16 +123,19 @@ public class RenderBeat {
      * @return 时间戳
      */
     public static long getLastTime(ZXMap zxMap) {
-        BaseNote lastNote = zxMap.notes.get(zxMap.notes.size() - 1);
-        long time;
-        if (lastNote instanceof ComplexNote complexNote) {
-            time = complexNote.notes.get(complexNote.notes.size() - 1).timeStamp;
-        } else if (lastNote instanceof LongNote longNote) {
-            time = longNote.timeStamp + longNote.sustainedTime;
-        } else {
-            time = zxMap.notes.get(zxMap.notes.size() - 1).timeStamp;
+        if (zxMap.notes.size() - 1 >= 0) {
+            BaseNote lastNote = zxMap.notes.get(zxMap.notes.size() - 1);
+            long time;
+            if (lastNote instanceof ComplexNote complexNote) {
+                time = complexNote.notes.get(complexNote.notes.size() - 1).timeStamp;
+            } else if (lastNote instanceof LongNote longNote) {
+                time = longNote.timeStamp + longNote.sustainedTime;
+            } else {
+                time = zxMap.notes.get(zxMap.notes.size() - 1).timeStamp;
+            }
+            return time;
         }
-        return time;
+        return 0;
     }
 
     public static RenderBeat findTime(ArrayList<RenderBeat> renderBeats, long time) {

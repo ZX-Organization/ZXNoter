@@ -2,6 +2,8 @@ package team.zxorg.zxnoter.ui_old;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -70,7 +72,7 @@ public class ZXNApp extends Application {
 
     static {
         try {
-            audioMixer = new AudioMixer(48000,1024);
+            audioMixer = new AudioMixer(48000, 1024);
         } catch (LineUnavailableException e) {
             throw new RuntimeException(e);
         }
@@ -102,10 +104,64 @@ public class ZXNApp extends Application {
         HBox.setMargin(zxnIcon, new Insets(2, 4, 2, 4));
 
         //菜单栏
-        Menu menu = new Menu("az");
-        Menu menuItem = new Menu("wdnmd2", ZXResources.getSvgPane("svg.zxnoter.file-notemap-line", 16, Color.AQUA));
-        menuItem.getItems().add(new MenuItem("@#$%^"));
-        menu.getItems().addAll(new MenuItem("wdnmd"), menuItem);
+        Menu menu = new Menu("文件");
+        MenuItem openMenuItem = new MenuItem("打开谱面", ZXResources.getSvgPane("svg.icons.zxnoter.file-notemap-line", 16, Color.DARKGREEN));
+        openMenuItem.setOnAction(event -> {
+            {//添加编辑器
+
+                MapEditor editor = new MapEditor(Paths.get("docs/reference/xiang/Happy Halloween_4k_hd.imd"));
+
+                Tab tab1 = new Tab(editor.zxMap.unLocalizedMapInfo.getInfo(ZXMInfo.Title));
+                tab1.setGraphic(ZXResources.getSvgPane("svg.icons.zxnoter.file-osu-line", 18, Color.DARKGREEN));
+
+                tab1.setContent(editor);
+                workspaceTabPane.getTabs().add(tab1);
+
+                rootPane.setOnKeyPressed(editor.getOnKeyPressed());
+
+
+                //画布更新线程常驻
+                AnimationTimer animationTimer = new AnimationTimer() {
+                    @Override
+                    public void handle(long l) {
+                        editor.render();
+                    }
+                };
+                animationTimer.start();
+
+
+            }
+        });
+
+        MenuItem creatMenuItem = new MenuItem("新建谱面", ZXResources.getSvgPane("svg.icons.zxnoter.file-zxm-line", 16, Color.WHEAT));
+        creatMenuItem.setOnAction(event -> {
+            {//添加编辑器
+
+                MapEditor editor = new MapEditor(null);
+                Tab tab1 = new Tab(editor.zxMap.unLocalizedMapInfo.getInfo(ZXMInfo.Title));
+                tab1.setGraphic(ZXResources.getSvgPane("svg.icons.zxnoter.file-osu-line", 18, Color.DARKGREEN));
+
+                tab1.setContent(editor);
+                workspaceTabPane.getTabs().add(tab1);
+
+                rootPane.setOnKeyPressed(editor.getOnKeyPressed());
+
+
+                //画布更新线程常驻
+                AnimationTimer animationTimer = new AnimationTimer() {
+                    @Override
+                    public void handle(long l) {
+                        editor.render();
+                    }
+                };
+                animationTimer.start();
+
+
+            }
+        });
+
+
+        menu.getItems().addAll(openMenuItem, creatMenuItem);
         Menu menu2 = new Menu("666");
         menuBar.getMenus().addAll(menu, menu2);
         menuBar.setPadding(new Insets(0));
@@ -177,30 +233,7 @@ public class ZXNApp extends Application {
         }*/
 
 
-        {//添加编辑器
 
-            MapEditor editor = new MapEditor(Paths.get("docs/reference/xiang/Happy Halloween_4k_hd.imd"));
-
-            Tab tab1 = new Tab(editor.zxMap.unLocalizedMapInfo.getInfo(ZXMInfo.Title));
-            tab1.setGraphic(ZXResources.getSvgPane("svg.icons.zxnoter.file-osu-line", 18, Color.DARKGREEN));
-
-            tab1.setContent(editor);
-            workspaceTabPane.getTabs().add(tab1);
-
-            rootPane.setOnKeyPressed(editor.getOnKeyPressed());
-
-
-            //画布更新线程常驻
-            AnimationTimer animationTimer = new AnimationTimer() {
-                @Override
-                public void handle(long l) {
-                    editor.render();
-                }
-            };
-            animationTimer.start();
-
-
-        }
 
 
 

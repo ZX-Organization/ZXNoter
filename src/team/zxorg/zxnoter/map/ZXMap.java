@@ -52,6 +52,7 @@ public class ZXMap {
     public ArrayList<Timing> findClosestTimings(long time) {
         ArrayList<Timing> findResults = new ArrayList<>();
         int res = findClosestTimingIndex(time);
+        if (res==-1)return findResults;
         Timing resTiming = timingPoints.get(res);
         int tempIndex = res;
         Timing tempTiming;
@@ -206,6 +207,7 @@ public class ZXMap {
      */
     private int findClosestTimingIndex(long time) {
         if (0 > time) return 0;
+        if (timingPoints.size()==0)return -1;
         if (timingPoints.get(timingPoints.size() - 1).timestamp < time) return timingPoints.size() - 1;
         int searchRes = binarySearchTiming(time, 0, timingPoints.size() - 1);
         //判断最近的

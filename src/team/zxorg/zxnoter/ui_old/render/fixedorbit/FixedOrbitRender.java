@@ -46,6 +46,8 @@ public abstract class FixedOrbitRender extends Render {
      * @return 时间戳
      */
     public long getLastTime() {
+        if (zxMap.notes.size() < 1)
+            return 0;
         BaseNote lastNote = zxMap.notes.get(zxMap.notes.size() - 1);
         long time;
         if (lastNote instanceof ComplexNote complexNote) {
@@ -58,8 +60,6 @@ public abstract class FixedOrbitRender extends Render {
         getInfo().noteLastTime.set(time);
         return time;
     }
-
-
 
 
 }
