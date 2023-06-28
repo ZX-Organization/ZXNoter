@@ -82,6 +82,7 @@ public class ZXMap {
     public ArrayList<BaseNote> findClosestNotes(long time) {
         ArrayList<BaseNote> findResults = new ArrayList<>();
         int res = findClosestNoteIndex(time, notes);
+        if (res==-1)return findResults;
         BaseNote resNote = notes.get(res);
         int tempIndex = res;
         BaseNote tempNote;
@@ -115,6 +116,7 @@ public class ZXMap {
         //结果预定义
         ArrayList<BaseNote> desNotes = new ArrayList<>();
 
+        if (timeNotes.size()==0)return desNotes;
         //结果首按键
         BaseNote firstNote = timeNotes.get(0);
         //遍历起始下标
@@ -173,6 +175,7 @@ public class ZXMap {
      */
     private int findClosestNoteIndex(long time, ArrayList<BaseNote> notes) {
         if (0 > time) return 0;
+        if (notes.size()==0)return -1;
         if (notes.get(notes.size() - 1).timeStamp < time) return notes.size() - 1;
         int searchRes = binarySearchNote(time, 0, notes.size() - 1);
         //判断最近的
@@ -211,17 +214,22 @@ public class ZXMap {
         if (timingPoints.get(timingPoints.size() - 1).timestamp < time) return timingPoints.size() - 1;
         int searchRes = binarySearchTiming(time, 0, timingPoints.size() - 1);
         //判断最近的
-        if (searchRes == 0) {
+        if (searchRes == 0) {//找到头部
             int next = searchRes + 1;
+            if (next >= timingPoints.size())//找到的既是头也是尾
+                return searchRes;
             if (Math.abs(timingPoints.get(next).timestamp - time) < Math.abs(timingPoints.get(searchRes).timestamp - time))
                 return next;
             else return searchRes;
-        } else if (searchRes == timingPoints.size() - 1) {
+        } else if (searchRes == timingPoints.size() - 1) {//找到最后
             int previous = searchRes - 1;
+            if (previous==0)//找到的既是尾也是头
+                return searchRes;
             if (Math.abs(timingPoints.get(previous).timestamp - time) < Math.abs(timingPoints.get(searchRes).timestamp - time))
                 return previous;
             else return searchRes;
         } else {
+            //找到中间部分
             int res = searchRes;
             int previous = searchRes - 1;
             int next = searchRes + 1;
