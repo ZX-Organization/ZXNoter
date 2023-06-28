@@ -702,7 +702,7 @@ public class MapEditor extends BaseEditor {
             {//播放变速
                 Button button = topToolBar.addButton("state", "svg.icons.media.slow-down-line", "播放变速");
                 button.setOnScroll(event -> {
-                    if (audioChannel.getPlayState() == AudioChannel.PlayState.PAUSE) {
+                    if (audioChannel != null) {
                         double speed = audioChannel.getPlaySpeed();
                         if (event.getDeltaY() > 0)
                             speed += 0.2;
@@ -782,7 +782,7 @@ public class MapEditor extends BaseEditor {
                         throw new RuntimeException("音频转换失败");
                     int id = ZXNApp.audioMixer.addAudio(workAudioPath);
                     audioChannel = ZXNApp.audioMixer.createChannel(id);
-                    audioChannel.setVolume(0.15f);
+                    audioChannel.setVolume(0.13f);
                     //audioChannel.setPlaySpeed(false, 0.8f);
 
                     mainMapRender.getInfo().timelinePosition.addListener((observable, oldValue, newValue) -> {
@@ -863,7 +863,7 @@ public class MapEditor extends BaseEditor {
                                 throw new RuntimeException(e);
                             }
                             audioChannel1.setEndBehavior(AudioChannel.EndBehavior.CLOSE);
-                            audioChannel1.setVolume(0.18f + (count * 0.08f));
+                            audioChannel1.setVolume(0.15f + count * 0.08f);
                             audioChannel1.play();
                             hitTime = System.currentTimeMillis();
                         }
