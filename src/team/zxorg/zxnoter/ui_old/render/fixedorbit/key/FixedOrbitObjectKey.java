@@ -11,7 +11,9 @@ public enum FixedOrbitObjectKey {
     SUB_BEAT_LINE("sub-beat-line"),
     TOP_LINE("top-line"),
     TIMING_BASE("timing-base"),
+    TIMING_BASE_DELETE("timing-base-delete"),
     TIMING("timing"),
+    TIMING_DELETE("timing-delete"),
     RED_LINE("red-line"),
     LOGO("logo"),
     IKUN("ikun");

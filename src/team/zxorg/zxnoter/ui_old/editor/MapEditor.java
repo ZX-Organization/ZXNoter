@@ -707,12 +707,27 @@ public class MapEditor extends BaseEditor {
 
         CanvasPane infoCanvasPane = new CanvasPane();
         infoCanvasPane.getStyleClass().add("info-canvas-pane");
+        infoCanvasPane.setMinWidth(200);
         infoCanvasPane.setPrefWidth(260);
         FixedOrbitRenderInfo fixedOrbitRenderInfo = new FixedOrbitRenderInfo(infoCanvasPane.canvas);
         fixedOrbitRenderInfo.timelinePosition.bind(mainMapRender.getInfo().timelinePosition);
         fixedOrbitRenderInfo.judgedLinePositionPercentage.bind(mainMapRender.getInfo().judgedLinePositionPercentage);
         fixedOrbitRenderInfo.timelineZoom.bind(mainMapRender.getInfo().timelineZoom);
-        infoRender = new FixedOrbitInfoRender(fixedOrbitRenderInfo, zxMap, infoCanvasPane.canvas, "default", renderBeats);
+        infoRender = new FixedOrbitInfoRender(fixedOrbitRenderInfo, zxMap, infoCanvasPane.canvas, "default", renderBeats, zxMap);
+
+
+        infoCanvasPane.setOnMouseMoved(event -> {
+            infoRender.point.setXY(event.getX(), event.getY());
+        });
+        infoCanvasPane.setOnMousePressed(event -> {
+            if (event.getButton().equals(MouseButton.SECONDARY)) {
+                if (infoRender.selectTiming != null) {
+                    zxMap.timingPoints.remove(infoRender.selectTiming);
+                    zxMap.unLocalizedMapInfo.addInfo(ZXMInfo.TimingCount, String.valueOf(zxMap.timingPoints.size()));
+                    RenderBeat.upDateBeats(zxMap, renderBeats);
+                }
+            }
+        });
 
 
         //主体
@@ -730,7 +745,8 @@ public class MapEditor extends BaseEditor {
                 button.setOnAction(event -> {
                     FileChooser fileChooser = new FileChooser();
                     fileChooser.setTitle("导出谱面到");
-                    fileChooser.setInitialDirectory(mapResourcePath.toFile());
+                    if (mapResourcePath != null)
+                        fileChooser.setInitialDirectory(mapResourcePath.toFile());
                     fileChooser.setInitialFileName(zxMap.unLocalizedMapInfo.getInfo(OsuInfo.Title.unLocalize()));
 
                     // 添加文件过滤器
@@ -965,6 +981,7 @@ public class MapEditor extends BaseEditor {
                         if (isBase.isSelected())
                             timing.absBpm = bpm;
                     }
+
 
                     zxMap.timingPoints.add(timing);
                     zxMap.unLocalizedMapInfo.addInfo(ZXMInfo.TimingCount, String.valueOf(zxMap.timingPoints.size()));

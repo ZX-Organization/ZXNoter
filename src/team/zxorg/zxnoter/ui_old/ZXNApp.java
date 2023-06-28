@@ -109,7 +109,7 @@ public class ZXNApp extends Application {
         openMenuItem.setOnAction(event -> {
             {//添加编辑器
                 Tab tab1 = new Tab();
-                MapEditor editor = new MapEditor(Paths.get("docs/reference/xiang/Happy Halloween_4k_hd.imd"), tab1);
+                MapEditor editor = new MapEditor(Paths.get("docs/reference/LeaF - NANO DEATH!!!!!/LeaF - NANO DEATH!!!!! (nowsmart) [DEATH].osu"), tab1);
 
 
                 tab1.setGraphic(ZXResources.getSvgPane("svg.icons.zxnoter.file-osu-line", 18, Color.DARKGREEN));
