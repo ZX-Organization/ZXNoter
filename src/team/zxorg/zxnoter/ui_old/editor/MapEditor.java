@@ -37,6 +37,7 @@ import team.zxorg.zxnoter.ui_old.TimeUtils;
 import team.zxorg.zxnoter.ui_old.ZXNApp;
 import team.zxorg.zxnoter.ui_old.component.CanvasPane;
 import team.zxorg.zxnoter.ui_old.component.HToolGroupBar;
+import team.zxorg.zxnoter.ui_old.component.InfoPane;
 import team.zxorg.zxnoter.ui_old.component.VToolGroupBar;
 import team.zxorg.zxnoter.ui_old.render.fixedorbit.*;
 
@@ -47,8 +48,13 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.regex.Pattern;
 
 public class MapEditor extends BaseEditor {
+
+    Tab tab;
+
     /**
      * 需要对应的zxmap
      */
@@ -115,13 +121,12 @@ public class MapEditor extends BaseEditor {
     AudioChannel audioChannel;
 
 
-    public MapEditor(Path mapPath) {
+    public MapEditor(Path mapPath, Tab tab) {
+        this.tab = tab;
 
 
         if (mapPath == null) {
             this.zxMap = new ZXMap();
-
-
 
 
         } else {
@@ -135,6 +140,9 @@ public class MapEditor extends BaseEditor {
                 }
             }
         }
+
+
+        tab.setText(zxMap.unLocalizedMapInfo.getInfo(ZXMInfo.TitleUnicode));
 
         if (mapPath != null)
             this.mapResourcePath = mapPath.getParent();
@@ -537,20 +545,26 @@ public class MapEditor extends BaseEditor {
         HBox.setHgrow(tabPane, Priority.SOMETIMES);
 
         {
-            Tab tab = new Tab("常用");
-            tabPane.getTabs().addAll(tab);
+            Tab tab1 = new Tab("常用");
+            InfoPane infoPane=new InfoPane(zxMap.unLocalizedMapInfo,new ZXMInfo[]{ZXMInfo.KeyCount});
+
+
+            tab1.setContent(infoPane);
+
+            tabPane.getTabs().addAll(tab1);
+
         }
         {
-            Tab tab = new Tab("OSU");
-            tabPane.getTabs().addAll(tab);
+            Tab tab1 = new Tab("OSU");
+            tabPane.getTabs().addAll(tab1);
         }
         {
-            Tab tab = new Tab("IMD");
-            tabPane.getTabs().addAll(tab);
+            Tab tab1 = new Tab("IMD");
+            tabPane.getTabs().addAll(tab1);
         }
         {
-            Tab tab = new Tab("全部");
-            tabPane.getTabs().addAll(tab);
+            Tab tab1 = new Tab("全部");
+            tabPane.getTabs().addAll(tab1);
         }
 
         /*for (int i = 0; i < 4; i++) {
@@ -682,9 +696,9 @@ public class MapEditor extends BaseEditor {
                     if (file != null) {
                         try {
                             if (file.getName().endsWith(".osu"))
-                                new OsuWriter().writeOut(zxMap,  file.toPath());
+                                new OsuWriter().writeOut(zxMap, file.toPath());
                             if (file.getName().endsWith(".imd"))
-                                new ImdWriter().writeOut(zxMap,  file.toPath());
+                                new ImdWriter().writeOut(zxMap, file.toPath());
                         } catch (NoSuchFieldException | IOException e) {
                             e.printStackTrace();
                             throw new RuntimeException(e);
@@ -706,7 +720,24 @@ public class MapEditor extends BaseEditor {
 
                     File audioFile = fileChooser.showOpenDialog(this.getScene().getWindow());
                     if (audioFile != null) {
-                        zxMap.unLocalizedMapInfo.addInfo(ZXMInfo.AudioPath, audioFile.getAbsolutePath());
+                        //zxMap.unLocalizedMapInfo.addInfo(ZXMInfo.Title,audioFile.getAbsolutePath());
+
+                        HashMap<String, String> metadata = FFmpeg.audioToMetadata(audioFile.toPath());
+
+                        String title = metadata.get(FFmpeg.AudioMetadataKey.TITLE.getKey());
+                        zxMap.unLocalizedMapInfo.addInfo(ZXMInfo.TitleUnicode, title);
+                        if (Pattern.matches("\\A\\p{ASCII}*\\z", title))
+                            zxMap.unLocalizedMapInfo.addInfo(ZXMInfo.Title, title);
+
+                        String artist = metadata.get(FFmpeg.AudioMetadataKey.ARTIST.getKey());
+                        zxMap.unLocalizedMapInfo.addInfo(ZXMInfo.ArtistUnicode, artist);
+                        if (Pattern.matches("\\A\\p{ASCII}*\\z", artist))
+                            zxMap.unLocalizedMapInfo.addInfo(ZXMInfo.Artist, artist);
+
+                        tab.setText(zxMap.unLocalizedMapInfo.getInfo(ZXMInfo.TitleUnicode));
+
+                        mapResourcePath = audioFile.toPath().getParent();
+                        zxMap.unLocalizedMapInfo.addInfo(ZXMInfo.AudioPath, audioFile.getName());
                         updateMusic();
                     }
                 });
@@ -1016,7 +1047,7 @@ public class MapEditor extends BaseEditor {
             mainMapRender.getInfo().timelinePosition.set(audioChannel.getTime());*/
 
         new Thread(() -> {
-            if (zxMap.notes.size()==0)
+            if (zxMap.notes.size() == 0)
                 return;
             ArrayList<BaseNote> findsNotes = zxMap.getScaleNotes(mainMapRender.getInfo().timelinePosition.get() - 100, 100, true);
             for (BaseNote note : findsNotes) {

@@ -108,10 +108,10 @@ public class ZXNApp extends Application {
         MenuItem openMenuItem = new MenuItem("打开谱面", ZXResources.getSvgPane("svg.icons.zxnoter.file-notemap-line", 16, Color.DARKGREEN));
         openMenuItem.setOnAction(event -> {
             {//添加编辑器
+                Tab tab1 = new Tab();
+                MapEditor editor = new MapEditor(Paths.get("docs/reference/xiang/Happy Halloween_4k_hd.imd"), tab1);
 
-                MapEditor editor = new MapEditor(Paths.get("docs/reference/xiang/Happy Halloween_4k_hd.imd"));
 
-                Tab tab1 = new Tab(editor.zxMap.unLocalizedMapInfo.getInfo(ZXMInfo.Title));
                 tab1.setGraphic(ZXResources.getSvgPane("svg.icons.zxnoter.file-osu-line", 18, Color.DARKGREEN));
 
                 tab1.setContent(editor);
@@ -136,9 +136,9 @@ public class ZXNApp extends Application {
         MenuItem creatMenuItem = new MenuItem("新建谱面", ZXResources.getSvgPane("svg.icons.zxnoter.file-zxm-line", 16, Color.WHEAT));
         creatMenuItem.setOnAction(event -> {
             {//添加编辑器
+                Tab tab1 = new Tab();
+                MapEditor editor = new MapEditor(null, tab1);
 
-                MapEditor editor = new MapEditor(null);
-                Tab tab1 = new Tab(editor.zxMap.unLocalizedMapInfo.getInfo(ZXMInfo.Title));
                 tab1.setGraphic(ZXResources.getSvgPane("svg.icons.zxnoter.file-osu-line", 18, Color.DARKGREEN));
 
                 tab1.setContent(editor);
