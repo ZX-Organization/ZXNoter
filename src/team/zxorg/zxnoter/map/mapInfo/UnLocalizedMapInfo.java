@@ -7,13 +7,17 @@ import java.util.HashMap;
  */
 public class UnLocalizedMapInfo {
     public HashMap<ZXMInfo, String> allInfo;
+    AddCallBack addInterface;
 
     public UnLocalizedMapInfo() {
         allInfo = new HashMap<>();
     }
 
     public void addInfo(ZXMInfo key, String value) {
+
         allInfo.put(key, value);
+        if (addInterface != null)
+            addInterface.callInfo(key,value);
     }
 
     public String getInfo(ZXMInfo key) {
@@ -35,10 +39,21 @@ public class UnLocalizedMapInfo {
         return info;
     }
 
+    /**
+     *  设置一个添加接口
+     * @param addInterface 添加接口
+     */
+    public void setAddInterface(AddCallBack addInterface) {
+        this.addInterface = addInterface;
+    }
+
     @Override
     public String toString() {
         return '\n' + "LocalizedMapInfo{" + allInfo +
                 '}';
+    }
+    public interface AddCallBack{
+        void callInfo(ZXMInfo info,String value);
     }
 
 }
