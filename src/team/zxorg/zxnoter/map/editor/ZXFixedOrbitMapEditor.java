@@ -15,7 +15,7 @@ public class ZXFixedOrbitMapEditor {
     /**
      * 实际zxMap
      */
-    ZXMap srcMap;
+    public ZXMap srcMap;
     /**
      * 虚影map
      */

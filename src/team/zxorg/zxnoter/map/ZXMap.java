@@ -467,7 +467,7 @@ public class ZXMap {
         notes.sort(BaseNote::compareTo);
     }
     public int getObjectCount() {
-        if (separateNotes == null) {
+        if (separateNotes == null || separateNotes.size()==0) {
             initSeparateNotes();
         }
         return separateNotes.size();

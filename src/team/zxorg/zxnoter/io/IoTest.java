@@ -3,6 +3,7 @@ package team.zxorg.zxnoter.io;
 import team.zxorg.zxnoter.io.reader.ImdReader;
 import team.zxorg.zxnoter.map.ZXMap;
 import team.zxorg.zxnoter.map.editor.ZXFixedOrbitMapEditor;
+import team.zxorg.zxnoter.map.mapInfo.ZXMInfo;
 import team.zxorg.zxnoter.note.fixedorbit.ComplexNote;
 import team.zxorg.zxnoter.note.fixedorbit.FixedOrbitNote;
 
@@ -33,15 +34,20 @@ public class IoTest {
 
         ZXFixedOrbitMapEditor editor = new ZXFixedOrbitMapEditor(map);
 
-        /*System.out.println("原map->"+map.notes);
+        System.out.println("原map->"+map.notes);
         editor.addNote(100,1);
+        System.out.println(editor.srcMap.unLocalizedMapInfo.getInfo(ZXMInfo.ObjectCount));
         editor.modifyDone();
-        System.out.println("操作后map->"+map.notes);
+        //System.out.println("操作后map->"+map.notes);
+        System.out.println(editor.srcMap.unLocalizedMapInfo.getInfo(ZXMInfo.ObjectCount));
         editor.withdraw();
-        System.out.println("撤回后map->"+map.notes);
+        //System.out.println("撤回后map->"+map.notes);
+        System.out.println(editor.srcMap.unLocalizedMapInfo.getInfo(ZXMInfo.ObjectCount));
         editor.redo();
-        System.out.println("重做后map->"+map.notes);*/
-        System.out.println(map.getScaleNotes(5548,100,true));
+        //System.out.println("重做后map->"+map.notes);
+
+        System.out.println(editor.srcMap.unLocalizedMapInfo.getInfo(ZXMInfo.ObjectCount));
+        //System.out.println(map.getScaleNotes(5548,100,true));
         /*System.out.println("原->"+ map.findClosestNotes(5818).get(0));
 
 
