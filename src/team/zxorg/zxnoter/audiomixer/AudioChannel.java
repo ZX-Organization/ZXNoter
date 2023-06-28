@@ -88,7 +88,8 @@ public class AudioChannel {
 
 
         numRead = inputStream.read(inBuffer);
-
+        lastTimeStamp = System.currentTimeMillis();
+        lastTime = getTime_();
 
         //System.out.println("numRead" + numRead);
         //System.out.println(inputStream.available());
@@ -147,7 +148,9 @@ public class AudioChannel {
      * @return 单位ms
      */
     private long getTime_() {
-        return (long) ((frameLength - (inputStream.available() / audioFormat.getFrameSize())) / ((audioFormat.getSampleRate() / 1000)));
+        double remainingFrames = frameLength - (double) inputStream.available() / audioFormat.getFrameSize();
+        double timeInSeconds = remainingFrames / (audioFormat.getSampleRate() / 1000);
+        return Math.round(timeInSeconds);
     }
 
 
@@ -157,7 +160,9 @@ public class AudioChannel {
      * @return 单位ms
      */
     public long getTime() {
-        return (long) (getTime_() * sonic.getRate() * sonic.getSpeed());
+        if (playState.equals(PlayState.PAUSE))
+            return getTime_();
+        return (long) (lastTime + ((System.currentTimeMillis() - lastTimeStamp) * sonic.getRate() * sonic.getSpeed()));
     }
 
 
@@ -175,10 +180,8 @@ public class AudioChannel {
     public void play() {
         sonic.flushStream();
         playState = PlayState.PLAY;
-        //lastTimeStamp = System.currentTimeMillis();
-        //lastTime=getTime_();
-       // lastTime = getTime_();//获取时间
-        //lastTimeStamp = System.currentTimeMillis();//获取时间戳
+        lastTimeStamp = System.currentTimeMillis();
+        lastTime = getTime_();
     }
 
     /**
