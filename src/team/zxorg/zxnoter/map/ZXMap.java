@@ -27,7 +27,14 @@ public class ZXMap {
     public ArrayList<Timing> timingPoints;
     public UnLocalizedMapInfo unLocalizedMapInfo;
 
+    /**
+     * 新建map
+     */
     public ZXMap() {
+        notes = new ArrayList<>();
+        separateNotes = new ArrayList<>();
+        timingPoints = new ArrayList<>();
+        unLocalizedMapInfo = UnLocalizedMapInfo.getDefaultInfo();
     }
 
     public ZXMap(ArrayList<BaseNote> notes, ArrayList<Timing> timingPoints, UnLocalizedMapInfo unLocalizedMapInfo) {

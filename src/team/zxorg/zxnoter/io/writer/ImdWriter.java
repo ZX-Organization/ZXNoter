@@ -20,17 +20,18 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Set;
 
-public class ImdWriter {
+public class ImdWriter implements Writer{
+    HashMap<ImdInfo,String> allInfos;
     /**
      * 写出zxMap到路径,不可编辑文件名(文件名保存一部分信息)
      * @param zxMap 要写出的zxMap
-     * @param checkedLocalizedInfos 经过检查的本地化imd信息hashmap,不可有null
      * @param path 要写出到的路径
      */
-    public static void writeOut(ZXMap zxMap,HashMap<ImdInfo,String> checkedLocalizedInfos, Path path) throws NoSuchFieldException, IOException {
+    public void writeOut(ZXMap zxMap, Path path) throws NoSuchFieldException, IOException {
+        allInfos = checkLocalizedInfos(zxMap);
         //检查本地化信息
-        if (checkedLocalizedInfos.size() == ImdInfo.values().length) {
-            Collection<String> values = checkedLocalizedInfos.values();
+        if (allInfos.size() == ImdInfo.values().length) {
+            Collection<String> values = allInfos.values();
             for (String value:values){
                 if (value == null) {
                     throw new NoSuchFieldException("丢失本地化信息!");
@@ -39,7 +40,7 @@ public class ImdWriter {
         }else {
             throw new NoSuchFieldException("丢失本地化字段!");
         }
-        double baseBpm = Double.parseDouble(checkedLocalizedInfos.get(ImdInfo.ImdBpm));
+        double baseBpm = Double.parseDouble(allInfos.get(ImdInfo.ImdBpm));
         //检查本地化信息通过
         //计算最终文件大小
         int absoluteNotesSize = 0;
@@ -57,7 +58,7 @@ public class ImdWriter {
 
         ByteBuffer bf = ByteBuffer.allocate(cap);
         bf.order(ByteOrder.LITTLE_ENDIAN);
-        bf.putInt(Integer.parseInt(checkedLocalizedInfos.get(ImdInfo.MapLength)));//谱面长度
+        bf.putInt(Integer.parseInt(allInfos.get(ImdInfo.MapLength)));//谱面长度
         bf.putInt(zxMap.timingPoints.size());//时间点数
 
         //时间点
@@ -67,7 +68,7 @@ public class ImdWriter {
         }
 
         bf.putShort((short) 771);// 03 03
-        bf.putInt(Integer.parseInt(checkedLocalizedInfos.get(ImdInfo.TabRows)));//表格行数
+        bf.putInt(Integer.parseInt(allInfos.get(ImdInfo.TabRows)));//表格行数
 
         //所有物件
         for (BaseNote note : zxMap.notes){
@@ -103,19 +104,7 @@ public class ImdWriter {
                 writeNoteDataWithoutType(bf,note);
             }
         }
-        FileOutputStream fos;
-        if (path.endsWith(".imd")){
-            //自拟文件名(丢失部分数据)
-            fos = new FileOutputStream(path.toAbsolutePath().toFile());
-        }else {
-            //自动生成文件名
-            String fileName = checkedLocalizedInfos.get(ImdInfo.ImdTitle)+
-                    "_"+checkedLocalizedInfos.get(ImdInfo.ImdKeyCount)+
-                    "k_"+checkedLocalizedInfos.get(ImdInfo.ImdVersion)+".imd";
-            if (fileName.contains("?"))
-                fileName=fileName.replaceAll("\\?","");
-            fos = new FileOutputStream(path.toAbsolutePath()+"/"+fileName);
-        }
+        FileOutputStream fos = new FileOutputStream(path.toAbsolutePath().toFile());
         fos.write(bf.array());
         fos.flush();
         fos.close();
@@ -204,5 +193,15 @@ public class ImdWriter {
             localizeMap.put(localizedInfo , tempValue);
         }
         return localizeMap;
+    }
+
+    @Override
+    public String getDefaultName() {
+        String fileName = allInfos.get(ImdInfo.ImdTitle)+
+                "_"+allInfos.get(ImdInfo.ImdKeyCount)+
+                "k_"+allInfos.get(ImdInfo.ImdVersion)+".imd";
+        if (fileName.contains("?"))
+            fileName=fileName.replaceAll("\\?","");
+        return fileName;
     }
 }

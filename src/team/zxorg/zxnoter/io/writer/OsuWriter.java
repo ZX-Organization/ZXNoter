@@ -17,10 +17,11 @@ import java.util.HashMap;
 import team.zxorg.zxnoter.note.timing.Timing;
 import team.zxorg.zxnoter.note.timing.ZXTiming;
 
-public class OsuWriter {
-    private static HashMap<OsuInfo, String> allInfos;
-    public static void writeOut(ZXMap zxMap, HashMap<OsuInfo, String> checkedLocalizedInfos, Path path) throws NoSuchFieldException, IOException {
-        allInfos = checkedLocalizedInfos;
+public class OsuWriter implements Writer{
+    private HashMap<OsuInfo, String> allInfos;
+    private BufferedWriter bW;
+    public void writeOut(ZXMap zxMap, Path path) throws NoSuchFieldException, IOException {
+        allInfos = checkLocalizedInfos(zxMap);
         //检查本地化信息
         if (allInfos.size() == OsuInfo.values().length) {
             Collection<String> values = allInfos.values();
@@ -33,15 +34,7 @@ public class OsuWriter {
             throw new NoSuchFieldException("丢失本地化字段!");
         }
         //本地化信息检查通过
-        BufferedWriter bW;
-        if (path.toString().endsWith("*.osu")) {
-            //自定文件名
-            bW = new BufferedWriter(new FileWriter(path.toAbsolutePath().toFile()));
-        } else {
-            //自动生成文件名
-            String fileName = allInfos.get(OsuInfo.Title) + " [" + allInfos.get(OsuInfo.Version) + "]" + ".osu";
-            bW = new BufferedWriter(new FileWriter(path.toAbsolutePath() + "/" + fileName));
-        }
+        bW = new BufferedWriter(new FileWriter(path.toAbsolutePath().toFile()));
         //切分属性数组
         OsuInfo[] allInfo = OsuInfo.values();
         //General
@@ -63,28 +56,28 @@ public class OsuWriter {
         bW.write("[General]");
         bW.newLine();
         for (OsuInfo info:generalInfos){
-            writeKeyValueInfo(info,bW);
+            writeKeyValueInfo(info);
         }
         //[Editor]
         bW.newLine();
         bW.write("[Editor]");
         bW.newLine();
         for (OsuInfo info:editorInfos){
-            writeKeyValueInfo(info,bW);
+            writeKeyValueInfo(info);
         }
         //[Metadata]
         bW.newLine();
         bW.write("[Metadata]");
         bW.newLine();
         for (OsuInfo info:metadataInfos){
-            writeKeyValueInfo(info,bW);
+            writeKeyValueInfo(info);
         }
         //[Difficulty]
         bW.newLine();
         bW.write("[Difficulty]");
         bW.newLine();
         for (OsuInfo info:difficultyInfos){
-            writeKeyValueInfo(info,bW);
+            writeKeyValueInfo(info);
         }
         //[Events]
         bW.newLine();
@@ -171,8 +164,8 @@ public class OsuWriter {
 
                 StringBuilder noteStrB = new StringBuilder();
                 StringBuilder soundStrB = new StringBuilder();
-                int keyCount = Integer.parseInt(checkedLocalizedInfos.get(OsuInfo.CircleSize));
-                noteStrB.append(512*fixedOrbitNote.orbit/keyCount + (int)(256/Double.parseDouble(checkedLocalizedInfos.get(OsuInfo.CircleSize)))).append(",").
+                int keyCount = Integer.parseInt(allInfos.get(OsuInfo.CircleSize));
+                noteStrB.append(512*fixedOrbitNote.orbit/keyCount + (int)(256/Double.parseDouble(allInfos.get(OsuInfo.CircleSize)))).append(",").
                                   append(192).append(",").
                                   append(fixedOrbitNote.timeStamp).append(",");
                 if (fixedOrbitNote instanceof LongNote longNote){
@@ -225,15 +218,17 @@ public class OsuWriter {
         bW.flush();
         bW.close();
     }
-
-    private static void writeKeyValueInfo(OsuInfo info,BufferedWriter bW) throws IOException {
+    public String getDefaultName(){
+        return allInfos.get(OsuInfo.Title) + " [" + allInfos.get(OsuInfo.Version) + "]" + ".osu";
+    }
+    private void writeKeyValueInfo(OsuInfo info) throws IOException {
         bW.write(info.name());
         bW.write(":");
         bW.write(allInfos.get(info));
         bW.newLine();
     }
 
-    public static HashMap<OsuInfo, String> checkLocalizedInfos(ZXMap zxMap) {
+    public HashMap<OsuInfo, String> checkLocalizedInfos(ZXMap zxMap) {
         //处理本地化信息
         UnLocalizedMapInfo unLocalizedMapInfo = zxMap.unLocalizedMapInfo;
         //列举写出需要的信息
@@ -280,4 +275,5 @@ public class OsuWriter {
         }
         return localizeMap;
     }
+
 }
