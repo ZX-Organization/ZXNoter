@@ -807,11 +807,15 @@ public class MapEditor extends BaseEditor {
                         HashMap<String, String> metadata = FFmpeg.audioToMetadata(audioFile.toPath());
 
                         String title = metadata.get(FFmpeg.AudioMetadataKey.TITLE.getKey());
+                        if (title == null)
+                            title = "";
                         zxMap.unLocalizedMapInfo.addInfo(ZXMInfo.TitleUnicode, title);
                         if (Pattern.matches("\\A\\p{ASCII}*\\z", title))
                             zxMap.unLocalizedMapInfo.addInfo(ZXMInfo.Title, title);
 
                         String artist = metadata.get(FFmpeg.AudioMetadataKey.ARTIST.getKey());
+                        if (artist == null)
+                            artist = "";
                         zxMap.unLocalizedMapInfo.addInfo(ZXMInfo.ArtistUnicode, artist);
                         if (Pattern.matches("\\A\\p{ASCII}*\\z", artist))
                             zxMap.unLocalizedMapInfo.addInfo(ZXMInfo.Artist, artist);
