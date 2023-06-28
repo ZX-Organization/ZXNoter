@@ -6,7 +6,7 @@ package team.zxorg.zxnoter.map.mapInfo;
 public enum ImdInfo{
 
     MapLength(ZXMInfo.MapLength, ""),
-    TimingCount(ZXMInfo.TimingCount, ""),
+    TimingCount(ZXMInfo.TimingCount, "0"),
     TabRows(ZXMInfo.ObjectCount, ""),
     ImdBpm(ZXMInfo.Bpm, ""),
     ImdTitle(ZXMInfo.Title, ""),

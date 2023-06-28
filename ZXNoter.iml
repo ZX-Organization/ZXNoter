@@ -7,7 +7,7 @@
       <excludeFolder url="file://$MODULE_DIR$/old" />
       <excludeFolder url="file://$MODULE_DIR$/test/audiochannel/audiomixer_t" />
       <excludeFolder url="file://$MODULE_DIR$/test" />
-      <excludeFolder url="file://$MODULE_DIR$/src/team/zxorg/zxnoter/audiochannel" />
+      <excludeFolder url="file://$MODULE_DIR$/old/audiochannel" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

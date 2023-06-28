@@ -38,6 +38,7 @@ public class UnLocalizedMapInfo {
         for (ImdInfo imdInfo:ImdInfo.values()){
             info.addInfo(imdInfo.unLocalize(), imdInfo.getDefaultValue());
         }
+        info.addInfo(ZXMInfo.ObjectCount,"0");
         return info;
     }
 

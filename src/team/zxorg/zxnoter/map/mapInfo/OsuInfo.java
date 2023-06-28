@@ -56,6 +56,7 @@ public enum OsuInfo{
     BackgroundColourTransformations(ZXMInfo.BackgroundColourTransformations, "Background Colour Transformations", ""),
     Bpm(ZXMInfo.Bpm, "", ""),
     BgPath(ZXMInfo.BgPath, "", "")
+
     ;
     private final ZXMInfo unLocalizedInfo;
     private final String originName;
