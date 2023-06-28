@@ -40,7 +40,11 @@ public class RenderBeat {
         Timing nowBaseTiming;
         //遍历用
         ArrayList<Timing> timingPoints = new ArrayList<>(zxMap.timingPoints);
+        System.out.println(getLastTime(zxMap));
         timingPoints.add(new Timing(getLastTime(zxMap), 0, true, 0));
+
+
+
         //遍历所以Timing
         for (Timing timing : timingPoints) {
             //记录新基准
@@ -103,10 +107,6 @@ public class RenderBeat {
         }
 
 
-
-
-
-
     }
 
 
@@ -140,6 +140,11 @@ public class RenderBeat {
             }
             return time;
         }
+        if (zxMap.timingPoints.size() > 1) {
+            return zxMap.timingPoints.get(zxMap.timingPoints.size() - 1).timestamp;
+        }
+
+
         return 0;
     }
 

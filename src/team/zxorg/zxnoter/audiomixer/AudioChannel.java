@@ -30,7 +30,7 @@ public class AudioChannel {
 
         sonic = new Sonic((int) audioFormat.getSampleRate(), audioFormat.getChannels());
         sonic.setQuality(100);
-        channelBufSize = 64;
+        channelBufSize = 256;
         inBuffer = new byte[channelBufSize];//输入缓冲区
         frameLength = inputStream.available() / 4;//帧长度
 
@@ -86,7 +86,7 @@ public class AudioChannel {
         //从原始流读取数据
         int numRead;
 
-
+        //System.out.println(lastTime);
         numRead = inputStream.read(inBuffer);
         lastTimeStamp = System.currentTimeMillis();
         lastTime = getTime_();
@@ -148,7 +148,7 @@ public class AudioChannel {
      * @return 单位ms
      */
     private long getTime_() {
-        double remainingFrames = frameLength - (double) inputStream.available() / audioFormat.getFrameSize();
+        double remainingFrames = frameLength - (double) (inputStream.available()) / audioFormat.getFrameSize();
         double timeInSeconds = remainingFrames / (audioFormat.getSampleRate() / 1000);
         return Math.round(timeInSeconds);
     }

@@ -697,7 +697,7 @@ public class MapEditor extends BaseEditor {
 
             { //判定线对齐
                 ToggleButton toggleButton = sideToolBar.addToggleButton("tool", "svg.icons.zxnoter.judged-line-align", "判定线对齐");
-                {
+                if (zxMap.notes.size() != 0) {
                     mainMapRender.getInfo().timelinePosition.set(RenderBeat.alignBeatsTime(renderBeats, 0));
                     judgeLineAlign = true;
                     mainMapRender.getInfo().timelinePosition.addListener(changeListener);
@@ -1008,6 +1008,7 @@ public class MapEditor extends BaseEditor {
                     RenderBeat.upDateBeats(zxMap, renderBeats);
                     if (zxMap.timingPoints.size() == 2) {
                         globalSubbeatButton.getOnScroll().handle(null);
+                        mainMapRender.getInfo().noteLastTime.set(RenderBeat.getLastTime(zxMap));
                     }
                 });
 

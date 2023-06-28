@@ -70,10 +70,10 @@ public class Sonic {
             -12, -10, -9, -7, -6, -4, -3, -2, -2, -1, -1, 0, 0, 0, 0, 0, 0, 0
     };
 
-    private short inputBuffer[];
-    private short outputBuffer[];
-    private short pitchBuffer[];
-    private short downSampleBuffer[];
+    private short[] inputBuffer;
+    private short[] outputBuffer;
+    private short[] pitchBuffer;
+    private short[] downSampleBuffer;
     private double speed;
     private float volume;
     private float pitch;
@@ -83,9 +83,9 @@ public class Sonic {
     private boolean useChordPitch;
     private int quality;
     private int numChannels;
-    private int inputBufferSize;
+    public int inputBufferSize;
     private int pitchBufferSize;
-    private int outputBufferSize;
+    public int outputBufferSize;
     private int numInputSamples;
     private int numOutputSamples;
     private int numPitchSamples;

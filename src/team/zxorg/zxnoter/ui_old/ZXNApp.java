@@ -399,7 +399,7 @@ public class ZXNApp extends Application {
         mainScene.getStylesheets().add(ZXResources.getPath("css.theme.dark").toUri().toString());
 
         stage.setScene(mainScene);
-        stage.setMinWidth(800);
+        stage.setMinWidth(900);
         stage.setMinHeight(600);
         stage.setWidth(800);
         stage.setHeight(600);
