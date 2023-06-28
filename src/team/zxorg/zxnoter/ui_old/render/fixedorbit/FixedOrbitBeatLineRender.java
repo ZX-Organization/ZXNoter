@@ -38,9 +38,6 @@ public class FixedOrbitBeatLineRender extends FixedOrbitRender {
             renderRectangle.setWidth(HPos.LEFT, canvasRectangle.getWidth());
             renderRectangle.setY(VPos.CENTER, getInfo().getTimeToPosition(renderBeat.time));
             drawImage();
-            graphics.setFill(Color.WHEAT);
-            graphics.fillText(TimeUtils.formatTime(renderBeat.time) + " " + renderBeat.measure, 0, getInfo().getTimeToPosition(renderBeat.time));
-
         }
     }
 

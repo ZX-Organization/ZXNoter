@@ -26,13 +26,15 @@ public class InfoPane extends VBox {
         setAlignment(Pos.TOP_CENTER);
         setSpacing(2);
         unlocalizedInfo.addAddInterface((info, value) -> {
-            children.get(info).change(value);
+            InfoEntry infoEntry = children.get(info);
+            if (infoEntry != null)
+                infoEntry.change(value);
         });
 
         for (ZXMInfo info : infos) {
             InfoEntry infoEntry = new InfoEntry(info);
             children.put(info, infoEntry);
-            VBox.setMargin(infoEntry,new Insets(0,4,0,4));
+            VBox.setMargin(infoEntry, new Insets(0, 4, 0, 4));
             getChildren().add(infoEntry);
         }
 

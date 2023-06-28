@@ -75,6 +75,8 @@ public class MapEditor extends BaseEditor {
     FixedOrbitBackgroundRender backgroundRender;//主背景渲染器
     FixedOrbitTimingRender timingRender;//时间点渲染器
     FixedOrbitBeatLineRender beatLineRender;//节拍线渲染器
+
+    FixedOrbitInfoRender infoRender;//信息渲染器
     //谱面画板
     CanvasPane mapCanvas = new CanvasPane();
     //预览画板
@@ -127,8 +129,6 @@ public class MapEditor extends BaseEditor {
 
         if (mapPath == null) {
             this.zxMap = new ZXMap();
-
-
         } else {
             try {
                 this.zxMap = new OsuReader().read(mapPath);
@@ -141,21 +141,24 @@ public class MapEditor extends BaseEditor {
             }
         }
 
-
-        tab.setText(zxMap.unLocalizedMapInfo.getInfo(ZXMInfo.TitleUnicode));
+        {
+            String titleStr = zxMap.unLocalizedMapInfo.getInfo(ZXMInfo.TitleUnicode);
+            if ("".equals(titleStr) || titleStr == null)
+                titleStr = zxMap.unLocalizedMapInfo.getInfo(ZXMInfo.Title);
+            tab.setText(titleStr);
+        }
 
         if (mapPath != null)
             this.mapResourcePath = mapPath.getParent();
         this.setPrefSize(Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE);
 
         RenderBeat.upDateBeats(zxMap, renderBeats);
-
         zxFixedOrbitMapEditor = new ZXFixedOrbitMapEditor(zxMap);
 
 
         //谱面画板
         mapCanvas.setMinWidth(200);
-        mapCanvas.setMaxWidth(800);
+        mapCanvas.setMaxWidth(1000);
         HBox.setHgrow(mapCanvas, Priority.ALWAYS);
 
 
@@ -502,7 +505,7 @@ public class MapEditor extends BaseEditor {
         //预览居中
         previewMapRender.getInfo().judgedLinePositionPercentage.setValue(0.5f);
         //预览缩放值
-        previewMapRender.getInfo().timelineZoom.setValue(0.18f);
+        previewMapRender.getInfo().timelineZoom.setValue(0.1f);
 
 
         //预览虚影渲染器
@@ -519,7 +522,7 @@ public class MapEditor extends BaseEditor {
 
         //谱面编辑渲染器
         mainMapRender = new FixedOrbitMapRender(new FixedOrbitRenderInfo(mapCanvas.canvas), mapCanvas, zxMap, "normal", "default");
-        mainMapRender.getInfo().timelineZoom.setValue(1.2f);
+        mainMapRender.getInfo().timelineZoom.setValue(0.4f);
         mainMapRender.getInfo().judgedLinePositionPercentage.setValue(0.75f);
 
         //绑定预览和主部分渲染信息
@@ -548,16 +551,31 @@ public class MapEditor extends BaseEditor {
 
 
         zxMap.unLocalizedMapInfo.addAddInterface((info, value) -> {
-            if (info.equals(ZXMInfo.KeyCount)) {
+            if (info.equals(ZXMInfo.KeyCount)) {//同步键数
                 mainMapRender.getInfo().orbits.set(Integer.parseInt(value));
+            } else if (info.equals(ZXMInfo.Title) || info.equals(ZXMInfo.TitleUnicode)) {//同步标题
+                String titleStr = zxMap.unLocalizedMapInfo.getInfo(ZXMInfo.TitleUnicode);
+                if ("".equals(titleStr) || titleStr == null)
+                    titleStr = zxMap.unLocalizedMapInfo.getInfo(ZXMInfo.Title);
+                tab.setText(titleStr);
             }
+
         });
 
 
         {
             Tab tab1 = new Tab("常用");
 
-            InfoPane infoPane = new InfoPane(zxMap.unLocalizedMapInfo, new ZXMInfo[]{ZXMInfo.KeyCount});
+            InfoPane infoPane = new InfoPane(zxMap.unLocalizedMapInfo, new ZXMInfo[]{
+                    ZXMInfo.AudioPath,
+                    ZXMInfo.BgPath,
+                    ZXMInfo.Title,
+                    ZXMInfo.Artist,
+                    ZXMInfo.Version,
+                    ZXMInfo.MapCreator,
+                    ZXMInfo.ObjectCount,
+                    ZXMInfo.TimingCount,
+            });
             ScrollPane scrollPane = new ScrollPane(infoPane);
             scrollPane.setFitToWidth(true);
             tab1.setContent(scrollPane);
@@ -671,21 +689,34 @@ public class MapEditor extends BaseEditor {
                 mainMapRender.getInfo().timelinePosition.set(RenderBeat.alignBeatsTime(renderBeats, newValue.longValue()));
             };
 
-            //判定线对齐
-            ToggleButton toggleButton = sideToolBar.addToggleButton("tool", "svg.icons.zxnoter.judged-line-align", "判定线对齐");
-            toggleButton.setOnAction(event -> {
-                judgeLineAlign = toggleButton.isSelected();
-                if (judgeLineAlign) {
-                    mainMapRender.getInfo().timelinePosition.addListener(changeListener);
-                } else {
-                    mainMapRender.getInfo().timelinePosition.removeListener(changeListener);
-                }
-            });
+            { //判定线对齐
+                ToggleButton toggleButton = sideToolBar.addToggleButton("tool", "svg.icons.zxnoter.judged-line-align", "判定线对齐");
+                toggleButton.setOnAction(event -> {
+                    judgeLineAlign = toggleButton.isSelected();
+                    if (judgeLineAlign) {
+                        mainMapRender.getInfo().timelinePosition.addListener(changeListener);
+                    } else {
+                        mainMapRender.getInfo().timelinePosition.removeListener(changeListener);
+                    }
+                });
+            }
+
+
         }
 
 
+        CanvasPane infoCanvasPane = new CanvasPane();
+        infoCanvasPane.getStyleClass().add("info-canvas-pane");
+        infoCanvasPane.setPrefWidth(260);
+        FixedOrbitRenderInfo fixedOrbitRenderInfo = new FixedOrbitRenderInfo(infoCanvasPane.canvas);
+        fixedOrbitRenderInfo.timelinePosition.bind(mainMapRender.getInfo().timelinePosition);
+        fixedOrbitRenderInfo.judgedLinePositionPercentage.bind(mainMapRender.getInfo().judgedLinePositionPercentage);
+        fixedOrbitRenderInfo.timelineZoom.bind(mainMapRender.getInfo().timelineZoom);
+        infoRender = new FixedOrbitInfoRender(fixedOrbitRenderInfo, zxMap, infoCanvasPane.canvas, "default", renderBeats);
+
+
         //主体
-        HBox bodyPane = new HBox(sideToolBar, mapCanvas, previewBar, scrollBar, tabPane);
+        HBox bodyPane = new HBox(sideToolBar, infoCanvasPane, mapCanvas, previewBar, scrollBar, tabPane);
         VBox.setVgrow(bodyPane, Priority.ALWAYS);
 
         //顶部工具组栏
@@ -749,7 +780,6 @@ public class MapEditor extends BaseEditor {
                         if (Pattern.matches("\\A\\p{ASCII}*\\z", artist))
                             zxMap.unLocalizedMapInfo.addInfo(ZXMInfo.Artist, artist);
 
-                        tab.setText(zxMap.unLocalizedMapInfo.getInfo(ZXMInfo.TitleUnicode));
 
                         mapResourcePath = audioFile.toPath().getParent();
                         zxMap.unLocalizedMapInfo.addInfo(ZXMInfo.AudioPath, audioFile.getName());
@@ -767,6 +797,7 @@ public class MapEditor extends BaseEditor {
             button = topToolBar.addButton("time", "svg.icons.zxnoter.time-format-line", "格式化时间/总毫秒时间");
             button.setOnAction(event -> {
                 timelineIsFormat.set(!timelineIsFormat.get());
+                infoRender.timeIsFormat = timelineIsFormat.get();
                 if (timelineIsFormat.get()) {
                     button.setShape(ZXResources.getSvg("svg.icons.zxnoter.time-format-line"));
                 } else {
@@ -818,7 +849,7 @@ public class MapEditor extends BaseEditor {
                 Button button = topToolBar.addButton("state", "svg.icons.media.volume-down-line", "音乐音量调节");
                 button.setOnScroll(event -> {
                     if (audioChannel != null) {
-                        float change = (event.isShiftDown() ? -0.05f : 0.01f);
+                        float change = (event.isControlDown() ? 0.05f : 0.01f);
                         float volume = audioChannel.getVolume() * 2;
                         if (event.getDeltaY() > 0)
                             volume += change;
@@ -843,7 +874,7 @@ public class MapEditor extends BaseEditor {
                 Button button = topToolBar.addButton("state", "svg.icons.media.volume-down-line", "key音音量调节");
                 button.setOnScroll(event -> {
                     if (audioChannel != null) {
-                        float change = (event.isShiftDown() ? -0.05f : 0.01f);
+                        float change = (event.isControlDown() ? 0.05f : 0.01f);
                         float volume = hitKeyVolume * 2;
                         if (event.getDeltaY() > 0)
                             volume += change;
@@ -961,6 +992,32 @@ public class MapEditor extends BaseEditor {
                     tooltip.show(button, event.getScreenX(), event.getScreenY());
                 });
             }
+
+
+            {
+                var ref = new Object() {
+                    int measure = 4;
+                };
+                //全局分拍数
+                Button button = new Button("1/" + ref.measure);
+                topToolBar.addNode("tool", button);
+
+                button.setOnAction(event -> RenderBeat.upDateBeats(zxMap, renderBeats));
+                button.setOnScroll(event -> {
+                    if (event.getDeltaY() > 0)
+                        ref.measure++;
+                    else
+                        ref.measure--;
+                    ref.measure = Math.max(ref.measure, 1);
+
+                    button.setText("1/" + ref.measure);
+                    for (RenderBeat beat : renderBeats) {
+                        beat.measure = ref.measure;
+                    }
+                });
+            }
+
+
         }
 
 /*
@@ -983,7 +1040,10 @@ public class MapEditor extends BaseEditor {
         //添加给自己
         this.getChildren().addAll(topToolBar, bodyPane);
 
-
+        try {
+            updateMusic();
+        } catch (Exception e) {
+        }
     }
 
     public void updateMusic() {
@@ -1085,7 +1145,7 @@ public class MapEditor extends BaseEditor {
                                 throw new RuntimeException(e);
                             }
                             audioChannel1.setEndBehavior(AudioChannel.EndBehavior.CLOSE);
-                            audioChannel1.setVolume(hitKeyVolume + count * 0.08f);
+                            audioChannel1.setVolume(hitKeyVolume + count * 0.12f * hitKeyVolume);
                             audioChannel1.play();
                             hitTime = System.currentTimeMillis();
                         }
@@ -1119,6 +1179,9 @@ public class MapEditor extends BaseEditor {
         mainShadowMapRender.render();
         timingRender.render();
 
+
+        infoRender.clearRect();
+        infoRender.render();
 
         //计算
         previewBackgroundRender.mainJudgedLinePositionPercentage.setValue(
