@@ -849,6 +849,13 @@ public class MapEditor extends BaseEditor {
                     if (!hitsNotes.contains(note)) {
                         hitsNotes.add(note);
                         if (System.currentTimeMillis() - hitTime > 10) {
+                            int count = 0;
+                            for (BaseNote sameNote : findsNotes) {
+                                if (Math.abs(note.timeStamp - sameNote.timeStamp) < 5)
+                                    count++;
+                            }
+
+
                             AudioChannel audioChannel1;
                             try {
                                 audioChannel1 = ZXNApp.audioMixer.createChannel(hitAudioID);
@@ -856,7 +863,7 @@ public class MapEditor extends BaseEditor {
                                 throw new RuntimeException(e);
                             }
                             audioChannel1.setEndBehavior(AudioChannel.EndBehavior.CLOSE);
-                            audioChannel1.setVolume(0.23f);
+                            audioChannel1.setVolume(0.23f * count);
                             audioChannel1.play();
                             hitTime = System.currentTimeMillis();
                         }
