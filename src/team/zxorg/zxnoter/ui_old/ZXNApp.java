@@ -184,8 +184,8 @@ public class ZXNApp extends Application {
         //侧边栏
         sideBar.getStyleClass().add("side-bar");
         //sideBar.setBackground(Background.fill(Color.YELLOW));
-        sideBar.setPrefWidth(180);
-        sideBar.setMinWidth(Region.USE_PREF_SIZE);
+        //sideBar.setN(140);
+
         HBox.setHgrow(sideBar,Priority.ALWAYS);
         //sideBar.setVisible(false);
         //sideBar.setPrefWidth(0);

@@ -1,6 +1,5 @@
 
 
-
 .root {
     -color-dark-blue: #498ba7; /* 深蓝色 */
     -color-blue: #519aba; /* 蓝色 */
@@ -418,3 +417,8 @@
     -fx-border-width: 1 0 0 0;
 }
 
+
+.info-canvas-pane{
+    -fx-border-color: -color-border-window;
+    -fx-border-width: 0 1 0 0;
+}
