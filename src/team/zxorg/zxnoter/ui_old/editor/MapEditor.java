@@ -1142,7 +1142,7 @@ public class MapEditor extends BaseEditor {
         new Thread(() -> {
             if (zxMap.notes.size() == 0)
                 return;
-            ArrayList<BaseNote> findsNotes = zxMap.getScaleNotes(mainMapRender.getInfo().timelinePosition.get() - 100, 100, true);
+            ArrayList<BaseNote> findsNotes = zxMap.getScaleNotes(mainMapRender.getInfo().timelinePosition.get() - 200, 400, true);
             for (BaseNote note : findsNotes) {
                 if (Math.abs(note.timeStamp - mainMapRender.getInfo().timelinePosition.get()) < 20)
                     if (!hitsNotes.contains(note)) {

@@ -10,14 +10,17 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import team.zxorg.zxnoter.audiomixer.AudioMixer;
+import team.zxorg.zxnoter.map.mapInfo.OsuInfo;
 import team.zxorg.zxnoter.map.mapInfo.ZXMInfo;
 import team.zxorg.zxnoter.resource.ZXResources;
 import team.zxorg.zxnoter.ui_old.editor.MapEditor;
 
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.LineUnavailableException;
+import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
@@ -105,8 +108,9 @@ public class ZXNApp extends Application {
 
         //菜单栏
         Menu menu = new Menu("文件");
-        MenuItem openMenuItem = new MenuItem("打开谱面", ZXResources.getSvgPane("svg.icons.zxnoter.file-notemap-line", 16, Color.DARKGREEN));
-        openMenuItem.setOnAction(event -> {
+
+        MenuItem testMenuItem = new MenuItem("测试", ZXResources.getSvgPane("svg.icons.zxnoter.file-notemap-line", 16, Color.DARKGREEN));
+        testMenuItem.setOnAction(event -> {
             {//添加编辑器
                 Tab tab1 = new Tab();
                 MapEditor editor = new MapEditor(Paths.get("docs/reference/LeaF - NANO DEATH!!!!!/LeaF - NANO DEATH!!!!! (nowsmart) [DEATH].osu"), tab1);
@@ -130,6 +134,46 @@ public class ZXNApp extends Application {
                 animationTimer.start();
 
 
+            }
+        });
+
+
+        MenuItem openMenuItem = new MenuItem("打开谱面", ZXResources.getSvgPane("svg.icons.zxnoter.file-notemap-line", 16, Color.DARKGREEN));
+        openMenuItem.setOnAction(event -> {
+            {//添加编辑器
+
+                FileChooser fileChooser = new FileChooser();
+                fileChooser.setTitle("导出谱面到");
+
+                // 添加文件过滤器
+                FileChooser.ExtensionFilter osuFilter = new FileChooser.ExtensionFilter("osu谱面", "*.osu");
+                FileChooser.ExtensionFilter imdFilter = new FileChooser.ExtensionFilter("节奏大师谱面", "*.imd");
+                fileChooser.getExtensionFilters().addAll(osuFilter, imdFilter);
+                File file = fileChooser.showOpenDialog(stage.getOwner());
+                if (file != null) {
+
+                    Tab tab1 = new Tab();
+                    MapEditor editor = new MapEditor(file.toPath(), tab1);
+
+
+                    tab1.setGraphic(ZXResources.getSvgPane("svg.icons.zxnoter.file-osu-line", 18, Color.DARKGREEN));
+
+                    tab1.setContent(editor);
+                    workspaceTabPane.getTabs().add(tab1);
+
+                    rootPane.setOnKeyPressed(editor.getOnKeyPressed());
+
+
+                    //画布更新线程常驻
+                    AnimationTimer animationTimer = new AnimationTimer() {
+                        @Override
+                        public void handle(long l) {
+                            editor.render();
+                        }
+                    };
+                    animationTimer.start();
+
+                }
             }
         });
 
@@ -161,7 +205,7 @@ public class ZXNApp extends Application {
         });
 
 
-        menu.getItems().addAll(openMenuItem, creatMenuItem);
+        menu.getItems().addAll(testMenuItem, openMenuItem, creatMenuItem);
         Menu menu2 = new Menu("666");
         menuBar.getMenus().addAll(menu, menu2);
         menuBar.setPadding(new Insets(0));
@@ -186,7 +230,7 @@ public class ZXNApp extends Application {
         //sideBar.setBackground(Background.fill(Color.YELLOW));
         //sideBar.setN(140);
 
-        HBox.setHgrow(sideBar,Priority.ALWAYS);
+        HBox.setHgrow(sideBar, Priority.ALWAYS);
         //sideBar.setVisible(false);
         //sideBar.setPrefWidth(0);
 
