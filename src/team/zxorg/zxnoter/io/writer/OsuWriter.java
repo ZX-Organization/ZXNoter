@@ -34,7 +34,7 @@ public class OsuWriter {
         }
         //本地化信息检查通过
         BufferedWriter bW;
-        if (path.endsWith(".osu")) {
+        if (path.toString().endsWith("*.osu")) {
             //自定文件名
             bW = new BufferedWriter(new FileWriter(path.toAbsolutePath().toFile()));
         } else {
