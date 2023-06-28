@@ -266,6 +266,26 @@ public class ZXMap {
         }
         return binarySearchNote(time, lowIndex, highIndex);
     }
+    private int binarySearchSeparateNotes(long time, int lowIndex, int highIndex) {
+        int mid = (lowIndex + highIndex) / 2;
+        if (time > separateNotes.get(mid).timeStamp) {
+            //查找的时间在中点之后
+            if (lowIndex == highIndex) {
+                return lowIndex;
+            } else {
+                lowIndex = mid + 1;
+            }
+
+        } else {
+            //查找的时间在中点之前
+            if (lowIndex == highIndex) {
+                return highIndex;
+            } else {
+                highIndex = mid;
+            }
+        }
+        return binarySearchNote(time, lowIndex, highIndex);
+    }
 
     private int binarySearchTiming(long time, int lowIndex, int highIndex) {
         int mid = (lowIndex + highIndex) / 2;
@@ -298,17 +318,28 @@ public class ZXMap {
 
         if (notes.size() == 0 || notes.get(notes.size() - 1).timeStamp <= note.timeStamp) {
             notes.add(note);
+            separateNotes.add(note);
             return notes.size() - 1;
         }
-        int index = binarySearchNote(note.timeStamp, 0, notes.size() - 1);
-        ArrayList<BaseNote> backNotes = new ArrayList<>();
-        while (index < notes.size()) {
-            backNotes.add(notes.get(index));
-            notes.remove(index);
+        int indexInNotes = binarySearchNote(note.timeStamp, 0, notes.size() - 1);
+        ArrayList<BaseNote> backNotesInNotes = new ArrayList<>();
+        while (indexInNotes < notes.size()) {
+            backNotesInNotes.add(notes.get(indexInNotes));
+            notes.remove(indexInNotes);
         }
         notes.add(note);
-        notes.addAll(backNotes);
-        return index;
+        notes.addAll(backNotesInNotes);
+
+        int indexInSeparateNotes = binarySearchSeparateNotes(note.timeStamp, 0, notes.size() - 1);
+        ArrayList<BaseNote> backNotesInSeparateNotes = new ArrayList<>();
+        while (indexInSeparateNotes < separateNotes.size()) {
+            backNotesInSeparateNotes.add(separateNotes.get(indexInSeparateNotes));
+            separateNotes.remove(indexInSeparateNotes);
+        }
+        separateNotes.add(note);
+        separateNotes.addAll(backNotesInSeparateNotes);
+
+        return indexInNotes;
     }
 
     /**
@@ -318,6 +349,7 @@ public class ZXMap {
      * @return 删除是否成功
      */
     public boolean deleteNote(BaseNote note) {
+        separateNotes.remove(note);
         return notes.remove(note);
     }
 

@@ -499,6 +499,7 @@ public class ZXFixedOrbitMapEditor {
             //System.out.println(note);
             srcMap.insertNote(note.clone());
         }
+        System.out.println(srcMap.notes);
         //修改信息
         srcMap.unLocalizedMapInfo.addInfo(ZXMInfo.ObjectCount,String.valueOf(srcMap.getObjectCount()));
         //清空添加列表
