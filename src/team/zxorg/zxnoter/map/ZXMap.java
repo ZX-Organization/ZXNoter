@@ -122,7 +122,7 @@ public class ZXMap {
         //遍历起始下标
         int startIndex;
         if (isDeepFind) {
-            if (separateNotes == null) {
+            if (separateNotes == null || separateNotes.size()==0) {
                 initSeparateNotes();
                 separateNotes.sort(BaseNote::compareTo);
             }
