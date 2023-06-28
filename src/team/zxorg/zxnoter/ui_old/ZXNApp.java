@@ -64,13 +64,13 @@ public class ZXNApp extends Application {
     VBox rootPane = new VBox(titleBar, bodyPane);
 
 
-    public static AudioFormat audioFormat = new AudioFormat(44100, 16, 2, true, false);//音频格式
+    public static AudioFormat audioFormat = new AudioFormat(96000, 16, 2, true, false);//音频格式
 
     public static AudioMixer audioMixer;
 
     static {
         try {
-            audioMixer = new AudioMixer(44100,2048);
+            audioMixer = new AudioMixer(96000,1024);
         } catch (LineUnavailableException e) {
             throw new RuntimeException(e);
         }
@@ -179,7 +179,7 @@ public class ZXNApp extends Application {
 
         {//添加编辑器
 
-            MapEditor editor = new MapEditor(Paths.get("docs/reference/Corruption/Corruption_4k_ez.imd"));
+            MapEditor editor = new MapEditor(Paths.get("docs/reference/1591671592_4k_ez.imd"));
 
             Tab tab1 = new Tab(editor.zxMap.unLocalizedMapInfo.getInfo(ZXMInfo.Title));
             tab1.setGraphic(ZXResources.getSvgPane("svg.icons.zxnoter.file-osu-line", 18, Color.DARKGREEN));

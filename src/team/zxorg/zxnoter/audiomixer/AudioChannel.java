@@ -28,10 +28,9 @@ public class AudioChannel {
         endBehavior = EndBehavior.CLOSE;//自动关闭
         audioFormat = new AudioFormat(audioData.getFormat().getSampleRate(), 16, 2, true, false);
 
-
         sonic = new Sonic((int) audioFormat.getSampleRate(), audioFormat.getChannels());
         sonic.setQuality(100);
-        channelBufSize = 51200;
+        channelBufSize = 128 ;
         inBuffer = new byte[channelBufSize];//输入缓冲区
         frameLength = inputStream.available() / 4;//帧长度
 
@@ -88,10 +87,10 @@ public class AudioChannel {
         int numRead;
 
 
-        lastTime = getTime_();//获取时间
-        lastTimeStamp = System.currentTimeMillis();//获取时间戳
+
 
         numRead = inputStream.read(inBuffer);
+
 
 
         //System.out.println("numRead" + numRead);
@@ -107,6 +106,9 @@ public class AudioChannel {
             //System.out.println("写入");
         }
 
+
+
+
         return numRead;
     }
 
@@ -119,6 +121,8 @@ public class AudioChannel {
     public void setTime(long time) throws IOException {
         sonic.flushStream();
         setFrame((long) (time / 1000 * audioFormat.getSampleRate()));
+        lastTime = getTime_();//获取时间
+        lastTimeStamp = System.currentTimeMillis();//获取时间戳
     }
 
     /**

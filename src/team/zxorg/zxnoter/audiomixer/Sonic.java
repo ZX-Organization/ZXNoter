@@ -105,7 +105,7 @@ public class Sonic {
             int newLength) {
         newLength *= numChannels;
         short[] newArray = new short[newLength];
-        int length = oldArray.length <= newLength ? oldArray.length : newLength;
+        int length = Math.min(oldArray.length, newLength);
 
         System.arraycopy(oldArray, 0, newArray, 0, length);
         return newArray;
@@ -113,9 +113,9 @@ public class Sonic {
 
     // Move samples from one array to another.  May move samples down within an array, but not up.
     private void move(
-            short dest[],
+            short[] dest,
             int destPos,
-            short source[],
+            short[] source,
             int sourcePos,
             int numSamples) {
         System.arraycopy(source, sourcePos * numChannels, dest, destPos * numChannels, numSamples * numChannels);
@@ -123,7 +123,7 @@ public class Sonic {
 
     // Scale the samples by the factor.
     private void scaleSamples(
-            short samples[],
+            short[] samples,
             int position,
             int numSamples,
             float volume) {

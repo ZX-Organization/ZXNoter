@@ -45,7 +45,6 @@ public class AudioMixer {
         //缓冲区大小
         line.open(audioFormat, mixerBufSize * 4);
         line.start();
-
         Thread mixerPlayThread = new Thread(() -> {
             try {
                 while (true) {
