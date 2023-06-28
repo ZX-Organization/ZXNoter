@@ -11,7 +11,7 @@ public enum ImdInfo{
     ImdBpm(ZXMInfo.Bpm, ""),
     ImdTitle(ZXMInfo.Title, ""),
     ImdVersion(ZXMInfo.Version, "ez"),
-    ImdKeyCount(ZXMInfo.KeyCount, ""),
+    ImdKeyCount(ZXMInfo.KeyCount, "4"),
     ImdBgPath(ZXMInfo.BgPath, ""),
     ImdAudioPath(ZXMInfo.AudioPath, "");
     private final ZXMInfo unLocalizedInfo;
