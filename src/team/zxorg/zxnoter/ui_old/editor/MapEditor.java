@@ -122,6 +122,9 @@ public class MapEditor extends BaseEditor {
 
     AudioChannel audioChannel;
 
+    ToggleButton isReverse;
+    Button globalSubbeatButton;
+
 
     public MapEditor(Path mapPath, Tab tab) {
         this.tab = tab;
@@ -479,6 +482,8 @@ public class MapEditor extends BaseEditor {
                     }
                 } else {
 
+                    if (!isReverse.isSelected())
+                        deltaY = -deltaY;
                     if (judgeLineAlign) {//判定线对齐分拍
                         long timeNow = (long) (mainMapRender.getInfo().timelinePosition.get() + deltaY);
                         RenderBeat renderBeat = RenderBeat.findTime(renderBeats, timeNow);
@@ -691,6 +696,13 @@ public class MapEditor extends BaseEditor {
 
             { //判定线对齐
                 ToggleButton toggleButton = sideToolBar.addToggleButton("tool", "svg.icons.zxnoter.judged-line-align", "判定线对齐");
+                {
+                    mainMapRender.getInfo().timelinePosition.set(RenderBeat.alignBeatsTime(renderBeats, 0));
+                    judgeLineAlign = true;
+                    mainMapRender.getInfo().timelinePosition.addListener(changeListener);
+                    toggleButton.setSelected(true);
+                }
+                //mainMapRender.getInfo().timelinePosition.addListener(changeListener);
                 toggleButton.setOnAction(event -> {
                     judgeLineAlign = toggleButton.isSelected();
                     if (judgeLineAlign) {
@@ -702,6 +714,13 @@ public class MapEditor extends BaseEditor {
             }
 
 
+        }
+
+
+        {//工具
+            { //反转
+                isReverse = sideToolBar.addToggleButton("tool", "svg.icons.arrows.arrow-up-down-line", "反转");
+            }
         }
 
 
@@ -986,7 +1005,9 @@ public class MapEditor extends BaseEditor {
                     zxMap.timingPoints.add(timing);
                     zxMap.unLocalizedMapInfo.addInfo(ZXMInfo.TimingCount, String.valueOf(zxMap.timingPoints.size()));
                     RenderBeat.upDateBeats(zxMap, renderBeats);
-
+                    if (zxMap.timingPoints.size()==2){
+                        globalSubbeatButton.getOnScroll().handle(null);
+                    }
                 });
 
 
@@ -1016,22 +1037,32 @@ public class MapEditor extends BaseEditor {
                     int measure = 4;
                 };
                 //全局分拍数
-                Button button = new Button("1/" + ref.measure);
-                topToolBar.addNode("tool", button);
+                globalSubbeatButton = new Button("1/1");
+                topToolBar.addNode("tool", globalSubbeatButton);
 
-                button.setOnAction(event -> RenderBeat.upDateBeats(zxMap, renderBeats));
-                button.setOnScroll(event -> {
+                globalSubbeatButton.setOnAction(event -> RenderBeat.upDateBeats(zxMap, renderBeats));
+                globalSubbeatButton.setOnScroll(event -> {
+
+                    if (event == null) {
+                        globalSubbeatButton.setText("1/" + ref.measure);
+                        for (RenderBeat beat : renderBeats) {
+                            beat.measure = ref.measure;
+                        }
+                        return;
+                    }
+
                     if (event.getDeltaY() > 0)
                         ref.measure++;
                     else
                         ref.measure--;
                     ref.measure = Math.max(ref.measure, 1);
 
-                    button.setText("1/" + ref.measure);
+                    globalSubbeatButton.setText("1/" + ref.measure);
                     for (RenderBeat beat : renderBeats) {
                         beat.measure = ref.measure;
                     }
                 });
+
             }
 
 
