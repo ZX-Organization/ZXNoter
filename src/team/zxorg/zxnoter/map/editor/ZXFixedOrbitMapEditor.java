@@ -492,16 +492,27 @@ public class ZXFixedOrbitMapEditor {
         for (BaseNote note : tempMapOperate.srcNotes)
             if (note != null) {
                 //非新建
-                srcMap.deleteNote(note);
+                srcMap.unLocalizedMapInfo.addInfo(
+                        ZXMInfo.ObjectCount,
+                        String.valueOf(
+                                Integer.parseInt(srcMap.unLocalizedMapInfo.getInfo(ZXMInfo.ObjectCount)) - srcMap.deleteNote(note)
+                        )
+                );
             }
+        int count = 0;
         //克隆结果插入原map
         for (BaseNote note : tempMapOperate.desNotes) {
+
             //System.out.println(note);
-            srcMap.insertNote(note.clone());
+            count+= srcMap.insertNote(note.clone());
         }
-        System.out.println(srcMap.notes);
         //修改信息
-        srcMap.unLocalizedMapInfo.addInfo(ZXMInfo.ObjectCount,String.valueOf(srcMap.getObjectCount()));
+        srcMap.unLocalizedMapInfo.addInfo(
+                ZXMInfo.ObjectCount,
+                String.valueOf(
+                        Integer.parseInt(srcMap.unLocalizedMapInfo.getInfo(ZXMInfo.ObjectCount)) + count
+                )
+        );
         //清空添加列表
         if (tempAddList.size() > 0) {
             tempAddList.clear();
@@ -671,16 +682,25 @@ public class ZXFixedOrbitMapEditor {
             MapOperate operate = operateStack.pollLast();
             for (BaseNote desNote : operate.desNotes) {
                 if (desNote != null) {
-                    srcMap.deleteNote(desNote);
+                    srcMap.unLocalizedMapInfo.addInfo(
+                            ZXMInfo.ObjectCount,
+                            String.valueOf(
+                                    Integer.parseInt(srcMap.unLocalizedMapInfo.getInfo(ZXMInfo.ObjectCount)) - srcMap.deleteNote(desNote)
+                            )
+                    );
                 }
             }
             for (BaseNote srcNote : operate.srcNotes) {
                 if (srcNote != null) {
-                    srcMap.insertNote(srcNote);
+                    srcMap.unLocalizedMapInfo.addInfo(
+                            ZXMInfo.ObjectCount,
+                            String.valueOf(
+                                    Integer.parseInt(srcMap.unLocalizedMapInfo.getInfo(ZXMInfo.ObjectCount)) + srcMap.insertNote(srcNote)
+                            )
+                    );
                 }
             }
             //修改信息
-            srcMap.unLocalizedMapInfo.addInfo(ZXMInfo.ObjectCount,String.valueOf(srcMap.getObjectCount()));
             withdrawStack.add(operate.getReverseOperate());
             if (withdrawStack.size() > 32)
                 withdrawStack.pollFirst();
@@ -696,16 +716,25 @@ public class ZXFixedOrbitMapEditor {
             MapOperate operate = withdrawStack.pollLast();
             for (BaseNote desNote : operate.desNotes) {
                 if (desNote != null) {
-                    srcMap.deleteNote(desNote);
+                    srcMap.unLocalizedMapInfo.addInfo(
+                            ZXMInfo.ObjectCount,
+                            String.valueOf(
+                                    Integer.parseInt(srcMap.unLocalizedMapInfo.getInfo(ZXMInfo.ObjectCount)) - srcMap.deleteNote(desNote)
+                            )
+                    );
                 }
             }
             for (BaseNote srcNote : operate.srcNotes) {
                 if (srcNote != null) {
-                    srcMap.insertNote(srcNote);
+                    srcMap.unLocalizedMapInfo.addInfo(
+                            ZXMInfo.ObjectCount,
+                            String.valueOf(
+                                    Integer.parseInt(srcMap.unLocalizedMapInfo.getInfo(ZXMInfo.ObjectCount)) + srcMap.insertNote(srcNote)
+                            )
+                    );
                 }
             }
             //修改信息
-            srcMap.unLocalizedMapInfo.addInfo(ZXMInfo.ObjectCount,String.valueOf(srcMap.getObjectCount()));
             operateStack.add(operate.getReverseOperate());
             if (operateStack.size() > 32)
                 operateStack.pollFirst();

@@ -312,12 +312,15 @@ public class ZXMap {
      * 插入按键,向按键列表中插入一个新按键,返回插入后所处的下标
      *
      * @param note
-     * @return 插入后所处下标
+     * @return 插入后大小变化
      */
     public int insertNote(BaseNote note) {
 
         if (notes.size() == 0 || notes.get(notes.size() - 1).timeStamp <= note.timeStamp) {
             notes.add(note);
+            if (separateNotes == null||separateNotes.size()==0) {
+                initSeparateNotes();
+            }
             separateNotes.add(note);
             return notes.size() - 1;
         }
@@ -339,7 +342,14 @@ public class ZXMap {
         separateNotes.add(note);
         separateNotes.addAll(backNotesInSeparateNotes);
 
-        return indexInNotes;
+        int count=0;
+        if (note instanceof ComplexNote complexNote){
+            for (FixedOrbitNote ignored: complexNote.notes)
+                count++;
+        }
+        count++;
+
+        return count;
     }
 
     /**
@@ -348,9 +358,16 @@ public class ZXMap {
      * @param note
      * @return 删除是否成功
      */
-    public boolean deleteNote(BaseNote note) {
+    public int deleteNote(BaseNote note) {
+        int count=0;
+        if(note instanceof ComplexNote complexNote){
+            for (FixedOrbitNote ignored: complexNote.notes)
+                count++;
+        }
+        count++;
         separateNotes.remove(note);
-        return notes.remove(note);
+        notes.remove(note);
+        return count;
     }
 
 
