@@ -44,7 +44,7 @@ public class FixedOrbitInfoRender extends FixedOrbitRender {
                 graphics.setFont(new Font(16));
                 graphics.setTextAlign(TextAlignment.LEFT);
                 graphics.setTextBaseline(VPos.CENTER);
-                graphics.fillText("bpm\n" + (int) (timing.absBpm * 100) / 100, 0, getInfo().getTimeToPosition(timing.timestamp));
+                graphics.fillText("bpm\n" + (int) (timing.absBpm * 100) / 100f, 0, getInfo().getTimeToPosition(timing.timestamp));
 
             } else {
 
@@ -52,7 +52,7 @@ public class FixedOrbitInfoRender extends FixedOrbitRender {
                 graphics.setFont(new Font(16));
                 graphics.setTextAlign(TextAlignment.RIGHT);
                 graphics.setTextBaseline(VPos.CENTER);
-                graphics.fillText((int) (timing.bpmSpeed / timing.absBpm * 100) / 100 + "×", getInfo().canvasWidth.getValue() / 2, getInfo().getTimeToPosition(timing.timestamp));
+                graphics.fillText((int) (timing.bpmSpeed / timing.absBpm * 100) / 100f + "×", getInfo().canvasWidth.getValue() / 2, getInfo().getTimeToPosition(timing.timestamp));
                 loadImage(getImage(FixedOrbitObjectKey.TIMING));
             }
             renderRectangle.setX(HPos.RIGHT, getInfo().canvasWidth.getValue());
