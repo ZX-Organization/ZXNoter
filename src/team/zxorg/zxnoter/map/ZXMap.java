@@ -344,7 +344,8 @@ public class ZXMap {
 
         int count=0;
         if (note instanceof ComplexNote complexNote){
-            for (FixedOrbitNote ignored: complexNote.notes)
+            for (FixedOrbitNote fixedOrbitNote: complexNote.notes)
+                separateNotes.add(fixedOrbitNote);
                 count++;
         }
         count++;
