@@ -9,6 +9,7 @@ import javafx.geometry.Side;
 import javafx.scene.control.*;
 import javafx.scene.input.*;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 import javafx.stage.PopupWindow;
@@ -825,35 +826,11 @@ public class MapEditor extends BaseEditor {
                     fileChooser.getExtensionFilters().addAll(audioMp3Filter, audioOggFilter);
 
                     File audioFile = fileChooser.showOpenDialog(this.getScene().getWindow());
-                    if (audioFile != null) {
-                        //zxMap.unLocalizedMapInfo.addInfo(ZXMInfo.Title,audioFile.getAbsolutePath());
 
-                        HashMap<String, String> metadata = FFmpeg.audioToMetadata(audioFile.toPath());
 
-                        String title = metadata.get(FFmpeg.AudioMetadataKey.TITLE.getKey());
-                        if (title == null) title = "";
+                    setNewAudioPath(audioFile.toPath());
 
-                        if (!"".equals(zxMap.unLocalizedMapInfo.getInfo(ZXMInfo.TitleUnicode)))
-                            zxMap.unLocalizedMapInfo.addInfo(ZXMInfo.TitleUnicode, title);
 
-                        if (!"".equals(zxMap.unLocalizedMapInfo.getInfo(ZXMInfo.Title)))
-                            if (Pattern.matches("\\A\\p{ASCII}*\\z", title))
-                                zxMap.unLocalizedMapInfo.addInfo(ZXMInfo.Title, title);
-
-                        String artist = metadata.get(FFmpeg.AudioMetadataKey.ARTIST.getKey());
-                        if (artist == null) artist = "";
-
-                        if (!"".equals(zxMap.unLocalizedMapInfo.getInfo(ZXMInfo.ArtistUnicode)))
-                            zxMap.unLocalizedMapInfo.addInfo(ZXMInfo.ArtistUnicode, artist);
-
-                        if (!"".equals(zxMap.unLocalizedMapInfo.getInfo(ZXMInfo.Artist)))
-                            if (Pattern.matches("\\A\\p{ASCII}*\\z", artist))
-                                zxMap.unLocalizedMapInfo.addInfo(ZXMInfo.Artist, artist);
-                        mapResourcePath = audioFile.toPath().getParent();
-                        zxMap.unLocalizedMapInfo.addInfo(ZXMInfo.AudioPath, audioFile.getName());
-                        updateMusic();
-                        upDateBeats();
-                    }
                 });
             }
 
@@ -912,10 +889,13 @@ public class MapEditor extends BaseEditor {
                 button.setOnScroll(event -> {
                     if (audioChannel != null) {
                         double speed = audioChannel.getPlaySpeed();
+                        double change = (event.isControlDown() ? 0.01 : 0.1);
                         if (event.getDeltaY() > 0)
-                            speed += 0.2;
+                            speed += change;
                         else
-                            speed -= 0.2;
+                            speed -= change;
+                        speed = Math.max(speed, 0.1);
+                        speed = Math.min(speed, 2);
                         audioChannel.setPlaySpeed(false, speed);
                         button.getTooltip().setText("播放变速" + Math.round(speed * 100) + "%");
                     }
@@ -1131,6 +1111,42 @@ public class MapEditor extends BaseEditor {
         }
 
 
+        setOnDragOver(event -> {
+            if (event.getDragboard().hasFiles()) {
+                // 允许拖放
+                event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+            }
+            event.consume();
+        });
+        setOnDragDropped(event -> {
+
+            Dragboard db = event.getDragboard();
+            boolean success = false;
+            if (db.hasFiles()) {
+                // 获取拖放的文件列表
+                File audioFile = db.getFiles().get(0);
+                setNewAudioPath(audioFile.toPath());
+                success = true;
+            }
+            event.setDropCompleted(success);
+            event.consume();
+
+
+        });
+
+
+        mainMapRender.getInfo().timelinePosition.addListener((observable, oldValue, newValue) -> {
+            if (audioChannel.getPlayState().equals(AudioChannel.PlayState.PAUSE)) {
+                try {
+                    hitsNotes.clear();
+                    audioChannel.setTime(mainMapRender.getInfo().timelinePosition.get());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+
+
         //添加给自己
         this.getChildren().addAll(topToolBar, bodyPane);
 
@@ -1141,6 +1157,49 @@ public class MapEditor extends BaseEditor {
 
         upDateBeats();
         mainMapRender.getInfo().timelinePosition.set(0);
+    }
+
+
+    public void setNewAudioPath(Path audioPath) {
+        if (audioPath != null) {
+            HashMap<String, String> metadata = FFmpeg.audioToMetadata(audioPath);
+
+            String title = metadata.get(FFmpeg.AudioMetadataKey.TITLE.getKey());
+            if (title == null) title = "";
+            if ("".equals(zxMap.unLocalizedMapInfo.getInfo(ZXMInfo.TitleUnicode)) || zxMap.unLocalizedMapInfo.getInfo(ZXMInfo.TitleUnicode) == null)
+                zxMap.unLocalizedMapInfo.addInfo(ZXMInfo.TitleUnicode, title);
+
+            if ("".equals(zxMap.unLocalizedMapInfo.getInfo(ZXMInfo.Title)) || zxMap.unLocalizedMapInfo.getInfo(ZXMInfo.Title) == null)
+                if (Pattern.matches("\\A\\p{ASCII}*\\z", title))
+                    zxMap.unLocalizedMapInfo.addInfo(ZXMInfo.Title, title);
+
+            if ("".equals(title)) {
+                title = audioPath.getFileName().toString();
+
+                if ("".equals(zxMap.unLocalizedMapInfo.getInfo(ZXMInfo.TitleUnicode)))
+                    zxMap.unLocalizedMapInfo.addInfo(ZXMInfo.TitleUnicode, title);
+
+                if ("".equals(zxMap.unLocalizedMapInfo.getInfo(ZXMInfo.Title)))
+                    if (Pattern.matches("\\A\\p{ASCII}*\\z", title))
+                        zxMap.unLocalizedMapInfo.addInfo(ZXMInfo.Title, title);
+            }
+
+
+            String artist = metadata.get(FFmpeg.AudioMetadataKey.ARTIST.getKey());
+            if (artist == null) artist = "";
+
+            if ("".equals(zxMap.unLocalizedMapInfo.getInfo(ZXMInfo.ArtistUnicode)) || zxMap.unLocalizedMapInfo.getInfo(ZXMInfo.ArtistUnicode) == null)
+                zxMap.unLocalizedMapInfo.addInfo(ZXMInfo.ArtistUnicode, artist);
+
+            if ("".equals(zxMap.unLocalizedMapInfo.getInfo(ZXMInfo.Artist)) || zxMap.unLocalizedMapInfo.getInfo(ZXMInfo.Artist) == null)
+                if (Pattern.matches("\\A\\p{ASCII}*\\z", artist))
+                    zxMap.unLocalizedMapInfo.addInfo(ZXMInfo.Artist, artist);
+            mapResourcePath = audioPath.getParent();
+            zxMap.unLocalizedMapInfo.addInfo(ZXMInfo.AudioPath, audioPath.getFileName().toString());
+            updateMusic();
+            upDateBeats();
+        }
+
     }
 
     public void updateMusic() {
@@ -1168,16 +1227,7 @@ public class MapEditor extends BaseEditor {
                     getMapTimeLength();
                     //audioChannel.setPlaySpeed(false, 0.8f);
 
-                    mainMapRender.getInfo().timelinePosition.addListener((observable, oldValue, newValue) -> {
-                        if (audioChannel.getPlayState().equals(AudioChannel.PlayState.PAUSE)) {
-                            try {
-                                hitsNotes.clear();
-                                audioChannel.setTime(mainMapRender.getInfo().timelinePosition.get());
-                            } catch (IOException e) {
-                                throw new RuntimeException(e);
-                            }
-                        }
-                    });
+
 
 
                     /*ZXNApp.threadAudioMixer.addAudioChannel();*/

@@ -11,6 +11,7 @@ public class ComponentFactory {
         Tooltip tooltip = new Tooltip(tip);
         tooltip.setAnchorLocation(PopupWindow.AnchorLocation.CONTENT_BOTTOM_LEFT);
         tooltip.setShowDelay(Duration.ZERO);
+        tooltip.setShowDuration(Duration.INDEFINITE);
         return tooltip;
     }
 

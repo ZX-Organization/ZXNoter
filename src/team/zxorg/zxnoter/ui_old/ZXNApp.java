@@ -286,11 +286,23 @@ public class ZXNApp extends Application {
             if (db.hasFiles()) {
                 // 获取拖放的文件列表
                 for (File file : db.getFiles()) {
-                    {//添加编辑器
+                    try {//尝试读谱
+                        {//添加编辑器
+                            Tab tab1 = new Tab();
+                            MapEditor editor = new MapEditor(file.toPath(), tab1);
+                            tab1.setGraphic(ZXResources.getSvgPane("svg.icons.zxnoter.file-osu-line", 18, Color.DARKGREEN));
+                            tab1.setContent(editor);
+                            workspaceTabPane.getTabs().add(tab1);
+                            workspaceTabPane.getSelectionModel().select(tab1);
+                            rootPane.setOnKeyPressed(editor.getOnKeyPressed());
+                        }
+                    } catch (Exception e) {
+                        //可能是音频
                         Tab tab1 = new Tab();
-                        MapEditor editor = new MapEditor(file.toPath(), tab1);
+                        MapEditor editor = new MapEditor(null, tab1);
                         tab1.setGraphic(ZXResources.getSvgPane("svg.icons.zxnoter.file-osu-line", 18, Color.DARKGREEN));
                         tab1.setContent(editor);
+                        editor.setNewAudioPath(file.toPath());
                         workspaceTabPane.getTabs().add(tab1);
                         workspaceTabPane.getSelectionModel().select(tab1);
                         rootPane.setOnKeyPressed(editor.getOnKeyPressed());
