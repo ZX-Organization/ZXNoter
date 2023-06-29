@@ -1142,7 +1142,7 @@ public class MapEditor extends BaseEditor {
                 if (Files.exists(audioPath)) {
                     Path workAudioPath = audioPath.getParent().resolve(audioPath.getFileName() + ".wav");
                     //格式转换
-                    System.out.println("格式转化");
+                    //System.out.println("格式转化");
                     if (!FFmpeg.audioToWav(audioPath, workAudioPath))
                         throw new RuntimeException("音频转换失败");
                     int id = ZXNApp.audioMixer.addAudio(workAudioPath);
@@ -1215,7 +1215,7 @@ public class MapEditor extends BaseEditor {
                     if (zxMap.notes.size() == 0)
                         return;
                     ArrayList<BaseNote> findsNotes = zxMap.getScaleNotes(mainMapRender.getInfo().timelinePosition.get(), 700, true);
-                    System.out.println(findsNotes);
+                    //System.out.println(findsNotes);
                     for (BaseNote note : findsNotes) {
                         if (Math.abs(note.timeStamp - mainMapRender.getInfo().timelinePosition.get()) < 20)
                             if (!hitsNotes.contains(note)) {
