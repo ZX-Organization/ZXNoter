@@ -2,9 +2,6 @@ package team.zxorg.zxnoter.ui_old.editor;
 
 import javafx.beans.property.*;
 import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
@@ -25,7 +22,6 @@ import team.zxorg.zxnoter.map.ZXMap;
 import team.zxorg.zxnoter.map.editor.ZXFixedOrbitMapEditor;
 import team.zxorg.zxnoter.map.mapInfo.ImdInfo;
 import team.zxorg.zxnoter.map.mapInfo.OsuInfo;
-import team.zxorg.zxnoter.map.mapInfo.UnLocalizedMapInfo;
 import team.zxorg.zxnoter.map.mapInfo.ZXMInfo;
 import team.zxorg.zxnoter.note.BaseNote;
 import team.zxorg.zxnoter.note.fixedorbit.ComplexNote;
@@ -47,7 +43,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.regex.Pattern;
@@ -126,6 +121,11 @@ public class MapEditor extends BaseEditor {
     ToggleButton isReverse;
     Button globalSubbeatButton;
 
+    long audioTimeLength = 10000;//音频时长   (10s)
+
+    LongProperty mapTimeLength = new SimpleLongProperty();//谱面时长
+
+    int globalMeasure = 0;//全局分拍
 
     public MapEditor(Path mapPath, Tab tab) {
         this.tab = tab;
@@ -156,7 +156,7 @@ public class MapEditor extends BaseEditor {
             this.mapResourcePath = mapPath.getParent();
         this.setPrefSize(Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE);
 
-        RenderBeat.upDateBeats(zxMap, renderBeats);
+
         zxFixedOrbitMapEditor = new ZXFixedOrbitMapEditor(zxMap);
 
 
@@ -525,7 +525,7 @@ public class MapEditor extends BaseEditor {
         //预览虚影渲染器
         previewShadowMapRender = new FixedOrbitMapRender(previewMapRender.getInfo(), previewCanvas, zxFixedOrbitMapEditor.shadowMap, "preview-selected", "default");
 
-        previewBackgroundRender = new FixedOrbitPreviewBackgroundRender(previewMapRender.getInfo(), zxMap, previewCanvas.canvas, "default");
+        previewBackgroundRender = new FixedOrbitPreviewBackgroundRender(previewMapRender.getInfo(), zxMap, previewCanvas.canvas, "default", mapTimeLength);
 
         previewTimingRender = new FixedOrbitTimingRender(previewMapRender.getInfo(), zxMap, previewCanvas.canvas, "default");
 
@@ -547,7 +547,7 @@ public class MapEditor extends BaseEditor {
         mainShadowMapRender = new FixedOrbitMapRender(mainMapRender.getInfo(), mapCanvas, zxFixedOrbitMapEditor.shadowMap, "normal-shadow", "default");
 
         //背景渲染器
-        backgroundRender = new FixedOrbitBackgroundRender(mainMapRender.getInfo(), zxMap, mapCanvas.canvas, "default");
+        backgroundRender = new FixedOrbitBackgroundRender(mainMapRender.getInfo(), zxMap, mapCanvas.canvas, "default", mapTimeLength);
 
         timingRender = new FixedOrbitTimingRender(mainMapRender.getInfo(), zxMap, mapCanvas.canvas, "default");
 
@@ -649,7 +649,7 @@ public class MapEditor extends BaseEditor {
 
         scrollBar.valueProperty().bindBidirectional(mainMapRender.getInfo().timelinePosition);
         scrollBar.setMin(0);
-        scrollBar.maxProperty().bind(mainMapRender.getInfo().noteLastTime);
+        scrollBar.maxProperty().bind(mapTimeLength);
 
         scrollBar.setBlockIncrement(10);
         scrollBar.setUnitIncrement(100);
@@ -714,8 +714,9 @@ public class MapEditor extends BaseEditor {
             //sideToolBar.addToggleButton("tool", "svg.icons.design.pencil-ruler-2-line", "吸附");
 
             ChangeListener<Number> changeListener = (observable, oldValue, newValue) -> {
-                if (audioChannel == null || audioChannel.getPlayState().equals(AudioChannel.PlayState.PAUSE))
+                if ((audioChannel == null || audioChannel.getPlayState().equals(AudioChannel.PlayState.PAUSE)) && zxMap.timingPoints.size() > 0)
                     mainMapRender.getInfo().timelinePosition.set(RenderBeat.alignBeatsTime(renderBeats, newValue.longValue()));
+                //zxMap.unLocalizedMapInfo.addInfo(ZXMInfo.TimelineZoom,);//上次打开的位置
             };
 
             { //判定线对齐
@@ -767,7 +768,7 @@ public class MapEditor extends BaseEditor {
                 if (infoRender.selectTiming != null) {
                     zxMap.timingPoints.remove(infoRender.selectTiming);
                     zxMap.unLocalizedMapInfo.addInfo(ZXMInfo.TimingCount, String.valueOf(zxMap.timingPoints.size()));
-                    RenderBeat.upDateBeats(zxMap, renderBeats);
+                    upDateBeats();
                 }
             }
         });
@@ -848,11 +849,10 @@ public class MapEditor extends BaseEditor {
                         if (!"".equals(zxMap.unLocalizedMapInfo.getInfo(ZXMInfo.Artist)))
                             if (Pattern.matches("\\A\\p{ASCII}*\\z", artist))
                                 zxMap.unLocalizedMapInfo.addInfo(ZXMInfo.Artist, artist);
-
-
                         mapResourcePath = audioFile.toPath().getParent();
                         zxMap.unLocalizedMapInfo.addInfo(ZXMInfo.AudioPath, audioFile.getName());
                         updateMusic();
+                        upDateBeats();
                     }
                 });
             }
@@ -876,6 +876,14 @@ public class MapEditor extends BaseEditor {
             TextField textField = new TextField("00.000");
             textField.setPrefWidth(80);
             textField.setAlignment(Pos.CENTER);
+            textField.focusedProperty().addListener((observable, oldValue, newValue) -> {
+                if (newValue) {
+                    textField.selectAll();
+                } else {
+                    textField.getParent().requestFocus();
+                    mainMapRender.getInfo().timelinePosition.set((timelineIsFormat.get() ? TimeUtils.parseTime(textField.getText()) : Long.parseLong(textField.getText().replaceAll("ms", "").replaceAll(" ", ""))));
+                }
+            });
             textField.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
                 if (event.getCode().equals(KeyCode.ENTER)) {
                     textField.getParent().requestFocus();
@@ -1038,10 +1046,11 @@ public class MapEditor extends BaseEditor {
 
                     zxMap.timingPoints.add(timing);
                     zxMap.unLocalizedMapInfo.addInfo(ZXMInfo.TimingCount, String.valueOf(zxMap.timingPoints.size()));
-                    RenderBeat.upDateBeats(zxMap, renderBeats);
+                    upDateBeats();
                     if (zxMap.timingPoints.size() == 2) {
                         globalSubbeatButton.getOnScroll().handle(null);
-                        mainMapRender.getInfo().noteLastTime.set(RenderBeat.getLastTime(zxMap));
+                        getMapTimeLength();
+                        //mainMapRender.getInfo().noteLastTime.set(getMapTimeLength());
                     }
                 });
 
@@ -1068,33 +1077,35 @@ public class MapEditor extends BaseEditor {
 
 
             {
-                var ref = new Object() {
-                    int measure = 4;
-                };
+
+
                 //全局分拍数
                 globalSubbeatButton = new Button("1/1");
                 topToolBar.addNode("tool", globalSubbeatButton);
+                globalSubbeatButton.setFocusTraversable(false);
 
-                globalSubbeatButton.setOnAction(event -> RenderBeat.upDateBeats(zxMap, renderBeats));
+                globalSubbeatButton.setOnAction(event -> upDateBeats());
                 globalSubbeatButton.setOnScroll(event -> {
 
                     if (event == null) {
-                        globalSubbeatButton.setText("1/" + ref.measure);
+                        globalSubbeatButton.setText("1/" + globalMeasure);
                         for (RenderBeat beat : renderBeats) {
-                            beat.measure = ref.measure;
+                            beat.measure = globalMeasure;
                         }
                         return;
                     }
 
                     if (event.getDeltaY() > 0)
-                        ref.measure++;
+                        globalMeasure++;
                     else
-                        ref.measure--;
-                    ref.measure = Math.max(ref.measure, 1);
+                        globalMeasure--;
+                    globalMeasure = Math.max(globalMeasure, 1);
 
-                    globalSubbeatButton.setText("1/" + ref.measure);
+                    globalSubbeatButton.setText("1/" + globalMeasure);
                     for (RenderBeat beat : renderBeats) {
-                        beat.measure = ref.measure;
+                        long time = Math.round(60000 / beat.timing.absBpm);
+                        if (zxMap.getScaleNotes(beat.time + 2, time - 4, true).size() == 0)
+                            beat.measure = globalMeasure;
                     }
                 });
 
@@ -1127,6 +1138,9 @@ public class MapEditor extends BaseEditor {
             updateMusic();
         } catch (Exception e) {
         }
+
+        upDateBeats();
+        mainMapRender.getInfo().timelinePosition.set(0);
     }
 
     public void updateMusic() {
@@ -1148,6 +1162,10 @@ public class MapEditor extends BaseEditor {
                     int id = ZXNApp.audioMixer.addAudio(workAudioPath);
                     audioChannel = ZXNApp.audioMixer.createChannel(id);
                     audioChannel.setVolume(0.10f);
+
+                    //更新音频长度
+                    audioTimeLength = audioChannel.getAudioLength();
+                    getMapTimeLength();
                     //audioChannel.setPlaySpeed(false, 0.8f);
 
                     mainMapRender.getInfo().timelinePosition.addListener((observable, oldValue, newValue) -> {
@@ -1194,6 +1212,93 @@ public class MapEditor extends BaseEditor {
 
 
         }
+    }
+
+    public long getMapTimeLength() {
+        mapTimeLength.set(Math.max(RenderBeat.getZXMapLastTime(zxMap), audioTimeLength));
+        return mapTimeLength.get();
+    }
+
+
+    public void upDateBeats() {
+
+        renderBeats.clear();//清空
+        //之前的基准
+        Timing previousBaseTiming = null;
+        //现在的基准
+        Timing nowBaseTiming;
+        //遍历用
+        ArrayList<Timing> timingPoints = new ArrayList<>(zxMap.timingPoints);
+        //System.out.println(getLastTime(zxMap));
+        timingPoints.add(new Timing(getMapTimeLength(), 0, true, 0));
+
+
+        //遍历所以Timing
+        for (Timing timing : timingPoints) {
+            //记录新基准
+            if (timing.isNewBaseBpm) {
+                nowBaseTiming = timing;
+                //计算 之前的和现在 中间节拍
+                if (previousBaseTiming != null) {
+                    //之前的基准BPM时间
+                    //一拍所花时间
+                    double beatCycleTime = 60000. / (previousBaseTiming.absBpm);
+                    int counts = (int) ((double) (nowBaseTiming.timestamp - previousBaseTiming.timestamp) / beatCycleTime);
+                    //System.out.println(counts);
+                    for (int i = 0; i < counts; i++) {
+                        long time = previousBaseTiming.timestamp + (long) (i * beatCycleTime);
+                        RenderBeat renderBeat = new RenderBeat(time, previousBaseTiming, (i == 0));
+                        ArrayList<BaseNote> notes = zxMap.getScaleNotes(time + 2, Math.round(beatCycleTime) - 4, true);
+                        ArrayList<Long> keyPoints = RenderBeat.keyPoint(notes, true);
+                        keyPoints.add(time);
+                        keyPoints.add(time + Math.round(beatCycleTime));
+                        boolean isTrue = false;
+                        renderBeat.measure = 1;
+                        if (notes.size() > 0) {
+                            for (int measure = 0; measure < 49; measure++) {//尝试拍计算
+                                isTrue = true;
+                                for (long note : keyPoints) {
+                                    if ((note - time + 2) % (beatCycleTime / measure) > 4) {
+                                        isTrue = false;
+                                        break;
+                                    }
+                                }
+                                if (isTrue) {
+                                    renderBeat.measure = measure;
+                                    break;
+                                }
+                            }
+                            if (!isTrue) {//只计算键头
+                                keyPoints = RenderBeat.keyPoint(notes, false);
+                                for (int measure = 0; measure < 49; measure++) {//尝试拍计算
+                                    isTrue = true;
+                                    for (long note : keyPoints) {
+                                        if ((note - time + 2) % (beatCycleTime / measure) > 4) {
+                                            isTrue = false;
+                                            break;
+                                        }
+                                    }
+                                    if (isTrue) {
+                                        renderBeat.measure = measure;
+                                        break;
+                                    }
+                                }
+                            }
+                            if (!isTrue)
+                                renderBeat.measure = globalMeasure;
+                        }
+                        if (!isTrue)
+                            renderBeat.measure = globalMeasure;
+                        renderBeats.add(renderBeat);
+                    }
+                }
+                //赋值之前基准
+                previousBaseTiming = nowBaseTiming;
+            }
+
+        }
+
+
     }
 
 

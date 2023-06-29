@@ -3,7 +3,6 @@ package team.zxorg.zxnoter.ui_old.render.fixedorbit;
 import team.zxorg.zxnoter.map.ZXMap;
 import team.zxorg.zxnoter.note.BaseNote;
 import team.zxorg.zxnoter.note.fixedorbit.ComplexNote;
-import team.zxorg.zxnoter.note.fixedorbit.FixedOrbitNote;
 import team.zxorg.zxnoter.note.fixedorbit.LongNote;
 import team.zxorg.zxnoter.note.timing.Timing;
 
@@ -31,83 +30,6 @@ public class RenderBeat {
                 '}';
     }
 
-    public static void upDateBeats(ZXMap zxMap, ArrayList<RenderBeat> renderBeats) {
-
-        renderBeats.clear();//清空
-        //之前的基准
-        Timing previousBaseTiming = null;
-        //现在的基准
-        Timing nowBaseTiming;
-        //遍历用
-        ArrayList<Timing> timingPoints = new ArrayList<>(zxMap.timingPoints);
-        //System.out.println(getLastTime(zxMap));
-        timingPoints.add(new Timing(getLastTime(zxMap), 0, true, 0));
-
-
-
-        //遍历所以Timing
-        for (Timing timing : timingPoints) {
-            //记录新基准
-            if (timing.isNewBaseBpm) {
-                nowBaseTiming = timing;
-                //计算 之前的和现在 中间节拍
-                if (previousBaseTiming != null) {
-                    //之前的基准BPM时间
-                    //一拍所花时间
-                    double beatCycleTime = 60000. / (previousBaseTiming.absBpm);
-                    int counts = (int) ((double) (nowBaseTiming.timestamp - previousBaseTiming.timestamp) / beatCycleTime);
-                    //System.out.println(counts);
-                    for (int i = 0; i < counts; i++) {
-                        long time = previousBaseTiming.timestamp + (long) (i * beatCycleTime);
-                        RenderBeat renderBeat = new RenderBeat(time, previousBaseTiming, (i == 0));
-                        ArrayList<BaseNote> notes = zxMap.getScaleNotes(time - 10, Math.round(beatCycleTime) + 20, true);
-                        ArrayList<Long> keyPoints = keyPoint(notes, true);
-                        keyPoints.add(time);
-                        keyPoints.add(time + Math.round(beatCycleTime));
-                        boolean isTrue = false;
-                        renderBeat.measure = 1;
-                        if (notes.size() > 0) {
-                            for (int measure = 0; measure < 33; measure++) {//尝试拍计算
-                                isTrue = true;
-                                for (long note : keyPoints) {
-                                    if ((note - time + 10) % (beatCycleTime / measure) > 20) {
-                                        isTrue = false;
-                                        break;
-                                    }
-                                }
-                                if (isTrue) {
-                                    renderBeat.measure = measure;
-                                    break;
-                                }
-                            }
-                            if (!isTrue) {//只计算键头
-                                keyPoints = keyPoint(notes, false);
-                                for (int measure = 0; measure < 33; measure++) {//尝试拍计算
-                                    isTrue = true;
-                                    for (long note : keyPoints) {
-                                        if ((note - time + 10) % (beatCycleTime / measure) > 20) {
-                                            isTrue = false;
-                                            break;
-                                        }
-                                    }
-                                    if (isTrue) {
-                                        renderBeat.measure = measure;
-                                        break;
-                                    }
-                                }
-                            }
-                        }
-                        renderBeats.add(renderBeat);
-                    }
-                }
-                //赋值之前基准
-                previousBaseTiming = nowBaseTiming;
-            }
-
-        }
-
-
-    }
 
 
     public static ArrayList<Long> keyPoint(ArrayList<BaseNote> baseNotes, boolean andLongEnd) {
@@ -123,14 +45,14 @@ public class RenderBeat {
 
 
     /**
-     * 获取最后的键位置
+     * 获取最后的键位置  (可能的)
      *
      * @return 时间戳
      */
-    public static long getLastTime(ZXMap zxMap) {
+    public static long getZXMapLastTime(ZXMap zxMap) {
+        long time = 0;
         if (zxMap.notes.size() - 1 >= 0) {
             BaseNote lastNote = zxMap.notes.get(zxMap.notes.size() - 1);
-            long time;
             if (lastNote instanceof ComplexNote complexNote) {
                 time = complexNote.notes.get(complexNote.notes.size() - 1).timeStamp;
             } else if (lastNote instanceof LongNote longNote) {
@@ -138,14 +60,11 @@ public class RenderBeat {
             } else {
                 time = zxMap.notes.get(zxMap.notes.size() - 1).timeStamp;
             }
-            return time;
         }
         if (zxMap.timingPoints.size() > 1) {
-            return zxMap.timingPoints.get(zxMap.timingPoints.size() - 1).timestamp;
+            time = Math.max(zxMap.timingPoints.get(zxMap.timingPoints.size() - 1).timestamp, time);
         }
-
-
-        return 0;
+        return time;
     }
 
     public static RenderBeat findTime(ArrayList<RenderBeat> renderBeats, long time) {
