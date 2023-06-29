@@ -165,6 +165,7 @@ public class ImdReader implements MapReader{
             }
         }
         map.notes = allNotes;
+        allNotes.sort(BaseNote::compareTo);
         completeInfo();
         map.unLocalizedMapInfo = unLocalizedMapInfo;
         map.timingPoints = timingPoints;
