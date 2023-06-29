@@ -23,6 +23,7 @@ import java.util.ArrayList;
 public class OsuReader implements MapReader{
     Path readPath;
     UnLocalizedMapInfo unLocalizedMapInfo;
+    ZXMap zxMap;
 
     @Override
     public String getSupportFileExtension() {
@@ -48,7 +49,7 @@ public class OsuReader implements MapReader{
         boolean getBaseBpm = true;
         double baseBpm = 0.;
 
-        ZXMap zxMap = new ZXMap();
+        zxMap = new ZXMap();
         ArrayList<BaseNote> allNotes = new ArrayList<>();
         ArrayList<Timing> timingPoints = new ArrayList<>();
         unLocalizedMapInfo = new UnLocalizedMapInfo();
@@ -264,5 +265,6 @@ public class OsuReader implements MapReader{
             if (!unLocalizedMapInfo.allInfo.containsKey(info)){
                 unLocalizedMapInfo.allInfo.put(info, info.getDefaultValue());
             }
+        unLocalizedMapInfo.allInfo.put(ZXMInfo.TimingCount,String.valueOf(zxMap.timingPoints.size()));
     }
 }

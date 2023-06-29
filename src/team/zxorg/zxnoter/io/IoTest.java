@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class IoTest {
     public static void main(String[] args) throws IOException {
         //try {
-            ZXMap map = new OsuReader().read(Path.of("G:/desktop/ideatest.osu"));
+            ZXMap map = new OsuReader().read(Path.of("docs/reference/Memme -  (dawn_future) [Hard].osu"));
 
 
             //System.out.println(map.notes);
@@ -34,7 +34,7 @@ public class IoTest {
         }*/
         //System.out.println(map.notes.get(4));
 
-        ZXFixedOrbitMapEditor editor = new ZXFixedOrbitMapEditor(map);
+        /*ZXFixedOrbitMapEditor editor = new ZXFixedOrbitMapEditor(map);
 
         System.out.println("原拆分map->"+map.separateNotes);
 
@@ -60,7 +60,10 @@ public class IoTest {
         editor.addEndOfNote((FixedOrbitNote) middleNote,-1,ZXFixedOrbitMapEditor.SLIDE_NOTE);
         editor.modifyDone();
 
-        System.out.println("后拆分map->"+map.separateNotes);
+        System.out.println("后拆分map->"+map.separateNotes);*/
+
+        System.out.println(map.timingPoints);
+
         //System.out.println(map.getScaleNotes(5548,100,true));
         /*System.out.println("原->"+ map.findClosestNotes(5818).get(0));
 
