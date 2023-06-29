@@ -165,6 +165,7 @@ public class MapEditor extends BaseEditor {
         //谱面画板
         mapCanvas.setMinWidth(200);
         mapCanvas.setMaxWidth(1000);
+        mapCanvas.getStyleClass().add("map-canvas");
         HBox.setHgrow(mapCanvas, Priority.ALWAYS);
 
 
@@ -484,12 +485,11 @@ public class MapEditor extends BaseEditor {
                 if (event.isAltDown()) {//修改分拍
                     RenderBeat renderBeat = RenderBeat.findTime(renderBeats, mainMapRender.getInfo().getPositionToTime(event.getY()));
                     if (renderBeat != null) {
-                        if (renderBeat.measure < 1)
-                            renderBeat.measure = 1;
                         if (event.getDeltaY() > 0)
                             renderBeat.measure++;
                         else
                             renderBeat.measure--;
+                        renderBeat.measure=Math.max(renderBeat.measure,1);
                     }
                 } else {
 
@@ -532,10 +532,10 @@ public class MapEditor extends BaseEditor {
 
         previewTimingRender = new FixedOrbitTimingRender(previewMapRender.getInfo(), zxMap, previewCanvas.canvas, "default");
 
-        previewBeatLineRender = new FixedOrbitBeatLineRender(previewMapRender.getInfo(), zxMap, previewCanvas.canvas, "default", renderBeats);
+        previewBeatLineRender = new FixedOrbitBeatLineRender(previewMapRender.getInfo(), zxMap, previewCanvas.canvas, "default", renderBeats, mapTimeLength);
 
         previewBar.getChildren().addAll(previewCanvas, previewPane);
-
+        HBox.setMargin(previewBar, new Insets(0, 0, 0, 26));
 
         //谱面编辑渲染器
         mainMapRender = new FixedOrbitMapRender(new FixedOrbitRenderInfo(mapCanvas.canvas), mapCanvas, zxMap, "normal", "default");
@@ -550,11 +550,12 @@ public class MapEditor extends BaseEditor {
         mainShadowMapRender = new FixedOrbitMapRender(mainMapRender.getInfo(), mapCanvas, zxFixedOrbitMapEditor.shadowMap, "normal-shadow", "default");
 
         //背景渲染器
-        backgroundRender = new FixedOrbitBackgroundRender(mainMapRender.getInfo(), zxMap, mapCanvas.canvas, "default", mapTimeLength);
+        backgroundRender = new FixedOrbitBackgroundRender(mainMapRender.getInfo(), zxMap, mapCanvas.canvas, "default");
 
         timingRender = new FixedOrbitTimingRender(mainMapRender.getInfo(), zxMap, mapCanvas.canvas, "default");
 
-        beatLineRender = new FixedOrbitBeatLineRender(mainMapRender.getInfo(), zxMap, mapCanvas.canvas, "default", renderBeats);
+        beatLineRender = new FixedOrbitBeatLineRender(mainMapRender.getInfo(), zxMap, mapCanvas.canvas, "default", renderBeats, mapTimeLength);
+        beatLineRender.showSubBeats = true;
 
         //属性栏
         TabPane tabPane = new TabPane();
@@ -761,6 +762,7 @@ public class MapEditor extends BaseEditor {
         fixedOrbitRenderInfo.judgedLinePositionPercentage.bind(mainMapRender.getInfo().judgedLinePositionPercentage);
         fixedOrbitRenderInfo.timelineZoom.bind(mainMapRender.getInfo().timelineZoom);
         infoRender = new FixedOrbitInfoRender(fixedOrbitRenderInfo, zxMap, infoCanvasPane.canvas, "default", renderBeats, zxMap);
+        HBox.setMargin(infoCanvasPane, new Insets(0, 26, 0, 0));
 
 
         infoCanvasPane.setOnMouseMoved(event -> {
@@ -900,7 +902,7 @@ public class MapEditor extends BaseEditor {
             textField.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
                 if (event.getCode().equals(KeyCode.ENTER)) {
                     textField.getParent().requestFocus();
-                    audioTimeOffset.set(Long.parseLong(textField.getText()));
+                    audioTimeOffset.set(-Long.parseLong(textField.getText()));
                     event.consume();
                 }
             });
@@ -1369,6 +1371,7 @@ public class MapEditor extends BaseEditor {
                         }
                         if (!isTrue)
                             renderBeat.measure = globalMeasure;
+                        renderBeat.measure=Math.max(renderBeat.measure,1);
                         renderBeats.add(renderBeat);
                     }
                 }
@@ -1446,6 +1449,7 @@ public class MapEditor extends BaseEditor {
         }
 
         // mainMapRender.graphics.rotate(1);
+
         backgroundRender.render();
         beatLineRender.render();
         mainMapRender.render();

@@ -258,6 +258,10 @@
     -fx-border-color: -color-border-window;
     -fx-border-width: 0 0 0 1;
 }
+.map-canvas{
+    -fx-border-color: -color-border-window;
+    -fx-border-width: 0 1 0 1;
+}
 
 
 .preview-pane {

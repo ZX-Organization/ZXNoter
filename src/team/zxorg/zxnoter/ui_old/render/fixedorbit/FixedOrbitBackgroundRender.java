@@ -13,15 +13,14 @@ import team.zxorg.zxnoter.ui_old.render.fixedorbit.key.FixedOrbitObjectKey;
 
 public class FixedOrbitBackgroundRender extends FixedOrbitRender {
 
-    LongProperty mapTimeLength;//谱面时长
+
 
 
     //分拍数 Minutes
 
 
-    public FixedOrbitBackgroundRender(FixedOrbitRenderInfo renderInfo, ZXMap renderZXMap, Canvas canvas, String theme, LongProperty mapTimeLength) {
+    public FixedOrbitBackgroundRender(FixedOrbitRenderInfo renderInfo, ZXMap renderZXMap, Canvas canvas, String theme) {
         super(renderInfo, renderZXMap, canvas, theme);
-        this.mapTimeLength = mapTimeLength;
     }
 
     @Override
@@ -46,17 +45,7 @@ public class FixedOrbitBackgroundRender extends FixedOrbitRender {
         }
 
 
-        //绘制判定线
-        image = getImage(FixedOrbitObjectKey.JUDGED_LINE);
-        graphics.drawImage(image, 0, renderInfo.canvasHeight.get() * getInfo().judgedLinePositionPercentage.doubleValue() - image.getHeight() / 2, renderInfo.canvasWidth.get(), image.getHeight());
 
-        //绘制底部线
-        image = getImage(FixedOrbitObjectKey.BOTTOM_LINE);
-        graphics.drawImage(image, 0, getInfo().getTimeToPosition(0) - image.getHeight() / 2, renderInfo.canvasWidth.get(), image.getHeight());
-
-        //绘制头部线
-        image = getImage(FixedOrbitObjectKey.TOP_LINE);
-        graphics.drawImage(image, 0, getInfo().getTimeToPosition(mapTimeLength.get() + getInfo().judgedLinePositionTimeOffset.get()) - image.getHeight() / 2, renderInfo.canvasWidth.get(), image.getHeight());
 
     }
 
