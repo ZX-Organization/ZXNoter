@@ -900,7 +900,7 @@ public class MapEditor extends BaseEditor {
             textField.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
                 if (event.getCode().equals(KeyCode.ENTER)) {
                     textField.getParent().requestFocus();
-                    audioTimeOffset.set(Long.parseLong(textField.getText()));
+                    audioTimeOffset.set(-Long.parseLong(textField.getText()));
                     event.consume();
                 }
             });
