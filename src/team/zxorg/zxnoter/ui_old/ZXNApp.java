@@ -447,7 +447,7 @@ public class ZXNApp extends Application {
         Scene mainScene = new Scene(rootPane);
 
 
-        System.out.println(ZXResources.getPath("css.root"));
+        //System.out.println(ZXResources.getPath("css.root"));
         //应用样式
         mainScene.getStylesheets().add(ZXResources.getPath("css.root").toUri().toString());
         mainScene.getStylesheets().add(ZXResources.getPath("css.theme.dark").toUri().toString());

@@ -40,7 +40,7 @@ public class RenderBeat {
         Timing nowBaseTiming;
         //遍历用
         ArrayList<Timing> timingPoints = new ArrayList<>(zxMap.timingPoints);
-        System.out.println(getLastTime(zxMap));
+        //System.out.println(getLastTime(zxMap));
         timingPoints.add(new Timing(getLastTime(zxMap), 0, true, 0));
 
 
