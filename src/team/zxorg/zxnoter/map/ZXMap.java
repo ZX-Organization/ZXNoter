@@ -53,6 +53,7 @@ public class ZXMap {
         ArrayList<Timing> findResults = new ArrayList<>();
         int res = findClosestTimingIndex(time);
         if (res == -1) return findResults;
+        if (timingPoints.size()==0)return findResults;
         Timing resTiming = timingPoints.get(res);
         int tempIndex = res;
         Timing tempTiming;
