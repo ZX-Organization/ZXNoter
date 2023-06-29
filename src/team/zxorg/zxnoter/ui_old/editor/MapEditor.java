@@ -1136,14 +1136,15 @@ public class MapEditor extends BaseEditor {
 
 
         mainMapRender.getInfo().timelinePosition.addListener((observable, oldValue, newValue) -> {
-            if (audioChannel.getPlayState().equals(AudioChannel.PlayState.PAUSE)) {
-                try {
-                    hitsNotes.clear();
-                    audioChannel.setTime(mainMapRender.getInfo().timelinePosition.get());
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
+            if (audioChannel != null)
+                if (audioChannel.getPlayState().equals(AudioChannel.PlayState.PAUSE)) {
+                    try {
+                        hitsNotes.clear();
+                        audioChannel.setTime(mainMapRender.getInfo().timelinePosition.get());
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
-            }
         });
 
 

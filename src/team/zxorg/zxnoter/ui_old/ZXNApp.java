@@ -466,7 +466,7 @@ public class ZXNApp extends Application {
 
         stage.setScene(mainScene);
         stage.setMinWidth(900);
-        stage.setMinHeight(600);
+        stage.setMinHeight(700);
         stage.setWidth(800);
         stage.setHeight(600);
         stage.show();
