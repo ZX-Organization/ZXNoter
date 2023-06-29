@@ -23,6 +23,7 @@ import team.zxorg.zxnoter.io.writer.ImdWriter;
 import team.zxorg.zxnoter.io.writer.OsuWriter;
 import team.zxorg.zxnoter.map.ZXMap;
 import team.zxorg.zxnoter.map.editor.ZXFixedOrbitMapEditor;
+import team.zxorg.zxnoter.map.mapInfo.ImdInfo;
 import team.zxorg.zxnoter.map.mapInfo.OsuInfo;
 import team.zxorg.zxnoter.map.mapInfo.UnLocalizedMapInfo;
 import team.zxorg.zxnoter.map.mapInfo.ZXMInfo;
@@ -583,7 +584,9 @@ public class MapEditor extends BaseEditor {
                     ZXMInfo.AudioPath,
                     ZXMInfo.BgPath,
                     ZXMInfo.Title,
+                    ZXMInfo.TitleUnicode,
                     ZXMInfo.Artist,
+                    ZXMInfo.ArtistUnicode,
                     ZXMInfo.Version,
                     ZXMInfo.MapCreator,
                     ZXMInfo.ObjectCount,
@@ -598,10 +601,30 @@ public class MapEditor extends BaseEditor {
         }
         {
             Tab tab1 = new Tab("OSU");
+            ArrayList<ZXMInfo> zxmInfos = new ArrayList<>();
+            for (OsuInfo info : OsuInfo.values()) {
+                zxmInfos.add(info.unLocalize());
+            }
+            ZXMInfo[] infos = new ZXMInfo[zxmInfos.size()];
+            zxmInfos.toArray(infos);
+            InfoPane infoPane = new InfoPane(zxMap.unLocalizedMapInfo, infos);
+            ScrollPane scrollPane = new ScrollPane(infoPane);
+            scrollPane.setFitToWidth(true);
+            tab1.setContent(scrollPane);
             tabPane.getTabs().addAll(tab1);
         }
         {
             Tab tab1 = new Tab("IMD");
+            ArrayList<ZXMInfo> zxmInfos = new ArrayList<>();
+            for (ImdInfo info : ImdInfo.values()) {
+                zxmInfos.add(info.unLocalize());
+            }
+            ZXMInfo[] infos = new ZXMInfo[zxmInfos.size()];
+            zxmInfos.toArray(infos);
+            InfoPane infoPane = new InfoPane(zxMap.unLocalizedMapInfo, infos);
+            ScrollPane scrollPane = new ScrollPane(infoPane);
+            scrollPane.setFitToWidth(true);
+            tab1.setContent(scrollPane);
             tabPane.getTabs().addAll(tab1);
         }
         {
@@ -807,18 +830,24 @@ public class MapEditor extends BaseEditor {
                         HashMap<String, String> metadata = FFmpeg.audioToMetadata(audioFile.toPath());
 
                         String title = metadata.get(FFmpeg.AudioMetadataKey.TITLE.getKey());
-                        if (title == null)
-                            title = "";
-                        zxMap.unLocalizedMapInfo.addInfo(ZXMInfo.TitleUnicode, title);
-                        if (Pattern.matches("\\A\\p{ASCII}*\\z", title))
-                            zxMap.unLocalizedMapInfo.addInfo(ZXMInfo.Title, title);
+                        if (title == null) title = "";
+
+                        if (!"".equals(zxMap.unLocalizedMapInfo.getInfo(ZXMInfo.TitleUnicode)))
+                            zxMap.unLocalizedMapInfo.addInfo(ZXMInfo.TitleUnicode, title);
+
+                        if (!"".equals(zxMap.unLocalizedMapInfo.getInfo(ZXMInfo.Title)))
+                            if (Pattern.matches("\\A\\p{ASCII}*\\z", title))
+                                zxMap.unLocalizedMapInfo.addInfo(ZXMInfo.Title, title);
 
                         String artist = metadata.get(FFmpeg.AudioMetadataKey.ARTIST.getKey());
-                        if (artist == null)
-                            artist = "";
-                        zxMap.unLocalizedMapInfo.addInfo(ZXMInfo.ArtistUnicode, artist);
-                        if (Pattern.matches("\\A\\p{ASCII}*\\z", artist))
-                            zxMap.unLocalizedMapInfo.addInfo(ZXMInfo.Artist, artist);
+                        if (artist == null) artist = "";
+
+                        if (!"".equals(zxMap.unLocalizedMapInfo.getInfo(ZXMInfo.ArtistUnicode)))
+                            zxMap.unLocalizedMapInfo.addInfo(ZXMInfo.ArtistUnicode, artist);
+
+                        if (!"".equals(zxMap.unLocalizedMapInfo.getInfo(ZXMInfo.Artist)))
+                            if (Pattern.matches("\\A\\p{ASCII}*\\z", artist))
+                                zxMap.unLocalizedMapInfo.addInfo(ZXMInfo.Artist, artist);
 
 
                         mapResourcePath = audioFile.toPath().getParent();
@@ -1185,7 +1214,8 @@ public class MapEditor extends BaseEditor {
                 new Thread(() -> {
                     if (zxMap.notes.size() == 0)
                         return;
-                    ArrayList<BaseNote> findsNotes = zxMap.getScaleNotes(mainMapRender.getInfo().timelinePosition.get() - 200, 400, true);
+                    ArrayList<BaseNote> findsNotes = zxMap.getScaleNotes(mainMapRender.getInfo().timelinePosition.get(), 700, true);
+                    System.out.println(findsNotes);
                     for (BaseNote note : findsNotes) {
                         if (Math.abs(note.timeStamp - mainMapRender.getInfo().timelinePosition.get()) < 20)
                             if (!hitsNotes.contains(note)) {
