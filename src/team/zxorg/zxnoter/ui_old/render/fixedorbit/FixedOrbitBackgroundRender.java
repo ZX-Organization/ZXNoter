@@ -1,5 +1,7 @@
 package team.zxorg.zxnoter.ui_old.render.fixedorbit;
 
+import javafx.beans.property.LongProperty;
+import javafx.beans.property.SimpleLongProperty;
 import javafx.geometry.HPos;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
@@ -11,11 +13,15 @@ import team.zxorg.zxnoter.ui_old.render.fixedorbit.key.FixedOrbitObjectKey;
 
 public class FixedOrbitBackgroundRender extends FixedOrbitRender {
 
+    LongProperty mapTimeLength;//谱面时长
+
+
     //分拍数 Minutes
 
 
-    public FixedOrbitBackgroundRender(FixedOrbitRenderInfo renderInfo, ZXMap renderZXMap, Canvas canvas, String theme) {
+    public FixedOrbitBackgroundRender(FixedOrbitRenderInfo renderInfo, ZXMap renderZXMap, Canvas canvas, String theme, LongProperty mapTimeLength) {
         super(renderInfo, renderZXMap, canvas, theme);
+        this.mapTimeLength = mapTimeLength;
     }
 
     @Override
@@ -50,7 +56,7 @@ public class FixedOrbitBackgroundRender extends FixedOrbitRender {
 
         //绘制头部线
         image = getImage(FixedOrbitObjectKey.TOP_LINE);
-        graphics.drawImage(image, 0, getInfo().getTimeToPosition(getLastTime() + getInfo().judgedLinePositionTimeOffset.get()) - image.getHeight() / 2, renderInfo.canvasWidth.get(), image.getHeight());
+        graphics.drawImage(image, 0, getInfo().getTimeToPosition(mapTimeLength.get() + getInfo().judgedLinePositionTimeOffset.get()) - image.getHeight() / 2, renderInfo.canvasWidth.get(), image.getHeight());
 
     }
 

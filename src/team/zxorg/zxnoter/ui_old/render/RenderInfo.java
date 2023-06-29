@@ -25,10 +25,7 @@ public class RenderInfo {
      */
     public DoubleProperty canvasHeight = new SimpleDoubleProperty();
 
-    /**
-     * 最后的键时间戳
-     */
-    public LongProperty noteLastTime = new SimpleLongProperty();
+
 
     public IntegerProperty orbits=new SimpleIntegerProperty();
 
