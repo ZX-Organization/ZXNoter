@@ -40,7 +40,7 @@ public class ImdWriter implements Writer{
         }else {
             throw new NoSuchFieldException("丢失本地化字段!");
         }
-        double baseBpm = Double.parseDouble(allInfos.get(ImdInfo.ImdBpm));
+        //double baseBpm = Double.parseDouble(allInfos.get(ImdInfo.ImdBpm));
         //检查本地化信息通过
         //计算最终文件大小
         int absoluteNotesSize = 0;

@@ -1,22 +1,16 @@
 package team.zxorg.zxnoter.io;
 
-import team.zxorg.zxnoter.io.reader.ImdReader;
 import team.zxorg.zxnoter.io.reader.OsuReader;
 import team.zxorg.zxnoter.map.ZXMap;
 import team.zxorg.zxnoter.map.editor.ZXFixedOrbitMapEditor;
-import team.zxorg.zxnoter.map.mapInfo.ZXMInfo;
-import team.zxorg.zxnoter.note.BaseNote;
-import team.zxorg.zxnoter.note.fixedorbit.ComplexNote;
-import team.zxorg.zxnoter.note.fixedorbit.FixedOrbitNote;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.ArrayList;
 
 public class IoTest {
     public static void main(String[] args) throws IOException {
         //try {
-            ZXMap map = new OsuReader().read(Path.of("docs/reference/Memme -  (dawn_future) [Hard].osu"));
+            ZXMap map = new OsuReader().read(Path.of("F:\\AllProjects\\ZX-Organization\\ZXNoter\\docs\\reference\\Risshuu feat. Choko - Take\\Risshuu feat. Choko - Take (LNP-) [Beyond].osu"));
 
 
             //System.out.println(map.notes);
@@ -34,8 +28,8 @@ public class IoTest {
         }*/
         //System.out.println(map.notes.get(4));
 
-        /*ZXFixedOrbitMapEditor editor = new ZXFixedOrbitMapEditor(map);
-
+        ZXFixedOrbitMapEditor editor = new ZXFixedOrbitMapEditor(map);
+/*
         System.out.println("原拆分map->"+map.separateNotes);
 
         editor.addNote(100,1);
