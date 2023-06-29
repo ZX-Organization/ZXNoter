@@ -129,8 +129,6 @@ public class OsuReader implements MapReader{
                 }
                 case 1->{
 
-                    System.out.println(readTemp);
-
                     //时间点处理
                     String[] allPars = readTemp.split(",");
                     boolean isExtendTiming = (Integer.parseInt(allPars[6]) == 1);

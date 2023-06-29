@@ -1,9 +1,11 @@
 package team.zxorg.zxnoter.io;
 
 import team.zxorg.zxnoter.io.reader.ImdReader;
+import team.zxorg.zxnoter.io.reader.OsuReader;
 import team.zxorg.zxnoter.map.ZXMap;
 import team.zxorg.zxnoter.map.editor.ZXFixedOrbitMapEditor;
 import team.zxorg.zxnoter.map.mapInfo.ZXMInfo;
+import team.zxorg.zxnoter.note.BaseNote;
 import team.zxorg.zxnoter.note.fixedorbit.ComplexNote;
 import team.zxorg.zxnoter.note.fixedorbit.FixedOrbitNote;
 
@@ -14,7 +16,7 @@ import java.util.ArrayList;
 public class IoTest {
     public static void main(String[] args) throws IOException {
         //try {
-            ZXMap map = new ImdReader().read(Path.of("docs/reference/xiuluo/Fracture Ray_4k_ez.imd"));
+            ZXMap map = new OsuReader().read(Path.of("G:/desktop/ideatest.osu"));
 
 
             //System.out.println(map.notes);
@@ -34,19 +36,31 @@ public class IoTest {
 
         ZXFixedOrbitMapEditor editor = new ZXFixedOrbitMapEditor(map);
 
-        System.out.println("原map->"+map.notes);
-        editor.addNote(100,1);
-        System.out.println(editor.srcMap.unLocalizedMapInfo.getInfo(ZXMInfo.ObjectCount));
-        editor.modifyDone();
-        //System.out.println("操作后map->"+map.notes);
-        System.out.println(editor.srcMap.unLocalizedMapInfo.getInfo(ZXMInfo.ObjectCount));
-        editor.withdraw();
-        //System.out.println("撤回后map->"+map.notes);
-        System.out.println(editor.srcMap.unLocalizedMapInfo.getInfo(ZXMInfo.ObjectCount));
-        editor.redo();
-        //System.out.println("重做后map->"+map.notes);
+        System.out.println("原拆分map->"+map.separateNotes);
 
-        System.out.println(editor.srcMap.unLocalizedMapInfo.getInfo(ZXMInfo.ObjectCount));
+        editor.addNote(100,1);
+        editor.modifyDone();
+        BaseNote firstNote = map.notes.get(0);
+        editor.addEndOfNote((FixedOrbitNote) firstNote,100,ZXFixedOrbitMapEditor.LONG_NOTE);
+        editor.addEndOfNote((FixedOrbitNote) firstNote,2,ZXFixedOrbitMapEditor.SLIDE_NOTE);
+        editor.modifyDone();
+
+
+        editor.addNote(400,1);
+        editor.modifyDone();
+        BaseNote secondNote = map.notes.get(1);
+        editor.addEndOfNote((FixedOrbitNote) secondNote,100,ZXFixedOrbitMapEditor.LONG_NOTE);
+        editor.addEndOfNote((FixedOrbitNote) secondNote,2,ZXFixedOrbitMapEditor.SLIDE_NOTE);
+        editor.modifyDone();
+
+        editor.addNote(300,2);
+        editor.modifyDone();
+        BaseNote middleNote = map.findClosestNotes(300).get(0);
+        editor.addEndOfNote((FixedOrbitNote) middleNote,50,ZXFixedOrbitMapEditor.LONG_NOTE);
+        editor.addEndOfNote((FixedOrbitNote) middleNote,-1,ZXFixedOrbitMapEditor.SLIDE_NOTE);
+        editor.modifyDone();
+
+        System.out.println("后拆分map->"+map.separateNotes);
         //System.out.println(map.getScaleNotes(5548,100,true));
         /*System.out.println("原->"+ map.findClosestNotes(5818).get(0));
 
