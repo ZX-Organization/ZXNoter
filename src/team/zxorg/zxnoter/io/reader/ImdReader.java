@@ -24,6 +24,7 @@ import java.util.ArrayList;
  */
 public class ImdReader implements MapReader{
     private Path readPath;
+    private ArrayList<Timing> timingPoints;
     private UnLocalizedMapInfo unLocalizedMapInfo;
 
     @Override
@@ -83,15 +84,19 @@ public class ImdReader implements MapReader{
 
         //跳回首timingPoint处
         bf.position(8);
-        ArrayList<Timing> timingPoints = new ArrayList<>(timingAmount);
+        double tempBpm = 0;
+        timingPoints = new ArrayList<>(timingAmount);
         for (int i = 0; i < timingAmount; i++) {
             int timeStamp = bf.getInt();
             double bpm = bf.getDouble();
-            timingPoints.add(
-                    new Timing(
-                            timeStamp, bpm,true,bpm
-                    )
-            );
+            if (bpm != tempBpm){
+                tempBpm=bpm;
+                timingPoints.add(
+                        new Timing(
+                                timeStamp, bpm,true,bpm
+                        )
+                );
+            }
         }
         //03 03
         bf.getShort();
@@ -179,5 +184,6 @@ public class ImdReader implements MapReader{
             if (!unLocalizedMapInfo.allInfo.containsKey(info)){
                 unLocalizedMapInfo.allInfo.put(info, info.getDefaultValue());
             }
+            unLocalizedMapInfo.allInfo.put(ZXMInfo.TimingCount,String.valueOf(timingPoints.size()));
     }
 }
