@@ -3,6 +3,8 @@ package team.zxorg.zxnoter.ui_old.component;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Control;
+import javafx.scene.control.Labeled;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -58,6 +60,14 @@ public class HToolGroupBar extends HBox {
         }
         addNode(groupName, button);
         return button;
+    }
+
+    public void addControl(String groupName, Control button, String toolTip) {
+        getGroup(groupName).getChildren().add(button);
+        HBox.setMargin(button, new Insets(2));
+        if (toolTip != null) {
+            button.setTooltip(ComponentFactory.getTooltip(toolTip));
+        }
     }
 
 

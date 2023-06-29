@@ -9,7 +9,6 @@ import javafx.geometry.Side;
 import javafx.scene.control.*;
 import javafx.scene.input.*;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 import javafx.stage.PopupWindow;
@@ -127,6 +126,8 @@ public class MapEditor extends BaseEditor {
     LongProperty mapTimeLength = new SimpleLongProperty();//谱面时长
 
     int globalMeasure = 0;//全局分拍
+
+    LongProperty audioTimeOffset = new SimpleLongProperty(0);//音频时间偏移
 
     public MapEditor(Path mapPath, Tab tab) {
         this.tab = tab;
@@ -499,6 +500,7 @@ public class MapEditor extends BaseEditor {
                         RenderBeat renderBeat = RenderBeat.findTime(renderBeats, timeNow);
                         if (renderBeat != null) {
                             double beatTime = 60000 / renderBeat.timing.absBpm;
+                            renderBeat.measure = Math.max(renderBeat.measure, 1);
                             double measureTime = beatTime / renderBeat.measure;
                             mainMapRender.getInfo().timelinePosition.set(RenderBeat.alignBeatsTime(renderBeats, (long) (mainMapRender.getInfo().timelinePosition.get() + measureTime * (deltaY > 0 ? 1 : -1))));
                         }
@@ -881,6 +883,32 @@ public class MapEditor extends BaseEditor {
 
         }
 
+
+        {//时间
+            TextField textField = new TextField("0");
+            textField.setPrefWidth(40);
+            textField.setAlignment(Pos.CENTER);
+            textField.setPromptText("ms");
+            textField.focusedProperty().addListener((observable, oldValue, newValue) -> {
+                if (newValue) {
+                    textField.selectAll();
+                } else {
+                    textField.getParent().requestFocus();
+                    audioTimeOffset.set(Long.parseLong(textField.getText()));
+                }
+            });
+            textField.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+                if (event.getCode().equals(KeyCode.ENTER)) {
+                    textField.getParent().requestFocus();
+                    audioTimeOffset.set(Long.parseLong(textField.getText()));
+                    event.consume();
+                }
+            });
+
+            topToolBar.addControl("time", textField, "音频偏移(ms)");
+        }
+
+
         {//状态
 
 
@@ -1222,6 +1250,7 @@ public class MapEditor extends BaseEditor {
                     int id = ZXNApp.audioMixer.addAudio(workAudioPath);
                     audioChannel = ZXNApp.audioMixer.createChannel(id);
                     audioChannel.setVolume(0.10f);
+                    audioChannel.setEndBehavior(AudioChannel.EndBehavior.PAUSE);
 
                     //更新音频长度
                     audioTimeLength = audioChannel.getAudioLength();
@@ -1306,7 +1335,7 @@ public class MapEditor extends BaseEditor {
                         boolean isTrue = false;
                         renderBeat.measure = 1;
                         if (notes.size() > 0) {
-                            for (int measure = 0; measure < 49; measure++) {//尝试拍计算
+                            for (int measure = 1; measure < 49; measure++) {//尝试拍计算
                                 isTrue = true;
                                 for (long note : keyPoints) {
                                     if ((note - time + 2) % (beatCycleTime / measure) > 4) {
@@ -1321,7 +1350,7 @@ public class MapEditor extends BaseEditor {
                             }
                             if (!isTrue) {//只计算键头
                                 keyPoints = RenderBeat.keyPoint(notes, false);
-                                for (int measure = 0; measure < 49; measure++) {//尝试拍计算
+                                for (int measure = 1; measure < 49; measure++) {//尝试拍计算
                                     isTrue = true;
                                     for (long note : keyPoints) {
                                         if ((note - time + 2) % (beatCycleTime / measure) > 4) {
@@ -1364,7 +1393,7 @@ public class MapEditor extends BaseEditor {
 
         if (audioChannel != null) {
             if (!audioChannel.getPlayState().equals(AudioChannel.PlayState.PAUSE)) {
-                mainMapRender.getInfo().timelinePosition.set(audioChannel.getTime());
+                mainMapRender.getInfo().timelinePosition.set(audioChannel.getTime() + audioTimeOffset.get());
 
 
                 new Thread(() -> {
