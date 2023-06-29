@@ -22,6 +22,7 @@ import java.util.ArrayList;
  */
 public class OsuReader implements MapReader{
     Path readPath;
+    UnLocalizedMapInfo unLocalizedMapInfo;
 
     @Override
     public String getSupportFileExtension() {
@@ -50,7 +51,7 @@ public class OsuReader implements MapReader{
         ZXMap zxMap = new ZXMap();
         ArrayList<BaseNote> allNotes = new ArrayList<>();
         ArrayList<Timing> timingPoints = new ArrayList<>();
-        UnLocalizedMapInfo unLocalizedMapInfo = new UnLocalizedMapInfo();
+        unLocalizedMapInfo = new UnLocalizedMapInfo();
         readTemp = bfReader.readLine();
 
         unLocalizedMapInfo.addInfo(
@@ -251,13 +252,17 @@ public class OsuReader implements MapReader{
         unLocalizedMapInfo.addInfo(ZXMInfo.ObjectCount,String.valueOf(allNotes.size()));
         zxMap.notes = allNotes;
         zxMap.timingPoints = timingPoints;
+        completeInfo();
         zxMap.unLocalizedMapInfo = unLocalizedMapInfo;
 
         return zxMap;
     }
 
     @Override
-    public UnLocalizedMapInfo completeInfo() {
-        return null;
+    public void completeInfo() {
+        for (ZXMInfo info:ZXMInfo.values())
+            if (!unLocalizedMapInfo.allInfo.containsKey(info)){
+                unLocalizedMapInfo.allInfo.put(info, info.getDefaultValue());
+            }
     }
 }

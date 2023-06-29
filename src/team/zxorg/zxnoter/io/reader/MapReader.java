@@ -30,5 +30,5 @@ public interface MapReader {
      * 补全zxMap所需的反本地化信息
      * @return
      */
-    UnLocalizedMapInfo completeInfo();
+    void completeInfo();
 }

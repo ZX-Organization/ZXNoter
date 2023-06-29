@@ -3,6 +3,7 @@ package team.zxorg.zxnoter.io.reader;
 import team.zxorg.zxnoter.map.mapInfo.ImdInfo;
 import team.zxorg.zxnoter.map.mapInfo.UnLocalizedMapInfo;
 import team.zxorg.zxnoter.map.ZXMap;
+import team.zxorg.zxnoter.map.mapInfo.ZXMInfo;
 import team.zxorg.zxnoter.note.BaseNote;
 import team.zxorg.zxnoter.note.timing.Timing;
 import team.zxorg.zxnoter.note.fixedorbit.ComplexNote;
@@ -23,6 +24,7 @@ import java.util.ArrayList;
  */
 public class ImdReader implements MapReader{
     private Path readPath;
+    private UnLocalizedMapInfo unLocalizedMapInfo;
 
     @Override
     public String getSupportFileExtension() {
@@ -51,7 +53,7 @@ public class ImdReader implements MapReader{
 
         //初始化
         ZXMap map = new ZXMap();
-        UnLocalizedMapInfo unLocalizedMapInfo = new UnLocalizedMapInfo();
+        unLocalizedMapInfo = new UnLocalizedMapInfo();
         ArrayList<BaseNote> allNotes = new ArrayList<>();
 
         //截取文件标题
@@ -163,6 +165,7 @@ public class ImdReader implements MapReader{
             }
         }
         map.notes = allNotes;
+        completeInfo();
         map.unLocalizedMapInfo = unLocalizedMapInfo;
         map.timingPoints = timingPoints;
 
@@ -170,7 +173,10 @@ public class ImdReader implements MapReader{
     }
 
     @Override
-    public UnLocalizedMapInfo completeInfo() {
-        return new UnLocalizedMapInfo();
+    public void completeInfo() {
+        for (ZXMInfo info:ZXMInfo.values())
+            if (!unLocalizedMapInfo.allInfo.containsKey(info)){
+                unLocalizedMapInfo.allInfo.put(info, info.getDefaultValue());
+            }
     }
 }
