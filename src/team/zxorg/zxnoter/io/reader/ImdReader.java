@@ -82,15 +82,12 @@ public class ImdReader implements MapReader{
         //跳回首timingPoint处
         bf.position(8);
         ArrayList<Timing> timingPoints = new ArrayList<>(timingAmount);
-        timingPoints.add(new Timing(
-                bf.getInt(), bf.getDouble(),true,baseBpm
-        ));
-        for (int i = 1; i < timingAmount; i++) {
+        for (int i = 0; i < timingAmount; i++) {
             int timeStamp = bf.getInt();
             double bpm = bf.getDouble();
             timingPoints.add(
                     new Timing(
-                            timeStamp, bpm,false,bpm
+                            timeStamp, bpm,true,bpm
                     )
             );
         }
