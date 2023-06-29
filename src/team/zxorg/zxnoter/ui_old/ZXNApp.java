@@ -8,20 +8,27 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import team.zxorg.zxnoter.Main;
 import team.zxorg.zxnoter.audiomixer.AudioMixer;
 import team.zxorg.zxnoter.map.mapInfo.OsuInfo;
 import team.zxorg.zxnoter.map.mapInfo.ZXMInfo;
 import team.zxorg.zxnoter.resource.ZXResources;
+import team.zxorg.zxnoter.ui_old.editor.BaseEditor;
 import team.zxorg.zxnoter.ui_old.editor.MapEditor;
 
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.LineUnavailableException;
 import java.io.File;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
@@ -121,7 +128,7 @@ public class ZXNApp extends Application {
 
                 tab1.setContent(editor);
                 workspaceTabPane.getTabs().add(tab1);
-
+                workspaceTabPane.getSelectionModel().select(tab1);
                 rootPane.setOnKeyPressed(editor.getOnKeyPressed());
 
 
@@ -147,9 +154,10 @@ public class ZXNApp extends Application {
                 fileChooser.setTitle("导出谱面到");
 
                 // 添加文件过滤器
+                FileChooser.ExtensionFilter allFilter = new FileChooser.ExtensionFilter("全部谱面", "*.osu", "*.imd");
                 FileChooser.ExtensionFilter osuFilter = new FileChooser.ExtensionFilter("osu谱面", "*.osu");
                 FileChooser.ExtensionFilter imdFilter = new FileChooser.ExtensionFilter("节奏大师谱面", "*.imd");
-                fileChooser.getExtensionFilters().addAll(osuFilter, imdFilter);
+                fileChooser.getExtensionFilters().addAll(allFilter, osuFilter, imdFilter);
                 File file = fileChooser.showOpenDialog(stage.getOwner());
                 if (file != null) {
 
@@ -161,7 +169,7 @@ public class ZXNApp extends Application {
 
                     tab1.setContent(editor);
                     workspaceTabPane.getTabs().add(tab1);
-
+                    workspaceTabPane.getSelectionModel().select(tab1);
                     rootPane.setOnKeyPressed(editor.getOnKeyPressed());
 
 
@@ -183,25 +191,11 @@ public class ZXNApp extends Application {
             {//添加编辑器
                 Tab tab1 = new Tab();
                 MapEditor editor = new MapEditor(null, tab1);
-
                 tab1.setGraphic(ZXResources.getSvgPane("svg.icons.zxnoter.file-osu-line", 18, Color.DARKGREEN));
-
                 tab1.setContent(editor);
                 workspaceTabPane.getTabs().add(tab1);
-
+                workspaceTabPane.getSelectionModel().select(tab1);
                 rootPane.setOnKeyPressed(editor.getOnKeyPressed());
-
-
-                //画布更新线程常驻
-                AnimationTimer animationTimer = new AnimationTimer() {
-                    @Override
-                    public void handle(long l) {
-                        editor.render();
-                    }
-                };
-                animationTimer.start();
-
-
             }
         });
 
@@ -250,6 +244,66 @@ public class ZXNApp extends Application {
         //workspace.setShape(ZXResources.getSvg("svg.icons.zxnoter.zxnoter"));
 
         VBox.setVgrow(workspaceTabPane, Priority.ALWAYS);
+
+
+        //画布更新线程常驻
+        AnimationTimer animationTimer = new AnimationTimer() {
+            @Override
+            public void handle(long l) {
+                Tab tab = workspaceTabPane.getSelectionModel().getSelectedItem();
+                if (tab != null)
+                    if (tab.getContent() instanceof BaseEditor editor)
+                        editor.render();
+            }
+        };
+        animationTimer.start();
+
+
+        for (String file : Main.args) {
+            Path path = Paths.get(file);
+            if (Files.exists(path)) {//添加编辑器
+                Tab tab1 = new Tab();
+                MapEditor editor = new MapEditor(path, tab1);
+                tab1.setGraphic(ZXResources.getSvgPane("svg.icons.zxnoter.file-osu-line", 18, Color.DARKGREEN));
+                tab1.setContent(editor);
+                workspaceTabPane.getTabs().add(tab1);
+                rootPane.setOnKeyPressed(editor.getOnKeyPressed());
+            }
+        }
+
+
+        rootPane.setOnDragOver(event -> {
+            if (event.getDragboard().hasFiles()) {
+                // 允许拖放
+                event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+            }
+            event.consume();
+        });
+        rootPane.setOnDragDropped(event -> {
+
+            Dragboard db = event.getDragboard();
+            boolean success = false;
+            if (db.hasFiles()) {
+                // 获取拖放的文件列表
+                for (File file : db.getFiles()) {
+                    {//添加编辑器
+                        Tab tab1 = new Tab();
+                        MapEditor editor = new MapEditor(file.toPath(), tab1);
+                        tab1.setGraphic(ZXResources.getSvgPane("svg.icons.zxnoter.file-osu-line", 18, Color.DARKGREEN));
+                        tab1.setContent(editor);
+                        workspaceTabPane.getTabs().add(tab1);
+                        workspaceTabPane.getSelectionModel().select(tab1);
+                        rootPane.setOnKeyPressed(editor.getOnKeyPressed());
+                    }
+                }
+                success = true;
+            }
+            event.setDropCompleted(success);
+            event.consume();
+
+
+        });
+
 
 
         /*{//添加编辑器
