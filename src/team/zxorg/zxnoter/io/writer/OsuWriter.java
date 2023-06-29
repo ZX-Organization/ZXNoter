@@ -101,6 +101,9 @@ public class OsuWriter implements Writer{
         for (Timing timing: zxMap.timingPoints){
             StringBuilder strB = new StringBuilder();
             strB.append(timing.timestamp).append(",");
+
+            System.out.println(timing);
+
             //判断是否属于ZxTiming,是则细分
             if (timing instanceof ZXTiming zxTiming){
                 if (zxTiming.isExtendTiming)
@@ -118,8 +121,10 @@ public class OsuWriter implements Writer{
 
                 }
             }else {
-                if (timing.bpmSpeed == timing.absBpm)
-                    strB.append(1/(baseBpm/60000)).append(",");
+
+                if (Math.abs(timing.bpmSpeed - timing.absBpm) <= 0.0002) {
+                    strB.append(1 / (baseBpm / 60000)).append(",");
+                }
                 else {
                     strB.append("-").append(100/(timing.bpmSpeed / timing.absBpm)).append(",");
                 }
@@ -145,7 +150,9 @@ public class OsuWriter implements Writer{
             if (index==1){
                 strB.append(1).append(",").append(0);
             }else {
-                strB.append(0).append(",").append(0);
+                if (Math.abs(timing.bpmSpeed - timing.absBpm) <= 0.0002)
+                    strB.append(1).append(",").append(0);
+                else strB.append(0).append(",").append(0);
             }
             bW.write(strB.toString());
             bW.newLine();

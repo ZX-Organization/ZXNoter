@@ -128,6 +128,9 @@ public class OsuReader implements MapReader{
                     continue;
                 }
                 case 1->{
+
+                    System.out.println(readTemp);
+
                     //时间点处理
                     String[] allPars = readTemp.split(",");
                     boolean isExtendTiming = (Integer.parseInt(allPars[6]) == 1);
@@ -138,9 +141,13 @@ public class OsuReader implements MapReader{
                         timeStamp = Integer.parseInt(allPars[0]);
                     }
                     double beatPar = Double.parseDouble(allPars[1]);
+
                     if(beatPar > 0){
                         baseBpm = 60000/beatPar;
                     }
+                    System.out.print("基准bpm"+baseBpm+'\t');
+                    System.out.print("继承"+isExtendTiming+'\t');
+
                     if (isExtendTiming){
                         //继承
                         //变速bpm时间点添加
