@@ -1188,7 +1188,7 @@ public class MapEditor extends BaseEditor {
                     //ZXNApp.audioMixer.addAudioChannel(audioInputChannel);
                 }
             } catch (Exception e) {
-                System.out.println("初始化播放通道失败");
+                //System.out.println("初始化播放通道失败");
                 throw new RuntimeException(e);
             }
 
