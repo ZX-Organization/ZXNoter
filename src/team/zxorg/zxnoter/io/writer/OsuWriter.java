@@ -102,8 +102,6 @@ public class OsuWriter implements Writer{
             StringBuilder strB = new StringBuilder();
             strB.append(timing.timestamp).append(",");
 
-            System.out.println(timing);
-
             //判断是否属于ZxTiming,是则细分
             if (timing instanceof ZXTiming zxTiming){
                 if (zxTiming.isExtendTiming)
@@ -117,7 +115,6 @@ public class OsuWriter implements Writer{
                     }else {
                         strB.append(tempBeatPar).append(",");
                     }
-                    //System.out.println( ( (tempBeatPar % 1) == 0) ? (int)tempBeatPar : tempBeatPar);
 
                 }
             }else {
@@ -252,7 +249,6 @@ public class OsuWriter implements Writer{
         );
         //列举目前有的反本地化信息,判断有无和上面所需信息表反本地化信息相同的信息,直接使用
         for (OsuInfo localizedInfo : infos) {
-            //System.out.println(localizedInfo);
             //通过本地化信息表查询所有反本地化信息
             String tempValue = unLocalizedMapInfo.getInfo(localizedInfo.unLocalize());
             if (tempValue == null) {

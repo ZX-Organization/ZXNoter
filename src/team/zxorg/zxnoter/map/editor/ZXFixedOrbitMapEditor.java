@@ -503,7 +503,6 @@ public class ZXFixedOrbitMapEditor {
         //克隆结果插入原map
         for (BaseNote note : tempMapOperate.desNotes) {
 
-            //System.out.println(note);
             count+= srcMap.insertNote(note.clone());
         }
         //修改信息

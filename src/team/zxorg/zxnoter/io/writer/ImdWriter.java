@@ -63,7 +63,6 @@ public class ImdWriter implements Writer{
 
         //时间点
         for (Timing timing: zxMap.timingPoints){
-            System.out.println(timing);
             bf.putInt((int)timing.timestamp);//时间戳
             bf.putDouble(timing.absBpm);//bpm
         }

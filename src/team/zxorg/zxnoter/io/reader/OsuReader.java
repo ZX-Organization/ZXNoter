@@ -143,8 +143,7 @@ public class OsuReader implements MapReader{
                     if(beatPar > 0){
                         baseBpm = 60000/beatPar;
                     }
-                    System.out.print("基准bpm"+baseBpm+'\t');
-                    System.out.print("继承"+isExtendTiming+'\t');
+
 
                     if (isExtendTiming){
                         //继承
@@ -191,8 +190,7 @@ public class OsuReader implements MapReader{
                         //物件处理
                         noteStr = readTemp.substring(0 , readTemp.lastIndexOf(","));
                         sampleStr = readTemp.substring(noteStr.length()+1);
-                        //System.out.println("base->"+noteStr);
-                        //System.out.println("temp->"+sampleStr);
+
                         //检查tempStr中是否有五个冒号,有五个冒号证明此物件为长条,且tempStr中包含长条参数
 
                         int colonSymCount = sampleStr.length() - sampleStr.replaceAll(":","").length();
@@ -212,15 +210,11 @@ public class OsuReader implements MapReader{
                     }
                     //分割物件参数集
                     String[] notePars = noteStr.split(",");
-                    //System.out.println("源->"+readTemp);
                     //分割物件音效组参数集
                     String[] sampleSetPars = sampleStr.split(":");
 
                     //预定义物件
                     FixedOrbitNote note;
-                    //System.out.println("音效组->"+Arrays.toString(sampleSetPars));
-                    //System.out.println("物件参数->"+Arrays.toString(notePars));
-                    //System.out.println();
                     //通过参数列表长度区分长键单键
                     if (notePars.length == 5 ){
                         //单键
