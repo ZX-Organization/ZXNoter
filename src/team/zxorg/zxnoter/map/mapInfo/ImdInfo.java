@@ -5,30 +5,25 @@ package team.zxorg.zxnoter.map.mapInfo;
  */
 public enum ImdInfo{
 
-    MapLength(ZXMInfo.MapLength, ""),
-    TimingCount(ZXMInfo.TimingCount, "0"),
-    TabRows(ZXMInfo.ObjectCount, ""),
-    ImdBpm(ZXMInfo.Bpm, ""),
-    ImdTitle(ZXMInfo.Title, ""),
-    ImdVersion(ZXMInfo.Version, "ez"),
-    ImdKeyCount(ZXMInfo.KeyCount, "4"),
-    ImdBgPath(ZXMInfo.BgPath, ""),
-    ImdAudioPath(ZXMInfo.AudioPath, "");
+    MapLength(ZXMInfo.MapLength),
+    TimingCount(ZXMInfo.TimingCount),
+    TabRows(ZXMInfo.ObjectCount),
+    ImdBpm(ZXMInfo.Bpm),
+    ImdTitle(ZXMInfo.Title),
+    ImdVersion(ZXMInfo.Version),
+    ImdKeyCount(ZXMInfo.KeyCount),
+    ImdBgPath(ZXMInfo.BgPath),
+    ImdAudioPath(ZXMInfo.AudioPath);
     private final ZXMInfo unLocalizedInfo;
-    private final String defaultValue;
 
-    ImdInfo(ZXMInfo unLocalizedInfo, String defaultValue) {
+    ImdInfo(ZXMInfo unLocalizedInfo) {
         this.unLocalizedInfo = unLocalizedInfo;
-        this.defaultValue = defaultValue;
     }
 
     public ZXMInfo unLocalize() {
         return unLocalizedInfo;
     }
 
-    public String getDefaultValue() {
-        return defaultValue;
-    }
     public enum ConvertMethod{
         BASE("滑键转成单键,组合键不拆分,直接转为单键"),
         BASE_SLIDE("拆分组合键,滑键转为同时间戳的两个或多个单键"),

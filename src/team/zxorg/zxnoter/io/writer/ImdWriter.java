@@ -182,7 +182,7 @@ public class ImdWriter implements Writer{
                         break;
                     }
                     case ImdVersion -> {
-                        tempValue = ImdInfo.ImdVersion.getDefaultValue();
+                        tempValue = ImdInfo.ImdVersion.unLocalize().getDefaultValue();
                     }
                     case ImdBgPath -> {
                         //自动使用标题名

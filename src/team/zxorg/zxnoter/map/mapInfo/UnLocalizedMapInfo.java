@@ -32,13 +32,8 @@ public class UnLocalizedMapInfo {
      */
     public static UnLocalizedMapInfo getDefaultInfo() {
         UnLocalizedMapInfo info = new UnLocalizedMapInfo();
-        for (OsuInfo osuInfo:OsuInfo.values()){
-            info.addInfo(osuInfo.unLocalize(), osuInfo.getDefaultValue());
-        }
-        for (ImdInfo imdInfo:ImdInfo.values()){
-            info.addInfo(imdInfo.unLocalize(), imdInfo.getDefaultValue());
-        }
-        info.addInfo(ZXMInfo.ObjectCount,"0");
+        for (ZXMInfo zxmInfo:ZXMInfo.values())
+            info.addInfo(zxmInfo, zxmInfo.getDefaultValue());
         return info;
     }
 

@@ -84,7 +84,7 @@ public class OsuWriter implements Writer{
         bW.write("[Events]");
         bW.newLine();
         for (OsuInfo info:eventInfos){
-            bW.write("//"+info.unLocalize());
+            bW.write("//"+info.getOriginName());
             bW.newLine();
             if (!"".equals(allInfos.get(info))){
                 bW.write(allInfos.get(info));
@@ -226,7 +226,7 @@ public class OsuWriter implements Writer{
         return allInfos.get(OsuInfo.Title) + " [" + allInfos.get(OsuInfo.Version) + "]" + ".osu";
     }
     private void writeKeyValueInfo(OsuInfo info) throws IOException {
-        bW.write(info.name());
+        bW.write(info.getOriginName());
         bW.write(":");
         bW.write(allInfos.get(info));
         bW.newLine();
@@ -270,7 +270,7 @@ public class OsuWriter implements Writer{
                         continue;
                     }
                 }
-                tempValue = localizedInfo.getDefaultValue();
+                tempValue = localizedInfo.unLocalize().getDefaultValue();
                 localizeMap.put(localizedInfo, tempValue);
                 continue;
             }
