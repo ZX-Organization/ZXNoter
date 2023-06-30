@@ -1,7 +1,7 @@
 package team.zxorg.zxnoter.note.fixedorbit;
 
 import team.zxorg.zxnoter.map.editor.ZXFixedOrbitMapEditor;
-import team.zxorg.zxnoter.map.mapInfo.ImdInfo;
+import team.zxorg.zxnoter.info.map.ImdInfo;
 import team.zxorg.zxnoter.note.BaseNote;
 
 /**

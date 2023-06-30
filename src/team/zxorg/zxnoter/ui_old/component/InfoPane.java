@@ -1,20 +1,15 @@
 package team.zxorg.zxnoter.ui_old.component;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import team.zxorg.zxnoter.map.mapInfo.UnLocalizedMapInfo;
-import team.zxorg.zxnoter.map.mapInfo.ZXMInfo;
+import team.zxorg.zxnoter.info.map.UnLocalizedMapInfo;
+import team.zxorg.zxnoter.info.map.ZXMInfo;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class InfoPane extends VBox {
@@ -58,7 +53,7 @@ public class InfoPane extends VBox {
             valueTextField.setMaxWidth(400);
             valueTextField.setText(unlocalizedInfo.getInfo(zxmInfo));
             valueTextField.textProperty().addListener((observable, oldValue, newValue) -> {
-                unlocalizedInfo.addInfo(zxmInfo, newValue);
+                unlocalizedInfo.setInfo(zxmInfo, newValue);
             });
 
         }

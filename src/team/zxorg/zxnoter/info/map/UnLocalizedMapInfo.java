@@ -1,4 +1,6 @@
-package team.zxorg.zxnoter.map.mapInfo;
+package team.zxorg.zxnoter.info.map;
+
+import team.zxorg.zxnoter.info.editor.ZXNInfo;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,7 +17,7 @@ public class UnLocalizedMapInfo {
         addInterfaceList = new ArrayList<>();
     }
 
-    public void addInfo(ZXMInfo key, String value) {
+    public void setInfo(ZXMInfo key, String value) {
 
         allInfo.put(key, value);
         for (AddCallBack addCallBack:addInterfaceList)
@@ -33,7 +35,7 @@ public class UnLocalizedMapInfo {
     public static UnLocalizedMapInfo getDefaultInfo() {
         UnLocalizedMapInfo info = new UnLocalizedMapInfo();
         for (ZXMInfo zxmInfo:ZXMInfo.values())
-            info.addInfo(zxmInfo, zxmInfo.getDefaultValue());
+            info.setInfo(zxmInfo, zxmInfo.getDefaultValue());
         return info;
     }
 

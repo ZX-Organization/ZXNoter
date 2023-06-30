@@ -1,4 +1,4 @@
-package team.zxorg.zxnoter.audiomixer;
+package team.zxorg.zxnoter.sound.audiomixer;
 
 import java.util.BitSet;
 

@@ -1,6 +1,6 @@
 package team.zxorg.zxnoter.note.fixedorbit;
 
-import team.zxorg.zxnoter.map.mapInfo.ImdInfo;
+import team.zxorg.zxnoter.info.map.ImdInfo;
 
 import java.util.ArrayList;
 

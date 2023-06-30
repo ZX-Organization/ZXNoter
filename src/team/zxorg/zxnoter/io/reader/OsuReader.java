@@ -1,9 +1,9 @@
 package team.zxorg.zxnoter.io.reader;
 
-import team.zxorg.zxnoter.map.mapInfo.UnLocalizedMapInfo;
+import team.zxorg.zxnoter.info.map.UnLocalizedMapInfo;
 import team.zxorg.zxnoter.map.ZXMap;
-import team.zxorg.zxnoter.map.mapInfo.OsuInfo;
-import team.zxorg.zxnoter.map.mapInfo.ZXMInfo;
+import team.zxorg.zxnoter.info.map.OsuInfo;
+import team.zxorg.zxnoter.info.map.ZXMInfo;
 import team.zxorg.zxnoter.note.BaseNote;
 import team.zxorg.zxnoter.note.fixedorbit.FixedOrbitNote;
 import team.zxorg.zxnoter.note.fixedorbit.CustomLongNote;
@@ -55,7 +55,7 @@ public class OsuReader implements MapReader{
         unLocalizedMapInfo = new UnLocalizedMapInfo();
         readTemp = bfReader.readLine();
 
-        unLocalizedMapInfo.addInfo(
+        unLocalizedMapInfo.setInfo(
                 OsuInfo.valueOf(readTemp.substring(0 , readTemp.lastIndexOf("v")).replaceAll(" ","")).unLocalize(),
                 readTemp.substring(readTemp.lastIndexOf("v"))
         );
@@ -70,7 +70,7 @@ public class OsuReader implements MapReader{
             if (readTemp.startsWith("[")){
                 //处理事件属性末尾未定义情况
                 if (eventValueMode){
-                    unLocalizedMapInfo.addInfo(eventInfo.unLocalize() , "");
+                    unLocalizedMapInfo.setInfo(eventInfo.unLocalize() , "");
                 }
                 //设置读取模式
                 if ("[Events]".equals(readTemp)){
@@ -94,7 +94,7 @@ public class OsuReader implements MapReader{
                     //带冒号属性
                     String name = readTemp.substring(0 , readTemp.indexOf(":"));
                     String value = readTemp.substring(readTemp.lastIndexOf(":") + 1);
-                    unLocalizedMapInfo.addInfo(
+                    unLocalizedMapInfo.setInfo(
                             OsuInfo.valueOf(name).unLocalize() ,
                             value.trim()
                     );
@@ -114,11 +114,11 @@ public class OsuReader implements MapReader{
                         //事件值读取模式
                         if (readTemp.startsWith("//")){
                             //值读取模式又一次读到事件名
-                            unLocalizedMapInfo.addInfo(eventInfo.unLocalize() , "");
+                            unLocalizedMapInfo.setInfo(eventInfo.unLocalize() , "");
                             eventInfo = OsuInfo.valueOf(key);
                         }else {
                             //值读取
-                            unLocalizedMapInfo.addInfo(eventInfo.unLocalize() , readTemp);
+                            unLocalizedMapInfo.setInfo(eventInfo.unLocalize() , readTemp);
                             eventValueMode = false;
                         }
                     }else {
@@ -249,8 +249,8 @@ public class OsuReader implements MapReader{
                 }
             }
         }
-        unLocalizedMapInfo.addInfo(OsuInfo.Bpm.unLocalize(),String.valueOf(baseBpm));
-        unLocalizedMapInfo.addInfo(ZXMInfo.ObjectCount,String.valueOf(allNotes.size()));
+        unLocalizedMapInfo.setInfo(OsuInfo.Bpm.unLocalize(),String.valueOf(baseBpm));
+        unLocalizedMapInfo.setInfo(ZXMInfo.ObjectCount,String.valueOf(allNotes.size()));
         zxMap.notes = allNotes;
         zxMap.timingPoints = timingPoints;
         completeInfo();

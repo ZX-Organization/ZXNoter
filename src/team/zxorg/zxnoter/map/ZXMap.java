@@ -1,16 +1,14 @@
 package team.zxorg.zxnoter.map;
 
-import team.zxorg.zxnoter.map.mapInfo.ImdInfo;
-import team.zxorg.zxnoter.map.mapInfo.UnLocalizedMapInfo;
-import team.zxorg.zxnoter.map.mapInfo.ZXMInfo;
+
+import team.zxorg.zxnoter.info.editor.ZXNInfo;
+import team.zxorg.zxnoter.info.map.UnLocalizedMapInfo;
 import team.zxorg.zxnoter.note.BaseNote;
 import team.zxorg.zxnoter.note.fixedorbit.ComplexNote;
-import team.zxorg.zxnoter.note.fixedorbit.FixedOrbitNote;
-import team.zxorg.zxnoter.note.fixedorbit.LongNote;
-import team.zxorg.zxnoter.note.fixedorbit.SlideNote;
 import team.zxorg.zxnoter.note.timing.Timing;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * zx谱面类
@@ -28,6 +26,12 @@ public class ZXMap {
     public UnLocalizedMapInfo unLocalizedMapInfo;
 
     /**
+     * 编辑器信息
+     */
+    public HashMap<String,String> editorInfo;
+
+
+    /**
      * 新建map
      */
     public ZXMap() {
@@ -35,12 +39,14 @@ public class ZXMap {
         separateNotes = new ArrayList<>();
         timingPoints = new ArrayList<>();
         unLocalizedMapInfo = UnLocalizedMapInfo.getDefaultInfo();
+        editorInfo = new HashMap<>();
     }
 
     public ZXMap(ArrayList<BaseNote> notes, ArrayList<Timing> timingPoints, UnLocalizedMapInfo unLocalizedMapInfo) {
         this.notes = notes;
         this.timingPoints = timingPoints;
         this.unLocalizedMapInfo = unLocalizedMapInfo;
+        editorInfo = new HashMap<>();
     }
 
     /**
@@ -392,7 +398,7 @@ public class ZXMap {
         note.setOrbit(orbit);
     }
 
-    public void initSeparateNotes() {
+    private void initSeparateNotes() {
         separateNotes = new ArrayList<>();
         for (BaseNote note : notes) {
             if (note instanceof ComplexNote complexNote) {
@@ -402,6 +408,9 @@ public class ZXMap {
             }
         }
         notes.sort(BaseNote::compareTo);
+    }
+    public void setEditInfo(ZXNInfo info,String value){
+        editorInfo.put(info.name(),value);
     }
     @Override
     public String toString() {

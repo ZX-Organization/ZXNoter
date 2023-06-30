@@ -2,25 +2,18 @@ package team.zxorg.zxnoter.ui_old;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 import team.zxorg.zxnoter.Main;
-import team.zxorg.zxnoter.audiomixer.AudioMixer;
-import team.zxorg.zxnoter.map.mapInfo.OsuInfo;
-import team.zxorg.zxnoter.map.mapInfo.ZXMInfo;
+import team.zxorg.zxnoter.sound.audiomixer.AudioMixer;
 import team.zxorg.zxnoter.resource.ZXResources;
 import team.zxorg.zxnoter.ui_old.editor.BaseEditor;
 import team.zxorg.zxnoter.ui_old.editor.MapEditor;
@@ -31,7 +24,6 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
 
 public class ZXNApp extends Application {
     /**

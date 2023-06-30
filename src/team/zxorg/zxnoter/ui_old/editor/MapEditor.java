@@ -12,17 +12,17 @@ import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 import javafx.stage.PopupWindow;
-import team.zxorg.zxnoter.audiomixer.AudioChannel;
-import team.zxorg.zxnoter.audiomixer.FFmpeg;
+import team.zxorg.zxnoter.sound.audiomixer.AudioChannel;
+import team.zxorg.zxnoter.sound.audiomixer.FFmpeg;
 import team.zxorg.zxnoter.io.reader.ImdReader;
 import team.zxorg.zxnoter.io.reader.OsuReader;
 import team.zxorg.zxnoter.io.writer.ImdWriter;
 import team.zxorg.zxnoter.io.writer.OsuWriter;
 import team.zxorg.zxnoter.map.ZXMap;
 import team.zxorg.zxnoter.map.editor.ZXFixedOrbitMapEditor;
-import team.zxorg.zxnoter.map.mapInfo.ImdInfo;
-import team.zxorg.zxnoter.map.mapInfo.OsuInfo;
-import team.zxorg.zxnoter.map.mapInfo.ZXMInfo;
+import team.zxorg.zxnoter.info.map.ImdInfo;
+import team.zxorg.zxnoter.info.map.OsuInfo;
+import team.zxorg.zxnoter.info.map.ZXMInfo;
 import team.zxorg.zxnoter.note.BaseNote;
 import team.zxorg.zxnoter.note.fixedorbit.ComplexNote;
 import team.zxorg.zxnoter.note.fixedorbit.FixedOrbitNote;
@@ -772,7 +772,7 @@ public class MapEditor extends BaseEditor {
             if (event.getButton().equals(MouseButton.SECONDARY)) {
                 if (infoRender.selectTiming != null) {
                     zxMap.timingPoints.remove(infoRender.selectTiming);
-                    zxMap.unLocalizedMapInfo.addInfo(ZXMInfo.TimingCount, String.valueOf(zxMap.timingPoints.size()));
+                    zxMap.unLocalizedMapInfo.setInfo(ZXMInfo.TimingCount, String.valueOf(zxMap.timingPoints.size()));
                     upDateBeats();
                 }
             }
@@ -1011,7 +1011,7 @@ public class MapEditor extends BaseEditor {
                         orbits++;
                     else
                         orbits--;
-                    zxMap.unLocalizedMapInfo.addInfo(ZXMInfo.KeyCount, String.valueOf(orbits));
+                    zxMap.unLocalizedMapInfo.setInfo(ZXMInfo.KeyCount, String.valueOf(orbits));
                 });
             }
 
@@ -1055,7 +1055,7 @@ public class MapEditor extends BaseEditor {
 
 
                     zxMap.timingPoints.add(timing);
-                    zxMap.unLocalizedMapInfo.addInfo(ZXMInfo.TimingCount, String.valueOf(zxMap.timingPoints.size()));
+                    zxMap.unLocalizedMapInfo.setInfo(ZXMInfo.TimingCount, String.valueOf(zxMap.timingPoints.size()));
                     upDateBeats();
                     if (zxMap.timingPoints.size() == 2) {
                         globalSubbeatButton.getOnScroll().handle(null);
@@ -1198,21 +1198,21 @@ public class MapEditor extends BaseEditor {
             String title = metadata.get(FFmpeg.AudioMetadataKey.TITLE.getKey());
             if (title == null) title = "";
             if ("".equals(zxMap.unLocalizedMapInfo.getInfo(ZXMInfo.TitleUnicode)) || zxMap.unLocalizedMapInfo.getInfo(ZXMInfo.TitleUnicode) == null)
-                zxMap.unLocalizedMapInfo.addInfo(ZXMInfo.TitleUnicode, title);
+                zxMap.unLocalizedMapInfo.setInfo(ZXMInfo.TitleUnicode, title);
 
             if ("".equals(zxMap.unLocalizedMapInfo.getInfo(ZXMInfo.Title)) || zxMap.unLocalizedMapInfo.getInfo(ZXMInfo.Title) == null)
                 if (Pattern.matches("\\A\\p{ASCII}*\\z", title))
-                    zxMap.unLocalizedMapInfo.addInfo(ZXMInfo.Title, title);
+                    zxMap.unLocalizedMapInfo.setInfo(ZXMInfo.Title, title);
 
             if ("".equals(title)) {
                 title = audioPath.getFileName().toString();
 
                 if ("".equals(zxMap.unLocalizedMapInfo.getInfo(ZXMInfo.TitleUnicode)))
-                    zxMap.unLocalizedMapInfo.addInfo(ZXMInfo.TitleUnicode, title);
+                    zxMap.unLocalizedMapInfo.setInfo(ZXMInfo.TitleUnicode, title);
 
                 if ("".equals(zxMap.unLocalizedMapInfo.getInfo(ZXMInfo.Title)))
                     if (Pattern.matches("\\A\\p{ASCII}*\\z", title))
-                        zxMap.unLocalizedMapInfo.addInfo(ZXMInfo.Title, title);
+                        zxMap.unLocalizedMapInfo.setInfo(ZXMInfo.Title, title);
             }
 
 
@@ -1220,13 +1220,13 @@ public class MapEditor extends BaseEditor {
             if (artist == null) artist = "";
 
             if ("".equals(zxMap.unLocalizedMapInfo.getInfo(ZXMInfo.ArtistUnicode)) || zxMap.unLocalizedMapInfo.getInfo(ZXMInfo.ArtistUnicode) == null)
-                zxMap.unLocalizedMapInfo.addInfo(ZXMInfo.ArtistUnicode, artist);
+                zxMap.unLocalizedMapInfo.setInfo(ZXMInfo.ArtistUnicode, artist);
 
             if ("".equals(zxMap.unLocalizedMapInfo.getInfo(ZXMInfo.Artist)) || zxMap.unLocalizedMapInfo.getInfo(ZXMInfo.Artist) == null)
                 if (Pattern.matches("\\A\\p{ASCII}*\\z", artist))
-                    zxMap.unLocalizedMapInfo.addInfo(ZXMInfo.Artist, artist);
+                    zxMap.unLocalizedMapInfo.setInfo(ZXMInfo.Artist, artist);
             mapResourcePath = audioPath.getParent();
-            zxMap.unLocalizedMapInfo.addInfo(ZXMInfo.AudioPath, audioPath.getFileName().toString());
+            zxMap.unLocalizedMapInfo.setInfo(ZXMInfo.AudioPath, audioPath.getFileName().toString());
             updateMusic();
             upDateBeats();
         }

@@ -1,8 +1,8 @@
 package team.zxorg.zxnoter.io.reader;
 
-import team.zxorg.zxnoter.map.mapInfo.UnLocalizedMapInfo;
+import team.zxorg.zxnoter.info.map.UnLocalizedMapInfo;
 import team.zxorg.zxnoter.map.ZXMap;
-import team.zxorg.zxnoter.map.mapInfo.ZXMInfo;
+import team.zxorg.zxnoter.info.map.ZXMInfo;
 
 import java.io.IOException;
 import java.nio.file.Path;

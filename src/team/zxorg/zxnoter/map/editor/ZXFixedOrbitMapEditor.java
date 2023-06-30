@@ -1,7 +1,7 @@
 package team.zxorg.zxnoter.map.editor;
 
 import team.zxorg.zxnoter.map.ZXMap;
-import team.zxorg.zxnoter.map.mapInfo.ZXMInfo;
+import team.zxorg.zxnoter.info.map.ZXMInfo;
 import team.zxorg.zxnoter.note.BaseNote;
 import team.zxorg.zxnoter.note.fixedorbit.ComplexNote;
 import team.zxorg.zxnoter.note.fixedorbit.FixedOrbitNote;
@@ -492,7 +492,7 @@ public class ZXFixedOrbitMapEditor {
         for (BaseNote note : tempMapOperate.srcNotes)
             if (note != null) {
                 //非新建
-                srcMap.unLocalizedMapInfo.addInfo(
+                srcMap.unLocalizedMapInfo.setInfo(
                         ZXMInfo.ObjectCount,
                         String.valueOf(
                                 Integer.parseInt(srcMap.unLocalizedMapInfo.getInfo(ZXMInfo.ObjectCount)) - srcMap.deleteNote(note)
@@ -506,7 +506,7 @@ public class ZXFixedOrbitMapEditor {
             count+= srcMap.insertNote(note.clone());
         }
         //修改信息
-        srcMap.unLocalizedMapInfo.addInfo(
+        srcMap.unLocalizedMapInfo.setInfo(
                 ZXMInfo.ObjectCount,
                 String.valueOf(
                         Integer.parseInt(srcMap.unLocalizedMapInfo.getInfo(ZXMInfo.ObjectCount)) + count
@@ -681,7 +681,7 @@ public class ZXFixedOrbitMapEditor {
             MapOperate operate = operateStack.pollLast();
             for (BaseNote desNote : operate.desNotes) {
                 if (desNote != null) {
-                    srcMap.unLocalizedMapInfo.addInfo(
+                    srcMap.unLocalizedMapInfo.setInfo(
                             ZXMInfo.ObjectCount,
                             String.valueOf(
                                     Integer.parseInt(srcMap.unLocalizedMapInfo.getInfo(ZXMInfo.ObjectCount)) - srcMap.deleteNote(desNote)
@@ -691,7 +691,7 @@ public class ZXFixedOrbitMapEditor {
             }
             for (BaseNote srcNote : operate.srcNotes) {
                 if (srcNote != null) {
-                    srcMap.unLocalizedMapInfo.addInfo(
+                    srcMap.unLocalizedMapInfo.setInfo(
                             ZXMInfo.ObjectCount,
                             String.valueOf(
                                     Integer.parseInt(srcMap.unLocalizedMapInfo.getInfo(ZXMInfo.ObjectCount)) + srcMap.insertNote(srcNote)
@@ -715,7 +715,7 @@ public class ZXFixedOrbitMapEditor {
             MapOperate operate = withdrawStack.pollLast();
             for (BaseNote desNote : operate.desNotes) {
                 if (desNote != null) {
-                    srcMap.unLocalizedMapInfo.addInfo(
+                    srcMap.unLocalizedMapInfo.setInfo(
                             ZXMInfo.ObjectCount,
                             String.valueOf(
                                     Integer.parseInt(srcMap.unLocalizedMapInfo.getInfo(ZXMInfo.ObjectCount)) - srcMap.deleteNote(desNote)
@@ -725,7 +725,7 @@ public class ZXFixedOrbitMapEditor {
             }
             for (BaseNote srcNote : operate.srcNotes) {
                 if (srcNote != null) {
-                    srcMap.unLocalizedMapInfo.addInfo(
+                    srcMap.unLocalizedMapInfo.setInfo(
                             ZXMInfo.ObjectCount,
                             String.valueOf(
                                     Integer.parseInt(srcMap.unLocalizedMapInfo.getInfo(ZXMInfo.ObjectCount)) + srcMap.insertNote(srcNote)

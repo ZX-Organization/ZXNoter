@@ -1,8 +1,8 @@
 package team.zxorg.zxnoter.io.writer;
 
-import team.zxorg.zxnoter.map.mapInfo.UnLocalizedMapInfo;
+import team.zxorg.zxnoter.info.map.UnLocalizedMapInfo;
 import team.zxorg.zxnoter.map.ZXMap;
-import team.zxorg.zxnoter.map.mapInfo.OsuInfo;
+import team.zxorg.zxnoter.info.map.OsuInfo;
 import team.zxorg.zxnoter.note.BaseNote;
 import team.zxorg.zxnoter.note.fixedorbit.*;
 

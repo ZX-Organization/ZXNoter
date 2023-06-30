@@ -1,11 +1,10 @@
-package team.zxorg.zxnoter.audiomixer;
+package team.zxorg.zxnoter.sound.audiomixer;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.file.Path;
-import java.util.Arrays;
 import java.util.HashMap;
 
 public class FFmpeg {
