@@ -140,7 +140,7 @@ public class ZXMap {
         if (isDeepFind) {
             //深度查询
             startIndex = 0;
-//向后找到时间范围内的按键
+            //向后找到时间范围内的按键
             while (startIndex <= separateNotes.size() - 1 && separateNotes.get(startIndex).timeStamp < time) {
                 startIndex++;
             }
@@ -412,6 +412,7 @@ public class ZXMap {
     public void setEditInfo(ZXNInfo info,String value){
         editorInfo.put(info.name(),value);
     }
+
     @Override
     public String toString() {
         return "ZXMap{" +

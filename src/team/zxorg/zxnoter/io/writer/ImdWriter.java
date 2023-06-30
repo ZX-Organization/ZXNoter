@@ -46,11 +46,8 @@ public class ImdWriter implements Writer{
         int absoluteNotesSize = 0;
         for (BaseNote note: zxMap.notes){
             if (note instanceof ComplexNote complexNote){
-                for (FixedOrbitNote ignored : complexNote.notes){
-                    absoluteNotesSize ++;
-                }
-            }
-            absoluteNotesSize ++;
+                absoluteNotesSize+=complexNote.notes.size();
+            }else absoluteNotesSize ++;
         }
         int cap =
                 4+4+zxMap.timingPoints.size() * 12 +//谱面长度(int4)+时间点数(int4)+所有时间点(bpm-double8+时间戳int4)
