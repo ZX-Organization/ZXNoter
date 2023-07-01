@@ -14,6 +14,7 @@ import team.zxorg.zxnoter.ui_old.render.basis.RenderPoint;
 import team.zxorg.zxnoter.ui_old.render.fixedorbit.key.FixedOrbitObjectKey;
 
 import java.util.ArrayList;
+import java.util.TreeMap;
 
 public class FixedOrbitInfoRender extends FixedOrbitRender {
     public FixedOrbitInfoRender(FixedOrbitRenderInfo renderInfo, ZXMap renderZXMap, Canvas canvas, String theme, ArrayList<RenderBeat> renderBeats, ZXMap zxMap) {
@@ -33,7 +34,6 @@ public class FixedOrbitInfoRender extends FixedOrbitRender {
     @Override
     protected void renderHandle() {
         selectTiming = null;
-
         //绘制Timing点
         for (int i = 0; i < zxMap.timingPoints.size(); i++) {
             Timing timing = zxMap.timingPoints.get(i);

@@ -143,7 +143,10 @@ public class MapEditor extends BaseEditor {
                 try {
                     this.zxMap = new ImdReader().read(mapPath);
                 } catch (IOException e1) {
-                    e1.printStackTrace();
+                    try {
+                        this.zxMap = new ZXMap(mapPath);
+                    } catch (Exception e2) {
+                    }
                 }
             }
         }
@@ -800,13 +803,16 @@ public class MapEditor extends BaseEditor {
                     fileChooser.setInitialFileName(zxMap.unLocalizedMapInfo.getInfo(OsuInfo.Title.unLocalize()));
 
                     // 添加文件过滤器
+                    FileChooser.ExtensionFilter zxnFilter = new FileChooser.ExtensionFilter("zxn谱面", "*.zxn");
                     FileChooser.ExtensionFilter osuFilter = new FileChooser.ExtensionFilter("osu谱面", "*.osu");
                     FileChooser.ExtensionFilter imdFilter = new FileChooser.ExtensionFilter("节奏大师谱面", "*.imd");
 
-                    fileChooser.getExtensionFilters().addAll(osuFilter, imdFilter);
+                    fileChooser.getExtensionFilters().addAll(zxnFilter, osuFilter, imdFilter);
                     File file = fileChooser.showSaveDialog(this.getScene().getWindow());
                     if (file != null) {
                         try {
+                            if (file.getName().endsWith(".zxn"))
+                                zxMap.saveZXN(file.toPath());
                             if (file.getName().endsWith(".osu"))
                                 new OsuWriter().writeOut(zxMap, file.toPath());
                             if (file.getName().endsWith(".imd"))
@@ -1047,9 +1053,8 @@ public class MapEditor extends BaseEditor {
                             isBase.isSelected(),
                             bpm,
                             4,
-                            0,0,75,isBase.isSelected(),0
+                            0, 0, 75, isBase.isSelected(), 0
                     );
-
 
 
                     ArrayList<Timing> timings = zxMap.findClosestTimings(time);
@@ -1413,7 +1418,7 @@ public class MapEditor extends BaseEditor {
                 new Thread(() -> {
                     if (zxMap.notes.size() == 0)
                         return;
-                    ArrayList<BaseNote> findsNotes = zxMap.getScaleNotes(mainMapRender.getInfo().timelinePosition.get()-1, 700, true);
+                    ArrayList<BaseNote> findsNotes = zxMap.getScaleNotes(mainMapRender.getInfo().timelinePosition.get() - 1, 700, true);
                     //System.out.println(findsNotes);
                     for (BaseNote note : findsNotes) {
                         if (Math.abs(note.timeStamp - mainMapRender.getInfo().timelinePosition.get()) < 20)
