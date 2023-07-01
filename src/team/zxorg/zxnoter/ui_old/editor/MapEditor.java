@@ -1461,7 +1461,7 @@ public class MapEditor extends BaseEditor {
             previewTimingRender.render();
         }
 
-        // mainMapRender.graphics.rotate(1);
+         //mainMapRender.graphics.rotate(1);
         backgroundRender.render();
         beatLineRender.render();
         mainMapRender.render();
