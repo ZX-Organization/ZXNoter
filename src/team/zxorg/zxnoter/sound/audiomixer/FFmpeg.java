@@ -1,5 +1,7 @@
 package team.zxorg.zxnoter.sound.audiomixer;
 
+import team.zxorg.zxnoter.Main;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -9,7 +11,7 @@ import java.util.HashMap;
 
 public class FFmpeg {
     public static boolean audioToWav(Path audio, Path wav) {
-        String[] command = {"ffmpeg", "-y", "-i", "\"" + audio.toAbsolutePath() + "\"", "\"" + wav.toAbsolutePath() + "\""};
+        String[] command = {"ffmpeg", "-y", "-i", Main.quotationMark + audio.toAbsolutePath() + Main.quotationMark, Main.quotationMark + wav.toAbsolutePath() + Main.quotationMark};
 
         try {
             ProcessBuilder processBuilder = new ProcessBuilder(command);
@@ -30,23 +32,55 @@ public class FFmpeg {
         return false;
     }
 
-    public static HashMap<String, String> audioToMetadata(Path audio) {
-        HashMap<String, String> metadata = new HashMap<>();
-        String[] command = {"ffmpeg", "-i", "\"" + audio.toAbsolutePath() + "\"", "-f", "ffmetadata"};
+    public static boolean checkFFmpegExistence() {
+        String[] command = {"ffmpeg", "-version"};
+
         try {
             ProcessBuilder processBuilder = new ProcessBuilder(command);
 
             // 获取系统环境变量
             processBuilder.environment().putAll(System.getenv());
 
+            // 重定向标准输出和错误输出
+            processBuilder.redirectErrorStream(true);
+
             // 启动进程
             Process process = processBuilder.start();
 
+            // 读取进程输出
+            InputStream inputStream = process.getInputStream();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+            StringBuilder output = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                output.append(line).append("\n");
+            }
+
+            // 等待进程执行完成
+            int exitCode = process.waitFor();
+
+            // 检查输出中是否包含 FFmpeg 版本信息
+            boolean ffmpegExists = output.toString().toLowerCase().contains("ffmpeg version");
+
+            return (exitCode == 0 && ffmpegExists);
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public static HashMap<String, String> audioToMetadata(Path audio) {
+        HashMap<String, String> metadata = new HashMap<>();
+        String[] command = {"ffmpeg", "-i", Main.quotationMark + audio.toAbsolutePath() + Main.quotationMark, "-f", "ffmetadata"};
+        try {
+            ProcessBuilder processBuilder = new ProcessBuilder(command);
+            // 获取系统环境变量
+            processBuilder.environment().putAll(System.getenv());
+            // 启动进程
+            Process process = processBuilder.start();
             // 获取进程的输出流
             InputStream inputStream = process.getErrorStream();
-
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-
             // 读取命令输出的每一行数据
             String line;
             while ((line = reader.readLine()) != null) {
@@ -60,16 +94,15 @@ public class FFmpeg {
                     }
                 }
             }
-
             // 等待进程执行完成
             int exitCode = process.waitFor();
-
             return metadata;
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
         return metadata;
     }
+
     public enum AudioMetadataKey {
         ARTIST("artist"),
         GENRE("genre"),

@@ -14,7 +14,8 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import team.zxorg.zxnoter.Main;
 import team.zxorg.zxnoter.sound.audiomixer.AudioMixer;
-import team.zxorg.zxnoter.resource.ZXResources;
+import team.zxorg.zxnoter.resource_old.ZXResources;
+import team.zxorg.zxnoter.sound.audiomixer.FFmpeg;
 import team.zxorg.zxnoter.ui_old.editor.BaseEditor;
 import team.zxorg.zxnoter.ui_old.editor.MapEditor;
 
@@ -69,13 +70,13 @@ public class ZXNApp extends Application {
     VBox rootPane = new VBox(titleBar, bodyPane);
 
 
-    public static AudioFormat audioFormat = new AudioFormat(96000, 16, 2, true, false);//音频格式
+    public static AudioFormat audioFormat = new AudioFormat(48000, 16, 2, true, false);//音频格式
 
     public static AudioMixer audioMixer;
 
     static {
         try {
-            audioMixer = new AudioMixer(48000, 1024);
+            audioMixer = new AudioMixer(48000, 2048);
         } catch (LineUnavailableException e) {
             throw new RuntimeException(e);
         }
@@ -217,9 +218,9 @@ public class ZXNApp extends Application {
         //sideBar.setBackground(Background.fill(Color.YELLOW));
         //sideBar.setN(140);
 
-        HBox.setHgrow(sideBar, Priority.ALWAYS);
-        //sideBar.setVisible(false);
-        //sideBar.setPrefWidth(0);
+        //HBox.setHgrow(sideBar, Priority.ALWAYS);
+        sideBar.setVisible(false);
+        sideBar.setPrefWidth(0);
 
         //工作空间
         workspace.getStyleClass().add("workspace");
@@ -250,12 +251,11 @@ public class ZXNApp extends Application {
         };
         animationTimer.start();
 
-
-        for (String file : Main.args) {
-            Path path = Paths.get(file);
-            if (Files.exists(path)) {//添加编辑器
+        for (String arg : Main.args) {
+            Path file = Paths.get(arg);
+            if (Files.exists(file)) {//添加编辑器
                 Tab tab1 = new Tab();
-                MapEditor editor = new MapEditor(path, tab1);
+                MapEditor editor = new MapEditor(file, tab1);
                 tab1.setGraphic(ZXResources.getSvgPane("svg.icons.zxnoter.file-osu-line", 18, Color.DARKGREEN));
                 tab1.setContent(editor);
                 workspaceTabPane.getTabs().add(tab1);
@@ -455,6 +455,7 @@ public class ZXNApp extends Application {
         //应用样式
         mainScene.getStylesheets().add(ZXResources.getPath("css.root").toUri().toString());
         mainScene.getStylesheets().add(ZXResources.getPath("css.theme.dark").toUri().toString());
+        mainScene.getRoot().layout();
 
         stage.setScene(mainScene);
         stage.setMinWidth(900);
@@ -465,6 +466,14 @@ public class ZXNApp extends Application {
         stage.setOnCloseRequest(event -> {
             System.exit(0);
         });
+        if (FFmpeg.checkFFmpegExistence()) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.getDialogPane().getStylesheets().addAll(mainScene.getStylesheets());
+            alert.setTitle("运行环境警告：");
+            alert.setHeaderText(null);
+            alert.setContentText("你的计算机环境没有 FFmpeg(音视频库)，可能会影响到软件部分功能。https://ffmpeg.org/");
+            alert.showAndWait();
+        }
 
     }
 

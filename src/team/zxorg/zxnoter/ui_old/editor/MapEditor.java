@@ -30,7 +30,7 @@ import team.zxorg.zxnoter.note.fixedorbit.FixedOrbitNote;
 import team.zxorg.zxnoter.note.fixedorbit.LongNote;
 import team.zxorg.zxnoter.note.fixedorbit.SlideNote;
 import team.zxorg.zxnoter.note.timing.Timing;
-import team.zxorg.zxnoter.resource.ZXResources;
+import team.zxorg.zxnoter.resource_old.ZXResources;
 import team.zxorg.zxnoter.ui_old.TimeUtils;
 import team.zxorg.zxnoter.ui_old.ZXNApp;
 import team.zxorg.zxnoter.ui_old.component.CanvasPane;
@@ -490,7 +490,7 @@ public class MapEditor extends BaseEditor {
                             renderBeat.measure++;
                         else
                             renderBeat.measure--;
-                        renderBeat.measure=Math.max(renderBeat.measure,1);
+                        renderBeat.measure = Math.max(renderBeat.measure, 1);
                     }
                 } else {
 
@@ -858,17 +858,23 @@ public class MapEditor extends BaseEditor {
             TextField textField = new TextField("00.000");
             textField.setPrefWidth(80);
             textField.setAlignment(Pos.CENTER);
+            textField.setOnMouseReleased(event -> {
+                if (event.getButton().equals(MouseButton.PRIMARY))
+                    if (event.getPickResult().getIntersectedNode() instanceof Pane)
+                        textField.selectAll();
+            });
             textField.focusedProperty().addListener((observable, oldValue, newValue) -> {
-                if (newValue) {
-                    textField.selectAll();
-                } else {
-                    textField.getParent().requestFocus();
+                if (!newValue) {
                     mainMapRender.getInfo().timelinePosition.set((timelineIsFormat.get() ? TimeUtils.parseTime(textField.getText()) : Long.parseLong(textField.getText().replaceAll("ms", "").replaceAll(" ", ""))));
                 }
             });
+
+            textField.setOnMouseExited(event -> {
+                mapCanvas.requestFocus();
+            });
             textField.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
                 if (event.getCode().equals(KeyCode.ENTER)) {
-                    textField.getParent().requestFocus();
+                    mapCanvas.requestFocus();
                     mainMapRender.getInfo().timelinePosition.set((timelineIsFormat.get() ? TimeUtils.parseTime(textField.getText()) : Long.parseLong(textField.getText().replaceAll("ms", "").replaceAll(" ", ""))));
                     event.consume();
                 }
@@ -920,7 +926,7 @@ public class MapEditor extends BaseEditor {
                 button.setOnScroll(event -> {
                     if (audioChannel != null) {
                         double speed = audioChannel.getPlaySpeed();
-                        double change = (event.isControlDown() ? 0.01 : 0.1);
+                        double change = (event.isControlDown() ? 0.1 : 0.01);
                         if (event.getDeltaY() > 0)
                             speed += change;
                         else
@@ -1028,7 +1034,7 @@ public class MapEditor extends BaseEditor {
                 CheckBox isBase = new CheckBox("基准");
                 isBase.setSelected(true);
                 Button done = new Button();
-                done.setShape(ZXResources.getSvg("svg.icons.system.add-box-line"));
+                done.setShape(ZXResources.getSvg("svg.icons.map.map-pin-add-line"));
                 done.setPrefSize(22, 22);
                 done.setOnAction(event -> {
                     double bpm = Double.parseDouble(textField.getText());
@@ -1099,7 +1105,6 @@ public class MapEditor extends BaseEditor {
                 //全局分拍数
                 globalSubbeatButton = new Button("1/1");
                 topToolBar.addNode("tool", globalSubbeatButton);
-                globalSubbeatButton.setFocusTraversable(false);
 
                 globalSubbeatButton.setOnAction(event -> upDateBeats());
                 globalSubbeatButton.setOnScroll(event -> {
@@ -1378,7 +1383,7 @@ public class MapEditor extends BaseEditor {
                         }
                         if (!isTrue)
                             renderBeat.measure = globalMeasure;
-                        renderBeat.measure=Math.max(renderBeat.measure,1);
+                        renderBeat.measure = Math.max(renderBeat.measure, 1);
                         renderBeats.add(renderBeat);
                     }
                 }
@@ -1394,17 +1399,16 @@ public class MapEditor extends BaseEditor {
 
     @Override
     public void render() {
+
         //if (audioChannel.getPlayState().equals(AudioChannel.PlayState.PLAY))
         //mainMapRender.getInfo().timelinePosition.set(System.currentTimeMillis() - synchroniseTime);
 
         /*if (audioChannel.getPlayState().equals(AudioChannel.PlayState.PLAY))
             mainMapRender.getInfo().timelinePosition.set(audioChannel.getTime());*/
 
-
         if (audioChannel != null) {
             if (!audioChannel.getPlayState().equals(AudioChannel.PlayState.PAUSE)) {
                 mainMapRender.getInfo().timelinePosition.set(audioChannel.getTime() + audioTimeOffset.get());
-
 
                 new Thread(() -> {
                     if (zxMap.notes.size() == 0)
@@ -1437,9 +1441,6 @@ public class MapEditor extends BaseEditor {
                             }
                     }
                 }).start();
-
-
-                //System.out.println(audioChannel.getTime());
             }
         }
 
@@ -1456,13 +1457,11 @@ public class MapEditor extends BaseEditor {
         }
 
         // mainMapRender.graphics.rotate(1);
-
         backgroundRender.render();
         beatLineRender.render();
         mainMapRender.render();
         mainShadowMapRender.render();
         timingRender.render();
-
 
         infoRender.clearRect();
         infoRender.render();
@@ -1471,7 +1470,9 @@ public class MapEditor extends BaseEditor {
         previewBackgroundRender.mainJudgedLinePositionPercentage.setValue(
                 mainMapRender.getInfo().timelinePosition.get()
         );
+
         previewMapRender.getInfo().timelinePosition.setValue(mainMapRender.getInfo().getPositionToTime(mainMapRender.getHeight() / 2));
+
     }
 
     @Override

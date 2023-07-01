@@ -1,0 +1,9 @@
+{
+    "type": "icon-pack",
+    "id": "zxnoter.base.fill",
+    "name": "默认图标资源-填充",
+    "author": [
+        "zedoCN"
+    ],
+    "describe": "本图标包是基于RemixIcon项目修改。\n相关链接:https://github.com/Remix-Design/RemixIcon"
+}

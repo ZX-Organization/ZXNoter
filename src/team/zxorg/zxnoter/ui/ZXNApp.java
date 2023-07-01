@@ -1,9 +1,8 @@
 package team.zxorg.zxnoter.ui;
 
 import javafx.application.Application;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
-import team.zxorg.zxnoter.resource.ZXResources;
+import team.zxorg.zxnoter.resource_old.ZXResources;
 import team.zxorg.zxnoter.ui.main.MainWindow;
 
 import java.nio.file.Path;

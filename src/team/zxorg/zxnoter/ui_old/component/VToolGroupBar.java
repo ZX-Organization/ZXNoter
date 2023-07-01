@@ -7,7 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.Region;
-import team.zxorg.zxnoter.resource.ZXResources;
+import team.zxorg.zxnoter.resource_old.ZXResources;
 import team.zxorg.zxnoter.ui_old.ComponentFactory;
 
 import java.util.HashMap;

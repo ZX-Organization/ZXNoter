@@ -4,7 +4,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
 import team.zxorg.zxnoter.map.ZXMap;
 import team.zxorg.zxnoter.info.map.ZXMInfo;
-import team.zxorg.zxnoter.resource.ZXResources;
+import team.zxorg.zxnoter.resource_old.ZXResources;
 import team.zxorg.zxnoter.ui_old.render.Render;
 import team.zxorg.zxnoter.ui_old.render.fixedorbit.key.FixedOrbitNotesKey;
 import team.zxorg.zxnoter.ui_old.render.fixedorbit.key.FixedOrbitObjectKey;

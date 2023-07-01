@@ -30,7 +30,7 @@ public class AudioChannel {
 
         sonic = new Sonic((int) audioFormat.getSampleRate(), audioFormat.getChannels());
         sonic.setQuality(100);
-        channelBufSize = 256;
+        channelBufSize = 512;
         inBuffer = new byte[channelBufSize];//输入缓冲区
         frameLength = inputStream.available() / 4;//帧长度
 

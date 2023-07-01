@@ -1,0 +1,9 @@
+{
+    "type": "icon-package",
+    "id": "zxnoter.base.line",
+    "name": "默认图标资源-轮廓",
+    "author": [
+        "zedoCN"
+    ],
+    "describe": "本图标包是基于RemixIcon项目修改。\n相关链接:https://github.com/Remix-Design/RemixIcon"
+}

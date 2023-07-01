@@ -1,0 +1,25 @@
+{
+    "type": "style",
+    "name": "默认样式",
+    "styles": [
+        {
+            "name": "深色主题",
+            "id": "zxnoter.base.dark",
+            "path": "color/dark.css"
+        },
+        {
+            "name": "浅色主题",
+            "id": "zxnoter.base.light",
+            "path": "color/light.css"
+        }
+    ],
+    "layout": [
+        {
+            "name": "默认布局",
+            "path": "layout/base.css"
+        }
+    ],
+    "editor": {
+        "map-editor": ""
+    }
+}

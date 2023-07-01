@@ -4,16 +4,12 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.Separator;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
-import team.zxorg.zxnoter.resource.ZXResources;
-
-import java.util.function.Consumer;
+import team.zxorg.zxnoter.resource_old.ZXResources;
 
 public class TitleBar extends HBox {
     //菜单栏

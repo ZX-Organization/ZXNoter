@@ -4,12 +4,11 @@ import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Control;
-import javafx.scene.control.Labeled;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
-import team.zxorg.zxnoter.resource.ZXResources;
+import team.zxorg.zxnoter.resource_old.ZXResources;
 import team.zxorg.zxnoter.ui_old.ComponentFactory;
 
 import java.util.HashMap;
@@ -36,6 +35,7 @@ public class HToolGroupBar extends HBox {
 
     public void addNode(String groupName, Node button) {
         getGroup(groupName).getChildren().add(button);
+        button.setFocusTraversable(false);
         HBox.setMargin(button, new Insets(2));
     }
 
@@ -65,6 +65,7 @@ public class HToolGroupBar extends HBox {
     public void addControl(String groupName, Control button, String toolTip) {
         getGroup(groupName).getChildren().add(button);
         HBox.setMargin(button, new Insets(2));
+        button.setFocusTraversable(false);
         if (toolTip != null) {
             button.setTooltip(ComponentFactory.getTooltip(toolTip));
         }
@@ -75,7 +76,6 @@ public class HToolGroupBar extends HBox {
         ToggleButton button = new ToggleButton();
         button.setShape(ZXResources.getSvg(key));
         button.setPrefSize(22, 22);
-        button.getStyleClass().add("button");
         button.setFocusTraversable(false);
        // HBox.setMargin(button, new Insets(2));
         if (toolTip != null) {

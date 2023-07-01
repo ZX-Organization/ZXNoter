@@ -4,7 +4,7 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.paint.Color;
 import javafx.stage.PopupWindow;
 import javafx.util.Duration;
-import team.zxorg.zxnoter.resource.ZXResources;
+import team.zxorg.zxnoter.resource_old.ZXResources;
 
 public class ComponentFactory {
     public static Tooltip getTooltip(String tip) {

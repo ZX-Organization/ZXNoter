@@ -1,14 +1,12 @@
 package team.zxorg.zxnoter.ui.main;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SeparatorMenuItem;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import team.zxorg.zxnoter.resource.ZXResources;
+import team.zxorg.zxnoter.resource_old.ZXResources;
 import team.zxorg.zxnoter.ui.ComponentFactory;
 import team.zxorg.zxnoter.ui.main.component.EditorArea;
 import team.zxorg.zxnoter.ui.main.component.SideBar;

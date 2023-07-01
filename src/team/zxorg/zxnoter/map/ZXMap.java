@@ -355,7 +355,6 @@ public class ZXMap {
         separateNotes.sort(BaseNote::compareTo);
 
         return count;
-
     }
 
     /**
