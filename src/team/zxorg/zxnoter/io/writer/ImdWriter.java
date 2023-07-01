@@ -20,7 +20,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Set;
 
-public class ImdWriter implements Writer{
+public class ImdWriter implements MapWriter {
     HashMap<ImdInfo,String> allInfos;
     /**
      * 写出zxMap到路径,不可编辑文件名(文件名保存一部分信息)
@@ -60,6 +60,7 @@ public class ImdWriter implements Writer{
 
         //时间点
         for (Timing timing: zxMap.timingPoints){
+            System.out.println(timing);
             bf.putInt((int)timing.timestamp);//时间戳
             bf.putDouble(timing.absBpm);//bpm
         }
@@ -75,26 +76,29 @@ public class ImdWriter implements Writer{
                     //类型处高位6 2 A顺序头 中 尾,低位正常
 
                     //头
-                    BaseNote head = complexNote.notes.get(0);
-                    int headType = 96 + head.getImdNoteType();//头按键类型6x
-                    bf.put((byte) headType);
-                    writeNoteDataWithoutType(bf,head);
+                    if (complexNote.notes.size() !=0){
+                        BaseNote head = complexNote.notes.get(0);
+                        int headType = 96 + head.getImdNoteType();//头按键类型6x
+                        bf.put((byte) headType);
+                        writeNoteDataWithoutType(bf,head);
 
-                    for (int i = 1; i < complexNote.notes.size()-1; i++) {
-                        BaseNote tempNote = complexNote.notes.get(i);
-                        //身体
-                        int bodyType = 32 + tempNote.getImdNoteType();
-                        bf.put((byte) bodyType);//身体按键类型2x
-                        writeNoteDataWithoutType(bf,tempNote);
+                        for (int i = 1; i < complexNote.notes.size()-1; i++) {
+                            BaseNote tempNote = complexNote.notes.get(i);
+                            //身体
+                            int bodyType = 32 + tempNote.getImdNoteType();
+                            bf.put((byte) bodyType);//身体按键类型2x
+                            writeNoteDataWithoutType(bf,tempNote);
+                        }
+
+                        //尾
+                        BaseNote end = complexNote.notes.get(complexNote.notes.size()-1);
+                        int endType = -96 + end.getImdNoteType();//尾按键类型Ax
+                        bf.put((byte) endType);
+                        writeNoteDataWithoutType(bf,end);
+                        continue;
+                    }
                     }
 
-                    //尾
-                    BaseNote end = complexNote.notes.get(complexNote.notes.size()-1);
-                    int endType = -96 + end.getImdNoteType();//尾按键类型Ax
-                    bf.put((byte) endType);
-                    writeNoteDataWithoutType(bf,end);
-                    continue;
-                }
 
                 //一般键写出
                 bf.put((byte) note.getImdNoteType());//按键类型

@@ -58,7 +58,7 @@ public class ImdReader implements MapReader{
         ArrayList<BaseNote> allNotes = new ArrayList<>();
 
         //截取文件标题
-        String title = fileName.substring(0, fileName.indexOf("_"));
+        String title = fileName. substring(0, fileName.indexOf("_"));
         //谱面标题
         unLocalizedMapInfo.setInfo(ImdInfo.ImdTitle.unLocalize(), title);
         //图片路径

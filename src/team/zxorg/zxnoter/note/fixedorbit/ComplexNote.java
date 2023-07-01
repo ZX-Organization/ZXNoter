@@ -1,5 +1,7 @@
 package team.zxorg.zxnoter.note.fixedorbit;
 
+import com.alibaba.fastjson2.JSONArray;
+import com.alibaba.fastjson2.JSONObject;
 import team.zxorg.zxnoter.info.map.ImdInfo;
 
 import java.util.ArrayList;
@@ -245,6 +247,20 @@ public class ComplexNote extends FixedOrbitNote implements Cloneable {
         return length;
     }
 
+    @Override
+    public JSONObject toJson() {
+        JSONObject noteJson = new JSONObject();
+        noteJson.put("time", timeStamp);
+        noteJson.put("orbit", orbit);
+        noteJson.put("soundKey",soundKey);
+        noteJson.put("soundPath",soundPath);
+        noteJson.put("isRelativeHead",isRelativeHead);
+        JSONArray childrenNotes = new JSONArray();
+        for (FixedOrbitNote fixedOrbitNote:notes)
+            childrenNotes.add(fixedOrbitNote.toJson());
+        noteJson.put("child",childrenNotes);
+        return noteJson;
+    }
     @Override
     public ComplexNote getParent() {
         return this;

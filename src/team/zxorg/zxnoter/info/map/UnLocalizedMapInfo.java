@@ -1,16 +1,18 @@
 package team.zxorg.zxnoter.info.map;
 
-import team.zxorg.zxnoter.info.editor.ZXNInfo;
+import com.alibaba.fastjson2.JSONObject;
+import team.zxorg.zxnoter.map.ZXMap;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
 
 /**
  * 本地化信息类
  */
 public class UnLocalizedMapInfo {
     public HashMap<ZXMInfo, String> allInfo;
-    ArrayList<AddCallBack> addInterfaceList;
+    ArrayList<AddListener> addInterfaceList;
 
     public UnLocalizedMapInfo() {
         allInfo = new HashMap<>();
@@ -20,7 +22,7 @@ public class UnLocalizedMapInfo {
     public void setInfo(ZXMInfo key, String value) {
 
         allInfo.put(key, value);
-        for (AddCallBack addCallBack:addInterfaceList)
+        for (AddListener addCallBack:addInterfaceList)
             addCallBack.callInfo(key,value);
     }
 
@@ -43,16 +45,25 @@ public class UnLocalizedMapInfo {
      *  设置一个添加接口
      * @param addInterface 添加接口
      */
-    public void addAddInterface(AddCallBack addInterface) {
+    public void addListener(AddListener addInterface) {
         this.addInterfaceList.add(addInterface) ;
     }
 
+    public JSONObject toJson(){
+        JSONObject unlocalizedInfoJson = new JSONObject();
+
+        Set<ZXMInfo> keyset = allInfo.keySet();
+        for (ZXMInfo info:keyset)
+            unlocalizedInfoJson.put(info.name(), allInfo.get(info));
+
+        return unlocalizedInfoJson;
+    }
     @Override
     public String toString() {
         return '\n' + "LocalizedMapInfo{" + allInfo +
                 '}';
     }
-    public interface AddCallBack{
+    public interface AddListener {
         void callInfo(ZXMInfo info,String value);
     }
 

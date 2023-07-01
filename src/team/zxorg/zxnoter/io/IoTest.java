@@ -1,18 +1,41 @@
 package team.zxorg.zxnoter.io;
 
+import team.zxorg.zxnoter.io.reader.ImdReader;
 import team.zxorg.zxnoter.io.reader.OsuReader;
+import team.zxorg.zxnoter.io.writer.ImdWriter;
 import team.zxorg.zxnoter.map.ZXMap;
 import team.zxorg.zxnoter.map.editor.ZXFixedOrbitMapEditor;
+import team.zxorg.zxnoter.note.BaseNote;
+import team.zxorg.zxnoter.note.fixedorbit.FixedOrbitNote;
+import team.zxorg.zxnoter.note.fixedorbit.LongNote;
+import team.zxorg.zxnoter.note.timing.Timing;
 
 import java.io.IOException;
 import java.nio.file.Path;
 
 public class IoTest {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException, NoSuchFieldException {
         //try {
-            ZXMap map = new OsuReader().read(Path.of("F:\\AllProjects\\ZX-Organization\\ZXNoter\\docs\\reference\\Risshuu feat. Choko - Take\\Risshuu feat. Choko - Take (LNP-) [Beyond].osu"));
+            ZXMap map = new ImdReader().read(Path.of("docs/reference/Contrapasso -paradiso-/t+pazolite - Contrapasso -paradiso-_4k_hd.imd"));
+
+        System.out.println(map.timingPoints);
+            map.timingPoints.add(
+                    new Timing(
+                            200000,121.5,true,121.5
+                    )
+            );
+        System.out.println(map.timingPoints);
+        new ImdWriter().writeOut(map,Path.of("G:/desktop/a_4k_ez.imd"));
+
+        ZXMap map2 = new ImdReader().read(Path.of("G:/desktop/a_4k_ez.imd"));
+        System.out.println(map2.timingPoints);
 
 
+
+
+
+
+            map.saveZXN(Path.of("G:/desktop"));
             //System.out.println(map.notes);
             //map.findClosestNote(1000);
             //System.out.println(map.notes.get(19));
@@ -27,10 +50,18 @@ public class IoTest {
             System.out.println("第"+i+"个键->"+map.notes.get(i));
         }*/
         //System.out.println(map.notes.get(4));
+        /*while (true){
+            map.getScaleNotes(100,2000,true);
+            map.findClosestNotes(100,true);
+            map.findClosestTimings(100);
+            map.insertNote(new LongNote(100,2,200));
+            Thread.sleep(1000/60);
+        }*/
 
-        ZXFixedOrbitMapEditor editor = new ZXFixedOrbitMapEditor(map);
-/*
-        System.out.println("原拆分map->"+map.separateNotes);
+
+
+        /*ZXFixedOrbitMapEditor editor = new ZXFixedOrbitMapEditor(map);
+        System.out.println("原map->"+map.notes);
 
         editor.addNote(100,1);
         editor.modifyDone();
@@ -49,14 +80,14 @@ public class IoTest {
 
         editor.addNote(300,2);
         editor.modifyDone();
-        BaseNote middleNote = map.findClosestNotes(300).get(0);
+        BaseNote middleNote = map.findClosestNotes(300,false).get(0);
         editor.addEndOfNote((FixedOrbitNote) middleNote,50,ZXFixedOrbitMapEditor.LONG_NOTE);
         editor.addEndOfNote((FixedOrbitNote) middleNote,-1,ZXFixedOrbitMapEditor.SLIDE_NOTE);
         editor.modifyDone();
 
-        System.out.println("后拆分map->"+map.separateNotes);*/
+        System.out.println("后map->"+map.notes);*/
 
-        System.out.println(map.timingPoints);
+        //System.out.println(map.timingPoints);
 
         //System.out.println(map.getScaleNotes(5548,100,true));
         /*System.out.println("原->"+ map.findClosestNotes(5818).get(0));

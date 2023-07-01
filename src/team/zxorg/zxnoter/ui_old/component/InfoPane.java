@@ -20,7 +20,7 @@ public class InfoPane extends VBox {
         this.unlocalizedInfo = unlocalizedInfo;
         setAlignment(Pos.TOP_CENTER);
         setSpacing(2);
-        unlocalizedInfo.addAddInterface((info, value) -> {
+        unlocalizedInfo.addListener((info, value) -> {
             InfoEntry infoEntry = children.get(info);
             if (infoEntry != null)
                 infoEntry.change(value);

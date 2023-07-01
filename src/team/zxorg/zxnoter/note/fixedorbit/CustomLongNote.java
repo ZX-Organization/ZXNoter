@@ -1,5 +1,7 @@
 package team.zxorg.zxnoter.note.fixedorbit;
 
+import com.alibaba.fastjson2.JSONObject;
+
 public class CustomLongNote extends LongNote{
     public int keyType;
     public int hitSound;
@@ -17,6 +19,25 @@ public class CustomLongNote extends LongNote{
         sampleVolume = Integer.parseInt(sampleSetPars[3]);
     }
 
+    @Override
+    public JSONObject toJson() {
+
+        JSONObject noteJson = new JSONObject();
+        noteJson.put("time", timeStamp);
+        noteJson.put("orbit", orbit);
+        noteJson.put("sustainedTime", sustainedTime);
+        noteJson.put("soundKey",soundKey);
+        noteJson.put("soundPath",soundPath);
+        noteJson.put("keyType",keyType);
+        noteJson.put("hitSound",hitSound);
+        noteJson.put("normalSampleSet",normalSampleSet);
+        noteJson.put("extendSampleSet",extendSampleSet);
+        noteJson.put("sampleIndex",sampleIndex);
+        noteJson.put("sampleVolume",sampleVolume);
+
+        return noteJson;
+
+    }
     @Override
     public String toString() {
         return '\n'+"OsuCustomLongNote{" +

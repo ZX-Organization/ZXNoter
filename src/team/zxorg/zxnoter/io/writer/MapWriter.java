@@ -5,7 +5,7 @@ import team.zxorg.zxnoter.map.ZXMap;
 import java.io.IOException;
 import java.nio.file.Path;
 
-public interface Writer {
+public interface MapWriter {
     void writeOut(ZXMap zxMap, Path path) throws NoSuchFieldException, IOException;
     String getDefaultName();
 

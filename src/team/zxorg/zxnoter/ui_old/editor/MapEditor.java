@@ -12,6 +12,7 @@ import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 import javafx.stage.PopupWindow;
+import team.zxorg.zxnoter.note.timing.ZXTiming;
 import team.zxorg.zxnoter.sound.audiomixer.AudioChannel;
 import team.zxorg.zxnoter.sound.audiomixer.FFmpeg;
 import team.zxorg.zxnoter.io.reader.ImdReader;
@@ -568,7 +569,7 @@ public class MapEditor extends BaseEditor {
         HBox.setHgrow(tabPane, Priority.SOMETIMES);
 
 
-        zxMap.unLocalizedMapInfo.addAddInterface((info, value) -> {
+        zxMap.unLocalizedMapInfo.addListener((info, value) -> {
             if (info.equals(ZXMInfo.KeyCount)) {//同步键数
                 mainMapRender.getInfo().orbits.set(Integer.parseInt(value));
             } else if (info.equals(ZXMInfo.Title) || info.equals(ZXMInfo.TitleUnicode)) {//同步标题
@@ -1034,12 +1035,16 @@ public class MapEditor extends BaseEditor {
                     long time = mainMapRender.getInfo().timelinePosition.get();
 
 
-                    Timing timing = new Timing(
+                    ZXTiming timing = new ZXTiming(
                             time,
                             bpm,
                             isBase.isSelected(),
-                            bpm
+                            bpm,
+                            4,
+                            0,0,75,isBase.isSelected(),0
                     );
+
+
 
                     ArrayList<Timing> timings = zxMap.findClosestTimings(time);
                     if (timings.size() > 0) {
@@ -1055,6 +1060,8 @@ public class MapEditor extends BaseEditor {
 
 
                     zxMap.timingPoints.add(timing);
+                    zxMap.timingPoints.sort(Timing::compareTo);
+                    System.out.println(zxMap.timingPoints);
                     zxMap.unLocalizedMapInfo.setInfo(ZXMInfo.TimingCount, String.valueOf(zxMap.timingPoints.size()));
                     upDateBeats();
                     if (zxMap.timingPoints.size() == 2) {
@@ -1402,7 +1409,7 @@ public class MapEditor extends BaseEditor {
                 new Thread(() -> {
                     if (zxMap.notes.size() == 0)
                         return;
-                    ArrayList<BaseNote> findsNotes = zxMap.getScaleNotes(mainMapRender.getInfo().timelinePosition.get(), 700, true);
+                    ArrayList<BaseNote> findsNotes = zxMap.getScaleNotes(mainMapRender.getInfo().timelinePosition.get()-1, 700, true);
                     //System.out.println(findsNotes);
                     for (BaseNote note : findsNotes) {
                         if (Math.abs(note.timeStamp - mainMapRender.getInfo().timelinePosition.get()) < 20)

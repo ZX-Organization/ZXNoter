@@ -1,14 +1,28 @@
 package team.zxorg.zxnoter.map;
 
 
+import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONArray;
+import com.alibaba.fastjson2.JSONObject;
+import com.alibaba.fastjson2.JSONWriter;
 import team.zxorg.zxnoter.info.editor.ZXNInfo;
 import team.zxorg.zxnoter.info.map.UnLocalizedMapInfo;
+import team.zxorg.zxnoter.info.map.ZXMInfo;
 import team.zxorg.zxnoter.note.BaseNote;
 import team.zxorg.zxnoter.note.fixedorbit.ComplexNote;
+import team.zxorg.zxnoter.note.fixedorbit.FixedOrbitNote;
+import team.zxorg.zxnoter.note.fixedorbit.LongNote;
+import team.zxorg.zxnoter.note.fixedorbit.SlideNote;
 import team.zxorg.zxnoter.note.timing.Timing;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
 
 /**
  * zx谱面类
@@ -39,7 +53,10 @@ public class ZXMap {
         separateNotes = new ArrayList<>();
         timingPoints = new ArrayList<>();
         unLocalizedMapInfo = UnLocalizedMapInfo.getDefaultInfo();
+        //初始化编辑器信息
         editorInfo = new HashMap<>();
+        for (ZXNInfo info:ZXNInfo.values())
+            editorInfo.put(info.name(),info.getDefVal());
     }
 
     public ZXMap(ArrayList<BaseNote> notes, ArrayList<Timing> timingPoints, UnLocalizedMapInfo unLocalizedMapInfo) {
@@ -47,6 +64,10 @@ public class ZXMap {
         this.timingPoints = timingPoints;
         this.unLocalizedMapInfo = unLocalizedMapInfo;
         editorInfo = new HashMap<>();
+    }
+
+    public ZXMap(Path zxnFilePath){
+        File zxnFile = zxnFilePath.toFile();
     }
 
     /**
@@ -411,6 +432,41 @@ public class ZXMap {
     }
     public void setEditInfo(ZXNInfo info,String value){
         editorInfo.put(info.name(),value);
+    }
+
+    public void saveZXN(Path path) throws IOException {
+        File absFile;
+        if (path.toFile().isFile()){
+            String fileName = path.getFileName().toString();
+            absFile = path.toFile();
+        }else {
+            absFile = new File(path.toFile().getAbsoluteFile() +"\\" +unLocalizedMapInfo.getInfo(ZXMInfo.TitleUnicode)+".zxn");
+        }
+
+        if (!absFile.exists()) absFile.createNewFile();
+
+        JSONObject zxn = new JSONObject();
+
+        zxn.put("allInfo",unLocalizedMapInfo.toJson());
+
+        JSONArray timings = new JSONArray();
+        for (Timing timing:timingPoints)timings.add(timing.toJson());
+        zxn.put("timing",timings);
+
+        Set<String> editorInfoKeyset = editorInfo.keySet();
+        JSONObject editJson = new JSONObject();
+        for (String editorInfoName:editorInfoKeyset)
+            editJson.put(editorInfoName,editorInfo.get(editorInfoName));
+        zxn.put("editor",editJson);
+
+        JSONArray notesJson = new JSONArray();
+        for (BaseNote note:notes)
+            notesJson.add(note.toJson());
+        zxn.put("note",notesJson);
+
+        FileOutputStream fileOutputStream = new FileOutputStream(absFile);
+        JSON.writeTo(fileOutputStream,zxn);
+
     }
 
     @Override

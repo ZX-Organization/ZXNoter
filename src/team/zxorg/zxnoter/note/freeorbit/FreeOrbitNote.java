@@ -1,5 +1,6 @@
 package team.zxorg.zxnoter.note.freeorbit;
 
+import com.alibaba.fastjson2.JSONObject;
 import team.zxorg.zxnoter.note.BaseNote;
 import team.zxorg.zxnoter.note.fixedorbit.ComplexNote;
 
@@ -35,5 +36,10 @@ public class FreeOrbitNote extends BaseNote {
     @Override
     public ComplexNote getParent() {
         return null;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        return new JSONObject();
     }
 }

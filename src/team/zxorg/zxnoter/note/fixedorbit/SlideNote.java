@@ -1,5 +1,6 @@
 package team.zxorg.zxnoter.note.fixedorbit;
 
+import com.alibaba.fastjson2.JSONObject;
 import team.zxorg.zxnoter.map.editor.ZXFixedOrbitMapEditor;
 import team.zxorg.zxnoter.info.map.ImdInfo;
 import team.zxorg.zxnoter.note.BaseNote;
@@ -73,6 +74,16 @@ public class SlideNote extends FixedOrbitNote implements Cloneable,Comparable<Ba
             }
         }
         return super.compareTo(baseNote);
+    }
+    @Override
+    public JSONObject toJson() {
+        JSONObject noteJson = new JSONObject();
+        noteJson.put("time", timeStamp);
+        noteJson.put("orbit", orbit);
+        noteJson.put("slideArg",slideArg);
+        noteJson.put("soundKey",soundKey);
+        noteJson.put("soundPath",soundPath);
+        return noteJson;
     }
     @Override
     public String toString() {

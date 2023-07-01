@@ -30,6 +30,7 @@ public class ZXFixedOrbitMapEditor {
     LinkedList<MapOperate> withdrawStack;
 
     public static int withdrawStackSize;
+
     /**
      * 虚影缓存
      */
@@ -57,7 +58,7 @@ public class ZXFixedOrbitMapEditor {
         withdrawStack = new LinkedList<>();
         shadows = new ArrayList<>();
         tempAddList = new ArrayList<>();
-        withdrawStackSize=32;
+        withdrawStackSize=128;
     }
 
     /**
@@ -343,6 +344,7 @@ public class ZXFixedOrbitMapEditor {
         //最后将添加列表加入组合键
         tempComplexNote.notes.addAll(tempAddList);
         checkComplexNote(tempComplexNote, false);
+
         if (!(shadowNote instanceof ComplexNote)) {
             //替换虚影为处理后的按键
             shadowMap.notes.removeAll(shadows);
@@ -643,6 +645,80 @@ public class ZXFixedOrbitMapEditor {
             shadows.remove(note);
             shadowMap.insertNote(note.notes.get(0).clone());
             shadows.add(note.notes.get(0).clone());
+        }
+        if (note.notes.size()>0){
+            //检查需要连接的按键
+            //检查重合按键
+            FixedOrbitNote lastNote = note.notes.get(note.notes.size()-1);
+            ArrayList<BaseNote> timeNotes;
+            if (lastNote instanceof LongNote longNote){
+                //组合键结尾为长条
+                timeNotes = srcMap.findClosestNotes(longNote.timeStamp + longNote.sustainedTime,false);
+                for (BaseNote timeNote:timeNotes){
+                    if (timeNote.timeStamp==lastNote.timeStamp+longNote.sustainedTime && timeNote.getOrbit() == lastNote.orbit){
+                        if (timeNote instanceof LongNote timeLongNote){
+                            //组合键结尾长条接上了另一个长条,合体
+                            longNote.sustainedTime+=timeLongNote.sustainedTime;
+                            tempMapOperate.srcNotes.clear();
+                            tempMapOperate.srcNotes.add(timeLongNote);
+                        }else if (timeNote instanceof SlideNote timeSlideNote){
+                            //组合键结尾长条接上了一个滑键,连接
+                            note.addNote(timeSlideNote);
+                            tempMapOperate.srcNotes.clear();
+                            tempMapOperate.srcNotes.add(timeSlideNote);
+                        } else if (timeNote instanceof ComplexNote complexNote){
+                            if (complexNote.notes.size() >0){
+                                FixedOrbitNote timeHeadNote = complexNote.notes.get(0);
+                                if (timeHeadNote instanceof LongNote timeHeadLongNote){
+                                    //连接到的组合键首子键为长条
+                                    longNote.sustainedTime+=timeHeadLongNote.sustainedTime;
+                                    //将连接到的组合键后部分合体
+                                    ArrayList<FixedOrbitNote> laterNotes = new ArrayList<>();
+                                    for (int i = 1; i < complexNote.notes.size(); i++) laterNotes.add(complexNote.notes.get(i));
+                                    note.notes.addAll(laterNotes);
+                                }else if (timeHeadNote instanceof SlideNote){
+                                    //连接到的组合键首子键为滑键
+                                    note.notes.addAll(complexNote.notes);
+                                    tempMapOperate.srcNotes.clear();
+                                    tempMapOperate.srcNotes.add(complexNote);
+                                }
+                            }
+
+                        }
+                        else {
+                            //单键
+                            tempMapOperate.srcNotes.clear();
+                            tempMapOperate.srcNotes.add(timeNote);
+                        }
+                    }
+                }
+            }else if (lastNote instanceof SlideNote slideNote){
+                //组合键结尾为滑键
+                timeNotes = srcMap.findClosestNotes(slideNote.timeStamp,false);
+                for (BaseNote timeNote:timeNotes){
+                    if (timeNote.timeStamp==lastNote.timeStamp && timeNote.getOrbit() == slideNote.orbit + slideNote.slideArg){
+                        if (timeNote instanceof LongNote timeLongNote){
+                            //组合键结尾滑键接上了另一个长条,连接
+                            note.addNote(timeLongNote);
+                            tempMapOperate.srcNotes.clear();
+                            tempMapOperate.srcNotes.add(timeLongNote);
+                        }else if (timeNote instanceof SlideNote timeSlideNote){
+                            //组合键结尾滑键接上了一个滑键,合体
+                            slideNote.slideArg+=timeSlideNote.slideArg;
+                            tempMapOperate.srcNotes.clear();
+                            tempMapOperate.srcNotes.add(timeSlideNote);
+                            if (slideNote.slideArg == 0){
+                                //结尾滑键参数归零
+                                note.notes.remove(slideNote);
+                            }
+                        }else {
+                            //单键
+                            tempMapOperate.srcNotes.clear();
+                            tempMapOperate.srcNotes.add(timeNote);
+                        }
+                    }
+                }
+            }
         }
     }
 

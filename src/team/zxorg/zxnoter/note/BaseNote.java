@@ -1,5 +1,6 @@
 package team.zxorg.zxnoter.note;
 
+import com.alibaba.fastjson2.JSONObject;
 import team.zxorg.zxnoter.note.fixedorbit.ComplexNote;
 
 /**
@@ -22,6 +23,7 @@ public abstract class BaseNote implements Cloneable,Comparable<BaseNote>{
     public abstract int getImdNoteType();
     public abstract long getLength();
     public abstract ComplexNote getParent();
+    public abstract JSONObject toJson();
     @Override
     public int compareTo(BaseNote o) {
         if (timeStamp<o.timeStamp) return -1;

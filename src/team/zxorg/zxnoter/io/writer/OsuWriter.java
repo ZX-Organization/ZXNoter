@@ -17,7 +17,7 @@ import java.util.HashMap;
 import team.zxorg.zxnoter.note.timing.Timing;
 import team.zxorg.zxnoter.note.timing.ZXTiming;
 
-public class OsuWriter implements Writer{
+public class OsuWriter implements MapWriter {
     private HashMap<OsuInfo, String> allInfos;
     private BufferedWriter bW;
     public void writeOut(ZXMap zxMap, Path path) throws NoSuchFieldException, IOException {
@@ -92,7 +92,6 @@ public class OsuWriter implements Writer{
             }
         }
         //[TimingPoints]
-        double baseBpm = zxMap.timingPoints.get(0).absBpm;
         bW.newLine();
         bW.write("[TimingPoints]");
         bW.newLine();
@@ -102,29 +101,27 @@ public class OsuWriter implements Writer{
             StringBuilder strB = new StringBuilder();
             strB.append(timing.timestamp).append(",");
 
+            System.out.println(timing);
             //判断是否属于ZxTiming,是则细分
             if (timing instanceof ZXTiming zxTiming){
                 if (zxTiming.isExtendTiming)
-                    strB.append(1/(baseBpm/60000)).append(",");
+                    strB.append(1/(zxTiming.absBpm/60000)).append(",");
                 else {
                     //变速
                     strB.append("-");
                     double tempBeatPar = 100/(zxTiming.bpmSpeed / zxTiming.absBpm);
-                    if (((tempBeatPar % 1) == 0)){
+                    if (((tempBeatPar % 1) == 0))
                         strB.append((int)tempBeatPar).append(",");
-                    }else {
+                    else
                         strB.append(tempBeatPar).append(",");
-                    }
-
                 }
             }else {
 
-                if (Math.abs(timing.bpmSpeed - timing.absBpm) <= 0.0002) {
-                    strB.append(1 / (baseBpm / 60000)).append(",");
-                }
-                else {
+                if (Math.abs(timing.bpmSpeed - timing.absBpm) <= 0.0002)
+                    strB.append(1 / (timing.absBpm / 60000)).append(",");
+                else
                     strB.append("-").append(100/(timing.bpmSpeed / timing.absBpm)).append(",");
-                }
+
             }
 
             if (timing instanceof ZXTiming zxTiming){

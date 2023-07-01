@@ -1,5 +1,7 @@
 package team.zxorg.zxnoter.note.timing;
 
+import com.alibaba.fastjson2.JSONObject;
+
 public class Timing implements Comparable<Timing>{
     /**
      * 时间点时间戳
@@ -24,22 +26,31 @@ public class Timing implements Comparable<Timing>{
         this.isNewBaseBpm = isNewBaseBpm;
         this.absBpm = absBpm;
     }
-
+    public JSONObject toJson(){
+        JSONObject timingJson = new JSONObject();
+        timingJson.put("time",timestamp);
+        timingJson.put("bpmSpeed",bpmSpeed);
+        timingJson.put("isNewBaseBpm",isNewBaseBpm);
+        timingJson.put("absBpm",absBpm);
+        return timingJson;
+    }
 
     @Override
     public String toString() {
         return '\n' +"Timing{" +
                 "时间戳=" + timestamp +
                 ", bpmSpeed=" + bpmSpeed +
+                ", isNewBaseBpm=" + isNewBaseBpm +
                 ", 绝对bpm=" + absBpm +
                 '}';
     }
 
     @Override
     public int compareTo(Timing o) {
-        if (o.timestamp>timestamp)return 1;
+        if (o.timestamp>timestamp)return -1;
         else if (o.timestamp<timestamp)return 1;
-        else if (o.isNewBaseBpm) return -1;
+        else if (o.isNewBaseBpm && !isNewBaseBpm) return -1;
+        else if (!o.isNewBaseBpm && isNewBaseBpm) return 1;
         else return 0;
     }
 }
