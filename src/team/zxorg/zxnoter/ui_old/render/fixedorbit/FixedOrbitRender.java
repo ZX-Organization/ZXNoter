@@ -10,11 +10,9 @@ import team.zxorg.zxnoter.ui_old.render.fixedorbit.key.FixedOrbitNotesKey;
 import team.zxorg.zxnoter.ui_old.render.fixedorbit.key.FixedOrbitObjectKey;
 
 public abstract class FixedOrbitRender extends Render {
-    String theme;//主题
 
     public FixedOrbitRender(FixedOrbitRenderInfo renderInfo, ZXMap renderZXMap, Canvas canvas, String theme) {
         super(renderInfo, renderZXMap, canvas);
-        this.theme = theme;
         getOrbits();
     }
 
@@ -25,11 +23,11 @@ public abstract class FixedOrbitRender extends Render {
 
     public Image getImage(String state, FixedOrbitNotesKey notesKey) {
 
-        return ZXResources.getImage("img.note.theme." + theme + "." + state + "." + notesKey.name);
+        return ZXResources.getImage("img.note.theme.default." + state + "." + notesKey.name);
     }
 
     public Image getImage(FixedOrbitObjectKey objectKey) {
-        return ZXResources.getImage("img.note.theme." + theme + "." + objectKey.name);
+        return ZXResources.getImage("img.note.theme.default." + objectKey.name);
     }
 
     public int getOrbits() {

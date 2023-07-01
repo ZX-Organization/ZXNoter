@@ -52,6 +52,7 @@ public class FixedOrbitInfoRender extends FixedOrbitRender {
                 graphics.setFont(new Font(16));
                 graphics.setTextAlign(TextAlignment.RIGHT);
                 graphics.setTextBaseline(VPos.CENTER);
+
                 graphics.fillText((int) (timing.bpmSpeed / timing.absBpm * 100) / 100f + "×", getInfo().canvasWidth.getValue() / 2, getInfo().getTimeToPosition(timing.timestamp));
                 loadImage(getImage(FixedOrbitObjectKey.TIMING));
             }
@@ -78,13 +79,13 @@ public class FixedOrbitInfoRender extends FixedOrbitRender {
                 renderRectangle.setY(VPos.CENTER,);
                 drawImage();*/
 
-                long time = (long) (renderBeat.time + (beatCycleTime / renderBeat.measure) * i);
+             /*   long time = (long) (renderBeat.time + (beatCycleTime / renderBeat.measure) * i);
                 graphics.setFill(Color.WHEAT);
                 graphics.setFont(new Font(16));
                 graphics.setTextAlign(TextAlignment.RIGHT);
                 graphics.setTextBaseline(VPos.CENTER);
                 graphics.fillText((timeIsFormat ? TimeUtils.formatTime(time) : time) + "", getInfo().canvasWidth.getValue() - 14, getInfo().getTimeToPosition(time));
-
+*/
             }
 
             //绘制拍线
@@ -94,13 +95,13 @@ public class FixedOrbitInfoRender extends FixedOrbitRender {
             drawImage();*/
 
 
-            graphics.setFill(Color.WHEAT);
+/*            graphics.setFill(Color.WHEAT);
             graphics.setFont(new Font(16));
             graphics.setTextAlign(TextAlignment.RIGHT);
             graphics.setTextBaseline(VPos.CENTER);
             graphics.fillText((timeIsFormat ? TimeUtils.formatTime(renderBeat.time) : renderBeat.time) + "",
                     getInfo().canvasWidth.getValue() - 14,
-                    getInfo().getTimeToPosition(renderBeat.time));
+                    getInfo().getTimeToPosition(renderBeat.time));*/
 
 
             graphics.setFill(Color.WHEAT);

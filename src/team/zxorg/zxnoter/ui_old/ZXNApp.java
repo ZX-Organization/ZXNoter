@@ -466,7 +466,7 @@ public class ZXNApp extends Application {
         stage.setOnCloseRequest(event -> {
             System.exit(0);
         });
-        if (FFmpeg.checkFFmpegExistence()) {
+        if (!FFmpeg.checkFFmpegExistence()) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.getDialogPane().getStylesheets().addAll(mainScene.getStylesheets());
             alert.setTitle("运行环境警告：");
