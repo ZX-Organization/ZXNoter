@@ -137,17 +137,18 @@ public class MapEditor extends BaseEditor {
         if (mapPath == null) {
             this.zxMap = new ZXMap();
         } else {
+
+
             try {
-                this.zxMap = new OsuReader().read(mapPath);
-            } catch (Exception e) {
-                try {
+                if (mapPath.toString().endsWith(".zxn")) {
+                    this.zxMap = new ZXMap(mapPath);
+                } else if (mapPath.toString().endsWith(".osu")) {
+                    this.zxMap = new OsuReader().read(mapPath);
+                } else if (mapPath.toString().endsWith(".imd")) {
                     this.zxMap = new ImdReader().read(mapPath);
-                } catch (IOException e1) {
-                    try {
-                        this.zxMap = new ZXMap(mapPath);
-                    } catch (Exception e2) {
-                    }
                 }
+            } catch (Exception e) {
+
             }
         }
 
@@ -1461,7 +1462,7 @@ public class MapEditor extends BaseEditor {
             previewTimingRender.render();
         }
 
-         //mainMapRender.graphics.rotate(1);
+        //mainMapRender.graphics.rotate(1);
         backgroundRender.render();
         beatLineRender.render();
         mainMapRender.render();

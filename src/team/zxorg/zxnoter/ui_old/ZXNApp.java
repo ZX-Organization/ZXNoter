@@ -443,7 +443,6 @@ public class ZXNApp extends Application {
 
         }*/
 
-
         //正文容器 添加控件
         bodyPane.getChildren().addAll(activityBar, sideBar, workspace);
 
