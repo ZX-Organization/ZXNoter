@@ -1,6 +1,4 @@
 
-
-
 .root {
     -color-dark-blue: #498ba7; /* 深蓝色 */
     -color-blue: #519aba; /* 蓝色 */
@@ -30,6 +28,7 @@
     -color-dark-white: #a1a3a3; /* 深白色 */
     -color-white: #d4d7d6; /* 白色 */
     -color-light-white: #f9fdfc; /* 浅白色 */
+
     -color-font-usually: #9A9A9A; /* 通常字体 */
     -color-font-light: #C8C8C8; /* 浅字体 */
 
@@ -260,9 +259,14 @@
     -fx-border-width: 0 0 0 1;
 }
 
+.map-canvas {
+    -fx-border-color: -color-border-window;
+    -fx-border-width: 0 1 0 1;
+}
+
 
 .preview-pane {
-    -fx-background-color: #ffffff11;
+    -fx-background-color: #ffffff44;
     -fx-border-color: -color-theme-3;
     -fx-border-width: 2 0 2 0;
 }
@@ -343,12 +347,12 @@
     -fx-padding: 2;
 }
 
-.h-tool-group-bar > .group > .button, .h-tool-group-bar > .group > .icon {
+ .h-tool-group-bar > .group > .icon {
     -fx-background-color: -color-font-usually;
     -fx-background-insets: 0;
 }
 
-.h-tool-group-bar > .group > .button:selected, .h-tool-group-bar > .group > .button:pressed {
+/*.h-tool-group-bar > .group > .button:selected, .h-tool-group-bar > .group > .button:pressed {
     -fx-background-color: -color-font-light;
 }
 
@@ -356,7 +360,7 @@
     -fx-padding: 2;
     -fx-border-width: 0;
     -fx-background-insets: 0;
-}
+}*/
 
 .h-tool-group-bar > .group {
     -fx-padding: 0 4 0 4;
@@ -418,3 +422,57 @@
     -fx-border-width: 1 0 0 0;
 }
 
+
+.info-canvas-pane {
+    -fx-border-color: -color-border-window;
+    -fx-border-width: 0 1 0 0;
+}
+
+
+.dialog-pane {
+    -fx-background-color: -color-theme-1;
+}
+
+.dialog-pane .text {
+    -fx-fill: -color-font-usually;
+}
+
+.button {
+    -fx-background-color: transparent;
+    -fx-border-color: -color-font-usually;
+    -fx-border-width: 2;
+    -fx-border-radius: 4;
+}
+
+.button .text {
+    -fx-fill: -color-font-usually;
+}
+
+.button:hover .text {
+    -fx-fill: -color-font-light;
+}
+
+.button:hover {
+    -fx-border-color: -color-font-light;
+}
+
+.check-box:determinate .box{
+    -fx-border-color: -color-font-usually;
+    -fx-background-color: transparent;
+    -fx-border-width: 2;
+    -fx-border-radius: 4;
+    -fx-padding: 1;
+}
+.check-box:determinate .text {
+    -fx-fill: -color-font-usually;
+}
+
+.check-box:determinate:selected .box {
+    -fx-border-color: -color-font-light;
+}
+
+.check-box:determinate .box .mark{
+    -fx-padding: 6;
+    -fx-fill: -color-font-light;
+    -fx-shape: "M10.0007 15.1709L19.1931 5.97852L20.6073 7.39273L10.0007 17.9993L3.63672 11.6354L5.05093 10.2212L10.0007 15.1709Z M0,0z M24,24z";
+}

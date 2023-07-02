@@ -1,6 +1,6 @@
 package team.zxorg.zxnoter;
 
-import team.zxorg.zxnoter.ui_old.ZXNApp;
+import team.zxorg.zxnoter.ui.ZXNApp;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;

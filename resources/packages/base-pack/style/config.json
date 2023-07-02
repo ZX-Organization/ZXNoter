@@ -20,6 +20,6 @@
         }
     ],
     "editor": {
-        "map-editor": ""
+        "map-editor": "editor/map-editor"
     }
 }
