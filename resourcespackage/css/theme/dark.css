@@ -376,7 +376,7 @@
 }
 
 
-/*.v-tool-group-bar > .group > .button {
+.v-tool-group-bar > .group > .button {
     -fx-padding: 2;
     -fx-background-color: -color-font-usually;
     -fx-background-insets: 0;
@@ -390,7 +390,7 @@
     -fx-padding: 2;
     -fx-border-width: 0;
     -fx-background-insets: 0;
-}*/
+}
 
 .v-tool-group-bar > .group {
     -fx-padding: 4 0 4 0;
