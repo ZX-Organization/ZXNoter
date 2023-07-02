@@ -632,6 +632,8 @@ public class ZXFixedOrbitMapEditor {
             shadowMap.insertNote(note.notes.get(0).clone());
             shadows.add(note.notes.get(0).clone());
         }
+
+
         if (note.notes.size()>0){
             //检查需要连接的按键
             //检查重合按键
@@ -658,7 +660,7 @@ public class ZXFixedOrbitMapEditor {
                                 note.notes.addAll(complexNote.notes);
                                 tempMapOperate.srcNotes.clear();
                                 tempMapOperate.srcNotes.add(complexNote);
-                                checkOperate(note);
+                                checkComplexNote(note,false);
                             }
                         }
                         else {
@@ -692,8 +694,9 @@ public class ZXFixedOrbitMapEditor {
                             if (complexNote.notes.size() >0){
                                 note.notes.addAll(complexNote.notes);
                                 //这里不需要clear,不知道为什么
+                                tempMapOperate.srcNotes.clear();
                                 tempMapOperate.srcNotes.add(complexNote);
-                                checkOperate(note);
+                                checkComplexNote(note,false);
 
                             }
                         }else {
