@@ -10,7 +10,6 @@ import team.zxorg.zxnoter.note.fixedorbit.SlideNote;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.TreeMap;
 
 public class ZXFixedOrbitMapEditor {
     /**
@@ -51,6 +50,8 @@ public class ZXFixedOrbitMapEditor {
      *
      */
     private ArrayList<FixedOrbitNote> tempAddList;
+    //合并列表
+    ArrayList<FixedOrbitNote> mergeList = new ArrayList<>();
 
     public ZXFixedOrbitMapEditor(ZXMap map) {
         srcMap = map;
@@ -59,7 +60,7 @@ public class ZXFixedOrbitMapEditor {
         withdrawStack = new LinkedList<>();
         shadows = new ArrayList<>();
         tempAddList = new ArrayList<>();
-        withdrawStackSize=128;
+        withdrawStackSize = 128;
     }
 
     /**
@@ -355,6 +356,7 @@ public class ZXFixedOrbitMapEditor {
             shadowMap.insertNote(tempComplexNote);
             shadows.add(tempComplexNote);
         }
+        mergeNote(tempComplexNote);
         return tempComplexNote;
     }
 
@@ -418,22 +420,23 @@ public class ZXFixedOrbitMapEditor {
 
     /**
      * 删除组合键指定子键
+     *
      * @param complexNote 组合键
-     * @param index 子键下标
+     * @param index       子键下标
      */
-    public void deleteChildNote(ComplexNote complexNote , int index){
+    public void deleteChildNote(ComplexNote complexNote, int index) {
         ComplexNote shadowNote = (ComplexNote) checkOperate(complexNote);
-        if (index+1 == complexNote.notes.size()){
+        if (index + 1 == complexNote.notes.size()) {
             shadowNote.notes.remove(index);
             return;
         }
         FixedOrbitNote next = shadowNote.notes.get(index + 1);
-        ComplexNote childCom1 = new ComplexNote(shadowNote.timeStamp , shadowNote.orbit);
-        ComplexNote childCom2 = new ComplexNote(next.timeStamp , next.orbit);
+        ComplexNote childCom1 = new ComplexNote(shadowNote.timeStamp, shadowNote.orbit);
+        ComplexNote childCom2 = new ComplexNote(next.timeStamp, next.orbit);
         for (int i = 0; i < index; i++) {
             childCom1.addNote(shadowNote.notes.get(i).clone());
         }
-        for (int i = index+1; i < shadowNote.notes.size(); i++) {
+        for (int i = index + 1; i < shadowNote.notes.size(); i++) {
             childCom2.addNote(shadowNote.notes.get(i).clone());
         }
         shadows.add(childCom1);
@@ -442,10 +445,12 @@ public class ZXFixedOrbitMapEditor {
         shadowMap.notes.add(childCom2);
         shadowMap.notes.remove(shadowNote);
     }
+
     /**
      * 完成修改,同步原map,操作栈
      */
     public void modifyDone() {
+
         //完成修改,同步到原zxMap中
         if (tempMapOperate == null) {
             return;
@@ -506,7 +511,119 @@ public class ZXFixedOrbitMapEditor {
         //克隆结果插入原map
         for (BaseNote note : tempMapOperate.desNotes) {
 
-            count+= srcMap.insertNote(note.clone());
+            //搜索按键列表
+            ArrayList<BaseNote> timeNotes;
+            boolean needMerge = false;
+            //检查尾部有无连接组合键
+            if (note instanceof ComplexNote complexNote){
+                if (complexNote.notes.size()>0){
+                    FixedOrbitNote lastNote = complexNote.notes.get(complexNote.notes.size()-1);
+                    if (lastNote instanceof LongNote longNote){
+                        timeNotes = srcMap.findClosestNotes(longNote.timeStamp+longNote.sustainedTime, false);
+                        for (BaseNote timeNote:timeNotes){
+                            if (timeNote.timeStamp == longNote.timeStamp+longNote.sustainedTime && timeNote.getOrbit() == longNote.orbit){
+                                needMerge = true;
+                                if (timeNote instanceof ComplexNote timeComplexNote){
+                                    //组合键(尾长条)碰上组合键
+                                    complexNote.notes.addAll(timeComplexNote.notes);
+                                    checkComplexNote(complexNote,false);
+                                    checkComplexNote(complexNote,false);
+                                    tempMapOperate.srcNotes.add(timeComplexNote);
+                                    srcMap.unLocalizedMapInfo.setInfo(
+                                            ZXMInfo.ObjectCount,
+                                            String.valueOf(
+                                                    Integer.parseInt(srcMap.unLocalizedMapInfo.getInfo(ZXMInfo.ObjectCount)) - srcMap.deleteNote(timeComplexNote)
+                                            )
+                                    );
+                                    count += srcMap.insertNote(complexNote.clone());
+                                }
+                            }
+                        }
+                    }
+                    if (lastNote instanceof SlideNote slideNote){
+                        timeNotes = srcMap.findClosestNotes(slideNote.timeStamp, false);
+                        for (BaseNote timeNote:timeNotes){
+                            if (timeNote.timeStamp == slideNote.timeStamp && timeNote.getOrbit() == slideNote.orbit+slideNote.slideArg){
+                                needMerge = true;
+                                if (timeNote instanceof ComplexNote timeComplexNote){
+                                    //组合键(尾长条)碰上组合键
+                                    complexNote.notes.addAll(timeComplexNote.notes);
+                                    checkComplexNote(complexNote,false);
+                                    checkComplexNote(complexNote,false);
+                                    tempMapOperate.srcNotes.add(timeComplexNote);
+                                    srcMap.unLocalizedMapInfo.setInfo(
+                                            ZXMInfo.ObjectCount,
+                                            String.valueOf(
+                                                    Integer.parseInt(srcMap.unLocalizedMapInfo.getInfo(ZXMInfo.ObjectCount)) - srcMap.deleteNote(timeComplexNote)
+                                            )
+                                    );
+                                    count += srcMap.insertNote(complexNote.clone());
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            if (note instanceof LongNote longNote){
+                timeNotes = srcMap.findClosestNotes(longNote.timeStamp+longNote.sustainedTime, false);
+                for (BaseNote timeNote:timeNotes){
+                    if (timeNote.timeStamp == longNote.timeStamp+longNote.sustainedTime && timeNote.getOrbit() == longNote.orbit){
+                        needMerge = true;
+                        if (timeNote instanceof ComplexNote timeComplexNote){
+                            //组合键(尾长条)碰上组合键
+                            ComplexNote complexNote = new ComplexNote(longNote.timeStamp, longNote.orbit);
+                            complexNote.addNote(longNote);
+
+                            complexNote.notes.addAll(timeComplexNote.notes);
+
+                            checkComplexNote(complexNote,false);
+                            checkComplexNote(complexNote,false);
+                            System.out.println(complexNote.notes);
+                            tempMapOperate.srcNotes.add(timeComplexNote);
+                            srcMap.unLocalizedMapInfo.setInfo(
+                                    ZXMInfo.ObjectCount,
+                                    String.valueOf(
+                                            Integer.parseInt(srcMap.unLocalizedMapInfo.getInfo(ZXMInfo.ObjectCount)) - srcMap.deleteNote(timeComplexNote)
+                                    )
+                            );
+                            tempMapOperate.desNotes.remove(longNote);
+                            tempMapOperate.desNotes.add(complexNote);
+                            count += srcMap.insertNote(complexNote.clone());
+                        }
+                    }
+                }
+            }
+            if (note instanceof SlideNote slideNote){
+                timeNotes = srcMap.findClosestNotes(slideNote.timeStamp, false);
+                for (BaseNote timeNote:timeNotes){
+                    if (timeNote.timeStamp == slideNote.timeStamp && timeNote.getOrbit() == slideNote.orbit+ slideNote.slideArg){
+                        needMerge = true;
+                        if (timeNote instanceof ComplexNote timeComplexNote){
+                            //组合键(尾长条)碰上组合键
+                            ComplexNote complexNote = new ComplexNote(slideNote.timeStamp, slideNote.orbit);
+                            complexNote.addNote(slideNote);
+                            complexNote.notes.addAll(timeComplexNote.notes);
+                            checkComplexNote(complexNote,false);
+                            checkComplexNote(complexNote,false);
+                            System.out.println(complexNote.notes);
+                            tempMapOperate.srcNotes.add(timeComplexNote);
+                            srcMap.unLocalizedMapInfo.setInfo(
+                                    ZXMInfo.ObjectCount,
+                                    String.valueOf(
+                                            Integer.parseInt(srcMap.unLocalizedMapInfo.getInfo(ZXMInfo.ObjectCount)) - srcMap.deleteNote(timeComplexNote)
+                                    )
+                            );
+                            tempMapOperate.desNotes.remove(slideNote);
+                            tempMapOperate.desNotes.add(complexNote);
+                            count += srcMap.insertNote(complexNote.clone());
+                        }
+                    }
+                }
+            }
+            if (!needMerge)
+                count += srcMap.insertNote(note.clone());
+
+
         }
         //修改信息
         srcMap.unLocalizedMapInfo.setInfo(
@@ -549,12 +666,12 @@ public class ZXFixedOrbitMapEditor {
                 if (complexNote.notes.size() != 1)
                     //长度为1的组合键
                     containsOldNote = true;
-             else
-                //检查操作源是否有同轨同时间按键
-                for (BaseNote operateNote : tempMapOperate.srcNotes)
-                    if (operateNote instanceof FixedOrbitNote operateFixedOrbitNote)
-                        if (operateFixedOrbitNote.timeStamp == srcNote.timeStamp && operateFixedOrbitNote.orbit == srcNote.orbit)
-                            containsOldNote = true;
+                else
+                    //检查操作源是否有同轨同时间按键
+                    for (BaseNote operateNote : tempMapOperate.srcNotes)
+                        if (operateNote instanceof FixedOrbitNote operateFixedOrbitNote)
+                            if (operateFixedOrbitNote.timeStamp == srcNote.timeStamp && operateFixedOrbitNote.orbit == srcNote.orbit)
+                                containsOldNote = true;
             if (!containsOldNote)
                 //加入操作源中
                 tempMapOperate.srcNotes.add(srcNote);
@@ -579,8 +696,8 @@ public class ZXFixedOrbitMapEditor {
     /**
      * 检查组合键合法性,自动修正
      *
-     * @param note 组合键
-     * @param flag 当组合键中只有一个子键时是否转化单键
+     * @param note  组合键
+     * @param flag  当组合键中只有一个子键时是否转化单键
      */
     private void checkComplexNote(ComplexNote note, boolean flag) {
         //检查按键是否为组合键,修复其中多余节点,0参滑键以及非法参数按键
@@ -613,6 +730,7 @@ public class ZXFixedOrbitMapEditor {
                     if (note.notes.get(index) instanceof LongNote nextLongNote) {
                         if (thisLongNote.orbit != nextLongNote.orbit)
                             break;
+
                         thisLongNote.sustainedTime += nextLongNote.sustainedTime;
                         deleteList.add(nextLongNote);
                     } else {
@@ -633,87 +751,88 @@ public class ZXFixedOrbitMapEditor {
             shadows.add(note.notes.get(0).clone());
         }
 
+    }
 
-        if (note.notes.size()>0){
+    private void mergeNote(ComplexNote note) {
+        if (note.notes.size() > 0) {
             //检查需要连接的按键
             //检查重合按键
-            FixedOrbitNote lastNote = note.notes.get(note.notes.size()-1);
+            FixedOrbitNote lastNote = note.notes.get(note.notes.size() - 1);
             ArrayList<BaseNote> timeNotes;
-            if (lastNote instanceof LongNote longNote){
+            boolean hasNeedMergeNote = false;
+            if (lastNote instanceof LongNote longNote) {
                 //组合键结尾为长条
-                timeNotes = srcMap.findClosestNotes(longNote.timeStamp + longNote.sustainedTime,false);
-                for (BaseNote timeNote:timeNotes){
-                    if (timeNote.timeStamp==lastNote.timeStamp+longNote.sustainedTime && timeNote.getOrbit() == lastNote.orbit){
-                        if (timeNote instanceof LongNote timeLongNote){
+                timeNotes = srcMap.findClosestNotes(longNote.timeStamp + longNote.sustainedTime, false);
+                for (BaseNote timeNote : timeNotes) {
+                    if (timeNote.timeStamp == lastNote.timeStamp + longNote.sustainedTime && timeNote.getOrbit() == lastNote.orbit) {
+                        hasNeedMergeNote = true;
+                        if (timeNote instanceof LongNote timeLongNote) {
                             //组合键结尾长条接上了另一个长条,合体
-                            longNote.sustainedTime+=timeLongNote.sustainedTime;
-                            tempMapOperate.srcNotes.clear();
+                            longNote.sustainedTime += timeLongNote.sustainedTime;
+                            tempMapOperate.srcNotes.removeAll(mergeList);
+                            mergeList.add(timeLongNote);
                             tempMapOperate.srcNotes.add(timeLongNote);
-                        }else if (timeNote instanceof SlideNote timeSlideNote){
+                        } else if (timeNote instanceof SlideNote timeSlideNote) {
                             //组合键结尾长条接上了一个滑键,连接
                             note.addNote(timeSlideNote);
-                            tempMapOperate.srcNotes.clear();
+                            tempMapOperate.srcNotes.removeAll(mergeList);
+                            mergeList.add(timeSlideNote);
                             tempMapOperate.srcNotes.add(timeSlideNote);
-                        } else if (timeNote instanceof ComplexNote complexNote){
-                            //连接到组合键
-                            if (complexNote.notes.size() >0){
-                                note.notes.addAll(complexNote.notes);
-                                tempMapOperate.srcNotes.clear();
-                                tempMapOperate.srcNotes.add(complexNote);
-                                checkComplexNote(note,false);
-                            }
+                        } if (timeNote instanceof ComplexNote){
                         }
                         else {
                             //单键
-                            tempMapOperate.srcNotes.clear();
+                            tempMapOperate.srcNotes.removeAll(mergeList);
                             tempMapOperate.srcNotes.add(timeNote);
                         }
                     }
                 }
-            }else if (lastNote instanceof SlideNote slideNote){
+            } else if (lastNote instanceof SlideNote slideNote) {
                 //组合键结尾为滑键
-                timeNotes = srcMap.findClosestNotes(slideNote.timeStamp,false);
-                for (BaseNote timeNote:timeNotes){
-                    if (timeNote.timeStamp==lastNote.timeStamp && timeNote.getOrbit() == slideNote.orbit + slideNote.slideArg){
-                        if (timeNote instanceof LongNote timeLongNote){
+                timeNotes = srcMap.findClosestNotes(slideNote.timeStamp, false);
+                for (BaseNote timeNote : timeNotes) {
+                    if (timeNote.timeStamp == lastNote.timeStamp && timeNote.getOrbit() == slideNote.orbit + slideNote.slideArg) {
+                        hasNeedMergeNote = true;
+                        if (timeNote instanceof LongNote timeLongNote) {
                             //组合键结尾滑键接上了另一个长条,连接
                             note.addNote(timeLongNote);
-                            tempMapOperate.srcNotes.clear();
+                            tempMapOperate.srcNotes.removeAll(mergeList);
+                            mergeList.add(timeLongNote);
                             tempMapOperate.srcNotes.add(timeLongNote);
-                        }else if (timeNote instanceof SlideNote timeSlideNote){
+                        } else if (timeNote instanceof SlideNote timeSlideNote) {
                             //组合键结尾滑键接上了一个滑键,合体
-                            slideNote.slideArg+=timeSlideNote.slideArg;
-                            tempMapOperate.srcNotes.clear();
+                            slideNote.slideArg += timeSlideNote.slideArg;
+                            tempMapOperate.srcNotes.removeAll(mergeList);
+                            mergeList.add(timeSlideNote);
                             tempMapOperate.srcNotes.add(timeSlideNote);
-                            if (slideNote.slideArg == 0){
+                            if (slideNote.slideArg == 0) {
                                 //结尾滑键参数归零
                                 note.notes.remove(slideNote);
                             }
-                        }else if (timeNote instanceof ComplexNote complexNote){
-                            //连接到组合键
-                            if (complexNote.notes.size() >0){
-                                note.notes.addAll(complexNote.notes);
-                                //这里不需要clear,不知道为什么
-                                tempMapOperate.srcNotes.clear();
-                                tempMapOperate.srcNotes.add(complexNote);
-                                checkComplexNote(note,false);
-
-                            }
-                        }else {
+                        }if (timeNote instanceof ComplexNote){
+                        }
+                        else {
                             //单键
-                            tempMapOperate.srcNotes.clear();
+                            mergeList.add((FixedOrbitNote) timeNote);
+                            tempMapOperate.srcNotes.removeAll(mergeList);
                             tempMapOperate.srcNotes.add(timeNote);
                         }
                     }
                 }
             }
+            //不需要操作时
+            if (!hasNeedMergeNote) {
+                tempMapOperate.srcNotes.removeAll(mergeList);
+            }
+
         }
     }
 
     /**
      * 在指定位置添加物件,确认添加需要done
+     *
      * @param timeStamp 时间戳位置
-     * @param orbit 轨道位置
+     * @param orbit     轨道位置
      */
     public void addNote(long timeStamp, int orbit) {
         FixedOrbitNote note = new FixedOrbitNote(timeStamp, orbit);
@@ -727,6 +846,7 @@ public class ZXFixedOrbitMapEditor {
 
     /**
      * 删除物件,确认执行需要done
+     *
      * @param srcNote 要删除的物件
      */
     public void deleteNote(FixedOrbitNote srcNote) {
@@ -773,7 +893,7 @@ public class ZXFixedOrbitMapEditor {
     /**
      * 重做撤回的操作
      */
-    public void redo(){
+    public void redo() {
 
         if (withdrawStack.size() > 0) {
             MapOperate operate = withdrawStack.pollLast();
