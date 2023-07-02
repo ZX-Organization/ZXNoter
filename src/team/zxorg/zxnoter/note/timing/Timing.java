@@ -27,7 +27,8 @@ public class Timing implements Comparable<Timing>{
         this.absBpm = absBpm;
     }
     public Timing(JSONObject timingJson) {
-        timestamp = timingJson.getLongValue("timestamp");
+        System.out.println(timingJson);
+        timestamp = timingJson.getLongValue("time");
         bpmSpeed = timingJson.getDoubleValue("bpmSpeed");
         isNewBaseBpm = timingJson.getBooleanValue("isNewBaseBpm");
         absBpm = timingJson.getDoubleValue("absBpm");

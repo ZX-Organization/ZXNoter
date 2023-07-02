@@ -21,7 +21,7 @@ public class ZXTiming extends Timing implements Comparable<Timing>{
     }
     public ZXTiming(JSONObject zxTimingJson) {
         super(
-                zxTimingJson.getLongValue("timestamp"),zxTimingJson.getDoubleValue("bpmSpeed"),
+                zxTimingJson.getLongValue("time"),zxTimingJson.getDoubleValue("bpmSpeed"),
                 zxTimingJson.getBooleanValue("isNewBaseBpm"),zxTimingJson.getDoubleValue("absBpm")
                 );
         beats = zxTimingJson.getIntValue("beats");
