@@ -19,6 +19,18 @@ public class ZXTiming extends Timing implements Comparable<Timing>{
         this.isExtendTiming = isExtendTiming;
         this.effect = effect;
     }
+    public ZXTiming(JSONObject zxTimingJson) {
+        super(
+                zxTimingJson.getLongValue("timestamp"),zxTimingJson.getDoubleValue("bpmSpeed"),
+                zxTimingJson.getBooleanValue("isNewBaseBpm"),zxTimingJson.getDoubleValue("absBpm")
+                );
+        beats = zxTimingJson.getIntValue("beats");
+        sampleSet = zxTimingJson.getIntValue("sampleSet");
+        soundPar = zxTimingJson.getIntValue("soundPar");
+        volume = zxTimingJson.getIntValue("volume");
+        isExtendTiming = zxTimingJson.getBooleanValue("isExtendTiming");
+        effect = zxTimingJson.getIntValue("effect");
+    }
 
     public JSONObject toJson() {
         JSONObject timingJson = new JSONObject();

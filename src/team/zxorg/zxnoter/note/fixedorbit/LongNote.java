@@ -14,14 +14,22 @@ public class LongNote extends FixedOrbitNote implements Cloneable,Comparable<Bas
     public long sustainedTime;
     public LongNote(long timeStamp, int orbit , long sustainedTime) {
         super(timeStamp, orbit);
-
         this.sustainedTime = sustainedTime;
+    }
+    public LongNote(long timeStamp, int orbit , long sustainedTime, String soundPath) {
+        super(timeStamp, orbit);
+        this.sustainedTime = sustainedTime;
+        this.soundPath = soundPath;
     }
 
     public LongNote(LongNote longNote) {
         super(longNote.timeStamp,longNote. orbit);
         sustainedTime = longNote.sustainedTime;
         hash = longNote.hash;
+    }
+    public LongNote(JSONObject longNoteJson) {
+        super(longNoteJson.getLongValue("time"),longNoteJson. getIntValue("orbit"),longNoteJson.getString("soundPath"));
+        sustainedTime = longNoteJson.getLongValue("sustainedTime");
     }
 
     @Override

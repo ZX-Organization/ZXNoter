@@ -15,6 +15,34 @@ public class ComplexNote extends FixedOrbitNote implements Cloneable {
         this.notes = notes;
         this.isRelativeHead = isRelativeHead;
     }
+    public ComplexNote(JSONObject noteJson) {
+        super(noteJson.getLongValue("time"), noteJson.getIntValue("orbit"),noteJson.getString("soundPath"));
+        JSONArray children = noteJson.getJSONArray("child");
+        notes = new ArrayList<>();
+        for (int i = 0; i < children.size(); i++) {
+            JSONObject childJson = children.getJSONObject(i);
+            if (childJson.size()==3){
+                //普通单键
+                notes.add(new FixedOrbitNote(childJson));
+            }
+            if (childJson.containsKey("slideArg")){
+                //滑键
+                notes.add(new SlideNote(childJson));
+            }
+            if (childJson.containsKey("sustainedTime")){
+                //长条
+                //判断是否为特殊长条
+                if (childJson.size() == 9) notes.add(new CustomLongNote(childJson));
+                else notes.add(new LongNote(childJson));
+            }
+            if (childJson.size()==8){
+                //特殊单键
+                notes.add(new CustomNote(childJson));
+            }
+        }
+
+        isRelativeHead = noteJson.getBooleanValue("isRelativeHead");
+    }
 
     public ComplexNote(ComplexNote complexNote) {
         super(complexNote.timeStamp, complexNote.orbit);

@@ -19,6 +19,10 @@ public class SlideNote extends FixedOrbitNote implements Cloneable,Comparable<Ba
         super(timeStamp, orbit);
         this.slideArg = slideArg;
     }
+    public SlideNote(JSONObject slideNoteJson) {
+        super(slideNoteJson.getLongValue("time"), slideNoteJson.getIntValue("orbit"),slideNoteJson.getString("soundPath"));
+        slideArg = slideNoteJson.getIntValue("slideArg");
+    }
 
     public SlideNote(SlideNote slideNote) {
         super(slideNote.timeStamp, slideNote.orbit);

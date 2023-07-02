@@ -3,7 +3,6 @@ package team.zxorg.zxnoter.note.fixedorbit;
 import com.alibaba.fastjson2.JSONObject;
 import team.zxorg.zxnoter.note.BaseNote;
 
-import java.nio.file.Path;
 import java.util.Random;
 
 /**
@@ -22,6 +21,18 @@ public class FixedOrbitNote extends BaseNote implements Cloneable, Comparable<Ba
         super(timeStamp);
         hash = new Random().nextInt();
         this.orbit = orbit;
+    }
+    public FixedOrbitNote(long timeStamp, int orbit, String soundPath) {
+        super(timeStamp);
+        hash = new Random().nextInt();
+        this.orbit = orbit;
+        this.soundPath = soundPath;
+    }
+
+    public FixedOrbitNote(JSONObject noteJson) {
+        super(noteJson.getLongValue("time"));
+        orbit = noteJson.getIntValue("orbit");
+        soundPath = noteJson.getString("soundPath");
     }
 
     public void setSound(String path) {

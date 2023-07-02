@@ -18,6 +18,15 @@ public class CustomNote extends FixedOrbitNote{
         sampleIndex = Integer.parseInt(sampleSetPars[2]);
         sampleVolume = Integer.parseInt(sampleSetPars[3]);
     }
+    public CustomNote(JSONObject customNoteJson) {
+        super(customNoteJson.getLongValue("time"), customNoteJson.getIntValue("orbit"),customNoteJson.getString("soundPath"));
+        keyType = customNoteJson.getIntValue("keyType");
+        hitSound = customNoteJson.getIntValue("hitSound");
+        normalSampleSet = customNoteJson.getIntValue("normalSampleSet");
+        extendSampleSet = customNoteJson.getIntValue("extendSampleSet");
+        sampleIndex = customNoteJson.getIntValue("sampleIndex");
+        sampleVolume = customNoteJson.getIntValue("sampleVolume");
+    }
     @Override
     public JSONObject toJson() {
         JSONObject noteJson = new JSONObject();

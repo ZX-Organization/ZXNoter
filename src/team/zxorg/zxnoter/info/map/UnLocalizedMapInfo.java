@@ -1,7 +1,6 @@
 package team.zxorg.zxnoter.info.map;
 
 import com.alibaba.fastjson2.JSONObject;
-import team.zxorg.zxnoter.map.ZXMap;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,6 +16,14 @@ public class UnLocalizedMapInfo {
     public UnLocalizedMapInfo() {
         allInfo = new HashMap<>();
         addInterfaceList = new ArrayList<>();
+    }
+    public UnLocalizedMapInfo(JSONObject infoJson) {
+        allInfo = new HashMap<>();
+        addInterfaceList = new ArrayList<>();
+
+        Set<String> keys = infoJson.keySet();
+        for (String key:keys) allInfo.put(ZXMInfo.valueOf(key),infoJson.getString(key));
+
     }
 
     public void setInfo(ZXMInfo key, String value) {

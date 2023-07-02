@@ -16,9 +16,11 @@ import java.nio.file.Path;
 public class IoTest {
     public static void main(String[] args) throws IOException, InterruptedException, NoSuchFieldException {
         //try {
-            ZXMap map = new ImdReader().read(Path.of("docs/reference/Contrapasso -paradiso-/t+pazolite - Contrapasso -paradiso-_4k_hd.imd"));
+            //ZXMap map = new ImdReader().read(Path.of("docs/reference/Contrapasso -paradiso-/t+pazolite - Contrapasso -paradiso-_4k_hd.imd"));
+        ZXMap map = new ZXMap(Path.of("G:/desktop/a.zxn"));
 
-        System.out.println(map.timingPoints);
+        System.out.println(map);
+        /*System.out.println(map.timingPoints);
             map.timingPoints.add(
                     new Timing(
                             200000,121.5,true,121.5
@@ -28,14 +30,14 @@ public class IoTest {
         new ImdWriter().writeOut(map,Path.of("G:/desktop/a_4k_ez.imd"));
 
         ZXMap map2 = new ImdReader().read(Path.of("G:/desktop/a_4k_ez.imd"));
-        System.out.println(map2.timingPoints);
+        System.out.println(map2.timingPoints);*/
 
 
 
 
 
 
-            map.saveZXN(Path.of("G:/desktop"));
+            //map.saveZXN(Path.of("G:/desktop"));
             //System.out.println(map.notes);
             //map.findClosestNote(1000);
             //System.out.println(map.notes.get(19));

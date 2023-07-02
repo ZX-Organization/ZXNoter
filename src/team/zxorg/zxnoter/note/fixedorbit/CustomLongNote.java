@@ -18,6 +18,15 @@ public class CustomLongNote extends LongNote{
         sampleIndex = Integer.parseInt(sampleSetPars[2]);
         sampleVolume = Integer.parseInt(sampleSetPars[3]);
     }
+    public CustomLongNote(JSONObject customLongNoteJson) {
+        super(customLongNoteJson.getLongValue("time"), customLongNoteJson.getIntValue("orbit"), customLongNoteJson.getLongValue("sustainedTime"),customLongNoteJson.getString("soundPath"));
+        keyType = customLongNoteJson.getIntValue("keyType");
+        hitSound = customLongNoteJson.getIntValue("hitSound");
+        normalSampleSet = customLongNoteJson.getIntValue("normalSampleSet");
+        extendSampleSet = customLongNoteJson.getIntValue("extendSampleSet");
+        sampleIndex = customLongNoteJson.getIntValue("sampleIndex");
+        sampleVolume = customLongNoteJson.getIntValue("sampleVolume");
+    }
 
     @Override
     public JSONObject toJson() {

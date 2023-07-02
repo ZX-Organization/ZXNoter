@@ -9,16 +9,11 @@ import team.zxorg.zxnoter.info.editor.ZXNInfo;
 import team.zxorg.zxnoter.info.map.UnLocalizedMapInfo;
 import team.zxorg.zxnoter.info.map.ZXMInfo;
 import team.zxorg.zxnoter.note.BaseNote;
-import team.zxorg.zxnoter.note.fixedorbit.ComplexNote;
-import team.zxorg.zxnoter.note.fixedorbit.FixedOrbitNote;
-import team.zxorg.zxnoter.note.fixedorbit.LongNote;
-import team.zxorg.zxnoter.note.fixedorbit.SlideNote;
+import team.zxorg.zxnoter.note.fixedorbit.*;
 import team.zxorg.zxnoter.note.timing.Timing;
+import team.zxorg.zxnoter.note.timing.ZXTiming;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -66,8 +61,64 @@ public class ZXMap {
         editorInfo = new HashMap<>();
     }
 
-    public ZXMap(Path zxnFilePath){
+    public ZXMap(Path zxnFilePath) throws IOException {
         File zxnFile = zxnFilePath.toFile();
+        FileInputStream fis = new FileInputStream(zxnFile);
+        JSONObject zxnJson = JSON.parseObject(fis);
+        fis.close();
+        //编辑器信息
+        editorInfo = new HashMap<>();
+        JSONObject editorJson = zxnJson.getJSONObject("editor");
+        Set<String> editorKeys = editorJson.keySet();
+        for (String editorKey:editorKeys) editorInfo.put(editorKey,editorJson.getString(editorKey));
+
+        //反本地化信息读取
+        unLocalizedMapInfo = new UnLocalizedMapInfo(zxnJson.getJSONObject("allInfo"));
+
+        //timing读取
+        timingPoints = new ArrayList<>();
+        JSONArray timingJsonArr = zxnJson.getJSONArray("timing");
+        for (int i = 0; i < timingJsonArr.size(); i++) {
+            JSONObject timingJson = timingJsonArr.getJSONObject(i);
+            if (timingJson.size() == 4){
+                //普通timing
+                timingPoints.add(new Timing(timingJson));
+            }
+            if (timingJson.size()==10){
+                //zxTiming
+                timingPoints.add(new ZXTiming(timingJson));
+            }
+        }
+        //按键读取
+        notes = new ArrayList<>();
+        JSONArray noteJsonArr = zxnJson.getJSONArray("note");
+        for (int i = 0; i < noteJsonArr.size(); i++) {
+            JSONObject noteJson = noteJsonArr.getJSONObject(i);
+            if (noteJson.size()==3){
+                //普通单键
+                notes.add(new FixedOrbitNote(noteJson));
+            }
+            if (noteJson.containsKey("slideArg")){
+                //滑键
+                notes.add(new SlideNote(noteJson));
+            }
+            if (noteJson.containsKey("sustainedTime")){
+                //长条
+                //判断是否为特殊长条
+                if (noteJson.size() == 9) notes.add(new CustomLongNote(noteJson));
+                    else notes.add(new LongNote(noteJson));
+            }
+            if (noteJson.containsKey("child")){
+                notes.add(new ComplexNote(noteJson));
+            }
+            if (noteJson.size()==8){
+                //特殊单键
+                notes.add(new CustomNote(noteJson));
+            }
+        }
+
+        //System.out.println(unLocalizedMapInfo);
+        //System.out.println(zxnJson);
     }
 
     /**
@@ -434,14 +485,15 @@ public class ZXMap {
     }
 
     public void saveZXN(Path path) throws IOException {
-        File absFile;
-        if (path.toFile().isFile()){
+        File absFile = path.toFile();
+        /*if (path.toFile().isFile()){
             String fileName = path.getFileName().toString();
             absFile = path.toFile();
         }else {
             absFile = new File(path.toFile().getAbsoluteFile() +"\\" +unLocalizedMapInfo.getInfo(ZXMInfo.TitleUnicode)+".zxn");
-        }
+        }*/
 
+        System.out.println(absFile);
         if (!absFile.exists()) absFile.createNewFile();
 
         JSONObject zxn = new JSONObject();
