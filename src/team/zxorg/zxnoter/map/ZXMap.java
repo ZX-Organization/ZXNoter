@@ -105,18 +105,19 @@ public class ZXMap {
             if (noteJson.containsKey("sustainedTime")){
                 //长条
                 //判断是否为特殊长条
-                if (noteJson.size() == 9) notes.add(new CustomLongNote(noteJson));
+                if (noteJson.size() == 10) notes.add(new CustomLongNote(noteJson));
                     else notes.add(new LongNote(noteJson));
             }
             if (noteJson.containsKey("child")){
                 notes.add(new ComplexNote(noteJson));
             }
-            if (noteJson.size()==8){
+            if (noteJson.size()==9){
                 //特殊单键
                 notes.add(new CustomNote(noteJson));
             }
         }
-
+        System.out.println(notes);
+        //System.out.println(timingPoints);
         //System.out.println(unLocalizedMapInfo);
         //System.out.println(zxnJson);
     }
