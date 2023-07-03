@@ -251,7 +251,7 @@ public class ZXNApp extends Application {
         };
         animationTimer.start();
 
-        for (String arg : Main.args) {
+        for (String arg : Main.commandLineArgs) {
             Path file = Paths.get(arg);
             if (Files.exists(file)) {//添加编辑器
                 Tab tab1 = new Tab();

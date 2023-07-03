@@ -1,0 +1,8 @@
+{
+  "type": "config",
+  "resources": {
+    "enabledResourcePackage": [
+      "zxnoter.base"
+    ]
+  }
+}

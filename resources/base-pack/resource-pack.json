@@ -1,0 +1,37 @@
+{
+  "name": "ZXNoter-BRP",
+  "id": "zxnoter.base",
+  "authors": "zedoCN",
+  "describe": "ZXNoter Base Resources Pack.",
+  "resources": {
+    "style": {
+      "color": [
+        {
+          "id": "dark",
+          "path": "style-color/dark.css"
+        }
+      ],
+      "layout": [
+        {
+          "id": "default",
+          "path": "style-layout/base.css"
+        }
+      ],
+      "editor": {
+        "map-editor": [
+          "style-editor/map-editor/map-editor/pink/config.json"
+        ]
+      }
+    },
+    "iconPacks": [
+      "icon-packs/base-pack-line/config.json",
+      "icon-packs/base-pack-fill/config.json"
+    ],
+    "audioPacks": [
+      "audio/base/config.json"
+    ],
+    "languages": [
+      "language/zh_cn.json"
+    ]
+  }
+}

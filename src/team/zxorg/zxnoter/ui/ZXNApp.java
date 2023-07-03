@@ -3,7 +3,7 @@ package team.zxorg.zxnoter.ui;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import team.zxorg.zxnoter.resource_old.ZXResources;
-import team.zxorg.zxnoter.ui.main.MainWindow;
+import team.zxorg.zxnoter.ui.main.MainScene;
 
 import java.nio.file.Path;
 
@@ -18,7 +18,7 @@ public class ZXNApp extends Application {
         //初始化主窗口
 
 
-        stage.setScene(new MainWindow().init("dark"));
+        stage.setScene(new MainScene().init("dark"));
         stage.setMinWidth(1070);
         stage.setMinHeight(600);
         stage.setWidth(1070);

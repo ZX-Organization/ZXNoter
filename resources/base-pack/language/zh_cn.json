@@ -1,0 +1,17 @@
+{
+    "type": "language",
+    "languageCode": "zh_cn",
+    "name": "简体中文(中国)",
+    "languages": {
+        "title-bar.menu.file": "文件",
+        "title-bar.menu.file.create": "新建",
+        "title-bar.menu.file.create.project": "项目...",
+        "title-bar.menu.file.create.zxmap": "谱面",
+        "title-bar.menu.file.open": "打开项目或文件",
+        "title-bar.menu.file.recent": "打开最近",
+        "title-bar.menu.file.close": "关闭项目",
+        "title-bar.menu.file.setting": "设置",
+        "title-bar.menu.file.quit": "退出",
+        "language.loss": "**语言丢失**"
+    }
+}
