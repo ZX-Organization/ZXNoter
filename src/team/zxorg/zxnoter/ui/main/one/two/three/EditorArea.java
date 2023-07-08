@@ -9,6 +9,7 @@ import team.zxorg.zxnoter.ui.main.one.two.three.four.EditorTabPane;
 import team.zxorg.zxnoter.ui.main.one.two.three.four.five.BaseEditor;
 import team.zxorg.zxnoter.ui.main.one.two.three.four.five.SettingEditor;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -19,7 +20,13 @@ public class EditorArea extends EditorLayout {
     public EditorTabPane dragTabPane;//拖拽中的TabPane
     public HashMap<String, BaseEditor> editorHashMap = new HashMap<>();
 
+    @Override
+    public String toString() {
+        return "(ROOT)" + super.toString();
+    }
+
     public EditorArea() {
+        super(null);
 
         getStyleClass().add("editor-area");
         setOrientation(Orientation.HORIZONTAL);

@@ -550,20 +550,26 @@
 }
 
 
-.editor-area .editor-tab-pane  .layout-0 {
+.editor-area .editor-tab-pane .layout-left {
     -fx-border-color: -color-blue;
-    -fx-border-width: 0 0 0 0;
-}
-.editor-area .editor-tab-pane  .layout-1 {
-    -fx-border-color: -color-blue;
-    -fx-border-width: 0 0 0 2;
-}
-.editor-area .editor-tab-pane  .layout-2 {
-    -fx-border-color: -color-blue;
-    -fx-border-width: 0 0 2 0;
-}
-.editor-area .editor-tab-pane  .layout-3 {
-    -fx-border-color: -color-blue;
-    -fx-border-width: 0 2 0 0;
+    -fx-border-width: 0 0 0 4;
 }
 
+.editor-area .editor-tab-pane .layout-right {
+    -fx-border-color: -color-blue;
+    -fx-border-width: 0 4 0 0;
+}
+
+.editor-area .editor-tab-pane .layout-top {
+    -fx-border-color: -color-blue;
+    -fx-border-width: 4 0 0 0;
+}
+
+.editor-area .editor-tab-pane .layout-bottom {
+    -fx-border-color: -color-blue;
+    -fx-border-width: 0 0 4 0;
+}
+.editor-area .editor-tab-pane .layout-center {
+    -fx-border-color: -color-blue;
+    -fx-border-width: 4;
+}

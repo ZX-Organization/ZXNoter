@@ -1,12 +1,10 @@
 package team.zxorg.zxnoter.ui.main.one.two.three.four;
 
-import javafx.application.Platform;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.geometry.Orientation;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.input.DragEvent;
@@ -18,21 +16,22 @@ import team.zxorg.zxnoter.ui.main.one.two.three.EditorArea;
 import team.zxorg.zxnoter.ui.main.one.two.three.four.five.BaseEditor;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
-import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class EditorTabPane extends TabPane {
     private final UUID uuid = UUID.randomUUID();
-    private final EditorArea area;//编辑器区域
-    private final EditorLayout layout;//上一层布局
+    private final EditorArea rootArea;//编辑器区域
+    protected EditorLayout parentLayout;//上一层布局
 
+    @Override
+    public String toString() {
+        return "编辑器堆叠 " + getTabs() + " ";
+    }
 
-    public EditorTabPane(EditorArea area, EditorLayout layout) {
-        this.area = area;
-        this.layout = layout;
+    public EditorTabPane(EditorArea rootArea, EditorLayout parentLayout) {
+        this.parentLayout = parentLayout;
+        this.rootArea = rootArea;
         setId(uuid.toString());
         setTabClosingPolicy(TabPane.TabClosingPolicy.ALL_TABS);
         getStyleClass().add("editor-tab-pane");
@@ -40,18 +39,20 @@ public class EditorTabPane extends TabPane {
         getTabs().addListener((ListChangeListener<Tab>) c -> {
             while (c.next()) {
                 if (c.wasRemoved()) {
+
                     List<? extends Tab> removedList = c.getAddedSubList();
                     for (Tab tab : removedList) {
-                        area.editorHashMap.remove(tab.getId());
+                        rootArea.editorHashMap.remove(tab.getId());
                     }
-                    if (getTabs().size() == 0) {//检查是否还有tab 没有则删除自身
-                        layout.getItems().remove(this);
-                    }
+                    /*if (getTabs().size() == 0) {//检查是否还有tab 没有则删除自身
+                        if (!parentLayout.getItems().remove(this)) {
+                            System.out.println("编辑器堆叠 自清除失败");
+                        }
+                    }*/
                 } else if (c.wasAdded()) {
                     List<? extends Tab> addedList = c.getAddedSubList();
                     for (Tab tab : addedList) {
-
-                        area.editorHashMap.put(tab.getId(), (BaseEditor) tab);
+                        rootArea.editorHashMap.put(tab.getId(), (BaseEditor) tab);
                     }
                 }
             }
@@ -68,6 +69,14 @@ public class EditorTabPane extends TabPane {
             }*/
         });
 
+
+       /* parentProperty().addListener((observable, oldValue, newValue) -> {
+            for (EditorLayout layout : rootArea.parentLayout) {
+                if (layout.getItems().contains(this)) {
+                    parentLayout = layout;
+                }
+            }
+        });*/
 
         setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
@@ -132,20 +141,20 @@ public class EditorTabPane extends TabPane {
 
     private void handleContentArea(Pane contentArea) {
         contentArea.setOnDragOver(event -> {
-            for (int i = 0; i < 4; i++) {
-                contentArea.getStyleClass().remove("layout-" + i);
+            for (LayoutPosition layoutPosition : LayoutPosition.values()) {
+                contentArea.getStyleClass().remove("layout-" + layoutPosition.getId());
             }
-            if (area.dragTab != null) {
-                int layoutMode = getLayout(contentArea, event);
-                contentArea.getStyleClass().add("layout-" + layoutMode);
+            if (rootArea.dragTab != null) {
+                LayoutPosition layoutPosition = getLayoutPosition(contentArea, event);
+                contentArea.getStyleClass().add("layout-" + layoutPosition.getId());
                 event.acceptTransferModes(TransferMode.MOVE);
             }
             event.consume();
         });
         contentArea.setOnDragExited((event) -> {
-            if (area.dragTab != null) {
-                for (int i = 0; i < 4; i++) {
-                    contentArea.getStyleClass().remove("layout-" + i);
+            if (rootArea.dragTab != null) {
+                for (LayoutPosition layoutPosition : LayoutPosition.values()) {
+                    contentArea.getStyleClass().remove("layout-" + layoutPosition.getId());
                 }
             }
             event.consume();
@@ -154,91 +163,144 @@ public class EditorTabPane extends TabPane {
 
         contentArea.setOnDragDropped((event) -> {
 
-            // 从 Dragboard 中获取 Tab 的数据
-            if (area.dragTab != null) {
+            try {// 从 Dragboard 中获取 Tab 的数据
+                if (rootArea.dragTab != null) {
 
-                for (int i = 0; i < 4; i++) {
-                    contentArea.getStyleClass().remove("layout-" + i);
-                }
-
-                area.dragTabPane.getTabs().remove(area.dragTab);
-                int layoutMode = getLayout(contentArea, event);
-
-                Orientation source = layout.getOrientation();
-                getLayout(contentArea, event);
-
-                if (layoutMode == 1 || layoutMode == 3) {
-
-                    if (source == Orientation.HORIZONTAL) {//源水平
-                        int index = layout.getItems().indexOf(this);
-
-                        EditorTabPane newEditorTabPane = new EditorTabPane(area, layout);
-                        layout.getItems().add((layoutMode == 1 ? index : index + 1), newEditorTabPane);
-                        newEditorTabPane.getTabs().add(area.dragTab);
-                        System.out.println("分隔水平");
-
-                    } else if (source == Orientation.VERTICAL) {//源垂直
-                        EditorLayout editorLayout = new EditorLayout();
-                        editorLayout.setOrientation(Orientation.HORIZONTAL);
-
-                        EditorTabPane newEditorTabPane = new EditorTabPane(area, layout);
-
-                        editorLayout.getItems().add(newEditorTabPane);
-
-                        newEditorTabPane.getTabs().add(area.dragTab);
-                        System.out.println("分隔水平");
-
-                        layout.getItems().add(editorLayout);
+                    for (LayoutPosition layoutPosition : LayoutPosition.values()) {
+                        contentArea.getStyleClass().remove("layout-" + layoutPosition.getId());
                     }
+
+                    rootArea.dragTab.removeParentThis();//清除源Tab
+                    LayoutPosition layoutPosition = getLayoutPosition(contentArea, event);
+
+                    if (layoutPosition == LayoutPosition.CENTER) {//中间
+                        getTabs().add(rootArea.dragTab);
+                        getSelectionModel().select(rootArea.dragTab);
+                        requestFocus();
+
+                    } else {//进行布局生成
+                        // 进行布局生成
+                        Orientation targetOrientation = layoutPosition.getOrientation();
+                        Orientation sourceOrientation = parentLayout.getOrientation();
+
+                        if ((parentLayout.getItems().size() == 1) && targetOrientation != sourceOrientation) {
+                            parentLayout.setOrientation(targetOrientation);
+                            sourceOrientation = targetOrientation;
+                        }
+
+
+                        System.out.println("源: " + sourceOrientation);
+                        System.out.println("到: " + targetOrientation);
+
+
+                        if (targetOrientation == sourceOrientation) {
+                            int index = parentLayout.getItems().indexOf(this);
+
+                            EditorTabPane newEditorTabPane = new EditorTabPane(rootArea, parentLayout);
+                            newEditorTabPane.getTabs().add(rootArea.dragTab);
+
+                            parentLayout.getItems().add((layoutPosition == LayoutPosition.LEFT || layoutPosition == LayoutPosition.TOP) ? index : index + 1, newEditorTabPane);
+
+                            System.out.println("分隔" + (targetOrientation == Orientation.HORIZONTAL ? "水平" : "垂直"));
+                        } else {
+                            //父布局水平 创建一个垂直
+
+                            //找到此TabPane的在父布局索引
+                            int index = parentLayout.getItems().indexOf(this);
+
+                            //创建新的垂直布局
+                            EditorLayout newEditorLayout = new EditorLayout(parentLayout);
+                            newEditorLayout.setOrientation(targetOrientation);
+
+                            //为拖拽Tab创建新的TabPane
+                            EditorTabPane newEditorTabPane = new EditorTabPane(rootArea, newEditorLayout);
+
+                            parentLayout.getItems().add(Math.max(index, 0), newEditorLayout);
+                            newEditorTabPane.getTabs().add(rootArea.dragTab);
+
+                            this.removeParentThis();//删除父节点的自己
+                            this.parentLayout = newEditorLayout;
+
+                            if ((layoutPosition == LayoutPosition.LEFT || layoutPosition == LayoutPosition.TOP)) {
+                                newEditorLayout.getItems().addAll(newEditorTabPane, this);
+                            } else {
+                                newEditorLayout.getItems().addAll(this, newEditorTabPane);
+                            }
+
+
+                            System.out.println("增加到" + (targetOrientation == Orientation.HORIZONTAL ? "水平" : "垂直"));
+                        }
+
+
+                    }
+
+                    if (rootArea.dragTabPane.getTabs().size() == 0) {
+                        rootArea.dragTabPane.removeParentThis();
+                    }
+
+
+                    System.out.println(rootArea);
+
+                    rootArea.dragTab = null;
+                    rootArea.dragTabPane = null;
+                    event.setDropCompleted(true);
                 }
-
-
-                area.dragTab = null;
-                event.setDropCompleted(true);
+                event.consume();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-            event.consume();
-
         });
     }
 
-    private int getLayout(Pane contentArea, DragEvent event) {
-        int layoutMode = 0;//其他部位
-        if (event.getX() < 32) {
-            layoutMode = 1;//左边
-        } else if (contentArea.getHeight() - event.getY() < 32) {
-            layoutMode = 2;//底部
-        } else if (contentArea.getWidth() - event.getX() < 32) {
-            layoutMode = 3;//右边
+    public void removeParentThis() {
+        if (!parentLayout.getItems().remove(this)) {
+            System.out.println("没删成功");
         }
-        return layoutMode;
+    }
+
+
+    /**
+     * 计算布局位置
+     */
+    private LayoutPosition getLayoutPosition(Pane contentArea, DragEvent event) {
+        if (event.getX() < 32) {
+            return LayoutPosition.LEFT;
+        } else if (contentArea.getWidth() - event.getX() < 32) {
+            return LayoutPosition.RIGHT;
+        } else if (event.getY() < 32) {
+            return LayoutPosition.TOP;
+        } else if (contentArea.getHeight() - event.getY() < 32) {
+            return LayoutPosition.BOTTOM;
+        }
+        return LayoutPosition.CENTER;
     }
 
     private void handleHeaderArea(Pane headerArea) {
         headerArea.setOnDragOver(event -> {
-            if (area.dragTab != null) {
+            if (rootArea.dragTab != null) {
                 event.acceptTransferModes(TransferMode.MOVE);
             }
             event.consume();
         });
 
         headerArea.setOnDragExited((event) -> {
-            if (area.dragTab != null) {
+            if (rootArea.dragTab != null) {
             }
             event.consume();
         });
 
         headerArea.setOnDragDropped((event) -> {
             // 从 Dragboard 中获取 Tab 的数据
-            if (area.dragTab != null) {
+            if (rootArea.dragTab != null) {
                 ObservableList<Tab> tabs = getTabs();
 
-                area.dragTabPane.getTabs().remove(area.dragTab);
+                rootArea.dragTabPane.getTabs().remove(rootArea.dragTab);
 
-                tabs.add(area.dragTab);
-                getSelectionModel().select(area.dragTab);
+                tabs.add(rootArea.dragTab);
+                getSelectionModel().select(rootArea.dragTab);
                 requestFocus();
                 event.setDropCompleted(true);
-                area.dragTab = null;
+                rootArea.dragTab = null;
             }
             event.consume();
         });
@@ -256,7 +318,7 @@ public class EditorTabPane extends TabPane {
     private void handleTabs(List<Node> tabs) {
         for (Node tab : tabs) {
             if (tab instanceof Pane pane) {
-                BaseEditor baseEditor = area.editorHashMap.get(tab.getId());
+                BaseEditor baseEditor = rootArea.editorHashMap.get(tab.getId());
                 baseEditor.updateDrag(pane, (Region) pane.getChildren().get(0));
             }
 
@@ -281,7 +343,7 @@ public class EditorTabPane extends TabPane {
 
     public BaseEditor createEditor(Class editorClass) {
         try {
-            BaseEditor editor = (BaseEditor) editorClass.getDeclaredConstructor(EditorArea.class).newInstance(area);
+            BaseEditor editor = (BaseEditor) editorClass.getDeclaredConstructor(EditorArea.class).newInstance(rootArea);
             getTabs().add(editor);
             getSelectionModel().select(editor);
             return editor;

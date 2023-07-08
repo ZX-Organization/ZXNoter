@@ -1,12 +1,8 @@
 package team.zxorg.zxnoter.ui.main.one.two.three.four.five;
 
 
-import javafx.application.Platform;
 import javafx.collections.ObservableList;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.scene.SnapshotParameters;
-import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
@@ -23,7 +19,10 @@ import java.util.UUID;
 public abstract class BaseEditor extends Tab {
     private final UUID uuid = UUID.randomUUID();
     private final EditorArea area;
-
+    @Override
+    public String toString() {
+        return "编辑器[" + getText() + "]";
+    }
     public BaseEditor(EditorArea area) {
         this.area = area;
         setId(uuid.toString());
@@ -115,5 +114,13 @@ public abstract class BaseEditor extends Tab {
         });
 
 
+    }
+
+    public void removeParentThis() {
+        if (getTabPane() != null) {
+            getTabPane().getTabs().remove(this);
+        }else {
+            System.out.println("没删成功");
+        }
     }
 }
