@@ -24,6 +24,10 @@ public class EditorTabPane extends TabPane {
     private final EditorArea rootArea;//编辑器区域
     protected EditorLayout parentLayout;//上一层布局
 
+    public EditorArea getRootArea() {
+        return rootArea;
+    }
+
     @Override
     public String toString() {
         return "编辑器堆叠 " + getTabs() + " ";
@@ -295,10 +299,14 @@ public class EditorTabPane extends TabPane {
                 ObservableList<Tab> tabs = getTabs();
 
                 rootArea.dragTabPane.getTabs().remove(rootArea.dragTab);
-
                 tabs.add(rootArea.dragTab);
                 getSelectionModel().select(rootArea.dragTab);
                 requestFocus();
+
+                if (rootArea.dragTabPane.getTabs().size() == 0) {
+                    rootArea.dragTabPane.removeParentThis();
+                }
+
                 event.setDropCompleted(true);
                 rootArea.dragTab = null;
             }

@@ -19,10 +19,12 @@ import java.util.UUID;
 public abstract class BaseEditor extends Tab {
     private final UUID uuid = UUID.randomUUID();
     private final EditorArea area;
+
     @Override
     public String toString() {
         return "编辑器[" + getText() + "]";
     }
+
     public BaseEditor(EditorArea area) {
         this.area = area;
         setId(uuid.toString());
@@ -97,7 +99,7 @@ public abstract class BaseEditor extends Tab {
                 title.getStyleClass().remove("left");
                 title.getStyleClass().remove("right");
 
-                TabPane tabPane = getTabPane();
+                EditorTabPane tabPane = (EditorTabPane) getTabPane();
                 ObservableList<Tab> tabs = tabPane.getTabs();
 
                 area.dragTabPane.getTabs().remove(area.dragTab);
@@ -105,6 +107,11 @@ public abstract class BaseEditor extends Tab {
                 tabs.add(tabs.indexOf(this) + (event.getX() < tabHead.getWidth() / 2 ? 0 : 1), area.dragTab);
                 tabPane.getSelectionModel().select(area.dragTab);
                 tabPane.requestFocus();
+
+
+                if (tabPane.getRootArea().dragTabPane.getTabs().size() == 0) {
+                    tabPane.getRootArea().dragTabPane.removeParentThis();
+                }
 
                 event.setDropCompleted(true);
                 area.dragTab = null;
@@ -119,7 +126,7 @@ public abstract class BaseEditor extends Tab {
     public void removeParentThis() {
         if (getTabPane() != null) {
             getTabPane().getTabs().remove(this);
-        }else {
+        } else {
             System.out.println("没删成功");
         }
     }
