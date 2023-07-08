@@ -1,15 +1,54 @@
 package team.zxorg.zxnoter.resource.type;
 
-import javafx.scene.layout.Pane;
+import javafx.scene.image.Image;
 import javafx.scene.shape.SVGPath;
-import javafx.scene.shape.Shape;
+import team.zxorg.zxnoter.resource.ResourcePack;
+import team.zxorg.zxnoter.resource.ResourceUtils;
 
-public class IconResource {
-    public String name;
-    public SVGPath svgPath;
-    public IconResource(String name, String shape) {
-        this.name = name;
-        this.svgPath = new SVGPath();
-        svgPath.setContent(shape);
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.stream.Stream;
+
+public class IconResource extends Resource {
+    private final HashMap<String, SVGPath> icons = new HashMap<>();
+    private Image icon;
+
+    public IconResource(ResourcePack pack, ResourceType type, Path jsonPath) {
+        super(pack, type, jsonPath);
+    }
+
+    public SVGPath getIcon(String key) {
+        return icons.get(key);
+    }
+
+    public Image getResourceIcon() {
+        return icon;
+    }
+
+    @Override
+    public void reload() {
+        Path rootPath = getPath();
+        try (Stream<Path> files = Files.walk(rootPath)) {
+            Iterator<Path> iterator = files.iterator();
+            Path file;
+            while (iterator.hasNext()) {
+                file = iterator.next();
+                String fileName = file.getFileName().toString();
+                if (fileName.endsWith(".svg")) {
+                    String key = file.subpath(rootPath.getNameCount(), file.getNameCount()).toString();
+                    key = key.substring(0, key.lastIndexOf("."));
+                    key = key.replaceAll("[/\\\\]", ".");
+                    SVGPath svgPath = new SVGPath();
+                    svgPath.setContent(ResourceUtils.readSvg(file));
+                    icons.put(key, svgPath);
+                }
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        icon = new Image(rootPath.resolve(getInfo().getString("icon")).toUri().toString());
     }
 }

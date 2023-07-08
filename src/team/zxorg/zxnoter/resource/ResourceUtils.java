@@ -69,6 +69,14 @@ public class ResourceUtils {
         }
     }
 
+    public static String getFileExtension(Path path) {
+        String fileName = path.getFileName().toString();
+        int dotIndex = fileName.lastIndexOf('.');
+        if (dotIndex == -1) {
+            return ""; // 文件没有扩展名
+        }
+        return fileName.substring(dotIndex + 1);
+    }
     private static String convertPolygonToPath(String points, String[] size) {
         StringBuilder pathBuilder = new StringBuilder("M");
         String[] coordinates = points.split("\\s+");

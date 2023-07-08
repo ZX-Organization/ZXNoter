@@ -1,8 +1,14 @@
 {
   "type": "config",
-  "resources": {
-    "enabledResourcePackage": [
-      "zxnoter.base"
-    ]
+  "userPreference": {
+    "usedResources": [
+      "zxnoter.language.zh-cn",
+      "zxnoter.sound.base",
+      "zxnoter.icon.line",
+      "zxnoter.style.map-editor-pink",
+      "zxnoter.layout.base",
+      "zxnoter.color.dark"
+    ],
+    "languageCode": "zh-cn"
   }
 }

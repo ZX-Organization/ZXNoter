@@ -11,11 +11,8 @@ import java.util.HashMap;
 
 public class FFmpeg {
     public static boolean audioToWav(Path audio, Path wav) {
-        String[] command = {"ffmpeg", "-y", "-i", Main.quotationMark + audio.toAbsolutePath() + Main.quotationMark, Main.quotationMark + wav.toAbsolutePath() + Main.quotationMark};
-
         try {
-            ProcessBuilder processBuilder = new ProcessBuilder(command);
-
+            ProcessBuilder processBuilder = new ProcessBuilder("ffmpeg", "-y", "-i", audio.toAbsolutePath().toString(), wav.toAbsolutePath().toString());
             // 获取系统环境变量
             processBuilder.environment().putAll(System.getenv());
 
@@ -33,10 +30,8 @@ public class FFmpeg {
     }
 
     public static boolean checkFFmpegExistence() {
-        String[] command = {"ffmpeg", "-version"};
-
         try {
-            ProcessBuilder processBuilder = new ProcessBuilder(command);
+            ProcessBuilder processBuilder = new ProcessBuilder("ffmpeg", "-version");
 
             // 获取系统环境变量
             processBuilder.environment().putAll(System.getenv());
@@ -71,9 +66,8 @@ public class FFmpeg {
 
     public static HashMap<String, String> audioToMetadata(Path audio) {
         HashMap<String, String> metadata = new HashMap<>();
-        String[] command = {"ffmpeg", "-i", Main.quotationMark + audio.toAbsolutePath() + Main.quotationMark, "-f", "ffmetadata"};
         try {
-            ProcessBuilder processBuilder = new ProcessBuilder(command);
+            ProcessBuilder processBuilder = new ProcessBuilder("ffmpeg", "-i", audio.toAbsolutePath().toString(), "-f", "ffmetadata");
             // 获取系统环境变量
             processBuilder.environment().putAll(System.getenv());
             // 启动进程

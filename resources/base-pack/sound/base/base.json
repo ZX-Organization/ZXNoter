@@ -1,0 +1,14 @@
+{
+  "id": "base",
+  "audio": [
+    {
+      "scope": "editor.mapEditor",
+      "audio": {
+        "hit": [
+          "hitnormal.wav",
+          "soft-hitnormal.wav"
+        ]
+      }
+    }
+  ]
+}

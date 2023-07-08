@@ -1,0 +1,30 @@
+{
+  "id": "zh-cn",
+  "languages": {
+    "resource-pack.zxnoter.name": "ZXNoter(BRP)",
+    "resource-pack.zxnoter.describe": "ZXNoter(基础资源包)",
+    "resource-pack.zxnoter.color.dark.name": "深色",
+    "resource-pack.zxnoter.color.light.name": "浅色",
+    "resource-pack.zxnoter.icon.fill.name": "填充",
+    "resource-pack.zxnoter.icon.fill.describe": "本图标包是基于RemixIcon项目修改。\n相关链接:https://github.com/Remix-Design/RemixIcon",
+    "resource-pack.zxnoter.icon.line.name": "线条",
+    "resource-pack.zxnoter.icon.line.describe": "本图标包是基于RemixIcon项目修改。\n相关链接:https://github.com/Remix-Design/RemixIcon",
+    "resource-pack.zxnoter.language.zh_cn.name": "简体中文",
+    "resource-pack.zxnoter.layout.base.name": "基础布局",
+    "resource-pack.zxnoter.sound.base.name": "基础音效",
+    "resource-pack.zxnoter.style.map-editor-pink.name": "少女粉",
+    "show.hello": "欢迎使用现代化的音乐游戏谱面制作器！",
+    "title-bar.menu.file": "文件",
+    "title-bar.menu.file.create": "新建",
+    "title-bar.menu.file.create.project": "项目...",
+    "title-bar.menu.file.create.zxmap": "谱面",
+    "title-bar.menu.file.open": "打开项目或文件",
+    "title-bar.menu.file.recent": "打开最近",
+    "title-bar.menu.file.close": "关闭项目",
+    "title-bar.menu.file.setting": "设置",
+    "title-bar.menu.file.quit": "退出",
+    "editor-area.editor-tab.insert-left": "向左插入",
+    "editor-area.editor-tab.insert-right": "向右插入",
+    "language.loss": "**语言丢失**"
+  }
+}

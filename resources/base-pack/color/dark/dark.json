@@ -1,0 +1,7 @@
+{
+  "name": "lang:style.color.dark",
+  "id": "dark",
+  "style": [
+    "dark.css"
+  ]
+}
