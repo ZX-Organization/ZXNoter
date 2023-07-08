@@ -105,10 +105,12 @@ public class ZXMap {
             if (noteJson.containsKey("sustainedTime")){
                 //长条
                 //判断是否为特殊长条
+
                 if (noteJson.size() == 10) notes.add(new CustomLongNote(noteJson));
                     else notes.add(new LongNote(noteJson));
             }
             if (noteJson.containsKey("child")){
+                if (noteJson.getJSONArray("child").size() == 0) continue;
                 notes.add(new ComplexNote(noteJson));
             }
             if (noteJson.size()==9){
@@ -116,7 +118,7 @@ public class ZXMap {
                 notes.add(new CustomNote(noteJson));
             }
         }
-        System.out.println(notes);
+        //System.out.println(notes);
         //System.out.println(timingPoints);
         //System.out.println(unLocalizedMapInfo);
         //System.out.println(zxnJson);
@@ -494,7 +496,7 @@ public class ZXMap {
             absFile = new File(path.toFile().getAbsoluteFile() +"\\" +unLocalizedMapInfo.getInfo(ZXMInfo.TitleUnicode)+".zxn");
         }*/
 
-        System.out.println(absFile);
+        //System.out.println(absFile);
         if (!absFile.exists()) absFile.createNewFile();
 
         JSONObject zxn = new JSONObject();
@@ -519,6 +521,9 @@ public class ZXMap {
         FileOutputStream fileOutputStream = new FileOutputStream(absFile);
         JSON.writeTo(fileOutputStream,zxn);
 
+    }
+    public int getSeparateNotesSize(){
+        return separateNotes.size();
     }
 
     @Override
