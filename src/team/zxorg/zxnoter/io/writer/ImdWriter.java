@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Set;
@@ -40,15 +41,20 @@ public class ImdWriter implements MapWriter {
         }else {
             throw new NoSuchFieldException("丢失本地化字段!");
         }
+        //System.out.println(zxMap.notes);
         //double baseBpm = Double.parseDouble(allInfos.get(ImdInfo.ImdBpm));
         //检查本地化信息通过
         //计算最终文件大小
+        System.out.println("物件总数"+zxMap.notes.size());
         int absoluteNotesSize = 0;
         for (BaseNote note: zxMap.notes){
             if (note instanceof ComplexNote complexNote){
                 absoluteNotesSize+=complexNote.notes.size();
             }else absoluteNotesSize ++;
         }
+        System.out.println("拆分物件总数"+absoluteNotesSize);
+        System.out.println("separate大小"+zxMap.getSeparateNotesSize());
+        //System.out.println("物件列表大小"+absoluteNotesSize);
         int cap =
                 4+4+zxMap.timingPoints.size() * 12 +//谱面长度(int4)+时间点数(int4)+所有时间点(bpm-double8+时间戳int4)
                 2+4+absoluteNotesSize * 11;//03 03固定值(short2)+表格行数(int4)+所有物件(按键类型byte1+00固定值byte1+时间戳int4+轨道byte1+按键参数int4)
@@ -60,21 +66,28 @@ public class ImdWriter implements MapWriter {
 
         //时间点
         for (Timing timing: zxMap.timingPoints){
-            System.out.println(timing);
+            //System.out.println(timing);
             bf.putInt((int)timing.timestamp);//时间戳
             bf.putDouble(timing.absBpm);//bpm
         }
 
+        //System.out.println("当前"+ Arrays.toString(bf.array()));
+
         bf.putShort((short) 771);// 03 03
         bf.putInt(Integer.parseInt(allInfos.get(ImdInfo.TabRows)));//表格行数
 
+        //System.out.println(cap);
+        int size = 0;
         //所有物件
         for (BaseNote note : zxMap.notes){
             if (note instanceof FixedOrbitNote fixedOrbitNote){
+
+                //System.out.println("正在写->"+note);
+
                 //组合键写出
                 if (fixedOrbitNote instanceof ComplexNote complexNote){
                     //类型处高位6 2 A顺序头 中 尾,低位正常
-
+                    //System.out.println("组合键"+complexNote.notes.size());
                     //头
                     if (complexNote.notes.size() !=0){
                         BaseNote head = complexNote.notes.get(0);
@@ -95,14 +108,14 @@ public class ImdWriter implements MapWriter {
                         int endType = -96 + end.getImdNoteType();//尾按键类型Ax
                         bf.put((byte) endType);
                         writeNoteDataWithoutType(bf,end);
-                        continue;
+                        //System.out.println("已写->"+ (size+= complexNote.notes.size()));
                     }
-                    }
-
-
-                //一般键写出
-                bf.put((byte) note.getImdNoteType());//按键类型
-                writeNoteDataWithoutType(bf,note);
+                }else {
+                    //一般键写出
+                    bf.put((byte) note.getImdNoteType());//按键类型
+                    writeNoteDataWithoutType(bf,note);
+                    //System.out.println("已写->"+(size+=1));
+                }
             }
         }
         FileOutputStream fos = new FileOutputStream(path.toAbsolutePath().toFile());

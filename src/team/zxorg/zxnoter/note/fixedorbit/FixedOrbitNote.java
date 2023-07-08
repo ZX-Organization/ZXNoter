@@ -33,6 +33,7 @@ public class FixedOrbitNote extends BaseNote implements Cloneable, Comparable<Ba
         super(noteJson.getLongValue("time"));
         orbit = noteJson.getIntValue("orbit");
         soundPath = noteJson.getString("soundPath");
+        hash = new Random().nextInt();
     }
 
     public void setSound(String path) {
