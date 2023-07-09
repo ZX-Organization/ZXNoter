@@ -2,6 +2,7 @@ package team.zxorg.zxnoter.resource;
 
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
+import team.zxorg.zxnoter.Main;
 
 import java.io.IOException;
 import java.net.URI;
@@ -10,6 +11,8 @@ import java.net.URL;
 import java.nio.file.*;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * ZXNoter全局配置类
@@ -33,10 +36,10 @@ public class ZXConfiguration {
      */
     public static void reload() {
         try {
-            System.out.println("ZXConfiguration:载入全局配置");
+            Main.logger.info("载入全局配置");
             root = JSON.parseObject(Files.newInputStream(Paths.get("configuration.json")));
         } catch (IOException e) {
-            System.out.println("ZXConfiguration:载入全局配置失败");
+            Main.logger.warning("载入全局配置失败");
             throw new RuntimeException(e);
         }
 

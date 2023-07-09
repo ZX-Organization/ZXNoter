@@ -6,6 +6,9 @@ import javafx.scene.layout.VBox;
 import team.zxorg.zxnoter.ui.main.one.two.three.EditorArea;
 import team.zxorg.zxnoter.ui.main.one.two.three.SideBar;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class BodyHBox extends HBox {
 
     public SideBar sideBar = new SideBar();//侧边栏

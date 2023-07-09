@@ -13,6 +13,8 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Stream;
 
 public class ZXResources {
@@ -25,6 +27,7 @@ public class ZXResources {
      * 全局资源
      */
     private static final HashMap<ResourceType, ArrayList<Resource>> globalResources = new HashMap<>();
+    private static final Logger logger = Logger.getLogger("资源");
 
     public static SVGPath getIconPane(String key) {
         SVGPath svgPath;
@@ -100,6 +103,7 @@ public class ZXResources {
     }
 
     public static void clearPacks() {
+        logger.log(Level.FINE, "清除资源包");
         loadedResourcePackMap.clear();
     }
 
