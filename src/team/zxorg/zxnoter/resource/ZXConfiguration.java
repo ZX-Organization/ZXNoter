@@ -41,8 +41,9 @@ public class ZXConfiguration {
         }
 
         Path resourcePath = Paths.get("res/resources");
-        try {
-            if (!Files.exists(resourcePath)) {
+        if (!Files.exists(resourcePath)) {
+            try {
+
                 URL resourceUrl = ZXConfiguration.class.getResource("/resources");
                 URI resourceUri = resourceUrl.toURI();
                 Map<String, String> env = new HashMap<>();
@@ -50,14 +51,15 @@ public class ZXConfiguration {
                 FileSystem zipfs = FileSystems.newFileSystem(resourceUri, env);
                 resourcePath = zipfs.getPath("/resources");
                 System.out.println("ZXConfiguration:使用内部资源 url:" + resourceUrl);
-            } else {
-                System.out.println("ZXConfiguration:进入开发阶段");
+            } catch (URISyntaxException | IOException e) {
+                e.printStackTrace();
+                System.err.println("ZXConfiguration:载入内部资源异常");
             }
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        } else {
+            System.out.println("ZXConfiguration:进入开发阶段");
         }
+
+        ZXResources.clearPacks();//清除一遍资源
 
         ZXResources.searchPacks(resourcePath);//搜索资源包
 
