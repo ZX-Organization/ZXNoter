@@ -41,7 +41,7 @@ public class EditorArea extends EditorLayout {
 
             for (int i = 0; i < 6; i++) {
                 BaseEditor baseEditor = editorTabPane.createEditor(SettingEditor.class);
-                baseEditor.setText(i+"");
+                baseEditor.setText("       "+i+"       ");
             }
 
         }
