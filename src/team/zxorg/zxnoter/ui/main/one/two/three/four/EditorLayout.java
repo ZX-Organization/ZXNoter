@@ -42,16 +42,9 @@ public class EditorLayout extends SplitPane {
     }
 
     public EditorLayout(EditorLayout parentLayout) {
-
         this.parentLayout = parentLayout;
         getStyleClass().add("editor-layout");
-        getItems().addListener((ListChangeListener<Node>) c -> {
-            int size = getItems().size();
-            double average = 1.0 / size;
-            for (int i = 0; i < size; i++) {
-                setDividerPosition(i, average * (i + 1));
-            }
-        });
+
 
     }
 
@@ -79,4 +72,11 @@ public class EditorLayout extends SplitPane {
 
     }
 
+    public void autoLayout(){
+        int size = getItems().size();
+        double average = 1.0 / size;
+        for (int i = 0; i < size; i++) {
+            setDividerPosition(i, average * (i + 1));
+        }
+    }
 }

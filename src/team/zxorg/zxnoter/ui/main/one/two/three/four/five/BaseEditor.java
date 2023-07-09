@@ -112,7 +112,6 @@ public abstract class BaseEditor extends Tab {
                 if (tabPane.getRootArea().dragTabPane.getTabs().size() == 0) {
                     tabPane.getRootArea().dragTabPane.removeParentThis();
                 }
-
                 tabPane.getRootArea().dragTabPane.parentLayout.checkItems();
 
 

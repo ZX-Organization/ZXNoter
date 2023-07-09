@@ -32,6 +32,7 @@ public class EditorTabPane extends TabPane {
     public String getName() {
         return uuid.toString().substring(19);
     }
+
     @Override
     public String toString() {
         return "堆叠容器 父布局{" + parentLayout.getName() + "} 此{" + getName() + "} " + getTabs() + " ";
@@ -199,6 +200,7 @@ public class EditorTabPane extends TabPane {
                             } else {
                                 newEditorLayout.getItems().addAll(this, newEditorTabPane);
                             }
+                            newEditorLayout.autoLayout();
 
                             System.out.println("增加到" + (targetOrientation == Orientation.HORIZONTAL ? "水平" : "垂直"));
                         }
@@ -214,6 +216,8 @@ public class EditorTabPane extends TabPane {
                         rootArea.dragTabPane.removeParentThis();
                     }
                     rootArea.dragTabPane.parentLayout.checkItems();
+                    rootArea.dragTabPane.parentLayout.autoLayout();
+                    parentLayout.autoLayout();
 
                     EditorLayout.printLayout(rootArea, "|");
 
