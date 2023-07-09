@@ -6,6 +6,8 @@
       <sourceFolder url="file://$MODULE_DIR$/base-resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/res" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/res" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/resources" type="java-resource" />
       <excludeFolder url="file://$MODULE_DIR$/test/audiochannel/audiomixer_t" />
       <excludeFolder url="file://$MODULE_DIR$/test" />
       <excludeFolder url="file://$MODULE_DIR$/old/team/zxorg/zxnoter/test/fft2" />

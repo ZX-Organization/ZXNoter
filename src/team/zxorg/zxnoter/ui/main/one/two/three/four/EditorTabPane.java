@@ -3,6 +3,7 @@ package team.zxorg.zxnoter.ui.main.one.two.three.four;
 import javafx.application.Platform;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Orientation;
 import javafx.scene.Node;
@@ -48,7 +49,6 @@ public class EditorTabPane extends TabPane {
         getTabs().addListener((ListChangeListener<Tab>) c -> {
             while (c.next()) {
                 if (c.wasRemoved()) {
-
                     List<? extends Tab> removedList = c.getAddedSubList();
                     for (Tab tab : removedList) {
                         rootArea.editorHashMap.remove(tab.getId());
@@ -69,18 +69,12 @@ public class EditorTabPane extends TabPane {
         });
 
 
-        setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                //".tab-container > .tab-label >.text"
-            }
+        setOnMouseClicked(event -> {
+            //".tab-container > .tab-label >.text"
         });
 
-
-        setOnDragDropped((event) -> {
-
-            event.consume();
-        });
+        //消耗拖拽
+        setOnDragDropped(Event::consume);
 
 
         //tabPane监听子节点变化
@@ -260,21 +254,8 @@ public class EditorTabPane extends TabPane {
         return LayoutPosition.CENTER;
     }
 
-    private void handleHeaderAreaButton(Pane pane) {
-        pane.setOnDragDetected(event -> {
-            event.consume();
-        });
-        pane.setOnDragDetected(event -> {
-            event.consume();
-        });
-    }
 
     private void handleHeaderArea(Pane headerArea) {
-        for (Node node : headerArea.getChildren())
-            if (node instanceof Pane pane)
-                if (pane.getStyleClass().contains("tab-content-area")) {
-                    handleHeaderAreaButton(pane);
-                }
 
         headerArea.setOnDragOver(event -> {
             if (rootArea.dragTab != null) {
@@ -345,16 +326,9 @@ public class EditorTabPane extends TabPane {
     }
 
 
-    public BaseEditor createEditor(Class editorClass) {
-        try {
-            BaseEditor editor = (BaseEditor) editorClass.getDeclaredConstructor(EditorArea.class).newInstance(rootArea);
-            getTabs().add(editor);
-            getSelectionModel().select(editor);
-            return editor;
-        } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
-                 NoSuchMethodException e) {
-            throw new RuntimeException(e);
-        }
+    public void createEditor(BaseEditor editor) {
+        getTabs().add(editor);
+        getSelectionModel().select(editor);
     }
 
 

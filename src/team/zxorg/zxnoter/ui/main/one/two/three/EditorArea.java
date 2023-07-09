@@ -19,8 +19,8 @@ import java.util.HashMap;
  * 编辑区域
  */
 public class EditorArea extends EditorLayout {
-    public BaseEditor dragTab;//拖拽中的Tab
-    public EditorTabPane dragTabPane;//拖拽中的TabPane
+    public static BaseEditor dragTab;//拖拽中的Tab
+    public static EditorTabPane dragTabPane;//拖拽中的TabPane
     public HashMap<String, BaseEditor> editorHashMap = new HashMap<>();
 
     @Override
@@ -30,7 +30,6 @@ public class EditorArea extends EditorLayout {
 
     public EditorArea() {
         super(null);
-
         getStyleClass().add("editor-area");
         setOrientation(Orientation.HORIZONTAL);
         HBox.setHgrow(this, Priority.ALWAYS);
@@ -38,23 +37,9 @@ public class EditorArea extends EditorLayout {
         {
             EditorTabPane editorTabPane = new EditorTabPane(this, this);
             getItems().add(editorTabPane);
-
-            for (int i = 0; i < 6; i++) {
-                BaseEditor baseEditor = editorTabPane.createEditor(SettingEditor.class);
-                baseEditor.setText("       "+i+"       ");
-            }
+            editorTabPane.createEditor(new SettingEditor(this));
 
         }
-
-
-        setOnKeyPressed(event -> {
-            if (event.getCode().equals(KeyCode.SPACE)) {
-                System.out.println(this);
-            }
-        });
-
-        //setDividerPositions(0.5, 0.5);
-
     }
 
 }

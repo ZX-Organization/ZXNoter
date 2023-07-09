@@ -2,6 +2,10 @@ package team.zxorg.zxnoter.ui.main.one.two.three.four.five;
 
 
 import javafx.collections.ObservableList;
+import javafx.event.Event;
+import javafx.event.EventHandler;
+import javafx.geometry.Bounds;
+import javafx.scene.Node;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Tab;
 import javafx.scene.image.Image;
@@ -35,7 +39,7 @@ public abstract class BaseEditor extends Tab {
     /**
      * 更新处理事件 (fx特有的查找困难)
      */
-    public void updateDrag(Region tabHead, Region title) {
+    public void updateDrag(Pane tabHead, Region title) {
         System.out.println("更新拖拽事件[" + getText() + "]");
 
         //tabHead = (Region) getTabPane().lookup("#" + uuid);
@@ -125,13 +129,36 @@ public abstract class BaseEditor extends Tab {
         });
 
 
+        for (Node node : tabHead.getChildren()) {
+            if (node instanceof Pane pane) {
+                handleTabContainer(pane);
+            }
+        }
+
+    }
+
+    private void handleTabContainer(Pane pane) {
+        for (Node node : pane.getChildren()) {
+            if (node instanceof Pane subPane) {
+                if (subPane.getStyleClass().contains("tab-close-button")) {
+                    handleTabCloseButton(subPane);
+                }
+            }
+        }
+    }
+
+
+    private void handleTabCloseButton(Pane pane) {
+        pane.setOnMousePressed(event -> {
+        });//顶掉原先的按下关闭
+        pane.setOnMouseClicked(event -> getTabPane().getTabs().remove(this));//改为点击触发关闭
     }
 
     public void removeParentThis() {
         if (getTabPane() != null) {
             getTabPane().getTabs().remove(this);
         } else {
-            System.out.println("没删成功");
+            System.err.println("BaseEditor:没删成功");
         }
     }
 }

@@ -36,6 +36,7 @@ public class ZXResources {
         }
         return null;
     }
+
     public static Pane getIconPane(String key, double size) {
         Pane pane = new Pane();
         SVGPath svgPath;
@@ -44,8 +45,8 @@ public class ZXResources {
                 svgPath = iconResource.getIcon(key);
                 pane.setShape(svgPath);
                 pane.getStyleClass().add("icon");
-                pane.setPrefSize(size,size);
-                pane.setMinSize(Region.USE_PREF_SIZE,Region.USE_PREF_SIZE);
+                pane.setPrefSize(size, size);
+                pane.setMinSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
                 return pane;
             }
         }
@@ -98,12 +99,19 @@ public class ZXResources {
         return pane;
     }
 
+    public static void clearPacks() {
+        loadedResourcePackMap.clear();
+    }
+
     /**
      * 重新搜索资源包
      */
-    public static void searchPacks() {
-        loadedResourcePackMap.clear();
-        Path resourcesDiv = Path.of("resources");//资源目录
+    public static void searchPacks(Path resourcesDiv) {
+        if (!Files.exists(resourcesDiv)) {
+            System.err.println("ZXResources:本地资源包目录不存在");
+            return;
+        }
+
         try (Stream<Path> packPaths = Files.list(resourcesDiv)) {
             Path packPath;//资源包根路径
             Iterator<Path> iterator = packPaths.iterator();//资源包迭代器
@@ -125,7 +133,6 @@ public class ZXResources {
             }
         } catch (IOException e) {
             System.err.println("ZXResources:资源包枚举中断");
-            e.printStackTrace();
         }
     }
 

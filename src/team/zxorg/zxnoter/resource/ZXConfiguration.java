@@ -4,15 +4,18 @@ import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.*;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * ZXNoter全局配置类
  */
 public class ZXConfiguration {
     public static JSONObject root;
-
 
 
     /**
@@ -37,7 +40,29 @@ public class ZXConfiguration {
             throw new RuntimeException(e);
         }
 
-        ZXResources.searchPacks();//搜索本地资源包
+        Path resourcePath = Paths.get("res/resources");
+        try {
+            if (!Files.exists(resourcePath)) {
+                URL resourceUrl = ZXConfiguration.class.getResource("/resources");
+                URI resourceUri = resourceUrl.toURI();
+                Map<String, String> env = new HashMap<>();
+                env.put("create", "true");
+                FileSystem zipfs = FileSystems.newFileSystem(resourceUri, env);
+                resourcePath = zipfs.getPath("/resources");
+                System.out.println("ZXConfiguration:使用内部资源 url:" + resourceUrl);
+            } else {
+                System.out.println("ZXConfiguration:进入开发阶段");
+            }
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        ZXResources.searchPacks(resourcePath);//搜索资源包
+
+        ZXResources.searchPacks(Path.of("./resource"));//搜索本地资源包
+
         ZXResources.reloadGlobalResource();//应用本地资源包
     }
 
