@@ -2,6 +2,9 @@ package team.zxorg.zxnoter.note.timing;
 
 import com.alibaba.fastjson2.JSONObject;
 
+/**
+ * @author xiang2333
+ */
 public class ZXTiming extends Timing implements Comparable<Timing>{
     public int beats;
     public int sampleSet;
@@ -32,6 +35,7 @@ public class ZXTiming extends Timing implements Comparable<Timing>{
         effect = zxTimingJson.getIntValue("effect");
     }
 
+    @Override
     public JSONObject toJson() {
         JSONObject timingJson = new JSONObject();
         timingJson.put("time", timestamp);

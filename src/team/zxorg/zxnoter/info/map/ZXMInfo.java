@@ -1,5 +1,9 @@
 package team.zxorg.zxnoter.info.map;
 
+/**
+ * @author xiang2333
+ */
+
 public enum ZXMInfo{
 
     //音频文件相对路径

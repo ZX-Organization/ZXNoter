@@ -5,6 +5,9 @@ import team.zxorg.zxnoter.map.ZXMap;
 import java.io.IOException;
 import java.nio.file.Path;
 
+/**
+ * @author xiang2333
+ */
 public interface MapReader {
     /**
      * 获取此reader支持文件扩展名

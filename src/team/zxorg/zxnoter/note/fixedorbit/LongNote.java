@@ -6,6 +6,7 @@ import team.zxorg.zxnoter.note.BaseNote;
 
 /**
  * 长键
+ * @author xiang2333
  */
 public class LongNote extends FixedOrbitNote implements Cloneable,Comparable<BaseNote>{
     /**

@@ -1,5 +1,9 @@
 package team.zxorg.zxnoter.info.editor;
 
+/**
+ * @author xiang2333
+ */
+
 public enum ZXNInfo{
 
     TimeLinePosition("0"),

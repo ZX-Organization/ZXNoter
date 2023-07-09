@@ -7,6 +7,7 @@ import java.util.Random;
 
 /**
  * 定轨按键
+ * @author xiang2333
  */
 public class FixedOrbitNote extends BaseNote implements Cloneable, Comparable<BaseNote> {
     /**
@@ -38,10 +39,11 @@ public class FixedOrbitNote extends BaseNote implements Cloneable, Comparable<Ba
 
     public void setSound(String path) {
         soundPath = path;
-        if (path.contains("."))
+        if (path.contains(".")) {
             soundKey = path.substring(0, path.lastIndexOf(".")).replaceAll("/", ".");
-        else
+        } else {
             soundKey = path.replaceAll("/", ".");
+        }
     }
 
     public String getSoundPath() {
@@ -97,10 +99,11 @@ public class FixedOrbitNote extends BaseNote implements Cloneable, Comparable<Ba
 /*        System.out.println(this+"与"+baseNote+"比较");
         System.out.println();*/
         //传入时间戳大于当前时间戳
-        if (timeStamp < baseNote.timeStamp) return -1;
-        else if (timeStamp > baseNote.timeStamp) return 1;
-
-        else if (baseNote instanceof FixedOrbitNote fixedOrbitNote) {
+        if (timeStamp < baseNote.timeStamp) {
+            return -1;
+        } else if (timeStamp > baseNote.timeStamp) {
+            return 1;
+        } else if (baseNote instanceof FixedOrbitNote fixedOrbitNote) {
 
             if (baseNote instanceof SlideNote && this instanceof LongNote) {
                 return 1;
@@ -114,13 +117,16 @@ public class FixedOrbitNote extends BaseNote implements Cloneable, Comparable<Ba
             return Integer.compare(orbit, fixedOrbitNote.orbit);
         }
         //相同
-        else return 0;
+        else {
+            return 0;
+        }
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof FixedOrbitNote fixedOrbitNote)
+        if (obj instanceof FixedOrbitNote fixedOrbitNote) {
             return hash == fixedOrbitNote.hash;
+        }
         return false;
     }
 

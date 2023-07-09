@@ -2,6 +2,7 @@ package team.zxorg.zxnoter.info.map;
 
 /**
  * osu词条及反本地化名,一些带有空格的词条反本地化名与本地化名一致
+ * @author xiang2333
  */
 public enum OsuInfo{
     osufileformat(ZXMInfo.osufileformat, "osu file format"),

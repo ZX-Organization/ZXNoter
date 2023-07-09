@@ -21,6 +21,7 @@ import java.util.ArrayList;
 
 /**
  * imd读取器(节奏大师)
+ * @author xiang2333
  */
 public class ImdReader implements MapReader{
     private Path readPath;
@@ -144,6 +145,7 @@ public class ImdReader implements MapReader{
 
             if (complexPar != 0)
                 //组合参数不为零,处理组合键
+            {
                 switch (complexPar){
                     case 0x06->{
                         //组合头,重新初始化缓存组合键,并将此首按键加入组合键中
@@ -164,7 +166,7 @@ public class ImdReader implements MapReader{
                         tempComplexNote = null;
                     }
                 }
-            else {
+            } else {
                 //组合参数为0,直接加入zxMap
                 allNotes.add(tempNote);
             }
@@ -180,10 +182,11 @@ public class ImdReader implements MapReader{
 
     @Override
     public void completeInfo() {
-        for (ZXMInfo info:ZXMInfo.values())
+        for (ZXMInfo info:ZXMInfo.values()) {
             if (!unLocalizedMapInfo.allInfo.containsKey(info)){
                 unLocalizedMapInfo.allInfo.put(info, info.getDefaultValue());
             }
+        }
             unLocalizedMapInfo.allInfo.put(ZXMInfo.TimingCount,String.valueOf(timingPoints.size()));
     }
 }

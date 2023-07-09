@@ -9,6 +9,7 @@ import java.nio.file.Path;
 
 /**
  * mc读取器(malody)
+ * @author xiang2333
  */
 public class McReader implements MapReader{
     UnLocalizedMapInfo unLocalizedMapInfo;
@@ -29,9 +30,10 @@ public class McReader implements MapReader{
 
     @Override
     public void completeInfo() {
-        for (ZXMInfo info:ZXMInfo.values())
+        for (ZXMInfo info:ZXMInfo.values()) {
             if (!unLocalizedMapInfo.allInfo.containsKey(info)){
                 unLocalizedMapInfo.allInfo.put(info, info.getDefaultValue());
             }
+        }
     }
 }

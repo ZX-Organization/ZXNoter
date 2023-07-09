@@ -1,0 +1,32 @@
+ZXConfiguration:载入全局配置
+载入资源包:zxnoter
+载入资源:zxnoter.language.zh-cn
+载入资源:zxnoter.sound.base
+载入资源:zxnoter.icon.line
+载入资源:zxnoter.style.map-editor-pink
+载入资源:zxnoter.layout.base
+载入资源:zxnoter.color.dark
+更新内容区域{9ad5-88bfa8eb3ecb}
+更新内容区域{9ad5-88bfa8eb3ecb}
+更新内容区域{9ad5-88bfa8eb3ecb}
+更新内容区域{9ad5-88bfa8eb3ecb}
+更新内容区域{9ad5-88bfa8eb3ecb}
+更新内容区域{9ad5-88bfa8eb3ecb}
+更新头部区域{9ad5-88bfa8eb3ecb}
+更新拖拽事件[0]
+更新拖拽事件[1]
+更新拖拽事件[2]
+更新拖拽事件[3]
+更新拖拽事件[4]
+更新拖拽事件[5]
+源布局: HORIZONTAL
+目标布局: HORIZONTAL
+分隔水平
+自动计算:2 平均:0.5 来自{8632-6d3fd7484e6e}
+自动计算:2 平均:0.5 来自{8632-6d3fd7484e6e}
+|(ROOT)(水平)布局 父布局{null} 此{8632-6d3fd7484e6e}
+|	堆叠容器 父布局{8632-6d3fd7484e6e} 此{b063-1aab111b6083} [编辑器[5]] 
+|	堆叠容器 父布局{8632-6d3fd7484e6e} 此{9ad5-88bfa8eb3ecb} [编辑器[0], 编辑器[1], 编辑器[2], 编辑器[3], 编辑器[4]] 
+更新内容区域{b063-1aab111b6083}
+更新头部区域{b063-1aab111b6083}
+更新拖拽事件[5]

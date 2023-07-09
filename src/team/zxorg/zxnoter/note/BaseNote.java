@@ -5,6 +5,7 @@ import team.zxorg.zxnoter.note.fixedorbit.ComplexNote;
 
 /**
  * 基本键
+ * @author xiang2333
  */
 public abstract class BaseNote implements Cloneable,Comparable<BaseNote>{
     /**
@@ -26,8 +27,12 @@ public abstract class BaseNote implements Cloneable,Comparable<BaseNote>{
     public abstract JSONObject toJson();
     @Override
     public int compareTo(BaseNote o) {
-        if (timeStamp<o.timeStamp) return -1;
-        else if (timeStamp>o.timeStamp) return 1;
-        else return 0;
+        if (timeStamp<o.timeStamp) {
+            return -1;
+        } else if (timeStamp>o.timeStamp) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 }

@@ -19,6 +19,7 @@ import java.util.ArrayList;
 
 /**
  * osu读取器(osu!mania)
+ * @author xiang2333
  */
 public class OsuReader implements MapReader{
     Path readPath;
@@ -98,8 +99,9 @@ public class OsuReader implements MapReader{
                             OsuInfo.valueOf(name).unLocalize() ,
                             value.trim()
                     );
-                    if ("CircleSize".equals(name))
+                    if ("CircleSize".equals(name)) {
                         keyCount = Integer.parseInt(value);
+                    }
                     continue;
                 }
                 case 0->{
@@ -261,10 +263,11 @@ public class OsuReader implements MapReader{
 
     @Override
     public void completeInfo() {
-        for (ZXMInfo info:ZXMInfo.values())
+        for (ZXMInfo info:ZXMInfo.values()) {
             if (!unLocalizedMapInfo.allInfo.containsKey(info)){
                 unLocalizedMapInfo.allInfo.put(info, info.getDefaultValue());
             }
+        }
         unLocalizedMapInfo.allInfo.put(ZXMInfo.TimingCount,String.valueOf(zxMap.timingPoints.size()));
     }
 }

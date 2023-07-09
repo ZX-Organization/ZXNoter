@@ -19,10 +19,12 @@ public enum LayoutPosition {
      * 获取方向
      */
     public Orientation getOrientation() {
-        if (this == LEFT || this == RIGHT)
+        if (this == LEFT || this == RIGHT) {
             return Orientation.HORIZONTAL;//水平
-        if (this == TOP || this == BOTTOM)
+        }
+        if (this == TOP || this == BOTTOM) {
             return Orientation.VERTICAL;//垂直
+        }
         return null;
     }
 

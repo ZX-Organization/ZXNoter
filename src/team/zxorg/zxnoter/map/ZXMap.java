@@ -21,6 +21,7 @@ import java.util.Set;
 
 /**
  * zx谱面类
+ * @author xiang2333
  */
 public class ZXMap {
     /**
@@ -50,8 +51,9 @@ public class ZXMap {
         unLocalizedMapInfo = UnLocalizedMapInfo.getDefaultInfo();
         //初始化编辑器信息
         editorInfo = new HashMap<>();
-        for (ZXNInfo info:ZXNInfo.values())
+        for (ZXNInfo info:ZXNInfo.values()) {
             editorInfo.put(info.name(),info.getDefVal());
+        }
     }
 
     public ZXMap(ArrayList<BaseNote> notes, ArrayList<Timing> timingPoints, UnLocalizedMapInfo unLocalizedMapInfo) {
@@ -70,7 +72,9 @@ public class ZXMap {
         editorInfo = new HashMap<>();
         JSONObject editorJson = zxnJson.getJSONObject("editor");
         Set<String> editorKeys = editorJson.keySet();
-        for (String editorKey:editorKeys) editorInfo.put(editorKey,editorJson.getString(editorKey));
+        for (String editorKey:editorKeys) {
+            editorInfo.put(editorKey,editorJson.getString(editorKey));
+        }
 
         //反本地化信息读取
         unLocalizedMapInfo = new UnLocalizedMapInfo(zxnJson.getJSONObject("allInfo"));
@@ -106,11 +110,16 @@ public class ZXMap {
                 //长条
                 //判断是否为特殊长条
 
-                if (noteJson.size() == 10) notes.add(new CustomLongNote(noteJson));
-                    else notes.add(new LongNote(noteJson));
+                if (noteJson.size() == 10) {
+                    notes.add(new CustomLongNote(noteJson));
+                } else {
+                    notes.add(new LongNote(noteJson));
+                }
             }
             if (noteJson.containsKey("child")){
-                if (noteJson.getJSONArray("child").size() == 0) continue;
+                if (noteJson.getJSONArray("child").size() == 0) {
+                    continue;
+                }
                 notes.add(new ComplexNote(noteJson));
             }
             if (noteJson.size()==9){
@@ -133,8 +142,12 @@ public class ZXMap {
     public ArrayList<Timing> findClosestTimings(long time) {
         ArrayList<Timing> findResults = new ArrayList<>();
         int res = findClosestTimingIndex(time);
-        if (res == -1) return findResults;
-        if (timingPoints.size()==0)return findResults;
+        if (res == -1) {
+            return findResults;
+        }
+        if (timingPoints.size()==0) {
+            return findResults;
+        }
         Timing resTiming = timingPoints.get(res);
         int tempIndex = res;
         Timing tempTiming;
@@ -149,8 +162,9 @@ public class ZXMap {
         //向后查找
 
         while (tempIndex + 1 < timingPoints.size()) {
-            if (tempIndex < notes.size() - 1 && (tempTiming = timingPoints.get(++tempIndex)).timestamp == resTiming.timestamp)
+            if (tempIndex < notes.size() - 1 && (tempTiming = timingPoints.get(++tempIndex)).timestamp == resTiming.timestamp) {
                 findResults.add(tempTiming);
+            }
         }
         return findResults;
     }
@@ -164,7 +178,9 @@ public class ZXMap {
     public ArrayList<BaseNote> findClosestNotes(long time, boolean isDeep) {
         ArrayList<BaseNote> findResults = new ArrayList<>();
         int res = findClosestNoteIndex(time, notes, isDeep);
-        if (res == -1) return findResults;
+        if (res == -1) {
+            return findResults;
+        }
         BaseNote resNote = notes.get(res);
         int tempIndex = res;
         BaseNote tempNote;
@@ -200,7 +216,9 @@ public class ZXMap {
         //结果预定义
         ArrayList<BaseNote> desNotes = new ArrayList<>();
 
-        if (timeNotes.size() == 0) return desNotes;
+        if (timeNotes.size() == 0) {
+            return desNotes;
+        }
         //结果首按键
         BaseNote firstNote = timeNotes.get(0);
         //遍历起始下标
@@ -252,33 +270,49 @@ public class ZXMap {
      * @return 按键下标
      */
     private int findClosestNoteIndex(long time, ArrayList<BaseNote> notes, boolean isDeep) {
-        if (notes.size() == 0) return -1;
-        if (0 > time) return 0;
-        if (notes.get(notes.size() - 1).timeStamp < time) return notes.size() - 1;
+        if (notes.size() == 0) {
+            return -1;
+        }
+        if (0 > time) {
+            return 0;
+        }
+        if (notes.get(notes.size() - 1).timeStamp < time) {
+            return notes.size() - 1;
+        }
         int searchRes = binarySearchNote(time, 0, notes.size() - 1, isDeep);
         //判断最近的
         if (searchRes == 0) {//找到头部
             int next = searchRes + 1;
             if (next >= notes.size())//既是头也是尾
+            {
                 return searchRes;
-            if (Math.abs(notes.get(next).timeStamp - time) < Math.abs(notes.get(searchRes).timeStamp - time))
+            }
+            if (Math.abs(notes.get(next).timeStamp - time) < Math.abs(notes.get(searchRes).timeStamp - time)) {
                 return next;
-            else return searchRes;
+            } else {
+                return searchRes;
+            }
         } else if (searchRes == notes.size() - 1) {//找到尾部
             int previous = searchRes - 1;
             if (previous <= 0)//既是尾也是头
+            {
                 return searchRes;
-            if (Math.abs(notes.get(previous).timeStamp - time) < Math.abs(notes.get(searchRes).timeStamp - time))
+            }
+            if (Math.abs(notes.get(previous).timeStamp - time) < Math.abs(notes.get(searchRes).timeStamp - time)) {
                 return previous;
-            else return searchRes;
+            } else {
+                return searchRes;
+            }
         } else {
             int res = searchRes;
             int previous = searchRes - 1;
             int next = searchRes + 1;
-            if (Math.abs(notes.get(previous).timeStamp - time) < Math.abs(notes.get(searchRes).timeStamp - time))
+            if (Math.abs(notes.get(previous).timeStamp - time) < Math.abs(notes.get(searchRes).timeStamp - time)) {
                 res = previous;
-            if (Math.abs(notes.get(next).timeStamp - time) < Math.abs(notes.get(searchRes).timeStamp - time))
+            }
+            if (Math.abs(notes.get(next).timeStamp - time) < Math.abs(notes.get(searchRes).timeStamp - time)) {
                 res = next;
+            }
 
             return res;
         }
@@ -291,34 +325,50 @@ public class ZXMap {
      * @return 时间点下标
      */
     private int findClosestTimingIndex(long time) {
-        if (0 > time) return 0;
-        if (timingPoints.size() == 0) return -1;
-        if (timingPoints.get(timingPoints.size() - 1).timestamp < time) return timingPoints.size() - 1;
+        if (0 > time) {
+            return 0;
+        }
+        if (timingPoints.size() == 0) {
+            return -1;
+        }
+        if (timingPoints.get(timingPoints.size() - 1).timestamp < time) {
+            return timingPoints.size() - 1;
+        }
         int searchRes = binarySearchTiming(time, 0, timingPoints.size() - 1);
         //判断最近的
         if (searchRes == 0) {//找到头部
             int next = searchRes + 1;
             if (next >= timingPoints.size())//找到的既是头也是尾
+            {
                 return searchRes;
-            if (Math.abs(timingPoints.get(next).timestamp - time) < Math.abs(timingPoints.get(searchRes).timestamp - time))
+            }
+            if (Math.abs(timingPoints.get(next).timestamp - time) < Math.abs(timingPoints.get(searchRes).timestamp - time)) {
                 return next;
-            else return searchRes;
+            } else {
+                return searchRes;
+            }
         } else if (searchRes == timingPoints.size() - 1) {//找到最后
             int previous = searchRes - 1;
             if (previous == 0)//找到的既是尾也是头
+            {
                 return searchRes;
-            if (Math.abs(timingPoints.get(previous).timestamp - time) < Math.abs(timingPoints.get(searchRes).timestamp - time))
+            }
+            if (Math.abs(timingPoints.get(previous).timestamp - time) < Math.abs(timingPoints.get(searchRes).timestamp - time)) {
                 return previous;
-            else return searchRes;
+            } else {
+                return searchRes;
+            }
         } else {
             //找到中间部分
             int res = searchRes;
             int previous = searchRes - 1;
             int next = searchRes + 1;
-            if (Math.abs(timingPoints.get(previous).timestamp - time) < Math.abs(timingPoints.get(searchRes).timestamp - time))
+            if (Math.abs(timingPoints.get(previous).timestamp - time) < Math.abs(timingPoints.get(searchRes).timestamp - time)) {
                 res = previous;
-            if (Math.abs(timingPoints.get(next).timestamp - time) < Math.abs(timingPoints.get(searchRes).timestamp - time))
+            }
+            if (Math.abs(timingPoints.get(next).timestamp - time) < Math.abs(timingPoints.get(searchRes).timestamp - time)) {
                 res = next;
+            }
 
             return res;
         }
@@ -334,8 +384,11 @@ public class ZXMap {
      */
     private int binarySearchNote(long time, int lowIndex, int highIndex, boolean isDeep) {
         ArrayList<BaseNote> tempNotes;
-        if (isDeep) tempNotes = separateNotes;
-        else tempNotes = notes;
+        if (isDeep) {
+            tempNotes = separateNotes;
+        } else {
+            tempNotes = notes;
+        }
 
         int mid = (lowIndex + highIndex) / 2;
         if (time > tempNotes.get(mid).timeStamp) {
@@ -393,9 +446,11 @@ public class ZXMap {
     public int insertNote(BaseNote note) {
         int count=1;
         //检测空图
-        if (notes.size()==0)
-            if (separateNotes==null||separateNotes.size()==0)
+        if (notes.size()==0) {
+            if (separateNotes==null||separateNotes.size()==0) {
                 initSeparateNotes();
+            }
+        }
         //向原map插入
         notes.add(note);
         //检测组合键
@@ -403,7 +458,9 @@ public class ZXMap {
             separateNotes.addAll(complexNote.notes);
             //将组合键子键物件总数替换添加计数,此计数不包含组合键本身
             count=complexNote.notes.size();
-        } else separateNotes.add(note);
+        } else {
+            separateNotes.add(note);
+        }
         //排序
         notes.sort(BaseNote::compareTo);
         separateNotes.sort(BaseNote::compareTo);
@@ -423,8 +480,9 @@ public class ZXMap {
         if (note instanceof ComplexNote complexNote){
             separateNotes.removeAll(complexNote.notes);
             count=complexNote.notes.size();
-        }else
+        }else {
             separateNotes.remove(note);
+        }
 
         notes.remove(note);
         return count;
@@ -497,25 +555,31 @@ public class ZXMap {
         }*/
 
         //System.out.println(absFile);
-        if (!absFile.exists()) absFile.createNewFile();
+        if (!absFile.exists()) {
+            absFile.createNewFile();
+        }
 
         JSONObject zxn = new JSONObject();
 
         zxn.put("allInfo",unLocalizedMapInfo.toJson());
 
         JSONArray timings = new JSONArray();
-        for (Timing timing:timingPoints)timings.add(timing.toJson());
+        for (Timing timing:timingPoints) {
+            timings.add(timing.toJson());
+        }
         zxn.put("timing",timings);
 
         Set<String> editorInfoKeyset = editorInfo.keySet();
         JSONObject editJson = new JSONObject();
-        for (String editorInfoName:editorInfoKeyset)
+        for (String editorInfoName:editorInfoKeyset) {
             editJson.put(editorInfoName,editorInfo.get(editorInfoName));
+        }
         zxn.put("editor",editJson);
 
         JSONArray notesJson = new JSONArray();
-        for (BaseNote note:notes)
+        for (BaseNote note:notes) {
             notesJson.add(note.toJson());
+        }
         zxn.put("note",notesJson);
 
         FileOutputStream fileOutputStream = new FileOutputStream(absFile);
