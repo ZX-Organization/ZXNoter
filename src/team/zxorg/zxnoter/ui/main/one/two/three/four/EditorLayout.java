@@ -72,9 +72,10 @@ public class EditorLayout extends SplitPane {
 
     }
 
-    public void autoLayout(){
+    public void autoLayout() {
         int size = getItems().size();
         double average = 1.0 / size;
+        System.out.println("自动计算:" + size + " 平均:" + average + " 来自{" + getName() + "}");
         for (int i = 0; i < size; i++) {
             setDividerPosition(i, average * (i + 1));
         }
