@@ -3,6 +3,7 @@ package team.zxorg.zxnoter.resource;
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
 import team.zxorg.zxnoter.Main;
+import team.zxorg.zxnoter.ZXLogger;
 
 import java.io.IOException;
 import java.net.URI;
@@ -36,10 +37,10 @@ public class ZXConfiguration {
      */
     public static void reload() {
         try {
-            Main.logger.info("载入全局配置");
+            ZXLogger.logger.info("载入全局配置");
             root = JSON.parseObject(Files.newInputStream(Paths.get("configuration.json")));
         } catch (IOException e) {
-            Main.logger.warning("载入全局配置失败");
+            ZXLogger.logger.severe("载入全局配置失败");
             throw new RuntimeException(e);
         }
 
@@ -53,13 +54,13 @@ public class ZXConfiguration {
                 env.put("create", "true");
                 FileSystem zipfs = FileSystems.newFileSystem(resourceUri, env);
                 resourcePath = zipfs.getPath("/resources");
-                System.out.println("ZXConfiguration:使用内部资源 url:" + resourceUrl);
+                ZXLogger.logger.info("使用内部资源 url:" + resourceUrl);
             } catch (URISyntaxException | IOException e) {
                 e.printStackTrace();
-                System.err.println("ZXConfiguration:载入内部资源异常");
+                ZXLogger.logger.severe("ZXConfiguration:载入内部资源异常");
             }
         } else {
-            System.out.println("ZXConfiguration:进入开发阶段");
+            ZXLogger.logger.info("ZXConfiguration:进入开发阶段");
         }
 
         ZXResources.clearPacks();//清除一遍资源

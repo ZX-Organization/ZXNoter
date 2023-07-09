@@ -1,56 +1,27 @@
 package team.zxorg.zxnoter;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.*;
 
 public class ZXLogger {
+
+
+    private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("[HH:mm:ss] ");
+    private static final Formatter formatter = new Formatter() {
+        @Override
+        public String format(LogRecord record) {
+            return simpleDateFormat.format(Date.from(record.getInstant())) + "[" + record.getSourceMethodName() + "/" + record.getLevel() + "]: " + record.getMessage() + "\n";
+        }
+    };
     public static final Logger logger = Logger.getLogger("ZXLogger");
 
-    /**
-     * 记录一般信息性消息
-     * @param message 消息内容
-     */
-    public static void info(String message) {
-        logger.info(message);
-    }
-
-    /**
-     * 记录警告信息
-     * @param message 消息内容
-     */
-    public static void warning(String message) {
-        logger.warning(message);
-    }
-
-    /**
-     * 记录严重错误信息
-     * @param message 消息内容
-     */
-    public static void severe(String message) {
-        logger.severe(message);
-    }
-
-    /**
-     * 记录调试信息
-     * @param message 消息内容
-     */
-    public static void debug(String message) {
-        logger.fine(message);
-    }
-
-    /**
-     * 记录更详细的调试信息
-     * @param message 消息内容
-     */
-    public static void finer(String message) {
-        logger.finer(message);
-    }
-
-    /**
-     * 记录最详细的调试信息
-     * @param message 消息内容
-     */
-    public static void finest(String message) {
-        logger.finest(message);
+    static {
+        Handler handler = new ConsoleHandler();
+        handler.setFormatter(formatter);
+        logger.setUseParentHandlers(false); // 禁用父级处理程序
+        logger.addHandler(handler);
     }
 }
