@@ -60,7 +60,6 @@ public class EditorLayout extends SplitPane {
         if (size == 0) {
             System.out.println("检查到布局{" + getName() + "}没有物品，直接移除");
             parentLayout.getChildren().remove(this);
-            return;
         } else if (size == 1) {
             if (parentLayout != null) {//子物品去除布局
                 System.out.println("检查到布局{" + getName() + "}只剩1个物品");
@@ -75,7 +74,6 @@ public class EditorLayout extends SplitPane {
 
                 parentLayout.getItems().addAll(Math.max(index, 0), getItems());//交给父布局
                 parentLayout.getItems().remove(this);//删除自身
-                return;
             }
         }
 

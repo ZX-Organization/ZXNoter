@@ -23,7 +23,7 @@ import java.util.UUID;
 public class EditorTabPane extends TabPane {
     private final UUID uuid = UUID.randomUUID();
     private final EditorArea rootArea;//编辑器区域
-    protected EditorLayout parentLayout;//上一层布局
+    public EditorLayout parentLayout;//上一层布局
 
     public EditorArea getRootArea() {
         return rootArea;

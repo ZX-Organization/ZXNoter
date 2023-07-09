@@ -108,10 +108,13 @@ public abstract class BaseEditor extends Tab {
                 tabPane.getSelectionModel().select(area.dragTab);
                 tabPane.requestFocus();
 
-
+                //检查清除拖拽Tab之前的TabPane
                 if (tabPane.getRootArea().dragTabPane.getTabs().size() == 0) {
                     tabPane.getRootArea().dragTabPane.removeParentThis();
                 }
+
+                tabPane.getRootArea().dragTabPane.parentLayout.checkItems();
+
 
                 event.setDropCompleted(true);
                 area.dragTab = null;
