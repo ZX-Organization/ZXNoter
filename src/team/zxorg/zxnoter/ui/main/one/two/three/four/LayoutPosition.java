@@ -10,7 +10,8 @@ public enum LayoutPosition {
     }
 
     private final String id;
-    public String getId(){
+
+    public String getId() {
         return this.id;
     }
 
@@ -23,5 +24,12 @@ public enum LayoutPosition {
         if (this == TOP || this == BOTTOM)
             return Orientation.VERTICAL;//垂直
         return null;
+    }
+
+    /**
+     * 是否优先
+     */
+    public boolean isPriority() {
+        return (this == LEFT || this == TOP);
     }
 }

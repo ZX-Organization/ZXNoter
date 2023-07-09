@@ -17,42 +17,67 @@ import java.util.UUID;
 
 public class EditorLayout extends SplitPane {
     protected EditorLayout parentLayout;//如果是null则为根(root)
+    private UUID uuid = UUID.randomUUID();
+
+
+    public String getName() {
+        return uuid.toString().substring(19);
+    }
 
     @Override
     public String toString() {
-        return "编辑器布局(" + (getOrientation() == Orientation.HORIZONTAL ? "水平)" : "垂直) ") + getItems() + " ";
+        return (getOrientation() == Orientation.HORIZONTAL ? "(水平)" : "(垂直)") + "布局 父布局{" + (parentLayout == null ? null : parentLayout.getName()) + "} 此{" + getName() + "}";
+    }
+
+    public static void printLayout(EditorLayout layout, String indent) {
+        System.out.println(indent + layout.toString());
+
+        for (Node item : layout.getItems()) {
+            if (item instanceof EditorLayout nestedLayout) {
+                printLayout(nestedLayout, indent + "\t");
+            } else {
+                System.out.println(indent + "\t" + item.toString());
+            }
+        }
     }
 
     public EditorLayout(EditorLayout parentLayout) {
+
         this.parentLayout = parentLayout;
         getStyleClass().add("editor-layout");
         getItems().addListener((ListChangeListener<Node>) c -> {
             int size = getItems().size();
-            if (size == 0) {
-                parentLayout.getChildren().remove(this);
-                return;
-            } else if (size == 1) {
-                if (parentLayout != null) {//子物品去除布局
-                    int index = parentLayout.getItems().indexOf(this);
-
-                    for (Node child : getItems()) {
-                        if (child instanceof EditorTabPane editorTabPane) {
-                            editorTabPane.parentLayout = parentLayout;
-                        }
-                    }
-
-                    parentLayout.getItems().addAll(Math.max(index, 0), getItems());
-                    parentLayout.getItems().remove(this);
-
-                    System.out.println("优化后:" + parentLayout);
-                    return;
-                }
-            }
-            double average = 1. / size;
+            double average = 1.0 / size;
             for (int i = 0; i < size; i++) {
                 setDividerPosition(i, average * (i + 1));
             }
         });
+
+    }
+
+    public void checkItems() {
+        int size = getItems().size();
+        if (size == 0) {
+            System.out.println("检查到布局{" + getName() + "}没有物品，直接移除");
+            parentLayout.getChildren().remove(this);
+            return;
+        } else if (size == 1) {
+            if (parentLayout != null) {//子物品去除布局
+                System.out.println("检查到布局{" + getName() + "}只剩1个物品");
+                int index = parentLayout.getItems().indexOf(this);
+                for (Node child : getItems()) {
+                    if (child instanceof EditorTabPane editorTabPane) {
+                        editorTabPane.parentLayout = parentLayout;
+                    } else if (child instanceof EditorLayout editorLayout) {
+                        editorLayout.parentLayout = parentLayout;
+                    }
+                }
+
+                parentLayout.getItems().addAll(Math.max(index, 0), getItems());//交给父布局
+                parentLayout.getItems().remove(this);//删除自身
+                return;
+            }
+        }
 
     }
 

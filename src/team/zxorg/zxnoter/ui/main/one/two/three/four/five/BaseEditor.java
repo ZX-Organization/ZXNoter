@@ -37,7 +37,7 @@ public abstract class BaseEditor extends Tab {
      * 更新处理事件 (fx特有的查找困难)
      */
     public void updateDrag(Region tabHead, Region title) {
-
+        System.out.println("更新拖拽事件[" + getText() + "]");
 
         //tabHead = (Region) getTabPane().lookup("#" + uuid);
         //System.out.println("aaa>" + tabHead);

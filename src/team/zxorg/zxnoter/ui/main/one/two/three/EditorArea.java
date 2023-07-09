@@ -1,7 +1,10 @@
 package team.zxorg.zxnoter.ui.main.one.two.three;
 
 import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.geometry.Orientation;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import team.zxorg.zxnoter.ui.main.one.two.three.four.EditorLayout;
@@ -22,7 +25,7 @@ public class EditorArea extends EditorLayout {
 
     @Override
     public String toString() {
-        return "(ROOT)" + super.toString();
+        return "(ROOT)" + super.toString() + "";
     }
 
     public EditorArea() {
@@ -36,34 +39,19 @@ public class EditorArea extends EditorLayout {
             EditorTabPane editorTabPane = new EditorTabPane(this, this);
             getItems().add(editorTabPane);
 
-            {
+            for (int i = 0; i < 6; i++) {
                 BaseEditor baseEditor = editorTabPane.createEditor(SettingEditor.class);
-                baseEditor.setText("1111");
-            }
-            {
-                BaseEditor baseEditor = editorTabPane.createEditor(SettingEditor.class);
-                baseEditor.setText("2222");
-            }
-            {
-                BaseEditor baseEditor = editorTabPane.createEditor(SettingEditor.class);
-                baseEditor.setText("555");
-            }
-        }
-        {
-            EditorTabPane editorTabPane = new EditorTabPane(this, this);
-
-            getItems().add(editorTabPane);
-            {
-                BaseEditor baseEditor = editorTabPane.createEditor(SettingEditor.class);
-                baseEditor.setText("3333");
-            }
-            {
-                BaseEditor baseEditor = editorTabPane.createEditor(SettingEditor.class);
-                baseEditor.setText("4444");
+                baseEditor.setText(i+"");
             }
 
         }
 
+
+        setOnKeyPressed(event -> {
+            if (event.getCode().equals(KeyCode.SPACE)) {
+                System.out.println(this);
+            }
+        });
 
         //setDividerPositions(0.5, 0.5);
 
