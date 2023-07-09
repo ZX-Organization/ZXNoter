@@ -1,17 +1,8 @@
 package team.zxorg.zxnoter.ui.main.one.two.three.four;
 
-import com.alibaba.fastjson2.JSONObject;
-import javafx.application.Platform;
-import javafx.collections.ListChangeListener;
 import javafx.geometry.Orientation;
 import javafx.scene.Node;
 import javafx.scene.control.SplitPane;
-import javafx.scene.control.Tab;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.Priority;
-import team.zxorg.zxnoter.ui.main.one.two.three.EditorArea;
-import team.zxorg.zxnoter.ui.main.one.two.three.four.five.BaseEditor;
 
 import java.util.UUID;
 

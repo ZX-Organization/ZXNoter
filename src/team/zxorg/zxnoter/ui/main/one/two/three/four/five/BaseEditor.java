@@ -4,7 +4,6 @@ package team.zxorg.zxnoter.ui.main.one.two.three.four.five;
 import javafx.collections.ObservableList;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
 import javafx.scene.input.*;
 import javafx.scene.layout.*;
@@ -18,15 +17,15 @@ import java.util.UUID;
 
 public abstract class BaseEditor extends Tab {
     private final UUID uuid = UUID.randomUUID();
-    private final EditorArea area;
+    private final EditorArea rootArea;
 
     @Override
     public String toString() {
         return "编辑器[" + getText() + "]";
     }
 
-    public BaseEditor(EditorArea area) {
-        this.area = area;
+    public BaseEditor(EditorArea rootArea) {
+        this.rootArea = rootArea;
         setId(uuid.toString());
         Pane icon = ZXResources.getIconPane("media.closed-captioning", 22, ZXColor.red);
         setGraphic(icon);
@@ -48,8 +47,11 @@ public abstract class BaseEditor extends Tab {
 
         tabHead.setOnDragDetected(event -> {
 
-            area.dragTab = this;
-            area.dragTabPane = (EditorTabPane) getTabPane();
+            rootArea.dragTab = this;
+            rootArea.dragTabPane = (EditorTabPane) getTabPane();
+            if (rootArea.dragTabPane == null) {
+                return;
+            }
 
             // 创建快照
             SnapshotParameters params = new SnapshotParameters();
@@ -66,8 +68,8 @@ public abstract class BaseEditor extends Tab {
 
         tabHead.setOnDragOver((event) -> {
             event.consume();
-            if (area.dragTab != null) {
-                if (area.dragTab.equals(this))
+            if (rootArea.dragTab != null) {
+                if (rootArea.dragTab.equals(this))
                     return;
                 event.acceptTransferModes(TransferMode.MOVE);
 
@@ -86,7 +88,7 @@ public abstract class BaseEditor extends Tab {
         });
 
         tabHead.setOnDragExited((event) -> {
-            if (area.dragTab != null) {
+            if (rootArea.dragTab != null) {
                 title.getStyleClass().remove("left");
                 title.getStyleClass().remove("right");
             }
@@ -95,17 +97,17 @@ public abstract class BaseEditor extends Tab {
 
         tabHead.setOnDragDropped((event) -> {
             // 从 Dragboard 中获取 Tab 的数据
-            if (area.dragTab != null) {
+            if (rootArea.dragTab != null) {
                 title.getStyleClass().remove("left");
                 title.getStyleClass().remove("right");
 
                 EditorTabPane tabPane = (EditorTabPane) getTabPane();
                 ObservableList<Tab> tabs = tabPane.getTabs();
 
-                area.dragTabPane.getTabs().remove(area.dragTab);
+                rootArea.dragTabPane.getTabs().remove(rootArea.dragTab);
 
-                tabs.add(tabs.indexOf(this) + (event.getX() < tabHead.getWidth() / 2 ? 0 : 1), area.dragTab);
-                tabPane.getSelectionModel().select(area.dragTab);
+                tabs.add(tabs.indexOf(this) + (event.getX() < tabHead.getWidth() / 2 ? 0 : 1), rootArea.dragTab);
+                tabPane.getSelectionModel().select(rootArea.dragTab);
                 tabPane.requestFocus();
 
                 //检查清除拖拽Tab之前的TabPane
@@ -116,7 +118,7 @@ public abstract class BaseEditor extends Tab {
 
 
                 event.setDropCompleted(true);
-                area.dragTab = null;
+                rootArea.dragTab = null;
             }
             event.consume();
 

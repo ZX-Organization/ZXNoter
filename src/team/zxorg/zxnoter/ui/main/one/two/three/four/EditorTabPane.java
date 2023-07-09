@@ -212,6 +212,9 @@ public class EditorTabPane extends TabPane {
                     rootArea.dragTab.getTabPane().requestFocus();
 
                     //检查清除拖拽Tab之前的TabPane
+                    if (rootArea.dragTabPane == null) {
+                        throw new RuntimeException("触发未知异常 拖拽TabPane为null (你怎么能触发到的？？)");
+                    }
                     if (rootArea.dragTabPane.getTabs().isEmpty()) {
                         rootArea.dragTabPane.removeParentThis();
                     }
@@ -222,7 +225,6 @@ public class EditorTabPane extends TabPane {
                     EditorLayout.printLayout(rootArea, "|");
 
                     rootArea.dragTab = null;
-                    rootArea.dragTabPane = null;
                     event.setDropCompleted(true);
                 }
                 //消耗掉事件
@@ -232,6 +234,7 @@ public class EditorTabPane extends TabPane {
                 e.printStackTrace();
             }
         });
+
     }
 
     public void removeParentThis() {
@@ -257,7 +260,22 @@ public class EditorTabPane extends TabPane {
         return LayoutPosition.CENTER;
     }
 
+    private void handleHeaderAreaButton(Pane pane) {
+        pane.setOnDragDetected(event -> {
+            event.consume();
+        });
+        pane.setOnDragDetected(event -> {
+            event.consume();
+        });
+    }
+
     private void handleHeaderArea(Pane headerArea) {
+        for (Node node : headerArea.getChildren())
+            if (node instanceof Pane pane)
+                if (pane.getStyleClass().contains("tab-content-area")) {
+                    handleHeaderAreaButton(pane);
+                }
+
         headerArea.setOnDragOver(event -> {
             if (rootArea.dragTab != null) {
                 event.acceptTransferModes(TransferMode.MOVE);
