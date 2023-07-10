@@ -30,10 +30,10 @@ public class Main {
 
         ZXLogger.info("初始化图形系统");
 
-        //Logging.getJavaFXLogger().disableLogging();
-        // 创建自定义的 PrintStream 实例
-
+        //屏蔽javafx歌姬异常报错
+        Logging.getJavaFXLogger().disableLogging();
         PlatformImpl.startup(() -> {
+            Logging.getJavaFXLogger().enableLogging();
             //初始化 (载入配置 使用资源)
             ZXLogger.info("初始化配置");
             ZXConfiguration.reload();
