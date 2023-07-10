@@ -103,7 +103,7 @@ public class ZXResources {
     }
 
     public static void clearPacks() {
-        ZXLogger.logger.info("清除资源包");
+        ZXLogger.info("清除资源包");
         loadedResourcePackMap.clear();
     }
 
@@ -112,7 +112,7 @@ public class ZXResources {
      */
     public static void searchPacks(Path resourcesDiv) {
         if (!Files.exists(resourcesDiv)) {
-            ZXLogger.logger.warning("本地资源包目录不存在");
+            ZXLogger.warning("本地资源包目录不存在");
             return;
         }
 
@@ -126,17 +126,17 @@ public class ZXResources {
 
                     ResourcePack repeatPack = loadedResourcePackMap.get(resourcePack.getId());
                     if (repeatPack == null) {//检查资源id是否重复
-                        ZXLogger.logger.info("载入资源包:" + resourcePack.getId());
+                        ZXLogger.info("载入资源包:" + resourcePack.getId());
                         loadedResourcePackMap.put(resourcePack.getId(), resourcePack);
                     } else {
-                        ZXLogger.logger.warning("资源包id冲突 现有:" + repeatPack + " 冲突:" + resourcePack);
+                        ZXLogger.warning("资源包id冲突 现有:" + repeatPack + " 冲突:" + resourcePack);
                     }
                 } else {
-                    ZXLogger.logger.warning("资源包缺失引导: " + packPath);
+                    ZXLogger.warning("资源包缺失引导: " + packPath);
                 }
             }
         } catch (IOException e) {
-            ZXLogger.logger.warning("资源包枚举中断");
+            ZXLogger.warning("资源包枚举中断");
         }
     }
 
@@ -145,20 +145,21 @@ public class ZXResources {
      */
     public static void reloadGlobalResource() {
         globalResources.clear();
+
         //初始化所有资源map
         for (ResourceType type : ResourceType.values()) {
             globalResources.put(type, new ArrayList<>());
         }
-
+        ZXLogger.info("AAAAAAAAAA");
         for (String ids : UserPreference.getUsedResources()) {
-            ZXLogger.logger.info("载入资源包:" + ids);
+            ZXLogger.info("载入资源包:" + ids);
             String packId;
             ResourceType type;
             String resourceId;
             {
                 String[] id = ids.split("\\.");
                 if (id.length != 3) {
-                    ZXLogger.logger.warning("重载语言资源时 id长度异常:" + ids);
+                    ZXLogger.warning("重载语言资源时 id长度异常:" + ids);
                     return;
                 }
 
@@ -170,20 +171,20 @@ public class ZXResources {
 
             ResourcePack resourcePack = loadedResourcePackMap.get(packId);
             if (resourcePack == null) {
-                ZXLogger.logger.warning("重载资源时 id为" + packId + "的资源包不存在");
+                ZXLogger.warning("重载资源时 id为" + packId + "的资源包不存在");
                 return;
             }
 
             Resource resource = resourcePack.getResources(type, resourceId);
 
             if (resource == null) {
-                ZXLogger.logger.warning("重载资源时 id为" + resourceId + "的资源不存在 资源包id为" + packId);
+                ZXLogger.warning("重载资源时 id为" + resourceId + "的资源不存在 资源包id为" + packId);
                 return;
             }
 
             //将启用的资源加入全局资源
             globalResources.get(type).add(resource);
-            ZXLogger.logger.info("资源包载入完成:" + ids);
+            ZXLogger.info("资源包载入完成:" + ids);
         }
     }
 

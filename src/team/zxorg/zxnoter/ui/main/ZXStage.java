@@ -8,7 +8,7 @@ import team.zxorg.zxnoter.ui.main.one.MainVBox;
 
 public class ZXStage extends Stage {
     public ZXStage() {
-        ZXLogger.logger.info("实例化ZXN-UI窗口");
+        ZXLogger.info("实例化ZXN-UI窗口");
         MainVBox mainVBox = new MainVBox();//构建UI
         Scene scene = new Scene(mainVBox);
         ZXResources.setSceneStyle(scene);//设置样式

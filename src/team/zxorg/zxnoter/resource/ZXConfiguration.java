@@ -37,10 +37,10 @@ public class ZXConfiguration {
      */
     public static void reload() {
         try {
-            ZXLogger.logger.info("载入全局配置");
+            ZXLogger.info("载入全局配置");
             root = JSON.parseObject(Files.newInputStream(Paths.get("configuration.json")));
         } catch (IOException e) {
-            ZXLogger.logger.severe("载入全局配置失败");
+            ZXLogger.severe("载入全局配置失败");
             throw new RuntimeException(e);
         }
 
@@ -54,13 +54,13 @@ public class ZXConfiguration {
                 env.put("create", "true");
                 FileSystem zipfs = FileSystems.newFileSystem(resourceUri, env);
                 resourcePath = zipfs.getPath("/resources");
-                ZXLogger.logger.info("使用内部资源 url:" + resourceUrl);
+                ZXLogger.info("使用内部资源 url:" + resourceUrl);
             } catch (URISyntaxException | IOException e) {
                 e.printStackTrace();
-                ZXLogger.logger.severe("ZXConfiguration:载入内部资源异常");
+                ZXLogger.severe("ZXConfiguration:载入内部资源异常");
             }
         } else {
-            ZXLogger.logger.info("ZXConfiguration:进入开发阶段");
+            ZXLogger.info("ZXConfiguration:进入开发阶段");
         }
 
         ZXResources.clearPacks();//清除一遍资源

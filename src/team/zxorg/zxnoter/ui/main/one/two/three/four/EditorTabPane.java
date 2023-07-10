@@ -14,6 +14,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
+import team.zxorg.zxnoter.ZXLogger;
 import team.zxorg.zxnoter.ui.main.one.two.three.EditorArea;
 import team.zxorg.zxnoter.ui.main.one.two.three.four.five.BaseEditor;
 
@@ -65,7 +66,6 @@ public class EditorTabPane extends TabPane {
                     }
                 }
             }
-
         });
 
 
@@ -87,11 +87,9 @@ public class EditorTabPane extends TabPane {
                             ObservableList<String> addedTabPaneStyleClass = addedTabPanePane.getStyleClass();
                             if (addedTabPaneStyleClass.contains("tab-content-area")) {
                                 // 处理添加的内容区域
-                                System.out.println("更新内容区域{" + uuid.toString().substring(19) + "}");
                                 handleContentArea(addedTabPanePane);
                             } else if (addedTabPaneStyleClass.contains("tab-header-area")) {
                                 // 处理添加的头部区域
-                                System.out.println("更新头部区域{" + uuid.toString().substring(19) + "}");
                                 handleHeaderArea(addedTabPanePane);
                             }
                         }
@@ -132,7 +130,6 @@ public class EditorTabPane extends TabPane {
 
         //TabPane内容容器拖拽到事件监听
         contentArea.setOnDragDropped((event) -> {
-            try {
                 //检查是否是拖拽的Tab
                 if (rootArea.dragTab != null) {
 
@@ -160,9 +157,6 @@ public class EditorTabPane extends TabPane {
                             sourceOrientation = targetOrientation;
                         }
 
-                        System.out.println("源布局: " + sourceOrientation);
-                        System.out.println("目标布局: " + targetOrientation);
-
                         //找到此TabPane的在父布局索引
                         int index = parentLayout.getItems().indexOf(this);
 
@@ -175,7 +169,7 @@ public class EditorTabPane extends TabPane {
                             //根据索引将新的tabPane直接加入到父布局里
                             parentLayout.getItems().add(layoutPosition.isPriority() ? index : index + 1, newEditorTabPane);
 
-                            System.out.println("分隔" + (targetOrientation == Orientation.HORIZONTAL ? "水平" : "垂直"));
+                            ZXLogger.info("布局分隔" + (targetOrientation == Orientation.HORIZONTAL ? "水平" : "垂直"));
                         } else {//布局不相同 创建一个布局
 
                             //创建新的垂直布局
@@ -196,7 +190,7 @@ public class EditorTabPane extends TabPane {
                             }
                             newEditorLayout.autoLayout();
 
-                            System.out.println("增加到" + (targetOrientation == Orientation.HORIZONTAL ? "水平" : "垂直"));
+                            ZXLogger.info("布局增加新" + (targetOrientation == Orientation.HORIZONTAL ? "水平" : "垂直"));
                         }
 
                     }
@@ -207,7 +201,8 @@ public class EditorTabPane extends TabPane {
 
                     //检查清除拖拽Tab之前的TabPane
                     if (rootArea.dragTabPane == null) {
-                        throw new RuntimeException("触发未知异常 拖拽TabPane为null (你怎么能触发到的？？)");
+                        ZXLogger.warning("触发未知异常 拖拽TabPane为null (你怎么能触发到的？？)");
+                        return;
                     }
                     if (rootArea.dragTabPane.getTabs().isEmpty()) {
                         rootArea.dragTabPane.removeParentThis();
@@ -216,24 +211,21 @@ public class EditorTabPane extends TabPane {
                     rootArea.dragTabPane.parentLayout.autoLayout();
                     parentLayout.autoLayout();
 
-                    EditorLayout.printLayout(rootArea, "|");
+                    //EditorLayout.printLayout(rootArea, "|");
 
                     rootArea.dragTab = null;
                     event.setDropCompleted(true);
                 }
                 //消耗掉事件
                 event.consume();
-            } catch (Exception e) {
-                //为了防止javafx输出异常 (会乱码) 直接打印堆栈跟踪
-                e.printStackTrace();
-            }
+
         });
 
     }
 
     public void removeParentThis() {
         if (!parentLayout.getItems().remove(this)) {
-            System.out.println("没删成功");
+            ZXLogger.warning("没删成功");
         }
     }
 
@@ -242,13 +234,13 @@ public class EditorTabPane extends TabPane {
      * 计算布局位置
      */
     private LayoutPosition getLayoutPosition(Pane contentArea, DragEvent event) {
-        if (event.getX() < 32) {
+        if (event.getX() < 64) {
             return LayoutPosition.LEFT;
-        } else if (contentArea.getWidth() - event.getX() < 32) {
+        } else if (contentArea.getWidth() - event.getX() < 64) {
             return LayoutPosition.RIGHT;
-        } else if (event.getY() < 32) {
+        } else if (event.getY() < 64) {
             return LayoutPosition.TOP;
-        } else if (contentArea.getHeight() - event.getY() < 32) {
+        } else if (contentArea.getHeight() - event.getY() < 64) {
             return LayoutPosition.BOTTOM;
         }
         return LayoutPosition.CENTER;
@@ -321,8 +313,7 @@ public class EditorTabPane extends TabPane {
     }
 
     private void handleRemovedNodes(List<? extends Node> removedNodes) {
-// 处理移除的子节点列表
-//System.out.println("移除的子节点：" + removedNodes);
+
     }
 
 
