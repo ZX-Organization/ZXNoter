@@ -3,8 +3,8 @@ package team.zxorg.zxnoter.resource;
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;
-import team.zxorg.zxnoter.resource.type.LanguageResource;
-import team.zxorg.zxnoter.resource.type.Resource;
+import team.zxorg.zxnoter.resource.pack.LanguageResourcePack;
+import team.zxorg.zxnoter.resource.pack.BaseResourcePack;
 import team.zxorg.zxnoter.resource.type.ResourceType;
 
 import java.io.IOException;
@@ -32,10 +32,10 @@ public class ResourcePack {
     /**
      * 所有的资源
      */
-    private final HashMap<ResourceType, HashMap<String, Resource>> allResources = new HashMap<>();
+    private final HashMap<ResourceType, HashMap<String, BaseResourcePack>> allResources = new HashMap<>();
 
 
-    public Resource getResources(ResourceType type, String subId) {
+    public BaseResourcePack getResources(ResourceType type, String subId) {
         return allResources.get(type).get(subId);
     }
 
@@ -99,11 +99,11 @@ public class ResourcePack {
         for (ResourceType type : ResourceType.values()) {
             //载入对应资源
             JSONArray resList = packInfo.getJSONObject("resources").getJSONArray(type.name());
-            Resource resource;
+            BaseResourcePack baseResourcePack;
             for (int i = 0; i < resList.size(); i++) {
-                resource = type.build(this, packPath.resolve(resList.getString(i)));
-                resource.reload();
-                allResources.get(type).put(resource.getResourceId(), resource);
+                baseResourcePack = type.build(this, packPath.resolve(resList.getString(i)));
+                baseResourcePack.reload();
+                allResources.get(type).put(baseResourcePack.getResourceId(), baseResourcePack);
             }
         }
     }
@@ -116,9 +116,9 @@ public class ResourcePack {
      * @return 本地化语言内容
      */
     public String getLanguageContent(String key) {
-        if (getResources(ResourceType.language, UserPreference.getLanguageCode()) instanceof LanguageResource language) {//尝试获取本土化翻译
+        if (getResources(ResourceType.language, UserPreference.getLanguageCode()) instanceof LanguageResourcePack language) {//尝试获取本土化翻译
             return language.getLanguageContent(key);
-        } else if (getResources(ResourceType.language, packInfo.getString("defaultLanguageCode")) instanceof LanguageResource language) {
+        } else if (getResources(ResourceType.language, packInfo.getString("defaultLanguageCode")) instanceof LanguageResourcePack language) {
             return language.getLanguageContent(key);
         }
         throw new RuntimeException("没有语言");

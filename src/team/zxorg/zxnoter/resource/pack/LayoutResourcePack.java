@@ -1,16 +1,17 @@
-package team.zxorg.zxnoter.resource.type;
+package team.zxorg.zxnoter.resource.pack;
 
 import team.zxorg.zxnoter.resource.ResourcePack;
+import team.zxorg.zxnoter.resource.type.ResourceType;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class LayoutResource extends Resource {
+public class LayoutResourcePack extends BaseResourcePack {
     private final ArrayList<Path> cssFiles = new ArrayList<>();
 
-    public LayoutResource(ResourcePack pack, ResourceType type, Path jsonPath) {
+    public LayoutResourcePack(ResourcePack pack, ResourceType type, Path jsonPath) {
         super(pack, type, jsonPath);
     }
 

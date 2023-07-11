@@ -1,15 +1,16 @@
-package team.zxorg.zxnoter.resource.type;
+package team.zxorg.zxnoter.resource.pack;
 
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
 import team.zxorg.zxnoter.resource.ResourcePack;
+import team.zxorg.zxnoter.resource.type.ResourceType;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-public abstract class Resource {
+public abstract class BaseResourcePack {
     /**
      * 资源子id
      */
@@ -36,7 +37,19 @@ public abstract class Resource {
         return "资源[类型:" + type + " id:" + resourceId + " 所属资源包:" + pack + " 所在路径:" + path + "]";
     }
 
-    public Resource(ResourcePack pack, ResourceType type, Path jsonPath) {
+    public String getResourceFullId() {
+        return (getPackId() + "." + getType().name() + "." + getName());
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof BaseResourcePack pack) {
+            return getResourceFullId().equals(pack.getResourceFullId());
+        }
+        return false;
+    }
+
+    public BaseResourcePack(ResourcePack pack, ResourceType type, Path jsonPath) {
         this.type = type;
         this.pack = pack;
         this.path = jsonPath.getParent();

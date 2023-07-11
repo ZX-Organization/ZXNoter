@@ -18,5 +18,7 @@ public class ZXStage extends Stage {
         setMinHeight(618);
         setWidth(1000);
         setHeight(618);
+        setTitle("ZXNoter");
+        getIcons().add(ZXResources.LOGO);
     }
 }

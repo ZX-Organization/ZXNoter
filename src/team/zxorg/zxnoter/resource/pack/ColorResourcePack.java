@@ -1,17 +1,18 @@
-package team.zxorg.zxnoter.resource.type;
+package team.zxorg.zxnoter.resource.pack;
 
 import team.zxorg.zxnoter.resource.ResourcePack;
+import team.zxorg.zxnoter.resource.type.ResourceType;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class ColorResource extends Resource {
+public class ColorResourcePack extends BaseResourcePack {
     private final ArrayList<Path> cssFiles = new ArrayList<>();
 
 
-    public ColorResource(ResourcePack pack, ResourceType type, Path jsonPath) {
+    public ColorResourcePack(ResourcePack pack, ResourceType type, Path jsonPath) {
         super(pack, type, jsonPath);
     }
 

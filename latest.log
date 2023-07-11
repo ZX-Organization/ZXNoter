@@ -1,23 +1,19 @@
-[19:25:31] [Main.main/INFO]: ZXNoter启动
-[19:25:31] [Main.main/INFO]: 初始化图形系统
-[19:25:31] [Main.lambda$main$0/INFO]: 初始化配置
-[19:25:31] [ZXConfiguration.reload/INFO]: 载入全局配置
-[19:25:32] [ZXConfiguration.reload/INFO]: ZXConfiguration:进入开发阶段
-[19:25:32] [ZXResources.clearPacks/INFO]: 清除资源包
-[19:25:32] [ZXResources.searchPacks/INFO]: 载入资源包:zxnoter
-[19:25:32] [ZXResources.searchPacks/WARNING]: 本地资源包目录不存在
-[19:25:32] [ZXResources.reloadGlobalResource/INFO]: AAAAAAAAAA
-[19:25:32] [ZXResources.reloadGlobalResource/INFO]: 载入资源包:zxnoter.language.zh-cn
-[19:25:32] [ZXResources.reloadGlobalResource/INFO]: 资源包载入完成:zxnoter.language.zh-cn
-[19:25:32] [ZXResources.reloadGlobalResource/INFO]: 载入资源包:zxnoter.sound.base
-[19:25:32] [ZXResources.reloadGlobalResource/INFO]: 资源包载入完成:zxnoter.sound.base
-[19:25:32] [ZXResources.reloadGlobalResource/INFO]: 载入资源包:zxnoter.icon.line
-[19:25:32] [ZXResources.reloadGlobalResource/INFO]: 资源包载入完成:zxnoter.icon.line
-[19:25:32] [ZXResources.reloadGlobalResource/INFO]: 载入资源包:zxnoter.style.map-editor-pink
-[19:25:32] [ZXResources.reloadGlobalResource/INFO]: 资源包载入完成:zxnoter.style.map-editor-pink
-[19:25:32] [ZXResources.reloadGlobalResource/INFO]: 载入资源包:zxnoter.layout.base
-[19:25:32] [ZXResources.reloadGlobalResource/INFO]: 资源包载入完成:zxnoter.layout.base
-[19:25:32] [ZXResources.reloadGlobalResource/INFO]: 载入资源包:zxnoter.color.dark
-[19:25:32] [ZXResources.reloadGlobalResource/INFO]: 资源包载入完成:zxnoter.color.dark
-[19:25:32] [ZXStage.<init>/INFO]: 实例化ZXN-UI窗口
-[19:25:32] [Main.lambda$main$0/INFO]: 显示ZXN-UI窗口
+[22:40:34] [Main.main/INFO]: ZXNoter启动
+[22:40:34] [Main.main/INFO]: 初始化图形系统
+[22:40:34] [Main.main/INFO]: NMSL
+[22:40:34] [Main.main/WARNING]: WDNMD
+[22:40:35] [Main.lambda$main$0/INFO]: 初始化配置
+[22:40:35] [ZXConfiguration.reload/INFO]: 载入全局配置
+[22:40:35] [ZXResources.<clinit>/INFO]: 载入基本资源
+[22:40:35] [ZXResources.clearPacks/INFO]: 清除资源包列表
+[22:40:35] [ZXResources.loadPack/INFO]: 载入资源包 zxnoter
+[22:40:35] [ZXResources.searchPacks/WARNING]: 本地资源包目录不存在
+[22:40:35] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表
+[22:40:35] [ZXResources.reloadGlobalResource/INFO]: 载入 zxnoter.language.zh-cn
+[22:40:35] [ZXResources.reloadGlobalResource/INFO]: 载入 zxnoter.sound.base
+[22:40:35] [ZXResources.reloadGlobalResource/INFO]: 载入 zxnoter.icon.line
+[22:40:35] [ZXResources.reloadGlobalResource/INFO]: 载入 zxnoter.style.map-editor-pink
+[22:40:35] [ZXResources.reloadGlobalResource/INFO]: 载入 zxnoter.layout.base
+[22:40:35] [ZXResources.reloadGlobalResource/INFO]: 载入 zxnoter.color.dark
+[22:40:35] [ZXStage.<init>/INFO]: 实例化ZXN-UI窗口
+[22:40:36] [Main.lambda$main$0/INFO]: 显示ZXN-UI窗口
