@@ -116,9 +116,9 @@ public class SideBar extends TabPane {
             }
         });
 
-        TrackTooltip bindTooltip = new TrackTooltip(iconPane, Pos.BOTTOM_CENTER, 0, TrackTooltip.BindAttributes.AUTO_POP_UP);
-        bindTooltip.setPos(Pos.CENTER_RIGHT, true,14);
-        bindTooltip.setText(ZXResources.getLanguageContent(tipLanguageKey));
+        TrackTooltip trackTooltip = new TrackTooltip(iconPane, Pos.BOTTOM_CENTER, 0, TrackTooltip.BindAttributes.AUTO_POP_UP);
+        trackTooltip.setPos(Pos.CENTER_RIGHT, false,14);
+        trackTooltip.setText(ZXResources.getLanguageContent(tipLanguageKey));
 
         //ComponentFactory.getTooltip(tipLanguageKey, iconPane, 12);
         tab.setGraphic(iconPane);

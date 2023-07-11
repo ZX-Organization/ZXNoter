@@ -292,13 +292,15 @@
     -fx-padding: 10;
 }
 
-.side-bar .tab-header-area .headers-region .tab:selected {
+.side-bar .tab-header-area .headers-region .tab:selected,
+.side-bar:focused .tab-header-area .headers-region .tab:selected {
     -fx-border-width: 4 0 0 0;
     -fx-padding: 6 10 10 10;
 
     -fx-background-color: transparent;
     -fx-border-color: -color-font-light;
 }
+
 
 .side-bar .tab-header-area .headers-region .tab:left .tab-container {
     -fx-padding: 0;
@@ -316,12 +318,16 @@
     -fx-background-color: -color-font-usually;
 }
 
-.fold-side-bar .tab-header-area .headers-region .tab, .fold-side-bar .tab-header-area .headers-region .tab:selected {
+
+.fold-side-bar .tab-header-area .headers-region .tab,
+.fold-side-bar:focused .tab-header-area .headers-region .tab:selected,
+.fold-side-bar .tab-header-area .headers-region .tab:selected {
     -fx-background-color: transparent;
     -fx-border-color: transparent;
     -fx-border-width: 0;
     -fx-padding: 10;
 }
+
 
 .adjust-side-bar {
     -fx-border-color: -color-blue;
@@ -569,6 +575,7 @@
     -fx-border-color: -color-blue;
     -fx-border-width: 0 0 4 0;
 }
+
 .editor-area .editor-tab-pane .layout-center {
     -fx-border-color: -color-blue;
     -fx-border-width: 4;

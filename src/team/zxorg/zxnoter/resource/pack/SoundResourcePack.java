@@ -6,8 +6,8 @@ import team.zxorg.zxnoter.resource.type.ResourceType;
 
 import java.nio.file.Path;
 
-public class StyleResourcePack extends BaseResourcePack {
-    public StyleResourcePack(ResourcePack pack, ResourceType type, Path jsonPath) {
+public class SoundResourcePack extends BaseResourcePack {
+    public SoundResourcePack(ResourcePack pack, ResourceType type, Path jsonPath) {
         super(pack, type, jsonPath);
     }
 

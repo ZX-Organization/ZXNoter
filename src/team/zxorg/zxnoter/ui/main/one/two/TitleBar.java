@@ -26,7 +26,7 @@ public class TitleBar extends HBox {
         setPrefSize(Region.USE_COMPUTED_SIZE, 30);
         setMinHeight(Region.USE_PREF_SIZE);
         getStyleClass().add("title-bar");
-        ImageView zxnIcon = new ImageView();//ZXResources.getImage("img.zxnoter.zxnoter-x26")
+        ImageView zxnIcon = new ImageView(ZXResources.LOGO_X26);//ZXResources.getImage("img.zxnoter.zxnoter-x26")
         HBox.setMargin(zxnIcon, new Insets(2, 4, 2, 4));
 
 

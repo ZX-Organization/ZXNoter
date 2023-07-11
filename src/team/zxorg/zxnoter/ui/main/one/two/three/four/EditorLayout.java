@@ -3,6 +3,7 @@ package team.zxorg.zxnoter.ui.main.one.two.three.four;
 import javafx.geometry.Orientation;
 import javafx.scene.Node;
 import javafx.scene.control.SplitPane;
+import team.zxorg.zxnoter.ZXLogger;
 
 import java.util.UUID;
 
@@ -42,11 +43,11 @@ public class EditorLayout extends SplitPane {
     public void checkItems() {
         int size = getItems().size();
         if (size == 0) {
-            System.out.println("检查到布局{" + getName() + "}没有物品，直接移除");
+            ZXLogger.info("检查到布局{" + getName() + "}没有物品，直接移除");
             parentLayout.getChildren().remove(this);
         } else if (size == 1) {
             if (parentLayout != null) {//子物品去除布局
-                System.out.println("检查到布局{" + getName() + "}只剩1个物品");
+                ZXLogger.info("检查到布局{" + getName() + "}只剩1个物品");
                 int index = parentLayout.getItems().indexOf(this);
                 for (Node child : getItems()) {
                     if (child instanceof EditorTabPane editorTabPane) {
@@ -66,7 +67,7 @@ public class EditorLayout extends SplitPane {
     public void autoLayout() {
         int size = getItems().size();
         double average = 1.0 / size;
-        System.out.println("自动计算:" + size + " 平均:" + average + " 来自{" + getName() + "}");
+        //ZXLogger.logger.info("自动计算:" + size + " 平均:" + average + " 来自{" + getName() + "}");
         for (int i = 0; i < size; i++) {
             setDividerPosition(i, average * (i + 1));
         }
