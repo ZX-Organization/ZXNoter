@@ -34,12 +34,16 @@ public class EditorArea extends EditorLayout {
         setOrientation(Orientation.HORIZONTAL);
         HBox.setHgrow(this, Priority.ALWAYS);
 
-        {
-            EditorTabPane editorTabPane = new EditorTabPane(this, this);
-            getItems().add(editorTabPane);
-            editorTabPane.createEditor(new SettingEditor(this));
+        EditorTabPane editorTabPane = new EditorTabPane(this, this);
+        getItems().add(editorTabPane);
 
+
+        for (int i = 0; i < 6; i++) {
+            SettingEditor settingEditor = new SettingEditor(this);
+            settingEditor.setText("    " + i + "    ");
+            editorTabPane.createEditor(settingEditor);
         }
+        autoLayout();
     }
 
 }
