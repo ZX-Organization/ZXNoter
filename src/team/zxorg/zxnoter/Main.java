@@ -23,16 +23,19 @@ public class Main {
 
         //屏蔽javafx歌姬初始化时的异常
         Logging.getJavaFXLogger().disableLogging();
+
         PlatformImpl.startup(() -> {
             Logging.getJavaFXLogger().enableLogging();
             //初始化 (载入配置 使用资源)
             ZXLogger.info("初始化配置");
             ZXConfiguration.reload();
 
-            //创建软件实例
-            ZXStage zxStage = new ZXStage();
-            ZXLogger.info("显示ZXN-UI窗口");
-            zxStage.show();
+            for (int i = 0; i < 3; i++) {
+                //创建软件实例
+                ZXStage zxStage = new ZXStage();
+                ZXLogger.info("显示ZXN-UI窗口");
+                zxStage.show();
+            }
         });
 
 
