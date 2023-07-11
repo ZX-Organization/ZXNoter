@@ -6,6 +6,9 @@ import team.zxorg.zxnoter.info.map.ImdInfo;
 
 import java.util.ArrayList;
 
+/**
+ * @author xiang2333
+ */
 public class ComplexNote extends FixedOrbitNote implements Cloneable {
     public ArrayList<FixedOrbitNote> notes = new ArrayList<>();
     private boolean isRelativeHead;
@@ -32,8 +35,11 @@ public class ComplexNote extends FixedOrbitNote implements Cloneable {
             if (childJson.containsKey("sustainedTime")){
                 //长条
                 //判断是否为特殊长条
-                if (childJson.size() == 9) notes.add(new CustomLongNote(childJson));
-                else notes.add(new LongNote(childJson));
+                if (childJson.size() == 9) {
+                    notes.add(new CustomLongNote(childJson));
+                } else {
+                    notes.add(new LongNote(childJson));
+                }
             }
             if (childJson.size()==8){
                 //特殊单键
@@ -73,8 +79,9 @@ public class ComplexNote extends FixedOrbitNote implements Cloneable {
     }
 
     public void setRelatively(boolean relativeHead) {
-        if (isRelativeHead == relativeHead) return;
-        else {
+        if (isRelativeHead == relativeHead) {
+            return;
+        } else {
             FixedOrbitNote head = notes.get(0);
             if (relativeHead) {
                 //设置为相对头部
@@ -284,8 +291,9 @@ public class ComplexNote extends FixedOrbitNote implements Cloneable {
         noteJson.put("soundPath",soundPath);
         noteJson.put("isRelativeHead",isRelativeHead);
         JSONArray childrenNotes = new JSONArray();
-        for (FixedOrbitNote fixedOrbitNote:notes)
+        for (FixedOrbitNote fixedOrbitNote:notes) {
             childrenNotes.add(fixedOrbitNote.toJson());
+        }
         noteJson.put("child",childrenNotes);
         return noteJson;
     }

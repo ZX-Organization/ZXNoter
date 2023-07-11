@@ -30,8 +30,9 @@ public class LanguageResourcePack extends BaseResourcePack {
      * @return 内容
      */
     public String getLanguageContent(String key) {
-        if (languages.get(key) instanceof String language)
+        if (languages.get(key) instanceof String language) {
             return language;
+        }
         return getLanguageContent("language.loss");//如果不存在则返回丢失内容
     }
 

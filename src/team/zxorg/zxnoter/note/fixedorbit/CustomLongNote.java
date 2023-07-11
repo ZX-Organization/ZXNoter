@@ -2,6 +2,9 @@ package team.zxorg.zxnoter.note.fixedorbit;
 
 import com.alibaba.fastjson2.JSONObject;
 
+/**
+ * @author xiang2333
+ */
 public class CustomLongNote extends LongNote{
     public int keyType;
     public int hitSound;

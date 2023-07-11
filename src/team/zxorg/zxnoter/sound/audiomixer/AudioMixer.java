@@ -62,6 +62,7 @@ public class AudioMixer {
                                 }
 
                                 if (audioChannel.playState.equals(AudioChannel.PlayState.END))//如果播放结束执行动作
+                                {
                                     switch (audioChannel.endBehavior) {
                                         case CLOSE -> audioChannel.playState = AudioChannel.PlayState.CLOSE;
                                         case LOOP -> {
@@ -70,6 +71,7 @@ public class AudioMixer {
                                         }
                                         case PAUSE -> audioChannel.playState = AudioChannel.PlayState.PAUSE;
                                     }
+                                }
 
 
                             }
@@ -145,8 +147,9 @@ public class AudioMixer {
      */
     public int addAudio(byte[] audioData) {
 
-        if (!audioDataList.contains(audioData))
+        if (!audioDataList.contains(audioData)) {
             audioDataList.add(audioData);
+        }
         return audioDataList.indexOf(audioData);
     }
 

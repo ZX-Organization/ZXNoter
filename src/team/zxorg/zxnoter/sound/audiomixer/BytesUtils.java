@@ -15,8 +15,9 @@ public class BytesUtils {
     public static short bytes2short(byte[] res) {
         short ret = 0;
         for (int i = 0; i < 2; i++) {
-            if (i < res.length)
+            if (i < res.length) {
                 ret |= (short) (res[i] & 0xFF) << (i * 8);
+            }
         }
         return ret;
     }
@@ -24,8 +25,9 @@ public class BytesUtils {
     public static int bytes2int(byte[] res) {
         int ret = 0;
         for (int i = 0; i < 4; i++) {
-            if (i < res.length)
+            if (i < res.length) {
                 ret |= (res[i] & 0xFF) << (i * 8);
+            }
         }
         return ret;
     }
@@ -33,8 +35,9 @@ public class BytesUtils {
     public static long bytes2long(byte[] res) {
         long ret = 0;
         for (int i = 0; i < 8; i++) {
-            if (i < res.length)
+            if (i < res.length) {
                 ret |= (long) (res[i] & 0xFF) << (i * 8);
+            }
         }
         return ret;
     }
@@ -61,8 +64,9 @@ public class BytesUtils {
         for (int i = 0; i < 8; i++) {
             ret.set(i, resb.get(7 - i));
         }
-        if (ret.length() == 0)
+        if (ret.length() == 0) {
             return -128;
+        }
         return ret.toByteArray()[0];
     }
 
@@ -98,8 +102,9 @@ public class BytesUtils {
     public static int bytes2intA(byte[] res) {
         int ret = 0;
         for (int i = 0; i < 4; i++) {
-            if (3 - i < res.length)
+            if (3 - i < res.length) {
                 ret |= (res[3 - i] & 0xFF) << (i * 8);
+            }
         }
         return ret;
     }
@@ -107,8 +112,9 @@ public class BytesUtils {
     public static long bytes2longA(byte[] res) {
         long ret = 0;
         for (int i = 0; i < 8; i++) {
-            if (7 - i < res.length)
+            if (7 - i < res.length) {
                 ret |= (long) (res[7 - i] & 0xFF) << (i * 8);
+            }
         }
         return ret;
     }

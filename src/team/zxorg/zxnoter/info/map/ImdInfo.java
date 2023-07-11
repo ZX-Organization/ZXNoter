@@ -2,6 +2,7 @@ package team.zxorg.zxnoter.info.map;
 
 /**
  * imd词条及反本地化名
+ * @author xiang2333
  */
 public enum ImdInfo{
 

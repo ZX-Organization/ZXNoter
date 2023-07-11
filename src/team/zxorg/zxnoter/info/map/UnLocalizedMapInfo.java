@@ -8,6 +8,7 @@ import java.util.Set;
 
 /**
  * 本地化信息类
+ * @author xiang2333
  */
 public class UnLocalizedMapInfo {
     public HashMap<ZXMInfo, String> allInfo;
@@ -22,15 +23,18 @@ public class UnLocalizedMapInfo {
         addInterfaceList = new ArrayList<>();
 
         Set<String> keys = infoJson.keySet();
-        for (String key:keys) allInfo.put(ZXMInfo.valueOf(key),infoJson.getString(key));
+        for (String key:keys) {
+            allInfo.put(ZXMInfo.valueOf(key),infoJson.getString(key));
+        }
 
     }
 
     public void setInfo(ZXMInfo key, String value) {
 
         allInfo.put(key, value);
-        for (AddListener addCallBack:addInterfaceList)
+        for (AddListener addCallBack:addInterfaceList) {
             addCallBack.callInfo(key,value);
+        }
     }
 
     public String getInfo(ZXMInfo key) {
@@ -43,25 +47,27 @@ public class UnLocalizedMapInfo {
      */
     public static UnLocalizedMapInfo getDefaultInfo() {
         UnLocalizedMapInfo info = new UnLocalizedMapInfo();
-        for (ZXMInfo zxmInfo:ZXMInfo.values())
+        for (ZXMInfo zxmInfo:ZXMInfo.values()) {
             info.setInfo(zxmInfo, zxmInfo.getDefaultValue());
+        }
         return info;
     }
 
     /**
      *  设置一个添加接口
-     * @param addInterface 添加接口
+     * @param listener 添加接口
      */
-    public void addListener(AddListener addInterface) {
-        this.addInterfaceList.add(addInterface) ;
+    public void addListener(AddListener listener) {
+        this.addInterfaceList.add(listener) ;
     }
 
     public JSONObject toJson(){
         JSONObject unlocalizedInfoJson = new JSONObject();
 
         Set<ZXMInfo> keyset = allInfo.keySet();
-        for (ZXMInfo info:keyset)
+        for (ZXMInfo info:keyset) {
             unlocalizedInfoJson.put(info.name(), allInfo.get(info));
+        }
 
         return unlocalizedInfoJson;
     }

@@ -21,6 +21,9 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Set;
 
+/**
+ * @author xiang2333
+ */
 public class ImdWriter implements MapWriter {
     HashMap<ImdInfo,String> allInfos;
     /**
@@ -28,6 +31,7 @@ public class ImdWriter implements MapWriter {
      * @param zxMap 要写出的zxMap
      * @param path 要写出到的路径
      */
+    @Override
     public void writeOut(ZXMap zxMap, Path path) throws NoSuchFieldException, IOException {
         allInfos = checkLocalizedInfos(zxMap);
         //检查本地化信息
@@ -50,7 +54,9 @@ public class ImdWriter implements MapWriter {
         for (BaseNote note: zxMap.notes){
             if (note instanceof ComplexNote complexNote){
                 absoluteNotesSize+=complexNote.notes.size();
-            }else absoluteNotesSize ++;
+            }else {
+                absoluteNotesSize ++;
+            }
         }
         System.out.println("拆分物件总数"+absoluteNotesSize);
         System.out.println("separate大小"+zxMap.getSeparateNotesSize());
@@ -214,8 +220,9 @@ public class ImdWriter implements MapWriter {
         String fileName = allInfos.get(ImdInfo.ImdTitle)+
                 "_"+allInfos.get(ImdInfo.ImdKeyCount)+
                 "k_"+allInfos.get(ImdInfo.ImdVersion)+".imd";
-        if (fileName.contains("?"))
+        if (fileName.contains("?")) {
             fileName=fileName.replaceAll("\\?","");
+        }
         return fileName;
     }
 }

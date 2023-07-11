@@ -17,9 +17,13 @@ import java.util.HashMap;
 import team.zxorg.zxnoter.note.timing.Timing;
 import team.zxorg.zxnoter.note.timing.ZXTiming;
 
+/**
+ * @author xiang2333
+ */
 public class OsuWriter implements MapWriter {
     private HashMap<OsuInfo, String> allInfos;
     private BufferedWriter bW;
+    @Override
     public void writeOut(ZXMap zxMap, Path path) throws NoSuchFieldException, IOException {
         allInfos = checkLocalizedInfos(zxMap);
         //检查本地化信息
@@ -104,23 +108,25 @@ public class OsuWriter implements MapWriter {
             System.out.println(timing);
             //判断是否属于ZxTiming,是则细分
             if (timing instanceof ZXTiming zxTiming){
-                if (zxTiming.isExtendTiming)
+                if (zxTiming.isExtendTiming) {
                     strB.append(1/(zxTiming.absBpm/60000)).append(",");
-                else {
+                } else {
                     //变速
                     strB.append("-");
                     double tempBeatPar = 100/(zxTiming.bpmSpeed / zxTiming.absBpm);
-                    if (((tempBeatPar % 1) == 0))
+                    if (((tempBeatPar % 1) == 0)) {
                         strB.append((int)tempBeatPar).append(",");
-                    else
+                    } else {
                         strB.append(tempBeatPar).append(",");
+                    }
                 }
             }else {
 
-                if (Math.abs(timing.bpmSpeed - timing.absBpm) <= 0.0002)
+                if (Math.abs(timing.bpmSpeed - timing.absBpm) <= 0.0002) {
                     strB.append(1 / (timing.absBpm / 60000)).append(",");
-                else
+                } else {
                     strB.append("-").append(100/(timing.bpmSpeed / timing.absBpm)).append(",");
+                }
 
             }
 
@@ -144,9 +150,11 @@ public class OsuWriter implements MapWriter {
             if (index==1){
                 strB.append(1).append(",").append(0);
             }else {
-                if (Math.abs(timing.bpmSpeed - timing.absBpm) <= 0.0002)
+                if (Math.abs(timing.bpmSpeed - timing.absBpm) <= 0.0002) {
                     strB.append(1).append(",").append(0);
-                else strB.append(0).append(",").append(0);
+                } else {
+                    strB.append(0).append(",").append(0);
+                }
             }
             bW.write(strB.toString());
             bW.newLine();
@@ -219,6 +227,7 @@ public class OsuWriter implements MapWriter {
         bW.flush();
         bW.close();
     }
+    @Override
     public String getDefaultName(){
         return allInfos.get(OsuInfo.Title) + " [" + allInfos.get(OsuInfo.Version) + "]" + ".osu";
     }

@@ -4,6 +4,9 @@ import team.zxorg.zxnoter.note.BaseNote;
 
 import java.util.ArrayList;
 
+/**
+ * @author xiang2333
+ */
 public class MapOperate {
     /**
      * 同时操作的所有按键,应与结果同样大小
@@ -23,12 +26,18 @@ public class MapOperate {
         ArrayList<BaseNote> srcNotes = new ArrayList<>();
         ArrayList<BaseNote> desNotes = new ArrayList<>();
         for (BaseNote note:srcOperate.desNotes){
-            if (note != null) srcNotes.add(note.clone());
-            else srcNotes.add(null);
+            if (note != null) {
+                srcNotes.add(note.clone());
+            } else {
+                srcNotes.add(null);
+            }
         }
         for (BaseNote note:srcOperate.srcNotes){
-            if (note != null) desNotes.add(note.clone());
-            else desNotes.add(null);
+            if (note != null) {
+                desNotes.add(note.clone());
+            } else {
+                desNotes.add(null);
+            }
 
         }
         this.srcNotes = srcNotes;
@@ -57,8 +66,9 @@ public class MapOperate {
                 return false;
             }
                 return true;
-        } else
+        } else {
             return false;
+        }
     }
 
     @Override

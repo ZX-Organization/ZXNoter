@@ -4,6 +4,10 @@ import com.alibaba.fastjson2.JSONObject;
 import team.zxorg.zxnoter.note.BaseNote;
 import team.zxorg.zxnoter.note.fixedorbit.ComplexNote;
 
+/**
+ *
+ * @author xiang2333
+ */
 public class FreeOrbitNote extends BaseNote {
     public FreeOrbitNote(long timeStamp) {
         super(timeStamp);

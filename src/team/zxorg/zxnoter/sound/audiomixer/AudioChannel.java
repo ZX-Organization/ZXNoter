@@ -67,16 +67,19 @@ public class AudioChannel {
 
         if (numBytes == 0 && bufSize != pos)//如果读取的字节不足则再次写入到sonic
         {
-            if (writeToSonic() == -1)
+            if (writeToSonic() == -1) {
                 return bufSize;
+            }
         }
 
-        if (pos == bufSize)
+        if (pos == bufSize) {
             return bufSize;
+        }
 
         System.arraycopy(outStagingBuffer, 0, buf, pos, numBytes);
-        if (numBytes < bufSize)
+        if (numBytes < bufSize) {
             read(buf, pos + numBytes, bufSize);
+        }
 
 
         return numBytes;
@@ -160,8 +163,9 @@ public class AudioChannel {
      * @return 单位ms
      */
     public long getTime() {
-        if (playState.equals(PlayState.PAUSE))
+        if (playState.equals(PlayState.PAUSE)) {
             return getTime_();
+        }
         return (long) (lastTime + ((System.currentTimeMillis() - lastTimeStamp) * sonic.getRate() * sonic.getSpeed()));
     }
 
