@@ -11,6 +11,7 @@ import team.zxorg.zxnoter.ui.main.one.two.three.four.EditorLayout;
 import team.zxorg.zxnoter.ui.main.one.two.three.four.EditorTabPane;
 import team.zxorg.zxnoter.ui.main.one.two.three.four.five.BaseEditor;
 import team.zxorg.zxnoter.ui.main.one.two.three.four.five.SettingEditor;
+import team.zxorg.zxnoter.ui.main.one.two.three.four.five.ThreeDimensionalMapEditor;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -41,6 +42,11 @@ public class EditorArea extends EditorLayout {
         for (int i = 0; i < 6; i++) {
             SettingEditor settingEditor = new SettingEditor(this);
             settingEditor.setText("    " + i + "    ");
+            editorTabPane.createEditor(settingEditor);
+        }
+        {
+            ThreeDimensionalMapEditor settingEditor = new ThreeDimensionalMapEditor(this);
+            settingEditor.setText("    3D    ");
             editorTabPane.createEditor(settingEditor);
         }
         autoLayout();

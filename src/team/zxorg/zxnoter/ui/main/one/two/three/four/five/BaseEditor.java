@@ -49,9 +49,9 @@ public abstract class BaseEditor extends Tab {
 
         tabHead.setOnDragDetected(event -> {
 
-            rootArea.dragTab = this;
-            rootArea.dragTabPane = (EditorTabPane) getTabPane();
-            if (rootArea.dragTabPane == null) {
+            EditorArea.dragTab = this;
+            EditorArea.dragTabPane = (EditorTabPane) getTabPane();
+            if (EditorArea.dragTabPane == null) {
                 return;
             }
 
@@ -70,8 +70,8 @@ public abstract class BaseEditor extends Tab {
 
         tabHead.setOnDragOver((event) -> {
             event.consume();
-            if (rootArea.dragTab != null) {
-                if (rootArea.dragTab.equals(this))
+            if (EditorArea.dragTab != null) {
+                if (EditorArea.dragTab.equals(this))
                     return;
                 event.acceptTransferModes(TransferMode.MOVE);
 
@@ -90,7 +90,7 @@ public abstract class BaseEditor extends Tab {
         });
 
         tabHead.setOnDragExited((event) -> {
-            if (rootArea.dragTab != null) {
+            if (EditorArea.dragTab != null) {
                 title.getStyleClass().remove("left");
                 title.getStyleClass().remove("right");
             }
@@ -99,28 +99,28 @@ public abstract class BaseEditor extends Tab {
 
         tabHead.setOnDragDropped((event) -> {
             // 从 Dragboard 中获取 Tab 的数据
-            if (rootArea.dragTab != null) {
+            if (EditorArea.dragTab != null) {
                 title.getStyleClass().remove("left");
                 title.getStyleClass().remove("right");
 
                 EditorTabPane tabPane = (EditorTabPane) getTabPane();
                 ObservableList<Tab> tabs = tabPane.getTabs();
 
-                rootArea.dragTabPane.getTabs().remove(rootArea.dragTab);
+                EditorArea.dragTabPane.getTabs().remove(EditorArea.dragTab);
 
-                tabs.add(tabs.indexOf(this) + (event.getX() < tabHead.getWidth() / 2 ? 0 : 1), rootArea.dragTab);
-                tabPane.getSelectionModel().select(rootArea.dragTab);
+                tabs.add(tabs.indexOf(this) + (event.getX() < tabHead.getWidth() / 2 ? 0 : 1), EditorArea.dragTab);
+                tabPane.getSelectionModel().select(EditorArea.dragTab);
                 tabPane.requestFocus();
 
                 //检查清除拖拽Tab之前的TabPane
-                if (tabPane.getRootArea().dragTabPane.getTabs().size() == 0) {
-                    tabPane.getRootArea().dragTabPane.removeParentThis();
+                if (EditorArea.dragTabPane.getTabs().size() == 0) {
+                    EditorArea.dragTabPane.removeParentThis();
                 }
-                tabPane.getRootArea().dragTabPane.parentLayout.checkItems();
+                EditorArea.dragTabPane.parentLayout.checkItems();
 
 
                 event.setDropCompleted(true);
-                rootArea.dragTab = null;
+                EditorArea.dragTab = null;
             }
             event.consume();
 

@@ -9,7 +9,7 @@ import java.util.UUID;
 
 public class EditorLayout extends SplitPane {
     protected EditorLayout parentLayout;//如果是null则为根(root)
-    private UUID uuid = UUID.randomUUID();
+    private final UUID uuid = UUID.randomUUID();
 
 
     public String getName() {

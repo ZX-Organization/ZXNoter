@@ -30,12 +30,10 @@ public class Main {
             ZXLogger.info("初始化配置");
             ZXConfiguration.reload();
 
-            for (int i = 0; i < 3; i++) {
-                //创建软件实例
-                ZXStage zxStage = new ZXStage();
-                ZXLogger.info("显示ZXN-UI窗口");
-                zxStage.show();
-            }
+            //创建软件实例
+            ZXStage zxStage = new ZXStage();
+            ZXLogger.info("显示ZXN-UI窗口");
+            zxStage.show();
         });
 
 
