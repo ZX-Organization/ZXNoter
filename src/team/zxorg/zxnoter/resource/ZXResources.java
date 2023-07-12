@@ -25,18 +25,10 @@ public class ZXResources {
      */
     private static final HashMap<String, ResourcePack> loadedResourcePackMap = new HashMap<>();
 
-    /**
-     * 全局资源包
-     */
-    private static final HashMap<ResourceType, ArrayList<BaseResourcePack>> globalResources = new HashMap<>();
-
-    /**
-     * 全局语言资源
-     */
-    private static final HashMap<String, StringProperty> globalLanguageResources = new HashMap<>();
 
 
-    public static SVGPath getIconPane(String key) {
+
+    /*public static SVGPath getIconPane(String key) {
         SVGPath svgPath;
         for (BaseResourcePack baseResourcePack : globalResources.get(ResourceType.icon)) {
             if (baseResourcePack instanceof IconResourcePack iconResourcePack) {
@@ -45,9 +37,9 @@ public class ZXResources {
             }
         }
         return null;
-    }
+    }*/
 
-    public static Pane getIconPane(String key, double size) {
+   /* public static Pane getIconPane(String key, double size) {
         Pane pane = new Pane();
         SVGPath svgPath;
         for (BaseResourcePack baseResourcePack : globalResources.get(ResourceType.icon)) {
@@ -61,9 +53,9 @@ public class ZXResources {
             }
         }
         return null;
-    }
+    }*/
 
-    public static String getLanguageContent(String key) {
+    /*public static String getLanguageContent(String key) {
         String content;
         for (BaseResourcePack baseResourcePack : globalResources.get(ResourceType.language)) {
             if (baseResourcePack instanceof LanguageResourcePack languageResourcePack) {
@@ -73,7 +65,7 @@ public class ZXResources {
             }
         }
         return null;
-    }
+    }*/
 
     public static final Image LOGO;
     public static final Image LOGO_X26;
@@ -91,37 +83,13 @@ public class ZXResources {
         }
     }
 
-    /**
-     * 为Scene重新应用样式
-     *
-     * @param scene 被设置的Scene
-     */
-    public static void setSceneStyle(Scene scene) {
-        ObservableList<String> lists = scene.getStylesheets();
-        lists.clear();
-        for (BaseResourcePack baseResourcePack : globalResources.get(ResourceType.layout)) {
-            if (baseResourcePack instanceof LayoutResourcePack layoutResourcePack) {
-                Iterator<Path> iterator = layoutResourcePack.iterator();
-                while (iterator.hasNext()) {
-                    lists.add(iterator.next().toUri().toString());
-                }
-            }
-        }
-        for (BaseResourcePack baseResourcePack : globalResources.get(ResourceType.color)) {
-            if (baseResourcePack instanceof ColorResourcePack colorResourcePack) {
-                Iterator<Path> iterator = colorResourcePack.iterator();
-                while (iterator.hasNext()) {
-                    lists.add(iterator.next().toUri().toString());
-                }
-            }
-        }
-    }
 
     public static Pane getIconPane(String key, double size, ZXColor color) {
         Pane pane = new Pane();
-        pane.setShape(getIconPane(key));
+        pane.shapeProperty().bind(GlobalResources.getIcon(key));
         pane.setPrefSize(size, size);
-        pane.getStyleClass().add("bg-" + color);
+        if (color != null)
+            pane.getStyleClass().add("bg-" + color);
         return pane;
     }
 
@@ -178,12 +146,9 @@ public class ZXResources {
      * 重载全局资源 (读取配置文件为资源包索引资源)
      */
     public static void reloadGlobalResource() {
-        globalResources.clear();
+        ArrayList<BaseResourcePack> globalResources = new ArrayList<>();
+
         ZXLogger.info("载入引用的资源包列表");
-        //初始化所有资源map
-        for (ResourceType type : ResourceType.values()) {
-            globalResources.put(type, new ArrayList<>());
-        }
 
         for (String ids : UserPreference.getUsedResources()) {
             String packId;
@@ -215,15 +180,17 @@ public class ZXResources {
                 continue;
             }
 
-            if (globalResources.get(type).contains(baseResourcePack)) {
+            if (globalResources.contains(baseResourcePack)) {
                 ZXLogger.warning("载入 " + ids + " 资源重复");
                 continue;
             }
 
             //将启用的资源加入全局资源
-            globalResources.get(type).add(baseResourcePack);
+            globalResources.add(baseResourcePack);
             ZXLogger.info("载入 " + ids);
         }
+
+        GlobalResources.reloadResources(globalResources);
     }
 
 

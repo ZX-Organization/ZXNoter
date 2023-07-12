@@ -9,6 +9,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import team.zxorg.zxnoter.resource.GlobalResources;
 import team.zxorg.zxnoter.resource.ZXResources;
 import team.zxorg.zxnoter.ui.component.TrackTooltip;
 
@@ -106,7 +107,7 @@ public class SideBar extends TabPane {
     public void createTab(String tipLanguageKey, String iconKey, Pane content) {
         Tab tab = new Tab();
         tab.setClosable(false);
-        Pane iconPane = ZXResources.getIconPane(iconKey, 30);
+        Pane iconPane = ZXResources.getIconPane(iconKey, 30, null);
         iconPane.setOnMousePressed(event -> {
             if (getSelectionModel().getSelectedItem().equals(tab)) {
                 isFold.set(!isFold.get());
@@ -117,8 +118,8 @@ public class SideBar extends TabPane {
         });
 
         TrackTooltip trackTooltip = new TrackTooltip(iconPane, Pos.BOTTOM_CENTER, 0, TrackTooltip.BindAttributes.AUTO_POP_UP);
-        trackTooltip.setPos(Pos.CENTER_RIGHT, false,14);
-        trackTooltip.setText(ZXResources.getLanguageContent(tipLanguageKey));
+        trackTooltip.setPos(Pos.CENTER_RIGHT, false, 14);
+        trackTooltip.textProperty().bind(GlobalResources.getLanguageContent(tipLanguageKey));
 
         //ComponentFactory.getTooltip(tipLanguageKey, iconPane, 12);
         tab.setGraphic(iconPane);

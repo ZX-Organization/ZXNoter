@@ -33,4 +33,8 @@ public class ColorResourcePack extends BaseResourcePack {
             }
         }
     }
+
+    public ArrayList<Path> getCssFiles() {
+        return cssFiles;
+    }
 }

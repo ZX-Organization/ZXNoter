@@ -25,6 +25,10 @@ public class IconResourcePack extends BaseResourcePack {
         return icons.get(key);
     }
 
+    public HashMap<String, SVGPath> getIcons() {
+        return icons;
+    }
+
     public Image getResourceIcon() {
         return icon;
     }

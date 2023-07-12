@@ -1,6 +1,7 @@
 package team.zxorg.zxnoter.ui.main.one.two.three.four.five;
 
 import com.alibaba.fastjson2.JSONObject;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.PerspectiveCamera;
@@ -23,7 +24,9 @@ public class SettingEditor extends BaseEditor {
     public SettingEditor(EditorArea area) {
         super(area);
 
+        setOnCloseRequest(event -> {
 
+        });
 
     }
 }

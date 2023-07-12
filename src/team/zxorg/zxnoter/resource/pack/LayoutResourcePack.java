@@ -11,13 +11,14 @@ import java.util.Iterator;
 public class LayoutResourcePack extends BaseResourcePack {
     private final ArrayList<Path> cssFiles = new ArrayList<>();
 
+    public ArrayList<Path> getCssFiles() {
+        return cssFiles;
+    }
+
     public LayoutResourcePack(ResourcePack pack, ResourceType type, Path jsonPath) {
         super(pack, type, jsonPath);
     }
 
-    public Iterator<Path> iterator() {
-        return cssFiles.iterator();
-    }
 
     @Override
     public void reload() {

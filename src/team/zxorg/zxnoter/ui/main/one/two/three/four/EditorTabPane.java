@@ -44,7 +44,7 @@ public class EditorTabPane extends TabPane {
         return "堆叠容器 父布局{" + parentLayout.getName() + "} 此{" + getName() + "} " + getTabs() + " ";
     }
 
-    private ObjectProperty<LayoutPosition> layoutPositionObjectProperty = new SimpleObjectProperty<>();
+    private final ObjectProperty<LayoutPosition> layoutPositionObjectProperty = new SimpleObjectProperty<>();
 
     public EditorTabPane(EditorArea rootArea, EditorLayout parentLayout) {
         this.parentLayout = parentLayout;
@@ -125,7 +125,6 @@ public class EditorTabPane extends TabPane {
 
 
         contentArea.setOnDragOver(event -> {
-
             if (EditorArea.dragTab != null) {
                 LayoutPosition layoutPosition = getLayoutPosition(contentArea, event);
                 layoutPositionObjectProperty.set(layoutPosition);
@@ -133,6 +132,7 @@ public class EditorTabPane extends TabPane {
             }
             event.consume();
         });
+
         contentArea.setOnDragExited((event) -> {
             if (EditorArea.dragTab != null) {
                 layoutPositionObjectProperty.set(null);
@@ -205,25 +205,7 @@ public class EditorTabPane extends TabPane {
 
                 }
 
-                //将焦点和选中交给拖拽tab
-                EditorArea.dragTab.getTabPane().getSelectionModel().select(EditorArea.dragTab);
-                EditorArea.dragTab.getTabPane().requestFocus();
-
-                //检查清除拖拽Tab之前的TabPane
-                if (EditorArea.dragTabPane == null) {
-                    ZXLogger.warning("触发未知异常 拖拽TabPane为null (你怎么能触发到的？？)");
-                    return;
-                }
-                if (EditorArea.dragTabPane.getTabs().isEmpty()) {
-                    EditorArea.dragTabPane.removeParentThis();
-                }
-                EditorArea.dragTabPane.parentLayout.checkItems();
-                EditorArea.dragTabPane.parentLayout.autoLayout();
-                parentLayout.autoLayout();
-
-                //EditorLayout.printLayout(rootArea, "|");
-
-                EditorArea.dragTab = null;
+                handleDragDropped();
                 event.setDropCompleted(true);
             }
             //消耗掉事件
@@ -267,27 +249,16 @@ public class EditorTabPane extends TabPane {
         });
 
         headerArea.setOnDragExited((event) -> {
-            if (EditorArea.dragTab != null) {
-            }
-            event.consume();
+
         });
 
         headerArea.setOnDragDropped((event) -> {
             // 从 Dragboard 中获取 Tab 的数据
             if (EditorArea.dragTab != null) {
-                ObservableList<Tab> tabs = getTabs();
-
-                EditorArea.dragTabPane.getTabs().remove(EditorArea.dragTab);
-                tabs.add(EditorArea.dragTab);
-                getSelectionModel().select(EditorArea.dragTab);
-                requestFocus();
-
-                if (EditorArea.dragTabPane.getTabs().size() == 0) {
-                    EditorArea.dragTabPane.removeParentThis();
-                }
-
+                EditorArea.dragTab.removeParentThis();
+                getTabs().add(EditorArea.dragTab);
+                handleDragDropped();
                 event.setDropCompleted(true);
-                EditorArea.dragTab = null;
             }
             event.consume();
         });
@@ -300,6 +271,35 @@ public class EditorTabPane extends TabPane {
                 }
             }
         }
+    }
+
+    /**
+     * 处理拖拽完成后事
+     */
+    public void handleDragDropped() {
+        if (EditorArea.dragTab != null) {
+            //将焦点和选中交给拖拽tab
+            EditorArea.dragTab.getTabPane().getSelectionModel().select(EditorArea.dragTab);
+            EditorArea.dragTab.getTabPane().requestFocus();
+        }
+
+        //检查清除拖拽Tab之前的TabPane
+        if (EditorArea.dragTabPane == null) {
+            ZXLogger.warning("触发未知异常 拖拽TabPane为null (你怎么能触发到的？？)");
+            return;
+        }
+        //检查源堆叠数量 为空移除
+        if (EditorArea.dragTabPane.getTabs().isEmpty()) {
+            EditorArea.dragTabPane.removeParentThis();
+        }
+
+        //检查源堆叠的父布局物品数 并计算布局
+        EditorArea.dragTabPane.parentLayout.checkItems();
+        EditorArea.dragTabPane.parentLayout.autoLayout();
+        //检查此父布局的布局
+        parentLayout.autoLayout();
+
+        EditorArea.dragTab = null;
     }
 
     private void handleTabs(List<Node> tabs) {
@@ -323,7 +323,7 @@ public class EditorTabPane extends TabPane {
     }
 
     private void handleRemovedNodes(List<? extends Node> removedNodes) {
-
+        
     }
 
 

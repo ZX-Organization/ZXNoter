@@ -8,6 +8,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.Region;
 import javafx.util.Duration;
+import team.zxorg.zxnoter.resource.GlobalResources;
 import team.zxorg.zxnoter.resource.ZXResources;
 
 public class ComponentFactory {
@@ -24,11 +25,11 @@ public class ComponentFactory {
         return tooltip;
     }
 
-    public static Tooltip getTooltip(String languageKey, Node bindNode, double offset) {
+    /*public static Tooltip getTooltip(String languageKey, Node bindNode, double offset) {
         Tooltip tooltip = getTooltip(bindNode, offset);
         tooltip.setText(ZXResources.getLanguageContent(languageKey));
         return tooltip;
-    }
+    }*/
 
     public static Tooltip getRealTimeTooltip(Node bindNode, double offset) {
         Tooltip tooltip = getTooltip(bindNode, offset);
@@ -37,34 +38,39 @@ public class ComponentFactory {
         return tooltip;
     }
 
-    public static Tooltip getRealTimeTooltip(String languageKey, Node bindNode, double offset) {
+    /*public static Tooltip getRealTimeTooltip(String languageKey, Node bindNode, double offset) {
         Tooltip tooltip = getTooltip(languageKey, bindNode, offset);
         tooltip.setShowDelay(Duration.ZERO);
         tooltip.setShowDuration(Duration.INDEFINITE);
         return tooltip;
-    }
+    }*/
 
 
     public static Button getButton(String languageKey) {
-        Button button = new Button(ZXResources.getLanguageContent(languageKey));
+        Button button = new Button();
+        button.textProperty().bind(GlobalResources.getLanguageContent(languageKey));
         return button;
     }
 
-    public static Button getIconButton(String iconKey, double size) {
+    /*public static Button getIconButton(String iconKey, double size) {
         Button button = new Button();
         button.setShape(ZXResources.getIconPane(iconKey));
         button.getStyleClass().add("icon-button");
         button.setPrefSize(size, size);
         button.setMinSize(Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE);
         return button;
+    }*/
+
+    public static Menu menu(String languageKey) {
+        Menu menu=new Menu();
+        menu.textProperty().bind(GlobalResources.getLanguageContent(languageKey));
+        return menu;
     }
 
-    public static Menu menu(String key) {
-        return new Menu(ZXResources.getLanguageContent(key));
-    }
-
-    public static MenuItem menuItem(String key) {
-        return new MenuItem(ZXResources.getLanguageContent(key));
+    public static MenuItem menuItem(String languageKey) {
+        MenuItem menuItem=new MenuItem();
+        menuItem.textProperty().bind(GlobalResources.getLanguageContent(languageKey));
+        return menuItem;
     }
 
 }

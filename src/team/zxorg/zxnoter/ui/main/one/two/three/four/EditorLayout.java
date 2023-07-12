@@ -44,7 +44,8 @@ public class EditorLayout extends SplitPane {
         int size = getItems().size();
         if (size == 0) {
             ZXLogger.info("检查到布局{" + getName() + "}没有物品，直接移除");
-            parentLayout.getChildren().remove(this);
+            if (parentLayout != null)
+                parentLayout.getChildren().remove(this);
         } else if (size == 1) {
             if (parentLayout != null) {//子物品去除布局
                 ZXLogger.info("检查到布局{" + getName() + "}只剩1个物品");

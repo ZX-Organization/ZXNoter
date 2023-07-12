@@ -1,10 +1,10 @@
 package team.zxorg.zxnoter.ui.main.one.two.three.four.five;
 
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ObservableList;
-import javafx.event.Event;
-import javafx.event.EventHandler;
-import javafx.geometry.Bounds;
 import javafx.scene.Node;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Tab;
@@ -22,6 +22,7 @@ import java.util.UUID;
 public abstract class BaseEditor extends Tab {
     private final UUID uuid = UUID.randomUUID();
     private final EditorArea rootArea;
+    private final ObjectProperty<TabDragStyle> tabDragStyle = new SimpleObjectProperty<>(null);
 
     @Override
     public String toString() {
@@ -31,21 +32,25 @@ public abstract class BaseEditor extends Tab {
     public BaseEditor(EditorArea rootArea) {
         this.rootArea = rootArea;
         setId(uuid.toString());
-        Pane icon = ZXResources.getIconPane("media.closed-captioning", 22, ZXColor.red);
-        setGraphic(icon);
+       /* Pane icon = ZXResources.getIconPane("media.closed-captioning", 22, ZXColor.red);
+        setGraphic(icon);*/
     }
 
 
     /**
-     * 更新处理事件 (fx特有的查找困难)
+     * 更新拖拽处理事件
      */
     public void updateDrag(Pane tabHead, Region title) {
-        //tabHead = (Region) getTabPane().lookup("#" + uuid);
-        //System.out.println("aaa>" + tabHead);
+        tabDragStyle.addListener((observable, oldValue, newValue) -> {
+            System.out.println(newValue);
+            if (oldValue != null) {
+                title.getStyleClass().remove(oldValue.name());
+            }
+            if (newValue != null) {
+                title.getStyleClass().add(newValue.name());
+            }
+        });
 
-
-        //title = (Label) getTabPane().lookup("#" + uuid + " > .tab-container > .tab-label");
-        //System.out.println("更新布局Tab");
 
         tabHead.setOnDragDetected(event -> {
 
@@ -75,13 +80,7 @@ public abstract class BaseEditor extends Tab {
                     return;
                 event.acceptTransferModes(TransferMode.MOVE);
 
-                title.getStyleClass().remove("left");
-                title.getStyleClass().remove("right");
-                if (event.getX() < tabHead.getWidth() / 2) {
-                    title.getStyleClass().add("left");
-                } else {
-                    title.getStyleClass().add("right");
-                }
+                tabDragStyle.set((event.getX() < tabHead.getWidth() / 2 ? TabDragStyle.left : TabDragStyle.right));
             }
         });
 
@@ -91,8 +90,7 @@ public abstract class BaseEditor extends Tab {
 
         tabHead.setOnDragExited((event) -> {
             if (EditorArea.dragTab != null) {
-                title.getStyleClass().remove("left");
-                title.getStyleClass().remove("right");
+                tabDragStyle.setValue(null);
             }
             event.consume();
         });
@@ -100,27 +98,17 @@ public abstract class BaseEditor extends Tab {
         tabHead.setOnDragDropped((event) -> {
             // 从 Dragboard 中获取 Tab 的数据
             if (EditorArea.dragTab != null) {
-                title.getStyleClass().remove("left");
-                title.getStyleClass().remove("right");
+                tabDragStyle.setValue(null);
 
                 EditorTabPane tabPane = (EditorTabPane) getTabPane();
                 ObservableList<Tab> tabs = tabPane.getTabs();
 
-                EditorArea.dragTabPane.getTabs().remove(EditorArea.dragTab);
+                EditorArea.dragTab.removeParentThis();
 
                 tabs.add(tabs.indexOf(this) + (event.getX() < tabHead.getWidth() / 2 ? 0 : 1), EditorArea.dragTab);
-                tabPane.getSelectionModel().select(EditorArea.dragTab);
-                tabPane.requestFocus();
-
-                //检查清除拖拽Tab之前的TabPane
-                if (EditorArea.dragTabPane.getTabs().size() == 0) {
-                    EditorArea.dragTabPane.removeParentThis();
-                }
-                EditorArea.dragTabPane.parentLayout.checkItems();
-
+                tabPane.handleDragDropped();
 
                 event.setDropCompleted(true);
-                EditorArea.dragTab = null;
             }
             event.consume();
 
@@ -149,7 +137,28 @@ public abstract class BaseEditor extends Tab {
     private void handleTabCloseButton(Pane pane) {
         pane.setOnMousePressed(event -> {
         });//顶掉原先的按下关闭
-        pane.setOnMouseClicked(event -> getTabPane().getTabs().remove(this));//改为点击触发关闭
+        pane.setOnMouseClicked(event -> {
+            boolean close = true;
+            if (getOnCloseRequest() != null) {
+                getOnCloseRequest().handle(event);
+                close = !event.isConsumed();
+            }
+
+
+            if (close) {
+                EditorTabPane editorTabPane = (EditorTabPane) getTabPane();
+                int index = editorTabPane.getTabs().indexOf(this);
+                if (editorTabPane.getTabs().remove(this)) {
+                    System.out.println("关闭: " + this);
+                    if (index - 1 > 0) {
+                        EditorArea.dragTab = (BaseEditor) editorTabPane.getTabs().get(index - 1);
+                    }
+                    EditorArea.dragTabPane = editorTabPane;
+                    editorTabPane.handleDragDropped();
+                }
+            }
+
+        });//改为点击触发关闭
     }
 
     public void removeParentThis() {
@@ -158,5 +167,9 @@ public abstract class BaseEditor extends Tab {
         } else {
             System.err.println("BaseEditor:没删成功");
         }
+    }
+
+    private enum TabDragStyle {
+        left, right
     }
 }
