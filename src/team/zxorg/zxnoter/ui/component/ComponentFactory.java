@@ -6,10 +6,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.Tooltip;
-import javafx.scene.layout.Region;
 import javafx.util.Duration;
 import team.zxorg.zxnoter.resource.GlobalResources;
-import team.zxorg.zxnoter.resource.ZXResources;
 
 public class ComponentFactory {
     public static Tooltip getTooltip(Node bindNode, double offset) {
@@ -46,7 +44,7 @@ public class ComponentFactory {
     }*/
 
 
-    public static Button getButton(String languageKey) {
+    public static Button Button(String languageKey) {
         Button button = new Button();
         button.textProperty().bind(GlobalResources.getLanguageContent(languageKey));
         return button;
@@ -72,5 +70,6 @@ public class ComponentFactory {
         menuItem.textProperty().bind(GlobalResources.getLanguageContent(languageKey));
         return menuItem;
     }
+
 
 }

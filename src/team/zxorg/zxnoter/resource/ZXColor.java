@@ -1,16 +1,17 @@
 package team.zxorg.zxnoter.resource;
 
 public enum ZXColor {
-    blue("blue"),
-    red("red"),
-    purple("purple"),
-    yellow("yellow"),
-    green("green"),
-    orange("orange"),
-    pink("pink"),
-    gray("gray"),
-    white("white"),
-    font("font-light");
+    BLUE("blue"),
+    RED("red"),
+    PURPLE("purple"),
+    YELLOW("yellow"),
+    GREEN("green"),
+    ORANGE("orange"),
+    PINK("pink"),
+    GRAY("gray"),
+    WHITE("white"),
+    FONT_USUALLY("font-usually"),
+    FONT_LIGHT("font-light");
     private final String id;
 
     ZXColor(String id) {

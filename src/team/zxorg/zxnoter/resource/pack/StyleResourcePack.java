@@ -1,8 +1,8 @@
 package team.zxorg.zxnoter.resource.pack;
 
 import team.zxorg.zxnoter.resource.ResourcePack;
+import team.zxorg.zxnoter.resource.ResourceType;
 import team.zxorg.zxnoter.resource.pack.BaseResourcePack;
-import team.zxorg.zxnoter.resource.type.ResourceType;
 
 import java.nio.file.Path;
 

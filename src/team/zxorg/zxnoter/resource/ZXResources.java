@@ -9,7 +9,6 @@ import javafx.scene.layout.Region;
 import javafx.scene.shape.SVGPath;
 import team.zxorg.zxnoter.ZXLogger;
 import team.zxorg.zxnoter.resource.pack.*;
-import team.zxorg.zxnoter.resource.type.*;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -23,8 +22,8 @@ public class ZXResources {
     /**
      * 载入的资源包
      */
-    private static final HashMap<String, ResourcePack> loadedResourcePackMap = new HashMap<>();
-
+    public static final HashMap<String, ResourcePack> loadedResourcePackMap = new HashMap<>();
+    public static final ArrayList<BaseResourcePack> usedResources = new ArrayList<>();
 
 
 
@@ -146,8 +145,7 @@ public class ZXResources {
      * 重载全局资源 (读取配置文件为资源包索引资源)
      */
     public static void reloadGlobalResource() {
-        ArrayList<BaseResourcePack> globalResources = new ArrayList<>();
-
+        usedResources.clear();
         ZXLogger.info("载入引用的资源包列表");
 
         for (String ids : UserPreference.getUsedResources()) {
@@ -180,17 +178,17 @@ public class ZXResources {
                 continue;
             }
 
-            if (globalResources.contains(baseResourcePack)) {
+            if (usedResources.contains(baseResourcePack)) {
                 ZXLogger.warning("载入 " + ids + " 资源重复");
                 continue;
             }
 
             //将启用的资源加入全局资源
-            globalResources.add(baseResourcePack);
+            usedResources.add(baseResourcePack);
             ZXLogger.info("载入 " + ids);
         }
 
-        GlobalResources.reloadResources(globalResources);
+        GlobalResources.reloadResources(usedResources);
     }
 
 

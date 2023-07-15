@@ -1,28 +1,22 @@
-package team.zxorg.zxnoter.ui.main.one.two.three.four;
+package team.zxorg.zxnoter.ui.main.stage.body.area;
 
-import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.geometry.Orientation;
 import javafx.scene.Node;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.input.DragEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import team.zxorg.zxnoter.ZXLogger;
-import team.zxorg.zxnoter.ui.main.one.two.three.EditorArea;
-import team.zxorg.zxnoter.ui.main.one.two.three.four.five.BaseEditor;
+import team.zxorg.zxnoter.ui.main.stage.body.EditorArea;
+import team.zxorg.zxnoter.ui.main.stage.body.area.editor.BaseEditor;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.UUID;
 
@@ -50,7 +44,7 @@ public class EditorTabPane extends TabPane {
         this.parentLayout = parentLayout;
         this.rootArea = rootArea;
         setId(uuid.toString());
-        setTabClosingPolicy(TabPane.TabClosingPolicy.ALL_TABS);
+        //setTabClosingPolicy(TabPane.TabClosingPolicy.ALL_TABS);
         getStyleClass().add("editor-tab-pane");
 
 
@@ -323,7 +317,7 @@ public class EditorTabPane extends TabPane {
     }
 
     private void handleRemovedNodes(List<? extends Node> removedNodes) {
-        
+
     }
 
 

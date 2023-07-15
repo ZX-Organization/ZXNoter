@@ -3,7 +3,7 @@ package team.zxorg.zxnoter.resource.pack;
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
 import team.zxorg.zxnoter.resource.ResourcePack;
-import team.zxorg.zxnoter.resource.type.ResourceType;
+import team.zxorg.zxnoter.resource.ResourceType;
 
 import java.io.IOException;
 import java.io.InputStream;

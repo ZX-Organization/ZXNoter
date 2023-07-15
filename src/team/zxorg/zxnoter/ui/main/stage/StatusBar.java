@@ -1,4 +1,4 @@
-package team.zxorg.zxnoter.ui.main.one.two;
+package team.zxorg.zxnoter.ui.main.stage;
 
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;

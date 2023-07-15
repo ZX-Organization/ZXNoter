@@ -25,6 +25,18 @@
     "title-bar.menu.file.quit": "退出",
     "editor-area.editor-tab.insert-left": "向左插入",
     "editor-area.editor-tab.insert-right": "向右插入",
+    "editor.setting-editor.tab-title": "设置",
+    "editor.setting-editor.settings.user-preference": "用户偏好",
+    "editor.setting-editor.settings.search": "搜索设置项",
+    "editor.setting-editor.settings.language": "语言",
+    "editor.setting-editor.settings.language.use-local-language": "使用本地语言",
+    "editor.setting-editor.settings.language.language-code": "语言代码",
+    "editor.setting-editor.settings.resources": "资源",
+    "editor.setting-editor.settings.resources.packs": "载入的资源包",
+    "editor.setting-editor.settings.resources.used-resources": "引用的资源",
+    "editor.start-editor.tab-title": "开始",
+    "editor.start-editor.title": "ZXNoter 谱面编辑器",
+    "editor.start-editor.fast-start": "快速开始",
     "language.loss": "**语言丢失**"
   }
 }

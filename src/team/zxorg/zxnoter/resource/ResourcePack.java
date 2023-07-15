@@ -5,7 +5,6 @@ import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;
 import team.zxorg.zxnoter.resource.pack.LanguageResourcePack;
 import team.zxorg.zxnoter.resource.pack.BaseResourcePack;
-import team.zxorg.zxnoter.resource.type.ResourceType;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -37,6 +36,10 @@ public class ResourcePack {
 
     public BaseResourcePack getResources(ResourceType type, String subId) {
         return allResources.get(type).get(subId);
+    }
+
+    public HashMap<String, BaseResourcePack> getResources(ResourceType type) {
+        return allResources.get(type);
     }
 
     @Override

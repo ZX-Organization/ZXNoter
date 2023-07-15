@@ -1,12 +1,6 @@
-package team.zxorg.zxnoter.ui.main.one.two.three.four.five;
+package team.zxorg.zxnoter.ui.main.stage.body.area.editor;
 
-import com.interactivemesh.jfx.importer.obj.ObjImportOption;
 import com.interactivemesh.jfx.importer.obj.ObjModelImporter;
-import de.javagl.obj.Obj;
-import de.javagl.obj.ObjFace;
-import de.javagl.obj.ObjReader;
-import javafx.event.EventHandler;
-import javafx.geometry.Point3D;
 import javafx.scene.Group;
 import javafx.scene.PerspectiveCamera;
 import javafx.scene.SubScene;
@@ -16,21 +10,12 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
 import javafx.scene.shape.Box;
 import javafx.scene.shape.MeshView;
-import javafx.scene.shape.TriangleMesh;
 import javafx.scene.transform.Rotate;
 import javafx.scene.transform.Translate;
 import team.zxorg.zxnoter.resource.ZXResources;
-import team.zxorg.zxnoter.ui.FXUtils;
-import team.zxorg.zxnoter.ui.main.one.two.three.EditorArea;
+import team.zxorg.zxnoter.ui.main.stage.body.EditorArea;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.ObjectStreamField;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class ThreeDimensionalMapEditor extends BaseEditor {
     MouseEvent mouseEvent;
@@ -42,7 +27,7 @@ public class ThreeDimensionalMapEditor extends BaseEditor {
     Rotate beforeCameraRotateY = new Rotate(0, Rotate.Y_AXIS);
 
     public ThreeDimensionalMapEditor(EditorArea area) {
-        super(area);
+        super();
 
 
         PerspectiveCamera camera = new PerspectiveCamera(true);

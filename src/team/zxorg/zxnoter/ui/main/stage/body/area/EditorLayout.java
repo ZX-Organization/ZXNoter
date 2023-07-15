@@ -1,4 +1,4 @@
-package team.zxorg.zxnoter.ui.main.one.two.three.four;
+package team.zxorg.zxnoter.ui.main.stage.body.area;
 
 import javafx.geometry.Orientation;
 import javafx.scene.Node;

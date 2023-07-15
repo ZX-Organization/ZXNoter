@@ -1,4 +1,4 @@
-package team.zxorg.zxnoter.ui.main.one.two.three;
+package team.zxorg.zxnoter.ui.main.stage.body;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -10,8 +10,10 @@ import javafx.scene.control.TabPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import team.zxorg.zxnoter.resource.GlobalResources;
+import team.zxorg.zxnoter.resource.ZXColor;
 import team.zxorg.zxnoter.resource.ZXResources;
 import team.zxorg.zxnoter.ui.component.TrackTooltip;
+import team.zxorg.zxnoter.ui.component.ZXIcon;
 
 public class SideBar extends TabPane {
     ObservableList<String> styleClass = getStyleClass();
@@ -107,8 +109,11 @@ public class SideBar extends TabPane {
     public void createTab(String tipLanguageKey, String iconKey, Pane content) {
         Tab tab = new Tab();
         tab.setClosable(false);
-        Pane iconPane = ZXResources.getIconPane(iconKey, 30, null);
-        iconPane.setOnMousePressed(event -> {
+        ZXIcon zxIcon=new ZXIcon();
+        zxIcon.setSize(30);
+        zxIcon.setIconKey(iconKey);
+        zxIcon.setColor(ZXColor.FONT_USUALLY);
+        zxIcon.setOnMousePressed(event -> {
             if (getSelectionModel().getSelectedItem().equals(tab)) {
                 isFold.set(!isFold.get());
                 event.consume();
@@ -117,12 +122,12 @@ public class SideBar extends TabPane {
             }
         });
 
-        TrackTooltip trackTooltip = new TrackTooltip(iconPane, Pos.BOTTOM_CENTER, 0, TrackTooltip.BindAttributes.AUTO_POP_UP);
+        TrackTooltip trackTooltip = new TrackTooltip(zxIcon, Pos.BOTTOM_CENTER, 0, TrackTooltip.BindAttributes.AUTO_POP_UP);
         trackTooltip.setPos(Pos.CENTER_RIGHT, false, 14);
         trackTooltip.textProperty().bind(GlobalResources.getLanguageContent(tipLanguageKey));
 
         //ComponentFactory.getTooltip(tipLanguageKey, iconPane, 12);
-        tab.setGraphic(iconPane);
+        tab.setGraphic(zxIcon);
         tab.setContent(content);
         getTabs().add(tab);
     }

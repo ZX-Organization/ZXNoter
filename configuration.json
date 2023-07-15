@@ -9,6 +9,9 @@
       "zxnoter.layout.base",
       "zxnoter.color.dark"
     ],
-    "languageCode": "zh-cn"
+    "language": {
+      "useLocalLanguage": true,
+      "languageCode": "zh-cn"
+    }
   }
 }

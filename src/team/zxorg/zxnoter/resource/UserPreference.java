@@ -1,7 +1,6 @@
 package team.zxorg.zxnoter.resource;
 
 import com.alibaba.fastjson2.JSONObject;
-import team.zxorg.zxnoter.resource.type.ResourceType;
 
 import java.util.ArrayList;
 

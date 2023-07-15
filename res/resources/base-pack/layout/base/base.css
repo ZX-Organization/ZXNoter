@@ -1,7 +1,9 @@
 .label {
     -fx-text-fill: -color-font-usually;
 }
-
+.text {
+    -fx-text-fill: -color-font-usually;
+}
 
 .menu-bar {
     -fx-background-color: transparent;
@@ -137,6 +139,122 @@
 
 .bg-color-font-light {
     -fx-background-color: -color-font-light;
+}
+
+.text-color-dark-blue {
+    -fx-text-fill: -color-dark-blue;
+}
+
+.text-color-blue {
+    -fx-text-fill: -color-blue;
+}
+
+.text-color-light-blue {
+    -fx-text-fill: -color-light-blue;
+}
+
+.text-color-dark-red {
+    -fx-text-fill: -color-dark-red;
+}
+
+.text-color-red {
+    -fx-text-fill: -color-red;
+}
+
+.text-color-light-red {
+    -fx-text-fill: -color-light-red;
+}
+
+.text-color-dark-purple {
+    -fx-text-fill: -color-dark-purple;
+}
+
+.text-color-purple {
+    -fx-text-fill: -color-purple;
+}
+
+.text-color-light-purple {
+    -fx-text-fill: -color-light-purple;
+}
+
+.text-color-dark-yellow {
+    -fx-text-fill: -color-dark-yellow;
+}
+
+.text-color-yellow {
+    -fx-text-fill: -color-yellow;
+}
+
+.text-color-light-yellow {
+    -fx-text-fill: -color-light-yellow;
+}
+
+.text-color-dark-green {
+    -fx-text-fill: -color-dark-green;
+}
+
+.text-color-green {
+    -fx-text-fill: -color-green;
+}
+
+.text-color-light-green {
+    -fx-text-fill: -color-light-green;
+}
+
+.text-color-dark-orange {
+    -fx-text-fill: -color-dark-orange;
+}
+
+.text-color-orange {
+    -fx-text-fill: -color-orange;
+}
+
+.text-color-light-orange {
+    -fx-text-fill: -color-light-orange;
+}
+
+.text-color-dark-pink {
+    -fx-text-fill: -color-dark-pink;
+}
+
+.text-color-pink {
+    -fx-text-fill: -color-pink;
+}
+
+.text-color-light-pink {
+    -fx-text-fill: -color-light-pink;
+}
+
+.text-color-dark-gray {
+    -fx-text-fill: -color-dark-gray;
+}
+
+.text-color-gray {
+    -fx-text-fill: -color-gray;
+}
+
+.text-color-light-gray {
+    -fx-text-fill: -color-light-gray;
+}
+
+.text-color-dark-white {
+    -fx-text-fill: -color-dark-white;
+}
+
+.text-color-white {
+    -fx-text-fill: -color-white;
+}
+
+.text-color-light-white {
+    -fx-text-fill: -color-light-white;
+}
+
+.text-color-font-usually {
+    -fx-text-fill: -color-font-usually;
+}
+
+.text-color-font-light {
+    -fx-text-fill: -color-font-light;
 }
 
 
@@ -350,13 +468,16 @@
 }
 
 
-.scroll-bar:vertical .thumb {
+.scroll-bar .thumb {
     -fx-background-color: -color-theme-1;
     -fx-background-radius: 2;
 }
 
-.scroll-bar:vertical .thumb:hover, .scroll-bar:vertical .thumb:pressed {
+.scroll-bar .thumb:hover, .scroll-bar .thumb:pressed {
     -fx-background-color: -color-theme-1-light;
+}
+.scroll-pane .corner{
+    -fx-background-color: transparent;
 }
 
 .preview-bar {
@@ -449,6 +570,7 @@
     -fx-highlight-fill: #093939;
     -fx-border-color: -color-border-window;
     -fx-border-width: 1 1 1 1;
+    -fx-prompt-text-fill: -color-font-usually;
 }
 
 
@@ -456,6 +578,7 @@
 
     -fx-background-radius: 0;
     -fx-text-fill: -color-font-light;
+    -fx-prompt-text-fill: transparent;
 }
 
 .separator:horizontal .line {
@@ -484,6 +607,7 @@
     -fx-border-color: -color-font-usually;
     -fx-border-width: 2;
     -fx-border-radius: 4;
+    -fx-background-insets: 0;
 }
 
 .button .text {
@@ -496,6 +620,7 @@
 
 .button:hover {
     -fx-border-color: -color-font-light;
+    -fx-background-insets: 0;
 }
 
 .check-box:determinate .box {
@@ -579,4 +704,217 @@
 .editor-area .editor-tab-pane .layout-center {
     -fx-border-color: -color-blue;
     -fx-border-width: 4;
+}
+
+.tool-bar {
+    -fx-background-color: transparent;
+}
+
+.group-component {
+    -fx-background-radius: 0;
+    -fx-background-color: -color-theme-4;
+    -fx-text-fill: -color-font-usually;
+    -fx-border-color: -color-border-window;
+    -fx-border-width: 1;
+}
+
+.group-component .text-field {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+}
+
+
+.button-color-blue {
+    -fx-background-color: -color-dark-blue;
+}
+
+.button-color-blue:hover {
+    -fx-background-color: -color-blue;
+}
+
+.button-color-blue:pressed {
+    -fx-background-color: -color-light-blue;
+
+}
+
+
+.button-color-red {
+    -fx-background-color: -color-dark-red;
+}
+
+.button-color-red:hover {
+    -fx-background-color: -color-red;
+}
+
+.button-color-red:pressed {
+    -fx-background-color: -color-light-red;
+}
+
+
+.button-color-purple {
+    -fx-background-color: -color-dark-purple;
+}
+
+.button-color-purple:hover {
+    -fx-background-color: -color-purple;
+}
+
+.button-color-purple:pressed {
+    -fx-background-color: -color-light-purple;
+
+}
+
+
+.button-color-yellow {
+    -fx-background-color: -color-dark-yellow;
+}
+
+.button-color-yellow:hover {
+    -fx-background-color: -color-yellow;
+}
+
+.button-color-yellow:pressed {
+    -fx-background-color: -color-light-yellow;
+
+}
+
+
+.button-color-green {
+    -fx-background-color: -color-dark-green;
+}
+
+.button-color-green:hover {
+    -fx-background-color: -color-green;
+}
+
+.button-color-green:pressed {
+    -fx-background-color: -color-light-green;
+
+}
+
+
+.button-color-orange {
+    -fx-background-color: -color-dark-orange;
+}
+
+.button-color-orange:hover {
+    -fx-background-color: -color-orange;
+}
+
+.button-color-orange:pressed {
+    -fx-background-color: -color-light-orange;
+
+}
+
+
+.button-color-pink {
+    -fx-background-color: -color-dark-pink;
+}
+
+.button-color-pink:hover {
+    -fx-background-color: -color-pink;
+}
+
+.button-color-pink:pressed {
+    -fx-background-color: -color-light-pink;
+
+}
+
+
+.button-color-gray {
+    -fx-background-color: -color-dark-gray;
+}
+
+.button-color-gray:hover {
+    -fx-background-color: -color-gray;
+}
+
+.button-color-gray:pressed {
+    -fx-background-color: -color-light-gray;
+}
+
+
+.button-color-white {
+    -fx-background-color: -color-dark-white;
+}
+
+.button-color-white:hover {
+    -fx-background-color: -color-white;
+}
+
+.button-color-white:pressed {
+    -fx-background-color: -color-light-white;
+}
+
+
+.button-color-font-usually {
+    -fx-background-color: -color-font-usually;
+}
+
+.button-color-font-usually:hover {
+    -fx-background-color: -color-font-light;
+}
+
+.button-color-font-usually:pressed {
+    -fx-background-color: -color-font-light;
+}
+
+
+.icon-button,
+.icon-button:pressed,
+.icon-button:hover {
+    -fx-border-color: transparent;
+}
+
+
+.tree-view {
+    -fx-background-color: -color-theme-4;
+}
+.tree-view .virtual-flow .clipped-container .sheet .tree-cell{
+    -fx-background-color: transparent;
+}
+.tree-view .virtual-flow .clipped-container .sheet .tree-cell:selected{
+    -fx-background-color: -color-theme-1;
+
+}
+.tree-view .virtual-flow .clipped-container .sheet .tree-cell .text{
+    -fx-fill: -color-font-usually;
+}
+.tree-view .virtual-flow .clipped-container .sheet .tree-cell:selected .text{
+    -fx-fill: -color-font-light;
+}
+
+
+.arrow{
+    -fx-background-color: -color-font-usually;
+}
+.scroll-pane,
+.scroll-pane .viewport{
+    -fx-background-color: transparent;
+}
+.combo-box,
+.choice-box{
+    -fx-background-color: -color-theme-4;
+    -fx-border-color: -color-border-window;
+}
+
+
+.list-view{
+    -fx-background-color: -color-theme-4;
+    -fx-border-color: -color-border-window;
+}
+
+.list-view .virtual-flow .clipped-container .sheet .list-cell{
+    -fx-background-color: transparent;
+}
+.list-view .virtual-flow .clipped-container .sheet .list-cell:selected{
+    -fx-background-color: -color-theme-1;
+
+}
+.list-view .virtual-flow .clipped-container .sheet .list-cell .text{
+    -fx-fill: -color-font-usually;
+}
+.list-view .virtual-flow .clipped-container .sheet .list-cell:selected .text{
+    -fx-fill: -color-font-light;
 }

@@ -1,8 +1,7 @@
-package team.zxorg.zxnoter.ui.main.one.two.three.four.five;
+package team.zxorg.zxnoter.ui.main.stage.body.area.editor;
 
 
 import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
@@ -12,28 +11,26 @@ import javafx.scene.image.Image;
 import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import team.zxorg.zxnoter.resource.ZXColor;
-import team.zxorg.zxnoter.resource.ZXResources;
-import team.zxorg.zxnoter.ui.main.one.two.three.EditorArea;
-import team.zxorg.zxnoter.ui.main.one.two.three.four.EditorTabPane;
+import team.zxorg.zxnoter.ui.component.ZXIcon;
+import team.zxorg.zxnoter.ui.main.stage.body.EditorArea;
+import team.zxorg.zxnoter.ui.main.stage.body.area.EditorTabPane;
 
 import java.util.UUID;
 
 public abstract class BaseEditor extends Tab {
-    private final UUID uuid = UUID.randomUUID();
-    private final EditorArea rootArea;
     private final ObjectProperty<TabDragStyle> tabDragStyle = new SimpleObjectProperty<>(null);
+    public ZXIcon icon = new ZXIcon();
 
     @Override
     public String toString() {
         return "编辑器[" + getText() + "]";
     }
 
-    public BaseEditor(EditorArea rootArea) {
-        this.rootArea = rootArea;
+    public BaseEditor() {
+        UUID uuid = UUID.randomUUID();
         setId(uuid.toString());
-       /* Pane icon = ZXResources.getIconPane("media.closed-captioning", 22, ZXColor.red);
-        setGraphic(icon);*/
+        icon.setSize(18);
+        setGraphic(icon);
     }
 
 
@@ -42,7 +39,6 @@ public abstract class BaseEditor extends Tab {
      */
     public void updateDrag(Pane tabHead, Region title) {
         tabDragStyle.addListener((observable, oldValue, newValue) -> {
-            System.out.println(newValue);
             if (oldValue != null) {
                 title.getStyleClass().remove(oldValue.name());
             }

@@ -1,6 +1,5 @@
-package team.zxorg.zxnoter.resource.type;
+package team.zxorg.zxnoter.resource;
 
-import team.zxorg.zxnoter.resource.ResourcePack;
 import team.zxorg.zxnoter.resource.pack.*;
 
 import java.lang.reflect.InvocationTargetException;

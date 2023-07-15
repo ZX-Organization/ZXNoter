@@ -18,8 +18,6 @@
     <orderEntry type="library" name="openjfx.javafx.graphics" level="project" />
     <orderEntry type="library" name="openjfx.javafx.base" level="project" />
     <orderEntry type="library" name="openjfx.javafx.controls" level="project" />
-    <orderEntry type="library" name="AudioChannel" level="project" />
-    <orderEntry type="library" name="openjfx.javafx.fxml" level="project" />
     <orderEntry type="library" name="de.javagl.obj" level="project" />
     <orderEntry type="library" name="jimObjModelImporterJFX" level="project" />
   </component>

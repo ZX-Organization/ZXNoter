@@ -30,10 +30,20 @@ public class GlobalResources {
      */
     private static final HashMap<String, ObjectProperty<SVGPath>> iconResources = new HashMap<>();
 
+    /**
+     * 获取语言内容
+     * @param key 语言key
+     * @return 语言内容
+     */
     public static StringProperty getLanguageContent(String key) {
         return languageResources.get(key);
     }
 
+    /**
+     * 获取图标
+     * @param key 图标key
+     * @return 图标
+     */
     public static ObjectProperty<SVGPath> getIcon(String key) {
         return iconResources.get(key);
     }
@@ -49,7 +59,6 @@ public class GlobalResources {
         String[] stylePaths = new String[styleResources.size()];
         styleResources.toArray(stylePaths);
         lists.addAll(stylePaths);
-
         styleResources.addListener((ListChangeListener<String>) c -> {
             while (c.next()) {
                 if (c.wasAdded()) {
@@ -61,10 +70,9 @@ public class GlobalResources {
         });
     }
 
-    public static void reloadResources(ArrayList<BaseResourcePack> globalResources) {
+    public static void reloadResources(ArrayList<BaseResourcePack> loadedResources) {
         styleResources.clear();//清除样式资源
-
-        for (BaseResourcePack pack : globalResources) {
+        for (BaseResourcePack pack : loadedResources) {
             if (pack instanceof LanguageResourcePack languageResourcePack) {
                 for (Map.Entry<String, String> language : languageResourcePack.getLanguages().entrySet()) {
                     StringProperty languageContent = languageResources.get(language.getKey());

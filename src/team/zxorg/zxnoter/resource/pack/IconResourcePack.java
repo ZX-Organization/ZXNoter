@@ -3,8 +3,8 @@ package team.zxorg.zxnoter.resource.pack;
 import javafx.scene.image.Image;
 import javafx.scene.shape.SVGPath;
 import team.zxorg.zxnoter.resource.ResourcePack;
+import team.zxorg.zxnoter.resource.ResourceType;
 import team.zxorg.zxnoter.resource.ResourceUtils;
-import team.zxorg.zxnoter.resource.type.ResourceType;
 
 import java.io.IOException;
 import java.nio.file.Files;
