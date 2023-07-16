@@ -1,6 +1,8 @@
 {
   "id": "zh-cn",
+  "weight": 0,
   "languages": {
+    "language-name": "中文(简体)",
     "resource-pack.zxnoter.name": "ZXNoter(BRP)",
     "resource-pack.zxnoter.describe": "ZXNoter(基础资源包)",
     "resource-pack.zxnoter.color.dark.name": "深色",
@@ -9,7 +11,7 @@
     "resource-pack.zxnoter.icon.fill.describe": "本图标包是基于RemixIcon项目修改。\n相关链接:https://github.com/Remix-Design/RemixIcon",
     "resource-pack.zxnoter.icon.line.name": "线条",
     "resource-pack.zxnoter.icon.line.describe": "本图标包是基于RemixIcon项目修改。\n相关链接:https://github.com/Remix-Design/RemixIcon",
-    "resource-pack.zxnoter.language.zh_cn.name": "简体中文",
+    "resource-pack.zxnoter.language.zh-cn.name": "中文(简体)",
     "resource-pack.zxnoter.layout.base.name": "基础布局",
     "resource-pack.zxnoter.sound.base.name": "基础音效",
     "resource-pack.zxnoter.style.map-editor-pink.name": "少女粉",
@@ -34,6 +36,7 @@
     "editor.setting-editor.settings.resources": "资源",
     "editor.setting-editor.settings.resources.packs": "载入的资源包",
     "editor.setting-editor.settings.resources.used-resources": "引用的资源",
+    "editor.setting-editor.settings.resources.reload-packs": "重载资源包",
     "editor.start-editor.tab-title": "开始",
     "editor.start-editor.title": "ZXNoter 谱面编辑器",
     "editor.start-editor.fast-start": "快速开始",

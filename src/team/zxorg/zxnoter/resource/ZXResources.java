@@ -1,14 +1,13 @@
 package team.zxorg.zxnoter.resource;
 
-import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.Scene;
+import javafx.collections.ObservableMap;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.Region;
-import javafx.scene.shape.SVGPath;
 import team.zxorg.zxnoter.ZXLogger;
 import team.zxorg.zxnoter.resource.pack.*;
+import team.zxorg.zxnoter.resource.preference.UserPreference;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -22,9 +21,17 @@ public class ZXResources {
     /**
      * 载入的资源包
      */
-    public static final HashMap<String, ResourcePack> loadedResourcePackMap = new HashMap<>();
-    public static final ArrayList<BaseResourcePack> usedResources = new ArrayList<>();
+    public static final ObservableMap<String, ResourcePack> loadedResourcePackMap = FXCollections.observableMap(new HashMap<>());
+    public static final ObservableList<BaseResourcePack> usedResources = FXCollections.observableArrayList();
 
+    public static ArrayList<BaseResourcePack> getUsedResources(ResourceType resourceType) {
+        ArrayList<BaseResourcePack> resources = new ArrayList<>();
+        for (BaseResourcePack pack : usedResources) {
+            if (pack.getClass().equals(resourceType.resourceClass))
+                resources.add(pack);
+        }
+        return resources;
+    }
 
 
     /*public static SVGPath getIconPane(String key) {
@@ -188,7 +195,7 @@ public class ZXResources {
             ZXLogger.info("载入 " + ids);
         }
 
-        GlobalResources.reloadResources(usedResources);
+        GlobalResources.loadResourcesPacks(usedResources);
     }
 
 

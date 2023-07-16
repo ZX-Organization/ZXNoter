@@ -1,10 +1,18 @@
 package team.zxorg.zxnoter.ui.main.stage.body.area.editor.setting.item;
 
+import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.ToggleButton;
 
-public class BooleanSettingItem extends SettingItem {
+public class BooleanSettingItem extends BaseSettingItem {
+    CheckBox checkBox ;
+
     public BooleanSettingItem(String titleKey) {
-        super(titleKey, new CheckBox());
+        super(titleKey);
+    }
+
+    @Override
+    protected Node initContent() {
+        checkBox = new CheckBox();
+        return checkBox;
     }
 }

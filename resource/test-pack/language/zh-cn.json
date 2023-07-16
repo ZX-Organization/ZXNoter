@@ -1,0 +1,9 @@
+{
+  "id": "zh-cn",
+  "languages": {
+    "language-name": "中文(简体)WDNMD",
+    "resource-pack.test.name": "ZXNoter(TEST)",
+    "resource-pack.test.describe": "ZXNoter(测试资源包)",
+    "language.loss": "**语言丢失**"
+  }
+}

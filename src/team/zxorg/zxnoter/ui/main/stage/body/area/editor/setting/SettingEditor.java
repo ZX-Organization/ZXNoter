@@ -11,7 +11,7 @@ import team.zxorg.zxnoter.resource.ZXColor;
 import team.zxorg.zxnoter.ui.component.*;
 import team.zxorg.zxnoter.ui.main.stage.body.area.editor.BaseEditor;
 import team.zxorg.zxnoter.ui.main.stage.body.area.editor.setting.pane.RootSettingPane;
-import team.zxorg.zxnoter.ui.main.stage.body.area.editor.setting.item.SettingItem;
+import team.zxorg.zxnoter.ui.main.stage.body.area.editor.setting.item.BaseSettingItem;
 import team.zxorg.zxnoter.ui.main.stage.body.area.editor.setting.pane.SettingPaneItem;
 
 public class SettingEditor extends BaseEditor {
@@ -49,7 +49,7 @@ public class SettingEditor extends BaseEditor {
 
         TreeView<SettingPaneItem> settingItemsView = new TreeView<>();
         settingItemsView.setMinWidth(Region.USE_PREF_SIZE);
-        settingItemsView.setPrefWidth(120);
+        settingItemsView.setPrefWidth(160);
 
         settingItemsPane = new VBox();
         settingItemsPane.setPadding(new Insets(8));
@@ -97,9 +97,9 @@ public class SettingEditor extends BaseEditor {
 
     private void showSettingPanes(SettingPaneItem settingPaneItemTreeItem) {
         settingItemsPane.getChildren().add(settingPaneItemTreeItem.settingPane.title);
-        for (SettingItem settingItem : settingPaneItemTreeItem.settingPane.settingItems) {
+        for (BaseSettingItem settingItem : settingPaneItemTreeItem.settingPane.settingItems) {
             settingItem.setPadding(new Insets(0, 0, 0, 12));
-            settingItemsPane.getChildren().add(settingItem);
+            settingItemsPane.getChildren().add(settingItem.getBox());
         }
         for (TreeItem<SettingPaneItem> treeItem : settingPaneItemTreeItem.thisTreeItem.getChildren()) {
             showSettingPanes(treeItem.getValue().settingPane.settingPaneItem);

@@ -1,18 +1,21 @@
 package team.zxorg.zxnoter.ui.main.stage.body.area.editor.setting.item;
 
 import javafx.scene.Node;
-import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
 
-public class ListSettingItem extends SettingItem {
-    public ListView listView;
+public class ListSettingItem extends BaseSettingItem {
+    public ListView<Label> listView;
 
     public ListSettingItem(String titleKey) {
-        super(titleKey, new ListView<>());
-        listView = (ListView) content;
+        super(titleKey);
         listView.setPrefHeight(80);
         listView.setPrefWidth(480);
+    }
+
+    @Override
+    protected Node initContent() {
+        listView = new ListView<>();
+        return listView;
     }
 }

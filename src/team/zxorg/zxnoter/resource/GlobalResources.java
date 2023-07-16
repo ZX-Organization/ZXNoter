@@ -11,7 +11,6 @@ import team.zxorg.zxnoter.resource.pack.*;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 public class GlobalResources {
@@ -32,6 +31,7 @@ public class GlobalResources {
 
     /**
      * 获取语言内容
+     *
      * @param key 语言key
      * @return 语言内容
      */
@@ -41,6 +41,7 @@ public class GlobalResources {
 
     /**
      * 获取图标
+     *
      * @param key 图标key
      * @return 图标
      */
@@ -70,35 +71,51 @@ public class GlobalResources {
         });
     }
 
-    public static void reloadResources(ArrayList<BaseResourcePack> loadedResources) {
+    public static void clearResources() {
         styleResources.clear();//清除样式资源
+    }
+
+    /**
+     * 载入资源
+     *
+     * @param loadedResources 资源包列表
+     */
+    public static void loadResourcesPacks(ObservableList<BaseResourcePack> loadedResources) {
         for (BaseResourcePack pack : loadedResources) {
-            if (pack instanceof LanguageResourcePack languageResourcePack) {
-                for (Map.Entry<String, String> language : languageResourcePack.getLanguages().entrySet()) {
-                    StringProperty languageContent = languageResources.get(language.getKey());
-                    if (languageContent == null) {
-                        languageContent = new SimpleStringProperty();
-                        languageResources.put(language.getKey(), languageContent);
-                    }
-                    languageContent.set(language.getValue());
+            loadResourcesPack(pack);
+        }
+    }
+    /**
+     * 载入资源
+     *
+     * @param pack 资源包
+     */
+    public static void loadResourcesPack(BaseResourcePack pack) {
+        if (pack instanceof LanguageResourcePack languageResourcePack) {
+            for (Map.Entry<String, String> language : languageResourcePack.getLanguages().entrySet()) {
+                StringProperty languageContent = languageResources.get(language.getKey());
+                if (languageContent == null) {
+                    languageContent = new SimpleStringProperty();
+                    languageResources.put(language.getKey(), languageContent);
                 }
-            } else if (pack instanceof IconResourcePack iconResourcePack) {
-                for (Map.Entry<String, SVGPath> svgPath : iconResourcePack.getIcons().entrySet()) {
-                    ObjectProperty<SVGPath> svgProperty = iconResources.get(svgPath.getKey());
-                    if (svgProperty == null) {
-                        svgProperty = new SimpleObjectProperty<>();
-                        iconResources.put(svgPath.getKey(), svgProperty);
-                    }
-                    svgProperty.set(svgPath.getValue());
+                languageContent.set(language.getValue());
+            }
+        } else if (pack instanceof IconResourcePack iconResourcePack) {
+            for (Map.Entry<String, SVGPath> svgPath : iconResourcePack.getIcons().entrySet()) {
+                ObjectProperty<SVGPath> svgProperty = iconResources.get(svgPath.getKey());
+                if (svgProperty == null) {
+                    svgProperty = new SimpleObjectProperty<>();
+                    iconResources.put(svgPath.getKey(), svgProperty);
                 }
-            } else if (pack instanceof LayoutResourcePack layoutResourcePack) {
-                for (Path file : layoutResourcePack.getCssFiles()) {
-                    styleResources.add(file.toUri().toString());
-                }
-            }else if (pack instanceof ColorResourcePack colorResourcePack) {
-                for (Path file : colorResourcePack.getCssFiles()) {
-                    styleResources.add(file.toUri().toString());
-                }
+                svgProperty.set(svgPath.getValue());
+            }
+        } else if (pack instanceof LayoutResourcePack layoutResourcePack) {
+            for (Path file : layoutResourcePack.getCssFiles()) {
+                styleResources.add(file.toUri().toString());
+            }
+        } else if (pack instanceof ColorResourcePack colorResourcePack) {
+            for (Path file : colorResourcePack.getCssFiles()) {
+                styleResources.add(file.toUri().toString());
             }
         }
     }

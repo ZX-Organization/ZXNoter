@@ -1,6 +1,7 @@
 {
   "id": "zxnoter",
   "author": "zedoCN",
+  "icon": "icon.png",
   "resources": {
     "color": [
       "color/dark/dark.json"
@@ -19,7 +20,8 @@
       "sound/base/base.json"
     ],
     "language": [
-      "language/zh-cn.json"
+      "language/zh-cn.json",
+      "language/en-us.json"
     ]
   },
   "defaultLanguageCode": "zh-cn"

@@ -1,0 +1,23 @@
+[09:55:08] [Main.main/INFO]: ZXNoter启动
+[09:55:08] [Main.main/INFO]: 初始化图形系统
+[09:55:08] [Main.main/INFO]: 系统语言代码 zh_CN
+[09:55:08] [Main.lambda$main$0/INFO]: 初始化配置
+[09:55:08] [ZXConfiguration.reload/INFO]: 载入全局配置
+[09:55:08] [ZXResources.<clinit>/INFO]: 载入基本资源
+[09:55:08] [ZXResources.clearPacks/INFO]: 清除资源包列表
+[09:55:09] [ZXResources.loadPack/INFO]: 载入资源包 zxnoter
+[09:55:09] [ZXResources.loadPack/INFO]: 载入资源包 test
+[09:55:09] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表
+[09:55:09] [ZXResources.reloadGlobalResource/INFO]: 载入 zxnoter.language.zh-cn
+[09:55:09] [ZXResources.reloadGlobalResource/INFO]: 载入 zxnoter.sound.base
+[09:55:09] [ZXResources.reloadGlobalResource/INFO]: 载入 zxnoter.icon.line
+[09:55:09] [ZXResources.reloadGlobalResource/INFO]: 载入 zxnoter.style.map-editor-pink
+[09:55:09] [ZXResources.reloadGlobalResource/INFO]: 载入 zxnoter.layout.base
+[09:55:09] [ZXResources.reloadGlobalResource/INFO]: 载入 zxnoter.color.dark
+[09:55:09] [ZXIconButton.lambda$new$2/INFO]: button icon-button button-color-font-usually
+[09:55:09] [ZXIconButton.lambda$new$2/INFO]: button icon-button button-color-font-usually
+[09:55:09] [ZXIconButton.lambda$new$2/INFO]: button icon-button button-color-font-usually
+[09:55:09] [ZXIconButton.lambda$new$2/INFO]: button icon-button button-color-font-usually
+[09:55:09] [ZXStage.<init>/INFO]: 实例化ZXN-UI窗口
+[09:55:09] [Main.lambda$main$0/INFO]: 显示ZXN-UI窗口
+[09:55:11] [SettingEditor.lambda$new$1/INFO]: 重新编制设置项SettingPaneItem@3d85ee62[styleClass=label]'用户偏好'

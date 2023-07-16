@@ -4,7 +4,7 @@ import javafx.geometry.Insets;
 import javafx.scene.text.Font;
 import team.zxorg.zxnoter.resource.ZXColor;
 import team.zxorg.zxnoter.ui.component.ZXLabel;
-import team.zxorg.zxnoter.ui.main.stage.body.area.editor.setting.item.SettingItem;
+import team.zxorg.zxnoter.ui.main.stage.body.area.editor.setting.item.BaseSettingItem;
 
 import java.util.ArrayList;
 
@@ -18,7 +18,7 @@ public class BaseSettingPane {
     /**
      * 包含的设置项
      */
-    public ArrayList<SettingItem> settingItems = new ArrayList<>();
+    public ArrayList<BaseSettingItem> settingItems = new ArrayList<>();
     /**
      * 对应的设置容器物品
      */

@@ -3,8 +3,10 @@ package team.zxorg.zxnoter.resource;
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;
+import javafx.scene.image.Image;
 import team.zxorg.zxnoter.resource.pack.LanguageResourcePack;
 import team.zxorg.zxnoter.resource.pack.BaseResourcePack;
+import team.zxorg.zxnoter.resource.preference.UserPreference;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -16,6 +18,15 @@ public class ResourcePack {
      * 唯一表示id (禁止使用'.' 用于分隔域)
      */
     private final String id;
+
+    public Image getIcon() {
+        return icon;
+    }
+
+    /**
+     * 唯一表示id (禁止使用'.' 用于分隔域)
+     */
+    private final Image icon;
     /**
      * 资源包作者
      */
@@ -62,6 +73,7 @@ public class ResourcePack {
         try {
             packInfo = JSON.parseObject(Files.newInputStream(resourcePackPath.resolve("resource-pack.json")));
             id = packInfo.getString("id");
+            icon = new Image(packPath.resolve(packInfo.getString("icon")).toUri().toURL().toString());
             if (id == null) {
                 throw new RuntimeException("ResourcePack:没有id属性");
             }
