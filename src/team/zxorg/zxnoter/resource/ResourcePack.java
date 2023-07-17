@@ -4,6 +4,7 @@ import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;
 import javafx.scene.image.Image;
+import team.zxorg.zxnoter.ZXLogger;
 import team.zxorg.zxnoter.resource.pack.LanguageResourcePack;
 import team.zxorg.zxnoter.resource.pack.BaseResourcePack;
 import team.zxorg.zxnoter.resource.preference.UserPreference;
@@ -52,6 +53,12 @@ public class ResourcePack {
     public HashMap<String, BaseResourcePack> getResources(ResourceType type) {
         return allResources.get(type);
     }
+    {
+        //初始化所有资源map
+        for (ResourceType type : ResourceType.values()) {
+            allResources.put(type, new HashMap<>());
+        }
+    }
 
     @Override
     public String toString() {
@@ -64,16 +71,18 @@ public class ResourcePack {
 
 
     public ResourcePack(Path resourcePackPath) {
-        //初始化所有资源map
-        for (ResourceType type : ResourceType.values()) {
-            allResources.put(type, new HashMap<>());
-        }
+
 
         packPath = resourcePackPath;
         try {
             packInfo = JSON.parseObject(Files.newInputStream(resourcePackPath.resolve("resource-pack.json")));
             id = packInfo.getString("id");
-            icon = new Image(packPath.resolve(packInfo.getString("icon")).toUri().toURL().toString());
+            {
+                Path iconPath = packPath.resolve(packInfo.getString("icon"));
+                if (Files.exists(iconPath))
+                    icon = new Image(packPath.resolve(packInfo.getString("icon")).toUri().toURL().toString());
+                else icon = ZXResources.DEFAULT_RESOURCE_PACK_ICON;
+            }
             if (id == null) {
                 throw new RuntimeException("ResourcePack:没有id属性");
             }
@@ -116,9 +125,13 @@ public class ResourcePack {
             JSONArray resList = packInfo.getJSONObject("resources").getJSONArray(type.name());
             BaseResourcePack baseResourcePack;
             for (int i = 0; i < resList.size(); i++) {
-                baseResourcePack = type.build(this, packPath.resolve(resList.getString(i)));
-                baseResourcePack.reload();
-                allResources.get(type).put(baseResourcePack.getResourceId(), baseResourcePack);
+                try {
+                    baseResourcePack = type.build(this, packPath.resolve(resList.getString(i)));
+                    baseResourcePack.reload();
+                    allResources.get(type).put(baseResourcePack.getResourceId(), baseResourcePack);
+                } catch (Exception e) {
+                    ZXLogger.warning("载入资源包 " + packPath.resolve(resList.getString(i)) + " 发生异常");
+                }
             }
         }
     }
@@ -136,7 +149,7 @@ public class ResourcePack {
         } else if (getResources(ResourceType.language, packInfo.getString("defaultLanguageCode")) instanceof LanguageResourcePack language) {
             return language.getLanguageContent(key);
         }
-        throw new RuntimeException("没有语言");
+        throw new RuntimeException("没有语言 " + key);
     }
 
 

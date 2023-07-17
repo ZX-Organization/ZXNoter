@@ -66,7 +66,10 @@ public class ZXConfiguration {
 
         ZXResources.searchPacks(Path.of("./resource"));//搜索本地资源包
 
-        ZXResources.reloadGlobalResource();//应用本地资源包
+        for (ResourceType resourceType : ResourceType.values()) {
+            ZXResources.reloadGlobalResource(resourceType);//应用本地资源包
+        }
+
     }
 
 }

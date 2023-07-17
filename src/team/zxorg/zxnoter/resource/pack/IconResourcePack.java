@@ -15,7 +15,6 @@ import java.util.stream.Stream;
 
 public class IconResourcePack extends BaseResourcePack {
     private final HashMap<String, SVGPath> icons = new HashMap<>();
-    private Image icon;
 
     public IconResourcePack(ResourcePack pack, ResourceType type, Path jsonPath) {
         super(pack, type, jsonPath);
@@ -29,9 +28,6 @@ public class IconResourcePack extends BaseResourcePack {
         return icons;
     }
 
-    public Image getResourceIcon() {
-        return icon;
-    }
 
     @Override
     public void reload() {
@@ -54,6 +50,6 @@ public class IconResourcePack extends BaseResourcePack {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        icon = new Image(rootPath.resolve(getInfo().getString("icon")).toUri().toString());
+
     }
 }

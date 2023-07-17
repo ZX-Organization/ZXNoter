@@ -1,4 +1,5 @@
 {
     "id": "line",
+    "weight": "base",
     "icon": "icon.png"
 }

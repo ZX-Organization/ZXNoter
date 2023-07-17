@@ -1,6 +1,9 @@
 package team.zxorg.zxnoter.resource;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
 import javafx.scene.image.Image;
@@ -19,73 +22,93 @@ import java.util.stream.Stream;
 
 public class ZXResources {
     /**
-     * 载入的资源包
+     * 载入的资源包 资源包id-资源包
      */
     public static final ObservableMap<String, ResourcePack> loadedResourcePackMap = FXCollections.observableMap(new HashMap<>());
-    public static final ObservableList<BaseResourcePack> usedResources = FXCollections.observableArrayList();
 
-    public static ArrayList<BaseResourcePack> getUsedResources(ResourceType resourceType) {
-        ArrayList<BaseResourcePack> resources = new ArrayList<>();
-        for (BaseResourcePack pack : usedResources) {
-            if (pack.getClass().equals(resourceType.resourceClass))
-                resources.add(pack);
-        }
-        return resources;
+    /**
+     * 使用的附加资源
+     */
+    public static final HashMap<ResourceType, ObservableList<BaseResourcePack>> usedAttachResourcesMap = new HashMap<>();
+
+    /**
+     * 基础资源
+     */
+    public static final HashMap<ResourceType, ObjectProperty<BaseResourcePack>> usedBaseResourcesMap = new HashMap<>();
+
+    /**
+     * 使用的所有资源
+     */
+    public static final HashMap<ResourceType, ObservableList<BaseResourcePack>> usedAllResourcesMap = new HashMap<>();
+
+    /**
+     * 使用的所有资源
+     */
+    public static final ObservableList<BaseResourcePack> usedAllResources = FXCollections.observableArrayList(new ArrayList<>());
+
+    public static ObjectProperty<BaseResourcePack> getUsedBaseResources(ResourceType resourceType) {
+        return usedBaseResourcesMap.get(resourceType);
     }
 
+    public static ObservableList<BaseResourcePack> getUsedAttachResources(ResourceType resourceType) {
+        return usedAttachResourcesMap.get(resourceType);
+    }
 
-    /*public static SVGPath getIconPane(String key) {
-        SVGPath svgPath;
-        for (BaseResourcePack baseResourcePack : globalResources.get(ResourceType.icon)) {
-            if (baseResourcePack instanceof IconResourcePack iconResourcePack) {
-                svgPath = iconResourcePack.getIcon(key);
-                return svgPath;
-            }
-        }
-        return null;
-    }*/
+    public static ObservableList<BaseResourcePack> getUsedAllResources(ResourceType resourceType) {
+        return usedAllResourcesMap.get(resourceType);
+    }
 
-   /* public static Pane getIconPane(String key, double size) {
-        Pane pane = new Pane();
-        SVGPath svgPath;
-        for (BaseResourcePack baseResourcePack : globalResources.get(ResourceType.icon)) {
-            if (baseResourcePack instanceof IconResourcePack iconResourcePack) {
-                svgPath = iconResourcePack.getIcon(key);
-                pane.setShape(svgPath);
-                pane.getStyleClass().add("icon");
-                pane.setPrefSize(size, size);
-                pane.setMinSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
-                return pane;
-            }
-        }
-        return null;
-    }*/
-
-    /*public static String getLanguageContent(String key) {
-        String content;
-        for (BaseResourcePack baseResourcePack : globalResources.get(ResourceType.language)) {
-            if (baseResourcePack instanceof LanguageResourcePack languageResourcePack) {
-                content = languageResourcePack.getLanguageContent(key);
-                if (content != null)
-                    return content;
-            }
-        }
-        return null;
-    }*/
 
     public static final Image LOGO;
     public static final Image LOGO_X26;
     public static final Image UNKNOWN;
+    public static final Image DEFAULT_RESOURCE_ICON;
+    public static final Image DEFAULT_RESOURCE_PACK_ICON;
 
     static {
         ZXLogger.info("载入基本资源");
         try {
             LOGO = new Image(ZXResources.class.getResource("/base/logo.png").toURI().toString());
             LOGO_X26 = new Image(ZXResources.class.getResource("/base/logo-x26.png").toURI().toString());
-            UNKNOWN = new Image(ZXResources.class.getResource("/base/Unknown.png").toURI().toString());
+            UNKNOWN = new Image(ZXResources.class.getResource("/base/unknown.png").toURI().toString());
+            DEFAULT_RESOURCE_ICON = new Image(ZXResources.class.getResource("/base/default-resource-icon.png").toURI().toString());
+            DEFAULT_RESOURCE_PACK_ICON = new Image(ZXResources.class.getResource("/base/default-resource-pack-icon.png").toURI().toString());
         } catch (Exception e) {
             ZXLogger.severe("载入基本资源发生异常");
             throw new RuntimeException(e);
+        }
+        //初始化资源
+        for (ResourceType resourceType : ResourceType.values()) {
+            ObservableList<BaseResourcePack> usedAllResourcesType = FXCollections.observableArrayList(new ArrayList<>());
+            usedAllResourcesMap.put(resourceType, usedAllResourcesType);
+
+            SimpleObjectProperty<BaseResourcePack> simpleObjectProperty = new SimpleObjectProperty<>();
+            usedBaseResourcesMap.put(resourceType, simpleObjectProperty);
+            simpleObjectProperty.addListener((observable, oldValue, newValue) -> {
+                if (oldValue != null) {
+                    usedAllResourcesType.remove(oldValue);
+                    usedAllResources.remove(oldValue);
+                }
+                usedAllResourcesType.add(newValue);
+                usedAllResources.add(newValue);
+
+            });
+
+            ObservableList<BaseResourcePack> usedAttachResourcesType = FXCollections.observableArrayList(new ArrayList<>());
+            usedAttachResourcesMap.put(resourceType, usedAttachResourcesType);
+            usedAttachResourcesType.addListener((ListChangeListener<BaseResourcePack>) c -> {
+                while (c.next()) {
+                    if (c.wasAdded()) {
+                        usedAllResources.addAll(c.getAddedSubList());
+                        usedAllResourcesType.addAll(c.getAddedSubList());
+                    } else if (c.wasRemoved()) {
+                        usedAllResources.removeAll(c.getRemoved());
+                        usedAllResourcesType.removeAll(c.getRemoved());
+                    }
+                }
+            });
+
+
         }
     }
 
@@ -148,54 +171,50 @@ public class ZXResources {
         }
     }
 
+    public static ResourcePack getResourcePackFromId(String packId) {
+        return loadedResourcePackMap.get(packId);
+    }
+
+    public static BaseResourcePack getResourceFromFullId(String ids) {
+        String packId;
+        ResourceType type;
+        String resourceId;
+        {
+            String[] id = ids.split("\\.");
+            if (id.length != 3) {
+                ZXLogger.warning("载入 " + ids + " id分隔异常");
+                throw new IllegalArgumentException("id分隔异常 " + ids);
+            }
+
+            packId = id[0];
+            type = ResourceType.valueOf(id[1]);
+            resourceId = id[2];
+        }
+        return getResourcePackFromId(packId).getResources(type, resourceId);
+    }
+
     /**
      * 重载全局资源 (读取配置文件为资源包索引资源)
      */
-    public static void reloadGlobalResource() {
-        usedResources.clear();
-        ZXLogger.info("载入引用的资源包列表");
+    public static void reloadGlobalResource(ResourceType resourceType) {
+        ZXLogger.info("载入引用的资源包列表 " + resourceType);
+        //清除其他资源
+        usedAttachResourcesMap.get(resourceType).clear();
 
-        for (String ids : UserPreference.getUsedResources()) {
-            String packId;
-            ResourceType type;
-            String resourceId;
-            {
-                String[] id = ids.split("\\.");
-                if (id.length != 3) {
-                    ZXLogger.warning("载入 " + ids + " id分隔异常");
-                    continue;
-                }
-
-                packId = id[0];
-                type = ResourceType.valueOf(id[1]);
-                resourceId = id[2];
-            }
-
-
-            ResourcePack resourcePack = loadedResourcePackMap.get(packId);
-            if (resourcePack == null) {
-                ZXLogger.warning("载入 " + ids + " 资源包不存在");
-                continue;
-            }
-
-            BaseResourcePack baseResourcePack = resourcePack.getResources(type, resourceId);
-
-            if (baseResourcePack == null) {
-                ZXLogger.warning("载入 " + ids + " 资源不存在");
-                continue;
-            }
-
-            if (usedResources.contains(baseResourcePack)) {
-                ZXLogger.warning("载入 " + ids + " 资源重复");
-                continue;
-            }
-
+        {
+            BaseResourcePack baseResourcePack = getResourceFromFullId(UserPreference.getUsedBaseResources(resourceType));
             //将启用的资源加入全局资源
-            usedResources.add(baseResourcePack);
-            ZXLogger.info("载入 " + ids);
+            usedBaseResourcesMap.get(resourceType).set(baseResourcePack);
+            ZXLogger.info("载入基础 " + baseResourcePack);
         }
 
-        GlobalResources.loadResourcesPacks(usedResources);
+        for (String fullIds : UserPreference.getUsedAttachResources(resourceType)) {
+            BaseResourcePack baseResourcePack = getResourceFromFullId(UserPreference.getUsedBaseResources(resourceType));
+            //将启用的资源加入全局资源
+            usedBaseResourcesMap.get(resourceType).set(baseResourcePack);
+            ZXLogger.info("载入附加 " + baseResourcePack);
+        }
+        GlobalResources.loadResourcesPacks(resourceType);
     }
 
 

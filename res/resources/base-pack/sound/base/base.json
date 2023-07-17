@@ -1,5 +1,7 @@
 {
   "id": "base",
+  "weight": "base",
+  "icon": "icon.png",
   "audio": [
     {
       "scope": "editor.mapEditor",

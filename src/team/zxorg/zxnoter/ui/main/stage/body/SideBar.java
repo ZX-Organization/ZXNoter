@@ -90,11 +90,11 @@ public class SideBar extends TabPane {
 
         {
             Pane pane = new Pane();
-            createTab("show.hello", "document.folder-4", pane);
+            createTab("side-bar.menu.file-manager", "document.folder-4", pane);
         }
         {
             Pane pane = new Pane();
-            createTab("show.hello", "document.folder-upload", pane);
+            createTab("side-bar.menu.pack-up", "document.folder-upload", pane);
         }
     }
 

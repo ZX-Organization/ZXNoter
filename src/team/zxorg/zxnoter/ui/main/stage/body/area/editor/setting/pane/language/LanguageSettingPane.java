@@ -18,19 +18,5 @@ public class LanguageSettingPane extends BaseSettingPane {
     public LanguageSettingPane() {
         super("editor.setting-editor.settings.language");
         settingItems.add(new BooleanSettingItem("editor.setting-editor.settings.language.use-local-language"));
-        LanguageSettingItem languageItem = new LanguageSettingItem("editor.setting-editor.settings.language.language-code");
-        Iterator<Map.Entry<String, ResourcePack>> loadPacks = ZXResources.loadedResourcePackMap.entrySet().iterator();
-        while (loadPacks.hasNext()) {
-            ResourcePack pack = loadPacks.next().getValue();
-            Iterator<Map.Entry<String, BaseResourcePack>> languagePacks = pack.getResources(ResourceType.language).entrySet().iterator();
-            while (languagePacks.hasNext()) {
-                BaseResourcePack langPack = languagePacks.next().getValue();
-                if (langPack instanceof LanguageResourcePack languageResourcePack) {
-                }
-            }
-        }
-        //GlobalResources.reloadResources();
-
-        settingItems.add(languageItem);
     }
 }

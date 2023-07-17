@@ -1,6 +1,7 @@
 {
-  "name": "lang:style.color.dark",
   "id": "dark",
+  "weight": "base",
+  "icon": "icon.png",
   "style": [
     "dark.css"
   ]

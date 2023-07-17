@@ -6,6 +6,7 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.shape.SVGPath;
+import team.zxorg.zxnoter.ZXLogger;
 import team.zxorg.zxnoter.resource.pack.*;
 
 import java.nio.file.Path;
@@ -76,15 +77,15 @@ public class GlobalResources {
     }
 
     /**
-     * 载入资源
-     *
-     * @param loadedResources 资源包列表
+     * 载入全局资源
+     * @param resourceType 资源类型
      */
-    public static void loadResourcesPacks(ObservableList<BaseResourcePack> loadedResources) {
-        for (BaseResourcePack pack : loadedResources) {
+    public static void loadResourcesPacks(ResourceType resourceType) {
+        for (BaseResourcePack pack : ZXResources.getUsedAllResources(resourceType)) {
             loadResourcesPack(pack);
         }
     }
+
     /**
      * 载入资源
      *
@@ -92,13 +93,17 @@ public class GlobalResources {
      */
     public static void loadResourcesPack(BaseResourcePack pack) {
         if (pack instanceof LanguageResourcePack languageResourcePack) {
-            for (Map.Entry<String, String> language : languageResourcePack.getLanguages().entrySet()) {
-                StringProperty languageContent = languageResources.get(language.getKey());
-                if (languageContent == null) {
-                    languageContent = new SimpleStringProperty();
-                    languageResources.put(language.getKey(), languageContent);
+            if (languageResourcePack.getWeight().equals(ResourceWeight.base)) {
+                for (Map.Entry<String, String> language : languageResourcePack.getLanguages().entrySet()) {
+                    StringProperty languageContent = languageResources.get(language.getKey());
+                    if (languageContent == null) {
+                        languageContent = new SimpleStringProperty();
+                        languageResources.put(language.getKey(), languageContent);
+                    }
+                    languageContent.set(language.getValue());
                 }
-                languageContent.set(language.getValue());
+            } else {
+                ZXLogger.warning("无法载入非基础语言资源 " + languageResourcePack);
             }
         } else if (pack instanceof IconResourcePack iconResourcePack) {
             for (Map.Entry<String, SVGPath> svgPath : iconResourcePack.getIcons().entrySet()) {

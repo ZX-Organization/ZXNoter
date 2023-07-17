@@ -1,5 +1,7 @@
 {
   "id": "zh-cn",
+  "weight": "other",
+  "icon": "",
   "languages": {
     "language-name": "中文(简体)WDNMD",
     "resource-pack.test.name": "ZXNoter(TEST)",

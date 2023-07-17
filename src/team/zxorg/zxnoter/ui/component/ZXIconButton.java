@@ -21,7 +21,6 @@ public class ZXIconButton extends Button {
         color.addListener((observable, oldValue, newValue) -> {
             getStyleClass().filtered(s -> s.contains("button-")).clear();
             getStyleClass().add("button-" + newValue);
-            System.out.println(getStyleClass());
         });
     }
     public void setSize(double size) {

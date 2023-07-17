@@ -1,5 +1,6 @@
 package team.zxorg.zxnoter.resource;
 
+import team.zxorg.zxnoter.ZXLogger;
 import team.zxorg.zxnoter.resource.pack.*;
 
 import java.lang.reflect.InvocationTargetException;
@@ -23,6 +24,7 @@ public enum ResourceType {
             return (BaseResourcePack) resourceClass.getDeclaredConstructor(ResourcePack.class, ResourceType.class, Path.class).newInstance(pack, this, jsonPath);
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
                  NoSuchMethodException e) {
+            ZXLogger.warning("构建资源包时发生异常");
             throw new RuntimeException(e);
         }
     }

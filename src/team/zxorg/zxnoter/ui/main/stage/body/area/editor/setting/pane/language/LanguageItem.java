@@ -8,7 +8,6 @@ public class LanguageItem {
 
     @Override
     public String toString() {
-
         return resourcePack.getPack().getName() + "-" + resourcePack.getLanguageContent("language-name");
     }
 
