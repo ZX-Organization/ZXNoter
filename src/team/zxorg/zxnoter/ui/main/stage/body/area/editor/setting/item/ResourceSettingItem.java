@@ -1,4 +1,4 @@
-package team.zxorg.zxnoter.ui.main.stage.body.area.editor.setting.pane.resource;
+package team.zxorg.zxnoter.ui.main.stage.body.area.editor.setting.item;
 
 import javafx.collections.ListChangeListener;
 import javafx.geometry.Orientation;
@@ -6,9 +6,9 @@ import javafx.scene.Node;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import team.zxorg.zxnoter.resource.ZXResources;
 import team.zxorg.zxnoter.resource.pack.BaseResourcePack;
-import team.zxorg.zxnoter.ui.main.stage.body.area.editor.setting.item.BaseSettingItem;
 
 public class ResourceSettingItem extends BaseSettingItem {
     ListView<ResourceItem> resourceItemListView;
@@ -21,8 +21,9 @@ public class ResourceSettingItem extends BaseSettingItem {
     @Override
     protected Node initContent() {
         resourceItemListView = new ListView<>();
+        resourceItemListView.setMinSize(Region.USE_PREF_SIZE,Region.USE_PREF_SIZE);
         resourceItemListView.setPrefWidth(260);
-        resourceItemListView.setPrefHeight(108);
+        resourceItemListView.setPrefHeight(120);
         resourceItemListView.setOrientation(Orientation.HORIZONTAL);
         HBox.setHgrow(resourceItemListView, Priority.ALWAYS);
         HBox hBox = new HBox(resourceItemListView);

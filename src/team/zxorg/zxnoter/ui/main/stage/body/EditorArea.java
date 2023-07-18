@@ -1,8 +1,11 @@
 package team.zxorg.zxnoter.ui.main.stage.body;
 
 import javafx.geometry.Orientation;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
+import javafx.scene.paint.Color;
 import team.zxorg.zxnoter.ui.main.stage.body.area.EditorLayout;
 import team.zxorg.zxnoter.ui.main.stage.body.area.EditorTabPane;
 import team.zxorg.zxnoter.ui.main.stage.body.area.editor.BaseEditor;
@@ -39,6 +42,8 @@ public class EditorArea extends EditorLayout {
         SettingEditor settingEditor = new SettingEditor();
         editorTabPane.createEditor(settingEditor);
 
+        //setPrefSize(Double.MAX_VALUE, Double.MAX_VALUE);
+        //setMinSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
         autoLayout();
     }
 

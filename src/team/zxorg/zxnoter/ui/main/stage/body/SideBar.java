@@ -14,6 +14,8 @@ import team.zxorg.zxnoter.resource.ZXColor;
 import team.zxorg.zxnoter.resource.ZXResources;
 import team.zxorg.zxnoter.ui.component.TrackTooltip;
 import team.zxorg.zxnoter.ui.component.ZXIcon;
+import team.zxorg.zxnoter.ui.main.stage.body.side.BaseSideBarTab;
+import team.zxorg.zxnoter.ui.main.stage.body.side.FileManagerTab;
 
 public class SideBar extends TabPane {
     ObservableList<String> styleClass = getStyleClass();
@@ -23,7 +25,7 @@ public class SideBar extends TabPane {
     double maxWeight = 400;
 
     BooleanProperty isAdjust = new SimpleBooleanProperty(false);//调整宽度
-    BooleanProperty isFold = new SimpleBooleanProperty(false);//是否是折叠
+    public BooleanProperty isFold = new SimpleBooleanProperty(false);//是否是折叠
     MouseEvent pressedMouseEvent;
 
     public SideBar() {
@@ -89,46 +91,20 @@ public class SideBar extends TabPane {
 
 
         {
-            Pane pane = new Pane();
-            createTab("side-bar.menu.file-manager", "document.folder-4", pane);
+            new FileManagerTab(this);
         }
-        {
-            Pane pane = new Pane();
-            createTab("side-bar.menu.pack-up", "document.folder-upload", pane);
-        }
+        /*{
+            new BaseSideBarTab("side-bar.menu.pack-up", "document.folder-upload", this);
+        }*/
     }
 
     public void setTabWidth(double width) {
-        setPrefWidth(width + 50);
+        setMinWidth(width + 50);
     }
 
     public double getTabWidth() {
-        return getWidth() - 50;
+        return getMinWidth() - 50;
     }
 
-    public void createTab(String tipLanguageKey, String iconKey, Pane content) {
-        Tab tab = new Tab();
-        tab.setClosable(false);
-        ZXIcon zxIcon=new ZXIcon();
-        zxIcon.setSize(30);
-        zxIcon.setIconKey(iconKey);
-        zxIcon.setColor(ZXColor.FONT_USUALLY);
-        zxIcon.setOnMousePressed(event -> {
-            if (getSelectionModel().getSelectedItem().equals(tab)) {
-                isFold.set(!isFold.get());
-                event.consume();
-            } else {
-                isFold.set(false);
-            }
-        });
 
-        TrackTooltip trackTooltip = new TrackTooltip(zxIcon, Pos.BOTTOM_CENTER, 0, TrackTooltip.BindAttributes.AUTO_POP_UP);
-        trackTooltip.setPos(Pos.CENTER_RIGHT, false, 14);
-        trackTooltip.textProperty().bind(GlobalResources.getLanguageContent(tipLanguageKey));
-
-        //ComponentFactory.getTooltip(tipLanguageKey, iconPane, 12);
-        tab.setGraphic(zxIcon);
-        tab.setContent(content);
-        getTabs().add(tab);
-    }
 }

@@ -1,4 +1,4 @@
-package team.zxorg.zxnoter.ui.main.stage.body.area.editor.setting.pane.resource.pack;
+package team.zxorg.zxnoter.ui.main.stage.body.area.editor.setting.item;
 
 import javafx.collections.MapChangeListener;
 import javafx.geometry.Orientation;
@@ -12,7 +12,6 @@ import team.zxorg.zxnoter.resource.ResourcePack;
 import team.zxorg.zxnoter.resource.ZXColor;
 import team.zxorg.zxnoter.resource.ZXResources;
 import team.zxorg.zxnoter.ui.component.ZXIconButton;
-import team.zxorg.zxnoter.ui.main.stage.body.area.editor.setting.item.BaseSettingItem;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -29,7 +28,7 @@ public class ResourcePackSettingItem extends BaseSettingItem {
     protected Node initContent() {
         resourcePackItemListView = new ListView<>();
         resourcePackItemListView.setPrefWidth(260);
-        resourcePackItemListView.setPrefHeight(108);
+        resourcePackItemListView.setPrefHeight(120);
         resourcePackItemListView.setOrientation(Orientation.HORIZONTAL);
         reload();
         ZXResources.loadedResourcePackMap.addListener((MapChangeListener<String, ResourcePack>) change -> {

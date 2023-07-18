@@ -26,26 +26,10 @@ public class SettingEditor extends BaseEditor {
         body.setSpacing(8);
         body.setMaxWidth(1200);
         body.setAlignment(Pos.TOP_CENTER);
-        body.setPadding(new Insets(8));
-        ZXTextField searchTextField = new ZXTextField();
-        searchTextField.setPromptTextKey("editor.setting-editor.settings.search");
-        HBox.setHgrow(searchTextField, Priority.ALWAYS);
+        body.setPadding(new Insets(8, 8, 0, 8));
 
-        ZXGroupComponent searchGroup = new ZXGroupComponent();
-
-        ZXIcon searchIcon = new ZXIcon();
-        searchIcon.setColor(ZXColor.FONT_USUALLY);
-        searchIcon.setSize(22);
-        searchIcon.setIconKey("system.search");
-        ZXIconButton searchClearButton = new ZXIconButton();
-        searchClearButton.setColor(ZXColor.FONT_USUALLY);
-        searchClearButton.setIconKey("system.close");
-        searchClearButton.setSize(22);
-        searchClearButton.setOnAction((event) -> searchTextField.clear());
-        searchClearButton.setVisible(false);
-        Tooltip searchClearButtonTip = ComponentFactory.getTooltip(searchClearButton, 0);
-        searchGroup.getChildren().addAll(searchIcon, searchTextField, searchClearButton);
-        searchGroup.setPrefWidth(Double.MAX_VALUE);
+        ZXTextFieldGroup searchTextField = new ZXTextFieldGroup("editor.setting-editor.settings.search", "system.search");
+        searchTextField.setPrefWidth(Double.MAX_VALUE);
 
         TreeView<SettingPaneItem> settingItemsView = new TreeView<>();
         settingItemsView.setMinWidth(Region.USE_PREF_SIZE);
@@ -65,17 +49,18 @@ public class SettingEditor extends BaseEditor {
                     SettingPaneItem settingPaneItemTreeItem = c.getAddedSubList().get(0).getValue();
                     ZXLogger.info("重新编制设置项" + settingPaneItemTreeItem);
                     settingItemsPane.getChildren().clear();
-                    showSettingPanes(settingPaneItemTreeItem);
-
+                    showSettingPanes(settingPaneItemTreeItem, searchTextField.getText());
                 }
             }
         });
 
+        settingItemsView.getRoot().setExpanded(true);
+        settingItemsView.getSelectionModel().selectFirst();
 
         HBox settingsBox = new HBox(settingItemsView, settingItemsScrollPane);
         VBox.setVgrow(settingsBox, Priority.ALWAYS);
 
-        body.getChildren().addAll(searchGroup, settingsBox);
+        body.getChildren().addAll(searchTextField, settingsBox);
 
 
         HBox root = new HBox(body);
@@ -84,7 +69,8 @@ public class SettingEditor extends BaseEditor {
 
 
         searchTextField.textProperty().addListener((observable, oldValue, newValue) -> {
-            searchClearButton.setVisible(newValue.length() != 0);
+            settingItemsView.getSelectionModel().clearSelection();
+            settingItemsView.getSelectionModel().selectFirst();
         });
 
 
@@ -95,14 +81,21 @@ public class SettingEditor extends BaseEditor {
     }
 
 
-    private void showSettingPanes(SettingPaneItem settingPaneItemTreeItem) {
+    private void showSettingPanes(SettingPaneItem settingPaneItemTreeItem, String searchText) {
         settingItemsPane.getChildren().add(settingPaneItemTreeItem.settingPane.title);
+        boolean allShow = settingPaneItemTreeItem.settingPane.title.getText().toLowerCase().contains(searchText.toLowerCase());
+        boolean show = false;
         for (BaseSettingItem settingItem : settingPaneItemTreeItem.settingPane.settingItems) {
-            settingItem.setPadding(new Insets(0, 0, 0, 12));
-            settingItemsPane.getChildren().add(settingItem.getBox());
+            if (settingItem.title.getText().toLowerCase().contains(searchText.toLowerCase()) || allShow) {
+                settingItem.setPadding(new Insets(0, 0, 0, 12));
+                settingItemsPane.getChildren().add(settingItem.getBox());
+                show = true;
+            }
         }
+        if (!show)
+            settingItemsPane.getChildren().remove(settingPaneItemTreeItem.settingPane.title);
         for (TreeItem<SettingPaneItem> treeItem : settingPaneItemTreeItem.thisTreeItem.getChildren()) {
-            showSettingPanes(treeItem.getValue().settingPane.settingPaneItem);
+            showSettingPanes(treeItem.getValue().settingPane.settingPaneItem, searchText);
         }
     }
 }

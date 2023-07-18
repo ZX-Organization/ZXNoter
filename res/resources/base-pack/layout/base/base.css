@@ -878,10 +878,10 @@
     -fx-background-color: -color-theme-1;
 
 }
-.tree-view .virtual-flow .clipped-container .sheet .tree-cell .text{
+.tree-view .virtual-flow .clipped-container .sheet .tree-cell > .text{
     -fx-fill: -color-font-usually;
 }
-.tree-view .virtual-flow .clipped-container .sheet .tree-cell:selected .text{
+.tree-view .virtual-flow .clipped-container .sheet .tree-cell:selected > .text{
     -fx-fill: -color-font-light;
 }
 
@@ -912,9 +912,9 @@
     -fx-background-color: -color-theme-1;
 
 }
-.list-view .virtual-flow .clipped-container .sheet .list-cell .text{
+.list-view .virtual-flow .clipped-container .sheet .list-cell > .text{
     -fx-fill: -color-font-usually;
 }
-.list-view .virtual-flow .clipped-container .sheet .list-cell:selected .text{
+.list-view .virtual-flow .clipped-container .sheet .list-cell:selected > .text{
     -fx-fill: -color-font-light;
 }
