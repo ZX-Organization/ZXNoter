@@ -43,8 +43,8 @@ public class ResourcePack {
     /**
      * 所有的资源
      */
-    private final HashMap<ResourceType, HashMap<String, BaseResourcePack>> allResources = new HashMap<>();
 
+    private final HashMap<ResourceType, HashMap<String, BaseResourcePack>> allResources = new HashMap<>();
 
     public BaseResourcePack getResources(ResourceType type, String subId) {
         return allResources.get(type).get(subId);
@@ -53,6 +53,7 @@ public class ResourcePack {
     public HashMap<String, BaseResourcePack> getResources(ResourceType type) {
         return allResources.get(type);
     }
+
     {
         //初始化所有资源map
         for (ResourceType type : ResourceType.values()) {

@@ -24,12 +24,13 @@ public class SettingEditor extends BaseEditor {
 
         VBox body = new VBox();
         body.setSpacing(8);
-        body.setMaxWidth(1200);
+        body.setPrefWidth(1200);
+        //body.setMaxWidth(1200);
         body.setAlignment(Pos.TOP_CENTER);
         body.setPadding(new Insets(8, 8, 0, 8));
 
         ZXTextFieldGroup searchTextField = new ZXTextFieldGroup("editor.setting-editor.settings.search", "system.search");
-        searchTextField.setPrefWidth(Double.MAX_VALUE);
+
 
         TreeView<SettingPaneItem> settingItemsView = new TreeView<>();
         settingItemsView.setMinWidth(Region.USE_PREF_SIZE);

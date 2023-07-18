@@ -9,6 +9,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Region;
 import team.zxorg.zxnoter.resource.GlobalResources;
 import team.zxorg.zxnoter.resource.ZXColor;
 import team.zxorg.zxnoter.resource.ZXResources;
@@ -30,10 +31,9 @@ public class SideBar extends TabPane {
 
     public SideBar() {
         styleClass.add("side-bar");
-        setMinWidth(50);
+        setMinWidth(Region.USE_PREF_SIZE);
         setSide(Side.LEFT);
         setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
-
         setTabWidth(minWeight);
         lastWeight = minWeight;
 
@@ -99,11 +99,11 @@ public class SideBar extends TabPane {
     }
 
     public void setTabWidth(double width) {
-        setMinWidth(width + 50);
+        setPrefWidth(width + 50);
     }
 
     public double getTabWidth() {
-        return getMinWidth() - 50;
+        return getPrefWidth() - 50;
     }
 
 

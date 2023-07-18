@@ -12,13 +12,19 @@ import team.zxorg.zxnoter.ZXLogger;
 import team.zxorg.zxnoter.resource.pack.*;
 import team.zxorg.zxnoter.resource.preference.UserPreference;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.stream.Stream;
+import java.util.zip.ZipInputStream;
 
 public class ZXResources {
     /**
@@ -131,6 +137,44 @@ public class ZXResources {
     }
 
     /**
+     * 搜索内部资源包目录
+     */
+    public static void loadInternalPacks() {
+        Path resourcePath = Paths.get("res/resources/base-pack");
+        if (!Files.exists(resourcePath)) {
+            try {
+                URL resourceUrl = ZXConfiguration.class.getResource("/resources/base-pack");
+                ZXLogger.info("载入内部资源 url:" + resourceUrl);
+                URI resourceUri = resourceUrl.toURI();
+                Map<String, String> env = new HashMap<>();
+                env.put("create", "true");
+                FileSystem zipfs = FileSystems.newFileSystem(resourceUri, env);
+                resourcePath = zipfs.getPath("/resources/base-pack");
+            } catch (URISyntaxException | IOException e) {
+                e.printStackTrace();
+                ZXLogger.severe("载入内部资源异常");
+            }
+        }
+        ZXResources.loadPack(resourcePath);
+    }
+
+    public static void loadZipPack(Path resourcePath) {
+        try {
+            URI resourceUri = URI.create("jar:" + resourcePath.normalize().toUri());
+            ZXLogger.info("载入Zip资源 " + resourceUri);
+            Map<String, String> env = new HashMap<>();
+            env.put("create", "true");
+            FileSystem zipfs = FileSystems.newFileSystem(resourceUri, env);
+            resourcePath = zipfs.getPath("/");
+            ZXResources.loadPack(resourcePath);
+        } catch (IOException e) {
+            e.printStackTrace();
+            ZXLogger.severe("载入Zip资源异常");
+        }
+    }
+
+
+    /**
      * 搜索资源包目录
      *
      * @param resourcesDiv 资源包目录
@@ -144,7 +188,16 @@ public class ZXResources {
         try (Stream<Path> packPaths = Files.list(resourcesDiv)) {
             Iterator<Path> iterator = packPaths.iterator();//资源包迭代器
             while (iterator.hasNext()) {//枚举所有资源包
-                loadPack(iterator.next());
+                Path resourcePack = iterator.next();
+                if (Files.isDirectory(resourcePack)) {
+                    loadPack(resourcePack);
+                } else {
+                    if (resourcePack.toString().toLowerCase().endsWith(".zip")) {
+                        loadZipPack(resourcePack);
+                    } else if (resourcePack.toString().toLowerCase().endsWith(".zxrp")) {
+                        loadZipPack(resourcePack);
+                    }
+                }
             }
         } catch (IOException e) {
             ZXLogger.warning("资源包枚举中断");

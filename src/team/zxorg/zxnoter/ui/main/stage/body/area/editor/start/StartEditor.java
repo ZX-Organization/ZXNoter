@@ -11,6 +11,7 @@ import team.zxorg.zxnoter.resource.GlobalResources;
 import team.zxorg.zxnoter.resource.ZXColor;
 import team.zxorg.zxnoter.resource.ZXResources;
 import team.zxorg.zxnoter.ui.component.ZXLabel;
+import team.zxorg.zxnoter.ui.component.ZXTextFieldGroup;
 import team.zxorg.zxnoter.ui.main.stage.body.area.editor.BaseEditor;
 
 public class StartEditor extends BaseEditor {
@@ -36,12 +37,10 @@ public class StartEditor extends BaseEditor {
         tools.getChildren().add(new Button("创建新谱面"));
         tools.setAlignment(Pos.CENTER);
         tools.setSpacing(6);
-
         VBox body = new VBox(logo, titleLabel, startLabel, tools);
         body.setSpacing(12);
         body.setAlignment(Pos.CENTER);
         setContent(body);
-
 
 
         setClosable(false);
