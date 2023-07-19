@@ -3,20 +3,11 @@ package team.zxorg.zxnoter.ui.main.stage.body;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.ObservableList;
-import javafx.geometry.Pos;
 import javafx.geometry.Side;
-import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
-import team.zxorg.zxnoter.resource.GlobalResources;
-import team.zxorg.zxnoter.resource.ZXColor;
-import team.zxorg.zxnoter.resource.ZXResources;
-import team.zxorg.zxnoter.ui.component.TrackTooltip;
-import team.zxorg.zxnoter.ui.component.ZXIcon;
-import team.zxorg.zxnoter.ui.main.stage.body.side.BaseSideBarTab;
-import team.zxorg.zxnoter.ui.main.stage.body.side.FileManagerTab;
+import team.zxorg.zxnoter.ui.main.stage.body.side.filemanager.FileManagerTab;
 
 public class SideBar extends TabPane {
     ObservableList<String> styleClass = getStyleClass();

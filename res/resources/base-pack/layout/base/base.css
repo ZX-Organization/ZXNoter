@@ -1,6 +1,7 @@
 .label {
     -fx-text-fill: -color-font-usually;
 }
+
 .text {
     -fx-text-fill: -color-font-usually;
 }
@@ -461,10 +462,16 @@
     -fx-background-color: -color-theme-4;
 }
 
-.scroll-bar {
-    -fx-background-color: -color-theme-4;
+.scroll-bar:vertical {
+    -fx-background-color: transparent;
     -fx-border-color: -color-border-window;
     -fx-border-width: 0 1 0 1;
+}
+
+.scroll-bar:horizontal {
+    -fx-background-color: transparent;
+    -fx-border-color: -color-border-window;
+    -fx-border-width: 1 0 1 0;
 }
 
 
@@ -473,10 +480,11 @@
     -fx-background-radius: 2;
 }
 
-.scroll-bar .thumb:hover, .scroll-bar .thumb:pressed {
+.scroll-bar .thumb, .scroll-bar .thumb:pressed {
     -fx-background-color: -color-theme-1-light;
 }
-.scroll-pane .corner{
+
+.scroll-pane .corner {
     -fx-background-color: transparent;
 }
 
@@ -712,7 +720,7 @@
 
 .group-component {
     -fx-background-radius: 0;
-    -fx-background-color: -color-theme-4;
+    -fx-background-color: transparent;
     -fx-text-fill: -color-font-usually;
     -fx-border-color: -color-border-window;
     -fx-border-width: 1;
@@ -869,52 +877,96 @@
 
 
 .tree-view {
-    -fx-background-color: -color-theme-4;
-}
-.tree-view .virtual-flow .clipped-container .sheet .tree-cell{
     -fx-background-color: transparent;
 }
-.tree-view .virtual-flow .clipped-container .sheet .tree-cell:selected{
+
+.tree-view .virtual-flow .clipped-container .sheet .tree-cell {
+    -fx-background-color: transparent;
+}
+
+.tree-view .virtual-flow .clipped-container .sheet .tree-cell:selected {
     -fx-background-color: -color-theme-1;
 
 }
-.tree-view .virtual-flow .clipped-container .sheet .tree-cell > .text{
+
+.tree-view .virtual-flow .clipped-container .sheet .tree-cell > .text {
     -fx-fill: -color-font-usually;
 }
-.tree-view .virtual-flow .clipped-container .sheet .tree-cell:selected > .text{
+
+.tree-view .virtual-flow .clipped-container .sheet .tree-cell:selected > .text {
     -fx-fill: -color-font-light;
 }
 
 
-.arrow{
+.arrow {
     -fx-background-color: -color-font-usually;
 }
+
 .scroll-pane,
-.scroll-pane .viewport{
+.scroll-pane .viewport {
     -fx-background-color: transparent;
 }
+
 .combo-box,
-.choice-box{
+.choice-box {
     -fx-background-color: -color-theme-4;
     -fx-border-color: -color-border-window;
 }
 
 
-.list-view{
-    -fx-background-color: -color-theme-4;
+.list-view {
+    -fx-background-color: transparent;
     -fx-border-color: -color-border-window;
 }
 
-.list-view .virtual-flow .clipped-container .sheet .list-cell{
+.list-view .virtual-flow .clipped-container .sheet .list-cell {
     -fx-background-color: transparent;
 }
-.list-view .virtual-flow .clipped-container .sheet .list-cell:selected{
+
+.list-view .virtual-flow .clipped-container .sheet .list-cell:selected {
     -fx-background-color: -color-theme-1;
 
 }
-.list-view .virtual-flow .clipped-container .sheet .list-cell > .text{
+
+.list-view .virtual-flow .clipped-container .sheet .list-cell > .text {
     -fx-fill: -color-font-usually;
 }
-.list-view .virtual-flow .clipped-container .sheet .list-cell:selected > .text{
+
+.list-view .virtual-flow .clipped-container .sheet .list-cell:selected > .text {
     -fx-fill: -color-font-light;
+}
+
+.file-view {
+    -fx-border-color: -color-border-window;
+    -fx-border-width: 1;
+}
+
+.file-view .list-view,
+.file-view .tree-view {
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+}
+
+.border-color {
+    -fx-border-color: -color-border-window;
+}
+
+.border-color-top {
+    -fx-border-color: -color-border-window;
+    -fx-border-width: 1 0 0 0;
+}
+
+.border-color-right {
+    -fx-border-color: -color-border-window;
+    -fx-border-width: 0 1 0 0;
+}
+
+.border-color-bottom {
+    -fx-border-color: -color-border-window;
+    -fx-border-width: 0 0 1 0;
+}
+
+.border-color-left {
+    -fx-border-color: -color-border-window;
+    -fx-border-width: 0 0 0 1;
 }

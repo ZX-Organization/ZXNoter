@@ -1,30 +1,25 @@
-[03:16:55] [Main.main/INFO]: ZXNoter启动
-[03:16:55] [Main.main/INFO]: 初始化图形系统
-[03:16:55] [Main.main/INFO]: 系统语言代码 zh_CN
-[03:16:56] [Main.lambda$main$0/INFO]: 初始化配置
-[03:16:56] [ZXConfiguration.reload/INFO]: 载入全局配置
-[03:16:56] [ZXResources.<clinit>/INFO]: 载入基本资源
-[03:16:56] [ZXResources.clearPacks/INFO]: 清除资源包列表
-[03:16:56] [ZXResources.loadPack/INFO]: 载入资源包 zxnoter
-[03:16:56] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 color
-[03:16:56] [ZXResources.reloadGlobalResource/INFO]: 载入基础 资源[类型:color id:dark 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\color\dark]
-[03:16:56] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 icon
-[03:16:56] [ZXResources.reloadGlobalResource/INFO]: 载入基础 资源[类型:icon id:line 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\icon\line]
-[03:16:56] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 language
-[03:16:56] [ZXResources.reloadGlobalResource/INFO]: 载入基础 语言资源[id:'zh-cn', 语言数:51]
-[03:16:56] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 layout
-[03:16:56] [ZXResources.reloadGlobalResource/INFO]: 载入基础 资源[类型:layout id:base 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\layout\base]
-[03:16:56] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 sound
-[03:16:56] [ZXResources.reloadGlobalResource/INFO]: 载入基础 资源[类型:sound id:base 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\sound\base]
-[03:16:56] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 style
-[03:16:56] [ZXResources.reloadGlobalResource/INFO]: 载入基础 资源[类型:style id:map-editor-pink 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\style\map-editor\pink]
-[03:16:56] [SettingEditor.lambda$new$0/INFO]: 重新编制设置项SettingPaneItem@edb9269[styleClass=label]'用户偏好'
-[03:16:56] [ZXStage.<init>/INFO]: 实例化ZXN-UI窗口
-[03:16:56] [Main.lambda$main$0/INFO]: 显示ZXN-UI窗口
-[03:16:58] [ResourcePackSettingItem.lambda$initContent$1/INFO]: 用户导入资源包
-[03:17:00] [ResourcePackSettingItem.lambda$initContent$1/INFO]: 用户导入资源包 H:\test-pack.zip
-[03:17:03] [ZXResources.loadZipPack/INFO]: 载入Zip资源 jar:file:///D:/Projects/ZXNoter/resource/test-pack.zip
-[03:17:03] [ZXResources.loadPack/INFO]: 载入资源包 test
-[03:17:49] [SettingEditor.lambda$new$0/INFO]: 重新编制设置项SettingPaneItem@39024eab[styleClass=label]'语言'
-[03:17:49] [SettingEditor.lambda$new$0/INFO]: 重新编制设置项SettingPaneItem@65448297[styleClass=label]'资源'
-[03:17:50] [SettingEditor.lambda$new$0/INFO]: 重新编制设置项SettingPaneItem@edb9269[styleClass=label]'用户偏好'
+[02:00:02] [Main.main/INFO]: ZXNoter启动
+[02:00:02] [Main.main/INFO]: 初始化图形系统
+[02:00:02] [Main.main/INFO]: 系统语言代码 zh_CN
+[02:00:03] [Main.lambda$main$0/INFO]: 初始化配置
+[02:00:03] [ZXConfiguration.reload/INFO]: 载入全局配置
+[02:00:03] [ZXResources.<clinit>/INFO]: 载入基本资源
+[02:00:03] [ZXResources.clearPacks/INFO]: 清除资源包列表
+[02:00:03] [ZXResources.loadPack/INFO]: 载入资源包 zxnoter
+[02:00:03] [ZXResources.loadZipPack/INFO]: 载入Zip资源 jar:file:///D:/Projects/ZXNoter/resource/test-pack.zip
+[02:00:03] [ZXResources.loadPack/INFO]: 载入资源包 test
+[02:00:03] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 color
+[02:00:03] [ZXResources.reloadGlobalResource/INFO]: 载入基础 资源[类型:color id:dark 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\color\dark]
+[02:00:03] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 icon
+[02:00:03] [ZXResources.reloadGlobalResource/INFO]: 载入基础 资源[类型:icon id:line 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\icon\line]
+[02:00:03] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 language
+[02:00:03] [ZXResources.reloadGlobalResource/INFO]: 载入基础 语言资源[id:'zh-cn', 语言数:64]
+[02:00:03] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 layout
+[02:00:03] [ZXResources.reloadGlobalResource/INFO]: 载入基础 资源[类型:layout id:base 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\layout\base]
+[02:00:03] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 sound
+[02:00:03] [ZXResources.reloadGlobalResource/INFO]: 载入基础 资源[类型:sound id:base 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\sound\base]
+[02:00:03] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 style
+[02:00:03] [ZXResources.reloadGlobalResource/INFO]: 载入基础 资源[类型:style id:map-editor-pink 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\style\map-editor\pink]
+[02:00:03] [SettingEditor.lambda$new$0/INFO]: 重新编制设置项SettingPaneItem@7f447952[styleClass=label]'用户偏好'
+[02:00:03] [ZXStage.<init>/INFO]: 实例化ZXN-UI窗口
+[02:00:03] [Main.lambda$main$0/INFO]: 显示ZXN-UI窗口

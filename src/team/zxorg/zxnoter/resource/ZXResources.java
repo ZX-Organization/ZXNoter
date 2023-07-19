@@ -10,10 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import team.zxorg.zxnoter.ZXLogger;
 import team.zxorg.zxnoter.resource.pack.*;
-import team.zxorg.zxnoter.resource.preference.UserPreference;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -24,7 +21,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.stream.Stream;
-import java.util.zip.ZipInputStream;
 
 public class ZXResources {
     /**

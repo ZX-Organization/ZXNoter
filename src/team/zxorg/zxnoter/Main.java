@@ -28,6 +28,7 @@ public class Main {
         Logging.getJavaFXLogger().disableLogging();
 
         PlatformImpl.startup(() -> {
+            //再次开启javafx日志
             Logging.getJavaFXLogger().enableLogging();
             //初始化 (载入配置 使用资源)
             ZXLogger.info("初始化配置");

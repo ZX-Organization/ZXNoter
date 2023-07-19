@@ -11,7 +11,26 @@ import team.zxorg.zxnoter.resource.ZXColor;
 
 public class ZXIconButton extends Button {
     public ObjectProperty<ZXColor> color = new SimpleObjectProperty<>();
+
+    public ZXIconButton() {
+    }
+
+    public ZXIconButton(String iconKey, double size) {
+        setIconKey(iconKey);
+        setSize(size);
+        setColor(ZXColor.FONT_USUALLY);
+    }
+
+    public ZXIconButton(String iconKey, double size, String tipLangKey) {
+        setIconKey(iconKey);
+        setSize(size);
+        setColor(ZXColor.FONT_USUALLY);
+        new ZXTooltip(this, tipLangKey);
+    }
+
+
     public StringProperty iconKey = new SimpleStringProperty();
+
     {
         setFocused(false);
         getStyleClass().add("icon-button");
@@ -23,6 +42,7 @@ public class ZXIconButton extends Button {
             getStyleClass().add("button-" + newValue);
         });
     }
+
     public void setSize(double size) {
         setPrefSize(size, size);
         setMaxSize(size, size);

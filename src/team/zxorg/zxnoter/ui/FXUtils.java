@@ -1,13 +1,9 @@
 package team.zxorg.zxnoter.ui;
 
-import de.javagl.obj.FloatTuple;
-import de.javagl.obj.Obj;
-import de.javagl.obj.ObjData;
-import de.javagl.obj.ObjFace;
-import javafx.scene.shape.TriangleMesh;
+
 
 import java.nio.FloatBuffer;
-
+/*
 public class FXUtils {
     public static TriangleMesh getTriangleMesh(Obj obj) {
         // 创建JavaFX的TriangleMesh对象
@@ -36,4 +32,4 @@ public class FXUtils {
         }
         return triangleMesh;
     }
-}
+}*/

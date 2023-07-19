@@ -12,7 +12,7 @@ import team.zxorg.zxnoter.resource.ResourceWeight;
 import team.zxorg.zxnoter.resource.ZXResources;
 import team.zxorg.zxnoter.resource.pack.BaseResourcePack;
 import team.zxorg.zxnoter.resource.pack.LanguageResourcePack;
-import team.zxorg.zxnoter.resource.preference.UserPreference;
+import team.zxorg.zxnoter.resource.UserPreference;
 
 import java.util.HashMap;
 import java.util.Map;

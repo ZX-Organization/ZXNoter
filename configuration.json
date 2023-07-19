@@ -28,8 +28,8 @@
       }
     },
     "language": {
-      "useLocalLanguage": true,
       "languageCode": "zh-cn"
-    }
+    },
+    "projectDirectory": "./docs/reference"
   }
 }

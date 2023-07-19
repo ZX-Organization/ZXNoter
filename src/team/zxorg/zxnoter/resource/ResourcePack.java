@@ -7,7 +7,6 @@ import javafx.scene.image.Image;
 import team.zxorg.zxnoter.ZXLogger;
 import team.zxorg.zxnoter.resource.pack.LanguageResourcePack;
 import team.zxorg.zxnoter.resource.pack.BaseResourcePack;
-import team.zxorg.zxnoter.resource.preference.UserPreference;
 
 import java.io.IOException;
 import java.nio.file.Files;
