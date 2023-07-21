@@ -42,7 +42,7 @@ public class ResourcePackItem extends VBox {
         VBox info = new VBox(name, packName, describe);
         info.setPadding(new Insets(2));
         HBox root = new HBox(icon, info);
-        TrackTooltip trackTooltip = new TrackTooltip(this, Pos.TOP_CENTER, 0, TrackTooltip.BindAttributes.AUTO_POP_UP);
+        TrackTooltip trackTooltip = new TrackTooltip(this, Pos.TOP_CENTER, 0, TrackTooltip.BindAttributes.HOVER_POP_UP);
         trackTooltip.setShowDelay(Duration.ZERO);
         trackTooltip.setShowDuration(Duration.INDEFINITE);
         trackTooltip.setHideDelay(Duration.ZERO);

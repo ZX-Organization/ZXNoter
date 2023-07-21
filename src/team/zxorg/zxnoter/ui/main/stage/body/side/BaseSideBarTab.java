@@ -26,7 +26,7 @@ public class BaseSideBarTab extends Tab {
                 tabPane.isFold.set(false);
             }
         });
-        TrackTooltip trackTooltip = new TrackTooltip(zxIcon, Pos.BOTTOM_CENTER, 0, TrackTooltip.BindAttributes.AUTO_POP_UP);
+        TrackTooltip trackTooltip = new TrackTooltip(zxIcon, Pos.BOTTOM_CENTER, 0, TrackTooltip.BindAttributes.HOVER_POP_UP);
         trackTooltip.setPos(Pos.CENTER_RIGHT, false, 14);
         trackTooltip.textProperty().bind(GlobalResources.getLanguageContent(tipLanguageKey));
 

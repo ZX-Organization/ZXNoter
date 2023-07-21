@@ -1,10 +1,13 @@
 package team.zxorg.zxnoter.ui.component;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.event.EventHandler;
 import javafx.geometry.Bounds;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.PopupControl;
 import javafx.scene.control.Tooltip;
+import javafx.scene.input.MouseEvent;
 import javafx.util.Duration;
 
 public class TrackTooltip extends Tooltip {
@@ -24,9 +27,14 @@ public class TrackTooltip extends Tooltip {
         setPos(pos, false, offset);
         for (BindAttributes attr : attributes) {
             switch (attr) {
-                case AUTO_POP_UP -> Tooltip.install(bindNode, this);
+                case HOVER_POP_UP -> Tooltip.install(bindNode, this);
                 case POP_UP_INSTANTLY -> setShowDelay(Duration.ZERO);
                 case NOT_DISAPPEAR -> setShowDuration(Duration.INDEFINITE);
+                case CLICK_POP_UP -> bindNode.setOnMouseClicked(event -> showTrackTooltip());
+                case LOSE_FOCUS_DISAPPEAR -> {
+                    setAutoHide(true);
+                    setAutoFix(true);
+                }
             }
         }
     }
@@ -61,8 +69,11 @@ public class TrackTooltip extends Tooltip {
     }
 
     public enum BindAttributes {
-        AUTO_POP_UP,
-        POP_UP_INSTANTLY,
-        NOT_DISAPPEAR
+        HOVER_POP_UP,//悬停弹出
+        POP_UP_INSTANTLY,//弹出内部
+        NOT_DISAPPEAR,//不消失
+        CLICK_POP_UP,//点击弹出
+
+        LOSE_FOCUS_DISAPPEAR,//丢失焦点消失
     }
 }

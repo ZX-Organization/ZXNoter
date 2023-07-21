@@ -7,12 +7,12 @@ import team.zxorg.zxnoter.resource.ZXColor;
 
 public class ZXTextFieldGroup extends ZXGroupComponent {
     public ZXTextField textField;
+    public ZXIcon icon = new ZXIcon();
 
     public ZXTextFieldGroup(String promptTextKey, String iconKey) {
         textField = new ZXTextField();
         textField.setPromptTextKey(promptTextKey);
         HBox.setHgrow(textField, Priority.ALWAYS);
-        ZXIcon icon = new ZXIcon();
         icon.setColor(ZXColor.FONT_USUALLY);
         icon.setSize(22);
         icon.setIconKey(iconKey);

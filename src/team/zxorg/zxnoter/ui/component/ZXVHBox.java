@@ -12,8 +12,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 public class ZXVHBox {
-    Pane pane = new HBox();
-    ObjectProperty<Orientation> orientation = new SimpleObjectProperty<>(Orientation.HORIZONTAL);
+    private Pane pane = new HBox();
+    private final ObjectProperty<Orientation> orientation = new SimpleObjectProperty<>(Orientation.HORIZONTAL);
 
     {
         orientation.addListener((observable, oldValue, newValue) -> {

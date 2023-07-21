@@ -15,13 +15,14 @@ import team.zxorg.zxnoter.resource.ZXColor;
 import team.zxorg.zxnoter.resource.pack.BaseResourcePack;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class ZXLabel extends Label {
-    public ObjectProperty<ZXColor> color = new SimpleObjectProperty<>();
-    public StringProperty langKey = new SimpleStringProperty();
-    public TrackTooltip tooltip = new TrackTooltip(this, Pos.TOP_CENTER, 0);//工具提示
-    public StringProperty languageContent = new SimpleStringProperty();
-    public ArrayList<StringProperty> properties = new ArrayList<>();
+    private final ObjectProperty<ZXColor> color = new SimpleObjectProperty<>();
+    private final StringProperty langKey = new SimpleStringProperty();
+    private final TrackTooltip tooltip = new TrackTooltip(this, Pos.TOP_CENTER, 0);//工具提示
+    private final StringProperty languageContent = new SimpleStringProperty();
+    private final ArrayList<ObjectProperty> properties = new ArrayList<>();
 
     {
         langKey.addListener((observable, oldValue, newValue) -> {
@@ -39,8 +40,25 @@ public class ZXLabel extends Label {
             getStyleClass().add("text-" + newValue);
         });
         languageContent.addListener((observable, oldValue, newValue) -> {
-            setText(String.format(newValue, properties));
+
+            update(newValue);
         });
+    }
+
+    private void update(String newValue) {
+        if (newValue.contains("%")) {
+            int count = newValue.length() - newValue.replaceAll("%", "").length();
+            if (count > properties.size()) {
+                return;
+            }
+            Object[] objects = new Object[properties.size()];
+            for (int i = 0; i < properties.size(); i++) {
+                objects[i] = properties.get(i).get();
+            }
+            setText(String.format(newValue, objects));
+            return;
+        }
+        setText(newValue);
     }
 
     public ZXLabel(String langKey, ZXColor color) {
@@ -51,6 +69,23 @@ public class ZXLabel extends Label {
     public ZXLabel(String langKey) {
         setColor(ZXColor.FONT_USUALLY);
         setLangKey(langKey);
+    }
+
+    public ZXLabel(String langKey, ObjectProperty... properties) {
+        setColor(ZXColor.FONT_USUALLY);
+        setLangKey(langKey);
+        for (ObjectProperty property : properties) {
+            this.properties.add(property);
+            property.addListener((observable, oldValue, newValue) -> {
+                update(languageContent.getValue());
+            });
+        }
+    }
+
+    public ObjectProperty getProperty(int index) {
+        if (index >= properties.size())
+            throw new IllegalArgumentException("下标异常");
+        return properties.get(index);
     }
 
     public void setColor(ZXColor zxColor) {

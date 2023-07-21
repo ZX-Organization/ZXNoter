@@ -45,6 +45,16 @@ public class ZXIcon extends Pane {
         return ZXFileIcon.unknown;
     }
 
+    public static ZXFileIcon getFileIcon(String file) {
+        String extensionName = file;
+        extensionName = extensionName.substring(extensionName.lastIndexOf(".") + 1);
+        extensionName = extensionName.toLowerCase();
+        ZXFileIcon returnIcon = fileIconMap.get(extensionName);
+        if (returnIcon != null)
+            return returnIcon;
+        return ZXFileIcon.unknown;
+    }
+
 
     public ZXIcon() {
     }
@@ -55,7 +65,7 @@ public class ZXIcon extends Pane {
             shapeProperty().bind(GlobalResources.getIcon(newValue));
         });
         color.addListener((observable, oldValue, newValue) -> {
-            getStyleClass().filtered(s -> s.contains("bg-")).clear();
+            getStyleClass().removeAll(getStyleClass().filtered(s -> s.contains("bg-")));
             getStyleClass().add("bg-" + newValue);
         });
     }
