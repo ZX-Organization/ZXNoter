@@ -50,4 +50,8 @@ public class UserPreference {
     public static Path getProjectDirectory() {
         return Path.of(config.getString("projectDirectory"));
     }
+
+    public static JSONObject getSideConfiguration(String sideKey) {
+        return config.getJSONObject("side-bar").getJSONObject(sideKey);
+    }
 }

@@ -4,20 +4,15 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
-import javafx.scene.control.Label;
+import javafx.scene.control.Button;
 import javafx.scene.control.Tooltip;
 import team.zxorg.zxnoter.resource.GlobalResources;
 import team.zxorg.zxnoter.resource.ZXColor;
-import team.zxorg.zxnoter.resource.pack.BaseResourcePack;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
-public class ZXLabel extends Label {
+public class ZXButton extends Button {
     private final ObjectProperty<ZXColor> color = new SimpleObjectProperty<>();
     private final StringProperty langKey = new SimpleStringProperty();
     private final TrackTooltip tooltip = new TrackTooltip(this, Pos.TOP_CENTER, 0);//工具提示
@@ -36,11 +31,10 @@ public class ZXLabel extends Label {
             }
         });
         color.addListener((observable, oldValue, newValue) -> {
-            getStyleClass().removeAll(getStyleClass().filtered(s -> s.contains("text-")));
-            getStyleClass().add("text-" + newValue);
+            getStyleClass().removeAll(getStyleClass().filtered(s -> s.contains("button-")));
+            getStyleClass().add("button-" + newValue);
         });
         languageContent.addListener((observable, oldValue, newValue) -> {
-
             update(newValue);
         });
     }
@@ -61,17 +55,17 @@ public class ZXLabel extends Label {
         setText(newValue);
     }
 
-    public ZXLabel(String langKey, ZXColor color) {
+    public ZXButton(String langKey, ZXColor color) {
         setColor(color);
         setLangKey(langKey);
     }
 
-    public ZXLabel(String langKey) {
+    public ZXButton(String langKey) {
         setColor(ZXColor.FONT_USUALLY);
         setLangKey(langKey);
     }
 
-    public ZXLabel(String langKey, ObjectProperty... properties) {
+    public ZXButton(String langKey, ObjectProperty... properties) {
         setColor(ZXColor.FONT_USUALLY);
         setLangKey(langKey);
         for (ObjectProperty property : properties) {

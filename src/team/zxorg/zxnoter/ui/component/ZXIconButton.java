@@ -38,8 +38,8 @@ public class ZXIconButton extends Button {
             shapeProperty().bind(GlobalResources.getIcon(newValue));
         });
         color.addListener((observable, oldValue, newValue) -> {
-            getStyleClass().removeAll(getStyleClass().filtered(s -> s.contains("button-")));
-            getStyleClass().add("button-" + newValue);
+            getStyleClass().removeAll(getStyleClass().filtered(s -> s.contains("icon-button-")));
+            getStyleClass().add("icon-button-" + newValue);
         });
     }
 

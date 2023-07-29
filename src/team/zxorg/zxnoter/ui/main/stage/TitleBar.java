@@ -11,14 +11,16 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import team.zxorg.zxnoter.resource.ZXColor;
 import team.zxorg.zxnoter.resource.ZXResources;
+import team.zxorg.zxnoter.resource.project.ZXProject;
 import team.zxorg.zxnoter.ui.component.ComponentFactory;
 
 public class TitleBar extends HBox {
     //菜单栏
     public MenuBar menuBar = new MenuBar();
+    ZXProject zxProject;
 
-    public TitleBar() {
-
+    public TitleBar(ZXProject zxProject) {
+        this.zxProject = zxProject;
         //标题栏
         setPrefSize(Region.USE_COMPUTED_SIZE, 30);
         setMinHeight(Region.USE_PREF_SIZE);
@@ -34,18 +36,18 @@ public class TitleBar extends HBox {
 
         {//构建菜单
             {//文件
-                Menu fileMenu = ComponentFactory.menu("title-bar.menu.file");
+                Menu fileMenu = ComponentFactory.menu("title-bar.file");
                 {//创建
-                    Menu createMenu = ComponentFactory.menu("title-bar.menu.file.create");
+                    Menu createMenu = ComponentFactory.menu("title-bar.file.create");
                     createMenu.setGraphic(ZXResources.getIconPane("document.folder-add", 18, ZXColor.FONT_USUALLY));
 
                     {//项目
-                        MenuItem createProject = ComponentFactory.menuItem("title-bar.menu.file.create.project");
+                        MenuItem createProject = ComponentFactory.menuItem("title-bar.file.create.project");
                         createProject.setGraphic(ZXResources.getIconPane("document.file-ppt", 18, ZXColor.FONT_USUALLY));
                         createProject.setOnAction(event -> {
                             System.out.println("创建一个项目");
                         });
-                        MenuItem createMap = ComponentFactory.menuItem("title-bar.menu.file.create.zxmap");
+                        MenuItem createMap = ComponentFactory.menuItem("title-bar.file.create.zxmap");
                         createMap.setGraphic(ZXResources.getIconPane("software.file-zxm", 18, ZXColor.YELLOW));
                         createMap.setOnAction(event -> {
                             System.out.println("创建一个谱面");
@@ -57,14 +59,15 @@ public class TitleBar extends HBox {
                     }
 
                     //打开项目或文件
-                    MenuItem openMenu = ComponentFactory.menuItem("title-bar.menu.file.open");
+                    MenuItem openMenu = ComponentFactory.menuItem("title-bar.file.open");
                     openMenu.setGraphic(ZXResources.getIconPane("document.folder-open", 18, ZXColor.FONT_LIGHT));
                     openMenu.setOnAction(event -> {
-                        System.out.println("打开一个项目或文件");
+                        zxProject.openProject(getScene().getWindow());
+                        System.out.println("打开一个项目");
                     });
 
                     //打开最近
-                    Menu recentMenu = ComponentFactory.menu("title-bar.menu.file.recent");
+                    Menu recentMenu = ComponentFactory.menu("title-bar.file.recent");
                     recentMenu.setGraphic(ZXResources.getIconPane("system.time", 18, ZXColor.FONT_LIGHT));
                     {
 
@@ -75,21 +78,22 @@ public class TitleBar extends HBox {
                     }
 
                     //关闭项目
-                    MenuItem closeMenu = ComponentFactory.menuItem("title-bar.menu.file.close");
+                    MenuItem closeMenu = ComponentFactory.menuItem("title-bar.file.close");
                     closeMenu.setGraphic(ZXResources.getIconPane("system.close", 18, ZXColor.FONT_LIGHT));
                     closeMenu.setOnAction(event -> {
+
                         System.out.println("关闭项目");
                     });
 
                     //设置
-                    MenuItem settingMenu = ComponentFactory.menuItem("title-bar.menu.file.setting");
+                    MenuItem settingMenu = ComponentFactory.menuItem("title-bar.file.setting");
                     settingMenu.setGraphic(ZXResources.getIconPane("system.settings-3", 18, ZXColor.FONT_LIGHT));
                     settingMenu.setOnAction(event -> {
                         System.out.println("设置");
                     });
 
                     //退出
-                    MenuItem quitMenu = ComponentFactory.menuItem("title-bar.menu.file.quit");
+                    MenuItem quitMenu = ComponentFactory.menuItem("title-bar.file.quit");
                     quitMenu.setGraphic(ZXResources.getIconPane("others.door-closed", 18, ZXColor.FONT_LIGHT));
                     quitMenu.setOnAction(event -> {
                         System.out.println("退出");

@@ -8,14 +8,14 @@ public class CreateFilePopupBox extends TrackPopupVHBox {
 
     public CreateFilePopupBox(Node bindNode, boolean isFolder, BindAttributes... attributes) {
         super(bindNode, Pos.TOP_CENTER, 0, attributes);
-        ZXTextFieldGroup createFileTextField = new ZXTextFieldGroup("side-bar.menu.file-manager.create-file.input", ZXFileIcon.unknown.iconKey);
+        ZXTextFieldGroup createFileTextField = new ZXTextFieldGroup("side-bar.file-manager.create-file.input", ZXFileIcon.unknown.iconKey);
         createFileTextField.setFocusTraversable(false);
         if (isFolder) {
-            createFileTextField.textField.setPromptTextKey("side-bar.menu.file-manager.create-folder.input");
+            createFileTextField.textField.setPromptTextKey("side-bar.file-manager.create-folder.input");
             createFileTextField.icon.color.set(ZXFileIcon.directory.color);
             createFileTextField.icon.iconKey.set(ZXFileIcon.directory.iconKey);
         } else {
-            createFileTextField.textField.setPromptTextKey("side-bar.menu.file-manager.create-file.input");
+            createFileTextField.textField.setPromptTextKey("side-bar.file-manager.create-file.input");
             createFileTextField.icon.color.set(ZXFileIcon.unknown.color);
             createFileTextField.textProperty().addListener((observable, oldValue, newValue) -> {
                 ZXFileIcon zxFileIcon = ZXIcon.getFileIcon(newValue);

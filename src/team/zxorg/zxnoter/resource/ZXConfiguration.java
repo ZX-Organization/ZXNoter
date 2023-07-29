@@ -37,7 +37,6 @@ public class ZXConfiguration {
         }
 
 
-
         ZXResources.clearPacks();//清除一遍资源
 
         ZXResources.loadInternalPacks();
@@ -51,4 +50,7 @@ public class ZXConfiguration {
 
     }
 
+    public static JSONObject getLast() {
+        return root.getJSONObject("last");
+    }
 }

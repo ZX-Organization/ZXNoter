@@ -30,6 +30,13 @@
     "language": {
       "languageCode": "zh-cn"
     },
-    "projectDirectory": "./docs/reference"
+    "projectDirectory": "./docs/reference",
+    "side-bar": {
+      "file-manager": {
+        "view": 0
+      }
+    }
+  },"last":{
+    "open-project":""
   }
 }

@@ -1,26 +1,31 @@
 package team.zxorg.zxnoter.ui.main.stage.body;
 
 import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.ObservableList;
 import javafx.geometry.Side;
 import javafx.scene.control.TabPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
+import team.zxorg.zxnoter.resource.project.ZXProject;
+import team.zxorg.zxnoter.resource.project.ZXProjectInfo;
 import team.zxorg.zxnoter.ui.main.stage.body.side.filemanager.FileManagerTab;
 
 public class SideBar extends TabPane {
     ObservableList<String> styleClass = getStyleClass();
     double lastWeight = 0;
     double foldWeight = 0;
-    double minWeight = 160;
-    double maxWeight = 400;
+    double minWeight = 220;
+    double maxWeight = 460;
 
     BooleanProperty isAdjust = new SimpleBooleanProperty(false);//调整宽度
     public BooleanProperty isFold = new SimpleBooleanProperty(false);//是否是折叠
     MouseEvent pressedMouseEvent;
+    public ZXProject zxProject;
 
-    public SideBar() {
+    public SideBar(ZXProject zxProject) {
+        this.zxProject = zxProject;
         styleClass.add("side-bar");
         setMinWidth(Region.USE_PREF_SIZE);
         setSide(Side.LEFT);
