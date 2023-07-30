@@ -1,26 +1,65 @@
-[21:33:58] [Main.main/INFO]: ZXNoter启动
-[21:33:58] [Main.main/INFO]: 初始化图形系统
-[21:33:58] [Main.main/INFO]: 系统语言代码 zh_CN
-[21:33:59] [Main.lambda$main$0/INFO]: 初始化配置
-[21:33:59] [ZXConfiguration.reload/INFO]: 载入全局配置
-[21:33:59] [ZXResources.<clinit>/INFO]: 载入基本资源
-[21:33:59] [ZXResources.clearPacks/INFO]: 清除资源包列表
-[21:33:59] [ZXResources.loadPack/INFO]: 载入资源包 zxnoter
-[21:33:59] [ZXResources.loadZipPack/INFO]: 载入Zip资源 jar:file:///D:/Projects/ZXNoter/resource/test-pack.zip
-[21:33:59] [ZXResources.loadPack/INFO]: 载入资源包 test
-[21:33:59] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 color
-[21:33:59] [ZXResources.reloadGlobalResource/INFO]: 载入基础 资源[类型:color id:dark 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\color\dark]
-[21:33:59] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 icon
-[21:33:59] [ZXResources.reloadGlobalResource/INFO]: 载入基础 资源[类型:icon id:line 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\icon\line]
-[21:33:59] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 language
-[21:33:59] [ZXResources.reloadGlobalResource/INFO]: 载入基础 语言资源[id:'zh-cn', 语言数:80]
-[21:33:59] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 layout
-[21:33:59] [ZXResources.reloadGlobalResource/INFO]: 载入基础 资源[类型:layout id:base 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\layout\base]
-[21:33:59] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 sound
-[21:33:59] [ZXResources.reloadGlobalResource/INFO]: 载入基础 资源[类型:sound id:base 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\sound\base]
-[21:33:59] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 style
-[21:33:59] [ZXResources.reloadGlobalResource/INFO]: 载入基础 资源[类型:style id:map-editor-pink 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\style\map-editor\pink]
-[21:34:00] [ZXStage.<init>/INFO]: 实例化ZXN-UI窗口
-[21:34:00] [SettingEditor.lambda$new$0/INFO]: 重新编制设置项SettingPaneItem@2b36fcd8[styleClass=label]'用户偏好'
-[21:34:00] [Main.lambda$main$0/INFO]: 显示ZXN-UI窗口
-[21:34:16] [TitleBar.lambda$new$0/INFO]: 创建一个项目
+[16:24:44] [Main.main/INFO]: ZXNoter启动
+[16:24:44] [Main.main/INFO]: 初始化图形系统
+[16:24:44] [Main.main/INFO]: 系统语言代码 zh_CN
+[16:24:44] [Main.lambda$main$0/INFO]: 初始化配置
+[16:24:44] [ZXConfiguration.reload/INFO]: 载入全局配置
+[16:24:44] [ZXResources.<clinit>/INFO]: 载入基本资源
+[16:24:44] [ZXResources.clearPacks/INFO]: 清除资源包列表
+[16:24:45] [ZXResources.loadPack/INFO]: 载入资源包 zxnoter
+[16:24:45] [ZXResources.loadZipPack/INFO]: 载入Zip资源 jar:file:///D:/Projects/ZXNoter/resource/test-pack.zip
+[16:24:45] [ZXResources.loadPack/INFO]: 载入资源包 test
+[16:24:45] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 color
+[16:24:45] [ZXResources.reloadGlobalResource/INFO]: 载入基础 资源[类型:color id:dark 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\color\dark]
+[16:24:45] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 icon
+[16:24:45] [ZXResources.reloadGlobalResource/INFO]: 载入基础 资源[类型:icon id:line 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\icon\line]
+[16:24:45] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 language
+[16:24:45] [ZXResources.reloadGlobalResource/INFO]: 载入基础 语言资源[id:'zh-cn', 语言数:119]
+[16:24:45] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 layout
+[16:24:45] [ZXResources.reloadGlobalResource/INFO]: 载入基础 资源[类型:layout id:base 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\layout\base]
+[16:24:45] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 sound
+[16:24:45] [ZXResources.reloadGlobalResource/INFO]: 载入基础 资源[类型:sound id:base 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\sound\base]
+[16:24:45] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 style
+[16:24:45] [ZXResources.reloadGlobalResource/INFO]: 载入基础 资源[类型:style id:map-editor-pink 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\style\map-editor\pink]
+[16:24:45] [ZXStage.<init>/INFO]: 实例化ZXN-UI窗口
+[16:24:45] [ZXProject.openLastProject/INFO]: 打开之前项目 D:\Projects\ZXNoter\docs\reference
+[16:24:45] [Main.lambda$main$0/INFO]: 显示ZXN-UI窗口
+[16:24:47] [SettingEditor.lambda$new$0/INFO]: 重新编制设置项SettingPaneItem@18515fb3[styleClass=label]'用户偏好'
+[16:24:49] [SettingEditor.lambda$new$0/INFO]: 重新编制设置项SettingPaneItem@45b36fe2[styleClass=label]'用户偏好'
+[16:24:51] [EditorTabPane.lambda$handleContentArea$6/INFO]: 布局分隔水平
+[16:24:54] [BaseResourceSettingItem.lambda$initContent$2/INFO]: 设置资源[类型:icon id:fill 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\icon\fill]
+[16:24:54] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 icon
+[16:24:54] [ZXResources.reloadGlobalResource/INFO]: 载入基础 资源[类型:icon id:fill 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\icon\fill]
+[16:24:55] [BaseResourceSettingItem.lambda$initContent$2/INFO]: 设置资源[类型:icon id:line 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\icon\line]
+[16:24:55] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 icon
+[16:24:55] [ZXResources.reloadGlobalResource/INFO]: 载入基础 资源[类型:icon id:line 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\icon\line]
+[16:24:56] [BaseResourceSettingItem.lambda$initContent$2/INFO]: 设置资源[类型:icon id:fill 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\icon\fill]
+[16:24:56] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 icon
+[16:24:56] [ZXResources.reloadGlobalResource/INFO]: 载入基础 资源[类型:icon id:fill 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\icon\fill]
+[16:24:56] [BaseResourceSettingItem.lambda$initContent$2/INFO]: 设置资源[类型:icon id:line 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\icon\line]
+[16:24:56] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 icon
+[16:24:56] [ZXResources.reloadGlobalResource/INFO]: 载入基础 资源[类型:icon id:line 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\icon\line]
+[16:24:56] [BaseResourceSettingItem.lambda$initContent$2/INFO]: 设置资源[类型:icon id:fill 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\icon\fill]
+[16:24:56] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 icon
+[16:24:56] [ZXResources.reloadGlobalResource/INFO]: 载入基础 资源[类型:icon id:fill 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\icon\fill]
+[16:24:56] [BaseResourceSettingItem.lambda$initContent$2/INFO]: 设置资源[类型:icon id:line 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\icon\line]
+[16:24:56] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 icon
+[16:24:56] [ZXResources.reloadGlobalResource/INFO]: 载入基础 资源[类型:icon id:line 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\icon\line]
+[16:24:58] [BaseResourceSettingItem.lambda$initContent$2/INFO]: 设置语言资源[id:'en-us', 语言数:48]
+[16:24:58] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 language
+[16:24:58] [ZXResources.reloadGlobalResource/INFO]: 载入基础 语言资源[id:'en-us', 语言数:48]
+[16:24:58] [BaseResourceSettingItem.lambda$initContent$2/INFO]: 设置语言资源[id:'zh-cn', 语言数:119]
+[16:24:58] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 language
+[16:24:58] [ZXResources.reloadGlobalResource/INFO]: 载入基础 语言资源[id:'zh-cn', 语言数:119]
+[16:24:58] [BaseResourceSettingItem.lambda$initContent$2/INFO]: 设置语言资源[id:'en-us', 语言数:48]
+[16:24:58] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 language
+[16:24:58] [ZXResources.reloadGlobalResource/INFO]: 载入基础 语言资源[id:'en-us', 语言数:48]
+[16:24:59] [BaseResourceSettingItem.lambda$initContent$2/INFO]: 设置语言资源[id:'zh-cn', 语言数:119]
+[16:24:59] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 language
+[16:24:59] [ZXResources.reloadGlobalResource/INFO]: 载入基础 语言资源[id:'zh-cn', 语言数:119]
+[16:25:02] [BaseEditor.lambda$handleTabCloseButton$7/INFO]: 关闭: 编辑器[设置]
+[16:25:05] [SettingEditor.lambda$new$0/INFO]: 重新编制设置项SettingPaneItem@69748a63[styleClass=label]'用户偏好'
+[16:25:09] [EditorTabPane.lambda$handleContentArea$6/INFO]: 布局分隔水平
+[16:25:10] [SettingEditor.lambda$new$0/INFO]: 重新编制设置项SettingPaneItem@7feaee57[styleClass=label]'用户偏好'
+[16:25:16] [SettingEditor.lambda$new$0/INFO]: 重新编制设置项SettingPaneItem@400e0df5[styleClass=label]'用户偏好'
+[16:25:26] [SettingEditor.lambda$new$0/INFO]: 重新编制设置项SettingPaneItem@dd072af[styleClass=label]'图标'
+[16:25:58] [ZXConfiguration.saveConfig/INFO]: 保存全局配置

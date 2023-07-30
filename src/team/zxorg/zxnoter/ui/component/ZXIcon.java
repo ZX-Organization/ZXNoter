@@ -7,6 +7,7 @@ import javafx.beans.property.StringProperty;
 import javafx.scene.layout.Pane;
 import team.zxorg.zxnoter.resource.GlobalResources;
 import team.zxorg.zxnoter.resource.ZXColor;
+import team.zxorg.zxnoter.resource.ZXFileType;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -18,41 +19,41 @@ public class ZXIcon extends Pane {
     public StringProperty iconKey = new SimpleStringProperty();
 
 
-    public static final HashMap<String, ZXFileIcon> fileIconMap = new HashMap<>();
+    public static final HashMap<String, ZXFileType> fileIconMap = new HashMap<>();
 
     static {
-        for (ZXFileIcon icon : ZXFileIcon.values()) {
+        for (ZXFileType icon : ZXFileType.values()) {
             fileIconMap.put(icon.extensionName, icon);
         }
     }
 
-    public ZXIcon(ZXFileIcon zxFileIcon,double size) {
+    public ZXIcon(ZXFileType zxFileIcon, double size) {
         setIconKey(zxFileIcon.iconKey);
-        setColor(zxFileIcon.color);
+        setColor(zxFileIcon.type.color);
         setSize(size);
     }
 
 
-    public static ZXFileIcon getFileIcon(Path file) {
+    public static ZXFileType getFileIcon(Path file) {
         if (Files.isDirectory(file))
-            return ZXFileIcon.directory;
+            return ZXFileType.directory;
         String extensionName = file.getFileName().toString();
         extensionName = extensionName.substring(extensionName.lastIndexOf(".") + 1);
         extensionName = extensionName.toLowerCase();
-        ZXFileIcon returnIcon = fileIconMap.get(extensionName);
+        ZXFileType returnIcon = fileIconMap.get(extensionName);
         if (returnIcon != null)
             return returnIcon;
-        return ZXFileIcon.unknown;
+        return ZXFileType.unknown;
     }
 
-    public static ZXFileIcon getFileIcon(String file) {
+    public static ZXFileType getFileIcon(String file) {
         String extensionName = file;
         extensionName = extensionName.substring(extensionName.lastIndexOf(".") + 1);
         extensionName = extensionName.toLowerCase();
-        ZXFileIcon returnIcon = fileIconMap.get(extensionName);
+        ZXFileType returnIcon = fileIconMap.get(extensionName);
         if (returnIcon != null)
             return returnIcon;
-        return ZXFileIcon.unknown;
+        return ZXFileType.unknown;
     }
 
 

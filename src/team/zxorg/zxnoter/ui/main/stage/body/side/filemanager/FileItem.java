@@ -3,7 +3,7 @@ package team.zxorg.zxnoter.ui.main.stage.body.side.filemanager;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
-import team.zxorg.zxnoter.ui.component.ZXFileIcon;
+import team.zxorg.zxnoter.resource.ZXFileType;
 import team.zxorg.zxnoter.ui.component.ZXIcon;
 
 import java.nio.file.Files;
@@ -13,7 +13,7 @@ public class FileItem extends HBox {
     public final Path path;
     public final Label fileName = new Label();
     public final boolean isDirectory;
-    public final ZXFileIcon icon;
+    public final ZXFileType icon;
 
     public FileItem(Path path) {
         this.path = path;

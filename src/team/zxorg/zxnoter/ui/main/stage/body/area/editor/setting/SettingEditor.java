@@ -14,6 +14,8 @@ import team.zxorg.zxnoter.ui.main.stage.body.area.editor.setting.pane.RootSettin
 import team.zxorg.zxnoter.ui.main.stage.body.area.editor.setting.item.BaseSettingItem;
 import team.zxorg.zxnoter.ui.main.stage.body.area.editor.setting.pane.SettingPaneItem;
 
+import java.io.OutputStream;
+
 public class SettingEditor extends BaseEditor {
     VBox settingItemsPane;
 
@@ -79,6 +81,11 @@ public class SettingEditor extends BaseEditor {
 
         });
 
+    }
+
+    @Override
+    public boolean saveFile(OutputStream outputStream) {
+        return false;
     }
 
 

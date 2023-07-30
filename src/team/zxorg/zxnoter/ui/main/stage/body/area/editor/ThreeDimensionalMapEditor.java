@@ -16,6 +16,7 @@ import team.zxorg.zxnoter.resource.ZXResources;
 import team.zxorg.zxnoter.ui.main.stage.body.EditorArea;
 
 import java.io.File;
+import java.io.OutputStream;
 
 public class ThreeDimensionalMapEditor extends BaseEditor {
     MouseEvent mouseEvent;
@@ -136,5 +137,10 @@ public class ThreeDimensionalMapEditor extends BaseEditor {
         }*/
 
         setContent(subScene);
+    }
+
+    @Override
+    public boolean saveFile(OutputStream outputStream) {
+        return false;
     }
 }

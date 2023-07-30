@@ -13,14 +13,16 @@ import team.zxorg.zxnoter.resource.ZXColor;
 import team.zxorg.zxnoter.resource.ZXResources;
 import team.zxorg.zxnoter.resource.project.ZXProject;
 import team.zxorg.zxnoter.ui.component.ComponentFactory;
+import team.zxorg.zxnoter.ui.main.ZXStage;
+import team.zxorg.zxnoter.ui.main.stage.body.area.editor.setting.SettingEditor;
 
 public class TitleBar extends HBox {
     //菜单栏
     public MenuBar menuBar = new MenuBar();
     ZXProject zxProject;
 
-    public TitleBar(ZXProject zxProject) {
-        this.zxProject = zxProject;
+    public TitleBar(ZXStage zxStage) {
+        this.zxProject = zxStage.project;
         //标题栏
         setPrefSize(Region.USE_COMPUTED_SIZE, 30);
         setMinHeight(Region.USE_PREF_SIZE);
@@ -63,7 +65,6 @@ public class TitleBar extends HBox {
                     openMenu.setGraphic(ZXResources.getIconPane("document.folder-open", 18, ZXColor.FONT_LIGHT));
                     openMenu.setOnAction(event -> {
                         zxProject.openProject(getScene().getWindow());
-                        System.out.println("打开一个项目");
                     });
 
                     //打开最近
@@ -81,15 +82,15 @@ public class TitleBar extends HBox {
                     MenuItem closeMenu = ComponentFactory.menuItem("title-bar.file.close");
                     closeMenu.setGraphic(ZXResources.getIconPane("system.close", 18, ZXColor.FONT_LIGHT));
                     closeMenu.setOnAction(event -> {
-
-                        System.out.println("关闭项目");
+                        zxProject.closeProject();
                     });
 
                     //设置
                     MenuItem settingMenu = ComponentFactory.menuItem("title-bar.file.setting");
                     settingMenu.setGraphic(ZXResources.getIconPane("system.settings-3", 18, ZXColor.FONT_LIGHT));
                     settingMenu.setOnAction(event -> {
-                        System.out.println("设置");
+
+                        zxStage.editorArea.editorTabPane.createEditor(new SettingEditor());
                     });
 
                     //退出

@@ -49,6 +49,7 @@ public class ZXProject {
                 }
             }
         });
+
     }
 
     /**
@@ -56,7 +57,17 @@ public class ZXProject {
      */
     public void openProject(Path path) {
         projectPath.set(path);
+        ZXConfiguration.getLast().put("open-project", path.toString());
     }
+
+    /**
+     * 关闭项目
+     */
+    public void closeProject() {
+        projectPath.set(null);
+        ZXConfiguration.getLast().put("open-project", "");
+    }
+
 
     /**
      * 打开项目
@@ -71,8 +82,20 @@ public class ZXProject {
         }
         File openFile = directoryChooser.showDialog(ownerWindow);
         if (openFile != null) {
-            ZXConfiguration.getLast().put("open-project", openFile.toString());
             openProject(openFile.toPath());
         }
     }
+
+    public void openLastProject() {
+        String path = ZXConfiguration.getLast().getString("open-project");
+        if (!"".equals(path)) {
+            ZXLogger.info("打开之前项目 " + path);
+            File lastFile = new File(path);
+            if (lastFile.exists())
+                openProject(lastFile.toPath());
+        }
+    }
+
+
+
 }

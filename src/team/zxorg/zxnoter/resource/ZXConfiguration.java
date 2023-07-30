@@ -5,6 +5,8 @@ import com.alibaba.fastjson2.JSONObject;
 import team.zxorg.zxnoter.ZXLogger;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.nio.file.*;
 
 /**
@@ -28,9 +30,9 @@ public class ZXConfiguration {
      * 重载配置 (会重新载入资源文件)
      */
     public static void reload() {
-        try {
+        try (InputStream inputStream = Files.newInputStream(Paths.get("configuration.json"))) {
             ZXLogger.info("载入全局配置");
-            root = JSON.parseObject(Files.newInputStream(Paths.get("configuration.json")));
+            root = JSON.parseObject(inputStream);
         } catch (IOException e) {
             ZXLogger.severe("载入全局配置失败");
             throw new RuntimeException(e);
@@ -48,6 +50,16 @@ public class ZXConfiguration {
             ZXResources.reloadGlobalResource(resourceType);//应用本地资源包
         }
 
+    }
+
+    public static void saveConfig() {
+        try (OutputStream outputStream = Files.newOutputStream(Paths.get("configuration.json"))) {
+            ZXLogger.info("保存全局配置");
+            JSON.writeTo(outputStream, root);
+        } catch (IOException e) {
+            ZXLogger.severe("保存全局配置失败");
+            throw new RuntimeException(e);
+        }
     }
 
     public static JSONObject getLast() {

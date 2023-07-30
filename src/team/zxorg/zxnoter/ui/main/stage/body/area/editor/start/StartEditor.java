@@ -14,6 +14,8 @@ import team.zxorg.zxnoter.ui.component.ZXLabel;
 import team.zxorg.zxnoter.ui.component.ZXTextFieldGroup;
 import team.zxorg.zxnoter.ui.main.stage.body.area.editor.BaseEditor;
 
+import java.io.OutputStream;
+
 public class StartEditor extends BaseEditor {
 
     public StartEditor() {
@@ -44,5 +46,10 @@ public class StartEditor extends BaseEditor {
 
 
         setClosable(false);
+    }
+
+    @Override
+    public boolean saveFile(OutputStream outputStream) {
+        return false;
     }
 }

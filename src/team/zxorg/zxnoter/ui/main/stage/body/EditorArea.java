@@ -1,6 +1,8 @@
 package team.zxorg.zxnoter.ui.main.stage.body;
 
 import javafx.geometry.Orientation;
+import javafx.scene.Node;
+import javafx.scene.control.Tab;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -12,6 +14,7 @@ import team.zxorg.zxnoter.ui.main.stage.body.area.editor.BaseEditor;
 import team.zxorg.zxnoter.ui.main.stage.body.area.editor.setting.SettingEditor;
 import team.zxorg.zxnoter.ui.main.stage.body.area.editor.start.StartEditor;
 
+import java.nio.file.Path;
 import java.util.HashMap;
 
 /**
@@ -21,6 +24,7 @@ public class EditorArea extends EditorLayout {
     public static BaseEditor dragTab;//拖拽中的Tab
     public static EditorTabPane dragTabPane;//拖拽中的TabPane
     public HashMap<String, BaseEditor> editorHashMap = new HashMap<>();
+    public EditorTabPane editorTabPane;
 
     @Override
     public String toString() {
@@ -33,18 +37,39 @@ public class EditorArea extends EditorLayout {
         setOrientation(Orientation.HORIZONTAL);
         HBox.setHgrow(this, Priority.ALWAYS);
 
-        EditorTabPane editorTabPane = new EditorTabPane(this, this);
+        editorTabPane = new EditorTabPane(this, this);
         getItems().add(editorTabPane);
 
         StartEditor startEditor = new StartEditor();
         editorTabPane.createEditor(startEditor);
 
-        SettingEditor settingEditor = new SettingEditor();
-        editorTabPane.createEditor(settingEditor);
-
         //setPrefSize(Double.MAX_VALUE, Double.MAX_VALUE);
         //setMinSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
         autoLayout();
+    }
+
+    public BaseEditor findEditor(Path openFile) {
+        return findEditor(openFile, this);
+    }
+
+
+
+
+    private BaseEditor findEditor(Path openFile, EditorLayout editorLayout) {
+        BaseEditor editor = null;
+        for (Node node : editorLayout.getItems()) {
+            if (node instanceof EditorLayout subEditorLayout) {
+                editor = findEditor(openFile, subEditorLayout);
+            } else if (node instanceof EditorTabPane editorTabPane) {
+                for (Tab tab:editorTabPane.getTabs()){
+                    if (tab instanceof BaseEditor baseEditor){
+
+                    }
+                }
+            }
+        }
+
+        return editor;
     }
 
 }

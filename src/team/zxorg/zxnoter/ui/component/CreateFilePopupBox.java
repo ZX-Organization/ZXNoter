@@ -3,24 +3,25 @@ package team.zxorg.zxnoter.ui.component;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import team.zxorg.zxnoter.resource.ZXColor;
+import team.zxorg.zxnoter.resource.ZXFileType;
 
 public class CreateFilePopupBox extends TrackPopupVHBox {
 
     public CreateFilePopupBox(Node bindNode, boolean isFolder, BindAttributes... attributes) {
         super(bindNode, Pos.TOP_CENTER, 0, attributes);
-        ZXTextFieldGroup createFileTextField = new ZXTextFieldGroup("side-bar.file-manager.create-file.input", ZXFileIcon.unknown.iconKey);
+        ZXTextFieldGroup createFileTextField = new ZXTextFieldGroup("side-bar.file-manager.create-file.input", ZXFileType.unknown.iconKey);
         createFileTextField.setFocusTraversable(false);
         if (isFolder) {
             createFileTextField.textField.setPromptTextKey("side-bar.file-manager.create-folder.input");
-            createFileTextField.icon.color.set(ZXFileIcon.directory.color);
-            createFileTextField.icon.iconKey.set(ZXFileIcon.directory.iconKey);
+            createFileTextField.icon.color.set(ZXFileType.directory.type.color);
+            createFileTextField.icon.iconKey.set(ZXFileType.directory.iconKey);
         } else {
             createFileTextField.textField.setPromptTextKey("side-bar.file-manager.create-file.input");
-            createFileTextField.icon.color.set(ZXFileIcon.unknown.color);
+            createFileTextField.icon.color.set(ZXFileType.unknown.type.color);
             createFileTextField.textProperty().addListener((observable, oldValue, newValue) -> {
-                ZXFileIcon zxFileIcon = ZXIcon.getFileIcon(newValue);
-                createFileTextField.icon.iconKey.set(zxFileIcon.iconKey);
-                createFileTextField.icon.color.set(zxFileIcon.color);
+                ZXFileType zxFileType = ZXIcon.getFileIcon(newValue);
+                createFileTextField.icon.iconKey.set(zxFileType.iconKey);
+                createFileTextField.icon.color.set(zxFileType.type.color);
             });
         }
 

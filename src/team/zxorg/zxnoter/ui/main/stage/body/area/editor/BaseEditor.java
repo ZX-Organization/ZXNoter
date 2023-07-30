@@ -15,11 +15,14 @@ import team.zxorg.zxnoter.ui.component.ZXIcon;
 import team.zxorg.zxnoter.ui.main.stage.body.EditorArea;
 import team.zxorg.zxnoter.ui.main.stage.body.area.EditorTabPane;
 
+import java.io.OutputStream;
+import java.nio.file.Path;
 import java.util.UUID;
 
 public abstract class BaseEditor extends Tab {
     private final ObjectProperty<TabDragStyle> tabDragStyle = new SimpleObjectProperty<>(null);
     public ZXIcon icon = new ZXIcon();
+    Path openFile;//打开的文件
 
     @Override
     public String toString() {
@@ -32,7 +35,6 @@ public abstract class BaseEditor extends Tab {
         icon.setSize(18);
         setGraphic(icon);
     }
-
 
     /**
      * 更新拖拽处理事件
@@ -168,4 +170,10 @@ public abstract class BaseEditor extends Tab {
     private enum TabDragStyle {
         left, right
     }
+
+    /**
+     * 保存文件
+     * @return 是否成功
+     */
+    public abstract boolean saveFile(OutputStream outputStream);
 }
