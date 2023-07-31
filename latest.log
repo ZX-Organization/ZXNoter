@@ -1,65 +1,211 @@
-[16:24:44] [Main.main/INFO]: ZXNoter启动
-[16:24:44] [Main.main/INFO]: 初始化图形系统
-[16:24:44] [Main.main/INFO]: 系统语言代码 zh_CN
-[16:24:44] [Main.lambda$main$0/INFO]: 初始化配置
-[16:24:44] [ZXConfiguration.reload/INFO]: 载入全局配置
-[16:24:44] [ZXResources.<clinit>/INFO]: 载入基本资源
-[16:24:44] [ZXResources.clearPacks/INFO]: 清除资源包列表
-[16:24:45] [ZXResources.loadPack/INFO]: 载入资源包 zxnoter
-[16:24:45] [ZXResources.loadZipPack/INFO]: 载入Zip资源 jar:file:///D:/Projects/ZXNoter/resource/test-pack.zip
-[16:24:45] [ZXResources.loadPack/INFO]: 载入资源包 test
-[16:24:45] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 color
-[16:24:45] [ZXResources.reloadGlobalResource/INFO]: 载入基础 资源[类型:color id:dark 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\color\dark]
-[16:24:45] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 icon
-[16:24:45] [ZXResources.reloadGlobalResource/INFO]: 载入基础 资源[类型:icon id:line 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\icon\line]
-[16:24:45] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 language
-[16:24:45] [ZXResources.reloadGlobalResource/INFO]: 载入基础 语言资源[id:'zh-cn', 语言数:119]
-[16:24:45] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 layout
-[16:24:45] [ZXResources.reloadGlobalResource/INFO]: 载入基础 资源[类型:layout id:base 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\layout\base]
-[16:24:45] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 sound
-[16:24:45] [ZXResources.reloadGlobalResource/INFO]: 载入基础 资源[类型:sound id:base 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\sound\base]
-[16:24:45] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 style
-[16:24:45] [ZXResources.reloadGlobalResource/INFO]: 载入基础 资源[类型:style id:map-editor-pink 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\style\map-editor\pink]
-[16:24:45] [ZXStage.<init>/INFO]: 实例化ZXN-UI窗口
-[16:24:45] [ZXProject.openLastProject/INFO]: 打开之前项目 D:\Projects\ZXNoter\docs\reference
-[16:24:45] [Main.lambda$main$0/INFO]: 显示ZXN-UI窗口
-[16:24:47] [SettingEditor.lambda$new$0/INFO]: 重新编制设置项SettingPaneItem@18515fb3[styleClass=label]'用户偏好'
-[16:24:49] [SettingEditor.lambda$new$0/INFO]: 重新编制设置项SettingPaneItem@45b36fe2[styleClass=label]'用户偏好'
-[16:24:51] [EditorTabPane.lambda$handleContentArea$6/INFO]: 布局分隔水平
-[16:24:54] [BaseResourceSettingItem.lambda$initContent$2/INFO]: 设置资源[类型:icon id:fill 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\icon\fill]
-[16:24:54] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 icon
-[16:24:54] [ZXResources.reloadGlobalResource/INFO]: 载入基础 资源[类型:icon id:fill 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\icon\fill]
-[16:24:55] [BaseResourceSettingItem.lambda$initContent$2/INFO]: 设置资源[类型:icon id:line 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\icon\line]
-[16:24:55] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 icon
-[16:24:55] [ZXResources.reloadGlobalResource/INFO]: 载入基础 资源[类型:icon id:line 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\icon\line]
-[16:24:56] [BaseResourceSettingItem.lambda$initContent$2/INFO]: 设置资源[类型:icon id:fill 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\icon\fill]
-[16:24:56] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 icon
-[16:24:56] [ZXResources.reloadGlobalResource/INFO]: 载入基础 资源[类型:icon id:fill 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\icon\fill]
-[16:24:56] [BaseResourceSettingItem.lambda$initContent$2/INFO]: 设置资源[类型:icon id:line 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\icon\line]
-[16:24:56] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 icon
-[16:24:56] [ZXResources.reloadGlobalResource/INFO]: 载入基础 资源[类型:icon id:line 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\icon\line]
-[16:24:56] [BaseResourceSettingItem.lambda$initContent$2/INFO]: 设置资源[类型:icon id:fill 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\icon\fill]
-[16:24:56] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 icon
-[16:24:56] [ZXResources.reloadGlobalResource/INFO]: 载入基础 资源[类型:icon id:fill 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\icon\fill]
-[16:24:56] [BaseResourceSettingItem.lambda$initContent$2/INFO]: 设置资源[类型:icon id:line 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\icon\line]
-[16:24:56] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 icon
-[16:24:56] [ZXResources.reloadGlobalResource/INFO]: 载入基础 资源[类型:icon id:line 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\icon\line]
-[16:24:58] [BaseResourceSettingItem.lambda$initContent$2/INFO]: 设置语言资源[id:'en-us', 语言数:48]
-[16:24:58] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 language
-[16:24:58] [ZXResources.reloadGlobalResource/INFO]: 载入基础 语言资源[id:'en-us', 语言数:48]
-[16:24:58] [BaseResourceSettingItem.lambda$initContent$2/INFO]: 设置语言资源[id:'zh-cn', 语言数:119]
-[16:24:58] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 language
-[16:24:58] [ZXResources.reloadGlobalResource/INFO]: 载入基础 语言资源[id:'zh-cn', 语言数:119]
-[16:24:58] [BaseResourceSettingItem.lambda$initContent$2/INFO]: 设置语言资源[id:'en-us', 语言数:48]
-[16:24:58] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 language
-[16:24:58] [ZXResources.reloadGlobalResource/INFO]: 载入基础 语言资源[id:'en-us', 语言数:48]
-[16:24:59] [BaseResourceSettingItem.lambda$initContent$2/INFO]: 设置语言资源[id:'zh-cn', 语言数:119]
-[16:24:59] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 language
-[16:24:59] [ZXResources.reloadGlobalResource/INFO]: 载入基础 语言资源[id:'zh-cn', 语言数:119]
-[16:25:02] [BaseEditor.lambda$handleTabCloseButton$7/INFO]: 关闭: 编辑器[设置]
-[16:25:05] [SettingEditor.lambda$new$0/INFO]: 重新编制设置项SettingPaneItem@69748a63[styleClass=label]'用户偏好'
-[16:25:09] [EditorTabPane.lambda$handleContentArea$6/INFO]: 布局分隔水平
-[16:25:10] [SettingEditor.lambda$new$0/INFO]: 重新编制设置项SettingPaneItem@7feaee57[styleClass=label]'用户偏好'
-[16:25:16] [SettingEditor.lambda$new$0/INFO]: 重新编制设置项SettingPaneItem@400e0df5[styleClass=label]'用户偏好'
-[16:25:26] [SettingEditor.lambda$new$0/INFO]: 重新编制设置项SettingPaneItem@dd072af[styleClass=label]'图标'
-[16:25:58] [ZXConfiguration.saveConfig/INFO]: 保存全局配置
+[16:09:00] [Main.main/INFO]: ZXNoter启动
+[16:09:00] [Main.main/INFO]: < 第 1 轮 > 👇
+[16:09:01] [Main.main/INFO]: 开摆
+[16:09:01] [Main.main/INFO]: HYP
+[16:09:01] [Main.main/INFO]: 看番
+[16:09:01] [Main.main/INFO]: ZXN
+[16:09:01] [Main.main/INFO]: ❌不正确😅
+[16:09:01] [Main.main/INFO]: < 第 2 轮 > 👇
+[16:09:01] [Main.main/INFO]: 开摆
+[16:09:01] [Main.main/INFO]: 开摆
+[16:09:01] [Main.main/INFO]: ZXN
+[16:09:01] [Main.main/INFO]: HYP
+[16:09:01] [Main.main/INFO]: ❌不正确😅
+[16:09:01] [Main.main/INFO]: < 第 3 轮 > 👇
+[16:09:02] [Main.main/INFO]: 开摆
+[16:09:02] [Main.main/INFO]: 看番
+[16:09:02] [Main.main/INFO]: 开摆
+[16:09:02] [Main.main/INFO]: 开摆
+[16:09:02] [Main.main/INFO]: ❌不正确😅
+[16:09:02] [Main.main/INFO]: < 第 4 轮 > 👇
+[16:09:02] [Main.main/INFO]: HYP
+[16:09:02] [Main.main/INFO]: ZXN
+[16:09:02] [Main.main/INFO]: 看番
+[16:09:02] [Main.main/INFO]: ZXN
+[16:09:02] [Main.main/INFO]: ❌不正确😅
+[16:09:02] [Main.main/INFO]: < 第 5 轮 > 👇
+[16:09:02] [Main.main/INFO]: HYP
+[16:09:02] [Main.main/INFO]: HYP
+[16:09:02] [Main.main/INFO]: HYP
+[16:09:02] [Main.main/INFO]: 开摆
+[16:09:02] [Main.main/INFO]: ❌不正确😅
+[16:09:02] [Main.main/INFO]: < 第 6 轮 > 👇
+[16:09:03] [Main.main/INFO]: HYP
+[16:09:03] [Main.main/INFO]: HYP
+[16:09:03] [Main.main/INFO]: ZXN
+[16:09:03] [Main.main/INFO]: HYP
+[16:09:03] [Main.main/INFO]: ❌不正确😅
+[16:09:03] [Main.main/INFO]: < 第 7 轮 > 👇
+[16:09:03] [Main.main/INFO]: 看番
+[16:09:03] [Main.main/INFO]: 开摆
+[16:09:03] [Main.main/INFO]: 看番
+[16:09:03] [Main.main/INFO]: HYP
+[16:09:03] [Main.main/INFO]: ❌不正确😅
+[16:09:03] [Main.main/INFO]: < 第 8 轮 > 👇
+[16:09:04] [Main.main/INFO]: ZXN
+[16:09:04] [Main.main/INFO]: 看番
+[16:09:04] [Main.main/INFO]: HYP
+[16:09:04] [Main.main/INFO]: 开摆
+[16:09:04] [Main.main/INFO]: ❌不正确😅
+[16:09:04] [Main.main/INFO]: < 第 9 轮 > 👇
+[16:09:04] [Main.main/INFO]: HYP
+[16:09:04] [Main.main/INFO]: HYP
+[16:09:04] [Main.main/INFO]: ZXN
+[16:09:04] [Main.main/INFO]: HYP
+[16:09:04] [Main.main/INFO]: ❌不正确😅
+[16:09:04] [Main.main/INFO]: < 第 10 轮 > 👇
+[16:09:05] [Main.main/INFO]: HYP
+[16:09:05] [Main.main/INFO]: 开摆
+[16:09:05] [Main.main/INFO]: 看番
+[16:09:05] [Main.main/INFO]: HYP
+[16:09:05] [Main.main/INFO]: ❌不正确😅
+[16:09:05] [Main.main/INFO]: < 第 11 轮 > 👇
+[16:09:05] [Main.main/INFO]: HYP
+[16:09:05] [Main.main/INFO]: ZXN
+[16:09:05] [Main.main/INFO]: 开摆
+[16:09:05] [Main.main/INFO]: 看番
+[16:09:05] [Main.main/INFO]: ❌不正确😅
+[16:09:05] [Main.main/INFO]: < 第 12 轮 > 👇
+[16:09:05] [Main.main/INFO]: 开摆
+[16:09:05] [Main.main/INFO]: 开摆
+[16:09:05] [Main.main/INFO]: 看番
+[16:09:05] [Main.main/INFO]: 看番
+[16:09:05] [Main.main/INFO]: ❌不正确😅
+[16:09:05] [Main.main/INFO]: < 第 13 轮 > 👇
+[16:09:06] [Main.main/INFO]: 开摆
+[16:09:06] [Main.main/INFO]: ZXN
+[16:09:06] [Main.main/INFO]: ZXN
+[16:09:06] [Main.main/INFO]: HYP
+[16:09:06] [Main.main/INFO]: ❌不正确😅
+[16:09:06] [Main.main/INFO]: < 第 14 轮 > 👇
+[16:09:06] [Main.main/INFO]: HYP
+[16:09:06] [Main.main/INFO]: HYP
+[16:09:06] [Main.main/INFO]: ZXN
+[16:09:06] [Main.main/INFO]: HYP
+[16:09:06] [Main.main/INFO]: ❌不正确😅
+[16:09:06] [Main.main/INFO]: < 第 15 轮 > 👇
+[16:09:07] [Main.main/INFO]: 开摆
+[16:09:07] [Main.main/INFO]: ZXN
+[16:09:07] [Main.main/INFO]: 看番
+[16:09:07] [Main.main/INFO]: 开摆
+[16:09:07] [Main.main/INFO]: ❌不正确😅
+[16:09:07] [Main.main/INFO]: < 第 16 轮 > 👇
+[16:09:07] [Main.main/INFO]: 开摆
+[16:09:07] [Main.main/INFO]: 开摆
+[16:09:07] [Main.main/INFO]: 看番
+[16:09:07] [Main.main/INFO]: 开摆
+[16:09:07] [Main.main/INFO]: ❌不正确😅
+[16:09:07] [Main.main/INFO]: < 第 17 轮 > 👇
+[16:09:07] [Main.main/INFO]: HYP
+[16:09:07] [Main.main/INFO]: ZXN
+[16:09:07] [Main.main/INFO]: 开摆
+[16:09:07] [Main.main/INFO]: ZXN
+[16:09:07] [Main.main/INFO]: ❌不正确😅
+[16:09:07] [Main.main/INFO]: < 第 18 轮 > 👇
+[16:09:08] [Main.main/INFO]: ZXN
+[16:09:08] [Main.main/INFO]: 开摆
+[16:09:08] [Main.main/INFO]: HYP
+[16:09:08] [Main.main/INFO]: ZXN
+[16:09:08] [Main.main/INFO]: ❌不正确😅
+[16:09:08] [Main.main/INFO]: < 第 19 轮 > 👇
+[16:09:08] [Main.main/INFO]: 看番
+[16:09:08] [Main.main/INFO]: 看番
+[16:09:08] [Main.main/INFO]: 开摆
+[16:09:08] [Main.main/INFO]: 开摆
+[16:09:08] [Main.main/INFO]: ❌不正确😅
+[16:09:08] [Main.main/INFO]: < 第 20 轮 > 👇
+[16:09:09] [Main.main/INFO]: ZXN
+[16:09:09] [Main.main/INFO]: 看番
+[16:09:09] [Main.main/INFO]: HYP
+[16:09:09] [Main.main/INFO]: 看番
+[16:09:09] [Main.main/INFO]: ❌不正确😅
+[16:09:09] [Main.main/INFO]: < 第 21 轮 > 👇
+[16:09:09] [Main.main/INFO]: 看番
+[16:09:09] [Main.main/INFO]: HYP
+[16:09:09] [Main.main/INFO]: ZXN
+[16:09:09] [Main.main/INFO]: ZXN
+[16:09:09] [Main.main/INFO]: ❌不正确😅
+[16:09:09] [Main.main/INFO]: < 第 22 轮 > 👇
+[16:09:09] [Main.main/INFO]: HYP
+[16:09:09] [Main.main/INFO]: 看番
+[16:09:09] [Main.main/INFO]: ZXN
+[16:09:09] [Main.main/INFO]: HYP
+[16:09:09] [Main.main/INFO]: ❌不正确😅
+[16:09:09] [Main.main/INFO]: < 第 23 轮 > 👇
+[16:09:10] [Main.main/INFO]: 开摆
+[16:09:10] [Main.main/INFO]: ZXN
+[16:09:10] [Main.main/INFO]: 开摆
+[16:09:10] [Main.main/INFO]: HYP
+[16:09:10] [Main.main/INFO]: ❌不正确😅
+[16:09:10] [Main.main/INFO]: < 第 24 轮 > 👇
+[16:09:10] [Main.main/INFO]: HYP
+[16:09:10] [Main.main/INFO]: 开摆
+[16:09:10] [Main.main/INFO]: 看番
+[16:09:10] [Main.main/INFO]: 看番
+[16:09:10] [Main.main/INFO]: ❌不正确😅
+[16:09:10] [Main.main/INFO]: < 第 25 轮 > 👇
+[16:09:11] [Main.main/INFO]: HYP
+[16:09:11] [Main.main/INFO]: ZXN
+[16:09:11] [Main.main/INFO]: HYP
+[16:09:11] [Main.main/INFO]: 看番
+[16:09:11] [Main.main/INFO]: ❌不正确😅
+[16:09:11] [Main.main/INFO]: < 第 26 轮 > 👇
+[16:09:11] [Main.main/INFO]: 看番
+[16:09:11] [Main.main/INFO]: 看番
+[16:09:11] [Main.main/INFO]: 看番
+[16:09:11] [Main.main/INFO]: 开摆
+[16:09:11] [Main.main/INFO]: ❌不正确😅
+[16:09:11] [Main.main/INFO]: < 第 27 轮 > 👇
+[16:09:11] [Main.main/INFO]: ZXN
+[16:09:11] [Main.main/INFO]: ZXN
+[16:09:11] [Main.main/INFO]: 开摆
+[16:09:11] [Main.main/INFO]: 看番
+[16:09:11] [Main.main/INFO]: ❌不正确😅
+[16:09:11] [Main.main/INFO]: < 第 28 轮 > 👇
+[16:09:12] [Main.main/INFO]: 开摆
+[16:09:12] [Main.main/INFO]: 看番
+[16:09:12] [Main.main/INFO]: 看番
+[16:09:12] [Main.main/INFO]: 开摆
+[16:09:12] [Main.main/INFO]: ❌不正确😅
+[16:09:12] [Main.main/INFO]: < 第 29 轮 > 👇
+[16:09:12] [Main.main/INFO]: 看番
+[16:09:12] [Main.main/INFO]: HYP
+[16:09:12] [Main.main/INFO]: ZXN
+[16:09:12] [Main.main/INFO]: 看番
+[16:09:12] [Main.main/INFO]: ❌不正确😅
+[16:09:12] [Main.main/INFO]: < 第 30 轮 > 👇
+[16:09:13] [Main.main/INFO]: ZXN
+[16:09:13] [Main.main/INFO]: 开摆
+[16:09:13] [Main.main/INFO]: HYP
+[16:09:13] [Main.main/INFO]: HYP
+[16:09:13] [Main.main/INFO]: ❌不正确😅
+[16:09:13] [Main.main/INFO]: < 第 31 轮 > 👇
+[16:09:13] [Main.main/INFO]: HYP
+[16:09:13] [Main.main/INFO]: 看番
+[16:09:13] [Main.main/INFO]: ZXN
+[16:09:13] [Main.main/INFO]: 开摆
+[16:09:13] [Main.main/INFO]: ❌不正确😅
+[16:09:13] [Main.main/INFO]: < 第 32 轮 > 👇
+[16:09:13] [Main.main/INFO]: 开摆
+[16:09:13] [Main.main/INFO]: 看番
+[16:09:13] [Main.main/INFO]: ZXN
+[16:09:13] [Main.main/INFO]: 看番
+[16:09:13] [Main.main/INFO]: ❌不正确😅
+[16:09:13] [Main.main/INFO]: < 第 33 轮 > 👇
+[16:09:14] [Main.main/INFO]: ZXN
+[16:09:14] [Main.main/INFO]: HYP
+[16:09:14] [Main.main/INFO]: 开摆
+[16:09:14] [Main.main/INFO]: ZXN
+[16:09:14] [Main.main/INFO]: ❌不正确😅
+[16:09:14] [Main.main/INFO]: < 第 34 轮 > 👇
+[16:09:14] [Main.main/INFO]: ZXN
+[16:09:14] [Main.main/INFO]: 开摆
+[16:09:14] [Main.main/INFO]: 开摆
+[16:09:14] [Main.main/INFO]: 看番
+[16:09:14] [Main.main/INFO]: ❌不正确😅
+[16:09:14] [Main.main/INFO]: < 第 35 轮 > 👇
+[16:09:15] [Main.main/INFO]: ZXN
+[16:09:15] [Main.main/INFO]: ZXN
+[16:09:15] [Main.main/INFO]: ZXN
+[16:09:15] [Main.main/INFO]: ZXN
+[16:09:15] [Main.main/INFO]: ✔️正确😋

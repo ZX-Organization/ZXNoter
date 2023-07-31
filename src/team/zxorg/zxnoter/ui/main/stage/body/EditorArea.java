@@ -54,15 +54,14 @@ public class EditorArea extends EditorLayout {
 
 
 
-
     private BaseEditor findEditor(Path openFile, EditorLayout editorLayout) {
         BaseEditor editor = null;
         for (Node node : editorLayout.getItems()) {
             if (node instanceof EditorLayout subEditorLayout) {
                 editor = findEditor(openFile, subEditorLayout);
             } else if (node instanceof EditorTabPane editorTabPane) {
-                for (Tab tab:editorTabPane.getTabs()){
-                    if (tab instanceof BaseEditor baseEditor){
+                for (Tab tab : editorTabPane.getTabs()) {
+                    if (tab instanceof BaseEditor baseEditor) {
 
                     }
                 }
