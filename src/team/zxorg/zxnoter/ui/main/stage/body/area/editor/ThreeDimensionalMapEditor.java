@@ -139,8 +139,5 @@ public class ThreeDimensionalMapEditor extends BaseEditor {
         setContent(subScene);
     }
 
-    @Override
-    public boolean saveFile(OutputStream outputStream) {
-        return false;
-    }
+
 }

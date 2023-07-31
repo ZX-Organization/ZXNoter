@@ -75,6 +75,7 @@
     "file-type.image": "图片",
     "file-type.text": "文本",
     "file-type.unknown": "未知",
+
     "title-bar.file": "文件",
     "title-bar.file.create": "新建",
     "title-bar.file.create.project": "项目...",
@@ -84,6 +85,7 @@
     "title-bar.file.close": "关闭项目",
     "title-bar.file.setting": "设置",
     "title-bar.file.quit": "退出",
+    
     "side-bar.file-manager": "文件管理",
     "side-bar.file-manager.not-open.title": "尚未打开项目",
     "side-bar.file-manager.not-open.open": "打开项目",
@@ -101,9 +103,9 @@
     "side-bar.file-manager.view": "视图",
     "side-bar.file-manager.create-folder.input": "文件夹名称",
     "side-bar.file-manager.create-file.down": "创建",
+
     "side-bar.pack-up": "打包",
-    "editor-area.editor-tab.insert-left": "向左插入",
-    "editor-area.editor-tab.insert-right": "向右插入",
+
     "editor.setting-editor.tab-title": "设置",
     "editor.setting-editor.search.clear": "清空搜索",
     "editor.setting-editor.settings.user-preference": "用户偏好",
@@ -123,6 +125,9 @@
     "editor.setting-editor.settings.resources.packs": "载入的资源包",
     "editor.setting-editor.settings.resources.used-resources": "引用的资源",
     "editor.setting-editor.settings.resources.reload-packs": "重载资源包",
+    "editor.setting-editor.settings.other":"其他",
+    "editor.setting-editor.settings.other.close-auto-save":"关闭时自动保存",
+
     "editor.start-editor.tab-title": "开始",
     "editor.start-editor.title": "ZXNoter 谱面编辑器",
     "editor.start-editor.fast-start": "快速开始",

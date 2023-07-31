@@ -48,8 +48,5 @@ public class StartEditor extends BaseEditor {
         setClosable(false);
     }
 
-    @Override
-    public boolean saveFile(OutputStream outputStream) {
-        return false;
-    }
+
 }

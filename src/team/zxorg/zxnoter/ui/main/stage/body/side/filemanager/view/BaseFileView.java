@@ -9,6 +9,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import team.zxorg.zxnoter.resource.UserPreference;
 import team.zxorg.zxnoter.resource.project.ZXProject;
+import team.zxorg.zxnoter.ui.main.ZXStage;
 import team.zxorg.zxnoter.ui.main.stage.body.side.filemanager.FileManagerTab;
 
 import java.nio.file.Path;

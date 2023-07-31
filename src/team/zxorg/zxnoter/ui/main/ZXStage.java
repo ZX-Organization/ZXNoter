@@ -22,7 +22,7 @@ import java.nio.file.Path;
 import java.util.Locale;
 
 public class ZXStage extends Stage {
-    public ZXProject project = new ZXProject();
+    public ZXProject project = new ZXProject(this);
     public TitleBar titleBar = new TitleBar(this);
     public HBox bodyHBox = new HBox();
     public StatusBar statusBar = new StatusBar(this);//状态栏

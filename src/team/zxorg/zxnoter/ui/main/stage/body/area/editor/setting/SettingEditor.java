@@ -83,10 +83,7 @@ public class SettingEditor extends BaseEditor {
 
     }
 
-    @Override
-    public boolean saveFile(OutputStream outputStream) {
-        return false;
-    }
+
 
 
     private void showSettingPanes(SettingPaneItem settingPaneItemTreeItem, String searchText) {

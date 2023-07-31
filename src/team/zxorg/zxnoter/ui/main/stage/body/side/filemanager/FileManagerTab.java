@@ -8,6 +8,8 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
@@ -84,6 +86,10 @@ public class FileManagerTab extends BaseSideBarTab {
         setFileViewType(config.getIntValue("view"));
     }
 
+
+
+
+
     public void setFileViewType(int fileViewType) {
         BaseFileView newFileView = fileViewProperty.get();
         if (fileViewType == -1) {
@@ -101,4 +107,6 @@ public class FileManagerTab extends BaseSideBarTab {
         }
         fileViewProperty.set(newFileView);
     }
+
+
 }

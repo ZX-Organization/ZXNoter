@@ -12,6 +12,7 @@ import javafx.stage.Window;
 import team.zxorg.zxnoter.ZXLogger;
 import team.zxorg.zxnoter.resource.GlobalResources;
 import team.zxorg.zxnoter.resource.ZXConfiguration;
+import team.zxorg.zxnoter.ui.main.ZXStage;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -23,8 +24,11 @@ import java.nio.file.Paths;
  */
 public class ZXProject {
     public ObjectProperty<Path> projectPath = new SimpleObjectProperty<>(Paths.get(""));//项目地址
-
     public ObjectProperty<ZXProjectInfo> projectInfo = new SimpleObjectProperty<>();//项目信息
+    public ZXStage zxStage;
+    public ZXProject(ZXStage zxStage) {
+        this.zxStage = zxStage;
+    }
 
     {
         projectPath.addListener((observable, oldValue, newValue) -> {
@@ -95,7 +99,6 @@ public class ZXProject {
                 openProject(lastFile.toPath());
         }
     }
-
 
 
 }

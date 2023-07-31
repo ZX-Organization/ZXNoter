@@ -104,7 +104,18 @@ public class EditorTabPane extends TabPane {
             }
         });
 
-
+        setOnDragExited((event) -> {
+            if (EditorArea.dragTab != null) {
+                System.out.println("退出");
+            }
+            event.consume();
+        });
+        setOnDragEntered((event) -> {
+            if (EditorArea.dragTab != null) {
+                System.out.println("进入");
+            }
+            event.consume();
+        });
     }
 
 
@@ -116,7 +127,6 @@ public class EditorTabPane extends TabPane {
                 contentArea.getStyleClass().add("layout-" + newValue.getId());
             }
         });
-
 
         contentArea.setOnDragOver(event -> {
             if (EditorArea.dragTab != null) {
@@ -142,62 +152,10 @@ public class EditorTabPane extends TabPane {
                 //清除所有布局高亮样式
                 layoutPositionObjectProperty.set(null);
 
-                //清除源Tab
-                EditorArea.dragTab.removeParentThis();
-
                 //通过计算获得目标布局方向位置
                 LayoutPosition layoutPosition = getLayoutPosition(contentArea, event);
-
-                if (layoutPosition == LayoutPosition.CENTER) {//拖拽到中间
-                    getTabs().add(EditorArea.dragTab);
-                } else {//进行布局生成
-                    // 进行布局生成
-                    Orientation targetOrientation = layoutPosition.getOrientation();
-                    Orientation sourceOrientation = parentLayout.getOrientation();
-
-                    //如果源布局内容只有一个并且和目标布局方向不相同 可以直接更改布局方向省去创建新布局
-                    if ((parentLayout.getItems().size() == 1) && targetOrientation != sourceOrientation) {
-                        parentLayout.setOrientation(targetOrientation);
-                        sourceOrientation = targetOrientation;
-                    }
-
-                    //找到此TabPane的在父布局索引
-                    int index = parentLayout.getItems().indexOf(this);
-
-                    //为拖拽Tab创建新的TabPane
-                    EditorTabPane newEditorTabPane = new EditorTabPane(rootArea, parentLayout);
-                    newEditorTabPane.getTabs().add(EditorArea.dragTab);
-
-                    //布局相同 直接加入布局
-                    if (targetOrientation == sourceOrientation) {
-                        //根据索引将新的tabPane直接加入到父布局里
-                        parentLayout.getItems().add(layoutPosition.isPriority() ? index : index + 1, newEditorTabPane);
-
-                        ZXLogger.info("布局分隔" + (targetOrientation == Orientation.HORIZONTAL ? "水平" : "垂直"));
-                    } else {//布局不相同 创建一个布局
-
-                        //创建新的垂直布局
-                        EditorLayout newEditorLayout = new EditorLayout(parentLayout);
-                        newEditorLayout.setOrientation(targetOrientation);//设置到目标布局方向
-                        //将新的布局根据索引位置添加新的布局
-                        parentLayout.getItems().add(Math.max(index, 0), newEditorLayout);
-
-                        this.removeParentThis();//删除父节点的自己
-                        this.parentLayout = newEditorLayout;//更改父布局为新的布局
-                        newEditorTabPane.parentLayout = newEditorLayout;//新的TabPane的父布局修改为新的布局
-
-                        //根据顺序将此Pane和新Pane加入到新布局里
-                        if (layoutPosition.isPriority()) {
-                            newEditorLayout.getItems().addAll(newEditorTabPane, this);
-                        } else {
-                            newEditorLayout.getItems().addAll(this, newEditorTabPane);
-                        }
-                        newEditorLayout.autoLayout();
-
-                        ZXLogger.info("布局增加新" + (targetOrientation == Orientation.HORIZONTAL ? "水平" : "垂直"));
-                    }
-
-                }
+                //处理拖拽
+                setLayout(layoutPosition, EditorArea.dragTab);
 
                 handleDragDropped();
                 event.setDropCompleted(true);
@@ -207,6 +165,62 @@ public class EditorTabPane extends TabPane {
 
         });
 
+    }
+
+    public void setLayout(LayoutPosition layoutPosition, BaseEditor sourceEditor) {
+        //清除源Tab
+        sourceEditor.removeParentThis();
+
+        if (layoutPosition == LayoutPosition.CENTER) {//拖拽到中间
+            getTabs().add(EditorArea.dragTab);
+        } else {//进行布局生成
+            // 进行布局生成
+            Orientation targetOrientation = layoutPosition.getOrientation();
+            Orientation sourceOrientation = parentLayout.getOrientation();
+
+            //如果源布局内容只有一个并且和目标布局方向不相同 可以直接更改布局方向省去创建新布局
+            if ((parentLayout.getItems().size() == 1) && targetOrientation != sourceOrientation) {
+                parentLayout.setOrientation(targetOrientation);
+                sourceOrientation = targetOrientation;
+            }
+
+            //找到此TabPane的在父布局索引
+            int index = parentLayout.getItems().indexOf(this);
+
+            //为拖拽Tab创建新的TabPane
+            EditorTabPane newEditorTabPane = new EditorTabPane(rootArea, parentLayout);
+            newEditorTabPane.getTabs().add(sourceEditor);
+
+            //布局相同 直接加入布局
+            if (targetOrientation == sourceOrientation) {
+                //根据索引将新的tabPane直接加入到父布局里
+                parentLayout.getItems().add(layoutPosition.isPriority() ? index : index + 1, newEditorTabPane);
+
+                ZXLogger.info("布局分隔" + (targetOrientation == Orientation.HORIZONTAL ? "水平" : "垂直"));
+            } else {//布局不相同 创建一个布局
+
+                //创建新的垂直布局
+                EditorLayout newEditorLayout = new EditorLayout(parentLayout);
+                newEditorLayout.setOrientation(targetOrientation);//设置到目标布局方向
+                //将新的布局根据索引位置添加新的布局
+                parentLayout.getItems().add(Math.max(index, 0), newEditorLayout);
+
+                this.removeParentThis();//删除父节点的自己
+                this.parentLayout = newEditorLayout;//更改父布局为新的布局
+                newEditorTabPane.parentLayout = newEditorLayout;//新的TabPane的父布局修改为新的布局
+
+                //根据顺序将此Pane和新Pane加入到新布局里
+                if (layoutPosition.isPriority()) {
+                    newEditorLayout.getItems().addAll(newEditorTabPane, this);
+                } else {
+                    newEditorLayout.getItems().addAll(this, newEditorTabPane);
+                }
+                newEditorLayout.autoLayout();
+
+                ZXLogger.info("布局增加新" + (targetOrientation == Orientation.HORIZONTAL ? "水平" : "垂直"));
+            }
+
+        }
     }
 
     public void removeParentThis() {
@@ -219,7 +233,7 @@ public class EditorTabPane extends TabPane {
     /**
      * 计算布局位置
      */
-    private LayoutPosition getLayoutPosition(Pane contentArea, DragEvent event) {
+    private static LayoutPosition getLayoutPosition(Pane contentArea, DragEvent event) {
         if (event.getX() < 64) {
             return LayoutPosition.LEFT;
         } else if (contentArea.getWidth() - event.getX() < 64) {
@@ -272,9 +286,11 @@ public class EditorTabPane extends TabPane {
      */
     public void handleDragDropped() {
         if (EditorArea.dragTab != null) {
-            //将焦点和选中交给拖拽tab
-            EditorArea.dragTab.getTabPane().getSelectionModel().select(EditorArea.dragTab);
-            EditorArea.dragTab.getTabPane().requestFocus();
+            if (EditorArea.dragTab.getTabPane()!=null){
+                //将焦点和选中交给拖拽tab
+                EditorArea.dragTab.getTabPane().getSelectionModel().select(EditorArea.dragTab);
+                EditorArea.dragTab.getTabPane().requestFocus();
+            }
         }
 
         //检查清除拖拽Tab之前的TabPane

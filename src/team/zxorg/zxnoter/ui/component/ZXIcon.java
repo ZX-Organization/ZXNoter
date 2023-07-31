@@ -34,7 +34,7 @@ public class ZXIcon extends Pane {
     }
 
 
-    public static ZXFileType getFileIcon(Path file) {
+    public static ZXFileType getFileType(Path file) {
         if (Files.isDirectory(file))
             return ZXFileType.directory;
         String extensionName = file.getFileName().toString();
@@ -46,7 +46,7 @@ public class ZXIcon extends Pane {
         return ZXFileType.unknown;
     }
 
-    public static ZXFileType getFileIcon(String file) {
+    public static ZXFileType getFileType(String file) {
         String extensionName = file;
         extensionName = extensionName.substring(extensionName.lastIndexOf(".") + 1);
         extensionName = extensionName.toLowerCase();

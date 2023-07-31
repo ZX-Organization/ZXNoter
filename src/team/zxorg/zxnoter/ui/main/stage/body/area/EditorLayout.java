@@ -4,6 +4,7 @@ import javafx.geometry.Orientation;
 import javafx.scene.Node;
 import javafx.scene.control.SplitPane;
 import team.zxorg.zxnoter.ZXLogger;
+import team.zxorg.zxnoter.ui.main.stage.body.EditorArea;
 
 import java.util.UUID;
 

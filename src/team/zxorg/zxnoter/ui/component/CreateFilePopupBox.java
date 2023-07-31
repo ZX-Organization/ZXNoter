@@ -19,7 +19,7 @@ public class CreateFilePopupBox extends TrackPopupVHBox {
             createFileTextField.textField.setPromptTextKey("side-bar.file-manager.create-file.input");
             createFileTextField.icon.color.set(ZXFileType.unknown.type.color);
             createFileTextField.textProperty().addListener((observable, oldValue, newValue) -> {
-                ZXFileType zxFileType = ZXIcon.getFileIcon(newValue);
+                ZXFileType zxFileType = ZXIcon.getFileType(newValue);
                 createFileTextField.icon.iconKey.set(zxFileType.iconKey);
                 createFileTextField.icon.color.set(zxFileType.type.color);
             });

@@ -9,6 +9,7 @@ public class RootSettingPane extends BaseSettingPane {
         addSettingPaneItem(new LanguageSettingPane());
         addSettingPaneItem(new ResourcesSettingPane());
         addSettingPaneItem(new IconSettingPane());
+        addSettingPaneItem(new OtherSettingPane());
     }
 
 }

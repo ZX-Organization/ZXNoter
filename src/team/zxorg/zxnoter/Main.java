@@ -82,11 +82,15 @@ public class Main {
                 ZXStage zxStage = new ZXStage();
                 ZXLogger.info("显示ZXN-UI窗口");
                 zxStage.show();
+
+                //创建软件实例
+                ZXStage zxStage2 = new ZXStage();
+                ZXLogger.info("显示ZXN-UI窗口");
+                zxStage2.show();
             });
 
 
         }
 
     }
-
 }

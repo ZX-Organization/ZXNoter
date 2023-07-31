@@ -1,13 +1,17 @@
 package team.zxorg.zxnoter.resource;
 
 import com.alibaba.fastjson2.JSONObject;
-import team.zxorg.zxnoter.resource.ResourceType;
-import team.zxorg.zxnoter.resource.ZXConfiguration;
+import javafx.beans.property.SimpleBooleanProperty;
 
 import java.nio.file.Path;
 
 public class UserPreference {
     private static final JSONObject config = ZXConfiguration.getScopeConfig("userPreference");
+
+
+
+    public static final SimpleBooleanProperty isCloseAutoSave = new SimpleBooleanProperty();//关闭时自动保存文件
+
 
     public static String getLanguageCode() {
         return config.getString("languageCode");
