@@ -23,10 +23,9 @@ public interface MapReader {
 
     /**
      * 读取文件Path.of()
-     * @param path 文件路径
      * @return
      */
-    ZXMap read(Path path) throws IOException;
+    ZXMap read() throws IOException;
 
     /**
      * 补全zxMap所需的反本地化信息
