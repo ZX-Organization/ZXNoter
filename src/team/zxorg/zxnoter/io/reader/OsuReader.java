@@ -1,6 +1,6 @@
 package team.zxorg.zxnoter.io.reader;
 
-import team.zxorg.zxnoter.info.map.UnLocalizedMapInfo;
+import team.zxorg.zxnoter.info.UnLocalizedMapInfo;
 import team.zxorg.zxnoter.map.ZXMap;
 import team.zxorg.zxnoter.info.map.OsuInfo;
 import team.zxorg.zxnoter.info.map.ZXMInfo;
@@ -22,10 +22,13 @@ import java.util.ArrayList;
  * @author xiang2333
  */
 public class OsuReader implements MapReader{
-    Path readPath;
-    UnLocalizedMapInfo unLocalizedMapInfo;
-    ZXMap zxMap;
+    private final Path readPath;
+    private UnLocalizedMapInfo unLocalizedMapInfo;
+    private ZXMap zxMap;
 
+    public OsuReader(Path path){
+        readPath = path;
+    }
     @Override
     public String getSupportFileExtension() {
         return "osu";
@@ -37,8 +40,8 @@ public class OsuReader implements MapReader{
     }
 
     @Override
-    public ZXMap read(Path path) throws IOException {
-        BufferedReader bfReader = new BufferedReader(new FileReader(path.toFile()));
+    public ZXMap read() throws IOException {
+        BufferedReader bfReader = new BufferedReader(new FileReader(readPath.toFile()));
         String readTemp;
         //读取模式[General]等
         byte mode = -1;

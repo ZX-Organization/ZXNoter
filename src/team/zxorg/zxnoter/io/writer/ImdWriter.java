@@ -1,6 +1,6 @@
 package team.zxorg.zxnoter.io.writer;
 
-import team.zxorg.zxnoter.info.map.UnLocalizedMapInfo;
+import team.zxorg.zxnoter.info.UnLocalizedMapInfo;
 import team.zxorg.zxnoter.map.ZXMap;
 import team.zxorg.zxnoter.info.map.ImdInfo;
 import team.zxorg.zxnoter.info.map.ZXMInfo;
@@ -16,7 +16,6 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.file.Path;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Set;

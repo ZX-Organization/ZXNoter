@@ -1,25 +1,27 @@
 package team.zxorg.zxnoter.io.reader;
 
 import team.zxorg.zxnoter.info.UnLocalizedMapInfo;
-import team.zxorg.zxnoter.map.ZXMap;
 import team.zxorg.zxnoter.info.map.ZXMInfo;
+import team.zxorg.zxnoter.map.ZXMap;
 
 import java.io.IOException;
 import java.nio.file.Path;
 
+
 /**
- * mc读取器(malody)
  * @author xiang2333
  */
-public class McReader implements MapReader{
-    private UnLocalizedMapInfo unLocalizedMapInfo;
+public class MMGReader implements MapReader {
     private final Path readPath;
-    public McReader (Path path){
-        readPath=path;
+    private UnLocalizedMapInfo unLocalizedMapInfo;
+
+    public MMGReader(Path path) {
+        this.readPath = path;
     }
+
     @Override
     public String getSupportFileExtension() {
-        return "mc";
+        return "mmg";
     }
 
     @Override
@@ -29,6 +31,8 @@ public class McReader implements MapReader{
 
     @Override
     public ZXMap read() throws IOException {
+
+
         return null;
     }
 

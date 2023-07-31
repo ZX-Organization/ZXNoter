@@ -1,7 +1,7 @@
 package team.zxorg.zxnoter.io.reader;
 
 import team.zxorg.zxnoter.info.map.ImdInfo;
-import team.zxorg.zxnoter.info.map.UnLocalizedMapInfo;
+import team.zxorg.zxnoter.info.UnLocalizedMapInfo;
 import team.zxorg.zxnoter.map.ZXMap;
 import team.zxorg.zxnoter.info.map.ZXMInfo;
 import team.zxorg.zxnoter.note.BaseNote;
@@ -24,10 +24,13 @@ import java.util.ArrayList;
  * @author xiang2333
  */
 public class ImdReader implements MapReader{
-    private Path readPath;
+    private final Path readPath;
     private ArrayList<Timing> timingPoints;
     private UnLocalizedMapInfo unLocalizedMapInfo;
 
+    public ImdReader(Path path){
+        readPath = path;
+    }
     @Override
     public String getSupportFileExtension() {
         return "imd";
@@ -39,15 +42,16 @@ public class ImdReader implements MapReader{
     }
 
     @Override
-    public ZXMap read(Path path) throws IOException {
-        String fileName = path.getFileName().toString();
+    public ZXMap read() throws IOException {
+        String fileName = readPath.getFileName().toString();
+
         //检查合法性
         boolean illegalFile = !fileName.endsWith(".imd") && !((fileName.length() - fileName.replaceAll("_", "").length()) == 2);
         if (illegalFile) {
             throw new RuntimeException("imd文件名非法");
         }
 
-        InputStream inputStream = Files.newInputStream(path);
+        InputStream inputStream = Files.newInputStream(readPath);
         byte[] data = inputStream.readAllBytes();
         ByteBuffer bf = ByteBuffer.wrap(data);
         inputStream.close();

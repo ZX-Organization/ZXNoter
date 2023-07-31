@@ -1,6 +1,7 @@
-package team.zxorg.zxnoter.info.map;
+package team.zxorg.zxnoter.info;
 
 import com.alibaba.fastjson2.JSONObject;
+import team.zxorg.zxnoter.info.map.ZXMInfo;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,7 +13,7 @@ import java.util.Set;
  */
 public class UnLocalizedMapInfo {
     public HashMap<ZXMInfo, String> allInfo;
-    ArrayList<AddListener> addInterfaceList;
+    ArrayList<ChangeListener> addInterfaceList;
 
     public UnLocalizedMapInfo() {
         allInfo = new HashMap<>();
@@ -32,7 +33,7 @@ public class UnLocalizedMapInfo {
     public void setInfo(ZXMInfo key, String value) {
 
         allInfo.put(key, value);
-        for (AddListener addCallBack:addInterfaceList) {
+        for (ChangeListener addCallBack:addInterfaceList) {
             addCallBack.callInfo(key,value);
         }
     }
@@ -57,10 +58,14 @@ public class UnLocalizedMapInfo {
      *  设置一个添加接口
      * @param listener 添加接口
      */
-    public void addListener(AddListener listener) {
+    public void addListener(ChangeListener listener) {
         this.addInterfaceList.add(listener) ;
     }
 
+    /**
+     * 转换为json存储
+     * @return json对象
+     */
     public JSONObject toJson(){
         JSONObject unlocalizedInfoJson = new JSONObject();
 
@@ -76,7 +81,7 @@ public class UnLocalizedMapInfo {
         return '\n' + "LocalizedMapInfo{" + allInfo +
                 '}';
     }
-    public interface AddListener {
+    public interface ChangeListener {
         void callInfo(ZXMInfo info,String value);
     }
 
