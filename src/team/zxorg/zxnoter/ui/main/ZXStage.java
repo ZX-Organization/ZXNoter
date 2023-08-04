@@ -27,7 +27,7 @@ public class ZXStage extends Stage {
     public HBox bodyHBox = new HBox();
     public StatusBar statusBar = new StatusBar(this);//状态栏
 
-    public EditorArea editorArea= new EditorArea();//编辑区域
+    public EditorArea editorArea= new EditorArea(project);//编辑区域
     public SideBar sideBar=new SideBar(project);//侧边栏
 
     public ZXStage() {

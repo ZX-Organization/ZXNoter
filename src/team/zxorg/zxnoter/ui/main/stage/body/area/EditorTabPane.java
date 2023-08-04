@@ -1,22 +1,30 @@
 package team.zxorg.zxnoter.ui.main.stage.body.area;
 
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.geometry.Orientation;
 import javafx.scene.Node;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.input.DragEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import team.zxorg.zxnoter.ZXLogger;
+import team.zxorg.zxnoter.resource.project.ZXProject;
 import team.zxorg.zxnoter.ui.main.stage.body.EditorArea;
-import team.zxorg.zxnoter.ui.main.stage.body.area.editor.BaseEditor;
+import team.zxorg.zxnoter.ui.main.stage.body.area.editor.base.BaseFileEditor;
+import team.zxorg.zxnoter.ui.main.stage.body.area.editor.base.BaseTab;
 
+import java.nio.file.Path;
 import java.util.List;
 import java.util.UUID;
 
@@ -29,6 +37,8 @@ public class EditorTabPane extends TabPane {
         return rootArea;
     }
 
+    public ZXProject zxProject;
+
     public String getName() {
         return uuid.toString().substring(19);
     }
@@ -40,9 +50,10 @@ public class EditorTabPane extends TabPane {
 
     private final ObjectProperty<LayoutPosition> layoutPositionObjectProperty = new SimpleObjectProperty<>();
 
-    public EditorTabPane(EditorArea rootArea, EditorLayout parentLayout) {
+    public EditorTabPane(EditorArea rootArea, EditorLayout parentLayout, ZXProject zxProject) {
         this.parentLayout = parentLayout;
         this.rootArea = rootArea;
+        this.zxProject = zxProject;
         setId(uuid.toString());
         //setTabClosingPolicy(TabPane.TabClosingPolicy.ALL_TABS);
         getStyleClass().add("editor-tab-pane");
@@ -63,7 +74,7 @@ public class EditorTabPane extends TabPane {
                 } else if (c.wasAdded()) {
                     List<? extends Tab> addedList = c.getAddedSubList();
                     for (Tab tab : addedList) {
-                        rootArea.editorHashMap.put(tab.getId(), (BaseEditor) tab);
+                        rootArea.editorHashMap.put(tab.getId(), (BaseTab) tab);
                     }
                 }
             }
@@ -73,9 +84,6 @@ public class EditorTabPane extends TabPane {
         setOnMouseClicked(event -> {
             //".tab-container > .tab-label >.text"
         });
-
-        //消耗拖拽
-        setOnDragDropped(Event::consume);
 
 
         //tabPane监听子节点变化
@@ -106,16 +114,53 @@ public class EditorTabPane extends TabPane {
 
         setOnDragExited((event) -> {
             if (EditorArea.dragTab != null) {
-                System.out.println("退出");
+
             }
             event.consume();
         });
-        setOnDragEntered((event) -> {
+
+
+        //消耗拖拽
+        setOnDragDropped((event -> {
+            //检查是否是拖拽的Tab
             if (EditorArea.dragTab != null) {
-                System.out.println("进入");
+                System.out.println("辅助拖拽");
+                //清除所有布局高亮样式
+                layoutPositionObjectProperty.set(null);
+
+                //处理拖拽
+                setLayout(LayoutPosition.CENTER, EditorArea.dragTab);
+
+                handleDragDropped();
+                event.setDropCompleted(true);
+            }
+            //消耗掉事件
+            event.consume();
+
+        }));
+
+        setOnDragOver(event -> {
+            if (EditorArea.dragTab != null) {
+                event.acceptTransferModes(TransferMode.MOVE);
             }
             event.consume();
         });
+
+
+      /*  focusedBooleanProperty.addListener((observable, oldValue, newValue) -> {
+            if (newValue)
+                getStyleClass().add("tab-focused");
+            else
+                getStyleClass().remove("tab-focused");
+        });*/
+
+        focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                rootArea.focusEditorTabPane.set(this);
+            }
+        });
+
+
     }
 
 
@@ -126,6 +171,10 @@ public class EditorTabPane extends TabPane {
             if (newValue != null) {
                 contentArea.getStyleClass().add("layout-" + newValue.getId());
             }
+        });
+
+        contentArea.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> {
+            rootArea.focusEditorTabPane.set(this);
         });
 
         contentArea.setOnDragOver(event -> {
@@ -165,9 +214,10 @@ public class EditorTabPane extends TabPane {
 
         });
 
+
     }
 
-    public void setLayout(LayoutPosition layoutPosition, BaseEditor sourceEditor) {
+    public void setLayout(LayoutPosition layoutPosition, BaseTab sourceEditor) {
         //清除源Tab
         sourceEditor.removeParentThis();
 
@@ -188,7 +238,7 @@ public class EditorTabPane extends TabPane {
             int index = parentLayout.getItems().indexOf(this);
 
             //为拖拽Tab创建新的TabPane
-            EditorTabPane newEditorTabPane = new EditorTabPane(rootArea, parentLayout);
+            EditorTabPane newEditorTabPane = new EditorTabPane(rootArea, parentLayout, zxProject);
             newEditorTabPane.getTabs().add(sourceEditor);
 
             //布局相同 直接加入布局
@@ -200,7 +250,7 @@ public class EditorTabPane extends TabPane {
             } else {//布局不相同 创建一个布局
 
                 //创建新的垂直布局
-                EditorLayout newEditorLayout = new EditorLayout(parentLayout);
+                EditorLayout newEditorLayout = new EditorLayout(parentLayout, zxProject);
                 newEditorLayout.setOrientation(targetOrientation);//设置到目标布局方向
                 //将新的布局根据索引位置添加新的布局
                 parentLayout.getItems().add(Math.max(index, 0), newEditorLayout);
@@ -285,27 +335,39 @@ public class EditorTabPane extends TabPane {
      * 处理拖拽完成后事
      */
     public void handleDragDropped() {
-        if (EditorArea.dragTab != null) {
-            if (EditorArea.dragTab.getTabPane()!=null){
+        EditorTabPane dragTabPane = EditorArea.dragTabPane;
+        BaseTab dragEditor = EditorArea.dragTab;
+
+        if (dragEditor != null) {
+            if (dragEditor.getTabPane() != null) {
                 //将焦点和选中交给拖拽tab
-                EditorArea.dragTab.getTabPane().getSelectionModel().select(EditorArea.dragTab);
-                EditorArea.dragTab.getTabPane().requestFocus();
+                dragEditor.getTabPane().getSelectionModel().select(dragEditor);
+                dragEditor.getTabPane().requestFocus();
             }
         }
 
         //检查清除拖拽Tab之前的TabPane
-        if (EditorArea.dragTabPane == null) {
+        if (dragTabPane == null) {
             ZXLogger.warning("触发未知异常 拖拽TabPane为null (你怎么能触发到的？？)");
             return;
         }
+
         //检查源堆叠数量 为空移除
-        if (EditorArea.dragTabPane.getTabs().isEmpty()) {
-            EditorArea.dragTabPane.removeParentThis();
+        if (dragTabPane.getTabs().isEmpty()) {
+            if (dragTabPane.parentLayout instanceof EditorArea editorArea) {
+                // 如果父布局是 EditorArea(Root)，并且其包含的子布局数量不等于1，则移除父布局
+                if (editorArea.getItems().size() != 1) {
+                    dragTabPane.removeParentThis();
+                }
+            } else {
+                // 如果父布局不是 EditorArea，则直接移除
+                dragTabPane.removeParentThis();
+            }
         }
 
         //检查源堆叠的父布局物品数 并计算布局
-        EditorArea.dragTabPane.parentLayout.checkItems();
-        EditorArea.dragTabPane.parentLayout.autoLayout();
+        dragTabPane.parentLayout.checkItems();
+        dragTabPane.parentLayout.autoLayout();
         //检查此父布局的布局
         parentLayout.autoLayout();
 
@@ -315,10 +377,9 @@ public class EditorTabPane extends TabPane {
     private void handleTabs(List<Node> tabs) {
         for (Node tab : tabs) {
             if (tab instanceof Pane pane) {
-                BaseEditor baseEditor = rootArea.editorHashMap.get(tab.getId());
-                baseEditor.updateDrag(pane, (Region) pane.getChildren().get(0));
+                BaseTab baseTab = rootArea.editorHashMap.get(tab.getId());
+                baseTab.updateDrag(pane, (Region) pane.getChildren().get(0));
             }
-
         }
     }
 
@@ -337,10 +398,17 @@ public class EditorTabPane extends TabPane {
     }
 
 
-    public void createEditor(BaseEditor editor) {
+    public void createEditor(BaseTab editor) {
         getTabs().add(editor);
         getSelectionModel().select(editor);
     }
 
+    public void createFileEditor(Path filePath) {
+        /*BaseFileEditor baseFileEditor;
+
+        getTabs().add(baseFileEditor);
+        getSelectionModel().select(baseFileEditor);
+        BaseFileEditor now = (BaseFileEditor) zxProject.editorMap.get(baseFileEditor.getFileItem().path);*/
+    }
 
 }

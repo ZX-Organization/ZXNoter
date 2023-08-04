@@ -4,6 +4,7 @@ import javafx.geometry.Orientation;
 import javafx.scene.Node;
 import javafx.scene.control.SplitPane;
 import team.zxorg.zxnoter.ZXLogger;
+import team.zxorg.zxnoter.resource.project.ZXProject;
 import team.zxorg.zxnoter.ui.main.stage.body.EditorArea;
 
 import java.util.UUID;
@@ -11,7 +12,7 @@ import java.util.UUID;
 public class EditorLayout extends SplitPane {
     protected EditorLayout parentLayout;//如果是null则为根(root)
     private final UUID uuid = UUID.randomUUID();
-
+    public ZXProject zxProject;
 
     public String getName() {
         return uuid.toString().substring(19);
@@ -34,8 +35,9 @@ public class EditorLayout extends SplitPane {
         }
     }
 
-    public EditorLayout(EditorLayout parentLayout) {
+    public EditorLayout(EditorLayout parentLayout,ZXProject zxProject) {
         this.parentLayout = parentLayout;
+        this.zxProject = zxProject;
         getStyleClass().add("editor-layout");
 
 
@@ -66,10 +68,10 @@ public class EditorLayout extends SplitPane {
 
     }
 
+    //自动计算布局占比
     public void autoLayout() {
         int size = getItems().size();
         double average = 1.0 / size;
-        //ZXLogger.logger.info("自动计算:" + size + " 平均:" + average + " 来自{" + getName() + "}");
         for (int i = 0; i < size; i++) {
             setDividerPosition(i, average * (i + 1));
         }

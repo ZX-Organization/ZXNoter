@@ -30,18 +30,18 @@ public class Main {
                 while (true) {
                     count++;
                     boolean found = true;
-
-                    System.out.print("< 第 " + count + " 轮 > 👇");
                     try {
-                        Thread.sleep(400);
+                        Thread.sleep(1);
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }
+                    StringBuilder stringBuilder = new StringBuilder();
+                    stringBuilder.append("< 第 " + count + " 轮 > 👉 ");
                     int firstRandomValue = new Random().nextInt(something.length);
-                    System.out.print(something[firstRandomValue]);
+                    stringBuilder.append(something[firstRandomValue]);
                     for (int i = 0; i < randomCounts - 1; i++) {
                         int nextRandomValue = new Random().nextInt(something.length);
-                        System.out.print(" " + something[nextRandomValue]);
+                        stringBuilder.append(" " + something[nextRandomValue]);
                         if (firstRandomValue != nextRandomValue) {
                             found = false;
                         }
@@ -49,10 +49,10 @@ public class Main {
 
 
                     if (found) {
-                        System.out.println(" ✔️正确😋");
+                        System.out.println(stringBuilder + " ✔️正确的😋");
                         break;
                     } else {
-                        System.out.println(" ❌不正确😅");
+                        System.out.println(stringBuilder + " ❌不正确😅");
                     }
                 }
 
@@ -83,10 +83,10 @@ public class Main {
                 ZXLogger.info("显示ZXN-UI窗口");
                 zxStage.show();
 
-                //创建软件实例
+             /*   //创建软件实例
                 ZXStage zxStage2 = new ZXStage();
                 ZXLogger.info("显示ZXN-UI窗口");
-                zxStage2.show();
+                zxStage2.show();*/
             });
 
 

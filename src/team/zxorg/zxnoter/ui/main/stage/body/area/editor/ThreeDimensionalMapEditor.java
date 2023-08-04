@@ -13,12 +13,14 @@ import javafx.scene.shape.MeshView;
 import javafx.scene.transform.Rotate;
 import javafx.scene.transform.Translate;
 import team.zxorg.zxnoter.resource.ZXResources;
+import team.zxorg.zxnoter.resource.project.ZXProject;
 import team.zxorg.zxnoter.ui.main.stage.body.EditorArea;
+import team.zxorg.zxnoter.ui.main.stage.body.area.editor.base.BaseTab;
+import team.zxorg.zxnoter.ui.main.stage.body.area.editor.base.BaseViewEditor;
 
 import java.io.File;
-import java.io.OutputStream;
 
-public class ThreeDimensionalMapEditor extends BaseEditor {
+public class ThreeDimensionalMapEditor extends BaseViewEditor {
     MouseEvent mouseEvent;
     Translate cameraTranslate = new Translate(0, 0, -15);
     Translate beforeCameraTranslate = new Translate(0, 0, -15);
@@ -27,8 +29,8 @@ public class ThreeDimensionalMapEditor extends BaseEditor {
     Rotate beforeCameraRotateX = new Rotate(0, Rotate.X_AXIS);
     Rotate beforeCameraRotateY = new Rotate(0, Rotate.Y_AXIS);
 
-    public ThreeDimensionalMapEditor(EditorArea area) {
-        super();
+    public ThreeDimensionalMapEditor(EditorArea area, ZXProject zxProject) {
+        super(zxProject);
 
 
         PerspectiveCamera camera = new PerspectiveCamera(true);
@@ -140,4 +142,7 @@ public class ThreeDimensionalMapEditor extends BaseEditor {
     }
 
 
+    @Override
+    protected void closed() {
+    }
 }

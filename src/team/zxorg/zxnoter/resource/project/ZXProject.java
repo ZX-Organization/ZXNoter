@@ -4,20 +4,21 @@ import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.stage.DirectoryChooser;
-import javafx.stage.FileChooser;
 import javafx.stage.Window;
 import team.zxorg.zxnoter.ZXLogger;
 import team.zxorg.zxnoter.resource.GlobalResources;
 import team.zxorg.zxnoter.resource.ZXConfiguration;
 import team.zxorg.zxnoter.ui.main.ZXStage;
+import team.zxorg.zxnoter.ui.main.stage.body.area.editor.base.BaseTab;
+import team.zxorg.zxnoter.ui.main.stage.body.area.editor.base.BaseFileEditor;
 
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 项目类
@@ -26,6 +27,9 @@ public class ZXProject {
     public ObjectProperty<Path> projectPath = new SimpleObjectProperty<>(Paths.get(""));//项目地址
     public ObjectProperty<ZXProjectInfo> projectInfo = new SimpleObjectProperty<>();//项目信息
     public ZXStage zxStage;
+
+    public HashMap<Path, BaseFileEditor> fileEditorMap = new HashMap<>();
+
     public ZXProject(ZXStage zxStage) {
         this.zxStage = zxStage;
     }
@@ -70,6 +74,10 @@ public class ZXProject {
     public void closeProject() {
         projectPath.set(null);
         ZXConfiguration.getLast().put("open-project", "");
+        for (Map.Entry<Path, BaseFileEditor> editorEntry : fileEditorMap.entrySet()) {
+            BaseFileEditor editor = editorEntry.getValue();
+            editor.close();
+        }
     }
 
 

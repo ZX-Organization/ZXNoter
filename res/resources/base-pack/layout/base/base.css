@@ -26,237 +26,6 @@
 }
 
 
-.bg-color-dark-blue {
-    -fx-background-color: -color-dark-blue;
-}
-
-.bg-color-blue {
-    -fx-background-color: -color-blue;
-}
-
-.bg-color-light-blue {
-    -fx-background-color: -color-light-blue;
-}
-
-.bg-color-dark-red {
-    -fx-background-color: -color-dark-red;
-}
-
-.bg-color-red {
-    -fx-background-color: -color-red;
-}
-
-.bg-color-light-red {
-    -fx-background-color: -color-light-red;
-}
-
-.bg-color-dark-purple {
-    -fx-background-color: -color-dark-purple;
-}
-
-.bg-color-purple {
-    -fx-background-color: -color-purple;
-}
-
-.bg-color-light-purple {
-    -fx-background-color: -color-light-purple;
-}
-
-.bg-color-dark-yellow {
-    -fx-background-color: -color-dark-yellow;
-}
-
-.bg-color-yellow {
-    -fx-background-color: -color-yellow;
-}
-
-.bg-color-light-yellow {
-    -fx-background-color: -color-light-yellow;
-}
-
-.bg-color-dark-green {
-    -fx-background-color: -color-dark-green;
-}
-
-.bg-color-green {
-    -fx-background-color: -color-green;
-}
-
-.bg-color-light-green {
-    -fx-background-color: -color-light-green;
-}
-
-.bg-color-dark-orange {
-    -fx-background-color: -color-dark-orange;
-}
-
-.bg-color-orange {
-    -fx-background-color: -color-orange;
-}
-
-.bg-color-light-orange {
-    -fx-background-color: -color-light-orange;
-}
-
-.bg-color-dark-pink {
-    -fx-background-color: -color-dark-pink;
-}
-
-.bg-color-pink {
-    -fx-background-color: -color-pink;
-}
-
-.bg-color-light-pink {
-    -fx-background-color: -color-light-pink;
-}
-
-.bg-color-dark-gray {
-    -fx-background-color: -color-dark-gray;
-}
-
-.bg-color-gray {
-    -fx-background-color: -color-gray;
-}
-
-.bg-color-light-gray {
-    -fx-background-color: -color-light-gray;
-}
-
-.bg-color-dark-white {
-    -fx-background-color: -color-dark-white;
-}
-
-.bg-color-white {
-    -fx-background-color: -color-white;
-}
-
-.bg-color-light-white {
-    -fx-background-color: -color-light-white;
-}
-
-.bg-color-font-usually {
-    -fx-background-color: -color-font-usually;
-}
-
-.bg-color-font-light {
-    -fx-background-color: -color-font-light;
-}
-
-.text-color-dark-blue {
-    -fx-text-fill: -color-dark-blue;
-}
-
-.text-color-blue {
-    -fx-text-fill: -color-blue;
-}
-
-.text-color-light-blue {
-    -fx-text-fill: -color-light-blue;
-}
-
-.text-color-dark-red {
-    -fx-text-fill: -color-dark-red;
-}
-
-.text-color-red {
-    -fx-text-fill: -color-red;
-}
-
-.text-color-light-red {
-    -fx-text-fill: -color-light-red;
-}
-
-.text-color-dark-purple {
-    -fx-text-fill: -color-dark-purple;
-}
-
-.text-color-purple {
-    -fx-text-fill: -color-purple;
-}
-
-.text-color-light-purple {
-    -fx-text-fill: -color-light-purple;
-}
-
-.text-color-dark-yellow {
-    -fx-text-fill: -color-dark-yellow;
-}
-
-.text-color-yellow {
-    -fx-text-fill: -color-yellow;
-}
-
-.text-color-light-yellow {
-    -fx-text-fill: -color-light-yellow;
-}
-
-.text-color-dark-green {
-    -fx-text-fill: -color-dark-green;
-}
-
-.text-color-green {
-    -fx-text-fill: -color-green;
-}
-
-.text-color-light-green {
-    -fx-text-fill: -color-light-green;
-}
-
-.text-color-dark-orange {
-    -fx-text-fill: -color-dark-orange;
-}
-
-.text-color-orange {
-    -fx-text-fill: -color-orange;
-}
-
-.text-color-light-orange {
-    -fx-text-fill: -color-light-orange;
-}
-
-.text-color-dark-pink {
-    -fx-text-fill: -color-dark-pink;
-}
-
-.text-color-pink {
-    -fx-text-fill: -color-pink;
-}
-
-.text-color-light-pink {
-    -fx-text-fill: -color-light-pink;
-}
-
-.text-color-dark-gray {
-    -fx-text-fill: -color-dark-gray;
-}
-
-.text-color-gray {
-    -fx-text-fill: -color-gray;
-}
-
-.text-color-light-gray {
-    -fx-text-fill: -color-light-gray;
-}
-
-.text-color-dark-white {
-    -fx-text-fill: -color-dark-white;
-}
-
-.text-color-white {
-    -fx-text-fill: -color-white;
-}
-
-.text-color-light-white {
-    -fx-text-fill: -color-light-white;
-}
-
-.text-color-font-usually {
-    -fx-text-fill: -color-font-usually;
-}
-
-.text-color-font-light {
-    -fx-text-fill: -color-font-light;
-}
 
 
 .title-bar {
@@ -265,21 +34,21 @@
     -fx-border-width: 0 0 1 0;
 }
 
-.menu-bar > .container > .menu {
+.menu-bar>.container>.menu {
     -fx-background-color: -color-theme-1;
 }
 
-.menu-bar > .container > .menu:hover,
-.menu-bar > .container > .menu:showing {
+.menu-bar>.container>.menu:hover,
+.menu-bar>.container>.menu:showing {
     -fx-background-color: -color-theme-1-light;
 }
 
-.menu-bar > .container > .menu > .label > .text {
+.menu-bar>.container>.menu>.label>.text {
     -fx-fill: -color-font-usually;
 }
 
-.menu-bar > .container > .menu:hover > .label > .text,
-.menu-bar > .container > .menu:showing > .label > .text {
+.menu-bar>.container>.menu:hover>.label>.text,
+.menu-bar>.container>.menu:showing>.label>.text {
     -fx-fill: -color-font-light;
 }
 
@@ -298,11 +67,11 @@
     -fx-background-color: -color-theme-3;
 }
 
-.menu-item > .label > .text {
+.menu-item>.label>.text {
     -fx-fill: -color-font-usually;
 }
 
-.menu-item:hover > .label > .text {
+.menu-item:hover>.label>.text {
     -fx-fill: -color-font-light;
 }
 
@@ -327,13 +96,11 @@
 }
 
 
-.tab-pane .tab-header-area .headers-region .tab .tab-container .tab-label > .text {
+.tab-pane .tab-header-area .headers-region .tab .tab-container .tab-label>.text {
     -fx-fill: -color-font-usually;
 }
 
-.tab-pane:focused .tab-header-area .headers-region .tab:selected .tab-container .tab-label > .text {
-    -fx-fill: -color-font-light;
-}
+
 
 .tab-pane .tab-header-area .headers-region .tab {
     -fx-background-color: -color-theme-4;
@@ -347,17 +114,19 @@
     -fx-border-color: -color-border-window;
 }
 
-.tab-pane:focused .tab-header-area .headers-region .tab:selected {
+
+.tab-pane-focused .tab-header-area .headers-region .tab:selected {
     -fx-background-color: -color-theme-1;
     -fx-border-color: -color-border-window;
 }
-
-
-.tab-pane:top .tab-header-area .headers-region .tab:selected:top .tab-container .tab-close-button {
-
+.tab-pane-focused .tab-header-area .headers-region .tab:selected .tab-container .tab-label>.text {
+    -fx-fill: -color-font-light;
 }
 
-.tab-pane:focused > .tab-header-area > .headers-region > .tab:selected .focus-indicator {
+
+.tab-pane:top .tab-header-area .headers-region .tab:selected:top .tab-container .tab-close-button {}
+
+.tab-pane:focused>.tab-header-area>.headers-region>.tab:selected .focus-indicator {
     -fx-border-color: transparent;
     -fx-border-width: 0;
 }
@@ -455,7 +224,7 @@
 }
 
 
-.workspace > .icon {
+.workspace>.icon {
     -fx-background-color: -color-theme-3;
 }
 
@@ -482,7 +251,8 @@
     -fx-padding: 0;
 }
 
-.scroll-bar .thumb:hover, .scroll-bar .thumb:pressed {
+.scroll-bar .thumb:hover,
+.scroll-bar .thumb:pressed {
     -fx-background-color: -color-theme-1-light;
 }
 
@@ -521,11 +291,11 @@
 }
 
 
-.h-tool-group-bar > .group > * {
+.h-tool-group-bar>.group>* {
     -fx-padding: 2;
 }
 
-.h-tool-group-bar > .group > .icon {
+.h-tool-group-bar>.group>.icon {
     -fx-background-color: -color-font-usually;
     -fx-background-insets: 0;
 }
@@ -540,7 +310,7 @@
     -fx-background-insets: 0;
 }*/
 
-.h-tool-group-bar > .group {
+.h-tool-group-bar>.group {
     -fx-padding: 0 4 0 4;
     -fx-border-color: -color-border-window;
     -fx-border-width: 0 1 0 0;
@@ -554,47 +324,57 @@
 }
 
 
-.v-tool-group-bar > .group > .button {
+.v-tool-group-bar>.group>.button {
     -fx-padding: 2;
     -fx-background-color: -color-font-usually;
     -fx-background-insets: 0;
 }
 
-.v-tool-group-bar > .group > .button:selected, .v-tool-group-bar > .group > .button:pressed {
+.v-tool-group-bar>.group>.button:selected,
+.v-tool-group-bar>.group>.button:pressed {
     -fx-background-color: -color-font-light;
 }
 
-.v-tool-group-bar > .group > .button:selected, .v-tool-group-bar > .group > .button:pressed, .v-tool-group-bar > .group > .button:focused {
+.v-tool-group-bar>.group>.button:selected,
+.v-tool-group-bar>.group>.button:pressed,
+.v-tool-group-bar>.group>.button:focused {
     -fx-padding: 2;
     -fx-border-width: 0;
     -fx-background-insets: 0;
 }
 
-.v-tool-group-bar > .group {
+.v-tool-group-bar>.group {
     -fx-padding: 4 0 4 0;
     -fx-border-color: -color-border-window;
     -fx-border-width: 0 0 1 0;
 }
 
 
-.text-field {
+.text-field,
+.text-area {
     -fx-padding: 5;
     -fx-background-radius: 0;
-    -fx-background-color: -color-theme-4;
+    -fx-background-color: transparent;
     -fx-text-fill: -color-font-usually;
     -fx-highlight-fill: #093939;
+    -fx-highlight-text-fill: -color-font-usually;
     -fx-border-color: -color-border-window;
     -fx-border-width: 1 1 1 1;
     -fx-prompt-text-fill: -color-font-usually;
 }
 
 
-.text-field:focused {
-
+.text-field:focused,
+.text-area:focused {
     -fx-background-radius: 0;
+    -fx-highlight-text-fill: -color-font-light;
     -fx-text-fill: -color-font-light;
     -fx-prompt-text-fill: transparent;
 }
+
+
+
+
 
 .separator:horizontal .line {
     -fx-padding: 1 4 0 4;
@@ -679,7 +459,8 @@
     -fx-background-color: -color-border-window;
 }
 
-.split-pane .split-pane-divider:hover, .split-pane .split-pane-divider:pressed {
+.split-pane .split-pane-divider:hover,
+.split-pane .split-pane-divider:pressed {
     -fx-background-color: -color-blue;
     -fx-padding: 0 1 0 1;
 }
@@ -1045,11 +826,11 @@
 
 }
 
-.tree-view .virtual-flow .clipped-container .sheet .tree-cell > .text {
+.tree-view .virtual-flow .clipped-container .sheet .tree-cell>.text {
     -fx-fill: -color-font-usually;
 }
 
-.tree-view .virtual-flow .clipped-container .sheet .tree-cell:selected > .text {
+.tree-view .virtual-flow .clipped-container .sheet .tree-cell:selected>.text {
     -fx-fill: -color-font-light;
 }
 
@@ -1084,11 +865,11 @@
 
 }
 
-.list-view .virtual-flow .clipped-container .sheet .list-cell > .text {
+.list-view .virtual-flow .clipped-container .sheet .list-cell>.text {
     -fx-fill: -color-font-usually;
 }
 
-.list-view .virtual-flow .clipped-container .sheet .list-cell:selected > .text {
+.list-view .virtual-flow .clipped-container .sheet .list-cell:selected>.text {
     -fx-fill: -color-font-light;
 }
 
@@ -1125,4 +906,262 @@
 .border-color-left {
     -fx-border-color: -color-border-window;
     -fx-border-width: 0 0 0 1;
+}
+
+.alert {
+    -fx-background-color: -color-theme-3;
+}
+
+
+/* 修改Alert标题的颜色 */
+.alert .header-panel {
+    -fx-background-color: -color-theme-1;
+}
+
+/* 修改Alert文本内容的颜色 */
+.alert .content {
+    -fx-background-color: -color-theme-3;
+}
+
+.text-area {
+    -fx-background-color: transparent;
+}
+
+.text-area .scroll-pane .viewport .content {
+    -fx-background-color: transparent;
+}
+
+
+
+.bg-color-dark-blue {
+    -fx-background-color: -color-dark-blue;
+}
+
+.bg-color-blue {
+    -fx-background-color: -color-blue;
+}
+
+.bg-color-light-blue {
+    -fx-background-color: -color-light-blue;
+}
+
+.bg-color-dark-red {
+    -fx-background-color: -color-dark-red;
+}
+
+.bg-color-red {
+    -fx-background-color: -color-red;
+}
+
+.bg-color-light-red {
+    -fx-background-color: -color-light-red;
+}
+
+.bg-color-dark-purple {
+    -fx-background-color: -color-dark-purple;
+}
+
+.bg-color-purple {
+    -fx-background-color: -color-purple;
+}
+
+.bg-color-light-purple {
+    -fx-background-color: -color-light-purple;
+}
+
+.bg-color-dark-yellow {
+    -fx-background-color: -color-dark-yellow;
+}
+
+.bg-color-yellow {
+    -fx-background-color: -color-yellow;
+}
+
+.bg-color-light-yellow {
+    -fx-background-color: -color-light-yellow;
+}
+
+.bg-color-dark-green {
+    -fx-background-color: -color-dark-green;
+}
+
+.bg-color-green {
+    -fx-background-color: -color-green;
+}
+
+.bg-color-light-green {
+    -fx-background-color: -color-light-green;
+}
+
+.bg-color-dark-orange {
+    -fx-background-color: -color-dark-orange;
+}
+
+.bg-color-orange {
+    -fx-background-color: -color-orange;
+}
+
+.bg-color-light-orange {
+    -fx-background-color: -color-light-orange;
+}
+
+.bg-color-dark-pink {
+    -fx-background-color: -color-dark-pink;
+}
+
+.bg-color-pink {
+    -fx-background-color: -color-pink;
+}
+
+.bg-color-light-pink {
+    -fx-background-color: -color-light-pink;
+}
+
+.bg-color-dark-gray {
+    -fx-background-color: -color-dark-gray;
+}
+
+.bg-color-gray {
+    -fx-background-color: -color-gray;
+}
+
+.bg-color-light-gray {
+    -fx-background-color: -color-light-gray;
+}
+
+.bg-color-dark-white {
+    -fx-background-color: -color-dark-white;
+}
+
+.bg-color-white {
+    -fx-background-color: -color-white;
+}
+
+.bg-color-light-white {
+    -fx-background-color: -color-light-white;
+}
+
+.bg-color-font-usually {
+    -fx-background-color: -color-font-usually;
+}
+
+.bg-color-font-light {
+    -fx-background-color: -color-font-light;
+}
+
+.text-color-dark-blue {
+    -fx-text-fill: -color-dark-blue;
+}
+
+.text-color-blue {
+    -fx-text-fill: -color-blue;
+}
+
+.text-color-light-blue {
+    -fx-text-fill: -color-light-blue;
+}
+
+.text-color-dark-red {
+    -fx-text-fill: -color-dark-red;
+}
+
+.text-color-red {
+    -fx-text-fill: -color-red;
+}
+
+.text-color-light-red {
+    -fx-text-fill: -color-light-red;
+}
+
+.text-color-dark-purple {
+    -fx-text-fill: -color-dark-purple;
+}
+
+.text-color-purple {
+    -fx-text-fill: -color-purple;
+}
+
+.text-color-light-purple {
+    -fx-text-fill: -color-light-purple;
+}
+
+.text-color-dark-yellow {
+    -fx-text-fill: -color-dark-yellow;
+}
+
+.text-color-yellow {
+    -fx-text-fill: -color-yellow;
+}
+
+.text-color-light-yellow {
+    -fx-text-fill: -color-light-yellow;
+}
+
+.text-color-dark-green {
+    -fx-text-fill: -color-dark-green;
+}
+
+.text-color-green {
+    -fx-text-fill: -color-green;
+}
+
+.text-color-light-green {
+    -fx-text-fill: -color-light-green;
+}
+
+.text-color-dark-orange {
+    -fx-text-fill: -color-dark-orange;
+}
+
+.text-color-orange {
+    -fx-text-fill: -color-orange;
+}
+
+.text-color-light-orange {
+    -fx-text-fill: -color-light-orange;
+}
+
+.text-color-dark-pink {
+    -fx-text-fill: -color-dark-pink;
+}
+
+.text-color-pink {
+    -fx-text-fill: -color-pink;
+}
+
+.text-color-light-pink {
+    -fx-text-fill: -color-light-pink;
+}
+
+.text-color-dark-gray {
+    -fx-text-fill: -color-dark-gray;
+}
+
+.text-color-gray {
+    -fx-text-fill: -color-gray;
+}
+
+.text-color-light-gray {
+    -fx-text-fill: -color-light-gray;
+}
+
+.text-color-dark-white {
+    -fx-text-fill: -color-dark-white;
+}
+
+.text-color-white {
+    -fx-text-fill: -color-white;
+}
+
+.text-color-light-white {
+    -fx-text-fill: -color-light-white;
+}
+
+.text-color-font-usually {
+    -fx-text-fill: -color-font-usually;
+}
+
+.text-color-font-light {
+    -fx-text-fill: -color-font-light;
+    -fx-highlight-text-fill: -color-font-light;
 }

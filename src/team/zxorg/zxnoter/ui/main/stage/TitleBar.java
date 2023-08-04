@@ -14,7 +14,7 @@ import team.zxorg.zxnoter.resource.ZXResources;
 import team.zxorg.zxnoter.resource.project.ZXProject;
 import team.zxorg.zxnoter.ui.component.ComponentFactory;
 import team.zxorg.zxnoter.ui.main.ZXStage;
-import team.zxorg.zxnoter.ui.main.stage.body.area.editor.setting.SettingEditor;
+import team.zxorg.zxnoter.ui.main.stage.body.area.editor.setting.SettingViewEditor;
 
 public class TitleBar extends HBox {
     //菜单栏
@@ -90,7 +90,7 @@ public class TitleBar extends HBox {
                     settingMenu.setGraphic(ZXResources.getIconPane("system.settings-3", 18, ZXColor.FONT_LIGHT));
                     settingMenu.setOnAction(event -> {
 
-                        zxStage.editorArea.editorTabPane.createEditor(new SettingEditor());
+                        zxStage.editorArea.editorTabPane.createEditor(new SettingViewEditor(zxProject));
                     });
 
                     //退出

@@ -1,9 +1,10 @@
-package team.zxorg.zxnoter.ui.main.stage.body.area.editor;
+package team.zxorg.zxnoter.ui.main.stage.body.area.editor.base;
 
 
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ObservableList;
+import javafx.event.Event;
 import javafx.scene.Node;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Tab;
@@ -11,28 +12,31 @@ import javafx.scene.image.Image;
 import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import team.zxorg.zxnoter.resource.project.ZXProject;
 import team.zxorg.zxnoter.ui.component.ZXIcon;
 import team.zxorg.zxnoter.ui.main.stage.body.EditorArea;
 import team.zxorg.zxnoter.ui.main.stage.body.area.EditorTabPane;
 
-import java.io.OutputStream;
-import java.nio.file.Path;
 import java.util.UUID;
 
-public abstract class BaseEditor extends Tab {
+public abstract class BaseTab extends Tab {
     private final ObjectProperty<TabDragStyle> tabDragStyle = new SimpleObjectProperty<>(null);
     public ZXIcon icon = new ZXIcon();
+    protected ZXProject zxProject;
+    protected BorderPane body = new BorderPane();
 
     @Override
     public String toString() {
         return "编辑器[" + getText() + "]";
     }
 
-    public BaseEditor() {
+    public BaseTab(ZXProject zxProject) {
         UUID uuid = UUID.randomUUID();
         setId(uuid.toString());
         icon.setSize(18);
         setGraphic(icon);
+        setContent(body);
+        this.zxProject = zxProject;
     }
 
     /**
@@ -132,31 +136,14 @@ public abstract class BaseEditor extends Tab {
 
 
     private void handleTabCloseButton(Pane pane) {
-        pane.setOnMousePressed(event -> {
-        });//顶掉原先的按下关闭
-        pane.setOnMouseClicked(event -> {
-            boolean close = true;
-            if (getOnCloseRequest() != null) {
-                getOnCloseRequest().handle(event);
-                close = !event.isConsumed();
+        pane.setOnMousePressed(Event::consume);//顶掉原先的按下关闭
+        pane.setOnMouseClicked(event -> {//改为点击触发关闭 处理关闭点击事件
+            if (closeRequest()) {
+                close();
             }
-
-
-            if (close) {
-                EditorTabPane editorTabPane = (EditorTabPane) getTabPane();
-                int index = editorTabPane.getTabs().indexOf(this);
-                if (editorTabPane.getTabs().remove(this)) {
-                    System.out.println("关闭: " + this);
-                    if (index - 1 > 0) {
-                        EditorArea.dragTab = (BaseEditor) editorTabPane.getTabs().get(index - 1);
-                    }
-                    EditorArea.dragTabPane = editorTabPane;
-                    editorTabPane.handleDragDropped();
-                }
-            }
-
-        });//改为点击触发关闭
+        });
     }
+
 
     public void removeParentThis() {
         if (getTabPane() != null) {
@@ -166,9 +153,41 @@ public abstract class BaseEditor extends Tab {
         }
     }
 
+    /**
+     * 关闭此编辑器
+     */
+    public void close() {
+        EditorTabPane editorTabPane = (EditorTabPane) getTabPane();
+        int index = editorTabPane.getTabs().indexOf(this);
+        if (editorTabPane.getTabs().remove(this)) {
+            System.out.println("关闭: " + this);
+            closed();//关闭完
+            if (index - 1 > 0) {
+                EditorArea.dragTab = (BaseTab) editorTabPane.getTabs().get(index - 1);
+            }
+            EditorArea.dragTabPane = editorTabPane;
+            editorTabPane.handleDragDropped();
+
+
+        }
+    }
+
+    /**
+     * 关闭后 (用于释放)
+     */
+    protected abstract void closed();
+
+
+    /**
+     * 关闭请求
+     *
+     * @return 是否可以关闭
+     */
+    protected abstract boolean closeRequest();
+
+
     private enum TabDragStyle {
         left, right
     }
-
 
 }

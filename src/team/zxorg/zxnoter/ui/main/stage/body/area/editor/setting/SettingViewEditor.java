@@ -8,28 +8,28 @@ import javafx.scene.layout.*;
 import team.zxorg.zxnoter.ZXLogger;
 import team.zxorg.zxnoter.resource.GlobalResources;
 import team.zxorg.zxnoter.resource.ZXColor;
+import team.zxorg.zxnoter.resource.project.ZXProject;
 import team.zxorg.zxnoter.ui.component.*;
-import team.zxorg.zxnoter.ui.main.stage.body.area.editor.BaseEditor;
+import team.zxorg.zxnoter.ui.main.stage.body.area.editor.base.BaseViewEditor;
 import team.zxorg.zxnoter.ui.main.stage.body.area.editor.setting.pane.RootSettingPane;
 import team.zxorg.zxnoter.ui.main.stage.body.area.editor.setting.item.BaseSettingItem;
 import team.zxorg.zxnoter.ui.main.stage.body.area.editor.setting.pane.SettingPaneItem;
 
-import java.io.OutputStream;
-
-public class SettingEditor extends BaseEditor {
+public class SettingViewEditor extends BaseViewEditor {
     VBox settingItemsPane;
 
-    public SettingEditor() {
+    public SettingViewEditor(ZXProject zxProject) {
+        super(zxProject);
         icon.setColor(ZXColor.FONT_USUALLY);
         icon.setIconKey("system.list-settings");
         textProperty().bind(GlobalResources.getLanguageContent("editor.setting-editor.tab-title"));
 
-        VBox body = new VBox();
-        body.setSpacing(8);
-        body.setPrefWidth(1200);
+        VBox vBox = new VBox();
+        vBox.setSpacing(8);
+        vBox.setPrefWidth(1200);
         //body.setMaxWidth(1200);
-        body.setAlignment(Pos.TOP_CENTER);
-        body.setPadding(new Insets(8, 8, 0, 8));
+        vBox.setAlignment(Pos.TOP_CENTER);
+        vBox.setPadding(new Insets(8, 8, 0, 8));
 
         ZXTextFieldGroup searchTextField = new ZXTextFieldGroup("editor.setting-editor.settings.search", "system.search");
 
@@ -63,12 +63,12 @@ public class SettingEditor extends BaseEditor {
         HBox settingsBox = new HBox(settingItemsView, settingItemsScrollPane);
         VBox.setVgrow(settingsBox, Priority.ALWAYS);
 
-        body.getChildren().addAll(searchTextField, settingsBox);
+        vBox.getChildren().addAll(searchTextField, settingsBox);
 
 
-        HBox root = new HBox(body);
+        HBox root = new HBox(vBox);
         root.setAlignment(Pos.TOP_CENTER);
-        setContent(root);
+        body.setCenter(root);
 
 
         searchTextField.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -83,7 +83,9 @@ public class SettingEditor extends BaseEditor {
 
     }
 
-
+    @Override
+    protected void closed() {
+    }
 
 
     private void showSettingPanes(SettingPaneItem settingPaneItemTreeItem, String searchText) {
