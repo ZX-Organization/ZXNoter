@@ -12,7 +12,6 @@ import team.zxorg.zxnoter.ZXLogger;
 import team.zxorg.zxnoter.resource.pack.*;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -70,19 +69,13 @@ public class ZXResources {
 
     static {
         ZXLogger.info("载入基本资源");
-        try (InputStream logoStream = ZXResources.class.getResourceAsStream("/base/logo.png");
-             InputStream logoX26Stream = ZXResources.class.getResourceAsStream("/base/logo-x26.png");
-             InputStream unknownStream = ZXResources.class.getResourceAsStream("/base/unknown.png");
-             InputStream defaultResourceIconStream = ZXResources.class.getResourceAsStream("/base/default-resource-icon.png");
-             InputStream defaultResourcePackIconStream = ZXResources.class.getResourceAsStream("/base/default-resource-pack-icon.png")) {
-
-            LOGO = new Image(logoStream);
-            LOGO_X26 = new Image(logoX26Stream);
-            UNKNOWN = new Image(unknownStream);
-            DEFAULT_RESOURCE_ICON = new Image(defaultResourceIconStream);
-            DEFAULT_RESOURCE_PACK_ICON = new Image(defaultResourcePackIconStream);
-
-        } catch (IOException e) {
+        try {
+            LOGO = new Image(ZXResources.class.getResource("/base/logo.png").toURI().toString());
+            LOGO_X26 = new Image(ZXResources.class.getResource("/base/logo-x26.png").toURI().toString());
+            UNKNOWN = new Image(ZXResources.class.getResource("/base/unknown.png").toURI().toString());
+            DEFAULT_RESOURCE_ICON = new Image(ZXResources.class.getResource("/base/default-resource-icon.png").toURI().toString());
+            DEFAULT_RESOURCE_PACK_ICON = new Image(ZXResources.class.getResource("/base/default-resource-pack-icon.png").toURI().toString());
+        } catch (Exception e) {
             ZXLogger.severe("载入基本资源发生异常");
             throw new RuntimeException(e);
         }

@@ -43,12 +43,6 @@ public class FileItem extends HBox {
                     zxProject.zxStage.editorArea.openFile(this);
             }
         });
-        setOnMousePressed(event -> {
-            if (event.getButton().equals(MouseButton.SECONDARY)) {
-                FileMenu fileMenu = new FileMenu();
-                fileMenu.show(getScene().getWindow(), event.getScreenX(), event.getScreenY());
-            }
-        });
     }
 
 }
