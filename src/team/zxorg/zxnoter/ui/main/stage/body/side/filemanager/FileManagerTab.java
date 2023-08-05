@@ -14,6 +14,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import team.zxorg.zxnoter.resource.UserPreference;
+import team.zxorg.zxnoter.resource.ZXColor;
 import team.zxorg.zxnoter.ui.component.*;
 import team.zxorg.zxnoter.ui.main.stage.body.SideBar;
 import team.zxorg.zxnoter.ui.main.stage.body.side.BaseSideBarTab;
@@ -36,6 +37,14 @@ public class FileManagerTab extends BaseSideBarTab {
         super("file-manager", "document.folder-4", tabPane);
         this.tabPane = tabPane;
         ZXTextFieldGroup searchGroup = new ZXTextFieldGroup("side-bar.file-manager.search", "document.file-search");
+
+        ZXIconButton regularButton = new ZXIconButton();
+        regularButton.setColor(ZXColor.FONT_USUALLY);
+        regularButton.setIconKey("system.close");
+        regularButton.setSize(22);
+        //regularButton.setOnAction((event) -> textField.clear());
+
+        searchGroup.getChildren().addAll(regularButton);
         VBox.setVgrow(fileView, Priority.ALWAYS);
 
         ZXIconButton viewButton = new ZXIconButton("editor.node-tree", 16, "side-bar.file-manager.view");
@@ -85,9 +94,6 @@ public class FileManagerTab extends BaseSideBarTab {
         });
         setFileViewType(config.getIntValue("view"));
     }
-
-
-
 
 
     public void setFileViewType(int fileViewType) {

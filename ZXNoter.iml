@@ -20,5 +20,6 @@
     <orderEntry type="library" name="openjfx.javafx.controls" level="project" />
     <orderEntry type="library" name="de.javagl.obj" level="project" />
     <orderEntry type="library" name="jimObjModelImporterJFX" level="project" />
+    <orderEntry type="library" name="jimObjModelImporterJFX" level="project" />
   </component>
 </module>

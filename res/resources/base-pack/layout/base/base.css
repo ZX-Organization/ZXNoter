@@ -34,46 +34,6 @@
     -fx-border-width: 0 0 1 0;
 }
 
-.menu-bar>.container>.menu {
-    -fx-background-color: -color-theme-1;
-}
-
-.menu-bar>.container>.menu:hover,
-.menu-bar>.container>.menu:showing {
-    -fx-background-color: -color-theme-1-light;
-}
-
-.menu-bar>.container>.menu>.label>.text {
-    -fx-fill: -color-font-usually;
-}
-
-.menu-bar>.container>.menu:hover>.label>.text,
-.menu-bar>.container>.menu:showing>.label>.text {
-    -fx-fill: -color-font-light;
-}
-
-
-.context-menu {
-    -fx-background-color: -color-theme-1;
-    -fx-border-color: -color-border-window;
-    -fx-padding: 1 0 1 0;
-}
-
-.menu-item {
-    -fx-background-color: -color-theme-1;
-}
-
-.menu-item:hover {
-    -fx-background-color: -color-theme-3;
-}
-
-.menu-item>.label>.text {
-    -fx-fill: -color-font-usually;
-}
-
-.menu-item:hover>.label>.text {
-    -fx-fill: -color-font-light;
-}
 
 .activity-bar {
     -fx-background-color: -color-theme-1;
@@ -1164,4 +1124,47 @@
 .text-color-font-light {
     -fx-text-fill: -color-font-light;
     -fx-highlight-text-fill: -color-font-light;
+}
+
+
+
+.menu-bar>.container>.menu {
+    -fx-background-color: -color-theme-1;
+}
+
+.menu-bar>.container>.menu:hover,
+.menu-bar>.container>.menu:showing {
+    -fx-background-color: -color-theme-1-light;
+}
+
+.menu-bar>.container>.menu>.label>.text {
+    -fx-fill: -color-font-usually;
+}
+
+.menu-bar>.container>.menu:hover>.label>.text,
+.menu-bar>.container>.menu:showing>.label>.text {
+    -fx-fill: -color-font-light;
+}
+
+
+.context-menu {
+    -fx-background-color: -color-theme-1;
+    -fx-border-color: -color-border-window;
+    -fx-padding: 1 0 1 0;
+}
+
+.menu-item {
+    -fx-background-color: -color-theme-1;
+}
+
+.menu-item:hover {
+    -fx-background-color: -color-theme-3;
+}
+
+.menu-item>.label>.text {
+    -fx-fill: -color-font-usually;
+}
+
+.menu-item:hover>.label>.text {
+    -fx-fill: -color-font-light;
 }
