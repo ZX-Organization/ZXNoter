@@ -1,5 +1,6 @@
 package team.zxorg.zxnoter.ui.component;
 
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
@@ -34,6 +35,9 @@ public class TrackTooltip extends Tooltip {
                 case LOSE_FOCUS_DISAPPEAR -> {
                     setAutoHide(true);
                     setAutoFix(true);
+                }
+                case HOVER_EXIT_DISAPPEAR -> {
+                    Platform.runLater(() -> getGraphic().setOnMouseExited(event -> hide()));
                 }
             }
         }
@@ -75,5 +79,6 @@ public class TrackTooltip extends Tooltip {
         CLICK_POP_UP,//点击弹出
 
         LOSE_FOCUS_DISAPPEAR,//丢失焦点消失
+        HOVER_EXIT_DISAPPEAR,//悬停退出消失
     }
 }

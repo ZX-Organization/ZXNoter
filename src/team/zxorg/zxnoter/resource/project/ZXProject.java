@@ -18,6 +18,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 /**
@@ -72,10 +73,12 @@ public class ZXProject {
      * 关闭项目
      */
     public void closeProject() {
+        ZXLogger.info("关闭项目 " + projectPath.get());
         projectPath.set(null);
         ZXConfiguration.getLast().put("open-project", "");
-        for (Map.Entry<Path, BaseFileEditor> editorEntry : fileEditorMap.entrySet()) {
-            BaseFileEditor editor = editorEntry.getValue();
+        BaseFileEditor[] editors = new BaseFileEditor[fileEditorMap.values().size()];
+        fileEditorMap.values().toArray(editors);
+        for (BaseFileEditor editor : editors) {
             editor.close();
         }
     }
@@ -84,7 +87,7 @@ public class ZXProject {
     /**
      * 打开项目
      */
-    public void openProject(Window ownerWindow) {
+    public void openProject() {
         DirectoryChooser directoryChooser = new DirectoryChooser();
         directoryChooser.setTitle(GlobalResources.getLanguageContent("project.open").getValue());
         {
@@ -92,7 +95,7 @@ public class ZXProject {
             if (lastFile.exists())
                 directoryChooser.setInitialDirectory(lastFile);
         }
-        File openFile = directoryChooser.showDialog(ownerWindow);
+        File openFile = directoryChooser.showDialog(zxStage);
         if (openFile != null) {
             openProject(openFile.toPath());
         }

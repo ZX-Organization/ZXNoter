@@ -14,12 +14,16 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import team.zxorg.zxnoter.resource.project.ZXProject;
 import team.zxorg.zxnoter.ui.component.ZXIcon;
+import team.zxorg.zxnoter.ui.component.ZXStatus;
 import team.zxorg.zxnoter.ui.main.stage.body.EditorArea;
 import team.zxorg.zxnoter.ui.main.stage.body.area.EditorTabPane;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.UUID;
 
 public abstract class BaseTab extends Tab {
+    public ArrayList<ZXStatus> zxStatuses = new ArrayList<>();
     private final ObjectProperty<TabDragStyle> tabDragStyle = new SimpleObjectProperty<>(null);
     public ZXIcon icon = new ZXIcon();
     protected ZXProject zxProject;
@@ -138,9 +142,7 @@ public abstract class BaseTab extends Tab {
     private void handleTabCloseButton(Pane pane) {
         pane.setOnMousePressed(Event::consume);//顶掉原先的按下关闭
         pane.setOnMouseClicked(event -> {//改为点击触发关闭 处理关闭点击事件
-            if (closeRequest()) {
-                close();
-            }
+            close();
         });
     }
 
@@ -156,8 +158,15 @@ public abstract class BaseTab extends Tab {
     /**
      * 关闭此编辑器
      */
-    public void close() {
+    public boolean close() {
+        if (!closeRequest()) {
+            return false;
+        }
+
+
         EditorTabPane editorTabPane = (EditorTabPane) getTabPane();
+        if (editorTabPane == null)
+            return false;
         int index = editorTabPane.getTabs().indexOf(this);
         if (editorTabPane.getTabs().remove(this)) {
             System.out.println("关闭: " + this);
@@ -167,9 +176,11 @@ public abstract class BaseTab extends Tab {
             }
             EditorArea.dragTabPane = editorTabPane;
             editorTabPane.handleDragDropped();
-
-
         }
+
+        if (this instanceof BaseFileEditor fileEditor)
+            zxProject.fileEditorMap.remove(fileEditor.fileItem.path);
+        return true;
     }
 
     /**

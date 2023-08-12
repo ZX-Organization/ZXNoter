@@ -24,6 +24,10 @@ public class ZXLogger {
 
     private static final Logger logger = Logger.getLogger("ZXLogger");
 
+    public static void addLoggerHandler(Handler handler) {
+        logger.addHandler(handler);
+    }
+
     static {
 
         handler.setFormatter(formatter);

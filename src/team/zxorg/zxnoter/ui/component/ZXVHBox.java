@@ -1,68 +1,74 @@
 package team.zxorg.zxnoter.ui.component;
 
+import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 public class ZXVHBox {
-    private Pane pane = new HBox();
+    private HBox hBox = new HBox();
+    private VBox vBox = new VBox();
     private final ObjectProperty<Orientation> orientation = new SimpleObjectProperty<>(Orientation.HORIZONTAL);
 
     {
+        hBox.spacingProperty().bindBidirectional(vBox.spacingProperty());
+        hBox.paddingProperty().bindBidirectional(vBox.paddingProperty());
+        hBox.prefWidthProperty().bindBidirectional(vBox.prefWidthProperty());
+        hBox.prefHeightProperty().bindBidirectional(vBox.prefHeightProperty());
+        hBox.minWidthProperty().bindBidirectional(vBox.minWidthProperty());
+        hBox.minHeightProperty().bindBidirectional(vBox.minHeightProperty());
+        hBox.maxWidthProperty().bindBidirectional(vBox.maxWidthProperty());
+        hBox.maxHeightProperty().bindBidirectional(vBox.maxHeightProperty());
+
+
         orientation.addListener((observable, oldValue, newValue) -> {
-            Pane lastPane = pane;
-            double spacing = getSpacing();
-            if (newValue.equals(Orientation.HORIZONTAL)) {
-                pane = new HBox();
-            } else if (newValue.equals(Orientation.VERTICAL)) {
-                pane = new VBox();
-            }
-            pane.getChildren().addAll(lastPane.getChildren());
+            Pane lastPane = getBox();
+            Pane newPane = (newValue.equals(Orientation.HORIZONTAL) ? hBox : vBox);
+            newPane.getChildren().addAll(lastPane.getChildren());
             lastPane.getChildren().clear();
-            pane.setPadding(lastPane.getPadding());
-            pane.setPrefSize(lastPane.getPrefWidth(), lastPane.getPrefHeight());
-            pane.setMinSize(lastPane.getMinWidth(), lastPane.getMinHeight());
-            pane.setMaxSize(lastPane.getMaxWidth(), lastPane.getMaxHeight());
-            setSpacing(spacing);
         });
     }
+
 
     public void setOrientation(Orientation orientation) {
         this.orientation.set(orientation);
     }
 
     public Pane getBox() {
-        return pane;
+        return (orientation.get().equals(Orientation.HORIZONTAL) ? hBox : vBox);
     }
 
     public ObservableList<Node> getChildren() {
-        return pane.getChildren();
+        return getBox().getChildren();
     }
 
     public double getSpacing() {
-        if (pane instanceof VBox) return ((VBox) pane).getSpacing();
-        if (pane instanceof HBox) return ((HBox) pane).getSpacing();
+        if (getBox() instanceof VBox) return ((VBox) getBox()).getSpacing();
+        if (getBox() instanceof HBox) return ((HBox) getBox()).getSpacing();
         return 0;
     }
 
     public void setSpacing(double spacing) {
-        if (pane instanceof VBox) ((VBox) pane).setSpacing(spacing);
-        if (pane instanceof HBox) ((HBox) pane).setSpacing(spacing);
+        if (getBox() instanceof VBox) ((VBox) getBox()).setSpacing(spacing);
+        if (getBox() instanceof HBox) ((HBox) getBox()).setSpacing(spacing);
     }
 
     public void setAlignment(Pos pos) {
-        if (pane instanceof VBox) ((VBox) pane).setAlignment(pos);
-        if (pane instanceof HBox) ((HBox) pane).setAlignment(pos);
+        if (getBox() instanceof VBox) ((VBox) getBox()).setAlignment(pos);
+        if (getBox() instanceof HBox) ((HBox) getBox()).setAlignment(pos);
     }
 
     public void setPadding(Insets padding) {
-        pane.setPadding(padding);
+        getBox().setPadding(padding);
     }
 }

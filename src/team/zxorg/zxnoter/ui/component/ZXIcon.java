@@ -32,6 +32,11 @@ public class ZXIcon extends Pane {
         setColor(zxFileIcon.type.color);
         setSize(size);
     }
+    public ZXIcon(String iconKey,ZXColor color, double size) {
+        setIconKey(iconKey);
+        setColor(color);
+        setSize(size);
+    }
 
 
     public static ZXFileType getFileType(Path file) {

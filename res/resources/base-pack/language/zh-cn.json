@@ -47,7 +47,7 @@
     "file-name.3gp":"第三代合作伙伴项目视频文件",
     "file-name.m4v":"MPEG-4视频文件",
     "file-name.mpg":"MPEG视频文件",
-    
+
     "file-name.txt":"纯文本文件",
     "file-name.csv":"逗号分隔值文件",
     "file-name.xml":"可扩展标记语言文件",
@@ -63,7 +63,7 @@
     "file-name.tar":"TAR压缩文件",
     "file-name.gz":"Gzip压缩文件",
     "file-name.bz2":"BZip2压缩文件",
-    
+
     "file-name.osz":"OSU!谱包文件",
     "file-name.mcz":"Malody谱包文件",
 
@@ -85,7 +85,10 @@
     "title-bar.file.close": "关闭项目",
     "title-bar.file.setting": "设置",
     "title-bar.file.quit": "退出",
-    
+
+    "menu.file.create-file": "新建文件",
+    "menu.file.create-project": "新建项目",
+
     "side-bar.file-manager": "文件管理",
     "side-bar.file-manager.not-open.title": "尚未打开项目",
     "side-bar.file-manager.not-open.open": "打开项目",
@@ -104,8 +107,25 @@
     "side-bar.file-manager.create-folder.input": "文件夹名称",
     "side-bar.file-manager.create-file.down": "创建",
 
+    "side-bar.file-manager.menu.create-folder": "新建文件夹",
+    "side-bar.file-manager.menu.create-file": "新建文件",
+    "side-bar.file-manager.menu.cut": "剪切",
+    "side-bar.file-manager.menu.copy": "复制",
+    "side-bar.file-manager.menu.paste": "粘贴",
+    "side-bar.file-manager.menu.rename": "重命名",
+
+    "side-bar.file-manager.menu.open": "打开文件夹",
+    "side-bar.file-manager.menu.copy-path": "复制路径",
+    "side-bar.file-manager.menu.search": "搜索引用",
+
+    "side-bar.file-manager.menu.refresh": "从磁盘重新加载",
+
+    "side-bar.file-manager.menu.delete": "删除",
+
     "side-bar.pack-up": "打包",
 
+    "editor.title": "%s",
+    "editor.title.edited": "%s*",
     "editor.setting-editor.tab-title": "设置",
     "editor.setting-editor.search.clear": "清空搜索",
     "editor.setting-editor.settings.user-preference": "用户偏好",
@@ -127,6 +147,8 @@
     "editor.setting-editor.settings.resources.reload-packs": "重载资源包",
     "editor.setting-editor.settings.other":"其他",
     "editor.setting-editor.settings.other.close-auto-save":"关闭时自动保存",
+
+    "editor.text-editor.status.cursor": "行 %d, 列 %d",
 
     "alert.save-file.title":"保存文件：",
     "alert.save-file.content":"是否保存对文件的修改？",

@@ -1,7 +1,11 @@
 package team.zxorg.zxnoter.ui.main.stage.body.area.editor.base;
 
 import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextArea;
@@ -9,6 +13,7 @@ import team.zxorg.zxnoter.ZXLogger;
 import team.zxorg.zxnoter.resource.GlobalResources;
 import team.zxorg.zxnoter.resource.UserPreference;
 import team.zxorg.zxnoter.resource.project.ZXProject;
+import team.zxorg.zxnoter.ui.component.ZXLabel;
 import team.zxorg.zxnoter.ui.main.stage.body.area.EditorTabPane;
 import team.zxorg.zxnoter.ui.main.stage.body.side.filemanager.FileItem;
 
@@ -31,8 +36,18 @@ public abstract class BaseFileEditor extends BaseTab {
         icon.setColor(fileItem.fileType.type.color);
         icon.setIconKey(fileItem.fileType.iconKey);
         isEdited.set(false);
+        ObjectProperty<String> fileName = new SimpleObjectProperty<>();
+        ZXLabel title = new ZXLabel("editor.title", fileName);
+        textProperty().bind(title.textProperty());
+        fileName.set(String.valueOf(fileItem.path.getFileName()));
 
-        setText(String.valueOf(fileItem.path.getFileName()));
+        isEdited.addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                title.setLangKey("editor.title.edited");
+            } else {
+                title.setLangKey("editor.title");
+            }
+        });
     }
 
     @Override
@@ -74,10 +89,9 @@ public abstract class BaseFileEditor extends BaseTab {
                 }
             }
         if (isEdited.get()) {//如果没保存成功，阻止关闭
+            ZXLogger.info("保存失败");
             return false;
         } else {
-            closed();//关闭
-            zxProject.fileEditorMap.remove(fileItem.path);
             return true;
         }
     }

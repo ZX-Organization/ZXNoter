@@ -1,16 +1,16 @@
 package team.zxorg.zxnoter.ui.component;
 
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.Menu;
 import team.zxorg.zxnoter.resource.GlobalResources;
-import team.zxorg.zxnoter.resource.ZXColor;
 
-public class ZXMenuItem extends MenuItem {
-    public ZXMenuItem(String languageKey) {
+public class ZXMenu extends Menu {
+    public ZXMenu(String languageKey) {
         textProperty().bind(GlobalResources.getLanguageContent(languageKey));
     }
 
-    public ZXMenuItem(String languageKey, ZXIcon zxIcon) {
+    public ZXMenu(String languageKey, ZXIcon zxIcon) {
         textProperty().bind(GlobalResources.getLanguageContent(languageKey));
         setGraphic(zxIcon);
     }
+
 }

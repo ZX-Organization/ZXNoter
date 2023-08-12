@@ -2,6 +2,7 @@ package team.zxorg.zxnoter.resource;
 
 import team.zxorg.zxnoter.ui.main.stage.body.area.editor.image.ImageViewEditor;
 import team.zxorg.zxnoter.ui.main.stage.body.area.editor.text.TextEditor;
+import team.zxorg.zxnoter.ui.main.stage.body.area.editor.video.VideoViewEditor;
 
 public enum ZXFileType {
     directory("", "document.folder", Type.directory, null),
@@ -11,26 +12,26 @@ public enum ZXFileType {
     imd("imd", "software.file-imd", Type.musicMap, null),
     mc("mc", "software.file-mc", Type.musicMap, null),
 
-    mp3("mp3", "media.music-2", Type.audio, null),
-    ogg("ogg", "media.music-2", Type.audio, null),
-    wav("wav", "media.music-2", Type.audio, null),
-    flac("flac", "media.music-2", Type.audio, null),
+    mp3("mp3", "media.music-2", Type.audio, VideoViewEditor.class),
+    ogg("ogg", "media.music-2", Type.audio, VideoViewEditor.class),
+    wav("wav", "media.music-2", Type.audio, VideoViewEditor.class),
+    flac("flac", "media.music-2", Type.audio, VideoViewEditor.class),
 
     png("png", "media.image", Type.image, ImageViewEditor.class),
     jpg("jpg", "media.image", Type.image, ImageViewEditor.class),
     jpeg("jpeg", "media.image", Type.image, ImageViewEditor.class),
     svg("svg", "media.image", Type.image, null),
 
-    mp4("mp4", "media.video", Type.video, null),
-    avi("avi", "media.video", Type.video, null),
-    mkv("mkv", "media.video", Type.video, null),
-    mov("mov", "media.video", Type.video, null),
-    wmv("wmv", "media.video", Type.video, null),
-    flv("flv", "media.video", Type.video, null),
-    webm("webm", "media.video", Type.video, null),
-    _3gp("3gp", "media.video", Type.video, null),
-    m4v("m4v", "media.video", Type.video, null),
-    mpg("mpg", "media.video", Type.video, null),
+    mp4("mp4", "media.video", Type.video, VideoViewEditor.class),
+    avi("avi", "media.video", Type.video, VideoViewEditor.class),
+    mkv("mkv", "media.video", Type.video, VideoViewEditor.class),
+    mov("mov", "media.video", Type.video, VideoViewEditor.class),
+    wmv("wmv", "media.video", Type.video, VideoViewEditor.class),
+    flv("flv", "media.video", Type.video, VideoViewEditor.class),
+    webm("webm", "media.video", Type.video, VideoViewEditor.class),
+    _3gp("3gp", "media.video", Type.video, VideoViewEditor.class),
+    m4v("m4v", "media.video", Type.video, VideoViewEditor.class),
+    mpg("mpg", "media.video", Type.video, VideoViewEditor.class),
 
     zxp("zxp", "document.file-text", Type.text, TextEditor.class),
 

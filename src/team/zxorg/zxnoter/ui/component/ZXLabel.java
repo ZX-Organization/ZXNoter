@@ -48,6 +48,7 @@ public class ZXLabel extends Label {
     private void update(String newValue) {
         if (newValue.contains("%")) {
             int count = newValue.length() - newValue.replaceAll("%", "").length();
+
             if (count > properties.size()) {
                 return;
             }
@@ -80,6 +81,7 @@ public class ZXLabel extends Label {
                 update(languageContent.getValue());
             });
         }
+        update(languageContent.getValue());
     }
 
     public ObjectProperty getProperty(int index) {

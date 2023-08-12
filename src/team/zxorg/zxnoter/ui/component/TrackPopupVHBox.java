@@ -21,6 +21,12 @@ public class TrackPopupVHBox extends TrackTooltip {
         super(bindNode, pos, offset, attributes);
     }
 
+    public TrackPopupVHBox(Orientation orientation,Node bindNode, Pos pos, double offset, BindAttributes... attributes) {
+        super(bindNode, pos, offset, attributes);
+        setOrientation(orientation);
+    }
+
+
     public void showTrackTooltip() {
         show(bindNode.getScene().getWindow());
     }
@@ -28,6 +34,7 @@ public class TrackPopupVHBox extends TrackTooltip {
 
     public void setOrientation(Orientation orientation) {
         body.setOrientation(orientation);
+        setGraphic(body.getBox());
     }
 
     public ObservableList<Node> getChildren() {

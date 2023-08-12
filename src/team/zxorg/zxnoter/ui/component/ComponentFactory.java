@@ -60,13 +60,13 @@ public class ComponentFactory {
     }*/
 
     public static Menu menu(String languageKey) {
-        Menu menu=new Menu();
+        Menu menu = new Menu();
         menu.textProperty().bind(GlobalResources.getLanguageContent(languageKey));
         return menu;
     }
 
     public static MenuItem menuItem(String languageKey) {
-        MenuItem menuItem=new MenuItem();
+        MenuItem menuItem = new MenuItem();
         menuItem.textProperty().bind(GlobalResources.getLanguageContent(languageKey));
         return menuItem;
     }

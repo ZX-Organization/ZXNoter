@@ -29,8 +29,9 @@ public class EditorArea extends EditorLayout {
     public static BaseTab dragTab;//拖拽中的Tab
     public static EditorTabPane dragTabPane;//拖拽中的TabPane
     public HashMap<String, BaseTab> editorHashMap = new HashMap<>();
-    public EditorTabPane editorTabPane;
+    public EditorTabPane rootEditorTabPane;
     public ObjectProperty<EditorTabPane> focusEditorTabPane = new SimpleObjectProperty<>();
+    public ObjectProperty<BaseTab> focusTab = new SimpleObjectProperty<>();
 
 
     @Override
@@ -44,15 +45,19 @@ public class EditorArea extends EditorLayout {
         setOrientation(Orientation.HORIZONTAL);
         HBox.setHgrow(this, Priority.ALWAYS);
 
-        editorTabPane = new EditorTabPane(this, this, zxProject);
+        rootEditorTabPane = new EditorTabPane(this, this, zxProject);
         focusEditorTabPane.addListener((observable, oldValue, newValue) -> {
             newValue.getStyleClass().add("tab-pane-focused");
-            if (oldValue != null)
+            if (oldValue != null) {
                 oldValue.getStyleClass().remove("tab-pane-focused");
+                oldValue.getSelectionModel().selectedItemProperty().removeListener(searchTabChangeListener);
+            }
+            newValue.getSelectionModel().selectedItemProperty().addListener(searchTabChangeListener);
+            focusTab.set((BaseTab)  newValue.getSelectionModel().getSelectedItem());
             System.out.println("焦点变更:" + newValue + newValue.getStyleClass());
         });
-        focusEditorTabPane.set(editorTabPane);
-        getItems().add(editorTabPane);
+        focusEditorTabPane.set(rootEditorTabPane);
+        getItems().add(rootEditorTabPane);
 
         /*StartEditor startEditor = new StartEditor();
         editorTabPane.createEditor(startEditor);*/
@@ -61,6 +66,13 @@ public class EditorArea extends EditorLayout {
         //setMinSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
         autoLayout();
     }
+
+     ChangeListener<Tab> searchTabChangeListener = new ChangeListener<>() {
+        @Override
+        public void changed(ObservableValue<? extends Tab> observable, Tab oldValue, Tab newValue) {
+            focusTab.set((BaseTab) newValue);
+        }
+    };
 
     public BaseTab findEditor(Path openFile) {
         return findEditor(openFile, this);
@@ -91,6 +103,11 @@ public class EditorArea extends EditorLayout {
         //检查是否已被打开
         BaseFileEditor fileEditor = zxProject.fileEditorMap.get(openFile.path);
         if (fileEditor != null) {
+            if (fileEditor.getTabPane() == null) {
+                zxProject.fileEditorMap.remove(fileEditor.getFileItem().path);
+                return;
+            }
+
             //获得焦点
             fileEditor.getTabPane().getSelectionModel().select(fileEditor);
             return;
