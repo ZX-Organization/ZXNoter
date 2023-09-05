@@ -65,8 +65,6 @@ public class Main {
             ZXLogger.info("初始化图形系统");
 
 
-            ZXLogger.info("系统语言代码 " + Locale.getDefault().getLanguage() + "_" + Locale.getDefault().getCountry());
-
 
             //屏蔽javafx歌姬初始化时的异常
             Logging.getJavaFXLogger().disableLogging();

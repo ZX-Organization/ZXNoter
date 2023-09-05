@@ -1,85 +1,40 @@
-[10:41:24] [Main.main/INFO]: ZXNoter启动
-[10:41:24] [Main.main/INFO]: 初始化图形系统
-[10:41:24] [Main.main/INFO]: 系统语言代码 zh_CN
-[10:41:25] [Main.lambda$main$0/INFO]: 初始化配置
-[10:41:25] [ZXConfiguration.reload/INFO]: 载入全局配置
-[10:41:25] [ZXResources.<clinit>/INFO]: 载入基本资源
-[10:41:25] [ZXResources.clearPacks/INFO]: 清除资源包列表
-[10:41:25] [ZXResources.loadPack/INFO]: 载入资源包 zxnoter
-[10:41:25] [ZXResources.loadZipPack/INFO]: 载入Zip资源 jar:file:///D:/Projects/ZXNoter/resource/test-pack.zip
-[10:41:25] [ZXResources.loadPack/INFO]: 载入资源包 test
-[10:41:25] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 color
-[10:41:25] [ZXResources.reloadGlobalResource/INFO]: 载入基础 资源[类型:color id:dark 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\color\dark]
-[10:41:25] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 icon
-[10:41:25] [ZXResources.reloadGlobalResource/INFO]: 载入基础 资源[类型:icon id:line 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\icon\line]
-[10:41:25] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 language
-[10:41:25] [ZXResources.reloadGlobalResource/INFO]: 载入基础 语言资源[id:'zh-cn', 语言数:144]
-[10:41:25] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 layout
-[10:41:25] [ZXResources.reloadGlobalResource/INFO]: 载入基础 资源[类型:layout id:base 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\layout\base]
-[10:41:25] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 sound
-[10:41:25] [ZXResources.reloadGlobalResource/INFO]: 载入基础 资源[类型:sound id:base 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\sound\base]
-[10:41:25] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 style
-[10:41:25] [ZXResources.reloadGlobalResource/INFO]: 载入基础 资源[类型:style id:map-editor-pink 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\style\map-editor\pink]
-[10:41:26] [EditorArea.lambda$new$0/INFO]: 焦点变更:堆叠容器 父布局{b56e-6883593c5036} 此{8ba8-ac549b9a0bb4} [] tab-pane editor-tab-pane tab-pane-focused
-[10:41:26] [ZXStage.<init>/INFO]: 实例化ZXN-UI窗口
-[10:41:26] [ZXProject.openLastProject/INFO]: 打开之前项目 D:\Projects\ZXNoter\docs\reference
-[10:41:26] [Main.lambda$main$0/INFO]: 显示ZXN-UI窗口
-[10:41:43] [EditorArea.openFile/INFO]: 打开文件 文件:D:\Projects\ZXNoter\docs\reference\Corruption\Corruption_cover.png image png
-[10:41:44] [EditorArea.openFile/INFO]: 打开文件 文件:D:\Projects\ZXNoter\docs\reference\Corruption\Corruption_title_ipad.png image png
-[10:41:55] [EditorArea.openFile/INFO]: 打开文件 文件:D:\Projects\ZXNoter\docs\reference\jitaimei\0\video.mp4 video mp4
-[10:42:02] [BaseFileEditor.closeRequest/INFO]: 关闭编辑器 编辑器[Corruption_title_ipad.png]
-[10:42:02] [BaseTab.close/INFO]: 关闭: 编辑器[Corruption_title_ipad.png]
-[10:42:05] [EditorArea.openFile/INFO]: 打开文件 文件:D:\Projects\ZXNoter\docs\reference\jitaimei\0\bg.png image png
-[10:42:06] [BaseFileEditor.closeRequest/INFO]: 关闭编辑器 编辑器[bg.png]
-[10:42:06] [BaseTab.close/INFO]: 关闭: 编辑器[bg.png]
-[10:42:20] [EditorArea.openFile/INFO]: 打开文件 文件:D:\Projects\ZXNoter\docs\reference\896710 VA - 6k High Speed Ultimate Pack Vol3\283343522564.jpg image jpg
-[10:42:35] [EditorTabPane.setLayout/INFO]: 布局分隔水平
-[10:42:35] [EditorArea.lambda$new$0/INFO]: 焦点变更:堆叠容器 父布局{b56e-6883593c5036} 此{af59-efbac2108682} [编辑器[283343522564.jpg]] tab-pane editor-tab-pane tab-pane-focused
-[10:42:38] [EditorArea.lambda$new$0/INFO]: 焦点变更:堆叠容器 父布局{b56e-6883593c5036} 此{8ba8-ac549b9a0bb4} [编辑器[Corruption_cover.png], 编辑器[video.mp4]] tab-pane editor-tab-pane tab-pane-focused
-[10:42:39] [EditorTabPane.setLayout/INFO]: 布局分隔水平
-[10:42:39] [EditorArea.lambda$new$0/INFO]: 焦点变更:堆叠容器 父布局{b56e-6883593c5036} 此{9342-2f06e987beec} [编辑器[video.mp4]] tab-pane editor-tab-pane tab-pane-focused
-[10:42:43] [EditorTabPane.setLayout/INFO]: 布局增加新垂直
-[10:42:46] [EditorArea.lambda$new$0/INFO]: 焦点变更:堆叠容器 父布局{8189-dba980569c5c} 此{93c3-3a6d148d7b69} [编辑器[video.mp4]] tab-pane editor-tab-pane tab-pane-focused
-[10:42:47] [EditorTabPane.setLayout/INFO]: 布局增加新垂直
-[10:42:47] [EditorLayout.checkItems/INFO]: 检查到布局{8189-dba980569c5c}只剩1个物品
-[10:43:22] [ZXConfiguration.saveConfig/INFO]: 保存全局配置
-[10:43:22] [ZXProject.closeProject/INFO]: 关闭项目 D:\Projects\ZXNoter\docs\reference
-[10:43:22] [ThreadGroup.uncaughtException/WARNING]: Exception in thread "JavaFX Application Thread"
-[10:43:22] [Throwable$WrappedPrintStream.println/WARNING]: java.lang.NullPointerException: Cannot invoke "java.nio.file.Path.resolve(java.nio.file.Path)" because the return value of "javafx.beans.property.ObjectProperty.get()" is null
-[10:43:22] [Throwable$WrappedPrintStream.println/WARNING]: at team.zxorg.zxnoter.ui.main.stage.body.side.filemanager.view.FileListView.refresh(FileListView.java:84)
-[10:43:22] [Throwable$WrappedPrintStream.println/WARNING]: at team.zxorg.zxnoter.ui.main.stage.body.side.filemanager.view.BaseFileView.lambda$new$0(BaseFileView.java:36)
-[10:43:22] [Throwable$WrappedPrintStream.println/WARNING]: at com.sun.javafx.binding.ExpressionHelper$Generic.fireValueChangedEvent(ExpressionHelper.java:372)
-[10:43:22] [Throwable$WrappedPrintStream.println/WARNING]: at com.sun.javafx.binding.ExpressionHelper.fireValueChangedEvent(ExpressionHelper.java:91)
-[10:43:22] [Throwable$WrappedPrintStream.println/WARNING]: at javafx.beans.property.ObjectPropertyBase.fireValueChangedEvent(ObjectPropertyBase.java:106)
-[10:43:22] [Throwable$WrappedPrintStream.println/WARNING]: at javafx.beans.property.ObjectPropertyBase.markInvalid(ObjectPropertyBase.java:113)
-[10:43:22] [Throwable$WrappedPrintStream.println/WARNING]: at javafx.beans.property.ObjectPropertyBase.set(ObjectPropertyBase.java:147)
-[10:43:22] [Throwable$WrappedPrintStream.println/WARNING]: at team.zxorg.zxnoter.resource.project.ZXProject.closeProject(ZXProject.java:77)
-[10:43:22] [Throwable$WrappedPrintStream.println/WARNING]: at team.zxorg.zxnoter.ui.main.ZXStage.lambda$new$0(ZXStage.java:55)
-[10:43:22] [Throwable$WrappedPrintStream.println/WARNING]: at com.sun.javafx.event.CompositeEventHandler.dispatchBubblingEvent(CompositeEventHandler.java:86)
-[10:43:22] [Throwable$WrappedPrintStream.println/WARNING]: at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:232)
-[10:43:22] [Throwable$WrappedPrintStream.println/WARNING]: at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:189)
-[10:43:22] [Throwable$WrappedPrintStream.println/WARNING]: at com.sun.javafx.event.CompositeEventDispatcher.dispatchBubblingEvent(CompositeEventDispatcher.java:59)
-[10:43:22] [Throwable$WrappedPrintStream.println/WARNING]: at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:58)
-[10:43:22] [Throwable$WrappedPrintStream.println/WARNING]: at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
-[10:43:22] [Throwable$WrappedPrintStream.println/WARNING]: at com.sun.javafx.event.EventUtil.fireEventImpl(EventUtil.java:74)
-[10:43:22] [Throwable$WrappedPrintStream.println/WARNING]: at com.sun.javafx.event.EventUtil.fireEvent(EventUtil.java:54)
-[10:43:22] [Throwable$WrappedPrintStream.println/WARNING]: at javafx.event.Event.fireEvent(Event.java:198)
-[10:43:22] [Throwable$WrappedPrintStream.println/WARNING]: at com.sun.javafx.stage.WindowPeerListener.closing(WindowPeerListener.java:100)
-[10:43:22] [Throwable$WrappedPrintStream.println/WARNING]: at com.sun.javafx.tk.quantum.GlassWindowEventHandler.run(GlassWindowEventHandler.java:147)
-[10:43:22] [Throwable$WrappedPrintStream.println/WARNING]: at com.sun.javafx.tk.quantum.GlassWindowEventHandler.run(GlassWindowEventHandler.java:40)
-[10:43:22] [Throwable$WrappedPrintStream.println/WARNING]: at java.base/java.security.AccessController.doPrivileged(AccessController.java:400)
-[10:43:22] [Throwable$WrappedPrintStream.println/WARNING]: at com.sun.javafx.tk.quantum.GlassWindowEventHandler.lambda$handleWindowEvent$4(GlassWindowEventHandler.java:178)
-[10:43:22] [Throwable$WrappedPrintStream.println/WARNING]: at com.sun.javafx.tk.quantum.QuantumToolkit.runWithoutRenderLock(QuantumToolkit.java:424)
-[10:43:22] [Throwable$WrappedPrintStream.println/WARNING]: at com.sun.javafx.tk.quantum.GlassWindowEventHandler.handleWindowEvent(GlassWindowEventHandler.java:176)
-[10:43:22] [Throwable$WrappedPrintStream.println/WARNING]: at com.sun.glass.ui.Window.handleWindowEvent(Window.java:1259)
-[10:43:22] [Throwable$WrappedPrintStream.println/WARNING]: at com.sun.glass.ui.Window.notifyClose(Window.java:1164)
-[10:43:22] [Throwable$WrappedPrintStream.println/WARNING]: at com.sun.glass.ui.win.WinApplication._runLoop(Native Method)
-[10:43:22] [Throwable$WrappedPrintStream.println/WARNING]: at com.sun.glass.ui.win.WinApplication.lambda$runLoop$3(WinApplication.java:185)
-[10:43:22] [Throwable$WrappedPrintStream.println/WARNING]: at java.base/java.lang.Thread.run(Thread.java:1623)
-[10:43:22] [BaseFileEditor.closeRequest/INFO]: 关闭编辑器 编辑器[283343522564.jpg]
-[10:43:22] [BaseTab.close/INFO]: 关闭: 编辑器[283343522564.jpg]
-[10:43:22] [BaseFileEditor.closeRequest/INFO]: 关闭编辑器 编辑器[Corruption_cover.png]
-[10:43:22] [BaseTab.close/INFO]: 关闭: 编辑器[Corruption_cover.png]
-[10:43:22] [EditorLayout.checkItems/INFO]: 检查到布局{b068-10a7e54916ca}只剩1个物品
-[10:43:22] [BaseFileEditor.closeRequest/INFO]: 关闭编辑器 编辑器[video.mp4]
-[10:43:22] [BaseTab.close/INFO]: 关闭: 编辑器[video.mp4]
+[19:47:55] [Main.main/INFO]: ZXNoter启动
+[19:47:55] [Main.main/INFO]: 初始化图形系统
+[19:47:56] [Main.lambda$main$0/INFO]: 初始化配置
+[19:47:56] [ZXConfiguration.reload/INFO]: 载入全局配置
+[19:47:56] [ZXResources.<clinit>/INFO]: 载入基本资源
+[19:47:56] [ZXResources.clearPacks/INFO]: 清除资源包列表
+[19:47:57] [ZXResources.loadPack/INFO]: 载入资源包 zxnoter
+[19:47:57] [ZXResources.loadZipPack/INFO]: 载入Zip资源 jar:file:///D:/Projects/ZXNoter/resource/test-pack.zip
+[19:47:57] [ZXResources.loadPack/INFO]: 载入资源包 test
+[19:47:57] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 color
+[19:47:57] [ZXResources.reloadGlobalResource/INFO]: 载入基础 资源[类型:color id:dark 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\color\dark]
+[19:47:57] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 icon
+[19:47:57] [ZXResources.reloadGlobalResource/INFO]: 载入基础 资源[类型:icon id:line 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\icon\line]
+[19:47:57] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 language
+[19:47:57] [ZXResources.reloadGlobalResource/INFO]: 载入基础 语言资源[id:'zh-cn', 语言数:144]
+[19:47:57] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 layout
+[19:47:57] [ZXResources.reloadGlobalResource/INFO]: 载入基础 资源[类型:layout id:base 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\layout\base]
+[19:47:57] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 sound
+[19:47:57] [ZXResources.reloadGlobalResource/INFO]: 载入基础 资源[类型:sound id:base 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\sound\base]
+[19:47:57] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 style
+[19:47:57] [ZXResources.reloadGlobalResource/INFO]: 载入基础 资源[类型:style id:map-editor-pink 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\style\map-editor\pink]
+[19:47:57] [EditorArea.lambda$new$0/INFO]: 焦点变更:堆叠容器 父布局{8f7e-f528912735b9} 此{b7de-fbf68a34b9a2} [] tab-pane editor-tab-pane tab-pane-focused
+[19:47:58] [ZXStage.<init>/INFO]: 实例化ZXN-UI窗口
+[19:47:58] [ZXProject.openLastProject/INFO]: 打开之前项目 D:\Projects\ZXNoter\docs\reference
+[19:47:58] [Main.lambda$main$0/INFO]: 显示ZXN-UI窗口
+[19:48:03] [SettingViewEditor.lambda$new$0/INFO]: 重新编制设置项SettingPaneItem@20a7cb06[styleClass=label]'用户偏好'
+[19:48:05] [SettingViewEditor.lambda$new$0/INFO]: 重新编制设置项SettingPaneItem@51b04ed1[styleClass=label]'语言'
+[19:48:05] [SettingViewEditor.lambda$new$0/INFO]: 重新编制设置项SettingPaneItem@6023a96a[styleClass=label]'资源'
+[19:48:06] [SettingViewEditor.lambda$new$0/INFO]: 重新编制设置项SettingPaneItem@539afcda[styleClass=label]'图标'
+[19:48:06] [SettingViewEditor.lambda$new$0/INFO]: 重新编制设置项SettingPaneItem@4859053d[styleClass=label]'其他'
+[19:48:07] [SettingViewEditor.lambda$new$0/INFO]: 重新编制设置项SettingPaneItem@539afcda[styleClass=label]'图标'
+[19:48:07] [SettingViewEditor.lambda$new$0/INFO]: 重新编制设置项SettingPaneItem@20a7cb06[styleClass=label]'用户偏好'
+[19:48:11] [SettingViewEditor.lambda$new$0/INFO]: 重新编制设置项SettingPaneItem@2b02982[styleClass=label]'用户偏好'
+[19:48:13] [SettingViewEditor.lambda$new$0/INFO]: 重新编制设置项SettingPaneItem@1ba7eb31[styleClass=label]'用户偏好'
+[19:48:15] [BaseTab.close/INFO]: 关闭: 编辑器[设置]
+[19:48:16] [BaseTab.close/INFO]: 关闭: 编辑器[设置]
+[19:48:18] [SettingViewEditor.lambda$new$0/INFO]: 重新编制设置项SettingPaneItem@2ccf6174[styleClass=label]'用户偏好'
+[19:48:21] [BaseTab.close/INFO]: 关闭: 编辑器[设置]
+[19:48:39] [EditorArea.openFile/INFO]: 打开文件 文件:D:\Projects\ZXNoter\docs\reference\$RJ54UUV.mp3 audio mp3
+[20:56:22] [ZXStage.lambda$new$1/INFO]: 关闭程序
