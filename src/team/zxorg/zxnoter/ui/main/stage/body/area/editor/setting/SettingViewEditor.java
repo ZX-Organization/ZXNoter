@@ -13,7 +13,7 @@ import team.zxorg.zxnoter.ui.component.*;
 import team.zxorg.zxnoter.ui.main.stage.body.area.editor.base.BaseViewEditor;
 import team.zxorg.zxnoter.ui.main.stage.body.area.editor.setting.pane.RootSettingPane;
 import team.zxorg.zxnoter.ui.main.stage.body.area.editor.setting.item.BaseSettingItem;
-import team.zxorg.zxnoter.ui.main.stage.body.area.editor.setting.pane.SettingPaneItem;
+import team.zxorg.zxnoter.ui.main.stage.body.area.editor.setting.pane.preference.SettingPaneItem;
 
 public class SettingViewEditor extends BaseViewEditor {
     VBox settingItemsPane;
@@ -59,6 +59,7 @@ public class SettingViewEditor extends BaseViewEditor {
 
         settingItemsView.getRoot().setExpanded(true);
         settingItemsView.getSelectionModel().selectFirst();
+        settingItemsView.setShowRoot(false);
 
         HBox settingsBox = new HBox(settingItemsView, settingItemsScrollPane);
         VBox.setVgrow(settingsBox, Priority.ALWAYS);

@@ -62,7 +62,7 @@ public class ZXConfiguration {
         }
     }
 
-    public static JSONObject getLast() {
-        return root.getJSONObject("last");
+    public static JSONObject getLastTime() {
+        return root.getJSONObject("lastTime");
     }
 }

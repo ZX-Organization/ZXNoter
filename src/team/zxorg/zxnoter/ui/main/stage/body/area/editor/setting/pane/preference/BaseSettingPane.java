@@ -1,4 +1,4 @@
-package team.zxorg.zxnoter.ui.main.stage.body.area.editor.setting.pane;
+package team.zxorg.zxnoter.ui.main.stage.body.area.editor.setting.pane.preference;
 
 import javafx.geometry.Insets;
 import javafx.scene.text.Font;

@@ -1,4 +1,4 @@
-package team.zxorg.zxnoter.ui.main.stage.body.area.editor.setting.pane;
+package team.zxorg.zxnoter.ui.main.stage.body.area.editor.setting.pane.preference;
 
 import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;

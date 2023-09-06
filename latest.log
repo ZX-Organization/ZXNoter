@@ -1,40 +1,29 @@
-[19:47:55] [Main.main/INFO]: ZXNoter启动
-[19:47:55] [Main.main/INFO]: 初始化图形系统
-[19:47:56] [Main.lambda$main$0/INFO]: 初始化配置
-[19:47:56] [ZXConfiguration.reload/INFO]: 载入全局配置
-[19:47:56] [ZXResources.<clinit>/INFO]: 载入基本资源
-[19:47:56] [ZXResources.clearPacks/INFO]: 清除资源包列表
-[19:47:57] [ZXResources.loadPack/INFO]: 载入资源包 zxnoter
-[19:47:57] [ZXResources.loadZipPack/INFO]: 载入Zip资源 jar:file:///D:/Projects/ZXNoter/resource/test-pack.zip
-[19:47:57] [ZXResources.loadPack/INFO]: 载入资源包 test
-[19:47:57] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 color
-[19:47:57] [ZXResources.reloadGlobalResource/INFO]: 载入基础 资源[类型:color id:dark 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\color\dark]
-[19:47:57] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 icon
-[19:47:57] [ZXResources.reloadGlobalResource/INFO]: 载入基础 资源[类型:icon id:line 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\icon\line]
-[19:47:57] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 language
-[19:47:57] [ZXResources.reloadGlobalResource/INFO]: 载入基础 语言资源[id:'zh-cn', 语言数:144]
-[19:47:57] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 layout
-[19:47:57] [ZXResources.reloadGlobalResource/INFO]: 载入基础 资源[类型:layout id:base 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\layout\base]
-[19:47:57] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 sound
-[19:47:57] [ZXResources.reloadGlobalResource/INFO]: 载入基础 资源[类型:sound id:base 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\sound\base]
-[19:47:57] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 style
-[19:47:57] [ZXResources.reloadGlobalResource/INFO]: 载入基础 资源[类型:style id:map-editor-pink 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\style\map-editor\pink]
-[19:47:57] [EditorArea.lambda$new$0/INFO]: 焦点变更:堆叠容器 父布局{8f7e-f528912735b9} 此{b7de-fbf68a34b9a2} [] tab-pane editor-tab-pane tab-pane-focused
-[19:47:58] [ZXStage.<init>/INFO]: 实例化ZXN-UI窗口
-[19:47:58] [ZXProject.openLastProject/INFO]: 打开之前项目 D:\Projects\ZXNoter\docs\reference
-[19:47:58] [Main.lambda$main$0/INFO]: 显示ZXN-UI窗口
-[19:48:03] [SettingViewEditor.lambda$new$0/INFO]: 重新编制设置项SettingPaneItem@20a7cb06[styleClass=label]'用户偏好'
-[19:48:05] [SettingViewEditor.lambda$new$0/INFO]: 重新编制设置项SettingPaneItem@51b04ed1[styleClass=label]'语言'
-[19:48:05] [SettingViewEditor.lambda$new$0/INFO]: 重新编制设置项SettingPaneItem@6023a96a[styleClass=label]'资源'
-[19:48:06] [SettingViewEditor.lambda$new$0/INFO]: 重新编制设置项SettingPaneItem@539afcda[styleClass=label]'图标'
-[19:48:06] [SettingViewEditor.lambda$new$0/INFO]: 重新编制设置项SettingPaneItem@4859053d[styleClass=label]'其他'
-[19:48:07] [SettingViewEditor.lambda$new$0/INFO]: 重新编制设置项SettingPaneItem@539afcda[styleClass=label]'图标'
-[19:48:07] [SettingViewEditor.lambda$new$0/INFO]: 重新编制设置项SettingPaneItem@20a7cb06[styleClass=label]'用户偏好'
-[19:48:11] [SettingViewEditor.lambda$new$0/INFO]: 重新编制设置项SettingPaneItem@2b02982[styleClass=label]'用户偏好'
-[19:48:13] [SettingViewEditor.lambda$new$0/INFO]: 重新编制设置项SettingPaneItem@1ba7eb31[styleClass=label]'用户偏好'
-[19:48:15] [BaseTab.close/INFO]: 关闭: 编辑器[设置]
-[19:48:16] [BaseTab.close/INFO]: 关闭: 编辑器[设置]
-[19:48:18] [SettingViewEditor.lambda$new$0/INFO]: 重新编制设置项SettingPaneItem@2ccf6174[styleClass=label]'用户偏好'
-[19:48:21] [BaseTab.close/INFO]: 关闭: 编辑器[设置]
-[19:48:39] [EditorArea.openFile/INFO]: 打开文件 文件:D:\Projects\ZXNoter\docs\reference\$RJ54UUV.mp3 audio mp3
-[20:56:22] [ZXStage.lambda$new$1/INFO]: 关闭程序
+[22:24:10] [Main.main/INFO]: ZXNoter启动
+[22:24:10] [Main.main/INFO]: 初始化图形系统
+[22:24:11] [Main.lambda$main$0/INFO]: 初始化配置
+[22:24:11] [ZXConfiguration.reload/INFO]: 载入全局配置
+[22:24:11] [ZXResources.<clinit>/INFO]: 载入基本资源
+[22:24:11] [ZXResources.clearPacks/INFO]: 清除资源包列表
+[22:24:12] [ZXResources.loadPack/INFO]: 载入资源包 zxnoter
+[22:24:12] [ZXResources.loadZipPack/INFO]: 载入Zip资源 jar:file:///home/zedo/project/ZXNoter/resource/test-pack.zip
+[22:24:12] [ZXResources.loadPack/INFO]: 载入资源包 test
+[22:24:12] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 color
+[22:24:12] [ZXResources.reloadGlobalResource/INFO]: 载入基础 资源[类型:color id:dark 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res/resources/base-pack'] 所在路径:res/resources/base-pack/color/dark]
+[22:24:12] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 icon
+[22:24:12] [ZXResources.reloadGlobalResource/INFO]: 载入基础 资源[类型:icon id:line 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res/resources/base-pack'] 所在路径:res/resources/base-pack/icon/line]
+[22:24:12] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 language
+[22:24:12] [ZXResources.reloadGlobalResource/INFO]: 载入基础 语言资源[id:'zh-cn', 语言数:144]
+[22:24:12] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 layout
+[22:24:12] [ZXResources.reloadGlobalResource/INFO]: 载入基础 资源[类型:layout id:base 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res/resources/base-pack'] 所在路径:res/resources/base-pack/layout/base]
+[22:24:12] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 sound
+[22:24:12] [ZXResources.reloadGlobalResource/INFO]: 载入基础 资源[类型:sound id:base 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res/resources/base-pack'] 所在路径:res/resources/base-pack/sound/base]
+[22:24:12] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 style
+[22:24:12] [ZXResources.reloadGlobalResource/INFO]: 载入基础 资源[类型:style id:map-editor-pink 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res/resources/base-pack'] 所在路径:res/resources/base-pack/style/map-editor/pink]
+[22:24:12] [EditorArea.lambda$new$0/INFO]: 焦点变更:堆叠容器 父布局{896f-5797e1a8eb04} 此{a520-fe1de88d90e3} [] tab-pane editor-tab-pane tab-pane-focused
+[22:24:12] [ZXStage.<init>/INFO]: 实例化ZXN-UI窗口
+[22:24:12] [ZXProject.openLastProject/INFO]: 打开之前项目 /home/zedo/project/ZXNoter/docs/reference
+[22:24:12] [Main.lambda$main$0/INFO]: 显示ZXN-UI窗口
+[22:24:14] [SettingViewEditor.lambda$new$0/INFO]: 重新编制设置项SettingPaneItem@70fed9ae[styleClass=label]'用户偏好'
+[22:24:17] [ZXConfiguration.saveConfig/INFO]: 保存全局配置
+[22:24:17] [ZXProject.closeProject/INFO]: 关闭项目 /home/zedo/project/ZXNoter/docs/reference
+[22:24:17] [ZXStage.lambda$new$1/INFO]: 关闭程序

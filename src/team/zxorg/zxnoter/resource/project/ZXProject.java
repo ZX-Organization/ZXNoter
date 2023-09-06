@@ -5,12 +5,10 @@ import com.alibaba.fastjson2.JSONObject;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.stage.DirectoryChooser;
-import javafx.stage.Window;
 import team.zxorg.zxnoter.ZXLogger;
 import team.zxorg.zxnoter.resource.GlobalResources;
 import team.zxorg.zxnoter.resource.ZXConfiguration;
 import team.zxorg.zxnoter.ui.main.ZXStage;
-import team.zxorg.zxnoter.ui.main.stage.body.area.editor.base.BaseTab;
 import team.zxorg.zxnoter.ui.main.stage.body.area.editor.base.BaseFileEditor;
 
 import java.io.*;
@@ -18,8 +16,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 
 /**
  * 项目类
@@ -66,7 +62,7 @@ public class ZXProject {
      */
     public void openProject(Path path) {
         projectPath.set(path);
-        ZXConfiguration.getLast().put("open-project", path.toString());
+        ZXConfiguration.getLastTime().put("open-project", path.toString());
     }
 
     /**
@@ -75,7 +71,7 @@ public class ZXProject {
     public void closeProject() {
         ZXLogger.info("关闭项目 " + projectPath.get());
         projectPath.set(null);
-        ZXConfiguration.getLast().put("open-project", "");
+        ZXConfiguration.getLastTime().put("open-project", "");
         BaseFileEditor[] editors = new BaseFileEditor[fileEditorMap.values().size()];
         fileEditorMap.values().toArray(editors);
         for (BaseFileEditor editor : editors) {
@@ -91,7 +87,7 @@ public class ZXProject {
         DirectoryChooser directoryChooser = new DirectoryChooser();
         directoryChooser.setTitle(GlobalResources.getLanguageContent("project.open").getValue());
         {
-            File lastFile = new File(ZXConfiguration.getLast().getString("open-project"));
+            File lastFile = new File(ZXConfiguration.getLastTime().getString("open-project"));
             if (lastFile.exists())
                 directoryChooser.setInitialDirectory(lastFile);
         }
@@ -102,7 +98,7 @@ public class ZXProject {
     }
 
     public void openLastProject() {
-        String path = ZXConfiguration.getLast().getString("open-project");
+        String path = ZXConfiguration.getLastTime().getString("open-project");
         if (!"".equals(path)) {
             ZXLogger.info("打开之前项目 " + path);
             File lastFile = new File(path);
