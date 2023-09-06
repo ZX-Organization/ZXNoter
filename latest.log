@@ -1,29 +1,4 @@
-[22:24:10] [Main.main/INFO]: ZXNoter启动
-[22:24:10] [Main.main/INFO]: 初始化图形系统
-[22:24:11] [Main.lambda$main$0/INFO]: 初始化配置
-[22:24:11] [ZXConfiguration.reload/INFO]: 载入全局配置
-[22:24:11] [ZXResources.<clinit>/INFO]: 载入基本资源
-[22:24:11] [ZXResources.clearPacks/INFO]: 清除资源包列表
-[22:24:12] [ZXResources.loadPack/INFO]: 载入资源包 zxnoter
-[22:24:12] [ZXResources.loadZipPack/INFO]: 载入Zip资源 jar:file:///home/zedo/project/ZXNoter/resource/test-pack.zip
-[22:24:12] [ZXResources.loadPack/INFO]: 载入资源包 test
-[22:24:12] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 color
-[22:24:12] [ZXResources.reloadGlobalResource/INFO]: 载入基础 资源[类型:color id:dark 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res/resources/base-pack'] 所在路径:res/resources/base-pack/color/dark]
-[22:24:12] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 icon
-[22:24:12] [ZXResources.reloadGlobalResource/INFO]: 载入基础 资源[类型:icon id:line 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res/resources/base-pack'] 所在路径:res/resources/base-pack/icon/line]
-[22:24:12] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 language
-[22:24:12] [ZXResources.reloadGlobalResource/INFO]: 载入基础 语言资源[id:'zh-cn', 语言数:144]
-[22:24:12] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 layout
-[22:24:12] [ZXResources.reloadGlobalResource/INFO]: 载入基础 资源[类型:layout id:base 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res/resources/base-pack'] 所在路径:res/resources/base-pack/layout/base]
-[22:24:12] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 sound
-[22:24:12] [ZXResources.reloadGlobalResource/INFO]: 载入基础 资源[类型:sound id:base 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res/resources/base-pack'] 所在路径:res/resources/base-pack/sound/base]
-[22:24:12] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 style
-[22:24:12] [ZXResources.reloadGlobalResource/INFO]: 载入基础 资源[类型:style id:map-editor-pink 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res/resources/base-pack'] 所在路径:res/resources/base-pack/style/map-editor/pink]
-[22:24:12] [EditorArea.lambda$new$0/INFO]: 焦点变更:堆叠容器 父布局{896f-5797e1a8eb04} 此{a520-fe1de88d90e3} [] tab-pane editor-tab-pane tab-pane-focused
-[22:24:12] [ZXStage.<init>/INFO]: 实例化ZXN-UI窗口
-[22:24:12] [ZXProject.openLastProject/INFO]: 打开之前项目 /home/zedo/project/ZXNoter/docs/reference
-[22:24:12] [Main.lambda$main$0/INFO]: 显示ZXN-UI窗口
-[22:24:14] [SettingViewEditor.lambda$new$0/INFO]: 重新编制设置项SettingPaneItem@70fed9ae[styleClass=label]'用户偏好'
-[22:24:17] [ZXConfiguration.saveConfig/INFO]: 保存全局配置
-[22:24:17] [ZXProject.closeProject/INFO]: 关闭项目 /home/zedo/project/ZXNoter/docs/reference
-[22:24:17] [ZXStage.lambda$new$1/INFO]: 关闭程序
+[01:00:22] [Main.main/INFO]: ZXNoter 1.0.0-Alpha
+[01:00:22] [Main.main/INFO]: -random [randomNum] [something]... 随机做些事
+[01:00:22] [Main.main/INFO]: -version 显示版本号
+[01:00:22] [Main.main/INFO]: -help 显示帮助
