@@ -5,19 +5,18 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ScrollEvent;
-import javafx.scene.layout.BorderPane;
-import team.zxorg.zxnoter.resource.project.ZXProject;
-import team.zxorg.zxnoter.ui.main.stage.body.area.editor.base.BaseFileEditor;
+import team.zxorg.zxnoter.ui.main.stage.body.EditorArea;
+import team.zxorg.zxnoter.ui.main.stage.body.area.editor.base.BaseEditor;
 import team.zxorg.zxnoter.ui.main.stage.body.side.filemanager.FileItem;
 
-public class ImageViewEditor extends BaseFileEditor {
+public class ImageViewEditor extends BaseEditor {
     Image image;
     ImageView imageView = new ImageView();
     ScrollPane scrollPane = new ScrollPane(imageView);
     double zoom = 0.8d;
 
-    public ImageViewEditor(FileItem fileItem, ZXProject zxProject) {
-        super(fileItem, zxProject);
+    public ImageViewEditor(FileItem fileItem, EditorArea editorArea) {
+        super(fileItem, editorArea);
         isEditable.set(false);//不可编辑
 
 

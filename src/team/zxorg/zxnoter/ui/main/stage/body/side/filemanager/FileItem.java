@@ -5,7 +5,6 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.*;
 import team.zxorg.zxnoter.resource.ZXFileType;
-import team.zxorg.zxnoter.resource.project.ZXProject;
 import team.zxorg.zxnoter.ui.component.ZXIcon;
 
 import java.nio.file.Files;
@@ -22,7 +21,7 @@ public class FileItem extends HBox {
         return (isDirectory ? "文件夹" : "文件") + ":" + path + " " + fileType.type + " " + fileType.extensionName;
     }
 
-    public FileItem(Path path, ZXProject zxProject) {
+    public FileItem(Path path) {
         this.path = path;
         isDirectory = Files.isDirectory(path);
         fileName.setText(String.valueOf(path.getFileName()));
@@ -37,12 +36,12 @@ public class FileItem extends HBox {
         fileName.setPrefHeight(Region.USE_COMPUTED_SIZE);
         getChildren().addAll(new ZXIcon(fileType, 16), fileName);
 
-        setOnMouseClicked(event -> {
+        /*setOnMouseClicked(event -> {
             if (event.getClickCount() == 2 && event.getButton().equals(MouseButton.PRIMARY)) {
                 if (!isDirectory)
                     zxProject.zxStage.editorArea.openFile(this);
             }
-        });
+        });*/
         setOnMousePressed(event -> {
             if (event.getButton().equals(MouseButton.SECONDARY)) {
                 FileMenu fileMenu = new FileMenu();

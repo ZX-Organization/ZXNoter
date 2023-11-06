@@ -10,11 +10,11 @@ public enum ReleaseStatus {
      */
     BETA("Beta"),
     /**
-     * 候选发布版
+     * 候选发布版 内部测试
      */
     RC("RC"),
     /**
-     * 稳定版
+     * 稳定版 稳定运行
      */
     STABLE("Stable");
 

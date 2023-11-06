@@ -8,7 +8,6 @@ import javafx.beans.value.ObservableValue;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import team.zxorg.zxnoter.resource.UserPreference;
-import team.zxorg.zxnoter.resource.project.ZXProject;
 import team.zxorg.zxnoter.ui.main.ZXStage;
 import team.zxorg.zxnoter.ui.main.stage.body.side.filemanager.FileManagerTab;
 
@@ -18,9 +17,8 @@ public abstract class BaseFileView extends VBox {
     /**
      * 项目根目录
      */
-    protected ObjectProperty<Path> projectDirectoryPath;
+    protected ObjectProperty<Path> projectDirectoryPath = new SimpleObjectProperty<>();
     protected ObjectProperty<Integer> folderSubItemCount;
-    protected ZXProject zxProject;
 
 
     {
@@ -28,10 +26,12 @@ public abstract class BaseFileView extends VBox {
         getStyleClass().add("file-view");
     }
 
+    public void setProjectDirectoryPath(Path projectDirectoryPath) {
+        this.projectDirectoryPath.set(projectDirectoryPath);
+    }
+
     public BaseFileView(FileManagerTab fileManagerTab) {
         this.folderSubItemCount = fileManagerTab.showCountProperty;
-        zxProject = fileManagerTab.tabPane.zxProject;
-        this.projectDirectoryPath = zxProject.projectPath;
         projectDirectoryPath.addListener((observable, oldValue, newValue) -> {
             refresh();
         });

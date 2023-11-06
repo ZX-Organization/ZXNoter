@@ -14,6 +14,7 @@ public class Main {
 
     public static void main(String[] args) {
         commandLineArgs = args;
+
         if (args != null) {
             switch (args[0]) {
                 case "-random" -> {
@@ -23,13 +24,13 @@ public class Main {
                     randomDoSomething(randomCounts, something);
                 }
                 case "-version" -> {
-                    ZXLogger.info("ZXNoter " + ZXVersion.VERSION);
+                    System.out.println("ZXNoter " + ZXVersion.VERSION);
                 }
                 case "-help" -> {
-                    ZXLogger.info("ZXNoter " + ZXVersion.VERSION);
-                    ZXLogger.info("-random [randomNum] [something]... 随机做些事");
-                    ZXLogger.info("-version 显示版本号");
-                    ZXLogger.info("-help 显示帮助");
+                    System.out.println("ZXNoter " + ZXVersion.VERSION);
+                    System.out.println("-random [randomNum] [something]... 随机做些事");
+                    System.out.println("-version 显示版本号");
+                    System.out.println("-help 显示帮助");
                 }
                 default -> {
                     zxnStart();
@@ -78,16 +79,25 @@ public class Main {
         }
     }
 
+
+    //创建软件实例
+    static ZXStage zxStage;
+
     /**
      * 启动ZXNoter
      */
     public static void zxnStart() {
+        ZXLogger.initialize();
+
+
         ZXLogger.info("ZXNoter启动");
 
 
         //屏蔽javafx歌姬初始化时的异常
         Logging.getJavaFXLogger().disableLogging();
         ZXLogger.info("初始化图形系统");
+
+
         PlatformImpl.startup(() -> {
             //再次开启javafx日志
             Logging.getJavaFXLogger().enableLogging();
@@ -95,15 +105,18 @@ public class Main {
             ZXLogger.info("初始化配置");
             ZXConfiguration.reload();
 
-            //创建软件实例
-            ZXStage zxStage = new ZXStage();
-            ZXLogger.info("显示ZXN-UI窗口");
-            zxStage.show();
+            zxStage = new ZXStage();
 
-             /*   //创建软件实例
-                ZXStage zxStage2 = new ZXStage();
-                ZXLogger.info("显示ZXN-UI窗口");
-                zxStage2.show();*/
+            ZXLogger.info("显示ZXN-UI窗口");
+            zxStage.setOpacity(0);
+
+
+            PlatformImpl.startup(() -> {
+                zxStage.show();
+                //System.out.println("执行自定义窗口");
+                //CustomWindow.createCustomWindow("ZXNoter");
+                zxStage.setOpacity(1);
+            });
         });
 
 

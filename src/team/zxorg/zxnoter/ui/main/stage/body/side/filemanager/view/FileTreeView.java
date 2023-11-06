@@ -40,7 +40,7 @@ public class FileTreeView extends BaseFileView {
     @Override
     public void refresh() {
         if (projectDirectoryPath.get() != null) {
-            TreeItem<FileItem> root = new TreeItem<>(new FileItem(projectDirectoryPath.get(),zxProject));
+            TreeItem<FileItem> root = new TreeItem<>(new FileItem(projectDirectoryPath.get()));
             treeView.setRoot(root);
             updateSubTree(root);
             root.setExpanded(true);
@@ -56,7 +56,7 @@ public class FileTreeView extends BaseFileView {
             Iterator<Path> files = filesStream.iterator();
             while (files.hasNext()) {
                 Path subPath = files.next();
-                TreeItem<FileItem> newTreeItem = new TreeItem<>(new FileItem(subPath,zxProject));
+                TreeItem<FileItem> newTreeItem = new TreeItem<>(new FileItem(subPath));
                 treeItem.getChildren().add(newTreeItem);
                 if (newTreeItem.getValue().isDirectory)
                     updateSubTree(newTreeItem);

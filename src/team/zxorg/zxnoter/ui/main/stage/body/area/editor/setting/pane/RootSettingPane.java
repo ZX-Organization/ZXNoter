@@ -8,7 +8,7 @@ public class RootSettingPane extends BaseSettingPane {
     }
 
     {
-        addSettingPaneItem(new UserPreferencePane());
+        //addSettingPaneItem(new UserPreferencePane());
 
     }
 

@@ -13,14 +13,13 @@ import javafx.scene.shape.MeshView;
 import javafx.scene.transform.Rotate;
 import javafx.scene.transform.Translate;
 import team.zxorg.zxnoter.resource.ZXResources;
-import team.zxorg.zxnoter.resource.project.ZXProject;
 import team.zxorg.zxnoter.ui.main.stage.body.EditorArea;
-import team.zxorg.zxnoter.ui.main.stage.body.area.editor.base.BaseTab;
-import team.zxorg.zxnoter.ui.main.stage.body.area.editor.base.BaseViewEditor;
+import team.zxorg.zxnoter.ui.main.stage.body.area.editor.base.BaseEditor;
 
 import java.io.File;
+import java.nio.file.Path;
 
-public class ThreeDimensionalMapEditor extends BaseViewEditor {
+public class ThreeDimensionalMapEditor extends BaseEditor {
     MouseEvent mouseEvent;
     Translate cameraTranslate = new Translate(0, 0, -15);
     Translate beforeCameraTranslate = new Translate(0, 0, -15);
@@ -29,8 +28,8 @@ public class ThreeDimensionalMapEditor extends BaseViewEditor {
     Rotate beforeCameraRotateX = new Rotate(0, Rotate.X_AXIS);
     Rotate beforeCameraRotateY = new Rotate(0, Rotate.Y_AXIS);
 
-    public ThreeDimensionalMapEditor(EditorArea area, ZXProject zxProject) {
-        super(zxProject);
+    public ThreeDimensionalMapEditor(EditorArea editorArea) {
+        super(Path.of("zxn://three"),editorArea);
 
 
         PerspectiveCamera camera = new PerspectiveCamera(true);
@@ -138,11 +137,17 @@ public class ThreeDimensionalMapEditor extends BaseViewEditor {
             group.getChildren().add(meshView);
         }*/
 
-        setContent(subScene);
+        //setContent(subScene);
     }
-
 
     @Override
     protected void closed() {
+
     }
+
+    @Override
+    protected void saveFile() {
+
+    }
+
 }

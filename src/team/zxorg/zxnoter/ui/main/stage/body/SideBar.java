@@ -8,8 +8,6 @@ import javafx.geometry.Side;
 import javafx.scene.control.TabPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
-import team.zxorg.zxnoter.resource.project.ZXProject;
-import team.zxorg.zxnoter.resource.project.ZXProjectInfo;
 import team.zxorg.zxnoter.ui.main.stage.body.side.filemanager.FileManagerTab;
 
 public class SideBar extends TabPane {
@@ -22,10 +20,8 @@ public class SideBar extends TabPane {
     BooleanProperty isAdjust = new SimpleBooleanProperty(false);//调整宽度
     public BooleanProperty isFold = new SimpleBooleanProperty(false);//是否是折叠
     MouseEvent pressedMouseEvent;
-    public ZXProject zxProject;
 
-    public SideBar(ZXProject zxProject) {
-        this.zxProject = zxProject;
+    public SideBar() {
         styleClass.add("side-bar");
         setMinWidth(Region.USE_PREF_SIZE);
         setSide(Side.LEFT);

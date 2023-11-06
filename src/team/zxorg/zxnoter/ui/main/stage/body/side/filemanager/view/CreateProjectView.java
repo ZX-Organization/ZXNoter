@@ -20,7 +20,7 @@ public class CreateProjectView extends BaseFileView {
 
         ZXButton openButton = new ZXButton("side-bar.file-manager.not-open.open");
         openButton.setOnAction((event -> {
-            zxProject.openProject();
+            //zxProject.openProject();
         }));
 
         ZXButton createButton = new ZXButton("side-bar.file-manager.not-open.create");

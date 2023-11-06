@@ -8,15 +8,16 @@ import team.zxorg.zxnoter.ui.component.ComponentFactory;
 import team.zxorg.zxnoter.ui.component.ZXIcon;
 import team.zxorg.zxnoter.ui.component.ZXMenu;
 import team.zxorg.zxnoter.ui.component.ZXMenuItem;
+import team.zxorg.zxnoter.ui.main.ZXStage;
 import team.zxorg.zxnoter.ui.main.stage.body.area.editor.setting.SettingViewEditor;
 
 
 public class TitleBarFileMenu extends ZXMenu {
-    public ZXProject zxProject;
+    public ZXStage zxStage;
 
-    public TitleBarFileMenu(ZXProject zxProject) {
+    public TitleBarFileMenu(ZXStage zxStage) {
         super("title-bar.file");
-        this.zxProject = zxProject;
+        this.zxStage = zxStage;
         {//构建菜单
             {//文件
                 {//创建
@@ -31,7 +32,7 @@ public class TitleBarFileMenu extends ZXMenu {
                     javafx.scene.control.MenuItem openMenu = ComponentFactory.menuItem("title-bar.file.open");
                     openMenu.setGraphic(ZXResources.getIconPane("document.folder-open", 18, ZXColor.FONT_LIGHT));
                     openMenu.setOnAction(event -> {
-                        zxProject.openProject();
+                        //zxProject.openProject();
                     });
 
                     //打开最近
@@ -49,15 +50,14 @@ public class TitleBarFileMenu extends ZXMenu {
                     javafx.scene.control.MenuItem closeMenu = ComponentFactory.menuItem("title-bar.file.close");
                     closeMenu.setGraphic(ZXResources.getIconPane("system.close", 18, ZXColor.FONT_LIGHT));
                     closeMenu.setOnAction(event -> {
-                        zxProject.closeProject();
+                        //zxStage.zxProject.closeProject();
                     });
 
                     //设置
                     javafx.scene.control.MenuItem settingMenu = ComponentFactory.menuItem("title-bar.file.setting");
                     settingMenu.setGraphic(ZXResources.getIconPane("system.settings-3", 18, ZXColor.FONT_LIGHT));
                     settingMenu.setOnAction(event -> {
-                        zxProject.
-                                zxStage.editorArea.rootEditorTabPane.createEditor(new SettingViewEditor(zxProject));
+                        zxStage.editorArea.rootEditorTabPane.createEditor(new SettingViewEditor(zxStage.editorArea));
                     });
 
                     //退出

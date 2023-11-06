@@ -4,35 +4,41 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextArea;
 import team.zxorg.zxnoter.ZXLogger;
 import team.zxorg.zxnoter.resource.GlobalResources;
 import team.zxorg.zxnoter.resource.UserPreference;
-import team.zxorg.zxnoter.resource.project.ZXProject;
 import team.zxorg.zxnoter.ui.component.ZXLabel;
-import team.zxorg.zxnoter.ui.main.stage.body.area.EditorTabPane;
+import team.zxorg.zxnoter.ui.main.stage.body.EditorArea;
 import team.zxorg.zxnoter.ui.main.stage.body.side.filemanager.FileItem;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.nio.file.Path;
 
-public abstract class BaseFileEditor extends BaseTab {
-    protected FileItem fileItem;//文件物品
+/**
+ * 和文件绑定的编辑器
+ */
+public abstract class BaseEditor extends BaseTab {
+    protected Path path;//编辑器路径
     protected BooleanProperty isEdited = new SimpleBooleanProperty();//是否编辑过
     protected BooleanProperty isEditable = new SimpleBooleanProperty();//是否能编辑
 
-    public FileItem getFileItem() {
-        return fileItem;
+    public Path getPath() {
+        return path;
     }
 
-    public BaseFileEditor(FileItem fileItem, ZXProject zxProject) {
-        super(zxProject);
-        this.fileItem = fileItem;
 
+    public BaseEditor(Path path, EditorArea editorArea) {
+        super(editorArea);
+        this.path = path;
+    }
+
+    public BaseEditor(FileItem fileItem, EditorArea editorArea) {
+        super(editorArea);
+        path = fileItem.path;
         icon.setColor(fileItem.fileType.type.color);
         icon.setIconKey(fileItem.fileType.iconKey);
         isEdited.set(false);
@@ -40,7 +46,6 @@ public abstract class BaseFileEditor extends BaseTab {
         ZXLabel title = new ZXLabel("editor.title", fileName);
         textProperty().bind(title.textProperty());
         fileName.set(String.valueOf(fileItem.path.getFileName()));
-
         isEdited.addListener((observable, oldValue, newValue) -> {
             if (newValue) {
                 title.setLangKey("editor.title.edited");
@@ -50,6 +55,7 @@ public abstract class BaseFileEditor extends BaseTab {
         });
     }
 
+
     @Override
     protected boolean closeRequest() {
         ZXLogger.info("关闭编辑器 " + this);
@@ -58,8 +64,8 @@ public abstract class BaseFileEditor extends BaseTab {
                 save();
             } else {//弹出保存提示框
                 Alert alert = new Alert(Alert.AlertType.NONE);
-                alert.getDialogPane().getStylesheets().addAll(zxProject.zxStage.getScene().getStylesheets());
-                alert.setTitle(GlobalResources.getLanguageContent("alert.save-file.title").get() + "(" + fileItem.path.getFileName() + ")");
+                alert.getDialogPane().getStylesheets().addAll(editorArea.getScene().getStylesheets());
+                alert.setTitle(GlobalResources.getLanguageContent("alert.save-file.title").get() + "(" + path.getFileName() + ")");
                 alert.setHeaderText(null);
                 alert.contentTextProperty().bind(GlobalResources.getLanguageContent("alert.save-file.content"));
 
@@ -80,7 +86,7 @@ public abstract class BaseFileEditor extends BaseTab {
                 } else if (result == discardButton) {
                     // 不保存文件的操作
                     ZXLogger.info("不保存文件");
-                    zxProject.fileEditorMap.remove(fileItem.path);
+                    //zxStage.fileEditorMap.remove(fileItem.path);
                     return true;
                 } else {
                     // 取消操作
@@ -109,8 +115,8 @@ public abstract class BaseFileEditor extends BaseTab {
             e.printStackTrace();
 
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.getDialogPane().getStylesheets().addAll(zxProject.zxStage.getScene().getStylesheets());
-            alert.setTitle(GlobalResources.getLanguageContent("alert.save-file.error.title").get() + "(" + fileItem.path.getFileName() + ")");
+            alert.getDialogPane().getStylesheets().addAll(editorArea.getScene().getStylesheets());
+            alert.setTitle(GlobalResources.getLanguageContent("alert.save-file.error.title").get() + "(" + path.getFileName() + ")");
             alert.setHeaderText(GlobalResources.getLanguageContent("alert.save-file.error.content").get());
             StringWriter sw = new StringWriter();
             PrintWriter pw = new PrintWriter(sw);

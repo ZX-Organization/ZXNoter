@@ -28,8 +28,7 @@ public class ZXLogger {
         logger.addHandler(handler);
     }
 
-    static {
-
+    public static void initialize(){
         handler.setFormatter(formatter);
         logger.setUseParentHandlers(false); // 禁用父级处理程序
         logger.addHandler(handler);
@@ -57,8 +56,6 @@ public class ZXLogger {
 
         System.setErr(printErr);
         System.setOut(printOut);
-
-
     }
 
     private static void printSystemLog(byte[] buf, int off, int len, OutType outType) {

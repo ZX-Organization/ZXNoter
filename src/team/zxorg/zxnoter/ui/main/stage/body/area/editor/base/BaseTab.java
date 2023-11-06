@@ -12,9 +12,9 @@ import javafx.scene.image.Image;
 import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import team.zxorg.zxnoter.resource.project.ZXProject;
 import team.zxorg.zxnoter.ui.component.ZXIcon;
 import team.zxorg.zxnoter.ui.component.ZXStatus;
+import team.zxorg.zxnoter.ui.main.ZXStage;
 import team.zxorg.zxnoter.ui.main.stage.body.EditorArea;
 import team.zxorg.zxnoter.ui.main.stage.body.area.EditorTabPane;
 
@@ -26,7 +26,7 @@ public abstract class BaseTab extends Tab {
     public ArrayList<ZXStatus> zxStatuses = new ArrayList<>();
     private final ObjectProperty<TabDragStyle> tabDragStyle = new SimpleObjectProperty<>(null);
     public ZXIcon icon = new ZXIcon();
-    protected ZXProject zxProject;
+    protected EditorArea editorArea;
     protected BorderPane body = new BorderPane();
 
     @Override
@@ -34,13 +34,13 @@ public abstract class BaseTab extends Tab {
         return "编辑器[" + getText() + "]";
     }
 
-    public BaseTab(ZXProject zxProject) {
+    public BaseTab(EditorArea editorArea) {
         UUID uuid = UUID.randomUUID();
         setId(uuid.toString());
         icon.setSize(18);
         setGraphic(icon);
         setContent(body);
-        this.zxProject = zxProject;
+        this.editorArea = editorArea;
     }
 
     /**
@@ -178,8 +178,8 @@ public abstract class BaseTab extends Tab {
             editorTabPane.handleDragDropped();
         }
 
-        if (this instanceof BaseFileEditor fileEditor)
-            zxProject.fileEditorMap.remove(fileEditor.fileItem.path);
+        /*if (this instanceof BaseFileEditor fileEditor)
+            zxStage.fileEditorMap.remove(fileEditor.fileItem.path);*/
         return true;
     }
 

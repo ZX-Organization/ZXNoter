@@ -8,18 +8,19 @@ import javafx.scene.layout.*;
 import team.zxorg.zxnoter.ZXLogger;
 import team.zxorg.zxnoter.resource.GlobalResources;
 import team.zxorg.zxnoter.resource.ZXColor;
-import team.zxorg.zxnoter.resource.project.ZXProject;
 import team.zxorg.zxnoter.ui.component.*;
-import team.zxorg.zxnoter.ui.main.stage.body.area.editor.base.BaseViewEditor;
+import team.zxorg.zxnoter.ui.main.stage.body.EditorArea;
+import team.zxorg.zxnoter.ui.main.stage.body.area.editor.base.BaseEditor;
 import team.zxorg.zxnoter.ui.main.stage.body.area.editor.setting.pane.RootSettingPane;
-import team.zxorg.zxnoter.ui.main.stage.body.area.editor.setting.item.BaseSettingItem;
-import team.zxorg.zxnoter.ui.main.stage.body.area.editor.setting.pane.preference.SettingPaneItem;
+import team.zxorg.zxnoter.ui.main.stage.body.area.editor.setting.pane.preference.BaseSettingItem;
 
-public class SettingViewEditor extends BaseViewEditor {
+import java.nio.file.Path;
+
+public class SettingViewEditor extends BaseEditor {
     VBox settingItemsPane;
 
-    public SettingViewEditor(ZXProject zxProject) {
-        super(zxProject);
+    public SettingViewEditor(EditorArea editorArea) {
+        super(Path.of("zxn/setting"),editorArea);
         icon.setColor(ZXColor.FONT_USUALLY);
         icon.setIconKey("system.list-settings");
         textProperty().bind(GlobalResources.getLanguageContent("editor.setting-editor.tab-title"));
@@ -34,7 +35,7 @@ public class SettingViewEditor extends BaseViewEditor {
         ZXTextFieldGroup searchTextField = new ZXTextFieldGroup("editor.setting-editor.settings.search", "system.search");
 
 
-        TreeView<SettingPaneItem> settingItemsView = new TreeView<>();
+        TreeView<BaseSettingItem> settingItemsView = new TreeView<>();
         settingItemsView.setMinWidth(Region.USE_PREF_SIZE);
         settingItemsView.setPrefWidth(160);
 
@@ -45,14 +46,14 @@ public class SettingViewEditor extends BaseViewEditor {
         settingItemsScrollPane.setFitToWidth(true);
         HBox.setHgrow(settingItemsScrollPane, Priority.ALWAYS);
 
-        settingItemsView.setRoot(new RootSettingPane().settingPaneItem.thisTreeItem);
-        settingItemsView.getSelectionModel().getSelectedItems().addListener((ListChangeListener<TreeItem<SettingPaneItem>>) c -> {
+        settingItemsView.setRoot(new RootSettingPane().baseSettingItem.thisTreeItem);
+        settingItemsView.getSelectionModel().getSelectedItems().addListener((ListChangeListener<TreeItem<BaseSettingItem>>) c -> {
             while (c.next()) {
                 if (c.wasAdded()) {
-                    SettingPaneItem settingPaneItemTreeItem = c.getAddedSubList().get(0).getValue();
-                    ZXLogger.info("重新编制设置项" + settingPaneItemTreeItem);
+                    BaseSettingItem baseSettingItemTreeItem = c.getAddedSubList().get(0).getValue();
+                    ZXLogger.info("重新编制设置项" + baseSettingItemTreeItem);
                     settingItemsPane.getChildren().clear();
-                    showSettingPanes(settingPaneItemTreeItem, searchTextField.getText());
+                    showSettingPanes(baseSettingItemTreeItem, searchTextField.getText());
                 }
             }
         });
@@ -85,15 +86,20 @@ public class SettingViewEditor extends BaseViewEditor {
     }
 
     @Override
+    protected void saveFile() {
+
+    }
+
+    @Override
     protected void closed() {
     }
 
 
-    private void showSettingPanes(SettingPaneItem settingPaneItemTreeItem, String searchText) {
-        settingItemsPane.getChildren().add(settingPaneItemTreeItem.settingPane.title);
-        boolean allShow = settingPaneItemTreeItem.settingPane.title.getText().toLowerCase().contains(searchText.toLowerCase());
+    private void showSettingPanes(BaseSettingItem baseSettingItemTreeItem, String searchText) {
+        settingItemsPane.getChildren().add(baseSettingItemTreeItem.settingPane.title);
+        boolean allShow = baseSettingItemTreeItem.settingPane.title.getText().toLowerCase().contains(searchText.toLowerCase());
         boolean show = false;
-        for (BaseSettingItem settingItem : settingPaneItemTreeItem.settingPane.settingItems) {
+        for (team.zxorg.zxnoter.ui.main.stage.body.area.editor.setting.item.BaseSettingItem settingItem : baseSettingItemTreeItem.settingPane.settingItems) {
             if (settingItem.title.getText().toLowerCase().contains(searchText.toLowerCase()) || allShow) {
                 settingItem.setPadding(new Insets(0, 0, 0, 12));
                 settingItemsPane.getChildren().add(settingItem.getBox());
@@ -101,9 +107,9 @@ public class SettingViewEditor extends BaseViewEditor {
             }
         }
         if (!show)
-            settingItemsPane.getChildren().remove(settingPaneItemTreeItem.settingPane.title);
-        for (TreeItem<SettingPaneItem> treeItem : settingPaneItemTreeItem.thisTreeItem.getChildren()) {
-            showSettingPanes(treeItem.getValue().settingPane.settingPaneItem, searchText);
+            settingItemsPane.getChildren().remove(baseSettingItemTreeItem.settingPane.title);
+        for (TreeItem<BaseSettingItem> treeItem : baseSettingItemTreeItem.thisTreeItem.getChildren()) {
+            showSettingPanes(treeItem.getValue().settingPane.baseSettingItem, searchText);
         }
     }
 }

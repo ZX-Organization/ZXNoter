@@ -44,7 +44,7 @@ public class FileManagerTab extends BaseSideBarTab {
         regularButton.setSize(22);
         //regularButton.setOnAction((event) -> textField.clear());
 
-        searchGroup.getChildren().addAll(regularButton);
+        //searchGroup.getChildren().addAll(regularButton);
         VBox.setVgrow(fileView, Priority.ALWAYS);
 
         ZXIconButton viewButton = new ZXIconButton("editor.node-tree", 16, "side-bar.file-manager.view");
@@ -68,15 +68,15 @@ public class FileManagerTab extends BaseSideBarTab {
         body.getChildren().addAll(searchGroup, fileView, control);
         body.setPadding(new Insets(8));
 
-
-        tabPane.zxProject.projectPath.addListener((observable, oldValue, newValue) -> {
+/*tabPane.zxProject.projectPath.addListener((observable, oldValue, newValue) -> {
             if (newValue == null) {
                 fileViewProperty.set(new CreateProjectView(this));
                 showCountProperty.set(0);
             } else {
                 setFileViewType(config.getIntValue("view"));
             }
-        });
+        });*/
+
 
 
         fileViewProperty.addListener((observable, oldValue, newValue) -> {

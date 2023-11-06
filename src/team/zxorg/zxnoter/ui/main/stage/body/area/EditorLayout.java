@@ -5,6 +5,7 @@ import javafx.scene.Node;
 import javafx.scene.control.SplitPane;
 import team.zxorg.zxnoter.ZXLogger;
 import team.zxorg.zxnoter.resource.project.ZXProject;
+import team.zxorg.zxnoter.ui.main.ZXStage;
 import team.zxorg.zxnoter.ui.main.stage.body.EditorArea;
 
 import java.util.UUID;
@@ -12,7 +13,6 @@ import java.util.UUID;
 public class EditorLayout extends SplitPane {
     protected EditorLayout parentLayout;//如果是null则为根(root)
     private final UUID uuid = UUID.randomUUID();
-    public ZXProject zxProject;
 
     public String getName() {
         return uuid.toString().substring(19);
@@ -35,9 +35,8 @@ public class EditorLayout extends SplitPane {
         }
     }
 
-    public EditorLayout(EditorLayout parentLayout,ZXProject zxProject) {
+    public EditorLayout(EditorLayout parentLayout) {
         this.parentLayout = parentLayout;
-        this.zxProject = zxProject;
         getStyleClass().add("editor-layout");
 
 

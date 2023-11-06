@@ -1,30 +1,22 @@
 package team.zxorg.zxnoter.ui.main.stage.body.area.editor.video;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
-import javafx.scene.input.DragEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.util.Duration;
 import team.zxorg.zxnoter.ZXLogger;
-import team.zxorg.zxnoter.resource.ZXColor;
-import team.zxorg.zxnoter.resource.project.ZXProject;
 import team.zxorg.zxnoter.ui.TimeUtils;
-import team.zxorg.zxnoter.ui.component.TimeTextField;
-import team.zxorg.zxnoter.ui.component.ZXIcon;
-import team.zxorg.zxnoter.ui.component.ZXIconButton;
-import team.zxorg.zxnoter.ui.component.ZXVolumeIconButton;
-import team.zxorg.zxnoter.ui.main.stage.body.area.editor.base.BaseFileEditor;
+import team.zxorg.zxnoter.ui.component.*;
+import team.zxorg.zxnoter.ui.main.stage.body.EditorArea;
+import team.zxorg.zxnoter.ui.main.stage.body.area.editor.base.BaseEditor;
 import team.zxorg.zxnoter.ui.main.stage.body.side.filemanager.FileItem;
 
-public class VideoViewEditor extends BaseFileEditor {
+public class VideoViewEditor extends BaseEditor {
     Media media;
     MediaPlayer mediaPlayer;
     MediaView mediaView;
@@ -35,8 +27,15 @@ public class VideoViewEditor extends BaseFileEditor {
     Slider timeSlider = new Slider();
     Label stopTimeLabel = new Label();
 
-    public VideoViewEditor(FileItem fileItem, ZXProject zxProject) {
-        super(fileItem, zxProject);
+    Label startTimeLabel = new Label();
+    ZXStatus timeStatus = new ZXStatus(startTimeLabel);
+
+    public VideoViewEditor(FileItem fileItem, EditorArea editorArea) {
+        super(fileItem, editorArea);
+
+        //添加状态
+        zxStatuses.add(timeStatus);
+
         isEditable.set(false);//不可编辑
         media = new Media(fileItem.path.toUri().toString());
         media.setOnError(() -> {
@@ -63,6 +62,7 @@ public class VideoViewEditor extends BaseFileEditor {
             timeTextField.changeTimeProperty.addListener((observable, oldValue, newValue) -> mediaPlayer.seek(new Duration(newValue.longValue() + 1)));
             timeSlider.setMax(mediaPlayer.getStopTime().toMillis());
             stopTimeLabel.setText(TimeUtils.formatTime((long) timeSlider.getMax()));
+            startTimeLabel.setText(TimeUtils.formatTime((long) timeSlider.getMax()));
             mediaPlayer.statusProperty().addListener((observable, oldValue, newValue) -> {
                 if (newValue.equals(MediaPlayer.Status.PLAYING)) {
                     zxIconButton.setIconKey("media.pause");

@@ -10,6 +10,8 @@
       <excludeFolder url="file://$MODULE_DIR$/old/team/zxorg/zxnoter/test/fft2" />
       <excludeFolder url="file://$MODULE_DIR$/src/team/zxorg/zxnoter/ui_old" />
       <excludeFolder url="file://$MODULE_DIR$/src/team/zxorg/zxnoter/resource_old" />
+      <excludeFolder url="file://$MODULE_DIR$/src/team/zxorg/zxnoter/ui/main/stage/body/area/editor/setting/pane/preference/old" />
+      <excludeFolder url="file://$MODULE_DIR$/src/team/zxorg/zxnoter/resource/project" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
@@ -22,5 +24,6 @@
     <orderEntry type="library" name="jimObjModelImporterJFX" level="project" />
     <orderEntry type="library" name="jimObjModelImporterJFX" level="project" />
     <orderEntry type="library" name="openjfx.javafx.media" level="project" />
+    <orderEntry type="library" name="net.java.dev.jna" level="project" />
   </component>
 </module>

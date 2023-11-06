@@ -15,7 +15,6 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.HashMap;
 
 /**
  * 项目类
@@ -23,9 +22,9 @@ import java.util.HashMap;
 public class ZXProject {
     public ObjectProperty<Path> projectPath = new SimpleObjectProperty<>(Paths.get(""));//项目地址
     public ObjectProperty<ZXProjectInfo> projectInfo = new SimpleObjectProperty<>();//项目信息
-    public ZXStage zxStage;
+    private ZXStage zxStage;
 
-    public HashMap<Path, BaseFileEditor> fileEditorMap = new HashMap<>();
+
 
     public ZXProject(ZXStage zxStage) {
         this.zxStage = zxStage;
@@ -68,7 +67,7 @@ public class ZXProject {
     /**
      * 关闭项目
      */
-    public void closeProject() {
+    /*public void closeProject() {
         ZXLogger.info("关闭项目 " + projectPath.get());
         projectPath.set(null);
         ZXConfiguration.getLastTime().put("open-project", "");
@@ -78,7 +77,7 @@ public class ZXProject {
             editor.close();
         }
     }
-
+*/
 
     /**
      * 打开项目

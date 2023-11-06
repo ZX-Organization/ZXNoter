@@ -1,7 +1,8 @@
-package team.zxorg.zxnoter.ui.main.stage.body.area.editor.setting.pane.preference;
+package team.zxorg.zxnoter.ui.main.stage.body.area.editor.setting.pane.preference.old;
 
 import team.zxorg.zxnoter.resource.ResourceType;
 import team.zxorg.zxnoter.ui.main.stage.body.area.editor.setting.item.BaseResourceSettingItem;
+import team.zxorg.zxnoter.ui.main.stage.body.area.editor.setting.pane.preference.BaseSettingPane;
 
 public class LanguageSettingPane extends BaseSettingPane {
     public LanguageSettingPane() {

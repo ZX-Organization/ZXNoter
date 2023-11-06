@@ -1,14 +1,9 @@
 package team.zxorg.zxnoter.ui.main.stage.body.area;
 
-import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.geometry.Orientation;
 import javafx.scene.Node;
 import javafx.scene.control.Tab;
@@ -19,9 +14,7 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import team.zxorg.zxnoter.ZXLogger;
-import team.zxorg.zxnoter.resource.project.ZXProject;
 import team.zxorg.zxnoter.ui.main.stage.body.EditorArea;
-import team.zxorg.zxnoter.ui.main.stage.body.area.editor.base.BaseFileEditor;
 import team.zxorg.zxnoter.ui.main.stage.body.area.editor.base.BaseTab;
 
 import java.nio.file.Path;
@@ -37,7 +30,6 @@ public class EditorTabPane extends TabPane {
         return rootArea;
     }
 
-    public ZXProject zxProject;
 
     public String getName() {
         return uuid.toString().substring(19);
@@ -50,10 +42,9 @@ public class EditorTabPane extends TabPane {
 
     private final ObjectProperty<LayoutPosition> layoutPositionObjectProperty = new SimpleObjectProperty<>();
 
-    public EditorTabPane(EditorArea rootArea, EditorLayout parentLayout, ZXProject zxProject) {
+    public EditorTabPane(EditorArea rootArea, EditorLayout parentLayout) {
         this.parentLayout = parentLayout;
         this.rootArea = rootArea;
-        this.zxProject = zxProject;
         setId(uuid.toString());
         //setTabClosingPolicy(TabPane.TabClosingPolicy.ALL_TABS);
         getStyleClass().add("editor-tab-pane");
@@ -238,7 +229,7 @@ public class EditorTabPane extends TabPane {
             int index = parentLayout.getItems().indexOf(this);
 
             //为拖拽Tab创建新的TabPane
-            EditorTabPane newEditorTabPane = new EditorTabPane(rootArea, parentLayout, zxProject);
+            EditorTabPane newEditorTabPane = new EditorTabPane(rootArea, parentLayout);
             newEditorTabPane.getTabs().add(sourceEditor);
 
             //布局相同 直接加入布局
@@ -250,7 +241,7 @@ public class EditorTabPane extends TabPane {
             } else {//布局不相同 创建一个布局
 
                 //创建新的垂直布局
-                EditorLayout newEditorLayout = new EditorLayout(parentLayout, zxProject);
+                EditorLayout newEditorLayout = new EditorLayout(parentLayout);
                 newEditorLayout.setOrientation(targetOrientation);//设置到目标布局方向
                 //将新的布局根据索引位置添加新的布局
                 parentLayout.getItems().add(Math.max(index, 0), newEditorLayout);

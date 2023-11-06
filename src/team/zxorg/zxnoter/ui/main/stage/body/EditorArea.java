@@ -10,10 +10,9 @@ import javafx.scene.control.Tab;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import team.zxorg.zxnoter.ZXLogger;
-import team.zxorg.zxnoter.resource.project.ZXProject;
 import team.zxorg.zxnoter.ui.main.stage.body.area.EditorLayout;
 import team.zxorg.zxnoter.ui.main.stage.body.area.EditorTabPane;
-import team.zxorg.zxnoter.ui.main.stage.body.area.editor.base.BaseFileEditor;
+import team.zxorg.zxnoter.ui.main.stage.body.area.editor.base.BaseEditor;
 import team.zxorg.zxnoter.ui.main.stage.body.area.editor.base.BaseTab;
 import team.zxorg.zxnoter.ui.main.stage.body.side.filemanager.FileItem;
 
@@ -34,18 +33,21 @@ public class EditorArea extends EditorLayout {
     public ObjectProperty<BaseTab> focusTab = new SimpleObjectProperty<>();
 
 
+    public HashMap<Path, BaseEditor> fileEditorMap = new HashMap<>();
+
+
     @Override
     public String toString() {
         return "(ROOT)" + super.toString() + "";
     }
 
-    public EditorArea(ZXProject zxProject) {
-        super(null, zxProject);
+    public EditorArea() {
+        super(null);
         getStyleClass().add("editor-area");
         setOrientation(Orientation.HORIZONTAL);
         HBox.setHgrow(this, Priority.ALWAYS);
 
-        rootEditorTabPane = new EditorTabPane(this, this, zxProject);
+        rootEditorTabPane = new EditorTabPane(this, this);
         focusEditorTabPane.addListener((observable, oldValue, newValue) -> {
             newValue.getStyleClass().add("tab-pane-focused");
             if (oldValue != null) {
@@ -53,7 +55,7 @@ public class EditorArea extends EditorLayout {
                 oldValue.getSelectionModel().selectedItemProperty().removeListener(searchTabChangeListener);
             }
             newValue.getSelectionModel().selectedItemProperty().addListener(searchTabChangeListener);
-            focusTab.set((BaseTab)  newValue.getSelectionModel().getSelectedItem());
+            focusTab.set((BaseTab) newValue.getSelectionModel().getSelectedItem());
             System.out.println("焦点变更:" + newValue + newValue.getStyleClass());
         });
         focusEditorTabPane.set(rootEditorTabPane);
@@ -67,7 +69,7 @@ public class EditorArea extends EditorLayout {
         autoLayout();
     }
 
-     ChangeListener<Tab> searchTabChangeListener = new ChangeListener<>() {
+    ChangeListener<Tab> searchTabChangeListener = new ChangeListener<>() {
         @Override
         public void changed(ObservableValue<? extends Tab> observable, Tab oldValue, Tab newValue) {
             focusTab.set((BaseTab) newValue);
@@ -101,10 +103,10 @@ public class EditorArea extends EditorLayout {
         ZXLogger.info("打开文件 " + openFile);
 
         //检查是否已被打开
-        BaseFileEditor fileEditor = zxProject.fileEditorMap.get(openFile.path);
+        BaseEditor fileEditor = fileEditorMap.get(openFile.path);
         if (fileEditor != null) {
             if (fileEditor.getTabPane() == null) {
-                zxProject.fileEditorMap.remove(fileEditor.getFileItem().path);
+                fileEditorMap.remove(fileEditor.getPath());
                 return;
             }
 
@@ -118,15 +120,15 @@ public class EditorArea extends EditorLayout {
         if (fileEditorClass != null) {
 
 
-            BaseFileEditor editor;
+            BaseEditor editor;
             try {
-                Constructor<BaseFileEditor> constructor = fileEditorClass.getDeclaredConstructor(FileItem.class, ZXProject.class);
-                editor = constructor.newInstance(openFile, zxProject);
+                Constructor<BaseEditor> constructor = fileEditorClass.getDeclaredConstructor(FileItem.class);
+                editor = constructor.newInstance(openFile);
             } catch (NoSuchMethodException | InvocationTargetException | InstantiationException |
                      IllegalAccessException e) {
                 throw new RuntimeException(e);
             }
-            zxProject.fileEditorMap.put(openFile.path, editor);
+            fileEditorMap.put(openFile.path, editor);
             focusEditorTabPane.get().createEditor(editor);
 
         }
