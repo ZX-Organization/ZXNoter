@@ -1,31 +1,25 @@
-[12:23:17] [Main.zxnStart/INFO]: ZXNoter启动
-[12:23:17] [Main.zxnStart/INFO]: 初始化图形系统
-[12:23:17] [Main.lambda$zxnStart$1/INFO]: 初始化配置
-[12:23:17] [ZXConfiguration.reload/INFO]: 载入全局配置
-[12:23:17] [ZXResources.<clinit>/INFO]: 载入基本资源
-[12:23:17] [ZXResources.clearPacks/INFO]: 清除资源包列表
-[12:23:18] [ZXResources.loadPack/INFO]: 载入资源包 zxnoter
-[12:23:18] [ZXResources.loadZipPack/INFO]: 载入Zip资源 jar:file:///D:/Projects/ZXNoter/resource/test-pack.zip
-[12:23:18] [ZXResources.loadPack/INFO]: 载入资源包 test
-[12:23:18] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 color
-[12:23:18] [ZXResources.reloadGlobalResource/INFO]: 载入基础 资源[类型:color id:dark 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\color\dark]
-[12:23:18] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 icon
-[12:23:18] [ZXResources.reloadGlobalResource/INFO]: 载入基础 资源[类型:icon id:line 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\icon\line]
-[12:23:18] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 language
-[12:23:18] [ZXResources.reloadGlobalResource/INFO]: 载入基础 语言资源[id:'zh-cn', 语言数:144]
-[12:23:18] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 layout
-[12:23:18] [ZXResources.reloadGlobalResource/INFO]: 载入基础 资源[类型:layout id:base 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\layout\base]
-[12:23:18] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 sound
-[12:23:18] [ZXResources.reloadGlobalResource/INFO]: 载入基础 资源[类型:sound id:base 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\sound\base]
-[12:23:18] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 style
-[12:23:18] [ZXResources.reloadGlobalResource/INFO]: 载入基础 资源[类型:style id:map-editor-pink 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\style\map-editor\pink]
-[12:23:18] [EditorArea.lambda$new$0/INFO]: 焦点变更:堆叠容器 父布局{916b-a0eac4dd2fa2} 此{851b-0bb185bcd3e6} [] tab-pane editor-tab-pane tab-pane-focused
-[12:23:18] [ZXStage.<init>/INFO]: 实例化ZXN-UI窗口
-[12:23:18] [Main.lambda$zxnStart$1/INFO]: 显示ZXN-UI窗口
-[12:23:34] [TitleBarFileMenu.lambda$new$0/INFO]: 创建一个项目
-[12:23:36] [TitleBarFileMenu.lambda$new$0/INFO]: 创建一个项目
-[12:23:37] [CreatFileMenu.lambda$new$0/INFO]: 创建一个谱面
-[12:23:45] [TitleBarFileMenu.lambda$new$4/INFO]: 退出
-[12:23:46] [SettingViewEditor.lambda$new$0/INFO]: 重新编制设置项BaseSettingItem@3b1ca5cc[styleClass=label]'用户偏好'
-[12:23:51] [ZXConfiguration.saveConfig/INFO]: 保存全局配置
-[12:23:51] [ZXStage.lambda$new$1/INFO]: 关闭程序
+[13:46:20] [Main.zxnStart/INFO]: ZXNoter启动
+[13:46:20] [Main.zxnStart/INFO]: 初始化图形系统
+[13:46:21] [Main.lambda$zxnStart$1/INFO]: 初始化配置
+[13:46:21] [ZXConfiguration.reload/INFO]: 载入全局配置
+[13:46:21] [ZXResources.<clinit>/INFO]: 载入基本资源
+[13:46:21] [ZXResources.clearPacks/INFO]: 清除资源包列表
+[13:46:22] [ZXResources.loadPack/INFO]: 载入资源包 zxnoter
+[13:46:22] [ZXResources.loadZipPack/INFO]: 载入Zip资源 jar:file:///D:/Projects/ZXNoter/resource/test-pack.zip
+[13:46:22] [ZXResources.loadPack/INFO]: 载入资源包 test
+[13:46:22] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 color
+[13:46:22] [ZXResources.reloadGlobalResource/INFO]: 载入基础 资源[类型:color id:dark 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\color\dark]
+[13:46:22] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 icon
+[13:46:22] [ZXResources.reloadGlobalResource/INFO]: 载入基础 资源[类型:icon id:line 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\icon\line]
+[13:46:22] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 language
+[13:46:22] [ZXResources.reloadGlobalResource/INFO]: 载入基础 语言资源[id:'zh-cn', 语言数:144]
+[13:46:22] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 layout
+[13:46:22] [ZXResources.reloadGlobalResource/INFO]: 载入基础 资源[类型:layout id:base 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\layout\base]
+[13:46:22] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 sound
+[13:46:22] [ZXResources.reloadGlobalResource/INFO]: 载入基础 资源[类型:sound id:base 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\sound\base]
+[13:46:22] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 style
+[13:46:22] [ZXResources.reloadGlobalResource/INFO]: 载入基础 资源[类型:style id:map-editor-pink 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\style\map-editor\pink]
+[13:46:22] [EditorArea.lambda$new$0/INFO]: 焦点变更:堆叠容器 父布局{8dad-77eff9f4f801} 此{8c48-a8c006501c16} [] tab-pane editor-tab-pane tab-pane-focused
+[13:46:22] [ZXStage.<init>/INFO]: 实例化ZXN-UI窗口
+[13:46:22] [Main.lambda$zxnStart$1/INFO]: 显示ZXN-UI窗口
+[13:46:35] [ZXConfiguration.saveConfig/INFO]: 保存全局配置
