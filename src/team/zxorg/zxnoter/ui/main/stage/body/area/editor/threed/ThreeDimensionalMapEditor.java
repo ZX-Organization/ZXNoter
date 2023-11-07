@@ -1,4 +1,4 @@
-package team.zxorg.zxnoter.ui.main.stage.body.area.editor;
+package team.zxorg.zxnoter.ui.main.stage.body.area.editor.threed;
 
 import com.interactivemesh.jfx.importer.obj.ObjModelImporter;
 import javafx.scene.Group;

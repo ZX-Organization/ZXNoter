@@ -1,4 +1,4 @@
-package team.zxorg.zxnoter.ui;
+package team.zxorg.zxnoter.ui.test;
 
 import com.sun.javafx.application.PlatformImpl;
 import com.sun.javafx.util.Logging;

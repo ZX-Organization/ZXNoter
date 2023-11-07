@@ -22,9 +22,18 @@ import java.nio.file.Path;
  * 和文件绑定的编辑器
  */
 public abstract class BaseEditor extends BaseTab {
-    protected Path path;//编辑器路径
-    protected BooleanProperty isEdited = new SimpleBooleanProperty();//是否编辑过
-    protected BooleanProperty isEditable = new SimpleBooleanProperty();//是否能编辑
+    /**
+     * 编辑器路径 (允许虚拟的，用于防止重复打开文件)
+     */
+    protected Path path;
+    /**
+     * 是否编辑过 (影响到文件的保存)
+     */
+    protected BooleanProperty isEdited = new SimpleBooleanProperty();
+    /**
+     * 是否能编辑
+     */
+    protected BooleanProperty isEditable = new SimpleBooleanProperty();
 
     public Path getPath() {
         return path;
@@ -146,8 +155,7 @@ public abstract class BaseEditor extends BaseTab {
     /**
      * 保存文件
      *
-     * @return 是否成功
      */
-    protected abstract void saveFile();
+     protected abstract  void saveFile() ;
 
 }

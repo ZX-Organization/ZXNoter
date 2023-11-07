@@ -9,12 +9,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="295bcb0d-2118-4e02-b35e-a9da4569b815" name="更改" comment="update ui">
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/ZXNoter_jar.xml" beforeDir="false" />
+    <list default="true" id="295bcb0d-2118-4e02-b35e-a9da4569b815" name="更改" comment="fix">
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/alibaba_fastjson2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/alibaba_fastjson2.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/apache_httpcomponents_client5_httpclient5.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/apache_httpcomponents_client5_httpclient5.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/openjfx_javafx_base.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/openjfx_javafx_base.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/openjfx_javafx_controls.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/openjfx_javafx_controls.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/openjfx_javafx_graphics.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/openjfx_javafx_graphics.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/shelf/_2023_6_12__12_41____.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/_2023_6_12__12_41____.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ZXNoter.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ZXNoter.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/latest.log" beforeDir="false" afterPath="$PROJECT_DIR$/latest.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/CustomWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/test/CustomWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/TestCustomWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/test/TestCustomWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/main/stage/body/area/EditorLayout.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/main/stage/body/area/EditorLayout.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/main/stage/body/area/editor/ThreeDimensionalMapEditor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/main/stage/body/area/editor/threed/ThreeDimensionalMapEditor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/main/stage/body/area/editor/base/BaseEditor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/main/stage/body/area/editor/base/BaseEditor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/main/stage/menu/TitleBarFileMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/main/stage/menu/TitleBarFileMenu.java" afterDir="false" />
     </list>
     <list id="9563a533-f70b-4cf6-9026-5fb6bd4d4309" name="zedoC 进行的更改" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -51,7 +62,7 @@
   &quot;associatedIndex&quot;: 0
 }</component>
   <component name="ProjectId" id="2R4d2a2ICdAen8WQi8ONuWVnUMn" />
-  <component name="ProjectLevelVcsManager">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
@@ -63,22 +74,23 @@
     "Downloaded.Files.Path.Enabled": "false",
     "Repository.Attach.Annotations": "false",
     "Repository.Attach.JavaDocs": "true",
-    "Repository.Attach.Sources": "false",
+    "Repository.Attach.Sources": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "UI",
+    "jdk.selected.JAVA_MODULE": "openjdk-21",
     "last_opened_file_path": "D:/Projects/intellij-community",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "库",
+    "project.structure.last.edited": "模块",
     "project.structure.proportion": "0.21134493",
-    "project.structure.side.proportion": "0.16957027",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "project.structure.side.proportion": "0.35935563",
+    "settings.editor.selected.configurable": "preferences.rainbow.brackets.lite",
     "settings.editor.splitter.proportion": "0.22435898",
     "vue.rearranger.settings.migration": "true"
   },
@@ -194,11 +206,11 @@
       </method>
     </configuration>
     <configuration name="TestCustomWindow" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="team.zxorg.zxnoter.ui.TestCustomWindow" />
+      <option name="MAIN_CLASS_NAME" value="team.zxorg.zxnoter.ui.test.TestCustomWindow" />
       <module name="ZXNoter" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="team.zxorg.zxnoter.ui.*" />
+          <option name="PATTERN" value="team.zxorg.zxnoter.ui.test.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -219,9 +231,9 @@
       <list>
         <item itemvalue="应用程序.Main" />
         <item itemvalue="应用程序.TestCustomWindow" />
-        <item itemvalue="应用程序.AAAA" />
-        <item itemvalue="应用程序.Json2Zxm" />
         <item itemvalue="应用程序.Pytorch" />
+        <item itemvalue="应用程序.Json2Zxm" />
+        <item itemvalue="应用程序.AAAA" />
       </list>
     </recent_temporary>
   </component>
@@ -317,6 +329,12 @@
       <workItem from="1699036533094" duration="7385000" />
       <workItem from="1699084574674" duration="18000" />
       <workItem from="1699170127591" duration="4509000" />
+      <workItem from="1699313262944" duration="385000" />
+      <workItem from="1699313656580" duration="191000" />
+      <workItem from="1699313854675" duration="149000" />
+      <workItem from="1699314010686" duration="71000" />
+      <workItem from="1699314209188" duration="3310000" />
+      <workItem from="1699364385374" duration="1204000" />
     </task>
     <task id="LOCAL-00058" summary="fix editor">
       <created>1688045817253</created>
@@ -733,7 +751,8 @@
     <MESSAGE value="update Random" />
     <MESSAGE value="新增版本类" />
     <MESSAGE value="update ui" />
-    <option name="LAST_COMMIT_MESSAGE" value="update ui" />
+    <MESSAGE value="fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

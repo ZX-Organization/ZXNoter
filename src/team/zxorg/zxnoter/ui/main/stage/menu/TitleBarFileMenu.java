@@ -3,7 +3,6 @@ package team.zxorg.zxnoter.ui.main.stage.menu;
 import javafx.scene.control.SeparatorMenuItem;
 import team.zxorg.zxnoter.resource.ZXColor;
 import team.zxorg.zxnoter.resource.ZXResources;
-import team.zxorg.zxnoter.resource.project.ZXProject;
 import team.zxorg.zxnoter.ui.component.ComponentFactory;
 import team.zxorg.zxnoter.ui.component.ZXIcon;
 import team.zxorg.zxnoter.ui.component.ZXMenu;

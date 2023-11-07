@@ -12,6 +12,8 @@
       <excludeFolder url="file://$MODULE_DIR$/src/team/zxorg/zxnoter/resource_old" />
       <excludeFolder url="file://$MODULE_DIR$/src/team/zxorg/zxnoter/ui/main/stage/body/area/editor/setting/pane/preference/old" />
       <excludeFolder url="file://$MODULE_DIR$/src/team/zxorg/zxnoter/resource/project" />
+      <excludeFolder url="file://$MODULE_DIR$/src/team/zxorg/zxnoter/ui/main/stage/body/area/editor/threed" />
+      <excludeFolder url="file://$MODULE_DIR$/src/team/zxorg/zxnoter/ui/test" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
@@ -20,10 +22,7 @@
     <orderEntry type="library" name="openjfx.javafx.graphics" level="project" />
     <orderEntry type="library" name="openjfx.javafx.base" level="project" />
     <orderEntry type="library" name="openjfx.javafx.controls" level="project" />
-    <orderEntry type="library" name="de.javagl.obj" level="project" />
-    <orderEntry type="library" name="jimObjModelImporterJFX" level="project" />
-    <orderEntry type="library" name="jimObjModelImporterJFX" level="project" />
     <orderEntry type="library" name="openjfx.javafx.media" level="project" />
-    <orderEntry type="library" name="net.java.dev.jna" level="project" />
+    <orderEntry type="library" name="io.netty.all" level="project" />
   </component>
 </module>
