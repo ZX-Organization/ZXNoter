@@ -7,7 +7,7 @@ import javafx.geometry.Side;
 import javafx.scene.control.TabPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
-import team.zxorg.zxnoter.resource.ZXProject;
+import team.zxorg.zxnoter.config.ZXProject;
 import team.zxorg.zxnoter.ui.main.ZXStage;
 import team.zxorg.zxnoter.ui.main.stage.side.filemanager.FileManagerTab;
 

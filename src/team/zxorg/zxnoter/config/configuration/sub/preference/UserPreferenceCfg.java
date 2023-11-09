@@ -1,8 +1,8 @@
-package team.zxorg.zxnoter.resource.config.date.sub.preference;
+package team.zxorg.zxnoter.config.configuration.sub.preference;
 
-import team.zxorg.zxnoter.resource.config.date.sub.preference.editor.EditorCfg;
-import team.zxorg.zxnoter.resource.config.date.sub.preference.res.ResourcesPackCfg;
-import team.zxorg.zxnoter.resource.config.date.sub.preference.side.SideBarCfg;
+import team.zxorg.zxnoter.config.configuration.sub.preference.editor.EditorCfg;
+import team.zxorg.zxnoter.config.configuration.sub.preference.res.ResourcesPackCfg;
+import team.zxorg.zxnoter.config.configuration.sub.preference.side.SideBarCfg;
 
 /**
  * 用户偏好配置

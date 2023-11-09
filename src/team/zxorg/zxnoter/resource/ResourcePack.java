@@ -5,7 +5,7 @@ import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;
 import javafx.scene.image.Image;
 import team.zxorg.zxnoter.ZXLogger;
-import team.zxorg.zxnoter.resource.config.ZXConfig;
+import team.zxorg.zxnoter.config.ZXConfig;
 import team.zxorg.zxnoter.resource.pack.LanguageResourcePack;
 import team.zxorg.zxnoter.resource.pack.BaseResourcePack;
 

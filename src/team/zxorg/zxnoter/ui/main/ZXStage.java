@@ -7,15 +7,13 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import team.zxorg.zxnoter.ZXLogger;
 import team.zxorg.zxnoter.resource.GlobalResources;
-import team.zxorg.zxnoter.resource.config.ZXConfig;
-import team.zxorg.zxnoter.resource.ZXProject;
+import team.zxorg.zxnoter.config.ZXConfig;
+import team.zxorg.zxnoter.config.ZXProject;
 import team.zxorg.zxnoter.resource.ZXResources;
 import team.zxorg.zxnoter.ui.main.stage.area.EditorArea;
 import team.zxorg.zxnoter.ui.main.stage.side.SideBar;
 import team.zxorg.zxnoter.ui.main.stage.menu.TitleBar;
 import team.zxorg.zxnoter.ui.main.stage.status.StatusBar;
-
-import java.nio.file.Path;
 
 public class ZXStage extends Stage {
 
@@ -48,9 +46,8 @@ public class ZXStage extends Stage {
     private HBox bodyHBox = new HBox();
 
 
-
-    public ZXStage(Path projectPath) {
-        ZXLogger.info("实例化ZXN-UI窗口");
+    public ZXStage() {
+        ZXLogger.info("实例化ZXStage");
 
         /*System.out.println(List.of(projectPath.getClass().getDeclaredFields()));
         projectPath.getClass().getDeclaredField("")*/
@@ -81,20 +78,12 @@ public class ZXStage extends Stage {
         //project.projectPath.set(Path.of("./docs/reference"));
 
 
-
-
         setOnCloseRequest(event -> {
             ZXConfig.saveConfig();
-            //zxProject.closeProject();
+            zxProject.closeProject();
         });
 
-        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-            ZXLogger.info("关闭程序");
-            close();
-            // 在这里执行您需要在关机前执行的操作
-        }));
 
-        zxProject.openedPath.set(projectPath);
     }
 
 

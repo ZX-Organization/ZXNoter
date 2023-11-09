@@ -3,12 +3,13 @@ package team.zxorg.zxnoter;
 import com.sun.javafx.application.PlatformImpl;
 import com.sun.javafx.util.Logging;
 import team.zxorg.zxnoter.info.ZXVersion;
-import team.zxorg.zxnoter.resource.config.ZXConfig;
-import team.zxorg.zxnoter.resource.config.date.sub.LastTimeStatesCfg;
-import team.zxorg.zxnoter.resource.config.date.sub.MiniProjectCfg;
+import team.zxorg.zxnoter.config.ZXConfig;
+import team.zxorg.zxnoter.config.configuration.sub.LastTimeStatesCfg;
+import team.zxorg.zxnoter.config.configuration.sub.MiniProjectCfg;
 import team.zxorg.zxnoter.ui.main.ZXStage;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Main {
@@ -97,6 +98,7 @@ public class Main {
         Logging.getJavaFXLogger().disableLogging();
         ZXLogger.info("初始化图形系统");
 
+        ArrayList<ZXStage> zxStages = new ArrayList<>();
 
         PlatformImpl.startup(() -> {
             //再次开启javafx日志
@@ -110,17 +112,29 @@ public class Main {
 
             if (lastTimeStates.openedProjects.isEmpty()) {
                 //创建软件实例
-                ZXStage zxStage = new ZXStage(null);
+                ZXStage zxStage = new ZXStage();
                 zxStage.show();
+                zxStages.add(zxStage);
             } else {
                 for (MiniProjectCfg path : lastTimeStates.openedProjects) {
                     ZXLogger.info("载入上次打开项目: " + path);
-                    ZXStage zxStage = new ZXStage(Path.of(path.path));
+                    ZXStage zxStage = new ZXStage();
+                    zxStage.zxProject.openProject(Path.of(path.path));
                     zxStage.show();
-                    ZXLogger.info("显示ZXN-UI窗口");
+                    zxStages.add(zxStage);
+
                 }
             }
 
+
+            Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+                ZXLogger.info("关闭程序");
+                for (ZXStage zxStage : zxStages) {
+                    zxStage.zxProject.closeProject();
+                    zxStage.close();
+                }
+                // 在这里执行您需要在关机前执行的操作
+            }));
 
 
            /* zxStage.setOpacity(0);

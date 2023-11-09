@@ -10,7 +10,7 @@ import javafx.scene.control.TextArea;
 import team.zxorg.zxnoter.ZXLogger;
 import team.zxorg.zxnoter.resource.GlobalResources;
 import team.zxorg.zxnoter.resource.ZXFileType;
-import team.zxorg.zxnoter.resource.config.ZXConfig;
+import team.zxorg.zxnoter.config.ZXConfig;
 import team.zxorg.zxnoter.ui.component.ZXIcon;
 import team.zxorg.zxnoter.ui.component.ZXLabel;
 import team.zxorg.zxnoter.ui.main.stage.area.EditorArea;

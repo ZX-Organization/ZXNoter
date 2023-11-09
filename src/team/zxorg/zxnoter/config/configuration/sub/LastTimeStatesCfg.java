@@ -1,4 +1,4 @@
-package team.zxorg.zxnoter.resource.config.date.sub;
+package team.zxorg.zxnoter.config.configuration.sub;
 
 import java.util.ArrayList;
 

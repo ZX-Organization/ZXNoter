@@ -31,9 +31,7 @@ public class EditorArea extends EditorLayout {
     public ObjectProperty<EditorTabPane> focusEditorTabPane = new SimpleObjectProperty<>();
     public ObjectProperty<BaseTab> focusTab = new SimpleObjectProperty<>();
 
-
     public HashMap<Path, BaseEditor> editorMap = new HashMap<>();
-
 
     @Override
     public String toString() {

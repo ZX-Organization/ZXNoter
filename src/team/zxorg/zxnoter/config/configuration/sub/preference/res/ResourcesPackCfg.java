@@ -1,4 +1,4 @@
-package team.zxorg.zxnoter.resource.config.date.sub.preference.res;
+package team.zxorg.zxnoter.config.configuration.sub.preference.res;
 
 import team.zxorg.zxnoter.resource.ResourceType;
 

@@ -1,14 +1,13 @@
 package team.zxorg.zxnoter.ui.main.stage.side;
 
-import com.alibaba.fastjson2.JSONObject;
 import javafx.geometry.Pos;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.VBox;
 import team.zxorg.zxnoter.resource.GlobalResources;
 import team.zxorg.zxnoter.resource.ZXColor;
-import team.zxorg.zxnoter.resource.ZXProject;
-import team.zxorg.zxnoter.resource.config.ZXConfig;
-import team.zxorg.zxnoter.resource.config.date.sub.preference.side.SideBarCfg;
+import team.zxorg.zxnoter.config.ZXProject;
+import team.zxorg.zxnoter.config.ZXConfig;
+import team.zxorg.zxnoter.config.configuration.sub.preference.side.SideBarCfg;
 import team.zxorg.zxnoter.ui.component.TrackTooltip;
 import team.zxorg.zxnoter.ui.component.ZXIcon;
 import team.zxorg.zxnoter.ui.main.ZXStage;

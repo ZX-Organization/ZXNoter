@@ -1,9 +1,9 @@
-package team.zxorg.zxnoter.resource.config.date;
+package team.zxorg.zxnoter.config.configuration;
 
 import com.alibaba.fastjson2.JSONObject;
-import team.zxorg.zxnoter.resource.config.date.sub.MiniProjectCfg;
-import team.zxorg.zxnoter.resource.config.date.sub.LastTimeStatesCfg;
-import team.zxorg.zxnoter.resource.config.date.sub.preference.UserPreferenceCfg;
+import team.zxorg.zxnoter.config.configuration.sub.MiniProjectCfg;
+import team.zxorg.zxnoter.config.configuration.sub.LastTimeStatesCfg;
+import team.zxorg.zxnoter.config.configuration.sub.preference.UserPreferenceCfg;
 
 import java.util.ArrayList;
 

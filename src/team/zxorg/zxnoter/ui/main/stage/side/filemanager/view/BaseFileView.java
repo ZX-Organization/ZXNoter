@@ -1,7 +1,6 @@
 package team.zxorg.zxnoter.ui.main.stage.side.filemanager.view;
 
 import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import team.zxorg.zxnoter.ui.main.stage.side.filemanager.FileManagerTab;

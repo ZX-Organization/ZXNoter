@@ -1,4 +1,4 @@
-package team.zxorg.zxnoter.resource.config.date.sub.preference.editor;
+package team.zxorg.zxnoter.config.configuration.sub.preference.editor;
 
 public class EditorCfg {
     /**

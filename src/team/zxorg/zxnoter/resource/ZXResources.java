@@ -9,8 +9,8 @@ import javafx.collections.ObservableMap;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import team.zxorg.zxnoter.ZXLogger;
-import team.zxorg.zxnoter.resource.config.ZXConfig;
-import team.zxorg.zxnoter.resource.config.ZXDefaultConfig;
+import team.zxorg.zxnoter.config.ZXConfig;
+import team.zxorg.zxnoter.config.ZXDefaultConfig;
 import team.zxorg.zxnoter.resource.pack.*;
 
 import java.io.IOException;

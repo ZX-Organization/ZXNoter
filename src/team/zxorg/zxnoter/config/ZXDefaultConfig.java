@@ -1,10 +1,9 @@
-package team.zxorg.zxnoter.resource.config;
+package team.zxorg.zxnoter.config;
 
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
 import team.zxorg.zxnoter.ZXLogger;
-import team.zxorg.zxnoter.resource.config.date.Configuration;
-import team.zxorg.zxnoter.resource.config.date.DefaultConfiguration;
+import team.zxorg.zxnoter.config.configuration.DefaultConfiguration;
 
 import java.io.IOException;
 import java.io.InputStream;
