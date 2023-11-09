@@ -10,7 +10,6 @@ import team.zxorg.zxnoter.ZXLogger;
 import team.zxorg.zxnoter.resource.pack.*;
 
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -118,8 +117,8 @@ public class GlobalResources {
             for (Path file : layoutResourcePack.getCssFiles()) {
                 styleResources.add(file.toUri().toString());
             }
-        } else if (pack instanceof ColorResourcePack colorResourcePack) {
-            for (Path file : colorResourcePack.getCssFiles()) {
+        } else if (pack instanceof ThemeResourcePack themeResourcePack) {
+            for (Path file : themeResourcePack.getCssFiles()) {
                 styleResources.add(file.toUri().toString());
             }
         }

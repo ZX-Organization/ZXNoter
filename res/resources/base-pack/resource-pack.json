@@ -3,8 +3,8 @@
   "author": "zedoCN",
   "icon": "icon.png",
   "resources": {
-    "color": [
-      "color/dark/dark.json"
+    "theme": [
+      "theme/dark/dark.json"
     ],
     "layout": [
       "layout/base/base.json"

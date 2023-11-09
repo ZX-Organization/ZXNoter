@@ -10,10 +10,11 @@
       <excludeFolder url="file://$MODULE_DIR$/old/team/zxorg/zxnoter/test/fft2" />
       <excludeFolder url="file://$MODULE_DIR$/src/team/zxorg/zxnoter/ui_old" />
       <excludeFolder url="file://$MODULE_DIR$/src/team/zxorg/zxnoter/resource_old" />
-      <excludeFolder url="file://$MODULE_DIR$/src/team/zxorg/zxnoter/ui/main/stage/body/area/editor/setting/pane/preference/old" />
       <excludeFolder url="file://$MODULE_DIR$/src/team/zxorg/zxnoter/resource/project" />
-      <excludeFolder url="file://$MODULE_DIR$/src/team/zxorg/zxnoter/ui/main/stage/body/area/editor/threed" />
       <excludeFolder url="file://$MODULE_DIR$/src/team/zxorg/zxnoter/ui/test" />
+      <excludeFolder url="file://$MODULE_DIR$/src/team/zxorg/zxnoter/resource/config/old" />
+      <excludeFolder url="file://$MODULE_DIR$/src/team/zxorg/zxnoter/ui/main/stage/area/editor/setting/pane/preference/old" />
+      <excludeFolder url="file://$MODULE_DIR$/src/team/zxorg/zxnoter/ui/main/stage/area/editor/threed" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
@@ -22,7 +23,7 @@
     <orderEntry type="library" name="openjfx.javafx.graphics" level="project" />
     <orderEntry type="library" name="openjfx.javafx.base" level="project" />
     <orderEntry type="library" name="openjfx.javafx.controls" level="project" />
-    <orderEntry type="library" name="openjfx.javafx.media" level="project" />
     <orderEntry type="library" name="io.netty.all" level="project" />
+    <orderEntry type="library" name="openjfx.javafx.media" level="project" />
   </component>
 </module>

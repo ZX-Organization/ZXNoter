@@ -1,3 +1,22 @@
 {
-    "creatorDate":1690533484326
+  "creatorDate": 1690533484326,
+  "openedFile": [
+    {
+      "paths": [
+        "./111.txt",
+        "./222.txt"
+      ],
+      "alignment": "horizontal",
+      "layout": [
+        {
+          "paths": [
+            "zxn/setting"
+          ],
+          "alignment": "vertical",
+          "layout": [
+          ]
+        }
+      ]
+    }
+  ]
 }

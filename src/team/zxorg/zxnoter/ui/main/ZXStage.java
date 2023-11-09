@@ -7,30 +7,53 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import team.zxorg.zxnoter.ZXLogger;
 import team.zxorg.zxnoter.resource.GlobalResources;
-import team.zxorg.zxnoter.resource.ZXConfiguration;
+import team.zxorg.zxnoter.resource.config.ZXConfig;
+import team.zxorg.zxnoter.resource.ZXProject;
 import team.zxorg.zxnoter.resource.ZXResources;
-import team.zxorg.zxnoter.ui.main.stage.*;
-import team.zxorg.zxnoter.ui.main.stage.body.EditorArea;
-import team.zxorg.zxnoter.ui.main.stage.body.SideBar;
+import team.zxorg.zxnoter.ui.main.stage.area.EditorArea;
+import team.zxorg.zxnoter.ui.main.stage.side.SideBar;
+import team.zxorg.zxnoter.ui.main.stage.menu.TitleBar;
+import team.zxorg.zxnoter.ui.main.stage.status.StatusBar;
+
+import java.nio.file.Path;
 
 public class ZXStage extends Stage {
+
+
+    /**
+     * 项目类
+     */
+    public ZXProject zxProject = new ZXProject(this);
+
+
+    /**
+     * 顶部 标题栏
+     */
     public TitleBar titleBar = new TitleBar(this);
-    public HBox bodyHBox = new HBox();
+
+    /**
+     * 中间 编辑区域
+     */
+    public EditorArea editorArea = new EditorArea(this);
+    /**
+     * 左边 侧边栏
+     */
+    public SideBar sideBar = new SideBar(this);
+    /**
+     * 底部 状态栏
+     */
+    public StatusBar statusBar = new StatusBar(this);
 
 
-    public EditorArea editorArea = new EditorArea();//编辑区域
-    public SideBar sideBar = new SideBar();//侧边栏
-
-    public StatusBar statusBar = new StatusBar(this);//状态栏
+    private HBox bodyHBox = new HBox();
 
 
 
-
-
-    public ZXStage() {
+    public ZXStage(Path projectPath) {
         ZXLogger.info("实例化ZXN-UI窗口");
 
-
+        /*System.out.println(List.of(projectPath.getClass().getDeclaredFields()));
+        projectPath.getClass().getDeclaredField("")*/
         //测试代码
         //initStyle(StageStyle.TRANSPARENT);
 
@@ -57,8 +80,11 @@ public class ZXStage extends Stage {
         //zxProject.openLastProject();
         //project.projectPath.set(Path.of("./docs/reference"));
 
+
+
+
         setOnCloseRequest(event -> {
-            ZXConfiguration.saveConfig();
+            ZXConfig.saveConfig();
             //zxProject.closeProject();
         });
 
@@ -67,6 +93,8 @@ public class ZXStage extends Stage {
             close();
             // 在这里执行您需要在关机前执行的操作
         }));
+
+        zxProject.openedPath.set(projectPath);
     }
 
 

@@ -3,9 +3,12 @@ package team.zxorg.zxnoter;
 import com.sun.javafx.application.PlatformImpl;
 import com.sun.javafx.util.Logging;
 import team.zxorg.zxnoter.info.ZXVersion;
-import team.zxorg.zxnoter.resource.ZXConfiguration;
+import team.zxorg.zxnoter.resource.config.ZXConfig;
+import team.zxorg.zxnoter.resource.config.date.sub.LastTimeStatesCfg;
+import team.zxorg.zxnoter.resource.config.date.sub.MiniProjectCfg;
 import team.zxorg.zxnoter.ui.main.ZXStage;
 
+import java.nio.file.Path;
 import java.util.Random;
 
 public class Main {
@@ -80,9 +83,6 @@ public class Main {
     }
 
 
-    //创建软件实例
-    static ZXStage zxStage;
-
     /**
      * 启动ZXNoter
      */
@@ -103,12 +103,27 @@ public class Main {
             Logging.getJavaFXLogger().enableLogging();
             //初始化 (载入配置 使用资源)
             ZXLogger.info("初始化配置");
-            ZXConfiguration.reload();
+            ZXConfig.reload();
 
-            zxStage = new ZXStage();
+            //读取上一次状态
+            LastTimeStatesCfg lastTimeStates = ZXConfig.configuration.lastTimeStates;
 
-            ZXLogger.info("显示ZXN-UI窗口");
-            zxStage.setOpacity(0);
+            if (lastTimeStates.openedProjects.isEmpty()) {
+                //创建软件实例
+                ZXStage zxStage = new ZXStage(null);
+                zxStage.show();
+            } else {
+                for (MiniProjectCfg path : lastTimeStates.openedProjects) {
+                    ZXLogger.info("载入上次打开项目: " + path);
+                    ZXStage zxStage = new ZXStage(Path.of(path.path));
+                    zxStage.show();
+                    ZXLogger.info("显示ZXN-UI窗口");
+                }
+            }
+
+
+
+           /* zxStage.setOpacity(0);
 
 
             PlatformImpl.startup(() -> {
@@ -116,7 +131,9 @@ public class Main {
                 //System.out.println("执行自定义窗口");
                 //CustomWindow.createCustomWindow("ZXNoter");
                 zxStage.setOpacity(1);
-            });
+            });*/
+
+
         });
 
 

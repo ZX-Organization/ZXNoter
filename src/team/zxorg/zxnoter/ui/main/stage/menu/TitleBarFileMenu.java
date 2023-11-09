@@ -8,7 +8,7 @@ import team.zxorg.zxnoter.ui.component.ZXIcon;
 import team.zxorg.zxnoter.ui.component.ZXMenu;
 import team.zxorg.zxnoter.ui.component.ZXMenuItem;
 import team.zxorg.zxnoter.ui.main.ZXStage;
-import team.zxorg.zxnoter.ui.main.stage.body.area.editor.setting.SettingViewEditor;
+import team.zxorg.zxnoter.ui.main.stage.area.editor.setting.SettingViewEditor;
 
 
 public class TitleBarFileMenu extends ZXMenu {
@@ -31,7 +31,7 @@ public class TitleBarFileMenu extends ZXMenu {
                     javafx.scene.control.MenuItem openMenu = ComponentFactory.menuItem("title-bar.file.open");
                     openMenu.setGraphic(ZXResources.getIconPane("document.folder-open", 18, ZXColor.FONT_LIGHT));
                     openMenu.setOnAction(event -> {
-                        //zxProject.openProject();
+                        zxStage.zxProject.openProject();
                     });
 
                     //打开最近
@@ -49,7 +49,7 @@ public class TitleBarFileMenu extends ZXMenu {
                     javafx.scene.control.MenuItem closeMenu = ComponentFactory.menuItem("title-bar.file.close");
                     closeMenu.setGraphic(ZXResources.getIconPane("system.close", 18, ZXColor.FONT_LIGHT));
                     closeMenu.setOnAction(event -> {
-                        //zxStage.zxProject.closeProject();
+                        zxStage.zxProject.closeProject();
                     });
 
                     //设置

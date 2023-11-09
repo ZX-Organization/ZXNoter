@@ -7,7 +7,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.nio.file.Path;
 
 public enum ResourceType {
-    color(ColorResourcePack.class),
+    theme(ThemeResourcePack.class),
     icon(IconResourcePack.class),
     language(LanguageResourcePack.class),
     layout(LayoutResourcePack.class),

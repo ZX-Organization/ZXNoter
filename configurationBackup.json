@@ -1,0 +1,57 @@
+{
+  "type": "config",
+  "userPreference": {
+    "usedResources": {
+      "language": {
+        "base": "zxnoter.language.zh-cn",
+        "attach": []
+      },
+      "sound": {
+        "base": "zxnoter.sound.base",
+        "attach": []
+      },
+      "icon": {
+        "base": "zxnoter.icon.line",
+        "attach": []
+      },
+      "style": {
+        "base": "zxnoter.style.map-editor-pink",
+        "attach": []
+      },
+      "layout": {
+        "base": "zxnoter.layout.base",
+        "attach": []
+      },
+      "theme": {
+        "base": "zxnoter.theme.dark",
+        "attach": []
+      }
+    },
+    "language": {
+      "languageCode": "zh-cn"
+    },
+    "projectsDirectory": "./docs/reference",
+    "side-bar": {
+      "file-manager": {
+        "view": 0
+      }
+    },
+    "languageCode": "zh-cn"
+  },
+  "lastTimeStates": {
+    "openedProjects": [
+      {
+        "path": "C:\\Users\\zedo-hp\\Documents\\GitHub\\ZXNoter\\docs",
+        "title": "测试项目"
+      }
+    ]
+  },
+  "historicalProjects": [
+    {
+      "path": "C:\\Users\\zedo-hp\\Documents\\GitHub\\ZXNoter\\docs",
+      "title": "测试项目"
+    }
+  ],
+  "extension": {
+  }
+}

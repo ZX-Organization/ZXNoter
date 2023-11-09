@@ -1,8 +1,8 @@
 package team.zxorg.zxnoter.resource;
 
-import team.zxorg.zxnoter.ui.main.stage.body.area.editor.image.ImageViewEditor;
-import team.zxorg.zxnoter.ui.main.stage.body.area.editor.text.TextEditor;
-import team.zxorg.zxnoter.ui.main.stage.body.area.editor.video.VideoViewEditor;
+import team.zxorg.zxnoter.ui.main.stage.area.editor.image.ImageViewEditor;
+import team.zxorg.zxnoter.ui.main.stage.area.editor.text.TextEditor;
+import team.zxorg.zxnoter.ui.main.stage.area.editor.video.VideoViewEditor;
 
 public enum ZXFileType {
     directory("", "document.folder", Type.directory, null),

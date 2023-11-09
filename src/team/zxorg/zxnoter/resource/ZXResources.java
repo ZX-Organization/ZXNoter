@@ -9,6 +9,8 @@ import javafx.collections.ObservableMap;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import team.zxorg.zxnoter.ZXLogger;
+import team.zxorg.zxnoter.resource.config.ZXConfig;
+import team.zxorg.zxnoter.resource.config.ZXDefaultConfig;
 import team.zxorg.zxnoter.resource.pack.*;
 
 import java.io.IOException;
@@ -146,7 +148,7 @@ public class ZXResources {
         Path resourcePath = Paths.get("res/resources/base-pack");
         if (!Files.exists(resourcePath)) {
             try {
-                URL resourceUrl = ZXConfiguration.class.getResource("/resources/base-pack");
+                URL resourceUrl = ZXConfig.class.getResource("/resources/base-pack");
                 ZXLogger.info("载入内部资源 url:" + resourceUrl);
                 URI resourceUri = resourceUrl.toURI();
                 Map<String, String> env = new HashMap<>();
@@ -257,19 +259,28 @@ public class ZXResources {
         //清除其他资源
         usedAttachResourcesMap.get(resourceType).clear();
 
-        {
-            BaseResourcePack baseResourcePack = getResourceFromFullId(UserPreference.getUsedBaseResources(resourceType));
+
+        /*{
+            BaseResourcePack baseResourcePack = getResourceFromFullId();
             //将启用的资源加入全局资源
             usedBaseResourcesMap.get(resourceType).set(baseResourcePack);
             ZXLogger.info("载入基础 " + baseResourcePack);
+        }*/
+        System.out.println(resourceType);
+        System.out.println(ZXDefaultConfig.configuration.resourcePacks.getTypeResourcePacks(resourceType));
+        for (String fullIds : ZXDefaultConfig.configuration.resourcePacks.getTypeResourcePacks(resourceType)) {
+            BaseResourcePack baseResourcePack = getResourceFromFullId(fullIds);
+            //将启用的资源加入全局资源
+            usedBaseResourcesMap.get(resourceType).set(baseResourcePack);
+            ZXLogger.info("载入基础资源包 " + baseResourcePack);
         }
 
-        for (String fullIds : UserPreference.getUsedAttachResources(resourceType)) {
-            BaseResourcePack baseResourcePack = getResourceFromFullId(UserPreference.getUsedBaseResources(resourceType));
+        /*for (String fullIds : UserPreferenceOld.getUsedAttachResources(resourceType)) {
+            BaseResourcePack baseResourcePack = getResourceFromFullId(UserPreferenceOld.getUsedBaseResources(resourceType));
             //将启用的资源加入全局资源
             usedBaseResourcesMap.get(resourceType).set(baseResourcePack);
             ZXLogger.info("载入附加 " + baseResourcePack);
-        }
+        }*/
         GlobalResources.loadResourcesPacks(resourceType);
     }
 

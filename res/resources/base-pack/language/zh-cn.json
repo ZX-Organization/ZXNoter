@@ -163,6 +163,8 @@
     "editor.start-editor.tab-title": "开始",
     "editor.start-editor.title": "ZXNoter 谱面编辑器",
     "editor.start-editor.fast-start": "快速开始",
+    "status-bar.console.title": "控制台",
+
     "language.loss": "**语言丢失**"
   }
 }
