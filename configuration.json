@@ -1,1 +1,51 @@
-{"extension":{},"historicalProjects":[{"path":"C:\\Users\\zedo-hp\\Documents\\GitHub\\ZXNoter\\docs\\reference","title":"测试项目"}],"lastTimeStates":{"openedProjects":[{"path":"C:\\Users\\zedo-hp\\Documents\\GitHub\\ZXNoter\\docs\\reference","title":"测试项目"}]},"userPreference":{"editor":{"closeAutoSave":false},"languageCode":"zh-cn","projectsFolderPath":"./docs/reference","resourcePacks":{"icons":["zxnoter.icon.line"],"languages":["zxnoter.language.zh-cn"],"layouts":["zxnoter.layout.base"],"sounds":["zxnoter.sound.base"],"styles":["zxnoter.style.map-editor-pink"],"themes":["zxnoter.theme.dark"]},"sideBar":{"fileManager":{"fileViewType":"list"}}}}
+{
+	"extension":{
+		
+	},
+	"historicalProjects":[
+		{
+			"path":"D:\\Projects\\ZXNoter\\docs\\reference",
+			"title":"测试项目"
+		}
+	],
+	"lastTimeStates":{
+		"openedProjects":[
+			{
+				"path":"D:\\Projects\\ZXNoter\\docs\\reference",
+				"title":"测试项目"
+			}
+		]
+	},
+	"userPreference":{
+		"editor":{
+			"closeAutoSave":false
+		},
+		"languageCode":"zh-cn",
+		"projectsFolderPath":"./docs/reference",
+		"resourcePacks":{
+			"icons":[
+				
+			],
+			"languages":[
+				
+			],
+			"layouts":[
+				
+			],
+			"sounds":[
+				
+			],
+			"styles":[
+				
+			],
+			"themes":[
+				
+			]
+		},
+		"sideBar":{
+			"fileManager":{
+				"fileViewType":"list"
+			}
+		}
+	}
+}

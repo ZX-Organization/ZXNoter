@@ -1,4 +1,6 @@
-package team.zxorg.zxnoter.config.configuration.sub;
+package team.zxorg.zxnoter.config.sub;
+
+import team.zxorg.zxnoter.config.sub.preference.MiniProjectCfg;
 
 import java.util.ArrayList;
 

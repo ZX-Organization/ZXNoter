@@ -1,9 +1,9 @@
-package team.zxorg.zxnoter.config.configuration;
+package team.zxorg.zxnoter.config.root;
 
 import com.alibaba.fastjson2.JSONObject;
-import team.zxorg.zxnoter.config.configuration.sub.MiniProjectCfg;
-import team.zxorg.zxnoter.config.configuration.sub.LastTimeStatesCfg;
-import team.zxorg.zxnoter.config.configuration.sub.preference.UserPreferenceCfg;
+import team.zxorg.zxnoter.config.sub.preference.MiniProjectCfg;
+import team.zxorg.zxnoter.config.sub.LastTimeStatesCfg;
+import team.zxorg.zxnoter.config.sub.preference.UserPreferenceCfg;
 
 import java.util.ArrayList;
 

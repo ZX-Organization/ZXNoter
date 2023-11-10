@@ -60,7 +60,7 @@ public class FileManagerTab extends BaseSideBarTab {
         body.setPadding(new Insets(8));
 
 
-        zxProject.openedPath.addListener((observable, oldValue, newValue) -> {
+        zxProjectManager.openedPath.addListener((observable, oldValue, newValue) -> {
             if (newValue == null) {
                 fileViewProperty.set(new CreateProjectView(this));
                 showCountProperty.set(0);

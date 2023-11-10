@@ -2,11 +2,12 @@ package team.zxorg.zxnoter.config;
 
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
+import com.alibaba.fastjson2.JSONWriter;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.stage.DirectoryChooser;
 import team.zxorg.zxnoter.ZXLogger;
-import team.zxorg.zxnoter.config.project.ProjectConfig;
+import team.zxorg.zxnoter.config.root.ProjectConfig;
 import team.zxorg.zxnoter.resource.GlobalResources;
 import team.zxorg.zxnoter.ui.main.ZXStage;
 import team.zxorg.zxnoter.ui.main.stage.area.editor.base.BaseEditor;
@@ -17,9 +18,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 
-public class ZXProject {
+public class ZXProjectManager {
 
     public static ProjectConfig projectConfig;
     /**
@@ -28,7 +28,7 @@ public class ZXProject {
     public ObjectProperty<Path> openedPath = new SimpleObjectProperty<>(null);
     ZXStage zxStage;
 
-    public ZXProject(ZXStage zxStage) {
+    public ZXProjectManager(ZXStage zxStage) {
         this.zxStage = zxStage;
     }
 
@@ -42,8 +42,8 @@ public class ZXProject {
             JSONObject root = JSON.parseObject(projectConfigInputStream);
             projectConfig = root.toJavaObject(ProjectConfig.class);
         } catch (IOException e) {
-            ZXLogger.severe("载入项目配置");
-            throw new RuntimeException(e);
+            ZXLogger.severe("载入项目配置异常");
+            return;
         }
         openedPath.set(path);
         //ZXConfiguration.getLastTime().put("open-project", path.toString());
@@ -63,7 +63,7 @@ public class ZXProject {
 
         try (OutputStream outputStream = Files.newOutputStream(openedPath.get().resolve("reference.zxp"))) {
             ZXLogger.info("保存项目配置");
-            JSON.writeTo(outputStream, projectConfig);
+            JSON.writeTo(outputStream, projectConfig, JSONWriter.Feature.PrettyFormat);
         } catch (IOException e) {
             ZXLogger.severe("保存项目配置失败");
             throw new RuntimeException(e);

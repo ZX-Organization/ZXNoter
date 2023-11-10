@@ -1,25 +1,52 @@
 package team.zxorg.zxnoter.ui.main.stage.area.editor.image;
 
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollBar;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
+import team.zxorg.zxnoter.resource.ZXColor;
+import team.zxorg.zxnoter.ui.component.ZXIcon;
+import team.zxorg.zxnoter.ui.component.ZXLabel;
+import team.zxorg.zxnoter.ui.component.ZXStatus;
 import team.zxorg.zxnoter.ui.main.stage.area.EditorArea;
 import team.zxorg.zxnoter.ui.main.stage.area.editor.base.BaseEditor;
 import team.zxorg.zxnoter.ui.main.stage.side.filemanager.FileItem;
 
 import java.nio.file.Path;
+import java.util.List;
 
 public class ImageViewEditor extends BaseEditor {
     Image image;
     ImageView imageView = new ImageView();
     ScrollPane scrollPane = new ScrollPane(imageView);
-    double zoom = 0.8d;
+
+    Label sizeLabel = new Label();
+    ZXStatus sizeStatus = new ZXStatus(sizeLabel);
+
+    Label zoomLabel = new Label();
+    Slider zoomSlider = new Slider();
+    ZXIcon zoomMinIcon = new ZXIcon("media.landscape", ZXColor.GRAY, 12);
+    ZXIcon zoomMaxIcon = new ZXIcon("media.landscape", ZXColor.GRAY, 18);
+    ZXStatus zoomStatus = new ZXStatus(zoomLabel, zoomMinIcon, zoomSlider, zoomMaxIcon);
 
     public ImageViewEditor(Path path, EditorArea editorArea) {
         super(path, editorArea);
         isEditable.set(false);//不可编辑
+
+        zxStatuses.addAll(List.of(zoomStatus, sizeStatus));
+
+        zoomSlider.setValue(0.8);
+        zoomLabel.setPrefWidth(40);
+        zoomSlider.setPrefWidth(80);
+        zoomSlider.setMax(4.0);
+        zoomSlider.setMin(0.4);
+        zoomSlider.setOnMouseDragged(event -> updateImageSize());
 
 
         image = new Image(path.toUri().toString());
@@ -28,6 +55,9 @@ public class ImageViewEditor extends BaseEditor {
         body.setCenter(scrollPane);
 
         updateImageSize();
+
+        sizeLabel.setText((int) image.getWidth() + "×" + (int) image.getHeight());
+
         scrollPane.widthProperty().addListener((observable, oldValue, newValue) -> {
             updateImageSize();
         });
@@ -35,10 +65,11 @@ public class ImageViewEditor extends BaseEditor {
             updateImageSize();
         });
 
+
         imageView.addEventFilter(ScrollEvent.SCROLL, event -> {
             if (event.isAltDown()) {
 
-                double newZoom = zoom + (0.004 * event.getDeltaY());
+                double newZoom = zoomSlider.getValue() + (0.004 * event.getDeltaY());
                 // 限制缩放范围，确保不会过度缩放或过度放大
                 double minZoom = 0.4;
                 double maxZoom = 4.0;
@@ -50,7 +81,7 @@ public class ImageViewEditor extends BaseEditor {
                 double mouseX = event.getX(); // 获取鼠标在图像上的X坐标
                 double mouseY = event.getY(); // 获取鼠标在图像上的Y坐标
 
-                zoom = newZoom;
+                zoomSlider.setValue(newZoom);
                 updateImageSize();
 
                 double newImgWidth = imageView.getFitWidth(); // 缩放后图像宽度
@@ -75,11 +106,11 @@ public class ImageViewEditor extends BaseEditor {
         double fitWidth;
         if (viewScale > imageScale) {
             // 以高度为准适应视图
-            fitHeight = scrollPane.getHeight() * zoom;
+            fitHeight = scrollPane.getHeight() * zoomSlider.getValue();
             fitWidth = fitHeight * imageScale;
         } else {
             // 以宽度为准适应视图
-            fitWidth = scrollPane.getWidth() * zoom;
+            fitWidth = scrollPane.getWidth() * zoomSlider.getValue();
             fitHeight = fitWidth / imageScale;
         }
 
@@ -99,7 +130,7 @@ public class ImageViewEditor extends BaseEditor {
         } else {
             scrollPane.setPadding(new Insets(0));
         }
-
+        zoomLabel.setText((int) (zoomSlider.getValue() * 100) + "%");
 
     }
 

@@ -3,9 +3,9 @@ package team.zxorg.zxnoter;
 import com.sun.javafx.application.PlatformImpl;
 import com.sun.javafx.util.Logging;
 import team.zxorg.zxnoter.info.ZXVersion;
-import team.zxorg.zxnoter.config.ZXConfig;
-import team.zxorg.zxnoter.config.configuration.sub.LastTimeStatesCfg;
-import team.zxorg.zxnoter.config.configuration.sub.MiniProjectCfg;
+import team.zxorg.zxnoter.config.ZXConfigManager;
+import team.zxorg.zxnoter.config.sub.LastTimeStatesCfg;
+import team.zxorg.zxnoter.config.sub.preference.MiniProjectCfg;
 import team.zxorg.zxnoter.ui.main.ZXStage;
 
 import java.nio.file.Path;
@@ -19,7 +19,7 @@ public class Main {
     public static void main(String[] args) {
         commandLineArgs = args;
 
-        if (args != null) {
+        if (args != null && args.length > 0) {
             switch (args[0]) {
                 case "-random" -> {
                     String[] something = new String[args.length - 2];
@@ -90,6 +90,22 @@ public class Main {
     public static void zxnStart() {
         ZXLogger.initialize();
 
+        ZXLogger.info("- - - -  ZXNoter  - - - -");
+        ZXLogger.info("Version: " + ZXVersion.VERSION + " Code: " + ZXVersion.VERSION.getVersionCode());
+        switch (ZXVersion.VERSION.status()) {
+            case RC -> {
+                ZXLogger.warning("当前为 [内部测试版本] 请不要泄漏软件到外部");
+            }
+            case BETA -> {
+                ZXLogger.warning("当前为 [提前预览版本] 如有问题请联系开发者");
+            }
+            case ALPHA -> {
+                ZXLogger.warning("当前为 [早期开发版本] 请谨慎测试软件功能");
+            }
+            case STABLE -> {
+                ZXLogger.info("当前为 [稳定发布版本] 请尽情使用");
+            }
+        }
 
         ZXLogger.info("ZXNoter启动");
 
@@ -105,10 +121,10 @@ public class Main {
             Logging.getJavaFXLogger().enableLogging();
             //初始化 (载入配置 使用资源)
             ZXLogger.info("初始化配置");
-            ZXConfig.reload();
+            ZXConfigManager.reload();
 
             //读取上一次状态
-            LastTimeStatesCfg lastTimeStates = ZXConfig.configuration.lastTimeStates;
+            LastTimeStatesCfg lastTimeStates = ZXConfigManager.configuration.lastTimeStates;
 
             if (lastTimeStates.openedProjects.isEmpty()) {
                 //创建软件实例
@@ -119,7 +135,7 @@ public class Main {
                 for (MiniProjectCfg path : lastTimeStates.openedProjects) {
                     ZXLogger.info("载入上次打开项目: " + path);
                     ZXStage zxStage = new ZXStage();
-                    zxStage.zxProject.openProject(Path.of(path.path));
+                    zxStage.zxProjectManager.openProject(Path.of(path.path));
                     zxStage.show();
                     zxStages.add(zxStage);
 
@@ -130,7 +146,7 @@ public class Main {
             Runtime.getRuntime().addShutdownHook(new Thread(() -> {
                 ZXLogger.info("关闭程序");
                 for (ZXStage zxStage : zxStages) {
-                    zxStage.zxProject.closeProject();
+                    zxStage.zxProjectManager.closeProject();
                     zxStage.close();
                 }
                 // 在这里执行您需要在关机前执行的操作

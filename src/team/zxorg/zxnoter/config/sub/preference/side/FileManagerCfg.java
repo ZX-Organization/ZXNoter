@@ -1,4 +1,4 @@
-package team.zxorg.zxnoter.config.configuration.sub.preference.side;
+package team.zxorg.zxnoter.config.sub.preference.side;
 
 /**
  * 侧边栏 文件管理器的配置

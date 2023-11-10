@@ -5,7 +5,7 @@ import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;
 import javafx.scene.image.Image;
 import team.zxorg.zxnoter.ZXLogger;
-import team.zxorg.zxnoter.config.ZXConfig;
+import team.zxorg.zxnoter.config.ZXConfigManager;
 import team.zxorg.zxnoter.resource.pack.LanguageResourcePack;
 import team.zxorg.zxnoter.resource.pack.BaseResourcePack;
 
@@ -43,7 +43,6 @@ public class ResourcePack {
     /**
      * 所有的资源
      */
-
     private final HashMap<ResourceType, HashMap<String, BaseResourcePack>> allResources = new HashMap<>();
 
     public BaseResourcePack getResources(ResourceType type, String subId) {
@@ -145,7 +144,7 @@ public class ResourcePack {
      * @return 本地化语言内容
      */
     public String getLanguageContent(String key) {
-        if (getResources(ResourceType.language, ZXConfig.configuration.userPreference.languageCode) instanceof LanguageResourcePack language) {//尝试获取本土化翻译
+        if (getResources(ResourceType.language, ZXConfigManager.configuration.userPreference.languageCode) instanceof LanguageResourcePack language) {//尝试获取本土化翻译
             return language.getLanguageContent(key);
         } else if (getResources(ResourceType.language, packInfo.getString("defaultLanguageCode")) instanceof LanguageResourcePack language) {
             return language.getLanguageContent(key);

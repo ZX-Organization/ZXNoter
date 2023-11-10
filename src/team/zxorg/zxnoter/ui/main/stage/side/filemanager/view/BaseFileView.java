@@ -3,6 +3,7 @@ package team.zxorg.zxnoter.ui.main.stage.side.filemanager.view;
 import javafx.beans.property.ObjectProperty;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import team.zxorg.zxnoter.ui.main.ZXStage;
 import team.zxorg.zxnoter.ui.main.stage.side.filemanager.FileManagerTab;
 
 import java.nio.file.Path;
@@ -14,6 +15,7 @@ public abstract class BaseFileView extends VBox {
     protected ObjectProperty<Path> projectPath;
     protected ObjectProperty<Integer> folderSubItemCount;
 
+    protected ZXStage zxStage;
 
     {
         VBox.setVgrow(this, Priority.ALWAYS);
@@ -22,8 +24,9 @@ public abstract class BaseFileView extends VBox {
 
 
     public BaseFileView(FileManagerTab fileManagerTab) {
+        zxStage = fileManagerTab.zxStage;
         this.folderSubItemCount = fileManagerTab.showCountProperty;
-        projectPath = fileManagerTab.zxStage.zxProject.openedPath;
+        projectPath = fileManagerTab.zxStage.zxProjectManager.openedPath;
         projectPath.addListener((observable, oldValue, newValue) -> {
             refresh();
         });

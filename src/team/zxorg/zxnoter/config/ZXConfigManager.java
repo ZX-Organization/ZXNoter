@@ -2,10 +2,11 @@ package team.zxorg.zxnoter.config;
 
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
+import com.alibaba.fastjson2.JSONWriter;
 import team.zxorg.zxnoter.ZXLogger;
+import team.zxorg.zxnoter.config.root.Configuration;
 import team.zxorg.zxnoter.resource.ResourceType;
 import team.zxorg.zxnoter.resource.ZXResources;
-import team.zxorg.zxnoter.config.configuration.Configuration;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,7 +16,7 @@ import java.nio.file.*;
 /**
  * ZXNoter全局配置类
  */
-public class ZXConfig {
+public class ZXConfigManager {
     //public static JSONObject root;
     /**
      * 全局的配置
@@ -61,7 +62,7 @@ public class ZXConfig {
     public static void saveConfig() {
         try (OutputStream outputStream = Files.newOutputStream(Paths.get("configuration.json"))) {
             ZXLogger.info("保存全局配置");
-            JSON.writeTo(outputStream, configuration);
+            JSON.writeTo(outputStream, configuration, JSONWriter.Feature.PrettyFormat);
         } catch (IOException e) {
             ZXLogger.severe("保存全局配置失败");
             throw new RuntimeException(e);

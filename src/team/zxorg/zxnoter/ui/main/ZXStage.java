@@ -7,8 +7,8 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import team.zxorg.zxnoter.ZXLogger;
 import team.zxorg.zxnoter.resource.GlobalResources;
-import team.zxorg.zxnoter.config.ZXConfig;
-import team.zxorg.zxnoter.config.ZXProject;
+import team.zxorg.zxnoter.config.ZXConfigManager;
+import team.zxorg.zxnoter.config.ZXProjectManager;
 import team.zxorg.zxnoter.resource.ZXResources;
 import team.zxorg.zxnoter.ui.main.stage.area.EditorArea;
 import team.zxorg.zxnoter.ui.main.stage.side.SideBar;
@@ -21,7 +21,7 @@ public class ZXStage extends Stage {
     /**
      * 项目类
      */
-    public ZXProject zxProject = new ZXProject(this);
+    public ZXProjectManager zxProjectManager = new ZXProjectManager(this);
 
 
     /**
@@ -79,8 +79,8 @@ public class ZXStage extends Stage {
 
 
         setOnCloseRequest(event -> {
-            ZXConfig.saveConfig();
-            zxProject.closeProject();
+            ZXConfigManager.saveConfig();
+            zxProjectManager.closeProject();
         });
 
 

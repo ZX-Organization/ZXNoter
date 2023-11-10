@@ -31,7 +31,7 @@ public class TitleBarFileMenu extends ZXMenu {
                     javafx.scene.control.MenuItem openMenu = ComponentFactory.menuItem("title-bar.file.open");
                     openMenu.setGraphic(ZXResources.getIconPane("document.folder-open", 18, ZXColor.FONT_LIGHT));
                     openMenu.setOnAction(event -> {
-                        zxStage.zxProject.openProject();
+                        zxStage.zxProjectManager.openProject();
                     });
 
                     //打开最近
@@ -49,7 +49,7 @@ public class TitleBarFileMenu extends ZXMenu {
                     javafx.scene.control.MenuItem closeMenu = ComponentFactory.menuItem("title-bar.file.close");
                     closeMenu.setGraphic(ZXResources.getIconPane("system.close", 18, ZXColor.FONT_LIGHT));
                     closeMenu.setOnAction(event -> {
-                        zxStage.zxProject.closeProject();
+                        zxStage.zxProjectManager.closeProject();
                     });
 
                     //设置

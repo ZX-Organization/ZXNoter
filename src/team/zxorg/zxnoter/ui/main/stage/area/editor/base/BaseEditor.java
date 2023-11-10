@@ -10,7 +10,7 @@ import javafx.scene.control.TextArea;
 import team.zxorg.zxnoter.ZXLogger;
 import team.zxorg.zxnoter.resource.GlobalResources;
 import team.zxorg.zxnoter.resource.ZXFileType;
-import team.zxorg.zxnoter.config.ZXConfig;
+import team.zxorg.zxnoter.config.ZXConfigManager;
 import team.zxorg.zxnoter.ui.component.ZXIcon;
 import team.zxorg.zxnoter.ui.component.ZXLabel;
 import team.zxorg.zxnoter.ui.main.stage.area.EditorArea;
@@ -66,7 +66,7 @@ public abstract class BaseEditor extends BaseTab {
     protected boolean closeRequest() {
         ZXLogger.info("关闭编辑器 " + this);
         if (isEdited.get())//编辑过才能保存
-            if (ZXConfig.configuration.userPreference.editor.closeAutoSave) {//自动保存
+            if (ZXConfigManager.configuration.userPreference.editor.closeAutoSave) {//自动保存
                 save();
             } else {//弹出保存提示框
                 Alert alert = new Alert(Alert.AlertType.NONE);

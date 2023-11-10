@@ -11,7 +11,7 @@ public class ZXStatus extends HBox {
     {
         setAlignment(Pos.CENTER);
         getStyleClass().addAll("status");
-        setPadding(new Insets(0, 4, 0, 4));
+        setPadding(new Insets(0, 8, 0, 8));
         setSpacing(4);
     }
 

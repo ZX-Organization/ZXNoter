@@ -1,4 +1,4 @@
-package team.zxorg.zxnoter.config.configuration.sub;
+package team.zxorg.zxnoter.config.sub.preference;
 
 /**
  * 不是很详细的项目属性

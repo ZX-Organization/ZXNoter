@@ -88,7 +88,7 @@ public class FileListView extends BaseFileView {
             while (files.hasNext()) {
                 Path file = files.next();
                 count++;
-                FileItem fileListItem = new FileItem(file);
+                FileItem fileListItem = new FileItem(file,zxStage);
                 if (Files.isDirectory(file))
                     fileListItem.setOnMouseClicked(itemMouseClickEvent);
                 fileListItemList.add(fileListItem);

@@ -1,50 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="ArtifactsWorkspaceSettings">
-    <artifacts-to-build>
-      <artifact name="ZXNoter" />
-    </artifacts-to-build>
-  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="295bcb0d-2118-4e02-b35e-a9da4569b815" name="更改" comment="update">
-      <change afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/configuration/DefaultConfiguration.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/project/ProjectConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/project/sub/EditorLayoutCfg.java" afterDir="false" />
+    <list default="true" id="dd78a4ca-7956-492b-9d75-ff82bf57b657" name="更改" comment="">
+      <change afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/root/DefaultConfiguration.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ZXNoter.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ZXNoter.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/configuration.json" beforeDir="false" afterPath="$PROJECT_DIR$/configuration.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/reference/reference.zxp" beforeDir="false" afterPath="$PROJECT_DIR$/docs/reference/reference.zxp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/编辑器自适应布局.drawio" beforeDir="false" afterPath="$PROJECT_DIR$/docs/编辑器自适应布局.drawio" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/latest.log" beforeDir="false" afterPath="$PROJECT_DIR$/latest.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/ZXConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/ZXConfigManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/ZXDefaultConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/ZXDefaultConfigManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/ZXProject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/ZXProjectManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/configuration/Configuration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/root/Configuration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/configuration/DefaultConfiguration.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/configuration/sub/LastTimeStatesCfg.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/sub/LastTimeStatesCfg.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/configuration/sub/MiniProjectCfg.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/sub/preference/MiniProjectCfg.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/configuration/sub/preference/UserPreferenceCfg.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/sub/preference/UserPreferenceCfg.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/configuration/sub/preference/editor/EditorCfg.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/sub/preference/editor/EditorCfg.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/configuration/sub/preference/res/ResourcesPackCfg.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/sub/preference/res/ResourcesPackCfg.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/configuration/sub/preference/side/FileManagerCfg.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/sub/preference/side/FileManagerCfg.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/configuration/sub/preference/side/SideBarCfg.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/sub/preference/side/SideBarCfg.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/old/UserPreferenceOld.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/project/ProjectConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/root/ProjectConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/project/sub/EditorLayoutCfg.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/sub/project/EditorLayoutCfg.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/resource/ResourcePack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/resource/ResourcePack.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/resource/ZXProject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/ZXProject.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/resource/ZXResources.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/resource/ZXResources.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/resource/config/ZXConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/ZXConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/resource/config/ZXDefaultConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/ZXDefaultConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/resource/config/date/Configuration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/configuration/Configuration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/resource/config/date/DefaultConfiguration.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/resource/config/date/sub/LastTimeStatesCfg.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/configuration/sub/LastTimeStatesCfg.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/resource/config/date/sub/MiniProjectCfg.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/configuration/sub/MiniProjectCfg.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/resource/config/date/sub/preference/UserPreferenceCfg.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/configuration/sub/preference/UserPreferenceCfg.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/resource/config/date/sub/preference/editor/EditorCfg.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/configuration/sub/preference/editor/EditorCfg.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/resource/config/date/sub/preference/res/ResourcesPackCfg.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/configuration/sub/preference/res/ResourcesPackCfg.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/resource/config/date/sub/preference/side/FileManagerCfg.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/configuration/sub/preference/side/FileManagerCfg.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/resource/config/date/sub/preference/side/SideBarCfg.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/configuration/sub/preference/side/SideBarCfg.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/resource/config/old/UserPreferenceOld.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/old/UserPreferenceOld.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/resource/project/ZXProject.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/resource/project/ZXProjectInfo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/component/ZXStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/component/ZXStatus.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/main/ZXStage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/main/ZXStage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/main/stage/area/EditorArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/main/stage/area/EditorArea.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/main/stage/area/editor/base/BaseEditor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/main/stage/area/editor/base/BaseEditor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/main/stage/area/editor/image/ImageViewEditor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/main/stage/area/editor/image/ImageViewEditor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/main/stage/menu/TitleBarFileMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/main/stage/menu/TitleBarFileMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/main/stage/side/BaseSideBarTab.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/main/stage/side/BaseSideBarTab.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/main/stage/side/SideBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/main/stage/side/SideBar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/main/stage/side/filemanager/FileItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/main/stage/side/filemanager/FileItem.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/main/stage/side/filemanager/FileManagerTab.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/main/stage/side/filemanager/FileManagerTab.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/main/stage/side/filemanager/view/BaseFileView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/main/stage/side/filemanager/view/BaseFileView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/main/stage/side/filemanager/view/FileListView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/main/stage/side/filemanager/view/FileListView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/main/stage/side/filemanager/view/FileTreeView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/main/stage/side/filemanager/view/FileTreeView.java" afterDir="false" />
     </list>
-    <list id="9563a533-f70b-4cf6-9026-5fb6bd4d4309" name="zedoC 进行的更改" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -53,143 +51,32 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="AnnotationType" />
-        <option value="CSS File" />
-        <option value="Interface" />
-        <option value="FxmlFile" />
-        <option value="module-info" />
-        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
   </component>
-  <component name="Git.Settings">
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="main" />
-      </map>
-    </option>
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="MarkdownSettingsMigration">
-    <option name="stateVersion" value="1" />
-  </component>
-  <component name="ProjectColorInfo">{
-  &quot;customColor&quot;: &quot;&quot;,
-  &quot;associatedIndex&quot;: 0
-}</component>
-  <component name="ProjectId" id="2R4d2a2ICdAen8WQi8ONuWVnUMn" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+  <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
-  <component name="ProjectViewState">
-    <option name="showLibraryContents" value="true" />
-  </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Annotations&quot;: &quot;true&quot;,
-    &quot;Repository.Attach.JavaDocs&quot;: &quot;true&quot;,
-    &quot;Repository.Attach.Sources&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;UI&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;openjdk-21&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/zedo-hp/Documents/GitHub/ZXNoter&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.21134493&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.35935563&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.general&quot;,
-    &quot;settings.editor.splitter.proportion&quot;: &quot;0.22435898&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
-  },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;mongo&quot;
-    ]
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "git-widget-placeholder": "UI",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "项目",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0"
   }
-}</component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\zedo-hp\Documents\GitHub\ZXNoter" />
-      <recent name="D:\Projects\ZXNoter\resources\base-pack\layout-style" />
-      <recent name="D:\Projects\ZXNoter\src\team\zxorg\zxnoter\audiomixer" />
-      <recent name="D:\Projects\ZXNoter\src\team\zxorg\zxnoter" />
-      <recent name="D:\Projects\ZXNoter\lib" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\Projects\ZXNoter\src\team\zxorg\zxnoter\ui\main\stage\body\area\editor\setting\pane\preference" />
-      <recent name="D:\Projects\ZXNoter\src\team\zxorg\zxnoter\ui" />
-      <recent name="D:\Projects\ZXNoter\res" />
-      <recent name="D:\Projects\ZXNoter\resources\zxresources" />
-      <recent name="D:\Projects\ZXNoter\resources" />
-    </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="team.zxorg.zxnoter.ui.main.stage.body.area.editor.setting.pane" />
-      <recent name="team.zxorg.zxnoter.ui.main.one.two.three.four.five" />
-      <recent name="team.zxorg.zxnoter.resource" />
-      <recent name="team.zxorg.zxnoter.ui.component" />
-      <recent name="team.zxorg.zxnoter.ui.render.fixedorbit" />
-    </key>
-  </component>
-  <component name="RunManager" selected="应用程序.Main">
-    <configuration name="AAAA" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="team.zxorg.zxnoter.util.AAAA" />
-      <module name="ZXNoter" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="team.zxorg.zxnoter.util.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Help" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="team.zxorg.zxnoter.Main" />
-      <module name="ZXNoter" />
-      <option name="PROGRAM_PARAMETERS" value="-help" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="team.zxorg.zxnoter.ui.main.stage.area.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Json2Zxm" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="team.zxorg.zxnoter.util.Json2Zxm" />
-      <module name="ZXNoter" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="team.zxorg.zxnoter.util.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+}]]></component>
+  <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="team.zxorg.zxnoter.Main" />
       <module name="ZXNoter" />
-      <option name="PROGRAM_PARAMETERS" value="&quot;D:\Projects\ZXNoter\docs\reference\LeaF - NANO DEATH!!!!!\LeaF - NANO DEATH!!!!! (nowsmart) [ajee's Normal].osu&quot; &quot;D:\Projects\ZXNoter\docs\reference\LeaF - NANO DEATH!!!!!\LeaF - NANO DEATH!!!!! (nowsmart) [ajee's Normal].osu&quot;" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="team.zxorg.zxnoter.ui.main.stage.area.*" />
+          <option name="PATTERN" value="team.zxorg.zxnoter.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -197,589 +84,14 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Pytorch" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="team.zxorg.zxnoter.util.Pytorch" />
-      <module name="ZXNoter" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="team.zxorg.zxnoter.util.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Random" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="team.zxorg.zxnoter.Main" />
-      <module name="ZXNoter" />
-      <option name="PROGRAM_PARAMETERS" value="-random 8 看番 MC小地图 ZXN 开摆" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="team.zxorg.zxnoter.ui.main.stage.area.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TestCustomWindow" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="team.zxorg.zxnoter.ui.test.TestCustomWindow" />
-      <module name="ZXNoter" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="team.zxorg.zxnoter.ui.test.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <list>
-      <item itemvalue="应用程序.Random" />
-      <item itemvalue="应用程序.Help" />
-      <item itemvalue="应用程序.TestCustomWindow" />
-      <item itemvalue="应用程序.AAAA" />
-      <item itemvalue="应用程序.Json2Zxm" />
-      <item itemvalue="应用程序.Pytorch" />
-      <item itemvalue="应用程序.Main" />
-    </list>
     <recent_temporary>
       <list>
         <item itemvalue="应用程序.Main" />
-        <item itemvalue="应用程序.TestCustomWindow" />
-        <item itemvalue="应用程序.Pytorch" />
-        <item itemvalue="应用程序.Json2Zxm" />
-        <item itemvalue="应用程序.AAAA" />
       </list>
     </recent_temporary>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
-    <task active="true" id="Default" summary="默认任务">
-      <changelist id="295bcb0d-2118-4e02-b35e-a9da4569b815" name="更改" comment="update" />
-      <created>1686584331234</created>
-      <option name="number" value="Default" />
-      <option name="presentableId" value="Default" />
-      <updated>1686584331234</updated>
-      <workItem from="1686584332351" duration="17020000" />
-      <workItem from="1686614821331" duration="40000000" />
-      <workItem from="1686675965846" duration="10000" />
-      <workItem from="1686675984923" duration="56000" />
-      <workItem from="1686676054836" duration="444000" />
-      <workItem from="1686719208556" duration="1804000" />
-      <workItem from="1686722063313" duration="78000" />
-      <workItem from="1686723075574" duration="38587000" />
-      <workItem from="1686849707076" duration="47473000" />
-      <workItem from="1687018987219" duration="15241000" />
-      <workItem from="1687076381286" duration="17635000" />
-      <workItem from="1687110635483" duration="3060000" />
-      <workItem from="1687113737848" duration="41513000" />
-      <workItem from="1687432172118" duration="12963000" />
-      <workItem from="1687500403437" duration="6253000" />
-      <workItem from="1687535863685" duration="134000" />
-      <workItem from="1687536009572" duration="87000" />
-      <workItem from="1687536104814" duration="919000" />
-      <workItem from="1687853052846" duration="93485000" />
-      <workItem from="1688090578197" duration="4161000" />
-      <workItem from="1688125781194" duration="1027000" />
-      <workItem from="1688127101830" duration="215000" />
-      <workItem from="1688127324132" duration="291000" />
-      <workItem from="1688127622008" duration="205000" />
-      <workItem from="1688127835996" duration="94000" />
-      <workItem from="1688127935857" duration="383000" />
-      <workItem from="1688128325662" duration="163000" />
-      <workItem from="1688128495224" duration="142000" />
-      <workItem from="1688128643211" duration="55000" />
-      <workItem from="1688128704678" duration="26245000" />
-      <workItem from="1688227904389" duration="61853000" />
-      <workItem from="1688477156296" duration="140400000" />
-      <workItem from="1688924426756" duration="332000" />
-      <workItem from="1688924765334" duration="932000" />
-      <workItem from="1688925704903" duration="50274000" />
-      <workItem from="1689130084363" duration="8252000" />
-      <workItem from="1689144966453" duration="46422000" />
-      <workItem from="1689409391726" duration="11000" />
-      <workItem from="1689409409173" duration="76338000" />
-      <workItem from="1689772187774" duration="38834000" />
-      <workItem from="1689996959776" duration="13000" />
-      <workItem from="1689996979191" duration="7345000" />
-      <workItem from="1690181054536" duration="502000" />
-      <workItem from="1690209893164" duration="1200000" />
-      <workItem from="1690471116969" duration="3148000" />
-      <workItem from="1690516648739" duration="116771000" />
-      <workItem from="1691476065004" duration="9592000" />
-      <workItem from="1691508442757" duration="22728000" />
-      <workItem from="1691808037758" duration="751000" />
-      <workItem from="1691962173596" duration="3481000" />
-      <workItem from="1692433804473" duration="3776000" />
-      <workItem from="1692882275672" duration="1221000" />
-      <workItem from="1693080672366" duration="658000" />
-      <workItem from="1693188176312" duration="1082000" />
-      <workItem from="1693662205362" duration="1581000" />
-      <workItem from="1693746954753" duration="4745000" />
-      <workItem from="1693828071472" duration="601000" />
-      <workItem from="1693832189905" duration="601000" />
-      <workItem from="1693921146340" duration="43000" />
-      <workItem from="1693980742309" duration="2210000" />
-      <workItem from="1694002159150" duration="11695000" />
-      <workItem from="1694014683809" duration="7532000" />
-      <workItem from="1694097177689" duration="32734000" />
-      <workItem from="1694531893770" duration="10599000" />
-      <workItem from="1694696072030" duration="8000" />
-      <workItem from="1696124287726" duration="1165000" />
-      <workItem from="1696231268986" duration="47000" />
-      <workItem from="1696515622639" duration="1476000" />
-      <workItem from="1696909116525" duration="4535000" />
-      <workItem from="1696921716572" duration="455000" />
-      <workItem from="1696922252032" duration="275000" />
-      <workItem from="1696922566911" duration="2038000" />
-      <workItem from="1696991790885" duration="2505000" />
-      <workItem from="1696994312650" duration="596000" />
-      <workItem from="1697089103894" duration="16188000" />
-      <workItem from="1697124400268" duration="2786000" />
-      <workItem from="1697527430392" duration="2051000" />
-      <workItem from="1697592810408" duration="9989000" />
-      <workItem from="1697613249888" duration="10475000" />
-      <workItem from="1697812861071" duration="48000" />
-      <workItem from="1699035104982" duration="1419000" />
-      <workItem from="1699036533094" duration="7385000" />
-      <workItem from="1699084574674" duration="18000" />
-      <workItem from="1699170127591" duration="4509000" />
-      <workItem from="1699313262944" duration="385000" />
-      <workItem from="1699313656580" duration="191000" />
-      <workItem from="1699313854675" duration="149000" />
-      <workItem from="1699314010686" duration="71000" />
-      <workItem from="1699314209188" duration="3310000" />
-      <workItem from="1699364385374" duration="1204000" />
-      <workItem from="1699366717680" duration="3424000" />
-      <workItem from="1699421038783" duration="398000" />
-      <workItem from="1699421503977" duration="23069000" />
-      <workItem from="1699494507209" duration="7394000" />
-    </task>
-    <task id="LOCAL-00058" summary="fix editor">
-      <created>1688045817253</created>
-      <option name="number" value="00058" />
-      <option name="presentableId" value="LOCAL-00058" />
-      <option name="project" value="LOCAL" />
-      <updated>1688045817253</updated>
-    </task>
-    <task id="LOCAL-00059" summary="fix editor">
-      <created>1688047897362</created>
-      <option name="number" value="00059" />
-      <option name="presentableId" value="LOCAL-00059" />
-      <option name="project" value="LOCAL" />
-      <updated>1688047897362</updated>
-    </task>
-    <task id="LOCAL-00060" summary="fix editor">
-      <created>1688048206198</created>
-      <option name="number" value="00060" />
-      <option name="presentableId" value="LOCAL-00060" />
-      <option name="project" value="LOCAL" />
-      <updated>1688048206198</updated>
-    </task>
-    <task id="LOCAL-00061" summary="fix editor">
-      <created>1688049746141</created>
-      <option name="number" value="00061" />
-      <option name="presentableId" value="LOCAL-00061" />
-      <option name="project" value="LOCAL" />
-      <updated>1688049746141</updated>
-    </task>
-    <task id="LOCAL-00062" summary="fix editor">
-      <created>1688056213519</created>
-      <option name="number" value="00062" />
-      <option name="presentableId" value="LOCAL-00062" />
-      <option name="project" value="LOCAL" />
-      <updated>1688056213519</updated>
-    </task>
-    <task id="LOCAL-00063" summary="fix editor">
-      <created>1688227479792</created>
-      <option name="number" value="00063" />
-      <option name="presentableId" value="LOCAL-00063" />
-      <option name="project" value="LOCAL" />
-      <updated>1688227479792</updated>
-    </task>
-    <task id="LOCAL-00064" summary="fix editor">
-      <created>1688227506256</created>
-      <option name="number" value="00064" />
-      <option name="presentableId" value="LOCAL-00064" />
-      <option name="project" value="LOCAL" />
-      <updated>1688227506256</updated>
-    </task>
-    <task id="LOCAL-00065" summary="fix editor">
-      <created>1688229671027</created>
-      <option name="number" value="00065" />
-      <option name="presentableId" value="LOCAL-00065" />
-      <option name="project" value="LOCAL" />
-      <updated>1688229671027</updated>
-    </task>
-    <task id="LOCAL-00066" summary="fix editor">
-      <created>1688231065282</created>
-      <option name="number" value="00066" />
-      <option name="presentableId" value="LOCAL-00066" />
-      <option name="project" value="LOCAL" />
-      <updated>1688231065282</updated>
-    </task>
-    <task id="LOCAL-00067" summary="update">
-      <created>1688234685901</created>
-      <option name="number" value="00067" />
-      <option name="presentableId" value="LOCAL-00067" />
-      <option name="project" value="LOCAL" />
-      <updated>1688234685901</updated>
-    </task>
-    <task id="LOCAL-00068" summary="fix editor">
-      <created>1688278773295</created>
-      <option name="number" value="00068" />
-      <option name="presentableId" value="LOCAL-00068" />
-      <option name="project" value="LOCAL" />
-      <updated>1688278773295</updated>
-    </task>
-    <task id="LOCAL-00069" summary="fix editor">
-      <created>1688279821623</created>
-      <option name="number" value="00069" />
-      <option name="presentableId" value="LOCAL-00069" />
-      <option name="project" value="LOCAL" />
-      <updated>1688279821623</updated>
-    </task>
-    <task id="LOCAL-00070" summary="update">
-      <created>1688304143406</created>
-      <option name="number" value="00070" />
-      <option name="presentableId" value="LOCAL-00070" />
-      <option name="project" value="LOCAL" />
-      <updated>1688304143406</updated>
-    </task>
-    <task id="LOCAL-00071" summary="update">
-      <created>1688408599851</created>
-      <option name="number" value="00071" />
-      <option name="presentableId" value="LOCAL-00071" />
-      <option name="project" value="LOCAL" />
-      <updated>1688408599851</updated>
-    </task>
-    <task id="LOCAL-00072" summary="update new ui">
-      <created>1688798340524</created>
-      <option name="number" value="00072" />
-      <option name="presentableId" value="LOCAL-00072" />
-      <option name="project" value="LOCAL" />
-      <updated>1688798340524</updated>
-    </task>
-    <task id="LOCAL-00073" summary="ui">
-      <created>1688819457153</created>
-      <option name="number" value="00073" />
-      <option name="presentableId" value="LOCAL-00073" />
-      <option name="project" value="LOCAL" />
-      <updated>1688819457153</updated>
-    </task>
-    <task id="LOCAL-00074" summary="fix editor">
-      <created>1688820320571</created>
-      <option name="number" value="00074" />
-      <option name="presentableId" value="LOCAL-00074" />
-      <option name="project" value="LOCAL" />
-      <updated>1688820320571</updated>
-    </task>
-    <task id="LOCAL-00075" summary="fix editor">
-      <created>1688900474841</created>
-      <option name="number" value="00075" />
-      <option name="presentableId" value="LOCAL-00075" />
-      <option name="project" value="LOCAL" />
-      <updated>1688900474841</updated>
-    </task>
-    <task id="LOCAL-00076" summary="fix editor">
-      <created>1688900861003</created>
-      <option name="number" value="00076" />
-      <option name="presentableId" value="LOCAL-00076" />
-      <option name="project" value="LOCAL" />
-      <updated>1688900861003</updated>
-    </task>
-    <task id="LOCAL-00077" summary="fix editor">
-      <created>1688901014296</created>
-      <option name="number" value="00077" />
-      <option name="presentableId" value="LOCAL-00077" />
-      <option name="project" value="LOCAL" />
-      <updated>1688901014296</updated>
-    </task>
-    <task id="LOCAL-00078" summary="fix editor">
-      <created>1688901186443</created>
-      <option name="number" value="00078" />
-      <option name="presentableId" value="LOCAL-00078" />
-      <option name="project" value="LOCAL" />
-      <updated>1688901186443</updated>
-    </task>
-    <task id="LOCAL-00079" summary="fix editor">
-      <created>1688905109316</created>
-      <option name="number" value="00079" />
-      <option name="presentableId" value="LOCAL-00079" />
-      <option name="project" value="LOCAL" />
-      <updated>1688905109316</updated>
-    </task>
-    <task id="LOCAL-00080" summary="fix editor">
-      <created>1688905198961</created>
-      <option name="number" value="00080" />
-      <option name="presentableId" value="LOCAL-00080" />
-      <option name="project" value="LOCAL" />
-      <updated>1688905198961</updated>
-    </task>
-    <task id="LOCAL-00081" summary="update res and ui">
-      <created>1688922481051</created>
-      <option name="number" value="00081" />
-      <option name="presentableId" value="LOCAL-00081" />
-      <option name="project" value="LOCAL" />
-      <updated>1688922481051</updated>
-    </task>
-    <task id="LOCAL-00082" summary="fix editor">
-      <created>1688922771497</created>
-      <option name="number" value="00082" />
-      <option name="presentableId" value="LOCAL-00082" />
-      <option name="project" value="LOCAL" />
-      <updated>1688922771497</updated>
-    </task>
-    <task id="LOCAL-00083" summary="fix editor">
-      <created>1688924281771</created>
-      <option name="number" value="00083" />
-      <option name="presentableId" value="LOCAL-00083" />
-      <option name="project" value="LOCAL" />
-      <updated>1688924281771</updated>
-    </task>
-    <task id="LOCAL-00084" summary="fix editor">
-      <created>1688931835239</created>
-      <option name="number" value="00084" />
-      <option name="presentableId" value="LOCAL-00084" />
-      <option name="project" value="LOCAL" />
-      <updated>1688931835239</updated>
-    </task>
-    <task id="LOCAL-00085" summary="update Logger">
-      <created>1688971714906</created>
-      <option name="number" value="00085" />
-      <option name="presentableId" value="LOCAL-00085" />
-      <option name="project" value="LOCAL" />
-      <updated>1688971714906</updated>
-    </task>
-    <task id="LOCAL-00086" summary="del old res">
-      <created>1688988565160</created>
-      <option name="number" value="00086" />
-      <option name="presentableId" value="LOCAL-00086" />
-      <option name="project" value="LOCAL" />
-      <updated>1688988565160</updated>
-    </task>
-    <task id="LOCAL-00087" summary="fix editor">
-      <created>1689086485672</created>
-      <option name="number" value="00087" />
-      <option name="presentableId" value="LOCAL-00087" />
-      <option name="project" value="LOCAL" />
-      <updated>1689086485672</updated>
-    </task>
-    <task id="LOCAL-00088" summary="fix editor">
-      <created>1689086619871</created>
-      <option name="number" value="00088" />
-      <option name="presentableId" value="LOCAL-00088" />
-      <option name="project" value="LOCAL" />
-      <updated>1689086619871</updated>
-    </task>
-    <task id="LOCAL-00089" summary="fix editor">
-      <created>1689088404120</created>
-      <option name="number" value="00089" />
-      <option name="presentableId" value="LOCAL-00089" />
-      <option name="project" value="LOCAL" />
-      <updated>1689088404120</updated>
-    </task>
-    <task id="LOCAL-00090" summary="fix editor">
-      <created>1689088869972</created>
-      <option name="number" value="00090" />
-      <option name="presentableId" value="LOCAL-00090" />
-      <option name="project" value="LOCAL" />
-      <updated>1689088869972</updated>
-    </task>
-    <task id="LOCAL-00091" summary="fix some bug add global resources">
-      <created>1689162338508</created>
-      <option name="number" value="00091" />
-      <option name="presentableId" value="LOCAL-00091" />
-      <option name="project" value="LOCAL" />
-      <updated>1689162338508</updated>
-    </task>
-    <task id="LOCAL-00092" summary="update ui">
-      <created>1689403002413</created>
-      <option name="number" value="00092" />
-      <option name="presentableId" value="LOCAL-00092" />
-      <option name="project" value="LOCAL" />
-      <updated>1689403002413</updated>
-    </task>
-    <task id="LOCAL-00093" summary="update ui">
-      <created>1689472882956</created>
-      <option name="number" value="00093" />
-      <option name="presentableId" value="LOCAL-00093" />
-      <option name="project" value="LOCAL" />
-      <updated>1689472882956</updated>
-    </task>
-    <task id="LOCAL-00094" summary="update setting">
-      <created>1689600975377</created>
-      <option name="number" value="00094" />
-      <option name="presentableId" value="LOCAL-00094" />
-      <option name="project" value="LOCAL" />
-      <updated>1689600975377</updated>
-    </task>
-    <task id="LOCAL-00095" summary="update ui">
-      <created>1689689059813</created>
-      <option name="number" value="00095" />
-      <option name="presentableId" value="LOCAL-00095" />
-      <option name="project" value="LOCAL" />
-      <updated>1689689059813</updated>
-    </task>
-    <task id="LOCAL-00096" summary="update setting and file mgr">
-      <created>1689707904865</created>
-      <option name="number" value="00096" />
-      <option name="presentableId" value="LOCAL-00096" />
-      <option name="project" value="LOCAL" />
-      <updated>1689707904865</updated>
-    </task>
-    <task id="LOCAL-00097" summary="update file list view">
-      <created>1689789673687</created>
-      <option name="number" value="00097" />
-      <option name="presentableId" value="LOCAL-00097" />
-      <option name="project" value="LOCAL" />
-      <updated>1689789673687</updated>
-    </task>
-    <task id="LOCAL-00098" summary="update ui">
-      <created>1689938961500</created>
-      <option name="number" value="00098" />
-      <option name="presentableId" value="LOCAL-00098" />
-      <option name="project" value="LOCAL" />
-      <updated>1689938961500</updated>
-    </task>
-    <task id="LOCAL-00099" summary="update ui">
-      <created>1690637694921</created>
-      <option name="number" value="00099" />
-      <option name="presentableId" value="LOCAL-00099" />
-      <option name="project" value="LOCAL" />
-      <updated>1690637694921</updated>
-    </task>
-    <task id="LOCAL-00100" summary="update ui">
-      <created>1690711593844</created>
-      <option name="number" value="00100" />
-      <option name="presentableId" value="LOCAL-00100" />
-      <option name="project" value="LOCAL" />
-      <updated>1690711593844</updated>
-    </task>
-    <task id="LOCAL-00101" summary="update Random">
-      <created>1690791335070</created>
-      <option name="number" value="00101" />
-      <option name="presentableId" value="LOCAL-00101" />
-      <option name="project" value="LOCAL" />
-      <updated>1690791335070</updated>
-    </task>
-    <task id="LOCAL-00102" summary="update ui">
-      <created>1690826507286</created>
-      <option name="number" value="00102" />
-      <option name="presentableId" value="LOCAL-00102" />
-      <option name="project" value="LOCAL" />
-      <updated>1690826507286</updated>
-    </task>
-    <task id="LOCAL-00103" summary="update ui">
-      <created>1691120967553</created>
-      <option name="number" value="00103" />
-      <option name="presentableId" value="LOCAL-00103" />
-      <option name="project" value="LOCAL" />
-      <updated>1691120967553</updated>
-    </task>
-    <task id="LOCAL-00104" summary="update ui">
-      <created>1691809134142</created>
-      <option name="number" value="00104" />
-      <option name="presentableId" value="LOCAL-00104" />
-      <option name="project" value="LOCAL" />
-      <updated>1691809134143</updated>
-    </task>
-    <task id="LOCAL-00105" summary="update ui">
-      <created>1693921171562</created>
-      <option name="number" value="00105" />
-      <option name="presentableId" value="LOCAL-00105" />
-      <option name="project" value="LOCAL" />
-      <updated>1693921171562</updated>
-    </task>
-    <task id="LOCAL-00106" summary="新增版本类">
-      <created>1694020655178</created>
-      <option name="number" value="00106" />
-      <option name="presentableId" value="LOCAL-00106" />
-      <option name="project" value="LOCAL" />
-      <updated>1694020655178</updated>
-    </task>
-    <option name="localTasksCounter" value="109" />
     <servers />
-  </component>
-  <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="3" />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="OPEN_GENERIC_TABS">
-      <map>
-        <entry key="e4be321f-a3f4-4e4d-a359-ad3122bf8b33" value="TOOL_WINDOW" />
-      </map>
-    </option>
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-        <entry key="e4be321f-a3f4-4e4d-a359-ad3122bf8b33">
-          <value>
-            <State>
-              <option name="FILTERS">
-                <map>
-                  <entry key="branch">
-                    <value>
-                      <list>
-                        <option value="HEAD" />
-                      </list>
-                    </value>
-                  </entry>
-                  <entry key="structure">
-                    <value>
-                      <list>
-                        <option value="dir:D:/Projects/ZXNoter/src" />
-                      </list>
-                    </value>
-                  </entry>
-                </map>
-              </option>
-              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
-            </State>
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
-  <component name="VcsManagerConfiguration">
-    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="update ImdReader" />
-    <MESSAGE value="fix ComplexNote" />
-    <MESSAGE value="update toString" />
-    <MESSAGE value="update localize method" />
-    <MESSAGE value="update reader interface" />
-    <MESSAGE value="update ZXMInfo" />
-    <MESSAGE value="update file name" />
-    <MESSAGE value="update reader and fix ZXMap" />
-    <MESSAGE value="audio" />
-    <MESSAGE value="update new ui" />
-    <MESSAGE value="ui" />
-    <MESSAGE value="update res and ui" />
-    <MESSAGE value="update Logger" />
-    <MESSAGE value="del old res" />
-    <MESSAGE value="fix editor" />
-    <MESSAGE value="fix some bug add global resources" />
-    <MESSAGE value="update setting" />
-    <MESSAGE value="update setting and file mgr" />
-    <MESSAGE value="update file list view" />
-    <MESSAGE value="update Random" />
-    <MESSAGE value="新增版本类" />
-    <MESSAGE value="update ui" />
-    <MESSAGE value="fix" />
-    <MESSAGE value="update" />
-    <option name="LAST_COMMIT_MESSAGE" value="update" />
-  </component>
-  <component name="XSLT-Support.FileAssociations.UIState">
-    <expand />
-    <select />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/ZXNoter$Main.ic" NAME="Main 覆盖结果" MODIFIED="1688229822928" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

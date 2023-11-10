@@ -35,7 +35,7 @@ public class FileTreeView extends BaseFileView {
     @Override
     public void refresh() {
         if (projectPath.get() != null) {
-            TreeItem<FileItem> root = new TreeItem<>(new FileItem(projectPath.get()));
+            TreeItem<FileItem> root = new TreeItem<>(new FileItem(projectPath.get(),zxStage));
             treeView.setRoot(root);
             updateSubTree(root);
             root.setExpanded(true);
@@ -51,7 +51,7 @@ public class FileTreeView extends BaseFileView {
             Iterator<Path> files = filesStream.iterator();
             while (files.hasNext()) {
                 Path subPath = files.next();
-                TreeItem<FileItem> newTreeItem = new TreeItem<>(new FileItem(subPath));
+                TreeItem<FileItem> newTreeItem = new TreeItem<>(new FileItem(subPath,zxStage));
                 treeItem.getChildren().add(newTreeItem);
                 if (newTreeItem.getValue().isDirectory)
                     updateSubTree(newTreeItem);

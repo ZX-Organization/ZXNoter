@@ -1,4 +1,4 @@
-package team.zxorg.zxnoter.config.configuration.sub.preference.editor;
+package team.zxorg.zxnoter.config.sub.preference.editor;
 
 public class EditorCfg {
     /**

@@ -5,9 +5,9 @@ import javafx.scene.control.Tab;
 import javafx.scene.layout.VBox;
 import team.zxorg.zxnoter.resource.GlobalResources;
 import team.zxorg.zxnoter.resource.ZXColor;
-import team.zxorg.zxnoter.config.ZXProject;
-import team.zxorg.zxnoter.config.ZXConfig;
-import team.zxorg.zxnoter.config.configuration.sub.preference.side.SideBarCfg;
+import team.zxorg.zxnoter.config.ZXProjectManager;
+import team.zxorg.zxnoter.config.ZXConfigManager;
+import team.zxorg.zxnoter.config.sub.preference.side.SideBarCfg;
 import team.zxorg.zxnoter.ui.component.TrackTooltip;
 import team.zxorg.zxnoter.ui.component.ZXIcon;
 import team.zxorg.zxnoter.ui.main.ZXStage;
@@ -17,12 +17,12 @@ public class BaseSideBarTab extends Tab {
     private final String sideKey;
     protected ZXStage zxStage;
     protected SideBar sideBar;
-    protected ZXProject zxProject;
-    protected SideBarCfg cfg= ZXConfig.configuration.userPreference.sideBar;
+    protected ZXProjectManager zxProjectManager;
+    protected SideBarCfg cfg= ZXConfigManager.configuration.userPreference.sideBar;
 
     public BaseSideBarTab(String sideKey, String iconKey, ZXStage zxStage) {
         this.sideKey = sideKey;
-        zxProject = zxStage.zxProject;
+        zxProjectManager = zxStage.zxProjectManager;
         this.zxStage = zxStage;
         sideBar = zxStage.sideBar;
         setClosable(false);

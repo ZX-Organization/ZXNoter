@@ -1,1 +1,28 @@
-{"creatorDate":1690533484326,"lastEditDate":0,"lastOpenDate":0,"openedFile":{"alignment":"horizontal","editorLayout":[{"alignment":"vertical","editorLayout":[],"paths":["zxn/setting"]}],"paths":["./111.txt","./222.txt"]},"title":"测试项目"}
+{
+	"creatorDate":1690533484326,
+	"editorArea":{
+		"orientation":"horizontal",
+		"subLayout":[
+			{
+				"orientation":"vertical",
+				"subLayout":[
+					{
+						"editors":[
+							"zxn/setting",
+							"./reference.zxp"
+						]
+					}
+				]
+			},
+			{
+				"editors":[
+					"./jitaimei/0/video.mp4",
+					"./[Crz]Emperor's skin/count1.png"
+				]
+			}
+		]
+	},
+	"lastEditDate":0,
+	"lastOpenDate":0,
+	"title":"测试项目"
+}

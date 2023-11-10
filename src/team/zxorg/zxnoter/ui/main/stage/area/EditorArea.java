@@ -122,8 +122,9 @@ public class EditorArea extends EditorLayout {
 
             BaseEditor editor;
             try {
-                Constructor<BaseEditor> constructor = fileEditorClass.getDeclaredConstructor(FileItem.class);
-                editor = constructor.newInstance(openFile);
+                Constructor<BaseEditor> constructor = fileEditorClass.getDeclaredConstructor(Path.class, EditorArea.class);
+                //Path path, EditorArea editorArea
+                editor = constructor.newInstance(openFile.path,this);
             } catch (NoSuchMethodException | InvocationTargetException | InstantiationException |
                      IllegalAccessException e) {
                 throw new RuntimeException(e);
