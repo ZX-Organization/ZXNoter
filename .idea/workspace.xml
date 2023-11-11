@@ -5,43 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dd78a4ca-7956-492b-9d75-ff82bf57b657" name="更改" comment="">
-      <change afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/root/DefaultConfiguration.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/configuration.json" beforeDir="false" afterPath="$PROJECT_DIR$/configuration.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/reference/reference.zxp" beforeDir="false" afterPath="$PROJECT_DIR$/docs/reference/reference.zxp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/编辑器自适应布局.drawio" beforeDir="false" afterPath="$PROJECT_DIR$/docs/编辑器自适应布局.drawio" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/latest.log" beforeDir="false" afterPath="$PROJECT_DIR$/latest.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/ZXConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/ZXConfigManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/ZXDefaultConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/ZXDefaultConfigManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/ZXProject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/ZXProjectManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/configuration/Configuration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/root/Configuration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/configuration/DefaultConfiguration.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/configuration/sub/LastTimeStatesCfg.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/sub/LastTimeStatesCfg.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/configuration/sub/MiniProjectCfg.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/sub/preference/MiniProjectCfg.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/configuration/sub/preference/UserPreferenceCfg.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/sub/preference/UserPreferenceCfg.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/configuration/sub/preference/editor/EditorCfg.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/sub/preference/editor/EditorCfg.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/configuration/sub/preference/res/ResourcesPackCfg.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/sub/preference/res/ResourcesPackCfg.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/configuration/sub/preference/side/FileManagerCfg.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/sub/preference/side/FileManagerCfg.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/configuration/sub/preference/side/SideBarCfg.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/sub/preference/side/SideBarCfg.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/old/UserPreferenceOld.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/project/ProjectConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/root/ProjectConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/project/sub/EditorLayoutCfg.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/sub/project/EditorLayoutCfg.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/resource/ResourcePack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/resource/ResourcePack.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/resource/ZXResources.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/resource/ZXResources.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/component/ZXStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/component/ZXStatus.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/main/ZXStage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/main/ZXStage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/main/stage/area/EditorArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/main/stage/area/EditorArea.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/main/stage/area/editor/base/BaseEditor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/main/stage/area/editor/base/BaseEditor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/main/stage/area/editor/image/ImageViewEditor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/main/stage/area/editor/image/ImageViewEditor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/main/stage/menu/TitleBarFileMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/main/stage/menu/TitleBarFileMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/main/stage/side/BaseSideBarTab.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/main/stage/side/BaseSideBarTab.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/main/stage/side/SideBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/main/stage/side/SideBar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/main/stage/side/filemanager/FileItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/main/stage/side/filemanager/FileItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/main/stage/side/filemanager/FileManagerTab.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/main/stage/side/filemanager/FileManagerTab.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/main/stage/side/filemanager/view/BaseFileView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/main/stage/side/filemanager/view/BaseFileView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/main/stage/side/filemanager/view/FileListView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/main/stage/side/filemanager/view/FileListView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/main/stage/side/filemanager/view/FileTreeView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui/main/stage/side/filemanager/view/FileTreeView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/ZXProjectManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/ZXProjectManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/sub/project/EditorLayoutCfg.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/config/sub/project/EditorLayoutCfg.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,11 +23,27 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 2
+}]]></component>
+  <component name="ProjectId" id="2Y1E1Kbqe3Ad7f7qSglNh6Icyer" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "UI",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -67,7 +51,8 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "project.structure.last.edited": "项目",
     "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0"
+    "project.structure.side.proportion": "0.0",
+    "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RunManager">
@@ -90,8 +75,33 @@
       </list>
     </recent_temporary>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
+    <task id="LOCAL-00001" summary="update ui">
+      <option name="closed" value="true" />
+      <created>1699614204677</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1699614204677</updated>
+    </task>
+    <task active="true" id="Default" summary="默认任务">
+      <changelist id="dd78a4ca-7956-492b-9d75-ff82bf57b657" name="更改" comment="" />
+      <created>1699684469115</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1699684469115</updated>
+      <workItem from="1699684470225" duration="830000" />
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="update ui" />
+    <option name="LAST_COMMIT_MESSAGE" value="update ui" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/ZXNoter$Main.ic" NAME="Main 覆盖结果" MODIFIED="1688229822928" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

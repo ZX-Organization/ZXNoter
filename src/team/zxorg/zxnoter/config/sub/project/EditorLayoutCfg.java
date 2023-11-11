@@ -15,4 +15,13 @@ public class EditorLayoutCfg {
      * 属于选项卡 记录打开的编辑器
       */
     public ArrayList<String> editors;
+
+    @Override
+    public String toString() {
+        return "EditorLayoutCfg{" +
+                "orientation='" + orientation + '\'' +
+                ", subLayout=" + subLayout +
+                ", editors=" + editors +
+                '}';
+    }
 }

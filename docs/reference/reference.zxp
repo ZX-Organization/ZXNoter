@@ -4,20 +4,13 @@
 		"orientation":"horizontal",
 		"subLayout":[
 			{
-				"orientation":"vertical",
-				"subLayout":[
-					{
-						"editors":[
-							"zxn/setting",
-							"./reference.zxp"
-						]
-					}
+				"editors":[
+					"D:\\Projects\\ZXNoter\\docs\\reference\\Corruption\\Corruption.png"
 				]
 			},
 			{
 				"editors":[
-					"./jitaimei/0/video.mp4",
-					"./[Crz]Emperor's skin/count1.png"
+					"D:\\Projects\\ZXNoter\\docs\\reference\\1591671592.mp3.wav"
 				]
 			}
 		]
