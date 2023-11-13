@@ -1,0 +1,42 @@
+{
+  "parent": "base.json",
+  "style": {
+    "font": {
+      "dark": {
+        "normal": "#9A9A9A",
+        "usually": "#9A9A9A",
+        "highlight": "#C8C8C8",
+        "disable": "#525252",
+        "link": "#589df6"
+      },
+      "light": {
+        "normal": "#5f6368",
+        "usually": "#3c4043",
+        "highlight": "#202124",
+        "disable": "#a4abb4",
+        "link": "#589df6"
+      }
+    },
+    "border": {
+      "dark": "#505050",
+      "light": "#dfdfdf"
+    },
+    "titleBar": {
+      "usually": "",
+      "loseFocus": ""
+    },
+    "sideBar": {
+      "activation": "",
+      "usually": "",
+      "loseFocus": ""
+    },
+    "theme3": {
+      "dark": "#2d2d2d",
+      "light": "#F0F0F0"
+    },
+    "theme4": {
+      "dark": "#292929",
+      "light": "#E1E1E1"
+    }
+  }
+}

@@ -1,4 +1,4 @@
-package team.zxorg.zxnoter;
+package team.zxorg.zxncore;
 
 import java.io.IOException;
 

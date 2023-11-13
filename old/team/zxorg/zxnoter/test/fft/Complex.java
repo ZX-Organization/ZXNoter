@@ -1,4 +1,4 @@
-package team.zxorg.zxnoter.test.fft;
+package team.zxorg.zxncore.test.fft;
 
 public class Complex {
     public double i;

@@ -1,8 +1,8 @@
-package team.zxorg.zxnoter.test.fft;
+package team.zxorg.zxncore.test.fft;
 
-import team.zxorg.zxnoter.test.sound.audiomixer.AudioChannel;
-import team.zxorg.zxnoter.test.sound.audiomixer.AudioMixer;
-import team.zxorg.zxnoter.utils.FxUtils;
+import team.zxorg.zxncore.test.sound.audiomixer.AudioChannel;
+import team.zxorg.zxncore.test.sound.audiomixer.AudioMixer;
+import team.zxorg.zxncore.utils.FxUtils;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;

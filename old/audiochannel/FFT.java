@@ -1,4 +1,4 @@
-package team.zxorg.zxnoter.audiochannel;
+package team.zxorg.zxncore.audiochannel;
 
 public class FFT {
     /**

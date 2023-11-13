@@ -1,0 +1,8 @@
+{
+  "id": "base",
+  "weight": "base",
+  "icon": "icon.png",
+  "style": [
+    "base.css"
+  ]
+}

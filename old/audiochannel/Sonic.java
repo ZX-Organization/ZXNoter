@@ -6,7 +6,7 @@
    This file is licensed under the Apache 2.0 license.
 */
 
-package team.zxorg.zxnoter.audiochannel;
+package team.zxorg.zxncore.audiochannel;
 
 public class Sonic {
 

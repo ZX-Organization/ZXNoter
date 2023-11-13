@@ -1,4 +1,4 @@
-package team.zxorg.zxnoter.utils;
+package team.zxorg.zxncore.utils;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.Pane;

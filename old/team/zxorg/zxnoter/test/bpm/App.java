@@ -1,6 +1,6 @@
-package team.zxorg.zxnoter.test.bpm;
+package team.zxorg.zxncore.test.bpm;
 
-import team.zxorg.zxnoter.utils.FxUtils;
+import team.zxorg.zxncore.utils.FxUtils;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
@@ -16,7 +16,7 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import static team.zxorg.zxnoter.test.bpm.Bpm.fft;
+import static team.zxorg.zxncore.test.bpm.Bpm.fft;
 
 public class App extends Application {
     Stage stage;

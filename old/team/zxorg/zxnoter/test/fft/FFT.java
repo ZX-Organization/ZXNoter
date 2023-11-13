@@ -1,4 +1,4 @@
-package team.zxorg.zxnoter.test.fft;
+package team.zxorg.zxncore.test.fft;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;

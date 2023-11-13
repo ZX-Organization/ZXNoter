@@ -1,6 +1,6 @@
-package team.zxorg.zxnoter.test.bpm;
+package team.zxorg.zxncore.test.bpm;
 
-import team.zxorg.zxnoter.test.fft.FFT;
+import team.zxorg.zxncore.test.fft.FFT;
 import javafx.application.Application;
 
 import java.nio.file.Path;

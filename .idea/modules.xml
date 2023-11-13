@@ -3,6 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ZXNoter.iml" filepath="$PROJECT_DIR$/ZXNoter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ZXNoterCore/ZXNoterCore.iml" filepath="$PROJECT_DIR$/ZXNoterCore/ZXNoterCore.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ZXNoterPlugin/ZXNoterPlugin.iml" filepath="$PROJECT_DIR$/ZXNoterPlugin/ZXNoterPlugin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ZXNoterUIFrame/ZXNoterUIFrame.iml" filepath="$PROJECT_DIR$/ZXNoterUIFrame/ZXNoterUIFrame.iml" />
     </modules>
   </component>
 </project>

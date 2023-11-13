@@ -1,4 +1,4 @@
-package team.zxorg.zxnoter.audiochannel.channel;
+package team.zxorg.zxncore.audiochannel.channel;
 
 public abstract class AudioChannelPlayControl {
     abstract void play(); // 播放音频

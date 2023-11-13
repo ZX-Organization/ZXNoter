@@ -1,74 +1,9 @@
-[14:36:15] [Main.zxnStart/INFO]: - - - -  ZXNoter  - - - -
-[14:36:15] [Main.zxnStart/INFO]: Version: 0.0.0-Alpha Code: 0
-[14:36:15] [Main.zxnStart/WARNING]: 当前为 [早期开发版本] 请谨慎测试软件功能
-[14:36:15] [Main.zxnStart/INFO]: ZXNoter启动
-[14:36:15] [Main.zxnStart/INFO]: 初始化图形系统
-[14:36:16] [Main.lambda$zxnStart$1/INFO]: 初始化配置
-[14:36:16] [ZXConfigManager.reload/INFO]: 载入全局配置
-[14:36:16] [ZXResources.<clinit>/INFO]: 载入基本资源
-[14:36:16] [ZXResources.clearPacks/INFO]: 清除资源包列表
-[14:36:17] [ZXResources.loadPack/INFO]: 载入资源包 zxnoter
-[14:36:17] [ZXResources.searchPacks/WARNING]: 本地资源包目录不存在
-[14:36:17] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 theme
-[14:36:17] [ZXDefaultConfigManager.<clinit>/INFO]: 载入默认配置
-[14:36:17] [ZXResources.reloadGlobalResource/INFO]: 载入基础资源包 资源[类型:theme id:dark 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\theme\dark]
-[14:36:17] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 icon
-[14:36:17] [ZXResources.reloadGlobalResource/INFO]: 载入基础资源包 资源[类型:icon id:line 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\icon\line]
-[14:36:17] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 language
-[14:36:17] [ZXResources.reloadGlobalResource/INFO]: 载入基础资源包 语言资源[id:'zh-cn', 语言数:145]
-[14:36:17] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 layout
-[14:36:17] [ZXResources.reloadGlobalResource/INFO]: 载入基础资源包 资源[类型:layout id:base 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\layout\base]
-[14:36:17] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 sound
-[14:36:17] [ZXResources.reloadGlobalResource/INFO]: 载入基础资源包 资源[类型:sound id:base 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\sound\base]
-[14:36:17] [ZXResources.reloadGlobalResource/INFO]: 载入引用的资源包列表 style
-[14:36:17] [ZXResources.reloadGlobalResource/INFO]: 载入基础资源包 资源[类型:style id:map-editor-pink 所属资源包:资源包[名称:'ZXNoter(BRP)', id:'zxnoter', 路径:'res\resources\base-pack'] 所在路径:res\resources\base-pack\style\map-editor\pink]
-[14:36:17] [Main.lambda$zxnStart$1/INFO]: 载入上次打开项目: team.zxorg.zxnoter.config.sub.preference.MiniProjectCfg@1de2755a
-[14:36:17] [EditorArea.lambda$new$0/INFO]: 焦点变更:堆叠容器 父布局{add5-569a106e29a6} 此{b44e-34d22768cb80} [] tab-pane editor-tab-pane tab-pane-focused
-[14:36:17] [ZXStage.<init>/INFO]: 实例化ZXStage
-[14:36:17] [ZXProjectManager.openProject/INFO]: 打开项目: D:\Projects\ZXNoter\docs\reference
-[14:36:17] [ZXProjectManager.openProject/INFO]: 载入项目配置
-[14:36:17] [ZXProjectManager.restoreEditorsArea/INFO]: 构建Layout EditorLayoutCfg{orientation='null', subLayout=null, editors=["D:\\Projects\\ZXNoter\\docs\\reference\\Corruption\\Corruption.png"]}
-[14:36:17] [ZXProjectManager.restoreEditorsArea/INFO]: 构建TabPane ["D:\\Projects\\ZXNoter\\docs\\reference\\Corruption\\Corruption.png"]
-[14:36:17] [ZXProjectManager.restoreEditorsArea/INFO]: 构建Layout EditorLayoutCfg{orientation='null', subLayout=null, editors=["D:\\Projects\\ZXNoter\\docs\\reference\\1591671592.mp3.wav"]}
-[14:36:17] [ZXProjectManager.restoreEditorsArea/INFO]: 构建TabPane ["D:\\Projects\\ZXNoter\\docs\\reference\\1591671592.mp3.wav"]
-[14:36:22] [EditorArea.lambda$new$0/INFO]: 焦点变更:堆叠容器 父布局{add5-569a106e29a6} 此{9f1c-4ce4ba482170} [编辑器[Corruption.png]] tab-pane editor-tab-pane tab-pane-focused
-[14:36:26] [EditorArea.lambda$new$0/INFO]: 焦点变更:堆叠容器 父布局{add5-569a106e29a6} 此{b136-c757ffe1e95c} [编辑器[1591671592.mp3.wav]] tab-pane editor-tab-pane tab-pane-focused
-[14:36:26] [EditorArea.lambda$new$0/INFO]: 焦点变更:堆叠容器 父布局{add5-569a106e29a6} 此{9f1c-4ce4ba482170} [编辑器[Corruption.png]] tab-pane editor-tab-pane tab-pane-focused
-[14:36:27] [EditorArea.lambda$new$0/INFO]: 焦点变更:堆叠容器 父布局{add5-569a106e29a6} 此{b136-c757ffe1e95c} [编辑器[1591671592.mp3.wav]] tab-pane editor-tab-pane tab-pane-focused
-[14:36:28] [EditorArea.lambda$new$0/INFO]: 焦点变更:堆叠容器 父布局{add5-569a106e29a6} 此{9f1c-4ce4ba482170} [编辑器[Corruption.png]] tab-pane editor-tab-pane tab-pane-focused
-[14:36:28] [EditorArea.lambda$new$0/INFO]: 焦点变更:堆叠容器 父布局{add5-569a106e29a6} 此{b136-c757ffe1e95c} [编辑器[1591671592.mp3.wav]] tab-pane editor-tab-pane tab-pane-focused
-[14:36:29] [EditorArea.lambda$new$0/INFO]: 焦点变更:堆叠容器 父布局{add5-569a106e29a6} 此{9f1c-4ce4ba482170} [编辑器[Corruption.png]] tab-pane editor-tab-pane tab-pane-focused
-[14:36:29] [EditorArea.lambda$new$0/INFO]: 焦点变更:堆叠容器 父布局{add5-569a106e29a6} 此{b136-c757ffe1e95c} [编辑器[1591671592.mp3.wav]] tab-pane editor-tab-pane tab-pane-focused
-[14:36:30] [EditorArea.lambda$new$0/INFO]: 焦点变更:堆叠容器 父布局{add5-569a106e29a6} 此{9f1c-4ce4ba482170} [编辑器[Corruption.png]] tab-pane editor-tab-pane tab-pane-focused
-[14:36:32] [EditorArea.lambda$new$0/INFO]: 焦点变更:堆叠容器 父布局{add5-569a106e29a6} 此{b136-c757ffe1e95c} [编辑器[1591671592.mp3.wav]] tab-pane editor-tab-pane tab-pane-focused
-[14:36:32] [EditorArea.lambda$new$0/INFO]: 焦点变更:堆叠容器 父布局{add5-569a106e29a6} 此{9f1c-4ce4ba482170} [编辑器[Corruption.png]] tab-pane editor-tab-pane tab-pane-focused
-[14:36:32] [EditorArea.lambda$new$0/INFO]: 焦点变更:堆叠容器 父布局{add5-569a106e29a6} 此{b136-c757ffe1e95c} [编辑器[1591671592.mp3.wav]] tab-pane editor-tab-pane tab-pane-focused
-[14:36:33] [EditorArea.lambda$new$0/INFO]: 焦点变更:堆叠容器 父布局{add5-569a106e29a6} 此{9f1c-4ce4ba482170} [编辑器[Corruption.png]] tab-pane editor-tab-pane tab-pane-focused
-[14:36:33] [EditorArea.lambda$new$0/INFO]: 焦点变更:堆叠容器 父布局{add5-569a106e29a6} 此{b136-c757ffe1e95c} [编辑器[1591671592.mp3.wav]] tab-pane editor-tab-pane tab-pane-focused
-[14:36:33] [EditorArea.lambda$new$0/INFO]: 焦点变更:堆叠容器 父布局{add5-569a106e29a6} 此{9f1c-4ce4ba482170} [编辑器[Corruption.png]] tab-pane editor-tab-pane tab-pane-focused
-[14:36:34] [EditorArea.lambda$new$0/INFO]: 焦点变更:堆叠容器 父布局{add5-569a106e29a6} 此{b136-c757ffe1e95c} [编辑器[1591671592.mp3.wav]] tab-pane editor-tab-pane tab-pane-focused
-[14:36:36] [EditorArea.lambda$new$0/INFO]: 焦点变更:堆叠容器 父布局{add5-569a106e29a6} 此{9f1c-4ce4ba482170} [编辑器[Corruption.png]] tab-pane editor-tab-pane tab-pane-focused
-[14:36:37] [EditorArea.lambda$new$0/INFO]: 焦点变更:堆叠容器 父布局{add5-569a106e29a6} 此{b136-c757ffe1e95c} [编辑器[1591671592.mp3.wav]] tab-pane editor-tab-pane tab-pane-focused
-[14:36:37] [EditorArea.lambda$new$0/INFO]: 焦点变更:堆叠容器 父布局{add5-569a106e29a6} 此{9f1c-4ce4ba482170} [编辑器[Corruption.png]] tab-pane editor-tab-pane tab-pane-focused
-[14:36:44] [EditorArea.lambda$new$0/INFO]: 焦点变更:堆叠容器 父布局{add5-569a106e29a6} 此{b136-c757ffe1e95c} [编辑器[1591671592.mp3.wav]] tab-pane editor-tab-pane tab-pane-focused
-[14:36:44] [EditorArea.lambda$new$0/INFO]: 焦点变更:堆叠容器 父布局{add5-569a106e29a6} 此{9f1c-4ce4ba482170} [编辑器[Corruption.png]] tab-pane editor-tab-pane tab-pane-focused
-[14:36:50] [EditorArea.lambda$new$0/INFO]: 焦点变更:堆叠容器 父布局{add5-569a106e29a6} 此{b136-c757ffe1e95c} [编辑器[1591671592.mp3.wav]] tab-pane editor-tab-pane tab-pane-focused
-[14:36:53] [EditorArea.lambda$new$0/INFO]: 焦点变更:堆叠容器 父布局{add5-569a106e29a6} 此{9f1c-4ce4ba482170} [编辑器[Corruption.png]] tab-pane editor-tab-pane tab-pane-focused
-[14:37:00] [EditorArea.lambda$new$0/INFO]: 焦点变更:堆叠容器 父布局{add5-569a106e29a6} 此{b136-c757ffe1e95c} [编辑器[1591671592.mp3.wav]] tab-pane editor-tab-pane tab-pane-focused
-[14:37:01] [EditorArea.lambda$new$0/INFO]: 焦点变更:堆叠容器 父布局{add5-569a106e29a6} 此{9f1c-4ce4ba482170} [编辑器[Corruption.png]] tab-pane editor-tab-pane tab-pane-focused
-[14:37:01] [EditorArea.lambda$new$0/INFO]: 焦点变更:堆叠容器 父布局{add5-569a106e29a6} 此{b136-c757ffe1e95c} [编辑器[1591671592.mp3.wav]] tab-pane editor-tab-pane tab-pane-focused
-[14:37:03] [EditorArea.lambda$new$0/INFO]: 焦点变更:堆叠容器 父布局{add5-569a106e29a6} 此{9f1c-4ce4ba482170} [编辑器[Corruption.png]] tab-pane editor-tab-pane tab-pane-focused
-[14:38:31] [EditorArea.lambda$new$0/INFO]: 焦点变更:堆叠容器 父布局{add5-569a106e29a6} 此{b136-c757ffe1e95c} [编辑器[1591671592.mp3.wav]] tab-pane editor-tab-pane tab-pane-focused
-[14:38:33] [EditorArea.lambda$new$0/INFO]: 焦点变更:堆叠容器 父布局{add5-569a106e29a6} 此{9f1c-4ce4ba482170} [编辑器[Corruption.png]] tab-pane editor-tab-pane tab-pane-focused
-[14:38:33] [EditorArea.lambda$new$0/INFO]: 焦点变更:堆叠容器 父布局{add5-569a106e29a6} 此{b136-c757ffe1e95c} [编辑器[1591671592.mp3.wav]] tab-pane editor-tab-pane tab-pane-focused
-[14:38:34] [EditorArea.lambda$new$0/INFO]: 焦点变更:堆叠容器 父布局{add5-569a106e29a6} 此{9f1c-4ce4ba482170} [编辑器[Corruption.png]] tab-pane editor-tab-pane tab-pane-focused
-[14:39:00] [EditorArea.lambda$new$0/INFO]: 焦点变更:堆叠容器 父布局{add5-569a106e29a6} 此{b136-c757ffe1e95c} [编辑器[1591671592.mp3.wav]] tab-pane editor-tab-pane tab-pane-focused
-[14:39:00] [EditorArea.lambda$new$0/INFO]: 焦点变更:堆叠容器 父布局{add5-569a106e29a6} 此{9f1c-4ce4ba482170} [编辑器[Corruption.png]] tab-pane editor-tab-pane tab-pane-focused
-[14:55:35] [EditorArea.lambda$new$0/INFO]: 焦点变更:堆叠容器 父布局{add5-569a106e29a6} 此{b136-c757ffe1e95c} [编辑器[1591671592.mp3.wav]] tab-pane editor-tab-pane tab-pane-focused
-[14:55:36] [EditorArea.lambda$new$0/INFO]: 焦点变更:堆叠容器 父布局{add5-569a106e29a6} 此{9f1c-4ce4ba482170} [编辑器[Corruption.png]] tab-pane editor-tab-pane tab-pane-focused
-[14:55:37] [EditorArea.lambda$new$0/INFO]: 焦点变更:堆叠容器 父布局{add5-569a106e29a6} 此{b136-c757ffe1e95c} [编辑器[1591671592.mp3.wav]] tab-pane editor-tab-pane tab-pane-focused
-[14:55:37] [EditorArea.lambda$new$0/INFO]: 焦点变更:堆叠容器 父布局{add5-569a106e29a6} 此{9f1c-4ce4ba482170} [编辑器[Corruption.png]] tab-pane editor-tab-pane tab-pane-focused
-[14:57:59] [ZXConfigManager.saveConfig/INFO]: 保存全局配置
-[14:57:59] [ZXProjectManager.closeProject/INFO]: 关闭项目 D:\Projects\ZXNoter\docs\reference
-[14:57:59] [ZXProjectManager.closeProject/INFO]: 保存项目配置
-[14:57:59] [Main.lambda$zxnStart$0/INFO]: 关闭程序
+[14:21:34] [Main.main/INFO]: ZXLogger 日志系统 初始化完毕
+[14:21:34] [Main.main/INFO]: ===== > ZXNoter User Interface Frame < =====
+[14:21:34] [Main.main/INFO]: Version: 0.0.0-Alpha Code: 0
+[14:21:34] [Main.main/WARNING]: 当前为 [早期开发版本] 请谨慎测试软件功能
+[14:21:34] [Main.main/INFO]: ZXNoter启动
+[14:21:34] [Main.main/INFO]: 初始化图形系统
+[14:21:34] [Main.lambda$main$2/INFO]: 初始化配置
+[14:21:34] [Main.lambda$main$2/INFO]: []
+[14:21:34] [Main.lambda$main$2/INFO]: null

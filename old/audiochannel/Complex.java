@@ -1,4 +1,4 @@
-package team.zxorg.zxnoter.audiochannel;
+package team.zxorg.zxncore.audiochannel;
 /**
  * 复数类，包含实部和虚部。
  */

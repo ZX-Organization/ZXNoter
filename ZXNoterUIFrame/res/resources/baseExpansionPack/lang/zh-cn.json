@@ -1,0 +1,33 @@
+{
+  "expansionPack": {
+    "zxnoter": {
+      "name": "扩展包 (基础)",
+      "description": "这是zxn的基础扩展包",
+      "icon": {
+        "fill": {
+          "name": "填充",
+          "description": "本图标包是基于RemixIcon项目修改。\n相关链接:https://github.com/Remix-Design/RemixIcon"
+        },
+        "line": {
+          "name": "线条",
+          "description": "本图标包是基于RemixIcon项目修改。\n相关链接:https://github.com/Remix-Design/RemixIcon"
+        }
+      },
+      "lang": {
+        "zh-cn": {
+          "name": "简体中文",
+          "description": "默认的语言"
+        }
+      },
+      "color": {
+        "default": {
+          "name": "默认颜色",
+          "description": "默认的主题颜色"
+        }
+      },
+      "style": {
+        "rightAngle": "默认颜色"
+      }
+    }
+  }
+}

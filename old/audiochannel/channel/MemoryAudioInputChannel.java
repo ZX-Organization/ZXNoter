@@ -1,6 +1,6 @@
-package team.zxorg.zxnoter.audiochannel.channel;
+package team.zxorg.zxncore.audiochannel.channel;
 
-import team.zxorg.zxnoter.audiochannel.AudioUtils;
+import team.zxorg.zxncore.audiochannel.AudioUtils;
 
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;

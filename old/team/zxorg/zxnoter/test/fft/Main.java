@@ -4,7 +4,7 @@ import javafx.application.Application;
 
 public class Main {
     public static void main(String[] args) {
-        Application.launch(team.zxorg.zxnoter.test.fft.App.class);
+        Application.launch(team.zxorg.zxncore.test.fft.App.class);
     }
 
 }

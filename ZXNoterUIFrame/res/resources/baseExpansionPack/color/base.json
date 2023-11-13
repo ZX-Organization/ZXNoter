@@ -1,0 +1,71 @@
+{
+  "color": {
+    "blue": {
+      "dark": "#498ba7",
+      "normal": "#519aba",
+      "light": "#61b9e0"
+    },
+    "red": {
+      "dark": "#84282c",
+      "normal": "#b8383d",
+      "light": "#ff4d54"
+    },
+    "purple": {
+      "dark": "#9068b0",
+      "normal": "#a074c4",
+      "light": "#bf8aea"
+    },
+    "yellow": {
+      "dark": "#b7b73b",
+      "normal": "#cbcb41",
+      "light": "#f1f14d"
+    },
+    "green": {
+      "dark": "#7fae42",
+      "normal": "#8dc149",
+      "light": "#a8e757"
+    },
+    "orange": {
+      "dark": "#cc6d2e",
+      "normal": "#e37933",
+      "light": "#ff9539"
+    },
+    "pink": {
+      "dark": "#dd4b78",
+      "normal": "#f55385",
+      "light": "#ff567f"
+    },
+    "gray": {
+      "dark": "#455155",
+      "normal": "#6d8086",
+      "light": "#8ca4ac"
+    },
+    "white": {
+      "dark": "#a1a3a3",
+      "normal": "#d4d7d6",
+      "light": "#f9fdfc"
+    }
+  },
+  "customize": {
+    "border": {
+      "dark": "#505050",
+      "light": "#dfdfdf"
+    },
+    "theme1": {
+      "dark": "#3c3c3c",
+      "light": "#f8f8f8"
+    },
+    "theme2": {
+      "dark": "#323232",
+      "light": "#f8f8f8"
+    },
+    "theme3": {
+      "dark": "#2d2d2d",
+      "light": "#f8f8f8"
+    },
+    "theme4": {
+      "dark": "#292929",
+      "light": "#ffffff"
+    }
+  }
+}

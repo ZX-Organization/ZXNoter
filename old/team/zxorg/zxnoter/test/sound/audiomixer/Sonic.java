@@ -6,7 +6,7 @@
    This file is licensed under the Apache 2.0 license.
 */
 
-package team.zxorg.zxnoter.test.sound.audiomixer;
+package team.zxorg.zxncore.test.sound.audiomixer;
 
 public class Sonic {
 

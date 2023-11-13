@@ -1,4 +1,4 @@
-package team.zxorg.zxnoter.audiochannel.channel;
+package team.zxorg.zxncore.audiochannel.channel;
 
 import javax.sound.sampled.AudioFormat;
 import java.nio.ByteBuffer;

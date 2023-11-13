@@ -1,4 +1,4 @@
-package team.zxorg.zxnoter.ui;
+package team.zxorg.zxncore.ui;
 
 import com.alibaba.fastjson2.JSONObject;
 import javafx.application.Application;
