@@ -1,0 +1,22 @@
+{
+  "resourcePacks": {
+    "languages": [
+      "zxnoter.language.zh-cn"
+    ],
+    "sounds": [
+      "zxnoter.sound.base"
+    ],
+    "icons": [
+      "zxnoter.icon.line"
+    ],
+    "styles": [
+      "zxnoter.style.map-editor-pink"
+    ],
+    "layouts": [
+      "zxnoter.layout.base"
+    ],
+    "themes": [
+      "zxnoter.theme.dark"
+    ]
+  }
+}

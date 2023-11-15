@@ -21,6 +21,28 @@
     -fx-padding: 1 2 1 2;
 }
 
+.context-menu {
+    -fx-background-color: -color-theme-1;
+    -fx-border-color: -color-border-window;
+    -fx-padding: 1 0 1 0;
+}
+
+.menu-item {
+    -fx-background-color: -color-theme-1;
+}
+
+.menu-item:hover {
+    -fx-background-color: -color-theme-3;
+}
+
+.menu-item > .label > .text {
+    -fx-fill: -color-font-usually;
+}
+
+.menu-item:hover > .label > .text {
+    -fx-fill: -color-font-light;
+}
+
 .tab-pane .tab-header-area {
     -fx-padding: 0;
 }

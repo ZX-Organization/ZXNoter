@@ -1,0 +1,894 @@
+/**
+基础控件
+ */
+
+.label {
+    -fx-text-fill: -color-text-usually;
+}
+
+.text {
+    -fx-text-fill: -color-text-usually;
+}
+
+
+/**
+按钮
+ */
+.button {
+    -fx-text-fill: -color-component-text-usually;
+    -fx-background-color: -color-component-bg-usually;
+    -fx-border-color: -color-component-border-usually;
+    -fx-border-radius: 3;
+}
+
+.button:hover {
+    -fx-text-fill: -color-component-text-hover;
+    -fx-background-color: -color-component-bg-hover;
+}
+
+.button:showing,
+.button:armed {
+    -fx-text-fill: -color-component-text-active;
+    -fx-border-color: -color-component-border-focused;
+    -fx-background-color: -color-component-bg-active;
+}
+
+.button:focused {
+    -fx-border-color: -color-component-border-focused;
+}
+
+/**
+复选框
+ */
+
+.check-box {
+    -fx-text-fill: -color-component-text-usually;
+}
+
+.check-box:hover {
+    -fx-text-fill: -color-component-text-hover;
+
+}
+
+.check-box:selected {
+    -fx-text-fill: -color-component-text-active;
+
+}
+
+.check-box .box {
+    -fx-background-color: transparent;
+    -fx-border-color: -color-component-border-usually;
+    -fx-border-radius: 3;
+    -fx-padding: 2;
+    -fx-alignment: center;
+}
+
+.check-box:selected .box {
+    -fx-background-color: transparent;
+    -fx-border-color: -color-component-border-active;
+}
+
+.check-box:focused .box {
+    -fx-background-color: transparent;
+    -fx-border-color: -color-component-border-focused;
+}
+
+.check-box .box .mark{
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+}
+
+.check-box:selected .box .mark{
+    -fx-background-color: -color-component-text-active;
+}
+
+/**
+单选按钮
+ */
+.radio-button {
+    -fx-text-fill: -color-component-text-usually;
+}
+
+.radio-button:selected {
+    -fx-text-fill: -color-component-text-active;
+
+}
+
+.radio-button:hover {
+    -fx-text-fill: -color-component-text-hover;
+
+}
+
+.radio-button .radio {
+    -fx-background-color: transparent;
+    -fx-border-color: -color-component-border-usually;
+    -fx-border-radius: 8;
+    -fx-padding: 3;
+    -fx-alignment: center;
+}
+
+.radio-button:selected .radio {
+    -fx-background-color: transparent;
+    -fx-border-color: -color-component-border-active;
+}
+
+.radio-button:focused .radio {
+    -fx-background-color: transparent;
+    -fx-border-color: -color-component-border-focused;
+}
+
+.radio-button .radio .dot{
+    -fx-background-color: transparent;
+}
+
+.radio-button:selected .radio .dot{
+    -fx-background-color: -color-component-text-active;
+    -fx-background-insets: 0;
+}
+/**
+选择框
+ */
+.choice-box {
+    -fx-background-color: transparent;
+    -fx-border-color: -color-component-border-usually;
+    -fx-border-radius: 3;
+}
+
+.choice-box .label {
+    -fx-text-fill: -color-component-text-usually;
+}
+
+.choice-box:focused {
+    -fx-border-color: -color-component-border-focused;
+}
+
+/**
+选色器
+ */
+.color-picker {
+    -fx-background-color: transparent;
+    -fx-border-color: -color-component-border-usually;
+    -fx-border-radius: 3;
+}
+
+.color-picker:focused {
+    -fx-border-color: -color-component-border-focused;
+}
+
+/**
+组合框
+ */
+.combo-box {
+    -fx-background-color: transparent;
+    -fx-border-color: -color-component-border-usually;
+    -fx-border-radius: 3;
+}
+
+.combo-box:focused {
+    -fx-border-color: -color-component-border-focused;
+}
+
+/**
+切换按钮
+ */
+.toggle-button {
+    -fx-text-fill: -color-component-text-usually;
+    -fx-background-color: transparent;
+    -fx-border-color: -color-component-border-usually;
+    -fx-border-radius: 3;
+}
+
+.toggle-button:hover {
+    -fx-text-fill: -color-component-text-hover;
+    -fx-background-color: -color-component-bg-hover;
+}
+
+.toggle-button:selected {
+    -fx-text-fill: -color-component-text-active;
+    -fx-background-color: -color-component-bg-active;
+}
+
+.toggle-button:focused {
+    -fx-border-color: -color-component-border-focused;
+}
+
+/**
+列表视图
+ */
+.list-view {
+    -fx-background-color: transparent;
+    -fx-border-color: -color-component-border-usually;
+}
+
+/**
+树视图
+ */
+.tree-view {
+    -fx-background-color: transparent;
+    -fx-border-color: -color-component-border-usually;
+}
+
+.tree-view .virtual-flow .clipped-container .sheet .tree-cell {
+    -fx-background-color: transparent;
+}
+
+.tree-view .virtual-flow .clipped-container .sheet .tree-cell:hover {
+    -fx-background-color: -color-component-bg-hover;
+}
+
+.tree-view .virtual-flow .clipped-container .sheet .tree-cell:selected {
+    -fx-background-color: -color-component-bg-active;
+}
+
+.tree-view .virtual-flow .clipped-container .sheet .tree-cell:focused {
+    -fx-border-color: -color-component-border-focused;
+}
+
+.tree-view .virtual-flow .clipped-container .sheet .tree-cell {
+    -fx-text-fill: -color-component-text-usually;
+}
+
+.tree-view .virtual-flow .clipped-container .sheet .tree-cell:hover {
+    -fx-text-fill: -color-component-text-hover;
+}
+
+.tree-view .virtual-flow .clipped-container .sheet .tree-cell:selected {
+    -fx-text-fill: -color-component-text-active;
+}
+
+/**
+文本框
+ */
+.text-field,
+.text-area {
+    -fx-text-fill: -color-component-text-usually;
+    -fx-background-color: transparent;
+    -fx-border-color: -color-component-border-usually;
+    -fx-border-radius: 3;
+    -fx-prompt-text-fill: -color-component-text-prompt;
+    -fx-highlight-fill: -color-text-component-bg-highlight;
+    -fx-highlight-text-fill: -color-text-component-text-highlight;
+}
+
+.text-field:focused,
+.text-area:focused {
+    -fx-text-fill: -color-component-text-active;
+    -fx-border-color: -color-component-border-focused;
+}
+
+/**
+文本区
+ */
+
+.text-area {
+    -fx-background-color: transparent;
+}
+
+.text-area .scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+.text-area .scroll-pane .viewport .content {
+    -fx-background-color: transparent;
+}
+
+/**
+滚动条
+ */
+
+.scroll-bar:vertical {
+    -fx-background-color: transparent;
+    -fx-border-color: -color-component-border-usually;
+    -fx-border-width: 0 1 0 1;
+    -fx-padding: 0 1 0 1;
+}
+
+.scroll-bar:horizontal {
+    -fx-background-color: transparent;
+    -fx-border-color: -color-component-border-usually;
+    -fx-border-width: 1 0 1 0;
+    -fx-padding: 1 0 1 0;
+}
+
+
+.scroll-bar .thumb {
+    -fx-background-color: -color-component-bg-usually;
+    -fx-border-color: -color-component-border-usually;
+    -fx-border-radius: 3;
+    -fx-background-radius: 3;
+    -fx-padding: 0;
+}
+
+.scroll-bar .thumb:hover{
+    -fx-background-color: -color-component-bg-hover;
+    -fx-border-color: -color-component-border-active;
+}
+.scroll-bar .thumb:pressed {
+    -fx-background-color: -color-component-bg-active;
+    -fx-border-color: -color-component-border-active;
+}
+
+.scroll-bar .decrement-button:hover,
+.scroll-bar .increment-button:hover {
+    -fx-background-color: -color-component-bg-hover;
+}
+/**
+滑块
+ */
+
+.slider .track {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-background-radius: 2;
+    -fx-padding: 2;
+    -fx-border-color: -color-component-border-usually;
+    -fx-border-width: 1;
+    -fx-border-radius: 2;
+}
+.slider .thumb{
+    -fx-background-color: -color-component-border-usually;
+    -fx-background-radius: 4;
+    -fx-border-radius: 4;
+    -fx-border-color: -color-component-border-usually;
+    -fx-border-width: 1;
+    -fx-padding: 4;
+}
+.slider .thumb:hover{
+    -fx-background-color: -color-component-border-usually;
+    -fx-border-color: -color-component-border-active;
+}
+.slider .thumb:pressed{
+    -fx-background-color: -color-component-border-active;
+    -fx-border-color: -color-component-border-active;
+}
+/**
+旋转器
+ */
+.spinner{
+    -fx-text-fill: -color-component-text-usually;
+    -fx-background-color: transparent;
+    -fx-border-color: -color-component-border-usually;
+    -fx-border-radius: 3;
+    -fx-border-width: 1;
+}
+.spinner:focused{
+    -fx-text-fill: -color-component-text-active;
+    -fx-border-color: -color-component-border-focused;
+}
+.spinner .text-field{
+    -fx-border-width: 0;
+}
+.spinner .increment-arrow-button{
+    -fx-background-color: transparent;
+    -fx-border-color: -color-component-border-usually;
+    -fx-border-width: 0 0 1 1;
+    -fx-border-insets: 0 0 -1 0;
+}
+.spinner .decrement-arrow-button{
+    -fx-background-color: transparent;
+    -fx-border-color: -color-component-border-usually;
+    -fx-border-width: 1 0 0 1;
+    -fx-border-insets: -1 0 0 0;
+}
+.spinner .increment-arrow-button .increment-arrow{
+    -fx-background-color: -color-component-text-usually;
+}
+.spinner .decrement-arrow-button .decrement-arrow{
+    -fx-background-color: -color-component-text-usually;
+}
+.spinner .increment-arrow-button:hover{
+    -fx-background-color: -color-component-bg-hover;
+}
+.spinner .decrement-arrow-button:hover{
+    -fx-background-color: -color-component-bg-hover;
+}
+.spinner .increment-arrow-button:hover .increment-arrow{
+    -fx-background-color: -color-component-text-hover;
+}
+.spinner .decrement-arrow-button:hover .decrement-hover{
+    -fx-background-color: -color-component-text-hover;
+}
+.spinner .increment-arrow-button:pressed{
+    -fx-background-color: -color-component-bg-active;
+}
+.spinner .decrement-arrow-button:pressed{
+    -fx-background-color: -color-component-bg-active;
+}
+.spinner .increment-arrow-button:pressed .increment-arrow{
+    -fx-background-color: -color-component-text-active;
+}
+.spinner .decrement-arrow-button:pressed .decrement-arrow{
+    -fx-background-color: -color-component-text-active;
+}
+
+/**
+分割菜单按钮
+ */
+.split-menu-button{
+    -fx-background-color: transparent;
+    -fx-border-color: -color-component-border-usually;
+    -fx-border-radius: 3;
+}
+.split-menu-button .label{
+    -fx-fill: -color-component-text-usually;
+    -fx-background-color: transparent;
+}
+.split-menu-button .label:hover{
+    -fx-fill: -color-component-text-hover;
+    -fx-background-color: -color-component-bg-hover;
+}
+
+.split-menu-button:armed .label {
+    -fx-fill: -color-component-text-active;
+    -fx-background-color: -color-component-bg-active;
+}
+.split-menu-button:focused {
+    -fx-border-color: -color-component-border-focused;
+}
+
+.split-menu-button .label{
+    -fx-background-color: transparent;
+}
+.split-menu-button .arrow-button{
+    -fx-background-color: transparent;
+    -fx-border-width: 0 0 0 1;
+    -fx-border-color: -color-component-border-usually;
+}
+.split-menu-button .arrow-button:hover{
+    -fx-background-color: -color-component-bg-hover;
+}
+.split-menu-button .arrow-button:pressed{
+    -fx-background-color: -color-component-bg-active;
+}
+.split-menu-button .arrow-button .arrow{
+    -fx-background-color:-color-component-text-usually;
+}
+.split-menu-button .arrow-button:hover .arrow{
+    -fx-background-color:-color-component-text-hover;
+}
+.split-menu-button .arrow-button:pressed .arrow{
+    -fx-background-color:-color-component-text-active;
+}
+/**
+进度条
+ */
+.progress-bar{
+    -fx-background-color: transparent;
+}
+.progress-bar .track{
+    -fx-background-color: transparent;
+    -fx-border-color: -color-component-border-usually;
+    -fx-border-radius: 3;
+}
+
+
+/**
+菜单按钮
+ */
+
+.menu {
+    -fx-pref-height: inherit;
+    -fx-background-color: -color-menu-bg-usually;
+}
+
+.menu .label {
+    -fx-text-fill: -color-menu-text-usually;
+}
+
+.menu:hover {
+    -fx-background-color: -color-menu-bg-hover;
+}
+
+.menu:hover .label {
+    -fx-text-fill: -color-menu-text-hover;
+}
+
+.menu:showing {
+    -fx-background-color: -color-menu-bg-active;
+}
+
+.menu:showing .label {
+    -fx-text-fill: -color-menu-text-active;
+}
+
+
+/**
+菜单 面板
+ */
+
+.context-menu {
+    -fx-background-color: -color-menu-bg-usually;
+    -fx-border-color: -color-menu-border-usually;
+    -fx-padding: 0;
+}
+
+/**
+分隔器
+ */
+.separator .line {
+    -fx-border-color: -color-border-pane;
+    -fx-border-width: 1 0 0 0;
+    -fx-border-insets: 0 0 -1 0;
+}
+
+
+/**
+菜单 选项
+ */
+.menu-item,
+.check-menu-item,
+.radio-menu-item {
+    -fx-background-color: -color-menu-item-bg-usually;
+}
+
+.menu-item:hover,
+.check-menu-item:hover,
+.radio-menu-item:hover {
+    -fx-background-color: -color-menu-item-bg-hover;
+}
+
+
+.menu-item .label .text,
+.check-menu-item .label .text,
+.radio-menu-item .label .text {
+    -fx-fill: -color-menu-item-text-usually;
+}
+
+.menu-item:hover .label .text,
+.check-menu-item:hover .label .text,
+.radio-menu-item:hover .label .text {
+    -fx-fill: -color-menu-item-text-hover;
+}
+
+
+/**
+分割窗格 样式
+ */
+
+.split-pane {
+    -fx-padding: 0;
+    -fx-background-color: transparent;
+}
+
+.split-pane .split-pane-divider {
+    -fx-padding: 0 0 0 1;
+    -fx-background-insets: 0;
+    -fx-border-width: 0;
+    -fx-background-color: -color-border-pane;
+}
+
+.split-pane:horizontal .split-pane-divider:hover,
+.split-pane:horizontal .split-pane-divider:pressed {
+    -fx-padding: 0 0 0 1;
+    -fx-background-insets: 0 -1 0 -1;
+    -fx-background-color: -color-border-active;
+}
+
+
+.split-pane:vertical .split-pane-divider:hover,
+.split-pane:vertical .split-pane-divider:pressed {
+    -fx-padding: 0 0 0 1;
+    -fx-background-insets: -1 0 -1 0;
+    -fx-background-color: -color-border-active;
+}
+
+
+/**
+选项卡
+ */
+.tab-pane .tab-header-area {
+    -fx-padding: 0;
+}
+
+/**
+选项卡头背景
+ */
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-background-color: -color-tab-pane-bg-usually;
+    -fx-border-color: -color-border-pane;
+    -fx-border-width: 0 0 1 0;
+}
+
+/**
+选项卡域
+ */
+.tab-pane .tab-header-area .headers-region {
+
+}
+
+/**
+选项卡tab
+ */
+.tab-pane .tab-header-area .headers-region .tab {
+    -fx-background-color: -color-tab-pane-tab-bg-usually;
+    -fx-border-color: transparent -color-tab-pane-tab-border-usually transparent transparent;
+    -fx-border-width: 2 1 0 0;
+    -fx-background-radius: 0;
+    -fx-padding: 0 4 0 12;
+}
+
+/**
+选项卡tab 左右拖拽 位置显示
+ */
+.tab-pane .tab-header-area .headers-region .tab:hover.left {
+    -fx-border-color: transparent -color-tab-pane-tab-border-usually transparent -color-tab-pane-tab-border-active;
+    -fx-border-width: 2 1 0 2;
+    -fx-padding: 0 4 0 10;
+
+}
+
+.tab-pane .tab-header-area .headers-region .tab:hover.right {
+    -fx-border-color: transparent -color-tab-pane-tab-border-active transparent transparent;
+    -fx-border-width: 2 2 0 0;
+    -fx-padding: 0 3 0 12;
+}
+
+/**
+选项卡tab
+ */
+.tab-pane .tab-header-area .headers-region .tab:hover {
+    -fx-background-color: -color-theme-2;
+}
+
+/**
+选项卡tab 选中的
+ */
+.tab-pane .tab-header-area .headers-region .tab:selected {
+    -fx-background-color: -color-theme-2;
+    -fx-border-color: -color-border-pane;
+
+}
+
+/**
+选项卡tab 左右拖拽 位置显示
+ */
+.tab-pane .tab-header-area .headers-region .tab:selected:hover.left {
+    -fx-border-color: -color-tab-pane-tab-border-usually -color-tab-pane-tab-border-usually transparent -color-tab-pane-tab-border-active;
+    -fx-border-width: 2 1 0 2;
+    -fx-padding: 0 4 0 10;
+
+}
+
+.tab-pane .tab-header-area .headers-region .tab:selected:hover.right {
+    -fx-border-color: -color-tab-pane-tab-border-usually -color-tab-pane-tab-border-active transparent transparent;
+    -fx-border-width: 2 2 0 0;
+    -fx-padding: 0 3 0 12;
+}
+
+
+.tab-pane .tab-header-area .headers-region .tab .tab-container {
+}
+
+/**
+选项卡tab 焦点 选中的
+ */
+.tab-pane:focused .tab-header-area .headers-region .tab:selected,
+.tab-pane.focused .tab-header-area .headers-region .tab:selected {
+    -fx-background-color: -color-theme-1;
+    -fx-border-width: 2 1 0 0;
+    -fx-border-color: -color-tab-pane-tab-border-active -color-tab-pane-tab-border-usually transparent transparent;
+}
+
+
+/**
+选项卡tab 焦点 选中的
+ */
+.tab-pane:focused .tab-header-area .headers-region .tab:selected .tab-container .tab-label,
+.tab-pane.focused .tab-header-area .headers-region .tab:selected .tab-container .tab-label {
+    -fx-text-fill: -color-text-active;
+}
+
+/**
+选项卡tab 焦点 通常
+ */
+.tab-pane .tab-header-area .headers-region .tab .tab-container .tab-label {
+    -fx-text-fill: -color-text-usually;
+}
+
+/**
+选项卡关闭按钮
+ */
+.tab-pane .tab-header-area .headers-region .tab .tab-container .tab-close-button {
+    -fx-background-color: transparent;
+}
+
+/**
+选项卡关闭按钮 tab悬停
+ */
+.tab-pane .tab-header-area .headers-region .tab:hover .tab-container .tab-close-button {
+    -fx-background-color: -color-text-usually;
+}
+
+/**
+选项卡关闭按钮 tab选中 通常
+ */
+.tab-pane .tab-header-area .headers-region .tab:selected .tab-container .tab-close-button {
+    -fx-background-color: -color-text-usually;
+}
+
+/**
+选项卡关闭按钮 关闭悬停
+ */
+.tab-pane .tab-header-area .headers-region .tab .tab-container .tab-close-button:hover {
+    -fx-background-color: -color-text-hover;
+}
+
+
+.tab-pane:focused .tab-header-area .headers-region .tab:selected .focus-indicator {
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+}
+
+/**
+选项卡 下拉选择框
+ */
+.tab-pane .tab-header-area .control-buttons-tab {
+    -fx-pref-width: 16px;
+    -fx-pref-height: inherit;
+    -fx-border-color: -color-border-pane;
+    -fx-border-width: 0 0 0 1;
+    -fx-border-insets: -2 0 0 0;
+    -fx-background-insets: -2 0 0 0;
+}
+
+.tab-pane .tab-header-area .control-buttons-tab:hover {
+    -fx-background-color: -color-tab-pane-tab-bg-hover;
+}
+
+.tab-pane .tab-header-area .control-buttons-tab:pressed {
+    -fx-background-color: -color-tab-pane-tab-bg-active;
+}
+
+.tab-pane .tab-header-area .control-buttons-tab .container {
+    -fx-pref-width: inherit;
+    -fx-pref-height: inherit;
+    -fx-alignment: center;
+    -fx-padding: 0;
+    -fx-background-insets: 0;
+    -fx-border-insets: 0;
+}
+
+
+.tab-pane .tab-header-area .control-buttons-tab .container .tab-down-button {
+    -fx-pref-width: inherit;
+    -fx-pref-height: inherit;
+
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+}
+
+/**
+选项卡本体
+ */
+
+.tab-pane .tab-content-area {
+    -fx-background-color: transparent;
+}
+
+.tab-pane .tab-content-area:hover {
+    -fx-border-width: 0 4 0 0;
+    -fx-border-color: -color-tab-pane-tab-border-active;
+}
+
+
+/**
+标题栏
+ */
+
+.title-bar {
+    -fx-background-color: -color-title-bar-bg-usually;
+    -fx-spacing: 8;
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 0 4 0 4;
+    -fx-pref-height: 30;
+    -fx-min-height: 30;
+    -fx-max-height: 30;
+    -fx-border-color: -color-border-pane;
+    -fx-border-width: 0 0 1 0;
+}
+
+.title-bar .icon {
+    -fx-fit-to-width: 26;
+    -fx-fit-to-height: 26;
+}
+
+.title-bar .text {
+    /*-fx-fill: -color-title-bar-text-usually;*/
+}
+
+/*.stage-focused .title-bar .text {
+    -fx-fill: -color-title-bar-text-focused;
+}
+
+.stage-focused .title-bar {
+    -fx-background-color: -color-title-bar-bg-focused;
+}*/
+
+/**
+菜单栏
+ */
+
+
+.title-bar .menu-bar {
+    -fx-background-color: -color-menu-bar-bg-usually;
+    -fx-padding: 0;
+    -fx-pref-height: 30px;
+}
+
+
+/**
+内容本体
+ */
+.content-body {
+
+}
+
+/**
+活动栏
+ */
+.content-body .activity-bar {
+    -fx-background-color: -color-activity-bar-bg-usually;
+    -fx-pref-width: 48;
+    -fx-max-width: 48;
+    -fx-min-width: 48;
+}
+
+/**
+工作区域
+ */
+.content-body .work-area {
+    -fx-border-color: -color-border-pane;
+    -fx-border-width: 0 0 0 1;
+    -fx-background-color: -color-editor-bg-usually;
+}
+
+/**
+侧边栏
+ */
+.content-body .work-area .side-bar {
+    -fx-background-color: -color-activity-bar-bg-usually;
+    -fx-pref-width: 220;
+    -fx-min-width: 160;
+    -fx-max-width: 260;
+
+}
+
+
+/**
+编辑器区域
+ */
+.content-body .work-area .editor-area {
+
+}
+
+
+/**
+状态栏
+ */
+.status-bar {
+    -fx-background-color: -color-status-bar-bg-usually;
+    -fx-spacing: 8;
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 0 4 0 4;
+    -fx-pref-height: 30;
+    -fx-min-height: 30;
+    -fx-max-height: 30;
+    -fx-border-color: -color-border-pane;
+    -fx-border-width: 1 0 0 0;
+}
+
+.status-bar .right-status {
+    -fx-alignment: CENTER_Right;
+    -fx-pref-width: -1;
+    -fx-spacing: 2;
+}
+
+.status-bar .status {
+    -fx-alignment: CENTER_LEFT;
+    -fx-pref-width: -1;
+    -fx-spacing: 2;
+    -fx-padding: 0 6 0 6;
+}
+

@@ -1,9 +1,9 @@
-[14:21:34] [Main.main/INFO]: ZXLogger 日志系统 初始化完毕
-[14:21:34] [Main.main/INFO]: ===== > ZXNoter User Interface Frame < =====
-[14:21:34] [Main.main/INFO]: Version: 0.0.0-Alpha Code: 0
-[14:21:34] [Main.main/WARNING]: 当前为 [早期开发版本] 请谨慎测试软件功能
-[14:21:34] [Main.main/INFO]: ZXNoter启动
-[14:21:34] [Main.main/INFO]: 初始化图形系统
-[14:21:34] [Main.lambda$main$2/INFO]: 初始化配置
-[14:21:34] [Main.lambda$main$2/INFO]: []
-[14:21:34] [Main.lambda$main$2/INFO]: null
+[21:20:39] [Main.main/INFO]: ZXLogger 日志系统 初始化完毕
+[21:20:39] [Main.main/INFO]: ===== > ZXNoter User Interface Frame < =====
+[21:20:39] [Main.main/INFO]: Version: 0.0.0-Alpha Code: 0
+[21:20:39] [Main.main/WARNING]: 当前为 [早期开发版本] 请谨慎测试软件功能
+[21:20:39] [Main.main/INFO]: ZXNoter启动
+[21:20:39] [Main.main/INFO]: 初始化图形系统
+[21:20:39] [Main.lambda$main$2/INFO]: 初始化配置
+[21:20:39] [Main.lambda$main$2/INFO]: []
+[21:20:39] [Main.lambda$main$2/INFO]: > root

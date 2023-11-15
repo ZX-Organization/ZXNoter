@@ -142,6 +142,7 @@ public class Main {
                 Scene scene = new Scene(pane);
                 stage.setScene(scene);
                 stage.show();
+                System.out.println("> "+ pane.getStyleClass());
 
 
             }
