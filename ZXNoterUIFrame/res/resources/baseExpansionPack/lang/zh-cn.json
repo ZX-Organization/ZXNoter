@@ -31,6 +31,86 @@
     }
   },
   "file": {
-
+    "type": {
+      "folder": "文件夹",
+      "music-map": "音游谱面",
+      "compression": "压缩文件",
+      "audio": "音频文件",
+      "image": "图片文件",
+      "video": "视频文件",
+      "text": "文本文件",
+      "unknown": "未知文件"
+    },
+    "extension": {
+      "zxm": "ZXNoter谱面文件",
+      "osu": "osu!谱面文件",
+      "imd": "节奏大师谱面文件",
+      "mc": "Malody谱面文件",
+      "mp3": "MPEG音频层3文件",
+      "ogg": "开放音频文件",
+      "wav": "波形音频文件",
+      "png": "可移植网络图形",
+      "jpg": "JPEG图像",
+      "jpeg": "JPEG图像",
+      "svg": "可缩放矢量图形",
+      "bmp": "位图",
+      "gif": "图形交换格式",
+      "tiff": "标签图像文件格式",
+      "webp": "Web图片",
+      "raw": "原始图像文件",
+      "ico": "图标文件",
+      "mp4": "MPEG-4视频文件",
+      "avi": "音频视频交错文件",
+      "mkv": "Matroska视频文件",
+      "mov": "QuickTime视频文件",
+      "wmv": "Windows Media视频文件",
+      "flv": "Flash视频文件",
+      "webm": "WebM视频文件",
+      "3gp": "第三代合作伙伴项目视频文件",
+      "m4v": "MPEG-4视频文件",
+      "mpg": "MPEG视频文件",
+      "txt": "纯文本文件",
+      "csv": "逗号分隔值文件",
+      "xml": "可扩展标记语言文件",
+      "json": "JavaScript对象表示法文件",
+      "md": "Markdown文件",
+      "log": "日志文件",
+      "ini": "初始化文件",
+      "cfg": "配置文件",
+      "zip": "ZIP压缩文件",
+      "rar": "RAR压缩文件",
+      "7z": "7-Zip压缩文件",
+      "tar": "TAR压缩文件",
+      "gz": "Gzip压缩文件",
+      "bz2": "BZip2压缩文件",
+      "osz": "OSU!谱包文件",
+      "mcz": "Malody谱包文件",
+      "unknown": "未知文件"
+    }
+  },
+  "ui": {
+    "projectView": {
+      "titleBar": {
+        "title": "ZXNoter",
+        "close": "关闭",
+        "minimize": "最小化",
+        "maximize": "最大化",
+        "restore": "还原",
+        "about": "关于",
+        "about_title": "关于ZXNoter",
+        "about_content": "ZXNoter v{version}\nCopyright © 2018-2021 ZXNoter Team\nAll rights reserved.",
+        "about_button": "查看源码"
+      },
+      "activityBar": {
+      },
+      "sideBar": {
+      },
+      "editorArea": {
+      },
+      "statusBar": {
+      }
+    },
+    "editorView": {
+    }
   }
 }

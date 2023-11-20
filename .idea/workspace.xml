@@ -5,21 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dd78a4ca-7956-492b-9d75-ff82bf57b657" name="更改" comment="">
-      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/res/base/default-config.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/res/base/default-resource-icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/res/base/default-resource-pack-icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/res/base/logo-x26.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/res/base/logo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/res/base/unknown.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/res/base/unknown.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/ui/FileView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/ui/component/Icon.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/ui/component/IconLabel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/ui/component/LocalizationLabel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/ui/javafx/FileViewStage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/ui/javafx/ProjectView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ZXNoterUIFrame/res/resources/baseExpansionPack/color/base.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ZXNoterUIFrame/res/resources/baseExpansionPack/color/dark.css" beforeDir="false" afterPath="$PROJECT_DIR$/ZXNoterUIFrame/res/resources/baseExpansionPack/color/dark.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ZXNoterUIFrame/res/resources/baseExpansionPack/color/dark.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ZXNoterUIFrame/res/resources/baseExpansionPack/color/light.json" beforeDir="false" afterPath="$PROJECT_DIR$/ZXNoterUIFrame/res/resources/baseExpansionPack/color/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ZXNoterUIFrame/res/resources/baseExpansionPack/lang/zh-cn.json" beforeDir="false" afterPath="$PROJECT_DIR$/ZXNoterUIFrame/res/resources/baseExpansionPack/lang/zh-cn.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ZXNoterUIFrame/res/resources/baseExpansionPack/style/rightAngle/base.css" beforeDir="false" afterPath="$PROJECT_DIR$/ZXNoterUIFrame/res/resources/baseExpansionPack/style/rightAngle/base.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/ui/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/ui/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/configuration.json" beforeDir="false" afterPath="$PROJECT_DIR$/configuration.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/latest.log" beforeDir="false" afterPath="$PROJECT_DIR$/latest.log" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -31,13 +27,23 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
-        <option value="Class" />
         <option value="CSS File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-controls/22-ea+16/javafx-controls-22-ea+16-sources.jar!/javafx/scene/control/Label.java" root0="SKIP_INSPECTION" />
+    <setting file="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-graphics/22-ea+16/javafx-graphics-22-ea+16-sources.jar!/javafx/animation/FadeTransition.java" root0="SKIP_INSPECTION" />
+    <setting file="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-graphics/22-ea+16/javafx-graphics-22-ea+16-sources.jar!/javafx/animation/FillTransition.java" root0="SKIP_INSPECTION" />
+    <setting file="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-graphics/22-ea+16/javafx-graphics-22-ea+16-sources.jar!/javafx/animation/ParallelTransition.java" root0="SKIP_INSPECTION" />
+    <setting file="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-graphics/22-ea+16/javafx-graphics-22-ea+16-sources.jar!/javafx/animation/PathTransition.java" root0="SKIP_INSPECTION" />
+    <setting file="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-graphics/22-ea+16/javafx-graphics-22-ea+16-sources.jar!/javafx/animation/PauseTransition.java" root0="SKIP_INSPECTION" />
+    <setting file="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-graphics/22-ea+16/javafx-graphics-22-ea+16-sources.jar!/javafx/animation/RotateTransition.java" root0="SKIP_INSPECTION" />
+    <setting file="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-graphics/22-ea+16/javafx-graphics-22-ea+16-sources.jar!/javafx/scene/Scene.java" root0="SKIP_INSPECTION" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -68,7 +74,7 @@
     &quot;project.structure.last.edited&quot;: &quot;模块&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.21134493&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2874845&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -135,6 +141,11 @@
       <workItem from="1699948412263" duration="21000" />
       <workItem from="1699948438760" duration="613000" />
       <workItem from="1699962391385" duration="26777000" />
+      <workItem from="1700117229470" duration="2565000" />
+      <workItem from="1700208622656" duration="6335000" />
+      <workItem from="1700470238260" duration="35000" />
+      <workItem from="1700470279631" duration="2904000" />
+      <workItem from="1700484731413" duration="3313000" />
     </task>
     <task id="LOCAL-00002" summary="update ui">
       <option name="closed" value="true" />

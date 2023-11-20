@@ -23,6 +23,7 @@ import javafx.scene.shape.Shape;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import team.zxorg.ui.javafx.ProjectView;
 import team.zxorg.zxncore.ZXLogger;
 import team.zxorg.zxncore.ZXVersion;
 import team.zxorg.zxncore.info.InfoManager;
@@ -91,6 +92,7 @@ public class Main {
                     //ZXLogger.severe("载入全局配置失败");
                     throw new RuntimeException(e);
                 }
+/*
 
                 Stage stage = new Stage();
                 TextField textField = new TextField();
@@ -126,7 +128,8 @@ public class Main {
                 // 播放动画
                 parallelTransition.play();
 
-                /*Timeline timeline = new Timeline(
+                */
+/*Timeline timeline = new Timeline(
                         new KeyFrame(Duration.ZERO, new KeyValue(pane.backgroundProperty(), Background.fill(Color.GOLD))),
                         new KeyFrame(Duration.seconds(1), new KeyValue(pane.backgroundProperty(), Background.fill(Color.RED))),
                         new KeyFrame(Duration.seconds(2), new KeyValue(pane.backgroundProperty(), Background.fill(Color.RED)))
@@ -136,15 +139,17 @@ public class Main {
                 timeline.setCycleCount(Timeline.INDEFINITE);
                 timeline.setAutoReverse(true);
                 timeline.play();
-*/
+*//*
+
 
 
                 Scene scene = new Scene(pane);
                 stage.setScene(scene);
                 stage.show();
                 System.out.println("> "+ pane.getStyleClass());
-
-
+*/
+                ProjectView projectView = new ProjectView();
+                projectView.show();
             }
 
             Runtime.getRuntime().addShutdownHook(new Thread(() -> {
