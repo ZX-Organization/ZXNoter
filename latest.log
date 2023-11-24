@@ -1,7 +1,10 @@
-[21:34:48] [Main.main/INFO]: ZXLogger 日志系统 初始化完毕
-[21:34:48] [Main.main/INFO]: ===== > ZXNoter User Interface Frame < =====
-[21:34:48] [Main.main/INFO]: Version: 0.0.0-Alpha Code: 0
-[21:34:48] [Main.main/WARNING]: 当前为 [早期开发版本] 请谨慎测试软件功能
-[21:34:48] [Main.main/INFO]: ZXNoter启动
-[21:34:48] [Main.main/INFO]: 初始化图形系统
-[21:34:48] [Main.lambda$main$1/INFO]: 初始化配置
+[17:05:30] [Main.main/INFO]: ZXLogger 日志系统 初始化完毕
+[17:05:30] [Main.main/INFO]: ===== > ZXNoter User Interface Frame < =====
+[17:05:30] [Main.main/INFO]: Version: 0.0.0-Alpha Code: 0
+[17:05:30] [Main.main/WARNING]: 当前为 [早期开发版本] 请谨慎测试软件功能
+[17:05:30] [Main.main/INFO]: ZXNoter启动
+[17:05:30] [Main.main/INFO]: 初始化图形系统
+[17:05:30] [Main.lambda$main$1/INFO]: 初始化配置
+[17:05:30] [FlexEditorTab.lambda$new$0/INFO]: FIXED
+[17:05:30] [FlexEditorTab.lambda$new$0/INFO]: FIXED
+[17:05:30] [FlexEditorTab.lambda$new$0/INFO]: FIXED
