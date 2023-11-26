@@ -1,8 +1,14 @@
 package team.zxorg.ui.javafx.editor.flexeditor;
 
+import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ListChangeListener;
+import javafx.scene.Node;
+import javafx.scene.control.Skin;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.skin.TabPaneSkin;
 import team.zxorg.zxncore.ZXLogger;
 
 import java.nio.file.Path;
@@ -25,9 +31,21 @@ public class FlexEditorTabPane extends TabPane {
                         parent.getItems().remove(this);
                     }
                 }
+                if (c.wasAdded()) {
+                    for (Tab tab : c.getAddedSubList()) {
+                        System.out.println("新加入选项卡 " + tab.getId());
+                        Platform.runLater(() -> {
+                            System.out.println("更新选项卡 " + tab.getId());
+                            System.out.println(lookupAll("#" + tab.getId()));
+                        });
+                    }
+                }
             }
         });
         setTabDragPolicy(TabDragPolicy.REORDER);
+        Platform.runLater(() -> {
+            System.out.println(lookupAll(".tab-header-area"));
+        });
     }
 
     /**

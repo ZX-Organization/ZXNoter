@@ -58,10 +58,18 @@ public class ProjectView extends FunctionalComponent {
         }
         {
             FlexEditorTabPane tabPane = splitPane.createTabPane();
-            FlexEditorTab tab = new FlexEditorTab(editorArea, Path.of("project")) {
-            };
-            tab.setText("NMSL");
-            tabPane.addTab(tab);
+            {
+                FlexEditorTab tab = new FlexEditorTab(editorArea, Path.of("project")) {
+                };
+                tab.setText("NMSL");
+                tabPane.addTab(tab);
+            }
+            {
+                FlexEditorTab tab = new FlexEditorTab(editorArea, Path.of("project")) {
+                };
+                tab.setText("NMSL");
+                tabPane.addTab(tab);
+            }
         }
     }
 

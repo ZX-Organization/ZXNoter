@@ -18,6 +18,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 
 import java.nio.file.Path;
+import java.util.UUID;
 
 /**
  * 灵活编辑器 选项卡
@@ -29,11 +30,13 @@ public abstract class FlexEditorTab extends Tab {
     public FlexEditorTab(FlexEditorArea editorArea, Path path) {
         this.editorArea = editorArea;
         this.path = path;
+        setId(UUID.randomUUID().toString());
 
         //监听所属选项卡窗格 重新注册事件
-        tabPaneProperty().addListener((observable, oldValue, newValue) -> {
-            System.out.println(newValue.getTabDragPolicy());
-        });
+        /*tabPaneProperty().addListener((observable, oldValue, newValue) -> {
+            System.out.println(newValue.lookup("#" + getId()));
+        });*/
+
     }
 
 

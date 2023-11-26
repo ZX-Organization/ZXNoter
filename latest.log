@@ -1,10 +1,22 @@
-[17:05:30] [Main.main/INFO]: ZXLogger 日志系统 初始化完毕
-[17:05:30] [Main.main/INFO]: ===== > ZXNoter User Interface Frame < =====
-[17:05:30] [Main.main/INFO]: Version: 0.0.0-Alpha Code: 0
-[17:05:30] [Main.main/WARNING]: 当前为 [早期开发版本] 请谨慎测试软件功能
-[17:05:30] [Main.main/INFO]: ZXNoter启动
-[17:05:30] [Main.main/INFO]: 初始化图形系统
-[17:05:30] [Main.lambda$main$1/INFO]: 初始化配置
-[17:05:30] [FlexEditorTab.lambda$new$0/INFO]: FIXED
-[17:05:30] [FlexEditorTab.lambda$new$0/INFO]: FIXED
-[17:05:30] [FlexEditorTab.lambda$new$0/INFO]: FIXED
+[17:08:14] [Main.main/INFO]: ZXLogger 日志系统 初始化完毕
+[17:08:14] [Main.main/INFO]: ===== > ZXNoter User Interface Frame < =====
+[17:08:14] [Main.main/INFO]: Version: 0.0.0-Alpha Code: 0
+[17:08:14] [Main.main/WARNING]: 当前为 [早期开发版本] 请谨慎测试软件功能
+[17:08:14] [Main.main/INFO]: ZXNoter启动
+[17:08:14] [Main.main/INFO]: 初始化图形系统
+[17:08:15] [Main.lambda$main$1/INFO]: 初始化配置
+[17:08:15] [FlexEditorTabPane.lambda$new$1/INFO]: 新加入选项卡 9646536c-cecf-49ec-942a-6dc603b84c88
+[17:08:15] [FlexEditorTabPane.lambda$new$1/INFO]: 新加入选项卡 bd9d35d6-1ec0-4f35-be06-9e68db9fb9bc
+[17:08:15] [FlexEditorTabPane.lambda$new$1/INFO]: 新加入选项卡 ce0ff9d7-773e-4406-9937-3f35cc9c78ee
+[17:08:15] [FlexEditorTabPane.lambda$new$1/INFO]: 新加入选项卡 5dfb6fb3-3496-412d-87fe-c4e5902f5d86
+[17:08:15] [FlexEditorTabPane.lambda$new$2/INFO]: [TabPaneSkin$TabHeaderArea@6787fcb5[styleClass=tab-header-area]]
+[17:08:15] [FlexEditorTabPane.lambda$new$0/INFO]: 更新选项卡 9646536c-cecf-49ec-942a-6dc603b84c88
+[17:08:15] [FlexEditorTabPane.lambda$new$0/INFO]: [TabPaneSkin$TabHeaderSkin[id=9646536c-cecf-49ec-942a-6dc603b84c88, styleClass=tab]]
+[17:08:15] [FlexEditorTabPane.lambda$new$2/INFO]: [TabPaneSkin$TabHeaderArea@75df8d72[styleClass=tab-header-area]]
+[17:08:15] [FlexEditorTabPane.lambda$new$0/INFO]: 更新选项卡 bd9d35d6-1ec0-4f35-be06-9e68db9fb9bc
+[17:08:15] [FlexEditorTabPane.lambda$new$0/INFO]: [TabPaneSkin$TabHeaderSkin[id=bd9d35d6-1ec0-4f35-be06-9e68db9fb9bc, styleClass=tab]]
+[17:08:15] [FlexEditorTabPane.lambda$new$2/INFO]: [TabPaneSkin$TabHeaderArea@15b05707[styleClass=tab-header-area]]
+[17:08:15] [FlexEditorTabPane.lambda$new$0/INFO]: 更新选项卡 ce0ff9d7-773e-4406-9937-3f35cc9c78ee
+[17:08:15] [FlexEditorTabPane.lambda$new$0/INFO]: [TabPaneSkin$TabHeaderSkin[id=ce0ff9d7-773e-4406-9937-3f35cc9c78ee, styleClass=tab]]
+[17:08:15] [FlexEditorTabPane.lambda$new$0/INFO]: 更新选项卡 5dfb6fb3-3496-412d-87fe-c4e5902f5d86
+[17:08:15] [FlexEditorTabPane.lambda$new$0/INFO]: [TabPaneSkin$TabHeaderSkin[id=5dfb6fb3-3496-412d-87fe-c4e5902f5d86, styleClass=tab]]

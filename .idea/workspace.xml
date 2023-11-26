@@ -5,20 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dd78a4ca-7956-492b-9d75-ff82bf57b657" name="更改" comment="">
-      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/ui/javafx/ActivityBar.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/ui/javafx/FunctionalComponent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/ui/javafx/SideBar.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/ui/javafx/StatusBar.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/ui/javafx/TitleBar.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/ui/javafx/editor/EditorArea.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/ui/javafx/editor/EditorSplitPane.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/ui/javafx/editor/EditorTabPane.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/ui/javafx/editor/flexeditor/FlexEditorArea.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/ui/javafx/editor/flexeditor/FlexEditorSplitPane.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/ui/javafx/editor/flexeditor/FlexEditorTab.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/ui/javafx/editor/flexeditor/FlexEditorTabPane.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/ui/javafx/ProjectView.java" beforeDir="false" afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/ui/javafx/ProjectView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/ui/javafx/editor/flexeditor/FlexEditorTab.java" beforeDir="false" afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/ui/javafx/editor/flexeditor/FlexEditorTab.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/ui/javafx/editor/flexeditor/FlexEditorTabPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/ui/javafx/editor/flexeditor/FlexEditorTabPane.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/latest.log" beforeDir="false" afterPath="$PROJECT_DIR$/latest.log" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -149,7 +139,7 @@
       <workItem from="1700470238260" duration="35000" />
       <workItem from="1700470279631" duration="2904000" />
       <workItem from="1700484731413" duration="4525000" />
-      <workItem from="1700577791244" duration="20009000" />
+      <workItem from="1700577791244" duration="25879000" />
     </task>
     <task id="LOCAL-00002" summary="update ui">
       <option name="closed" value="true" />
@@ -175,7 +165,15 @@
       <option name="project" value="LOCAL" />
       <updated>1700492879792</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="update ui">
+      <option name="closed" value="true" />
+      <created>1700830612867</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1700830612867</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
