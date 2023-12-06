@@ -40,13 +40,13 @@
         <mxCell id="o41DHxtEnveocu8xdy-4-7" value="EditorTabPane" style="rounded=0;whiteSpace=wrap;html=1;align=center;verticalAlign=top;" vertex="1" parent="1">
           <mxGeometry x="440" y="480" width="170" height="180" as="geometry" />
         </mxCell>
-        <mxCell id="o41DHxtEnveocu8xdy-4-8" value="editor" style="rounded=0;whiteSpace=wrap;html=1;align=center;verticalAlign=top;fillColor=none;fontColor=#ffffff;strokeColor=#6F0000;" vertex="1" parent="1">
+        <mxCell id="o41DHxtEnveocu8xdy-4-8" value="skinEditor" style="rounded=0;whiteSpace=wrap;html=1;align=center;verticalAlign=top;fillColor=none;fontColor=#ffffff;strokeColor=#6F0000;" vertex="1" parent="1">
           <mxGeometry x="450" y="510" width="150" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="o41DHxtEnveocu8xdy-4-9" value="editor" style="rounded=0;whiteSpace=wrap;html=1;align=center;verticalAlign=top;fillColor=none;fontColor=#ffffff;strokeColor=#6F0000;" vertex="1" parent="1">
+        <mxCell id="o41DHxtEnveocu8xdy-4-9" value="skinEditor" style="rounded=0;whiteSpace=wrap;html=1;align=center;verticalAlign=top;fillColor=none;fontColor=#ffffff;strokeColor=#6F0000;" vertex="1" parent="1">
           <mxGeometry x="450" y="560" width="150" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="o41DHxtEnveocu8xdy-4-10" value="editor" style="rounded=0;whiteSpace=wrap;html=1;align=center;verticalAlign=top;fillColor=none;fontColor=#ffffff;strokeColor=#6F0000;" vertex="1" parent="1">
+        <mxCell id="o41DHxtEnveocu8xdy-4-10" value="skinEditor" style="rounded=0;whiteSpace=wrap;html=1;align=center;verticalAlign=top;fillColor=none;fontColor=#ffffff;strokeColor=#6F0000;" vertex="1" parent="1">
           <mxGeometry x="450" y="610" width="150" height="40" as="geometry" />
         </mxCell>
       </root>
