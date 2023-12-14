@@ -1,4 +1,4 @@
-package team.zxorg.skin;
+package team.zxorg.skin.test;
 
 import javafx.geometry.Orientation;
 
@@ -21,14 +21,6 @@ public class ExpressionCalculator {
 
     public ExpressionCalculator(double canvasWidth, double canvasHeight) {
         updateCanvasSize(canvasWidth, canvasHeight);
-    }
-
-    public double getCanvasWidth() {
-        return canvasWidth;
-    }
-
-    public double getCanvasHeight() {
-        return canvasHeight;
     }
 
     public void addCanvasSizeChangeEvent(Consumer<Orientation> recalculate) {

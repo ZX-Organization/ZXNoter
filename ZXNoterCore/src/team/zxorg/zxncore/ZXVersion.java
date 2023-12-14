@@ -20,18 +20,6 @@ public record ZXVersion(int major, int minor, int patch, ReleaseStatus status) {
      */
     public static final Pattern pattern = Pattern.compile("^(\\d+)\\.(\\d+)\\.(\\d+)(?:-(\\w+))?$");
 
-    @Override
-    public String toString() {
-        return major + "." + minor + "." + patch + "-" + status.getDisplayName();
-    }
-
-    /**
-     * 获取版本代号
-     */
-    public int getVersionCode() {
-        return major * 100000 + minor * 1000 + patch * 10 + status().ordinal();
-    }
-
     /**
      * 通过版本字符串解析成版本类
      *
@@ -56,6 +44,18 @@ public record ZXVersion(int major, int minor, int patch, ReleaseStatus status) {
      */
     public static ZXVersion resolve(int versionCode) {
         return new ZXVersion(versionCode / 100000, versionCode / 1000 % 100, versionCode / 10 % 100, ReleaseStatus.values()[versionCode % 10]);
+    }
+
+    @Override
+    public String toString() {
+        return major + "." + minor + "." + patch + "-" + status.getDisplayName();
+    }
+
+    /**
+     * 获取版本代号
+     */
+    public int getVersionCode() {
+        return major * 100000 + minor * 1000 + patch * 10 + status().ordinal();
     }
 
     public enum ReleaseStatus {

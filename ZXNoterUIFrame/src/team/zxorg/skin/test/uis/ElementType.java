@@ -1,4 +1,4 @@
-package team.zxorg.skin.uis;
+package team.zxorg.skin.test.uis;
 
 public enum ElementType {
     /**

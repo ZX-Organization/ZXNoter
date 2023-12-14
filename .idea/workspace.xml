@@ -5,27 +5,51 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dd78a4ca-7956-492b-9d75-ff82bf57b657" name="更改" comment="">
-      <change afterPath="$PROJECT_DIR$/ZXNoterCore/src/team/zxorg/zxncore/lib/plist/PlistImageList.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ZXNoterCore/src/team/zxorg/zxncore/lib/plist/SubImage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ZXNoterCore/test/PlistTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/skin/ElementRender.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/skin/ExpressionCalculator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/skin/SkinEditor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/skin/UISParser.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/skin/uis/BlendType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/skin/uis/Element.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/skin/uis/ElementType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/skin/uis/internal/NoteElement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/alibaba_fastjson2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/alibaba_fastjson2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/apache_httpcomponents_client5_httpclient5.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/apache_httpcomponents_client5_httpclient5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/engine2d/engine3d/CanvasPane.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/engine2d/engine3d/ElementCanvas.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/engine2d/engine3d/ElementObject.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/engine2d/engine3d/Vector3D.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/engine2d/engine3d/component/Component.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/engine2d/engine3d/component/Renderer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/engine2d/engine3d/component/SpriteComponent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/engine2d/engine3d/component/Transform.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/skin/CanvasPane.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/skin/ExpressionVector.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/skin/LayerCanvasPane.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/skin/ResizableCanvas.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/skin/basis/ElementRender.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/skin/basis/RenderPoint.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/skin/basis/RenderRectangle.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/skin/components/AnimationComponent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/skin/components/HitComponent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/skin/components/NoteComponent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/skin/components/OrdinaryComponent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/skin/components/PressComponent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/skin/test/CanvasRenderer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/skin/test/ExpressionCalculator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/skin/test/SkinEditor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/skin/test/uis/BlendType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/skin/test/uis/ExpressionDimension.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/skin/uis/UISCodeArea.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/skin/uis/UISConventionalElementType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/skin/uis/UISElement.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/skin/uis/UISParser.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/latest.log.lck" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ZXNoterCore/src/team/zxorg/zxncore/ZXVersion.java" beforeDir="false" afterPath="$PROJECT_DIR$/ZXNoterCore/src/team/zxorg/zxncore/ZXVersion.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ZXNoterUIFrame/docs/main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/ZXNoterUIFrame/docs/main.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/ui/javafx/editor/flexeditor/FlexEditorTab.java" beforeDir="false" afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/ui/javafx/editor/flexeditor/FlexEditorTab.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/ui/javafx/editor/flexeditor/FlexEditorTabPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/ui/javafx/editor/flexeditor/FlexEditorTabPane.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ZXNoterUIFrame/res/resources/baseExpansionPack/color/dark.css" beforeDir="false" afterPath="$PROJECT_DIR$/ZXNoterUIFrame/res/resources/baseExpansionPack/color/dark.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ZXNoterUIFrame/res/resources/baseExpansionPack/color/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/ZXNoterUIFrame/res/resources/baseExpansionPack/color/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/skin/ElementRender.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/skin/ExpressionCalculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/skin/ExpressionCalculator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/skin/SkinEditor.java" beforeDir="false" afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/skin/uis/UISEditor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/skin/UISParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/skin/test/UISParser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/skin/uis/Element.java" beforeDir="false" afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/skin/test/uis/Element.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/skin/uis/ElementType.java" beforeDir="false" afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/skin/test/uis/ElementType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/skin/uis/internal/NoteElement.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/.$编辑器自适应布局.drawio.dtmp" beforeDir="false" afterPath="$PROJECT_DIR$/docs/.$编辑器自适应布局.drawio.dtmp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/reference/LeaF - NANO DEATH!!!!!/NANO DEATH!!!!!.zxn" beforeDir="false" afterPath="$PROJECT_DIR$/docs/reference/LeaF - NANO DEATH!!!!!/NANO DEATH!!!!!.zxn" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/latest.log" beforeDir="false" afterPath="$PROJECT_DIR$/latest.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/note/fixedorbit/LongNote.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/note/fixedorbit/LongNote.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,33 +92,45 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;UI&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;openjdk-21&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Projects/ZXNoter/ZXNoterCore/src/team/zxorg/zxncore/lib/plist&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;模块&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.21134493&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2874845&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Downloaded.Files.Path.Enabled": "false",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "deletionFromPopupRequiresConfirmation": "false",
+    "git-widget-placeholder": "UI",
+    "jdk.selected.JAVA_MODULE": "openjdk-21",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/Projects/richtextfx-demos",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "库",
+    "project.structure.proportion": "0.21134493",
+    "project.structure.side.proportion": "0.2874845",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true",
+    "应用程序.SkinEditor (1).executor": "Run",
+    "应用程序.SkinEditor.executor": "Run",
+    "应用程序.UISEditor.executor": "Run",
+    "应用程序.UISParser.executor": "Run"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Projects\ZXNoter\ZXNoterUIFrame\src\team\zxorg\skin" />
+      <recent name="D:\Projects\ZXNoter\ZXNoterUIFrame\src\team\zxorg\engine2d" />
+      <recent name="D:\Projects\ZXNoter\ZXNoterUIFrame\src\team\zxorg\skin\old" />
       <recent name="D:\Projects\ZXNoter\ZXNoterCore\src\team\zxorg\zxncore\lib\plist" />
       <recent name="D:\Projects\ZXNoter\ZXNoterUIFrame\res" />
-      <recent name="D:\Projects\ZXNoter\ZXNoterCore\src\team\zxorg\zxnoter" />
-      <recent name="D:\Projects\ZXNoter\ZXNoterUI\src\team\zxorg\zxnoter" />
-      <recent name="D:\Projects\ZXNoter\ZXNoterCore\src" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Projects\ZXNoter\ZXNoterUIFrame\res\resources\baseExpansionPack\color" />
@@ -105,43 +141,20 @@
       <recent name="" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="team.zxorg.skin" />
+      <recent name="team.zxorg.skin.components" />
+      <recent name="team.zxorg.skin.elements" />
       <recent name="team.zxorg.ui" />
       <recent name="team.zxorg.zxnoter" />
     </key>
   </component>
-  <component name="RunManager" selected="应用程序.team.zxorg.skin.UISParser">
-    <configuration name="ExpressionSize" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="team.zxorg.skin.size.ExpressionSize" />
+  <component name="RunManager" selected="应用程序.UISEditor">
+    <configuration name="UISEditor" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="team.zxorg.skin.uis.UISEditor" />
       <module name="ZXNoterUIFrame" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="team.zxorg.skin.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="SkinEditor" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="team.zxorg.skin.SkinEditor" />
-      <module name="ZXNoterUIFrame" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="team.zxorg.skin.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Text" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="team.zxorg.skin.size.Text" />
-      <module name="ZXNoterUIFrame" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="team.zxorg.skin.*" />
+          <option name="PATTERN" value="team.zxorg.skin.basis.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -150,18 +163,11 @@
       </method>
     </configuration>
     <configuration name="UISParser" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="UISParser" />
-      <module name="ZXNoterUIFrame" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="team.zxorg.skin.UISParser" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="team.zxorg.skin.UISParser" />
+      <option name="MAIN_CLASS_NAME" value="team.zxorg.skin.uis.UISParser" />
       <module name="ZXNoterUIFrame" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="team.zxorg.skin.uis.*" />
+          <option name="PATTERN" value="team.zxorg.skin.components.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -171,13 +177,17 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="应用程序.team.zxorg.skin.UISParser" />
-        <item itemvalue="应用程序.Text" />
-        <item itemvalue="应用程序.ExpressionSize" />
-        <item itemvalue="应用程序.SkinEditor" />
+        <item itemvalue="应用程序.UISEditor" />
         <item itemvalue="应用程序.UISParser" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-19.0.2-corretto-19.0.2-3183f394aec4-f0552fc0" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -218,7 +228,12 @@
       <workItem from="1701722592885" duration="9000" />
       <workItem from="1701777616927" duration="8513000" />
       <workItem from="1701855673458" duration="51000" />
-      <workItem from="1701855730371" duration="8056000" />
+      <workItem from="1701855730371" duration="18881000" />
+      <workItem from="1701943928383" duration="16322000" />
+      <workItem from="1701961703028" duration="67080000" />
+      <workItem from="1702028900112" duration="42553000" />
+      <workItem from="1702315827129" duration="5087000" />
+      <workItem from="1702411155801" duration="36598000" />
     </task>
     <task id="LOCAL-00002" summary="update ui">
       <option name="closed" value="true" />
@@ -260,15 +275,36 @@
       <option name="project" value="LOCAL" />
       <updated>1701002817763</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="update skin,fuck u plist!">
+      <option name="closed" value="true" />
+      <created>1701870848175</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1701870848175</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="update ui" />
-    <option name="LAST_COMMIT_MESSAGE" value="update ui" />
+    <MESSAGE value="update skin,fuck u plist!" />
+    <option name="LAST_COMMIT_MESSAGE" value="update skin,fuck u plist!" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/ZXNoter$Main.ic" NAME="Main 覆盖结果" MODIFIED="1688229822928" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

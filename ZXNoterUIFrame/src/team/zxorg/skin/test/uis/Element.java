@@ -1,4 +1,4 @@
-package team.zxorg.skin.uis;
+package team.zxorg.skin.test.uis;
 
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Orientation;

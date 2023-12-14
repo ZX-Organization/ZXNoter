@@ -7,7 +7,7 @@
 }
 
 .text {
-    -fx-text-fill: -color-text-usually;
+    -fx-fill: -color-text-usually;
 }
 
 
@@ -73,12 +73,12 @@
     -fx-border-color: -color-component-border-focused;
 }
 
-.check-box .box .mark{
+.check-box .box .mark {
     -fx-background-color: transparent;
     -fx-background-insets: 0;
 }
 
-.check-box:selected .box .mark{
+.check-box:selected .box .mark {
     -fx-background-color: -color-component-text-active;
 }
 
@@ -117,14 +117,15 @@
     -fx-border-color: -color-component-border-focused;
 }
 
-.radio-button .radio .dot{
+.radio-button .radio .dot {
     -fx-background-color: transparent;
 }
 
-.radio-button:selected .radio .dot{
+.radio-button:selected .radio .dot {
     -fx-background-color: -color-component-text-active;
     -fx-background-insets: 0;
 }
+
 /**
 选择框
  */
@@ -299,10 +300,11 @@
     -fx-padding: 0;
 }
 
-.scroll-bar .thumb:hover{
+.scroll-bar .thumb:hover {
     -fx-background-color: -color-component-bg-hover;
     -fx-border-color: -color-component-border-active;
 }
+
 .scroll-bar .thumb:pressed {
     -fx-background-color: -color-component-bg-active;
     -fx-border-color: -color-component-border-active;
@@ -312,6 +314,7 @@
 .scroll-bar .increment-button:hover {
     -fx-background-color: -color-component-bg-hover;
 }
+
 /**
 滑块
  */
@@ -325,7 +328,8 @@
     -fx-border-width: 1;
     -fx-border-radius: 2;
 }
-.slider .thumb{
+
+.slider .thumb {
     -fx-background-color: -color-component-border-usually;
     -fx-background-radius: 4;
     -fx-border-radius: 4;
@@ -333,87 +337,106 @@
     -fx-border-width: 1;
     -fx-padding: 4;
 }
-.slider .thumb:hover{
+
+.slider .thumb:hover {
     -fx-background-color: -color-component-border-usually;
     -fx-border-color: -color-component-border-active;
 }
-.slider .thumb:pressed{
+
+.slider .thumb:pressed {
     -fx-background-color: -color-component-border-active;
     -fx-border-color: -color-component-border-active;
 }
+
 /**
 旋转器
  */
-.spinner{
+.spinner {
     -fx-text-fill: -color-component-text-usually;
     -fx-background-color: transparent;
     -fx-border-color: -color-component-border-usually;
     -fx-border-radius: 3;
     -fx-border-width: 1;
 }
-.spinner:focused{
+
+.spinner:focused {
     -fx-text-fill: -color-component-text-active;
     -fx-border-color: -color-component-border-focused;
 }
-.spinner .text-field{
+
+.spinner .text-field {
     -fx-border-width: 0;
 }
-.spinner .increment-arrow-button{
+
+.spinner .increment-arrow-button {
     -fx-background-color: transparent;
     -fx-border-color: -color-component-border-usually;
     -fx-border-width: 0 0 1 1;
     -fx-border-insets: 0 0 -1 0;
 }
-.spinner .decrement-arrow-button{
+
+.spinner .decrement-arrow-button {
     -fx-background-color: transparent;
     -fx-border-color: -color-component-border-usually;
     -fx-border-width: 1 0 0 1;
     -fx-border-insets: -1 0 0 0;
 }
-.spinner .increment-arrow-button .increment-arrow{
+
+.spinner .increment-arrow-button .increment-arrow {
     -fx-background-color: -color-component-text-usually;
 }
-.spinner .decrement-arrow-button .decrement-arrow{
+
+.spinner .decrement-arrow-button .decrement-arrow {
     -fx-background-color: -color-component-text-usually;
 }
-.spinner .increment-arrow-button:hover{
+
+.spinner .increment-arrow-button:hover {
     -fx-background-color: -color-component-bg-hover;
 }
-.spinner .decrement-arrow-button:hover{
+
+.spinner .decrement-arrow-button:hover {
     -fx-background-color: -color-component-bg-hover;
 }
-.spinner .increment-arrow-button:hover .increment-arrow{
+
+.spinner .increment-arrow-button:hover .increment-arrow {
     -fx-background-color: -color-component-text-hover;
 }
-.spinner .decrement-arrow-button:hover .decrement-hover{
+
+.spinner .decrement-arrow-button:hover .decrement-hover {
     -fx-background-color: -color-component-text-hover;
 }
-.spinner .increment-arrow-button:pressed{
+
+.spinner .increment-arrow-button:pressed {
     -fx-background-color: -color-component-bg-active;
 }
-.spinner .decrement-arrow-button:pressed{
+
+.spinner .decrement-arrow-button:pressed {
     -fx-background-color: -color-component-bg-active;
 }
-.spinner .increment-arrow-button:pressed .increment-arrow{
+
+.spinner .increment-arrow-button:pressed .increment-arrow {
     -fx-background-color: -color-component-text-active;
 }
-.spinner .decrement-arrow-button:pressed .decrement-arrow{
+
+.spinner .decrement-arrow-button:pressed .decrement-arrow {
     -fx-background-color: -color-component-text-active;
 }
 
 /**
 分割菜单按钮
  */
-.split-menu-button{
+.split-menu-button {
     -fx-background-color: transparent;
     -fx-border-color: -color-component-border-usually;
     -fx-border-radius: 3;
 }
-.split-menu-button .label{
+
+.split-menu-button .label {
     -fx-fill: -color-component-text-usually;
     -fx-background-color: transparent;
 }
-.split-menu-button .label:hover{
+
+.split-menu-button .label:hover {
     -fx-fill: -color-component-text-hover;
     -fx-background-color: -color-component-bg-hover;
 }
@@ -422,40 +445,49 @@
     -fx-fill: -color-component-text-active;
     -fx-background-color: -color-component-bg-active;
 }
+
 .split-menu-button:focused {
     -fx-border-color: -color-component-border-focused;
 }
 
-.split-menu-button .label{
+.split-menu-button .label {
     -fx-background-color: transparent;
 }
-.split-menu-button .arrow-button{
+
+.split-menu-button .arrow-button {
     -fx-background-color: transparent;
     -fx-border-width: 0 0 0 1;
     -fx-border-color: -color-component-border-usually;
 }
-.split-menu-button .arrow-button:hover{
+
+.split-menu-button .arrow-button:hover {
     -fx-background-color: -color-component-bg-hover;
 }
-.split-menu-button .arrow-button:pressed{
+
+.split-menu-button .arrow-button:pressed {
     -fx-background-color: -color-component-bg-active;
 }
-.split-menu-button .arrow-button .arrow{
-    -fx-background-color:-color-component-text-usually;
+
+.split-menu-button .arrow-button .arrow {
+    -fx-background-color: -color-component-text-usually;
 }
-.split-menu-button .arrow-button:hover .arrow{
-    -fx-background-color:-color-component-text-hover;
+
+.split-menu-button .arrow-button:hover .arrow {
+    -fx-background-color: -color-component-text-hover;
 }
-.split-menu-button .arrow-button:pressed .arrow{
-    -fx-background-color:-color-component-text-active;
+
+.split-menu-button .arrow-button:pressed .arrow {
+    -fx-background-color: -color-component-text-active;
 }
+
 /**
 进度条
  */
-.progress-bar{
+.progress-bar {
     -fx-background-color: transparent;
 }
-.progress-bar .track{
+
+.progress-bar .track {
     -fx-background-color: transparent;
     -fx-border-color: -color-component-border-usually;
     -fx-border-radius: 3;
@@ -767,10 +799,10 @@
     -fx-background-color: transparent;
 }
 
-.tab-pane .tab-content-area:hover {
+/*.tab-pane .tab-content-area:hover {
     -fx-border-width: 0 4 0 0;
     -fx-border-color: -color-tab-pane-tab-border-active;
-}
+}*/
 
 
 /**
@@ -890,5 +922,202 @@
     -fx-pref-width: -1;
     -fx-spacing: 2;
     -fx-padding: 0 6 0 6;
+}
+
+/**
+颜色填充
+ */
+.color-fill-blue {
+    -fx-fill: -color-blue;
+}
+
+.color-fill-red {
+    -fx-fill: -color-red;
+}
+
+.color-fill-purple {
+    -fx-fill: -color-purple;
+}
+
+.color-fill-yellow {
+    -fx-fill: -color-yellow;
+}
+
+.color-fill-green {
+    -fx-fill: -color-green;
+}
+
+.color-fill-orange {
+    -fx-fill: -color-orange;
+}
+
+.color-fill-pink {
+    -fx-fill: -color-pink;
+}
+
+.color-fill-gray {
+    -fx-fill: -color-gray;
+}
+
+.color-fill-white {
+    -fx-fill: -color-white;
+}
+
+/**
+子字体
+ */
+
+
+.color-font-blue .text {
+    -fx-fill: -color-blue;
+}
+
+.color-font-red .text {
+    -fx-fill: -color-red;
+}
+
+.color-font-purple .text {
+    -fx-fill: -color-purple;
+}
+
+.color-font-yellow .text {
+    -fx-fill: -color-yellow;
+}
+
+.color-font-green .text {
+    -fx-fill: -color-green;
+}
+
+.color-font-orange .text {
+    -fx-fill: -color-orange;
+}
+
+.color-font-pink .text {
+    -fx-fill: -color-pink;
+}
+
+.color-font-gray .text {
+    -fx-fill: -color-gray;
+}
+
+.color-font-white .text {
+    -fx-fill: -color-white;
+}
+
+
+/**
+代码编辑器
+ */
+
+.code-area {
+    -fx-font-size: 20;
+}
+
+.code-area * {
+    -fx-tab-size: 4;
+}
+
+.code-area .left-bar {
+    -fx-border-color: -color-gray-dark;
+    -fx-border-width: 0 1 0 0;
+    -fx-border-insets: 0 2 0 0;
+}
+
+.code-area .left-bar .label {
+    -fx-background-color: transparent;
+    -fx-font-size: 16;
+}
+
+/**
+插入符
+ */
+.code-area .caret {
+    -fx-stroke: -color-white-light;
+}
+
+/**
+选择区域
+ */
+.code-area .selection {
+    -fx-fill: -color-blue-dark;
+    -fx-opacity: 0.4;
+}
+
+
+/* 样式类命令的样式 */
+.code-area .command {
+    -fx-fill: -color-orange-light; /* 设置字体颜色为蓝色 */
+}
+
+/**
+ * 注释
+ */
+.code-area .comment {
+    -fx-fill: -color-green-light;
+}
+
+/**
+ * 功能组件
+ */
+.code-area .functionalComponent {
+    -fx-fill: -color-yellow-light;
+}
+
+/**
+ * 其他组件
+ */
+.code-area .otherComponent {
+    -fx-fill: -color-blue-light;
+}
+/**
+动画组件
+ */
+.code-area .animationComponent{
+    -fx-fill: -color-pink-light;
+}
+
+/* 组件属性名 */
+.code-area .componentProperty {
+    -fx-fill: -color-green-light;
+}
+
+/* 组件属性名 但是不是\t */
+.code-area .componentPropertyError {
+    -fx-fill: -color-green-dark;
+}
+
+/**
+百分比
+ */
+.code-area .percentage {
+    -fx-fill: -color-purple-light;
+}
+
+/**
+像素
+ */
+.code-area .pixel {
+    -fx-fill: -color-pink-light;
+}
+
+/**
+逗号、方括号
+ */
+.code-area .dot,
+.code-area .squareBracket {
+    -fx-fill: -color-pink-dark;
+}
+
+/**
+分隔符/
+ */
+.code-area .delimiter {
+    -fx-fill: -color-yellow-dark;
+}
+/**
+分隔符/
+ */
+.code-area .delimiterError {
+    -fx-fill: -color-red-light;
 }
 
