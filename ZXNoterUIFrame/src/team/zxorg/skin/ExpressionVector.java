@@ -49,7 +49,7 @@ public class ExpressionVector {
         if (expression == null) return null;
         String[] str = expression.split(",");
         if (str.length == 1) return new ExpressionVector(str[0].trim(), "");
-        if (str.length >= 2) return new ExpressionVector(str[0].trim(), str[1].trim());
+        if (str.length == 2) return new ExpressionVector(str[0].trim(), str[1].trim());
         return null;
     }
 

@@ -3,7 +3,6 @@ package team.zxorg.skin.components;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.effect.PerspectiveTransform;
 import javafx.scene.image.Image;
 import team.zxorg.skin.ExpressionVector;
 import team.zxorg.skin.basis.ElementRender;
@@ -64,6 +63,8 @@ public class NoteComponent implements ElementRender {
      * 下落进度 0出现位置 1f打击的位置
      */
     private double progress;
+    private double progress2;
+    private boolean progress3;
     /**
      * 是否被按下
      */
@@ -82,7 +83,7 @@ public class NoteComponent implements ElementRender {
         size2 = ExpressionVector.parse(properties.get("size2"));
         size3 = ExpressionVector.parse(properties.get("size3"));
         anchor = getAnchorPos(properties.get("anchor"));
-        progress=new Random().nextFloat();
+        progress = new Random().nextFloat();
     }
 
     private void renderType0(GraphicsContext gc, double canvasWidth, double canvasHeight) {
@@ -96,20 +97,24 @@ public class NoteComponent implements ElementRender {
 
         //设置渲染矩阵
         gc.save();
-        gc.setGlobalAlpha(1);
+        gc.setGlobalAlpha(0.5);
         rr.setSize(anchor, imgW, imgH);
         rr.setPos(anchor, imgX, imgY);
         rr.drawImageTest(gc, tex);
         gc.restore();
+
+        progress2 += (progress3 ?  -0.01 :0.01);
+        if (progress2 >= 1 || progress2 <= 0)
+            progress3 = !progress3;
         gc.save();
-        gc.setGlobalAlpha(0.5);
-        rr.setSize(anchor,  size.getWidth(),  size.getHeight());
+        gc.setGlobalAlpha(progress2);
+        rr.setSize(anchor, size.getWidth(), size.getHeight());
         rr.setPos(anchor, pos.getX(), pos.getY());
         rr.drawImageTest(gc, tex);
         gc.restore();
         gc.save();
-        gc.setGlobalAlpha(0.5);
-        rr.setSize(anchor,  size2.getWidth(),  size2.getHeight());
+        gc.setGlobalAlpha(progress2);
+        rr.setSize(anchor, size2.getWidth(), size2.getHeight());
         rr.setPos(anchor, pos2.getX(), pos2.getY());
         rr.drawImageTest(gc, tex);
         gc.restore();
@@ -117,7 +122,7 @@ public class NoteComponent implements ElementRender {
 
     @Override
     public void render(GraphicsContext gc, double canvasWidth, double canvasHeight) {
-        progress += 0.001;
+        progress += 0.004;
         progress %= 1;
         if (type == 0) {
             renderType0(gc, canvasWidth, canvasHeight);

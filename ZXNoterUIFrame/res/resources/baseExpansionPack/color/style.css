@@ -1078,12 +1078,12 @@
 
 /* 组件属性名 */
 .code-area .componentProperty {
-    -fx-fill: -color-green-light;
+    -fx-fill: -color-orange-dark;
 }
 
 /* 组件属性名 但是不是\t */
 .code-area .componentPropertyError {
-    -fx-fill: -color-green-dark;
+    -fx-fill: -color-red-dark;
 }
 
 /**

@@ -3,6 +3,7 @@ package team.zxorg.skin.components;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.effect.BlendMode;
 import javafx.scene.image.Image;
 import team.zxorg.skin.ExpressionVector;
 import team.zxorg.skin.basis.ElementRender;
@@ -44,6 +45,7 @@ public class HitComponent implements ElementRender {
      */
     private double opacity;
     private Orientation flip;
+    private int blend;
 
     public HitComponent(HashMap<String, String> properties, Path uisPath) {
 
@@ -52,7 +54,10 @@ public class HitComponent implements ElementRender {
             interval = Double.parseDouble(properties.get("interval"));
         } catch (NumberFormatException ignored) {
         }
-
+        if (properties.get("blend") != null) try {
+            blend = Integer.parseInt(properties.get("blend"));
+        } catch (NumberFormatException ignored) {
+        }
 
         frame = new AnimationComponent(properties.get("frame"), interval, uisPath);
         frame.loop = true;
@@ -89,7 +94,9 @@ public class HitComponent implements ElementRender {
         gc.setGlobalAlpha(opacity / 100);
         frame.update();
         Image currentFrame = (System.currentTimeMillis() % 500 < 200 ? frame.getCurrentFrame() : null);
-         currentFrame =  frame.getCurrentFrame();
+        currentFrame = frame.getCurrentFrame();
+        if (blend != 0)
+            gc.setGlobalBlendMode((blend == 1 ? BlendMode.LIGHTEN : BlendMode.LIGHTEN));
         if (currentFrame != null) {
             if (flip != null) rr.drawImage(gc, currentFrame, flip);
             else rr.drawImage(gc, currentFrame);

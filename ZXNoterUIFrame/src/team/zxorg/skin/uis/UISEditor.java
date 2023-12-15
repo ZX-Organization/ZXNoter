@@ -8,15 +8,11 @@ import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.SnapshotParameters;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-import javafx.scene.effect.PerspectiveTransform;
-import javafx.scene.image.WritableImage;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
@@ -24,19 +20,18 @@ import javafx.stage.Stage;
 import team.zxorg.skin.ExpressionVector;
 import team.zxorg.skin.LayerCanvasPane;
 import team.zxorg.skin.basis.ElementRender;
-import team.zxorg.skin.components.HitComponent;
-import team.zxorg.skin.components.NoteComponent;
-import team.zxorg.skin.components.PressComponent;
+import team.zxorg.skin.components.*;
 import team.zxorg.zxncore.ZXLogger;
 import team.zxorg.zxncore.ZXVersion;
 
 import java.io.File;
 import java.nio.file.Path;
 import java.util.HashMap;
+import java.util.Objects;
 
 public class UISEditor extends HBox {
     HashMap<String, ElementRender> elements = new HashMap<>();
-    LayerCanvasPane layerCanvasPane = new LayerCanvasPane(){
+    LayerCanvasPane layerCanvasPane = new LayerCanvasPane() {
         {
             setBorder(new Border(new BorderStroke(Color.WHITE, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(1), new Insets(0))));
         }
@@ -123,7 +118,7 @@ public class UISEditor extends HBox {
     };
     VBox rightVBox = new VBox(tabPane, toolbar) {
         {
-            setHgrow(this,Priority.ALWAYS);
+            setHgrow(this, Priority.ALWAYS);
             setPrefWidth(260);
             setBackground(Background.fill(Color.BLACK));
             setBorder(new Border(new BorderStroke(Color.WHITE, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(0, 0, 0, 1), new Insets(0))));
@@ -150,18 +145,19 @@ public class UISEditor extends HBox {
             canvas.setHeight(pane.getHeight());
         });*/
         setBackground(Background.fill(Color.BLACK));
-        // 角度变量 角度为0时，画面平行 角度增大时画面上面变小，底部不变
-        double angle = -28;
+
         layerCanvasPane.createCanvas("other");
         layerCanvasPane.createCanvas("note");
         layerCanvasPane.createCanvas("press");
         layerCanvasPane.createCanvas("hit");
+        layerCanvasPane.createCanvas("touch");
+
         //画布更新线程常驻
         AnimationTimer animationTimer = new AnimationTimer() {
             @Override
             public void handle(long l) {
                 layerCanvasPane.clearRect();
-
+                PerspectiveComponent perspectiveComponent=null;
                 for (ElementRender e : elements.values()) {
 
                     String key = "other";
@@ -171,46 +167,28 @@ public class UISEditor extends HBox {
                         key = "press";
                     } else if (e instanceof HitComponent) {
                         key = "hit";
+                    } else if (e instanceof TouchComponent) {
+                        key = "touch";
+                    } else if (e instanceof PerspectiveComponent perspectiveComponent_) {
+                        perspectiveComponent = perspectiveComponent_;
+                        continue;
                     }
 
                     GraphicsContext gc = layerCanvasPane.getGraphicsContext2D(key);
 
 
-                    e.render(gc, layerCanvasPane.getWidth(), layerCanvasPane.getHeight());
+                    try {
+                        e.render(gc, layerCanvasPane.getWidth(), layerCanvasPane.getHeight());
+                    } catch (Exception exception) {
+
+                    }
                 }
-                Canvas canvas3d = layerCanvasPane.getCanvas("note");
-                GraphicsContext gc = canvas3d.getGraphicsContext2D();
-                PerspectiveTransform pt = new PerspectiveTransform();
-                //计算透视
 
-                // 计算透视，使用角度变量
-                double perspectiveAngle = Math.toRadians(angle);
-                double perspectiveFactor = Math.tan(perspectiveAngle);
-
-                // 根据需求设置透视变换的参数
-                double offsetX = -perspectiveFactor * layerCanvasPane.getWidth() * 0.44;
-                pt.setUlx(offsetX);
-                pt.setUly(0);
-                pt.setUrx(layerCanvasPane.getWidth() - offsetX);
-                pt.setUry(0);
-
-
-                pt.setLlx(0);
-                pt.setLly(layerCanvasPane.getHeight());
-                pt.setLrx(layerCanvasPane.getWidth());
-                pt.setLry(layerCanvasPane.getHeight());
-
-                // 创建画布快照
-                SnapshotParameters snapshotParams = new SnapshotParameters();
-                snapshotParams.setFill(Color.TRANSPARENT);
-                WritableImage snapshot = canvas3d.snapshot(snapshotParams, null);
-
-                // 清除整个画布
-                gc.clearRect(0, 0, layerCanvasPane.getWidth(), layerCanvasPane.getHeight());
-                gc.setEffect(pt);
-                // 绘制之前的快照
-                gc.drawImage(snapshot, 0, 0);
-                gc.setEffect(null);
+                if (perspectiveComponent != null) {
+                    GraphicsContext gc = layerCanvasPane.getGraphicsContext2D("note");
+                    perspectiveComponent.render(gc,layerCanvasPane.getWidth(), layerCanvasPane.getHeight());
+                }
+                //透视
 
             }
         };

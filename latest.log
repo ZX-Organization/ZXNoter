@@ -1,166 +1,55 @@
-[12:41:33] [UISEditor.main/INFO]: ZXLogger 日志系统 初始化完毕
-[12:41:33] [UISEditor.main/INFO]: ===== > ZXNoter Skin Editor < =====
-[12:41:33] [UISEditor.main/INFO]: Version: 0.0.0-Alpha Code: 0
-[12:41:33] [UISEditor.main/WARNING]: 当前为 [早期开发版本] 请谨慎测试软件功能
-[12:41:33] [UISEditor.main/INFO]: ZXNoter Skin Editor启动
-[12:41:33] [UISEditor.main/INFO]: 初始化图形系统
-[12:41:33] [UISEditor.lambda$main$4/INFO]: 初始化配置
-[12:41:40] [UISEditor$6.lambda$new$0/INFO]: Selected File: D:\malody\skin\ttb5测试\script-key-4K.mui
-[12:41:40] [UISParser.parseToMap/INFO]: uis 开始解析: script-key-4K.mui
-[12:41:40] [UISParser.parseToMap/INFO]: uis 插入: base.mui
-[12:41:40] [UISParser.parseToMap/INFO]: uis 开始解析: base.mui
-[12:41:40] [UISParser.parseToMap/INFO]: uis 解析完成: base.mui
-[12:41:40] [UISParser.parseToMap/INFO]: uis 解析完成: script-key-4K.mui
-[12:41:40] [UISParser.parseToElementMap/INFO]: 解析组件: _bgbg
-[12:41:40] [UISParser.parseToElementMap/INFO]: 解析组件: _hpbg
-[12:41:41] [UISParser.parseToElementMap/INFO]: 解析组件: _scorebg
-[12:41:41] [UISParser.parseToElementMap/INFO]: 解析组件: _accbg
-[12:41:41] [UISParser.parseToElementMap/INFO]: 解析组件: _t
-[12:41:41] [UISParser.parseToElementMap/INFO]: 解析组件: _scoremaxcombobg
-[12:41:41] [UISCodeArea$1.accept/INFO]: 自动保存
-[12:41:41] [UISParser.parseToMap/INFO]: uis 开始解析: script-key-4K.mui
-[12:41:41] [UISParser.parseToMap/INFO]: uis 插入: base.mui
-[12:41:41] [UISParser.parseToMap/INFO]: uis 开始解析: base.mui
-[12:41:41] [UISParser.parseToMap/INFO]: uis 解析完成: base.mui
-[12:41:41] [UISParser.parseToMap/INFO]: uis 解析完成: script-key-4K.mui
-[12:41:41] [UISParser.parseToElementMap/INFO]: 解析组件: _bgbg
-[12:41:41] [UISParser.parseToElementMap/INFO]: 解析组件: _hpbg
-[12:41:41] [UISParser.parseToElementMap/INFO]: 解析组件: _scorebg
-[12:41:41] [UISParser.parseToElementMap/INFO]: 解析组件: _accbg
-[12:41:41] [UISParser.parseToElementMap/INFO]: 解析组件: _t
-[12:41:41] [UISParser.parseToElementMap/INFO]: 解析组件: _scoremaxcombobg
-[12:44:59] [UISCodeArea$1.accept/INFO]: 自动保存
-[12:44:59] [UISParser.parseToMap/INFO]: uis 开始解析: script-key-4K.mui
-[12:44:59] [UISParser.parseToMap/INFO]: uis 解析完成: script-key-4K.mui
-[12:45:02] [UISCodeArea$1.accept/INFO]: 自动保存
-[12:45:02] [UISParser.parseToMap/INFO]: uis 开始解析: script-key-4K.mui
-[12:45:02] [UISParser.parseToMap/INFO]: uis 插入: base.mui
-[12:45:02] [UISParser.parseToMap/INFO]: uis 开始解析: base.mui
-[12:45:02] [UISParser.parseToMap/INFO]: uis 解析完成: base.mui
-[12:45:02] [UISParser.parseToMap/INFO]: uis 解析完成: script-key-4K.mui
-[12:45:02] [UISParser.parseToElementMap/INFO]: 解析组件: _bgbg
-[12:45:02] [UISParser.parseToElementMap/INFO]: 解析组件: _hpbg
-[12:45:02] [UISParser.parseToElementMap/INFO]: 解析组件: _scorebg
-[12:45:02] [UISParser.parseToElementMap/INFO]: 解析组件: _accbg
-[12:45:02] [UISParser.parseToElementMap/INFO]: 解析组件: _t
-[12:45:02] [UISParser.parseToElementMap/INFO]: 解析组件: _scoremaxcombobg
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-green-light' while resolving lookups for '-fx-fill' from rule '*.code-area *.componentProperty' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-fill' from rule '*.text' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-pink-dark' while resolving lookups for '-fx-fill' from rule '*.code-area *.dot' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Caught 'java.lang.ClassCastException: class java.lang.String cannot be cast to class javafx.scene.paint.Paint (java.lang.String is in module java.base of loader 'bootstrap'; javafx.scene.paint.Paint is in unnamed module of loader 'app')' while converting value for '-fx-border-color' from rule '*.code-area *.left-bar' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-text-fill' from rule '*.label' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-text-fill' from rule '*.label' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-text-fill' from rule '*.label' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-text-fill' from rule '*.label' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-fill' from rule '*.text' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-fill' from rule '*.text' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-text-fill' from rule '*.label' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-text-fill' from rule '*.label' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-fill' from rule '*.text' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-text-fill' from rule '*.label' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-text-fill' from rule '*.label' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-text-fill' from rule '*.label' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-fill' from rule '*.text' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-fill' from rule '*.text' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-text-fill' from rule '*.label' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-fill' from rule '*.text' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-yellow-light' while resolving lookups for '-fx-fill' from rule '*.code-area *.functionalComponent' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-text-fill' from rule '*.label' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-text-fill' from rule '*.label' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-text-fill' from rule '*.label' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-fill' from rule '*.text' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-fill' from rule '*.text' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-text-fill' from rule '*.label' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-fill' from rule '*.text' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-purple-light' while resolving lookups for '-fx-fill' from rule '*.code-area *.percentage' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-text-fill' from rule '*.label' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-text-fill' from rule '*.label' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-text-fill' from rule '*.label' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-fill' from rule '*.text' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-fill' from rule '*.text' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-text-fill' from rule '*.label' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-fill' from rule '*.text' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-text-fill' from rule '*.label' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-text-fill' from rule '*.label' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-text-fill' from rule '*.label' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-fill' from rule '*.text' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-fill' from rule '*.text' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-text-fill' from rule '*.label' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-fill' from rule '*.text' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-text-fill' from rule '*.label' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-text-fill' from rule '*.label' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-text-fill' from rule '*.label' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-fill' from rule '*.text' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-fill' from rule '*.text' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-text-fill' from rule '*.label' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-fill' from rule '*.text' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-text-fill' from rule '*.label' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-text-fill' from rule '*.label' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-text-fill' from rule '*.label' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-fill' from rule '*.text' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-fill' from rule '*.text' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-text-fill' from rule '*.label' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-fill' from rule '*.text' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-text-fill' from rule '*.label' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-text-fill' from rule '*.label' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-text-fill' from rule '*.label' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-fill' from rule '*.text' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-fill' from rule '*.text' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-text-fill' from rule '*.label' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-fill' from rule '*.text' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-text-fill' from rule '*.label' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-text-fill' from rule '*.label' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-text-fill' from rule '*.label' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-fill' from rule '*.text' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-fill' from rule '*.text' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-text-fill' from rule '*.label' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-fill' from rule '*.text' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-text-fill' from rule '*.label' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-text-fill' from rule '*.label' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-text-fill' from rule '*.label' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-fill' from rule '*.text' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-fill' from rule '*.text' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-text-fill' from rule '*.label' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-fill' from rule '*.text' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-text-fill' from rule '*.label' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-text-fill' from rule '*.label' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-text-fill' from rule '*.label' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-fill' from rule '*.text' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-fill' from rule '*.text' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-text-fill' from rule '*.label' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-fill' from rule '*.text' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-text-fill' from rule '*.label' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-text-fill' from rule '*.label' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-text-fill' from rule '*.label' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:11] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-fill' from rule '*.text' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:12] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-fill' from rule '*.text' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:12] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-text-fill' from rule '*.label' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:12] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-fill' from rule '*.text' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:12] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-text-fill' from rule '*.label' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:12] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-text-fill' from rule '*.label' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:12] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-text-fill' from rule '*.label' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:12] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-fill' from rule '*.text' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:12] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-fill' from rule '*.text' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:12] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-text-fill' from rule '*.label' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:12] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-fill' from rule '*.text' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:12] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-text-fill' from rule '*.label' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:12] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-text-fill' from rule '*.label' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:12] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-text-fill' from rule '*.label' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:12] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-fill' from rule '*.text' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:12] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-fill' from rule '*.text' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:12] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-text-fill' from rule '*.label' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:12] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-fill' from rule '*.text' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:12] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-text-fill' from rule '*.label' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:12] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-text-fill' from rule '*.label' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:12] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-text-fill' from rule '*.label' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:12] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-fill' from rule '*.text' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:12] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-fill' from rule '*.text' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:12] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-text-fill' from rule '*.label' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:12] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-fill' from rule '*.text' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:12] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-text-fill' from rule '*.label' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:12] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-text-fill' from rule '*.label' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:12] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-text-fill' from rule '*.label' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:12] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-fill' from rule '*.text' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:12] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-fill' from rule '*.text' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:12] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-text-fill' from rule '*.label' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
-[12:45:12] [CssStyleHelper.calculateValue/WARNING]: 警告: Could not resolve '-color-text-usually' while resolving lookups for '-fx-fill' from rule '*.text' in stylesheet file:/D:/Projects/ZXNoter/out/production/ZXNoterUIFrame/resources/baseExpansionPack/color/style.css
+[23:42:19] [UISEditor.main/INFO]: ZXLogger 日志系统 初始化完毕
+[23:42:19] [UISEditor.main/INFO]: ===== > ZXNoter Skin Editor < =====
+[23:42:19] [UISEditor.main/INFO]: Version: 0.0.0-Alpha Code: 0
+[23:42:19] [UISEditor.main/WARNING]: 当前为 [早期开发版本] 请谨慎测试软件功能
+[23:42:19] [UISEditor.main/INFO]: ZXNoter Skin Editor启动
+[23:42:19] [UISEditor.main/INFO]: 初始化图形系统
+[23:42:19] [UISEditor.lambda$main$4/INFO]: 初始化配置
+[23:42:27] [UISEditor$6.lambda$new$0/INFO]: Selected File: D:\malody\skin\测试中\script-key-6K.mui
+[23:42:27] [UISParser.parseToMap/INFO]: uis 开始解析: script-key-6K.mui
+[23:42:27] [UISParser.parseToMap/INFO]: uis 插入: base.mui
+[23:42:27] [UISParser.parseToMap/INFO]: uis 开始解析: base.mui
+[23:42:27] [UISParser.parseToMap/INFO]: uis 解析完成: base.mui
+[23:42:27] [UISParser.parseToMap/INFO]: uis 解析完成: script-key-6K.mui
+[23:42:27] [UISParser.parseToElementMap/INFO]: 解析组件: _bgprogress
+[23:42:27] [UISParser.parseToElementMap/INFO]: 解析组件: _bg6r
+[23:42:27] [UISParser.parseToElementMap/WARNING]: hit-fast 组件解析失败: Cannot invoke "String.lastIndexOf(String)" because "frameInfo" is null
+[23:42:27] [UISParser.parseToElementMap/INFO]: 解析组件: _button6r
+[23:42:27] [UISParser.parseToElementMap/INFO]: 解析组件: _button6l
+[23:42:27] [UISParser.parseToElementMap/INFO]: 解析组件: _hp
+[23:42:27] [UISParser.parseToElementMap/WARNING]: hit-slow 组件解析失败: Cannot invoke "String.lastIndexOf(String)" because "frameInfo" is null
+[23:42:27] [UISParser.parseToElementMap/INFO]: 解析组件: _bg6l
+[23:42:27] [UISParser.parseToElementMap/INFO]: 解析组件: _icon
+[23:42:27] [UISCodeArea$1.accept/INFO]: 自动保存
+[23:42:27] [UISParser.parseToMap/INFO]: uis 开始解析: script-key-6K.mui
+[23:42:27] [UISParser.parseToMap/INFO]: uis 插入: base.mui
+[23:42:27] [ThreadGroup.uncaughtException/WARNING]: Exception in thread "JavaFX Application Thread"
+[23:42:27] [UISParser.parseToMap/INFO]: uis 开始解析: base.mui
+[23:42:27] [Throwable$WrappedPrintStream.println/WARNING]: java.util.ConcurrentModificationException
+[23:42:27] [Throwable$WrappedPrintStream.println/WARNING]: at java.base/java.util.HashMap$HashIterator.nextNode(HashMap.java:1605)
+[23:42:27] [Throwable$WrappedPrintStream.println/WARNING]: at java.base/java.util.HashMap$ValueIterator.next(HashMap.java:1633)
+[23:42:27] [Throwable$WrappedPrintStream.println/WARNING]: at team.zxorg.skin.uis.UISEditor$9.handle(UISEditor.java:161)
+[23:42:27] [Throwable$WrappedPrintStream.println/WARNING]: at javafx.animation.AnimationTimer$AnimationTimerReceiver.lambda$handle$0(AnimationTimer.java:59)
+[23:42:27] [UISParser.parseToMap/INFO]: uis 解析完成: base.mui
+[23:42:27] [Throwable$WrappedPrintStream.println/WARNING]: at java.base/java.security.AccessController.doPrivileged(AccessController.java:400)
+[23:42:27] [Throwable$WrappedPrintStream.println/WARNING]: at javafx.animation.AnimationTimer$AnimationTimerReceiver.handle(AnimationTimer.java:58)
+[23:42:27] [Throwable$WrappedPrintStream.println/WARNING]: at com.sun.scenario.animation.AbstractPrimaryTimer.timePulseImpl(AbstractPrimaryTimer.java:356)
+[23:42:27] [Throwable$WrappedPrintStream.println/WARNING]: at com.sun.scenario.animation.AbstractPrimaryTimer$MainLoop.run(AbstractPrimaryTimer.java:266)
+[23:42:27] [UISParser.parseToMap/INFO]: uis 解析完成: script-key-6K.mui
+[23:42:27] [UISParser.parseToElementMap/INFO]: 解析组件: _bgprogress
+[23:42:27] [Throwable$WrappedPrintStream.println/WARNING]: at com.sun.javafx.tk.quantum.QuantumToolkit.pulse(QuantumToolkit.java:588)
+[23:42:27] [Throwable$WrappedPrintStream.println/WARNING]: at com.sun.javafx.tk.quantum.QuantumToolkit.pulse(QuantumToolkit.java:572)
+[23:42:27] [Throwable$WrappedPrintStream.println/WARNING]: at com.sun.javafx.tk.quantum.QuantumToolkit.pulseFromQueue(QuantumToolkit.java:565)
+[23:42:27] [Throwable$WrappedPrintStream.println/WARNING]: at com.sun.javafx.tk.quantum.QuantumToolkit.lambda$runToolkit$11(QuantumToolkit.java:352)
+[23:42:27] [Throwable$WrappedPrintStream.println/WARNING]: at com.sun.glass.ui.InvokeLaterDispatcher$Future.run(InvokeLaterDispatcher.java:95)
+[23:42:27] [Throwable$WrappedPrintStream.println/WARNING]: at com.sun.glass.ui.win.WinApplication._runLoop(Native Method)
+[23:42:27] [UISParser.parseToElementMap/INFO]: 解析组件: _bg6r
+[23:42:27] [Throwable$WrappedPrintStream.println/WARNING]: at com.sun.glass.ui.win.WinApplication.lambda$runLoop$3(WinApplication.java:185)
+[23:42:27] [Throwable$WrappedPrintStream.println/WARNING]: at java.base/java.lang.Thread.run(Thread.java:1583)
+[23:42:27] [UISParser.parseToElementMap/WARNING]: hit-fast 组件解析失败: Cannot invoke "String.lastIndexOf(String)" because "frameInfo" is null
+[23:42:27] [UISParser.parseToElementMap/INFO]: 解析组件: _button6r
+[23:42:27] [UISParser.parseToElementMap/INFO]: 解析组件: _button6l
+[23:42:27] [UISParser.parseToElementMap/INFO]: 解析组件: _hp
+[23:42:27] [UISParser.parseToElementMap/WARNING]: hit-slow 组件解析失败: Cannot invoke "String.lastIndexOf(String)" because "frameInfo" is null
+[23:42:27] [UISParser.parseToElementMap/INFO]: 解析组件: _bg6l
+[23:42:27] [UISParser.parseToElementMap/INFO]: 解析组件: _icon

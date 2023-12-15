@@ -43,6 +43,8 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.paint.RadialGradient?>
 <?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="575.0" prefWidth="928.0" styleClass="stage-focused" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
@@ -108,6 +110,12 @@
                               </ImageView>
                            </children>
                         </AnchorPane>
+                        <TextFlow prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                           </children>
+                        </TextFlow>
                      </children></VBox>
                   <SplitPane id="editorArea" dividerPositions="0.5" prefHeight="200.0" prefWidth="200.0" styleClass="UISEditor-area">
                      <items>

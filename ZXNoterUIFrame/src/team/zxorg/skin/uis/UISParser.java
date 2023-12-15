@@ -2,10 +2,7 @@ package team.zxorg.skin.uis;
 
 import javafx.geometry.Pos;
 import team.zxorg.skin.basis.ElementRender;
-import team.zxorg.skin.components.HitComponent;
-import team.zxorg.skin.components.NoteComponent;
-import team.zxorg.skin.components.OrdinaryComponent;
-import team.zxorg.skin.components.PressComponent;
+import team.zxorg.skin.components.*;
 import team.zxorg.zxncore.ZXLogger;
 
 import java.io.BufferedReader;
@@ -65,6 +62,10 @@ public class UISParser {
                             ZXLogger.warning("uis 插入: " + includePath.getFileName() + " 文件不存在！");
                         }
                     }
+                    case "@angle" -> {
+                        HashMap<String, String> angle = uis.computeIfAbsent("parameter", k -> new HashMap());
+                        angle.put("angle", args[1]);
+                    }
                 }
                 continue;
             }
@@ -122,6 +123,10 @@ public class UISParser {
                     element = new PressComponent(properties, divPath);
                 } else if (elementName.startsWith("hit-")) {
                     element = new HitComponent(properties, divPath);
+                } else if (elementName.startsWith("parameter")) {
+                    element = new PerspectiveComponent(properties.getOrDefault("angle", "0"));
+                } else if (elementName.equals("touch")) {
+                    element = new TouchComponent(properties, divPath);
                 } else if (elementName.startsWith("_")) {
                     switch (UISConventionalElementType.values()[Integer.parseInt(properties.getOrDefault("type", "0"))]) {
                         case ORDINARY -> {

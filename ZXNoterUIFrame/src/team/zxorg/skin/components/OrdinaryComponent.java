@@ -53,6 +53,9 @@ public class OrdinaryComponent implements ElementRender {
     RenderRectangle rr = new RenderRectangle();
 
 
+    private Orientation flip;
+
+
     public OrdinaryComponent(HashMap<String, String> properties, Path uisPath) {
 
         InputStream fileStream;
@@ -72,6 +75,9 @@ public class OrdinaryComponent implements ElementRender {
             opacity = Double.parseDouble(properties.get("opacity"));
         } catch (NumberFormatException ignored) {
         }
+
+        if (properties.get("flip") != null)
+            flip = (properties.get("flip").equals("0") ? Orientation.HORIZONTAL : Orientation.VERTICAL);
     }
 
     @Override
@@ -93,7 +99,10 @@ public class OrdinaryComponent implements ElementRender {
         gc.save();
         gc.rotate(rotate);
         gc.setGlobalAlpha(opacity / 100);
-        rr.drawImage(gc, tex);
+
+        if (flip != null) rr.drawImage(gc, tex, flip);
+        else rr.drawImage(gc, tex);
+
         gc.restore();
     }
 
