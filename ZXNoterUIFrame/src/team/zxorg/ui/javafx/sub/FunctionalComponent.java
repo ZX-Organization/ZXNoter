@@ -1,6 +1,7 @@
-package team.zxorg.ui.javafx;
+package team.zxorg.ui.javafx.sub;
 
 import javafx.scene.Node;
+import team.zxorg.ui.javafx.ProjectView;
 
 /**
  * 布局组件

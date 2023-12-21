@@ -30,8 +30,8 @@ public class PerspectiveComponent implements ElementRender {
         double perspectiveFactor = Math.tan(perspectiveAngle);
 
         // 根据需求设置透视变换的参数
-        double offsetX = perspectiveFactor * canvas3d.getWidth() * 0.43;
-         offsetX = perspectiveFactor * canvas3d.getWidth() * 0.40;
+        double offsetX = perspectiveFactor * canvas3d.getWidth() * 0.44;
+         //offsetX = perspectiveFactor * canvas3d.getWidth() * 0.40;
         pt.setUlx(offsetX);
         pt.setUly(0);
         pt.setUrx(canvas3d.getWidth() - offsetX);

@@ -1,5 +1,6 @@
 package team.zxorg.ui.javafx;
 
+import javafx.application.Platform;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.SplitPane;
@@ -7,11 +8,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import team.zxorg.ui.javafx.editor.EditorTabPane;
-import team.zxorg.ui.javafx.editor.flexeditor.FlexEditorArea;
-import team.zxorg.ui.javafx.editor.flexeditor.FlexEditorSplitPane;
-import team.zxorg.ui.javafx.editor.flexeditor.FlexEditorTab;
-import team.zxorg.ui.javafx.editor.flexeditor.FlexEditorTabPane;
+import team.zxorg.ui.javafx.sub.*;
+import team.zxorg.ui.javafx.sub.editor.flexeditor.FlexArea;
+import team.zxorg.ui.javafx.sub.editor.flexeditor.FlexSplitPane;
+import team.zxorg.ui.javafx.sub.editor.flexeditor.FlexTab;
+import team.zxorg.ui.javafx.sub.editor.flexeditor.FlexTabPane;
 
 import java.nio.file.Path;
 
@@ -34,42 +35,50 @@ public class ProjectView extends FunctionalComponent {
 
     private final SideBar sideBar = new SideBar(this);
 
-    private final FlexEditorArea editorArea = new FlexEditorArea();
+    private final FlexArea editorArea = new FlexArea();
 
     {
         //测试区域
 
         {
-            FlexEditorTabPane tabPane = editorArea.createTabPane();
-            FlexEditorTab tab = new FlexEditorTab(editorArea, Path.of("project")) {
+            FlexTabPane tabPane = editorArea.createTabPane();
+            FlexTab tab = new FlexTab(Path.of("project")) {
             };
             tab.setText("NMSL");
             tabPane.addTab(tab);
         }
 
-        FlexEditorSplitPane splitPane = editorArea.createSplitPane();
+        FlexSplitPane splitPane = editorArea.createSplitPane();
 
         {
-            FlexEditorTabPane tabPane = splitPane.createTabPane();
-            FlexEditorTab tab = new FlexEditorTab(editorArea, Path.of("project")) {
+            FlexTabPane tabPane = splitPane.createTabPane();
+            FlexTab tab = new FlexTab( Path.of("project")) {
             };
             tab.setText("NMSL");
             tabPane.addTab(tab);
         }
         {
-            FlexEditorTabPane tabPane = splitPane.createTabPane();
+            FlexTabPane tabPane = splitPane.createTabPane();
             {
-                FlexEditorTab tab = new FlexEditorTab(editorArea, Path.of("project")) {
+                FlexTab tab = new FlexTab(Path.of("project")) {
                 };
                 tab.setText("NMSL");
                 tabPane.addTab(tab);
             }
             {
-                FlexEditorTab tab = new FlexEditorTab(editorArea, Path.of("project")) {
+                FlexTab tab = new FlexTab(Path.of("project")) {
                 };
                 tab.setText("NMSL");
                 tabPane.addTab(tab);
             }
+            Platform.runLater(() -> {
+                {
+                    FlexTab tab = new FlexTab(Path.of("project")) {
+                    };
+                    tab.setText("NMSL");
+                    tabPane.addTab(tab);
+                }
+            });
         }
     }
 

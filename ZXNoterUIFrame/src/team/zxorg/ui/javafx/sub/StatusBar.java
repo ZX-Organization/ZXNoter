@@ -1,7 +1,8 @@
-package team.zxorg.ui.javafx;
+package team.zxorg.ui.javafx.sub;
 
 import javafx.scene.Node;
 import javafx.scene.layout.HBox;
+import team.zxorg.ui.javafx.ProjectView;
 
 /**
  * 状态栏定义

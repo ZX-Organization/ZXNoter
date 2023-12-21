@@ -1,10 +1,9 @@
-package team.zxorg.ui.javafx;
+package team.zxorg.ui.javafx.sub;
 
 import javafx.scene.Node;
 import javafx.scene.control.SplitPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import team.zxorg.ui.javafx.ProjectView;
 
 public class SideBar extends FunctionalComponent {
     protected VBox sideBar = new VBox() {

@@ -14,7 +14,7 @@ public class PlistParser {
      */
     public static void main(String[] args) throws Exception {
 
-        Files.list(Path.of("D:\\malody\\skin\\测试中")).forEach(path -> {
+        Files.list(Path.of("D:\\malody\\skin\\ttb5原始 - 副本")).forEach(path -> {
             if (!path.getFileName().toString().endsWith(".plist")) return;
             try {
                 PlistImageList plistImageList = new PlistImageList(path);
@@ -26,7 +26,7 @@ public class PlistParser {
                         BufferedImage sizeImage = new BufferedImage(size.width, size.height, subImage.getImage().getType());
                         Graphics2D g2d = sizeImage.createGraphics();
                         BufferedImage image = subImage.getImage();
-                        g2d.drawImage(image, sizeImage.getWidth() / 2 - image.getWidth() / 2+subImage.getSpriteOffset().x, sizeImage.getHeight() / 2 - image.getHeight() / 2+subImage.getSpriteOffset().y, image.getWidth(), image.getHeight(), null);
+                        g2d.drawImage(image, sizeImage.getWidth() / 2 - image.getWidth() / 2+subImage.getSpriteOffset().x, sizeImage.getHeight() / 2 - image.getHeight() / 2-subImage.getSpriteOffset().y, image.getWidth(), image.getHeight(), null);
                         g2d.dispose();
 
                         ImageIO.write(sizeImage, "png", path.getParent().resolve(subImage.getImageName()).toFile());

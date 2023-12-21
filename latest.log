@@ -1,55 +1,26 @@
-[23:42:19] [UISEditor.main/INFO]: ZXLogger 日志系统 初始化完毕
-[23:42:19] [UISEditor.main/INFO]: ===== > ZXNoter Skin Editor < =====
-[23:42:19] [UISEditor.main/INFO]: Version: 0.0.0-Alpha Code: 0
-[23:42:19] [UISEditor.main/WARNING]: 当前为 [早期开发版本] 请谨慎测试软件功能
-[23:42:19] [UISEditor.main/INFO]: ZXNoter Skin Editor启动
-[23:42:19] [UISEditor.main/INFO]: 初始化图形系统
-[23:42:19] [UISEditor.lambda$main$4/INFO]: 初始化配置
-[23:42:27] [UISEditor$6.lambda$new$0/INFO]: Selected File: D:\malody\skin\测试中\script-key-6K.mui
-[23:42:27] [UISParser.parseToMap/INFO]: uis 开始解析: script-key-6K.mui
-[23:42:27] [UISParser.parseToMap/INFO]: uis 插入: base.mui
-[23:42:27] [UISParser.parseToMap/INFO]: uis 开始解析: base.mui
-[23:42:27] [UISParser.parseToMap/INFO]: uis 解析完成: base.mui
-[23:42:27] [UISParser.parseToMap/INFO]: uis 解析完成: script-key-6K.mui
-[23:42:27] [UISParser.parseToElementMap/INFO]: 解析组件: _bgprogress
-[23:42:27] [UISParser.parseToElementMap/INFO]: 解析组件: _bg6r
-[23:42:27] [UISParser.parseToElementMap/WARNING]: hit-fast 组件解析失败: Cannot invoke "String.lastIndexOf(String)" because "frameInfo" is null
-[23:42:27] [UISParser.parseToElementMap/INFO]: 解析组件: _button6r
-[23:42:27] [UISParser.parseToElementMap/INFO]: 解析组件: _button6l
-[23:42:27] [UISParser.parseToElementMap/INFO]: 解析组件: _hp
-[23:42:27] [UISParser.parseToElementMap/WARNING]: hit-slow 组件解析失败: Cannot invoke "String.lastIndexOf(String)" because "frameInfo" is null
-[23:42:27] [UISParser.parseToElementMap/INFO]: 解析组件: _bg6l
-[23:42:27] [UISParser.parseToElementMap/INFO]: 解析组件: _icon
-[23:42:27] [UISCodeArea$1.accept/INFO]: 自动保存
-[23:42:27] [UISParser.parseToMap/INFO]: uis 开始解析: script-key-6K.mui
-[23:42:27] [UISParser.parseToMap/INFO]: uis 插入: base.mui
-[23:42:27] [ThreadGroup.uncaughtException/WARNING]: Exception in thread "JavaFX Application Thread"
-[23:42:27] [UISParser.parseToMap/INFO]: uis 开始解析: base.mui
-[23:42:27] [Throwable$WrappedPrintStream.println/WARNING]: java.util.ConcurrentModificationException
-[23:42:27] [Throwable$WrappedPrintStream.println/WARNING]: at java.base/java.util.HashMap$HashIterator.nextNode(HashMap.java:1605)
-[23:42:27] [Throwable$WrappedPrintStream.println/WARNING]: at java.base/java.util.HashMap$ValueIterator.next(HashMap.java:1633)
-[23:42:27] [Throwable$WrappedPrintStream.println/WARNING]: at team.zxorg.skin.uis.UISEditor$9.handle(UISEditor.java:161)
-[23:42:27] [Throwable$WrappedPrintStream.println/WARNING]: at javafx.animation.AnimationTimer$AnimationTimerReceiver.lambda$handle$0(AnimationTimer.java:59)
-[23:42:27] [UISParser.parseToMap/INFO]: uis 解析完成: base.mui
-[23:42:27] [Throwable$WrappedPrintStream.println/WARNING]: at java.base/java.security.AccessController.doPrivileged(AccessController.java:400)
-[23:42:27] [Throwable$WrappedPrintStream.println/WARNING]: at javafx.animation.AnimationTimer$AnimationTimerReceiver.handle(AnimationTimer.java:58)
-[23:42:27] [Throwable$WrappedPrintStream.println/WARNING]: at com.sun.scenario.animation.AbstractPrimaryTimer.timePulseImpl(AbstractPrimaryTimer.java:356)
-[23:42:27] [Throwable$WrappedPrintStream.println/WARNING]: at com.sun.scenario.animation.AbstractPrimaryTimer$MainLoop.run(AbstractPrimaryTimer.java:266)
-[23:42:27] [UISParser.parseToMap/INFO]: uis 解析完成: script-key-6K.mui
-[23:42:27] [UISParser.parseToElementMap/INFO]: 解析组件: _bgprogress
-[23:42:27] [Throwable$WrappedPrintStream.println/WARNING]: at com.sun.javafx.tk.quantum.QuantumToolkit.pulse(QuantumToolkit.java:588)
-[23:42:27] [Throwable$WrappedPrintStream.println/WARNING]: at com.sun.javafx.tk.quantum.QuantumToolkit.pulse(QuantumToolkit.java:572)
-[23:42:27] [Throwable$WrappedPrintStream.println/WARNING]: at com.sun.javafx.tk.quantum.QuantumToolkit.pulseFromQueue(QuantumToolkit.java:565)
-[23:42:27] [Throwable$WrappedPrintStream.println/WARNING]: at com.sun.javafx.tk.quantum.QuantumToolkit.lambda$runToolkit$11(QuantumToolkit.java:352)
-[23:42:27] [Throwable$WrappedPrintStream.println/WARNING]: at com.sun.glass.ui.InvokeLaterDispatcher$Future.run(InvokeLaterDispatcher.java:95)
-[23:42:27] [Throwable$WrappedPrintStream.println/WARNING]: at com.sun.glass.ui.win.WinApplication._runLoop(Native Method)
-[23:42:27] [UISParser.parseToElementMap/INFO]: 解析组件: _bg6r
-[23:42:27] [Throwable$WrappedPrintStream.println/WARNING]: at com.sun.glass.ui.win.WinApplication.lambda$runLoop$3(WinApplication.java:185)
-[23:42:27] [Throwable$WrappedPrintStream.println/WARNING]: at java.base/java.lang.Thread.run(Thread.java:1583)
-[23:42:27] [UISParser.parseToElementMap/WARNING]: hit-fast 组件解析失败: Cannot invoke "String.lastIndexOf(String)" because "frameInfo" is null
-[23:42:27] [UISParser.parseToElementMap/INFO]: 解析组件: _button6r
-[23:42:27] [UISParser.parseToElementMap/INFO]: 解析组件: _button6l
-[23:42:27] [UISParser.parseToElementMap/INFO]: 解析组件: _hp
-[23:42:27] [UISParser.parseToElementMap/WARNING]: hit-slow 组件解析失败: Cannot invoke "String.lastIndexOf(String)" because "frameInfo" is null
-[23:42:27] [UISParser.parseToElementMap/INFO]: 解析组件: _bg6l
-[23:42:27] [UISParser.parseToElementMap/INFO]: 解析组件: _icon
+[17:03:37] [Main.main/INFO]: ZXLogger 日志系统 初始化完毕
+[17:03:37] [Main.main/INFO]: ===== > ZXNoter User Interface Frame < =====
+[17:03:37] [Main.main/INFO]: Version: 0.0.0-Alpha Code: 0
+[17:03:37] [Main.main/WARNING]: 当前为 [早期开发版本] 请谨慎测试软件功能
+[17:03:37] [Main.main/INFO]: ZXNoter启动
+[17:03:37] [Main.main/INFO]: 初始化图形系统
+[17:03:38] [Main.lambda$main$1/INFO]: 初始化配置
+[17:03:38] [FlexTabPane.lambda$new$1/INFO]: 新加入选项卡 fa17240d-dbd0-4944-9a9e-89f3a822e2f9
+[17:03:38] [FlexTabPane.lambda$new$1/INFO]: 新加入选项卡 3189bcfd-52a9-45a2-9cbf-7e0ce44d3368
+[17:03:38] [FlexTabPane.lambda$new$1/INFO]: 新加入选项卡 a147b201-7979-42d1-b651-1f4694dc725d
+[17:03:38] [FlexTabPane.lambda$new$1/INFO]: 新加入选项卡 f83107ba-cddf-472b-a715-8b90453c1d88
+[17:03:38] [FlexSkinProcessor.updateTabContentRegion/INFO]: 更新 TabPaneSkin$TabContentRegion@5dc6ef48[styleClass=tab-content-area]
+[17:03:38] [FlexTabPane.handleTabHeaderArea/INFO]: 初始化和更新 TabHeaderSkin
+[17:03:38] [FlexSkinProcessor.updateTabContentRegion/INFO]: 更新 TabPaneSkin$TabContentRegion@1a8e08[styleClass=tab-content-area]
+[17:03:38] [FlexTabPane.handleTabHeaderArea/INFO]: 初始化和更新 TabHeaderSkin
+[17:03:38] [FlexSkinProcessor.updateTabContentRegion/INFO]: 更新 TabPaneSkin$TabContentRegion@5395bee3[styleClass=tab-content-area]
+[17:03:38] [FlexSkinProcessor.updateTabContentRegion/INFO]: 更新 TabPaneSkin$TabContentRegion@61c614b5[styleClass=tab-content-area]
+[17:03:38] [FlexTabPane.handleTabHeaderArea/INFO]: 初始化和更新 TabHeaderSkin
+[17:03:38] [FlexTabPane.lambda$new$0/INFO]: 更新选项卡 fa17240d-dbd0-4944-9a9e-89f3a822e2f9
+[17:03:38] [FlexTabPane.lambda$new$0/INFO]: 更新选项卡 3189bcfd-52a9-45a2-9cbf-7e0ce44d3368
+[17:03:38] [FlexTabPane.lambda$new$0/INFO]: 更新选项卡 a147b201-7979-42d1-b651-1f4694dc725d
+[17:03:38] [FlexTabPane.lambda$new$0/INFO]: 更新选项卡 f83107ba-cddf-472b-a715-8b90453c1d88
+[17:03:38] [FlexTabPane.lambda$new$1/INFO]: 新加入选项卡 fdb806d0-5357-4afd-9071-b7fcbc1eed0e
+[17:03:38] [FlexSkinProcessor.updateTabContentRegion/INFO]: 更新 TabPaneSkin$TabContentRegion@1f85316d[styleClass=tab-content-area]
+[17:03:38] [FlexTabPane.lambda$new$0/INFO]: 更新选项卡 fdb806d0-5357-4afd-9071-b7fcbc1eed0e
+[17:21:13] [Main.lambda$main$0/INFO]: 关闭程序

@@ -77,7 +77,7 @@ public class UISEditor extends HBox {
 
         }
     };
-    private File lastDirectory = new File("D:\\malody\\skin\\ttb5测试"); // 记录上一次选择的目录
+    private File lastDirectory = new File("D:\\malody\\skin\\ttb5测试-再修改"); // 记录上一次选择的目录
     Button openFileButton = new Button("打开mui文件") {
         {
             setOnAction(event -> {

@@ -1,10 +1,11 @@
-package team.zxorg.ui.javafx;
+package team.zxorg.ui.javafx.sub;
 
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuBar;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import team.zxorg.ui.javafx.ProjectView;
 
 /**
  * 标题栏定义
