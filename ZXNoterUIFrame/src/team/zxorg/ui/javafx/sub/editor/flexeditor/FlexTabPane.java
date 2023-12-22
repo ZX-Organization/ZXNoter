@@ -93,6 +93,7 @@ public class FlexTabPane extends TabPane {
     }
 
     private void handleTabHeaderArea(Node node) {
+        skinProcessor.updateTabHeaderArea(this, node);
         if (lookup(".headers-region") instanceof Pane headersRegion) {
             ZXLogger.info("初始化和更新 TabHeaderSkin");
             headersRegion.getChildren().forEach(skinProcessor::updateTabHeaderSkin);
@@ -104,7 +105,6 @@ public class FlexTabPane extends TabPane {
             });
         }
     }
-
 
 
     public FlexArea getArea() {

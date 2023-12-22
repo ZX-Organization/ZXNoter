@@ -4,6 +4,7 @@ import javafx.application.Platform;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.SplitPane;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
@@ -46,6 +47,7 @@ public class ProjectView extends FunctionalComponent {
             };
             tab.setText("NMSL");
             tabPane.addTab(tab);
+            tab.setContent(new TextArea());
         }
 
         FlexSplitPane splitPane = editorArea.createSplitPane();
@@ -70,6 +72,7 @@ public class ProjectView extends FunctionalComponent {
                 };
                 tab.setText("NMSL");
                 tabPane.addTab(tab);
+                tab.setContent(new TextArea());
             }
             Platform.runLater(() -> {
                 {
@@ -77,6 +80,7 @@ public class ProjectView extends FunctionalComponent {
                     };
                     tab.setText("NMSL");
                     tabPane.addTab(tab);
+                    tab.setContent(new TextArea());
                 }
             });
         }

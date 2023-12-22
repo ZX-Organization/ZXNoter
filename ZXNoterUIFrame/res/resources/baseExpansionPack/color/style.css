@@ -639,21 +639,6 @@
     -fx-padding: 0 4 0 12;
 }
 
-/**
-选项卡tab 左右拖拽 位置显示
- */
-.tab-pane .tab-header-area .headers-region .tab:hover.left {
-    -fx-border-color: transparent -color-tab-pane-tab-border-usually transparent -color-tab-pane-tab-border-active;
-    -fx-border-width: 2 1 0 2;
-    -fx-padding: 0 4 0 10;
-
-}
-
-.tab-pane .tab-header-area .headers-region .tab:hover.right {
-    -fx-border-color: transparent -color-tab-pane-tab-border-active transparent transparent;
-    -fx-border-width: 2 2 0 0;
-    -fx-padding: 0 3 0 12;
-}
 
 /**
 选项卡tab
@@ -670,17 +655,33 @@
     -fx-border-color: -color-border-pane;
 }
 
+
 /**
 选项卡tab 左右拖拽 位置显示
  */
-.tab-pane .tab-header-area .headers-region .tab:selected:hover.left {
+.tab-pane .tab-header-area .headers-region .tab.drag-left {
+    -fx-border-color: transparent -color-tab-pane-tab-border-usually transparent -color-tab-pane-tab-border-active;
+    -fx-border-width: 2 1 0 2;
+    -fx-padding: 0 4 0 10;
+}
+
+.tab-pane .tab-header-area .headers-region .tab.drag-right {
+    -fx-border-color: transparent -color-tab-pane-tab-border-active transparent transparent;
+    -fx-border-width: 2 2 0 0;
+    -fx-padding: 0 3 0 12;
+}
+
+/**
+选项卡tab 左右拖拽 位置显示
+ */
+.tab-pane .tab-header-area .headers-region .tab:selected.drag-left {
     -fx-border-color: -color-tab-pane-tab-border-usually -color-tab-pane-tab-border-usually transparent -color-tab-pane-tab-border-active;
     -fx-border-width: 2 1 0 2;
     -fx-padding: 0 4 0 10;
 
 }
 
-.tab-pane .tab-header-area .headers-region .tab:selected:hover.right {
+.tab-pane .tab-header-area .headers-region .tab:selected.drag-right {
     -fx-border-color: -color-tab-pane-tab-border-usually -color-tab-pane-tab-border-active transparent transparent;
     -fx-border-width: 2 2 0 0;
     -fx-padding: 0 3 0 12;
@@ -703,7 +704,7 @@
 /**
 选项卡tab 焦点 通常
  */
-.tab-pane .tab-header-area .headers-region .tab .tab-container .tab-label .text{
+.tab-pane .tab-header-area .headers-region .tab .tab-container .tab-label .text {
     -fx-fill: -color-text-powerless;
 }
 
@@ -711,7 +712,7 @@
 /**
 选项卡tab 焦点 选中的
  */
-.tab-pane .tab-header-area .headers-region .tab:selected .tab-container .tab-label .text{
+.tab-pane .tab-header-area .headers-region .tab:selected .tab-container .tab-label .text {
     -fx-fill: -color-text-usually;
 }
 
@@ -719,7 +720,7 @@
 /**
 选项卡tab 焦点 选中的
  */
-.tab-pane .tab-header-area .headers-region .tab:hover .tab-container .tab-label .text{
+.tab-pane .tab-header-area .headers-region .tab:hover .tab-container .tab-label .text {
     -fx-fill: -color-text-hover;
 }
 
@@ -727,10 +728,9 @@
 选项卡tab 焦点 选中的
  */
 .tab-pane:focused .tab-header-area .headers-region .tab:selected .tab-container .tab-label .text,
-.tab-pane.focused .tab-header-area .headers-region .tab:selected .tab-container .tab-label .text{
+.tab-pane.focused .tab-header-area .headers-region .tab:selected .tab-container .tab-label .text {
     -fx-fill: -color-text-active;
 }
-
 
 
 /**
@@ -758,7 +758,7 @@
 /**
 选项卡焦点 tab选中
  */
-.tab-pane:focused .tab-header-area .headers-region .tab:selected .tab-container .tab-close-button ,
+.tab-pane:focused .tab-header-area .headers-region .tab:selected .tab-container .tab-close-button,
 .tab-pane.focused .tab-header-area .headers-region .tab:selected .tab-container .tab-close-button {
     -fx-background-color: -color-text-usually;
 }
@@ -767,12 +767,11 @@
 /**
 选项卡关闭按钮 关闭悬停
  */
-.tab-pane .tab-header-area .headers-region .tab .tab-container .tab-close-button:hover ,
-.tab-pane.focused .tab-header-area .headers-region .tab .tab-container .tab-close-button:hover ,
+.tab-pane .tab-header-area .headers-region .tab .tab-container .tab-close-button:hover,
+.tab-pane.focused .tab-header-area .headers-region .tab .tab-container .tab-close-button:hover,
 .tab-pane .tab-header-area .headers-region .tab:selected .tab-container .tab-close-button:hover {
     -fx-background-color: -color-text-hover;
 }
-
 
 
 .tab-pane:focused .tab-header-area .headers-region .tab:selected .focus-indicator {
@@ -820,6 +819,18 @@
     -fx-border-width: 0;
 }
 
+.tab-pane .tab-header-area.drag-hover {
+    -fx-border-color: -color-tab-pane-tab-border-active;
+    -fx-border-width: 2 2 3 0;
+    -fx-padding: -1 0 -1 0;
+}
+
+.tab-pane .tab-header-area.drag-hover .headers-region {
+    -fx-border-color: -color-tab-pane-tab-border-active;
+    -fx-border-width: 0 2 0 0;
+    -fx-padding: 0 0 -1 0;
+}
+
 /**
 选项卡本体
  */
@@ -828,6 +839,34 @@
     -fx-background-color: transparent;
 }
 
+.tab-pane .tab-content-area.drag-top {
+    -fx-border-width: 4 0 0 0;
+    -fx-border-color: -color-tab-pane-tab-border-active;
+    -fx-padding: -4 0 0 0;
+}
+
+.tab-pane .tab-content-area.drag-right {
+    -fx-border-width: 0 4 0 0;
+    -fx-border-color: -color-tab-pane-tab-border-active;
+    -fx-padding: 0 -4 0 0;
+}
+
+.tab-pane .tab-content-area.drag-bottom {
+    -fx-border-width: 0 0 4 0;
+    -fx-border-color: -color-tab-pane-tab-border-active;
+    -fx-padding: 0 0 -4 0;
+}
+
+.tab-pane .tab-content-area.drag-left {
+    -fx-border-width: 0 0 0 4;
+    -fx-border-color: -color-tab-pane-tab-border-active;
+    -fx-padding: 0 0 0 -4;
+}
+.tab-pane .tab-content-area.drag-center {
+    -fx-border-width: 4;
+    -fx-border-color: -color-tab-pane-tab-border-active;
+    -fx-padding: -4;
+}
 /*.tab-pane .tab-content-area:hover {
     -fx-border-width: 0 4 0 0;
     -fx-border-color: -color-tab-pane-tab-border-active;
@@ -1098,10 +1137,11 @@
 .code-area .otherComponent {
     -fx-fill: -color-blue-light;
 }
+
 /**
 动画组件
  */
-.code-area .animationComponent{
+.code-area .animationComponent {
     -fx-fill: -color-pink-light;
 }
 
@@ -1143,6 +1183,7 @@
 .code-area .delimiter {
     -fx-fill: -color-yellow-dark;
 }
+
 /**
 分隔符/
  */

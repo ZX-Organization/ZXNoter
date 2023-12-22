@@ -1,13 +1,13 @@
 package team.zxorg.ui.javafx.sub.editor.flexeditor;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.scene.Node;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.image.Image;
-import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.DataFormat;
-import javafx.scene.input.Dragboard;
-import javafx.scene.input.TransferMode;
+import javafx.scene.input.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
@@ -21,7 +21,7 @@ public class FlexSkinProcessor {
     private static final DataFormat EDITOR_TAB_DATA_FORMAT = new DataFormat("application/x-editor-tab");
 
     /**
-     * 通过反射强行获取FlexTab
+     * 通过反射强行获取 FlexTab
      *
      * @param node 只有部分有这玩意
      * @return FlexTab
@@ -40,18 +40,52 @@ public class FlexSkinProcessor {
     }
 
     /**
-     * 更新拖拽处理事件    TabPaneSkin$TabHeaderArea
+     * 更新拖拽处理事件  TabPaneSkin$TabHeaderArea
      */
-    public void updateTabHeaderArea(Node tabHeaderArea) {
+    public void updateTabHeaderArea(FlexTabPane tabPane, Node tabHeaderArea) {
 
+        ObjectProperty<Boolean> tabContentRegionDragStyle = new SimpleObjectProperty<>();
+        tabContentRegionDragStyle.addListener((observable, oldValue, newValue) -> {
+            ObservableList<String> style = tabHeaderArea.getStyleClass();
+            if (newValue)
+                style.add("drag-hover");
+            else
+                style.remove("drag-hover");
+        });
+
+        tabHeaderArea.setOnDragExited((event) -> {
+            FlexArea area = tabPane.getArea();
+            if (area.draggingTab != null) {
+                tabContentRegionDragStyle.set(false);
+            }
+            event.consume();
+        });
+        tabHeaderArea.setOnDragOver((event) -> {
+            FlexArea area = tabPane.getArea();
+            if (area.draggingTab != null) {
+                tabContentRegionDragStyle.set(true);
+                event.acceptTransferModes(TransferMode.MOVE);
+            }
+            event.consume();
+        });
+        System.out.println("更新 " + tabHeaderArea);
     }
 
     /**
-     * TabPaneSkin$TabHeaderSkin
-     *
+     * 更新选项卡标题皮肤  TabPaneSkin$TabHeaderSkin
      */
     public void updateTabHeaderSkin(Node tabHeaderSkin) {
         FlexTab tab = getTab(tabHeaderSkin);
+        ObjectProperty<TabHeaderDragStyle> tabHeaderDragStyle = new SimpleObjectProperty<>();
+        tabHeaderDragStyle.addListener((observable, oldValue, newValue) -> {
+            ObservableList<String> style = tabHeaderSkin.getStyleClass();
+            if (oldValue != null)
+                style.remove(oldValue.toString());
+            if (newValue != null)
+                style.add(newValue.toString());
+            System.out.println(style);
+        });
+
         //设置开始拖动
         tabHeaderSkin.setOnDragDetected(event -> {
             FlexArea area = tab.getArea();
@@ -85,24 +119,24 @@ public class FlexSkinProcessor {
 
         tabHeaderSkin.setOnDragOver((event) -> {
             FlexArea area = tab.getArea();
+            event.consume();
             if (area.draggingTab != null) {
                 if (area.draggingTab.equals(tab))
                     return;
                 event.acceptTransferModes(TransferMode.MOVE);
-                //tabDragStyle.set((event.getX() < tabHead.getWidth() / 2 ? TabDragStyle.left : TabDragStyle.right));
+                tabHeaderDragStyle.set((event.getX() < ((Pane) tabHeaderSkin).getWidth() / 2 ? TabHeaderDragStyle.left : TabHeaderDragStyle.right));
+                tabHeaderSkin.getParent().getParent().getOnDragExited().handle(event.copyFor(event.getSource(), event.getTarget(), DragEvent.DRAG_EXITED));
             }
-            event.consume();
         });
         //拖动进入事件
         tabHeaderSkin.setOnDragEntered(event -> {
+            event.consume();
         });
         //拖动离开事件
         tabHeaderSkin.setOnDragExited((event) -> {
-            event.acceptTransferModes(TransferMode.MOVE);
+            //event.acceptTransferModes(TransferMode.MOVE);
 
-           /* if (EditorArea.dragTab != null) {
-                tabDragStyle.setValue(null);
-            }*/
+            tabHeaderDragStyle.setValue(null);
             event.consume();
         });
         //拖动放下事件
@@ -133,12 +167,84 @@ public class FlexSkinProcessor {
         });
     }
 
+    /**
+     * 更新选项卡内容区域  TabPaneSkin$TabContentRegion
+     */
     public void updateTabContentRegion(Node tabContentRegion) {
         FlexTab tab = getTab(tabContentRegion);
-        System.out.println("更新 "+tabContentRegion);
+
+        ObjectProperty<TabContentRegionDragStyle> tabContentRegionDragStyle = new SimpleObjectProperty<>();
+        tabContentRegionDragStyle.addListener((observable, oldValue, newValue) -> {
+            ObservableList<String> style = tabContentRegion.getStyleClass();
+            if (oldValue != null)
+                style.remove(oldValue.toString());
+            if (newValue != null)
+                style.add(newValue.toString());
+            System.out.println(style);
+        });
+
+        tabContentRegion.setOnDragExited((event) -> {
+            FlexArea area = tab.getArea();
+            if (area.draggingTab != null) {
+                tabContentRegionDragStyle.set(null);
+            }
+            event.consume();
+        });
+        tabContentRegion.setOnDragOver((event) -> {
+            FlexArea area = tab.getArea();
+            if (area.draggingTab != null) {
+
+                Pane tabContentRegionPane = (Pane) tabContentRegion;
+                double w = tabContentRegionPane.getWidth();
+                double h = tabContentRegionPane.getHeight();
+                double x = event.getX();
+                double y = event.getY();
+
+                TabContentRegionDragStyle style = TabContentRegionDragStyle.center;
+
+                double threshold = 0.1;
+                double edgeThreshold = 0.25;
+
+                if (y < h * threshold) {
+                    style = TabContentRegionDragStyle.top;
+                } else if (h - y < h * threshold) {
+                    style = TabContentRegionDragStyle.bottom;
+                } else if (x < w * threshold) {
+                    style = TabContentRegionDragStyle.left;
+                } else if (w - x < w * threshold) {
+                    style = TabContentRegionDragStyle.right;
+                }
+
+                // 对于 top 和 bottom 方向，再次检查 x 轴位置
+                if ((style == TabContentRegionDragStyle.top || style == TabContentRegionDragStyle.bottom) &&
+                        (x < w * edgeThreshold || w - x < w * edgeThreshold)) {
+                    style = (x < w * edgeThreshold) ? TabContentRegionDragStyle.left : TabContentRegionDragStyle.right;
+                }
+
+                tabContentRegionDragStyle.set(style);
+
+                event.acceptTransferModes(TransferMode.MOVE);
+            }
+            event.consume();
+        });
+        System.out.println("更新 " + tabContentRegion);
     }
 
-    private enum TabDragStyle {
-        left, right
+    private enum TabHeaderDragStyle {
+        left, right;
+
+        @Override
+        public String toString() {
+            return "drag-" + name();
+        }
+    }
+
+    private enum TabContentRegionDragStyle {
+        left, right, top, bottom, center;
+
+        @Override
+        public String toString() {
+            return "drag-" + name();
+        }
     }
 }
