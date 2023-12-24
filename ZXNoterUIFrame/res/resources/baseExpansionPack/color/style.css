@@ -280,14 +280,15 @@
 .scroll-bar:vertical {
     -fx-background-color: transparent;
     -fx-border-color: -color-component-border-usually;
-    -fx-border-width: 0 1 0 1;
+    /*-fx-border-width: 0 1 0 1;*/
+    -fx-border-width: 0;
     -fx-padding: 0 1 0 1;
 }
 
 .scroll-bar:horizontal {
     -fx-background-color: transparent;
     -fx-border-color: -color-component-border-usually;
-    -fx-border-width: 1 0 1 0;
+    -fx-border-width: 0;
     -fx-padding: 1 0 1 0;
 }
 
@@ -314,7 +315,9 @@
 .scroll-bar .increment-button:hover {
     -fx-background-color: -color-component-bg-hover;
 }
-
+.scroll-pane .corner{
+    -fx-background-color: transparent;
+}
 /**
 滑块
  */

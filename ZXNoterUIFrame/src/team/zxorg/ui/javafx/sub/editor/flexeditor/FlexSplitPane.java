@@ -1,5 +1,6 @@
 package team.zxorg.ui.javafx.sub.editor.flexeditor;
 
+import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -15,17 +16,17 @@ import team.zxorg.zxncore.ZXLogger;
  */
 public class FlexSplitPane extends SplitPane {
     /**
-     * 编辑器区域 编辑器根
+     * 根区域
      */
-    private final ObjectProperty<FlexArea> editorArea = new SimpleObjectProperty<>();
+    private final ObjectProperty<FlexArea> flexArea = new SimpleObjectProperty<>();
 
     /**
-     * 父编辑器拆分窗格
+     * 父拆分窗格
      */
-    private final ObjectProperty<FlexSplitPane> parentEditorSplitPane = new SimpleObjectProperty<>();
+    private final ObjectProperty<FlexSplitPane> parentFlexSplitPane = new SimpleObjectProperty<>();
 
     {
-        getStyleClass().addAll("flex-editor");
+        getStyleClass().addAll("flex-split-pane");
     }
 
     public FlexSplitPane() {
@@ -40,35 +41,85 @@ public class FlexSplitPane extends SplitPane {
         getItems().addListener((ListChangeListener<Node>) c -> {
             while (c.next()) {
                 //判断是被移除时 列表为空
-                if (c.wasRemoved() && c.getList().isEmpty()) {
-                    ZXLogger.info("拆分窗格列表为空 删除自身");
-
-                    if (getParent() instanceof FlexSplitPane editorSplitPane) {
-                        editorSplitPane.getItems().remove(this);
+                if (c.wasRemoved()) {
+                    if (c.getList().isEmpty()) {
+                        ZXLogger.info("拆分窗格列表为空 删除自身");
+                        if (getParent().getParent() instanceof FlexSplitPane editorSplitPane) {
+                            editorSplitPane.getItems().remove(this);
+                        }
+                    } else if (c.getList().size() == 1) {
+                        FlexSplitPane flexSplitPane = getParentFlexSplitPane();
+                        //如果是根，则不精简
+                        if (flexSplitPane != null) {
+                            //精简
+                            ZXLogger.info("拆分窗格列表精简");
+                            flexSplitPane.getItems().addAll(c.getList());
+                            Platform.runLater(() -> {
+                                getItems().clear();
+                            });
+                        }
                     }
+
+                    //释放并解除
+                    for (Node node : c.getRemoved()) {
+                        if (node instanceof FlexTabPane tabPane) {
+                            //tabPane.parentFlexSplitPane.set(null);
+                        } else if (node instanceof FlexSplitPane splitPane) {
+                            //splitPane.parentFlexSplitPane.set(null);
+                        }
+                    }
+                    updateDividers();
+                } else if (c.wasAdded()) {
+                    //添加并绑定
+                    for (Node node : c.getAddedSubList()) {
+                        if (node instanceof FlexTabPane tabPane) {
+                            tabPane.parentFlexSplitPane.set(this);
+
+
+
+                        } else if (node instanceof FlexSplitPane splitPane) {
+                            splitPane.parentFlexSplitPane.set(this);
+                            splitPane.flexArea.bind(flexAreaProperty());
+                            splitPane.setOrientation((getOrientation() == Orientation.HORIZONTAL ? Orientation.VERTICAL : Orientation.HORIZONTAL));
+
+
+                        }
+                    }
+                    //重新计算每个的占比
+                    updateDividers();
+
                 }
             }
         });
     }
 
-    public ReadOnlyObjectProperty<FlexArea> editorAreaProperty() {
-        return editorArea;
+    private void updateDividers() {
+        double v = 1. / (getItems().size());
+        double v2=0;
+        for (Divider divider : getDividers()) {
+            v2+=v;
+            divider.setPosition(v2);
+        }
     }
 
-    public ReadOnlyObjectProperty<FlexSplitPane> parentEditorSplitPaneProperty() {
-        return parentEditorSplitPane;
+    public ReadOnlyObjectProperty<FlexArea> flexAreaProperty() {
+        return flexArea;
     }
 
-    public FlexArea getEditorArea() {
-        return editorArea.get();
+    public ReadOnlyObjectProperty<FlexSplitPane> parentFlexSplitPaneProperty() {
+        return parentFlexSplitPane;
     }
 
-    protected void setEditorArea(FlexArea editorArea) {
-        this.editorArea.set(editorArea);
+    public FlexArea getFlexArea() {
+        return flexArea.get();
     }
 
-    public FlexSplitPane getParentEditorSplitPane() {
-        return parentEditorSplitPane.get();
+    protected void setFlexArea(FlexArea flexArea) {
+        this.flexArea.set(flexArea);
+    }
+
+    public FlexSplitPane getParentFlexSplitPane() {
+        return parentFlexSplitPane.get();
     }
 
     public FlexTabPane createTabPane() {
@@ -83,9 +134,13 @@ public class FlexSplitPane extends SplitPane {
      */
     public FlexTabPane createTabPane(int index) {
         FlexTabPane tabPane = new FlexTabPane();
-        tabPane.parentEditorSplitPane.set(this);
         getItems().add(index, tabPane);
         return tabPane;
+    }
+
+    public void addTabPane(FlexTabPane tabPane, int index) {
+        tabPane.getParentSplitPane().removeSplitPane(tabPane);
+        getItems().add(index, tabPane);
     }
 
     public FlexSplitPane createSplitPane() {
@@ -100,23 +155,19 @@ public class FlexSplitPane extends SplitPane {
      */
     public FlexSplitPane createSplitPane(int index) {
         FlexSplitPane newSplitPane = new FlexSplitPane();
-        newSplitPane.parentEditorSplitPane.set(this);
-        newSplitPane.editorArea.bind(editorAreaProperty());
-        newSplitPane.setOrientation((getOrientation() == Orientation.HORIZONTAL ? Orientation.VERTICAL : Orientation.HORIZONTAL));
         getItems().add(index, newSplitPane);
         return newSplitPane;
     }
 
     public void removeSplitPane(int index) {
         ObservableList<Node> items = getItems();
-        if (items.get(index) instanceof FlexSplitPane flexSplitPane) {
-            flexSplitPane.parentEditorSplitPane.set(null);
-            flexSplitPane.editorArea.set(null);
-        }
         items.remove(index);
     }
 
-
+    public void removeSplitPane(FlexTabPane tabPane) {
+        ObservableList<Node> items = getItems();
+        items.remove(tabPane);
+    }
     /**
      * 关闭此拆分窗格
      */

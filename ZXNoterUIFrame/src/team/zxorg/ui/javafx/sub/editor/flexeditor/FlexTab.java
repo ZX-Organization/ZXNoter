@@ -14,7 +14,6 @@ public abstract class FlexTab extends Tab {
 
     public FlexTab(Path path) {
         this.path = path;
-        setId(UUID.randomUUID().toString());
 
         //监听所属选项卡窗格 重新注册事件
         /*tabPaneProperty().addListener((observable, oldValue, newValue) -> {

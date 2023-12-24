@@ -1,24 +1,35 @@
 package team.zxorg.ui.javafx.sub.editor.flexeditor;
 
+import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
+import javafx.geometry.Orientation;
 import javafx.scene.Node;
 import javafx.scene.SnapshotParameters;
+import javafx.scene.control.Tab;
 import javafx.scene.image.Image;
 import javafx.scene.input.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import team.zxorg.zxncore.ZXLogger;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 public class FlexSkinProcessor {
     /**
-     * 编辑器标签页数据格式 (用于处理拖拽判断)
+     * 灵活标签页数据格式 (用于处理拖拽判断)
      */
-    private static final DataFormat EDITOR_TAB_DATA_FORMAT = new DataFormat("application/x-editor-tab");
+    private static final DataFormat FLEX_TAB_DATA_FORMAT = new DataFormat("application/x-flex-tab");
+    FlexTabPane tabPane;
+
+
+    public FlexSkinProcessor(FlexTabPane tabPane) {
+        this.tabPane = tabPane;
+    }
 
     /**
      * 通过反射强行获取 FlexTab
@@ -26,24 +37,40 @@ public class FlexSkinProcessor {
      * @param node 只有部分有这玩意
      * @return FlexTab
      */
-    private static FlexTab getTab(Node node) {
+    private static Tab getTab(Node node) {
         try {
             Method skinField = node.getClass().getMethod("getTab");
             skinField.setAccessible(true);
-            if (skinField.invoke(node) instanceof FlexTab tab) {
-                return tab;
-            }
+            return (Tab) skinField.invoke(node);
         } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
             throw new RuntimeException(e);
         }
-        return null;
+    }
+
+    void handleNodeChange(Node node) {
+        switch (node.getClass().getSimpleName()) {
+            case "TabHeaderArea" -> handleTabHeaderArea(node);
+            case "TabContentRegion" -> updateTabContentRegion(node);
+        }
+    }
+
+    private void handleTabHeaderArea(Node node) {
+        updateTabHeaderArea(node);
+        if (tabPane.lookup(".headers-region") instanceof Pane headersRegion) {
+            ZXLogger.info("初始化和更新 TabHeaderSkin");
+            headersRegion.getChildren().forEach(this::updateTabHeaderSkin);
+            headersRegion.getChildren().addListener((ListChangeListener<Node>) c1 -> {
+                while (c1.next())
+                    if (c1.wasAdded())
+                        c1.getAddedSubList().forEach(this::updateTabHeaderSkin);
+            });
+        }
     }
 
     /**
      * 更新拖拽处理事件  TabPaneSkin$TabHeaderArea
      */
-    public void updateTabHeaderArea(FlexTabPane tabPane, Node tabHeaderArea) {
-
+    private void updateTabHeaderArea(Node tabHeaderArea) {
         ObjectProperty<Boolean> tabContentRegionDragStyle = new SimpleObjectProperty<>();
         tabContentRegionDragStyle.addListener((observable, oldValue, newValue) -> {
             ObservableList<String> style = tabHeaderArea.getStyleClass();
@@ -61,12 +88,46 @@ public class FlexSkinProcessor {
             event.consume();
         });
         tabHeaderArea.setOnDragOver((event) -> {
+            if (!event.getDragboard().getContentTypes().contains(FLEX_TAB_DATA_FORMAT)) {
+                return;
+            }
             FlexArea area = tabPane.getArea();
             if (area.draggingTab != null) {
+                if (tabPane.getTabs().contains(area.draggingTab))
+                    return;
                 tabContentRegionDragStyle.set(true);
                 event.acceptTransferModes(TransferMode.MOVE);
             }
             event.consume();
+        });
+
+        //拖动放下事件
+        tabHeaderArea.setOnDragDropped((event) -> {
+            if (!event.getDragboard().getContentTypes().contains(FLEX_TAB_DATA_FORMAT)) {
+                return;
+            }
+            FlexArea area = tabPane.getArea();
+            Tab draggingTab = area.draggingTab;
+
+            // 从 Dragboard 中获取 Tab 的数据
+            if (draggingTab != null) {
+                tabContentRegionDragStyle.set(false);
+                if (draggingTab.getUserData() instanceof FlexTabPane tabPane) {
+                    tabPane.getSelectionModel().selectNext();
+                }
+                ObservableList<Tab> tabs = tabPane.getTabs();
+                //计算新的位置
+                if (!tabs.contains(draggingTab))
+                    tabs.add(draggingTab);
+                Platform.runLater(() -> {
+                    tabPane.getSelectionModel().select(draggingTab);
+                });
+                area.draggingTab = null;
+                tabPane.requestFocus();
+                event.setDropCompleted(true);
+            }
+            event.consume();
+
         });
         System.out.println("更新 " + tabHeaderArea);
     }
@@ -74,8 +135,8 @@ public class FlexSkinProcessor {
     /**
      * 更新选项卡标题皮肤  TabPaneSkin$TabHeaderSkin
      */
-    public void updateTabHeaderSkin(Node tabHeaderSkin) {
-        FlexTab tab = getTab(tabHeaderSkin);
+    private void updateTabHeaderSkin(Node tabHeaderSkin) {
+        Tab tab = getTab(tabHeaderSkin);
         ObjectProperty<TabHeaderDragStyle> tabHeaderDragStyle = new SimpleObjectProperty<>();
         tabHeaderDragStyle.addListener((observable, oldValue, newValue) -> {
             ObservableList<String> style = tabHeaderSkin.getStyleClass();
@@ -88,7 +149,7 @@ public class FlexSkinProcessor {
 
         //设置开始拖动
         tabHeaderSkin.setOnDragDetected(event -> {
-            FlexArea area = tab.getArea();
+            FlexArea area = tabPane.getArea();
             area.draggingTab = tab;
             //draggingTab = tab;
             /*editorArea.dragTab = this;
@@ -108,7 +169,7 @@ public class FlexSkinProcessor {
             ClipboardContent content = new ClipboardContent();
 
             // 将自定义数据格式作为拖拽的内容
-            content.put(EDITOR_TAB_DATA_FORMAT, "");
+            content.put(FLEX_TAB_DATA_FORMAT, "");
             dragboard.setContent(content);
 
             // 设置拖拽时的图标
@@ -118,14 +179,17 @@ public class FlexSkinProcessor {
         });
 
         tabHeaderSkin.setOnDragOver((event) -> {
-            FlexArea area = tab.getArea();
+            if (!event.getDragboard().getContentTypes().contains(FLEX_TAB_DATA_FORMAT)) {
+                return;
+            }
+            FlexArea area = tabPane.getArea();
+            tabHeaderSkin.getParent().getParent().getOnDragExited().handle(event.copyFor(event.getSource(), event.getTarget(), DragEvent.DRAG_EXITED));
             event.consume();
             if (area.draggingTab != null) {
                 if (area.draggingTab.equals(tab))
                     return;
                 event.acceptTransferModes(TransferMode.MOVE);
                 tabHeaderDragStyle.set((event.getX() < ((Pane) tabHeaderSkin).getWidth() / 2 ? TabHeaderDragStyle.left : TabHeaderDragStyle.right));
-                tabHeaderSkin.getParent().getParent().getOnDragExited().handle(event.copyFor(event.getSource(), event.getTarget(), DragEvent.DRAG_EXITED));
             }
         });
         //拖动进入事件
@@ -141,20 +205,29 @@ public class FlexSkinProcessor {
         });
         //拖动放下事件
         tabHeaderSkin.setOnDragDropped((event) -> {
+            if (!event.getDragboard().getContentTypes().contains(FLEX_TAB_DATA_FORMAT)) {
+                return;
+            }
+            FlexArea area = tabPane.getArea();
+            Tab draggingTab = area.draggingTab;
+
             // 从 Dragboard 中获取 Tab 的数据
-            /*if (EditorArea.dragTab != null) {
-                tabDragStyle.setValue(null);
-
-                EditorTabPane tabPane = (EditorTabPane) getTabPane();
+            if (draggingTab != null) {
+                if (draggingTab.getUserData() instanceof FlexTabPane tabPane) {
+                    tabPane.getSelectionModel().selectNext();
+                }
                 ObservableList<Tab> tabs = tabPane.getTabs();
-
-                EditorArea.dragTab.removeParentThis();
-
-                tabs.add(tabs.indexOf(this) + (event.getX() < tabHead.getWidth() / 2 ? 0 : 1), EditorArea.dragTab);
-                tabPane.handleDragDropped();
-
+                //计算新的位置
+                tabs.remove(draggingTab);
+                int index = tabs.indexOf(tab) + (event.getX() < ((Pane) tabHeaderSkin).getWidth() / 2 ? 0 : 1);
+                tabs.add(index, draggingTab);
+                Platform.runLater(() -> {
+                    tabPane.getSelectionModel().select(draggingTab);
+                });
+                area.draggingTab = null;
+                tabPane.requestFocus();
                 event.setDropCompleted(true);
-            }*/
+            }
             event.consume();
 
         });
@@ -170,8 +243,8 @@ public class FlexSkinProcessor {
     /**
      * 更新选项卡内容区域  TabPaneSkin$TabContentRegion
      */
-    public void updateTabContentRegion(Node tabContentRegion) {
-        FlexTab tab = getTab(tabContentRegion);
+    private void updateTabContentRegion(Node tabContentRegion) {
+        Tab tab = getTab(tabContentRegion);
 
         ObjectProperty<TabContentRegionDragStyle> tabContentRegionDragStyle = new SimpleObjectProperty<>();
         tabContentRegionDragStyle.addListener((observable, oldValue, newValue) -> {
@@ -182,18 +255,20 @@ public class FlexSkinProcessor {
                 style.add(newValue.toString());
             System.out.println(style);
         });
-
+        //拖动离开
         tabContentRegion.setOnDragExited((event) -> {
-            FlexArea area = tab.getArea();
+            FlexArea area = tabPane.getArea();
             if (area.draggingTab != null) {
                 tabContentRegionDragStyle.set(null);
             }
             event.consume();
         });
+        //拖动悬停
         tabContentRegion.setOnDragOver((event) -> {
-            FlexArea area = tab.getArea();
+            FlexArea area = tabPane.getArea();
             if (area.draggingTab != null) {
 
+                //计算拖拽位置
                 Pane tabContentRegionPane = (Pane) tabContentRegion;
                 double w = tabContentRegionPane.getWidth();
                 double h = tabContentRegionPane.getHeight();
@@ -202,6 +277,7 @@ public class FlexSkinProcessor {
 
                 TabContentRegionDragStyle style = TabContentRegionDragStyle.center;
 
+                //更具拖拽位置设置样式
                 double threshold = 0.1;
                 double edgeThreshold = 0.25;
 
@@ -221,11 +297,77 @@ public class FlexSkinProcessor {
                     style = (x < w * edgeThreshold) ? TabContentRegionDragStyle.left : TabContentRegionDragStyle.right;
                 }
 
-                tabContentRegionDragStyle.set(style);
 
+                tabContentRegionDragStyle.set(style);
                 event.acceptTransferModes(TransferMode.MOVE);
             }
             event.consume();
+        });
+
+
+        //拖动放下事件
+        tabContentRegion.setOnDragDropped((event) -> {
+            if (!event.getDragboard().getContentTypes().contains(FLEX_TAB_DATA_FORMAT)) {
+                return;
+            }
+            FlexArea area = tabPane.getArea();
+            Tab draggingTab = area.draggingTab;
+
+            if (draggingTab != null) {
+                //如果数量不足1则无效
+                if (draggingTab.getTabPane().getTabs().size() <= 1 && draggingTab == tab)
+                    return;
+
+
+                if (draggingTab.getUserData() instanceof FlexTabPane tabPane) {
+                    tabPane.getSelectionModel().selectNext();
+                }
+                ObservableList<Tab> tabs = tabPane.getTabs();
+
+
+                FlexSplitPane parentFlexSplitPane = tabPane.getParentSplitPane();
+                //判断分隔方向和父分隔面板方向是否一样
+                Orientation parentOrientation = parentFlexSplitPane.getOrientation();
+                TabContentRegionDragStyle style = tabContentRegionDragStyle.get();
+
+                System.out.println(style);
+                System.out.println(parentOrientation);
+                if (parentOrientation.equals(style.getOrientation())) {
+                    //System.out.println("方向一样");
+                    System.out.println("同方向拆分窗格");
+
+                    FlexTabPane newTabPane = parentFlexSplitPane.createTabPane(0);
+                    //计算新的位置
+                    newTabPane.addTab(draggingTab);
+                } else if (style.getOrientation() == null) {
+                    //中间放入
+                    if (draggingTab != tab)
+                        tabPane.addTab(draggingTab);
+                } else {
+                    //新分隔面板
+                    System.out.println("非同方向拆分窗格");
+
+                    FlexSplitPane newSplitPane = parentFlexSplitPane.createSplitPane();
+                    FlexTabPane newTabPane = newSplitPane.createTabPane();
+                    newSplitPane.addTabPane(tabPane, 0);
+                    newTabPane.addTab(draggingTab);
+
+                }
+
+                Platform.runLater(() -> {
+                    tabPane.getSelectionModel().select(draggingTab);
+                });
+                area.draggingTab = null;
+                tabPane.requestFocus();
+                event.setDropCompleted(true);
+                tabContentRegionDragStyle.set(null);
+            }
+            event.consume();
+        });
+
+
+        tabContentRegion.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> {
+            tabContentRegion.getParent().requestFocus();
         });
         System.out.println("更新 " + tabContentRegion);
     }
@@ -240,7 +382,22 @@ public class FlexSkinProcessor {
     }
 
     private enum TabContentRegionDragStyle {
-        left, right, top, bottom, center;
+        left(Orientation.HORIZONTAL, -1), right(Orientation.HORIZONTAL, 1), top(Orientation.VERTICAL, -1), bottom(Orientation.VERTICAL, 1), center(null, 0);
+        final Orientation orientation;
+        final int offset;
+
+        TabContentRegionDragStyle(Orientation orientation, int offset) {
+            this.orientation = orientation;
+            this.offset = offset;
+        }
+
+        public int getOffset() {
+            return offset;
+        }
+
+        public Orientation getOrientation() {
+            return orientation;
+        }
 
         @Override
         public String toString() {

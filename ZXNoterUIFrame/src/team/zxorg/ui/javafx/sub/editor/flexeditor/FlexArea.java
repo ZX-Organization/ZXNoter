@@ -9,7 +9,7 @@ public class FlexArea extends FlexSplitPane {
     /**
      * 拖动中的选项卡
      */
-    protected FlexTab draggingTab;
+    protected Tab draggingTab;
     /**
      * 焦点编辑器标签页面板
      */
@@ -17,7 +17,7 @@ public class FlexArea extends FlexSplitPane {
 
     public FlexArea() {
         super();
-        setEditorArea(this);
+        setFlexArea(this);
         focusEditorTabPane.addListener((observable, oldValue, newValue) -> {
             if (oldValue instanceof FlexTabPane tabPane)
                 tabPane.getStyleClass().remove("focused");

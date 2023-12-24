@@ -7,7 +7,6 @@ import javafx.collections.ListChangeListener;
 import javafx.scene.Node;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-import javafx.scene.layout.Pane;
 import team.zxorg.zxncore.ZXLogger;
 
 
@@ -15,13 +14,15 @@ import team.zxorg.zxncore.ZXLogger;
  * 灵活编辑器 选项卡窗格
  */
 public class FlexTabPane extends TabPane {
-
     /**
      * 父编辑器分隔面板
      */
-    protected final ObjectProperty<FlexSplitPane> parentEditorSplitPane = new SimpleObjectProperty<>();
-
-    private final FlexSkinProcessor skinProcessor = new FlexSkinProcessor();
+    protected final ObjectProperty<FlexSplitPane> parentFlexSplitPane = new SimpleObjectProperty<>();
+    /**
+     * 根区域
+     */
+    private final ObjectProperty<FlexArea> flexArea = new SimpleObjectProperty<>();
+    private final FlexSkinProcessor skinProcessor = new FlexSkinProcessor(this);
 
     public FlexTabPane() {
 
@@ -31,27 +32,34 @@ public class FlexTabPane extends TabPane {
         getTabs().addListener((ListChangeListener<Tab>) c -> {
             while (c.next()) {
                 //判断是被移除时 列表为空
-                if (c.wasRemoved() && c.getList().isEmpty()) {
-                    ZXLogger.info("选项卡窗格列表为空 删除自身");
-                    if (getParent() instanceof FlexSplitPane editorSplitPane) {
-                        editorSplitPane.getItems().remove(this);
-                    }
-                }
-                if (c.wasAdded()) {
-                    for (Tab tab : c.getAddedSubList()) {
-                        if (tab instanceof FlexTab flexTab) {
-                            System.out.println("新加入选项卡 " + tab.getId());
-                            Platform.runLater(() -> {
-                                System.out.println("更新选项卡 " + tab.getId());
-                                Pane tabHeaderArea = (Pane) lookup("#" + tab.getId());
-                                //FlexSkin.updateDrag(flexTab, tabHeaderArea, null);
-                            });
-                        } else {
-                            throw new RuntimeException("只支持 FlexEditorTab");
+                if (c.wasRemoved()) {
+                    if (c.getList().isEmpty()) {
+                        ZXLogger.info("选项卡窗格列表为空 删除自身");
+                        if (getParent().getParent() instanceof FlexSplitPane editorSplitPane) {
+                            editorSplitPane.getItems().remove(this);
                         }
+                    }
+                } else if (c.wasAdded()) {
+                    for (Tab tab : c.getAddedSubList()) {
+                        if (tab.getUserData() instanceof FlexTabPane previousParent) {
+                            if (previousParent == this)
+                                continue;
+                            Platform.runLater(() -> {
+                                previousParent.getTabs().remove(tab);
+                            });
+                        }
+                        tab.setUserData(this);
                     }
                 }
             }
+        });
+
+        //绑定根
+        parentFlexSplitPane.addListener((observable, oldValue, newValue) -> {
+            if (newValue != null)
+                flexArea.bind(newValue.flexAreaProperty());
+            else
+                flexArea.unbind();
         });
         //setTabDragPolicy(TabDragPolicy.REORDER);
         /*Platform.runLater(() -> {
@@ -68,15 +76,17 @@ public class FlexTabPane extends TabPane {
          */
         focusedProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.booleanValue())
-                parentEditorSplitPane.get().getEditorArea().focusEditorTabPane.set(this);
+                parentFlexSplitPane.get().getFlexArea().focusEditorTabPane.set(this);
         });
 
-
+        /**
+         * 为监听和处理拖拽
+         */
         getChildren().addListener((ListChangeListener<Node>) c -> {
             while (c.next()) {
                 if (c.wasAdded()) {
                     for (Node node : c.getAddedSubList()) {
-                        handleNodeChange(node);
+                        skinProcessor.handleNodeChange(node);
                     }
                 }
             }
@@ -84,31 +94,12 @@ public class FlexTabPane extends TabPane {
 
     }
 
-    private void handleNodeChange(Node node) {
-        switch (node.getClass().getSimpleName()) {
-            case "TabHeaderArea" -> handleTabHeaderArea(node);
-            case "TabContentRegion" -> skinProcessor.updateTabContentRegion(node);
-            default -> System.out.println("Unknown Node Type: " + node.getClass().getSimpleName());
-        }
+    public ObjectProperty<FlexArea> flexAreaProperty() {
+        return flexArea;
     }
-
-    private void handleTabHeaderArea(Node node) {
-        skinProcessor.updateTabHeaderArea(this, node);
-        if (lookup(".headers-region") instanceof Pane headersRegion) {
-            ZXLogger.info("初始化和更新 TabHeaderSkin");
-            headersRegion.getChildren().forEach(skinProcessor::updateTabHeaderSkin);
-            headersRegion.getChildren().addListener((ListChangeListener<Node>) c1 -> {
-                while (c1.next())
-                    if (c1.wasAdded())
-                        c1.getAddedSubList().forEach(skinProcessor::updateTabHeaderSkin);
-
-            });
-        }
-    }
-
 
     public FlexArea getArea() {
-        return parentEditorSplitPane.get().getEditorArea();
+        return flexArea.get();
     }
 
     /**
@@ -116,7 +107,7 @@ public class FlexTabPane extends TabPane {
      *
      * @param tab 选项卡
      */
-    public void addTab(FlexTab tab) {
+    public void addTab(Tab tab) {
         addTab(getTabs().size(), tab);
     }
 
@@ -126,8 +117,8 @@ public class FlexTabPane extends TabPane {
      * @param index 索引
      * @param tab   选项卡
      */
-    public void addTab(int index, FlexTab tab) {
-        if (tab.getTabPane() instanceof FlexTabPane parent) {
+    public void addTab(int index, Tab tab) {
+        if (tab.getTabPane() instanceof TabPane parent) {
             //如果已有父选项卡窗格 需要脱离
             parent.getTabs().remove(tab);
         }
@@ -139,9 +130,12 @@ public class FlexTabPane extends TabPane {
      *
      * @param tab 选项卡
      */
-    public void removeTab(FlexTab tab) {
+    public void removeTab(Tab tab) {
         getTabs().remove(tab);
     }
 
+    public FlexSplitPane getParentSplitPane() {
+        return parentFlexSplitPane.get();
+    }
 
 }

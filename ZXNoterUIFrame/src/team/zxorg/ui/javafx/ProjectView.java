@@ -3,12 +3,12 @@ package team.zxorg.ui.javafx;
 import javafx.application.Platform;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.SplitPane;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import team.zxorg.skin.CanvasPane;
 import team.zxorg.ui.javafx.sub.*;
 import team.zxorg.ui.javafx.sub.editor.flexeditor.FlexArea;
 import team.zxorg.ui.javafx.sub.editor.flexeditor.FlexSplitPane;
@@ -37,56 +37,14 @@ public class ProjectView extends FunctionalComponent {
     private final SideBar sideBar = new SideBar(this);
 
     private final FlexArea editorArea = new FlexArea();
-
-    {
-        //测试区域
-
-        {
-            FlexTabPane tabPane = editorArea.createTabPane();
-            FlexTab tab = new FlexTab(Path.of("project")) {
-            };
-            tab.setText("NMSL");
-            tabPane.addTab(tab);
-            tab.setContent(new TextArea());
-        }
-
-        FlexSplitPane splitPane = editorArea.createSplitPane();
-
-        {
-            FlexTabPane tabPane = splitPane.createTabPane();
-            FlexTab tab = new FlexTab( Path.of("project")) {
-            };
-            tab.setText("NMSL");
-            tabPane.addTab(tab);
-        }
-        {
-            FlexTabPane tabPane = splitPane.createTabPane();
-            {
-                FlexTab tab = new FlexTab(Path.of("project")) {
-                };
-                tab.setText("NMSL");
-                tabPane.addTab(tab);
-            }
-            {
-                FlexTab tab = new FlexTab(Path.of("project")) {
-                };
-                tab.setText("NMSL");
-                tabPane.addTab(tab);
-                tab.setContent(new TextArea());
-            }
-            Platform.runLater(() -> {
-                {
-                    FlexTab tab = new FlexTab(Path.of("project")) {
-                    };
-                    tab.setText("NMSL");
-                    tabPane.addTab(tab);
-                    tab.setContent(new TextArea());
-                }
-            });
-        }
-    }
-
-
+    /**
+     * 状态栏
+     */
+    private final StatusBar statusBar = new StatusBar(this);
+    /**
+     * 窗口
+     */
+    private final Stage stage = new Stage();
     /**
      * 工作区
      */
@@ -96,8 +54,6 @@ public class ProjectView extends FunctionalComponent {
             HBox.setHgrow(this, Priority.ALWAYS);
         }
     };
-
-
     /**
      * 内容容器
      */
@@ -107,12 +63,6 @@ public class ProjectView extends FunctionalComponent {
             VBox.setVgrow(this, Priority.ALWAYS);
         }
     };
-
-    /**
-     * 状态栏
-     */
-    private final StatusBar statusBar = new StatusBar(this);
-
     /**
      * 根
      */
@@ -122,10 +72,54 @@ public class ProjectView extends FunctionalComponent {
      * 场景
      */
     private final Scene scene = new Scene(root);
-    /**
-     * 窗口
-     */
-    private final Stage stage = new Stage();
+
+    {
+        //测试区域
+
+        {
+            FlexTabPane tabPane = editorArea.createTabPane();
+            Tab tab = new Tab();
+            tab.setText("111");
+            tabPane.addTab(tab);
+            VBox hBox = new VBox(new TextField(), new Button(), new TextArea(), new CanvasPane());
+            tab.setContent(hBox);
+        }
+
+        FlexSplitPane splitPane = editorArea.createSplitPane();
+
+        {
+            FlexTabPane tabPane = splitPane.createTabPane();
+            FlexTab tab = new FlexTab(Path.of("project")) {
+            };
+            tab.setText("222");
+            tabPane.addTab(tab);
+        }
+        {
+            FlexTabPane tabPane = splitPane.createTabPane();
+            {
+                FlexTab tab = new FlexTab(Path.of("project")) {
+                };
+                tab.setText("333");
+                tabPane.addTab(tab);
+            }
+            {
+                FlexTab tab = new FlexTab(Path.of("project")) {
+                };
+                tab.setText("444");
+                tabPane.addTab(tab);
+                tab.setContent(new TextArea());
+            }
+            Platform.runLater(() -> {
+                {
+                    FlexTab tab = new FlexTab(Path.of("project")) {
+                    };
+                    tab.setText("555");
+                    tabPane.addTab(tab);
+                    tab.setContent(new TextArea());
+                }
+            });
+        }
+    }
 
 
     public ProjectView() {
