@@ -12,7 +12,7 @@ public class AnimationComponent {
     Image[] frames;
     double interval;
     int currentIndex;
-    long timer = 0;
+    long timer = System.currentTimeMillis();
     boolean loop;
 
     public AnimationComponent(String frameInfo, double interval, Path uisPath) {
@@ -37,13 +37,18 @@ public class AnimationComponent {
         currentIndex = index;
     }
 
-    public void update() {
+    public boolean update() {
         int time = (int) (System.currentTimeMillis() - timer);
         if (time > interval) {
             currentIndex++;
             timer = System.currentTimeMillis();
-            if (currentIndex >= frames.length && loop) currentIndex = 0;
+            if (currentIndex >= frames.length && loop) {
+                currentIndex = 0;
+            }
+            return currentIndex == frames.length - 1;
+
         }
+        return false;
     }
 
     public Image getCurrentFrame() {

@@ -168,7 +168,7 @@ public class UISCodeArea extends CodeArea {
         COMPONENT_PROPERTY_ERROR("^( {4})([^\n=]+)(?==)", "componentPropertyError"),
         PERCENTAGE("(\\d+(\\.\\d+)?%)", "percentage"),
         PIXEL("(\\d+(\\.\\d+)?px)", "pixel"),
-        DOT("(,)", "dot"),
+        DOT("(,|\\$)", "dot"),
         SQUARE_BRACKET("(\\[|\\])", "squareBracket"),
         DELIMITER("(/)", "delimiter"),
         DELIMITER_ERROR("(\\\\)", "delimiterError"),

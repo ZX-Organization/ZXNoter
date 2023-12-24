@@ -5,7 +5,7 @@ import javafx.geometry.Pos;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import team.zxorg.skin.ExpressionVector;
-import team.zxorg.skin.basis.ElementRender;
+import team.zxorg.skin.basis.ElementRenderer;
 import team.zxorg.skin.basis.RenderRectangle;
 
 import java.nio.file.Path;
@@ -16,7 +16,7 @@ import static team.zxorg.skin.uis.UISParser.getAnchorPos;
 /**
  * 普通元件
  */
-public class PressComponent implements ElementRender {
+public class PressComponent implements ElementRenderer {
     /**
      * 按下的图片
      */
@@ -69,7 +69,12 @@ public class PressComponent implements ElementRender {
             frame2 = new AnimationComponent(properties.get("frame2"), interval, uisPath);
 
 
-        pos = ExpressionVector.parse(properties.get("pos"));
+        String elementName = properties.get("$elementName");
+        int elementIndex = Integer.parseInt(elementName.substring(elementName.indexOf('-') + 1)) ;
+
+
+        pos = ExpressionVector.parse(properties.get("pos") + "," + elementIndex);
+
         size = ExpressionVector.parse(properties.get("size"));
         anchor = getAnchorPos(properties.get("anchor"));
         rotate = 0;

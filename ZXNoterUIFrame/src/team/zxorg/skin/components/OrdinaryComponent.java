@@ -5,7 +5,7 @@ import javafx.geometry.Pos;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import team.zxorg.skin.ExpressionVector;
-import team.zxorg.skin.basis.ElementRender;
+import team.zxorg.skin.basis.ElementRenderer;
 import team.zxorg.skin.basis.RenderRectangle;
 
 import java.io.InputStream;
@@ -18,7 +18,7 @@ import static team.zxorg.skin.uis.UISParser.getResource;
 /**
  * 普通元件
  */
-public class OrdinaryComponent implements ElementRender {
+public class OrdinaryComponent implements ElementRenderer {
     /**
      * 原件的图片
      */

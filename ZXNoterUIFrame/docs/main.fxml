@@ -21,6 +21,7 @@
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.RadioMenuItem?>
 <?import javafx.scene.control.ScrollBar?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.Spinner?>
@@ -122,8 +123,8 @@
                         <SplitPane id="editorLayout" dividerPositions="0.5" orientation="VERTICAL" prefHeight="200.0" prefWidth="200.0" styleClass="UISEditor-layout">
                            <items>
                               <TabPane id="editorTab" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="ALL_TABS">
-                                 <myTabs>
-                                    <Tab id="UISEditor" styleClass="UISEditor-myTab" text="Untitled Tab 1">
+                                 <tabs>
+                                    <Tab id="UISEditor" styleClass="UISEditor-tab" text="Untitled Tab 1">
                                        <content>
                                           <BorderPane>
                                              <left>
@@ -149,15 +150,22 @@
                                              </center>
                                           </BorderPane>
                                        </content></Tab>
-                                    <Tab id="UISEditor" styleClass="UISEditor-myTab" text="Untitled Tab 2" />
-                                 </myTabs>
+                                    <Tab id="UISEditor" styleClass="UISEditor-tab" text="Untitled Tab 2">
+                                       <content>
+                                          <ScrollPane prefHeight="200.0" prefWidth="200.0">
+                                            <content>
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="368.0" prefWidth="482.0" />
+                                            </content>
+                                          </ScrollPane>
+                                       </content></Tab>
+                                 </tabs>
                                  <styleClass>
                                     <String fx:value="focused" />
-                                    <String fx:value="UISEditor-myTab-pane" />
+                                    <String fx:value="UISEditor-tab-pane" />
                                  </styleClass>
                               </TabPane>
                               <TabPane id="editorTab" prefHeight="200.0" prefWidth="309.0" tabClosingPolicy="ALL_TABS">
-                                 <myTabs>
+                                 <tabs>
                                     <Tab id="UISEditor" text="Untitled Tab 1">
                                        <content>
                                           <SubScene height="200.0" width="200.0">
@@ -183,20 +191,20 @@
                                           </SubScene>
                                        </content></Tab>
                                     <Tab id="UISEditor" text="Untitled Tab 2" />
-                                 </myTabs>
+                                 </tabs>
                                  <styleClass>
                                     <String fx:value="top" />
-                                    <String fx:value="UISEditor-myTab-pane" />
+                                    <String fx:value="UISEditor-tab-pane" />
                                  </styleClass>
                               </TabPane>
                            </items>
                         </SplitPane>
                         <TabPane id="editorTab" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="ALL_TABS">
-                          <myTabs>
+                          <tabs>
                             <Tab id="UISEditor" text="Untitled Tab 1">
                                  <styleClass>
                                     <String fx:value="left" />
-                                    <String fx:value="UISEditor-myTab" />
+                                    <String fx:value="UISEditor-tab" />
                                  </styleClass>
                                  <content>
                                     <BorderPane>
@@ -233,13 +241,13 @@
                             <Tab id="UISEditor" text="Untitled Tab 2">
                                  <styleClass>
                                     <String fx:value="right" />
-                                    <String fx:value="UISEditor-myTab" />
+                                    <String fx:value="UISEditor-tab" />
                                  </styleClass></Tab>
-                              <Tab id="UISEditor" styleClass="UISEditor-myTab" text="Untitled Tab 2" />
-                          </myTabs>
+                              <Tab id="UISEditor" styleClass="UISEditor-tab" text="Untitled Tab 2" />
+                          </tabs>
                            <styleClass>
                               <String fx:value="center" />
-                              <String fx:value="UISEditor-myTab-pane" />
+                              <String fx:value="UISEditor-tab-pane" />
                            </styleClass>
                         </TabPane>
                      </items>

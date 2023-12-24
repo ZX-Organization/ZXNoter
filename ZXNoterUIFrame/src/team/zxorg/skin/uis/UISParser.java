@@ -1,7 +1,7 @@
 package team.zxorg.skin.uis;
 
 import javafx.geometry.Pos;
-import team.zxorg.skin.basis.ElementRender;
+import team.zxorg.skin.basis.ElementRenderer;
 import team.zxorg.skin.components.*;
 import team.zxorg.zxncore.ZXLogger;
 
@@ -14,6 +14,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -94,10 +95,14 @@ public class UISParser {
             }
 
         }
+
+        for (Map.Entry<String, HashMap<String, String>> property : uis.entrySet()) {
+            property.getValue().put("$elementName", property.getKey());
+        }
         return uis;
     }
 
-    public static HashMap<String, ElementRender> parseToElementMap(Path file) {
+    public static HashMap<String, ElementRenderer> parseToElementMap(Path file) {
         HashMap<String, HashMap<String, String>> uisMap;
         try {
             uisMap = parseToMap(file);
@@ -108,13 +113,13 @@ public class UISParser {
         return parseToElementMap(file.getParent(), uisMap);
     }
 
-    public static HashMap<String, ElementRender> parseToElementMap(Path divPath, HashMap<String, HashMap<String, String>> uisMap) {
+    public static HashMap<String, ElementRenderer> parseToElementMap(Path divPath, HashMap<String, HashMap<String, String>> uisMap) {
 
-        HashMap<String, ElementRender> uis = new HashMap<>();
+        HashMap<String, ElementRenderer> uis = new HashMap<>();
 
 
         for (String elementName : uisMap.keySet()) {
-            ElementRender element = null;
+            ElementRenderer element = null;
             HashMap<String, String> properties = uisMap.get(elementName);
             try {
                 if (elementName.startsWith("note-")) {
@@ -127,6 +132,8 @@ public class UISParser {
                     element = new PerspectiveComponent(properties.getOrDefault("angle", "0"));
                 } else if (elementName.equals("touch")) {
                     element = new TouchComponent(properties, divPath);
+                } else if (elementName.startsWith("judge-")) {
+                    element = new JudgeComponent(properties, divPath);
                 } else if (elementName.startsWith("_")) {
                     switch (UISConventionalElementType.values()[Integer.parseInt(properties.getOrDefault("type", "0"))]) {
                         case ORDINARY -> {

@@ -2,8 +2,7 @@ package team.zxorg.skin.basis;
 
 import javafx.geometry.Orientation;
 import javafx.scene.canvas.GraphicsContext;
-
-public interface ElementRender {
+public interface ElementRenderer {
     /**
      * 渲染处理
      *

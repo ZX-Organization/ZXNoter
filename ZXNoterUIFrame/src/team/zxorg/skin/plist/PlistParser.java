@@ -14,7 +14,7 @@ public class PlistParser {
      */
     public static void main(String[] args) throws Exception {
 
-        Files.list(Path.of("D:\\malody\\skin\\ttb5原始 - 副本")).forEach(path -> {
+        Files.list(Path.of("D:\\malody\\skin\\Evans-进行中")).forEach(path -> {
             if (!path.getFileName().toString().endsWith(".plist")) return;
             try {
                 PlistImageList plistImageList = new PlistImageList(path);

@@ -5,7 +5,7 @@ import javafx.geometry.Pos;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import team.zxorg.skin.ExpressionVector;
-import team.zxorg.skin.basis.ElementRender;
+import team.zxorg.skin.basis.ElementRenderer;
 import team.zxorg.skin.basis.RenderRectangle;
 
 import java.io.InputStream;
@@ -16,7 +16,7 @@ import java.util.Random;
 import static team.zxorg.skin.uis.UISParser.getAnchorPos;
 import static team.zxorg.skin.uis.UISParser.getResource;
 
-public class NoteComponent implements ElementRender {
+public class NoteComponent implements ElementRenderer {
 
     /**
      * 定义note出现的位置
@@ -70,20 +70,28 @@ public class NoteComponent implements ElementRender {
      */
     private boolean pressed;
 
-
     public NoteComponent(HashMap<String, String> properties, Path uisPath) {
 
         InputStream fileStream;
         fileStream = getResource(uisPath, properties.get("tex"));
         if (fileStream != null) tex = new Image(fileStream);
 
-        pos = ExpressionVector.parse(properties.get("pos"));
-        pos2 = ExpressionVector.parse(properties.get("pos2"));
+        String elementName = properties.get("$elementName");
+        int elementIndex = Integer.parseInt(elementName.substring(elementName.indexOf('-') + 1));
+
+
+        pos = ExpressionVector.parse(properties.get("pos") + "," + elementIndex);
+        pos2 = ExpressionVector.parse(properties.get("pos2") + "," + elementIndex);
         size = ExpressionVector.parse(properties.get("size"));
-        size2 = ExpressionVector.parse(properties.get("size2"));
+        if (properties.get("size2") == null)
+            size2 = size;
+        else
+            size2 = ExpressionVector.parse(properties.get("size2"));
+
         size3 = ExpressionVector.parse(properties.get("size3"));
         anchor = getAnchorPos(properties.get("anchor"));
         progress = new Random().nextFloat();
+
     }
 
     private void renderType0(GraphicsContext gc, double canvasWidth, double canvasHeight) {
@@ -103,7 +111,7 @@ public class NoteComponent implements ElementRender {
         rr.drawImageTest(gc, tex);
         gc.restore();
 
-        progress2 += (progress3 ?  -0.01 :0.01);
+        progress2 += (progress3 ? -0.01 : 0.01);
         if (progress2 >= 1 || progress2 <= 0)
             progress3 = !progress3;
         gc.save();

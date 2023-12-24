@@ -5,7 +5,7 @@ import javafx.geometry.Pos;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import team.zxorg.skin.ExpressionVector;
-import team.zxorg.skin.basis.ElementRender;
+import team.zxorg.skin.basis.ElementRenderer;
 import team.zxorg.skin.basis.RenderRectangle;
 
 import java.nio.file.Path;
@@ -13,15 +13,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TouchComponent implements ElementRender {
+public class TouchComponent implements ElementRenderer {
     int type;
-    ArrayList<ElementRender> subRenderList = new ArrayList<ElementRender>();
+    ArrayList<ElementRenderer> subRenderList = new ArrayList<ElementRenderer>();
 
     public TouchComponent(HashMap<String, String> properties, Path uisPath) {
         type = Integer.parseInt(properties.get("type"));
 
         for (Map.Entry<String, String> entry : properties.entrySet()) {
-            if (!entry.getKey().contains("type")) {
+            if (!entry.getKey().contains("type") && !entry.getKey().contains("$elementName")) {
                 subRenderList.add(
                         switch (type) {
                             case 1 -> new TouchSquare(entry.getValue());
@@ -38,7 +38,7 @@ public class TouchComponent implements ElementRender {
 
     @Override
     public void render(GraphicsContext gc, double width, double height) {
-        for (ElementRender render : subRenderList)
+        for (ElementRenderer render : subRenderList)
             render.render(gc, width, height);
     }
 
@@ -47,14 +47,14 @@ public class TouchComponent implements ElementRender {
 
     }
 
-    private class TouchSquare implements ElementRender {
+    private class TouchSquare implements ElementRenderer {
         ExpressionVector pos;
         ExpressionVector size;
         RenderRectangle rr = new RenderRectangle();
 
         public TouchSquare(String v) {
             String[] str = v.split(",");
-            if (str.length != 4)
+            if (str.length < 4)
                 throw new IllegalArgumentException("Invalid number of arguments");
             pos = new ExpressionVector(str[0].trim(), str[1].trim());
             size = new ExpressionVector(str[2].trim(), str[3].trim());
@@ -74,13 +74,13 @@ public class TouchComponent implements ElementRender {
         }
     }
 
-    private class TouchRound implements ElementRender {
+    private class TouchRound implements ElementRenderer {
         ExpressionVector pos;
         ExpressionVector size;
 
         public TouchRound(String v) {
             String[] str = v.split(",");
-            if (str.length != 4)
+            if (str.length < 4)
                 throw new IllegalArgumentException("Invalid number of arguments");
             pos = new ExpressionVector(str[0].trim(), str[1].trim());
             size = new ExpressionVector(str[2].trim(), str[3].trim());
@@ -98,14 +98,14 @@ public class TouchComponent implements ElementRender {
         }
     }
 
-    private class TouchTriangle implements ElementRender {
+    private class TouchTriangle implements ElementRenderer {
         ExpressionVector pos;
         ExpressionVector pos2;
         ExpressionVector pos3;
 
         public TouchTriangle(String v) {
             String[] str = v.split(",");
-            if (str.length != 6)
+            if (str.length < 6)
                 throw new IllegalArgumentException("Invalid number of arguments");
             pos = new ExpressionVector(str[0].trim(), str[1].trim());
             pos2 = new ExpressionVector(str[2].trim(), str[3].trim());

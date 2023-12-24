@@ -57,10 +57,18 @@ public class ExpressionCalculator {
     }
 
     public double calculateX(String expression) {
-        return calculateValue(expression, widthRelativeMagnification, canvasWidth);
+        return calculateValue(expression, heightRelativeMagnification, canvasWidth);
     }
 
     public double calculateY(String expression) {
+        return canvasHeight - calculateValue(expression, heightRelativeMagnification, canvasHeight);
+    }
+
+    public double calculateW(String expression) {
+        return calculateValue(expression, heightRelativeMagnification, canvasWidth);
+    }
+
+    public double calculateH(String expression) {
         return calculateValue(expression, heightRelativeMagnification, canvasHeight);
     }
 

@@ -24,11 +24,12 @@ public class LayerCanvasPane extends StackPane {
         return getCanvas(key).getGraphicsContext2D();
     }
 
-    public void createCanvas(String key) {
+    public Canvas createCanvas(String key) {
         Canvas canvas = new ResizableCanvas();
         canvasList.add(canvas);
         canvasMap.put(key, canvas);
         getChildren().add(canvas);
+        return canvas;
     }
 
     /**

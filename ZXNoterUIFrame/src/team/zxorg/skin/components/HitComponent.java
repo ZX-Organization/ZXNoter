@@ -6,15 +6,16 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.effect.BlendMode;
 import javafx.scene.image.Image;
 import team.zxorg.skin.ExpressionVector;
-import team.zxorg.skin.basis.ElementRender;
+import team.zxorg.skin.basis.ElementRenderer;
 import team.zxorg.skin.basis.RenderRectangle;
 
 import java.nio.file.Path;
 import java.util.HashMap;
+import java.util.Random;
 
 import static team.zxorg.skin.uis.UISParser.getAnchorPos;
 
-public class HitComponent implements ElementRender {
+public class HitComponent implements ElementRenderer {
     private final AnimationComponent frame;
     private final AnimationComponent frame2;
     private final AnimationComponent frame3;
@@ -61,12 +62,17 @@ public class HitComponent implements ElementRender {
 
         frame = new AnimationComponent(properties.get("frame"), interval, uisPath);
         frame.loop = true;
+        frame.setCurrentFrameTo(new Random().nextInt(frame.frames.length));
 
         frame2 = new AnimationComponent(properties.get("frame2"), interval, uisPath);
         frame3 = new AnimationComponent(properties.get("frame3"), interval, uisPath);
 
 
-        pos = ExpressionVector.parse(properties.get("pos"));
+        String elementName = properties.get("$elementName");
+        int elementIndex = Integer.parseInt(elementName.substring(elementName.indexOf('-') + 1)) ;
+
+
+        pos = ExpressionVector.parse(properties.get("pos") + "," + elementIndex);
         size = ExpressionVector.parse(properties.get("size"));
         anchor = getAnchorPos(properties.get("anchor"));
         rotate = 0;
@@ -92,11 +98,14 @@ public class HitComponent implements ElementRender {
         gc.save();
         gc.rotate(rotate);
         gc.setGlobalAlpha(opacity / 100);
-        frame.update();
+        if (frame.update()) {
+            frame.timer = System.currentTimeMillis() + 400;
+        }
         Image currentFrame = (System.currentTimeMillis() % 500 < 200 ? frame.getCurrentFrame() : null);
         currentFrame = frame.getCurrentFrame();
-        if (blend != 0)
-            gc.setGlobalBlendMode((blend == 1 ? BlendMode.LIGHTEN : BlendMode.LIGHTEN));
+        //if (blend != 0)
+        //gc.setGlobalBlendMode((blend == 1 ? BlendMode.SOFT_LIGHT : BlendMode.LIGHTEN));
+        gc.setGlobalBlendMode(BlendMode.ADD);
         if (currentFrame != null) {
             if (flip != null) rr.drawImage(gc, currentFrame, flip);
             else rr.drawImage(gc, currentFrame);

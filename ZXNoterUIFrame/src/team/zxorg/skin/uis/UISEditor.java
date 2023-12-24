@@ -3,23 +3,25 @@ package team.zxorg.skin.uis;
 import com.sun.javafx.application.PlatformImpl;
 import com.sun.javafx.util.Logging;
 import javafx.animation.AnimationTimer;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
+import javafx.scene.control.*;
+import javafx.scene.effect.BlendMode;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import team.zxorg.skin.ExpressionVector;
 import team.zxorg.skin.LayerCanvasPane;
-import team.zxorg.skin.basis.ElementRender;
+import team.zxorg.skin.basis.ElementRenderer;
 import team.zxorg.skin.components.*;
 import team.zxorg.zxncore.ZXLogger;
 import team.zxorg.zxncore.ZXVersion;
@@ -27,15 +29,41 @@ import team.zxorg.zxncore.ZXVersion;
 import java.io.File;
 import java.nio.file.Path;
 import java.util.HashMap;
-import java.util.Objects;
 
 public class UISEditor extends HBox {
-    HashMap<String, ElementRender> elements = new HashMap<>();
+    MeasuringRulerRenderer measuringRulerRenderer = new MeasuringRulerRenderer();
+    HashMap<String, ElementRenderer> elements = new HashMap<>();
     LayerCanvasPane layerCanvasPane = new LayerCanvasPane() {
         {
             setBorder(new Border(new BorderStroke(Color.WHITE, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(1), new Insets(0))));
         }
     };
+
+    Slider scalingFactorSlider = new Slider() {
+        {
+            setMin(0.2);
+            setMax(4.0);
+            setBlockIncrement(0.2);
+            setMajorTickUnit(0.4);
+            //setShowTickMarks(true);
+            setShowTickLabels(true);
+            setMinorTickCount(1);
+            setValue(1);
+            setPrefWidth(100);
+            setSnapToTicks(true);
+            setSnapToPixel(true);
+            valueProperty().addListener(new ChangeListener<Number>() {
+                @Override
+                public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                    if (!isValueChanging()) {
+                        scalingFactorLabel.setText("缩放: " + (int) (newValue.doubleValue() * 100) + "%");
+                        reload.run();
+                    }
+                }
+            });
+        }
+    };
+
     TabPane tabPane = new TabPane() {
         {
             VBox.setVgrow(this, Priority.ALWAYS);
@@ -43,99 +71,41 @@ public class UISEditor extends HBox {
             setMinWidth(600);
         }
     };
-    Button resetButton = new Button("解析当前") {
-        {
-            setOnAction(event -> {
-                if (tabPane.getSelectionModel().getSelectedItem() != null)
-                    if (tabPane.getSelectionModel().getSelectedItem().getContent() instanceof UISCodeArea uisCodeArea) {
-                        elements.clear();
-                        elements.putAll(UISParser.parseToElementMap(uisCodeArea.getFile()));
-                    }
-            });
-        }
-    };
-    Runnable reload = new Runnable() {
-
-        @Override
-        public void run() {
-            resetButton.getOnAction().handle(new ActionEvent());
-        }
-    };
     ChoiceBox<ResolutionInfo> resolutionChoiceBox = new ChoiceBox<>() {
         {
             getItems().addAll(
-                    new ResolutionInfo(1920, 1080, "电脑 1080p 16:9"),
-                    new ResolutionInfo(1600, 900, "电脑 900p 16:9"),
-                    new ResolutionInfo(1440, 900, "平板 900p 16:10"),
-                    new ResolutionInfo(1280, 800, "平板 800p 16:10"),
-                    new ResolutionInfo(1280, 720, "笔记本 720p 16:9"),
-                    new ResolutionInfo(1024, 768, "平板 768p 4:3"),
-                    new ResolutionInfo(1024, 600, "手机 600p 17:10"),
-                    new ResolutionInfo(800, 600, "手机 600p 4:3"),
-                    new ResolutionInfo(512, 384, "手机 384p 4:3")
+                    new ResolutionInfo(1.333333333333333, "ipad 4:3"),
+                    new ResolutionInfo(1.333984375, "ipad Evans ≈4:3"),
+                    new ResolutionInfo(1.431654676258993, "ipad xu ≈4:3"),
+                    new ResolutionInfo(1.6, "平板 16:10"),
+                    new ResolutionInfo(1.706666666666667, "手机 17:10"),
+                    new ResolutionInfo(1.777777777777778, "电脑 16:9")
             );
 
         }
     };
-    private File lastDirectory = new File("D:\\malody\\skin\\ttb5测试-再修改"); // 记录上一次选择的目录
-    Button openFileButton = new Button("打开mui文件") {
+    Label scalingFactorLabel = new Label("缩放: 100%") {
+        {
+            setPrefWidth(70);
+        }
+    };
+    Button reloadButton = new Button("重载") {
         {
             setOnAction(event -> {
-
-                // 创建文件选择器
-                FileChooser fileChooser = new FileChooser();
-                // 设置初始目录为上一次选择的目录
-                if (lastDirectory != null && lastDirectory.isDirectory()) {
-                    fileChooser.setInitialDirectory(lastDirectory);
-                }
-                fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("MUI 文件", "*.mui"));
-
-                // 显示文件选择对话框
-                File selectedFile = fileChooser.showOpenDialog(null);
-
-                if (selectedFile != null) {
-                    System.out.println("Selected File: " + selectedFile.getAbsolutePath());
-
-                    openFIle(selectedFile.toPath());
-                    // 记录本次选择的目录
-                    lastDirectory = selectedFile.getParentFile();
-                } else {
-                    System.out.println("No file selected.");
-                }
-
-
+                reload.run();
             });
         }
     };
-    HBox toolbar = new HBox(resolutionChoiceBox, openFileButton) {
-        {
-            setMinHeight(40);
-            setBorder(new Border(new BorderStroke(Color.WHITE, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(1, 0, 0, 0), new Insets(0))));
-            setAlignment(Pos.CENTER_LEFT);
-            setSpacing(16);
-            setPadding(new Insets(0, 8, 0, 8));
-        }
-    };
-    VBox rightVBox = new VBox(tabPane, toolbar) {
-        {
-            setHgrow(this, Priority.ALWAYS);
-            setPrefWidth(260);
-            setBackground(Background.fill(Color.BLACK));
-            setBorder(new Border(new BorderStroke(Color.WHITE, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(0, 0, 0, 1), new Insets(0))));
-        }
-    };
+    private File lastDirectory = new File("D:\\malody\\skin\\Evans-进行中"); // 记录上一次选择的目录
 
     public UISEditor() {
         setAlignment(Pos.CENTER_LEFT);
-        tabPane.getSelectionModel().selectedItemProperty().addListener(observable -> resetButton.getOnAction().handle(new ActionEvent()));
+        tabPane.getSelectionModel().selectedItemProperty().addListener(observable -> reloadButton.getOnAction().handle(new ActionEvent()));
 
         resolutionChoiceBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            layerCanvasPane.setMinSize(newValue.getWidthInfo(), newValue.getHeightInfo());
-            layerCanvasPane.setMaxSize(newValue.getWidthInfo(), newValue.getHeightInfo());
-            setMinSize(layerCanvasPane.getMinWidth() + tabPane.getMinWidth(), layerCanvasPane.getMinHeight());
-            setPrefSize(layerCanvasPane.getMinWidth() + tabPane.getMinWidth(), layerCanvasPane.getMinHeight());
+            setCanvasSize(newValue.getAspectRatio(), scalingFactorSlider.getValue());
         });
-        resolutionChoiceBox.getSelectionModel().select(4);
+        resolutionChoiceBox.getSelectionModel().selectLast();
 
 
         /*pane.widthProperty().addListener(observable -> {
@@ -149,16 +119,40 @@ public class UISEditor extends HBox {
         layerCanvasPane.createCanvas("other");
         layerCanvasPane.createCanvas("note");
         layerCanvasPane.createCanvas("press");
-        layerCanvasPane.createCanvas("hit");
+        layerCanvasPane.createCanvas("hit").setBlendMode(BlendMode.LIGHTEN);
+        layerCanvasPane.createCanvas("judge");
         layerCanvasPane.createCanvas("touch");
+        Canvas canvas = layerCanvasPane.createCanvas("$mark");
 
+        canvas.setOnMousePressed(event -> {
+            if (event.getButton().equals(MouseButton.PRIMARY)) {
+                measuringRulerRenderer.setPos = 1;
+            } else {
+                measuringRulerRenderer.setPos = 2;
+            }
+
+            if (event.isShiftDown()) {
+                measuringRulerRenderer.state = 1;
+            } else if (event.isAltDown()) {
+                measuringRulerRenderer.state = 2;
+            } else {
+                measuringRulerRenderer.state = 0;
+            }
+        });
+        canvas.setOnMouseDragged(event -> {
+            switch (measuringRulerRenderer.setPos) {
+                case 1 -> measuringRulerRenderer.setPos1(event.getX(), event.getY());
+                case 2 -> measuringRulerRenderer.setPos2(event.getX(), event.getY());
+            }
+        });
+        canvas.setOnMouseReleased(event -> measuringRulerRenderer.setPos = 0);
         //画布更新线程常驻
         AnimationTimer animationTimer = new AnimationTimer() {
             @Override
             public void handle(long l) {
                 layerCanvasPane.clearRect();
-                PerspectiveComponent perspectiveComponent=null;
-                for (ElementRender e : elements.values()) {
+                PerspectiveComponent perspectiveComponent = null;
+                for (ElementRenderer e : elements.values()) {
 
                     String key = "other";
                     if (e instanceof NoteComponent) {
@@ -169,6 +163,10 @@ public class UISEditor extends HBox {
                         key = "hit";
                     } else if (e instanceof TouchComponent) {
                         key = "touch";
+                    } else if (e instanceof MeasuringRulerRenderer) {
+                        key = "$mark";
+                    } else if (e instanceof JudgeComponent) {
+                        key = "judge";
                     } else if (e instanceof PerspectiveComponent perspectiveComponent_) {
                         perspectiveComponent = perspectiveComponent_;
                         continue;
@@ -186,7 +184,7 @@ public class UISEditor extends HBox {
 
                 if (perspectiveComponent != null) {
                     GraphicsContext gc = layerCanvasPane.getGraphicsContext2D("note");
-                    perspectiveComponent.render(gc,layerCanvasPane.getWidth(), layerCanvasPane.getHeight());
+                    perspectiveComponent.render(gc, layerCanvasPane.getWidth(), layerCanvasPane.getHeight());
                 }
                 //透视
 
@@ -195,26 +193,32 @@ public class UISEditor extends HBox {
         //宽度变更
         layerCanvasPane.widthProperty().addListener(observable -> {
 
-            ExpressionVector.expressionCalculator.updateCanvasWidth(layerCanvasPane.getWidth());
-            for (ElementRender e : elements.values()) {
-                e.canvasResized(layerCanvasPane.getWidth(), layerCanvasPane.getHeight(), Orientation.HORIZONTAL);
-            }
+
         });
         //高度变更
         layerCanvasPane.heightProperty().addListener(observable -> {
-            ExpressionVector.expressionCalculator.updateCanvasHeight(layerCanvasPane.getHeight());
-            for (ElementRender e : elements.values()) {
-                e.canvasResized(layerCanvasPane.getWidth(), layerCanvasPane.getHeight(), Orientation.VERTICAL);
-            }
+
         });
 
 
         animationTimer.start();
         HBox.setHgrow(layerCanvasPane, Priority.ALWAYS);
-        getChildren().addAll(layerCanvasPane, rightVBox);
+        getChildren().addAll(rightVBox, layerCanvasPane);
 
 
     }
+
+    Runnable reload = () -> {
+        setCanvasSize(resolutionChoiceBox.getValue().getAspectRatio(), scalingFactorSlider.getValue());
+
+
+        if (tabPane.getSelectionModel().getSelectedItem() != null)
+            if (tabPane.getSelectionModel().getSelectedItem().getContent() instanceof UISCodeArea uisCodeArea) {
+                elements.clear();
+                elements.putAll(UISParser.parseToElementMap(uisCodeArea.getFile()));
+                elements.put("$mark", measuringRulerRenderer);
+            }
+    };
 
     public static void main(String[] args) {
         ZXLogger.info("===== > ZXNoter Skin Editor < =====");
@@ -247,14 +251,41 @@ public class UISEditor extends HBox {
             Logging.getJavaFXLogger().enableLogging();
             //初始化 (载入配置 使用资源)
             ZXLogger.info("初始化配置");
-            UISEditor UISEditor = new UISEditor();
-            Scene scene = new Scene(UISEditor);
+            UISEditor uISEditor = new UISEditor();
+            Scene scene = new Scene(uISEditor);
             scene.getStylesheets().addAll("resources/baseExpansionPack/color/style.css");
             scene.getStylesheets().addAll("resources/baseExpansionPack/color/dark.css");
             Stage stage = new Stage();
             stage.setScene(scene);
             stage.show();
+            uISEditor.minWidthProperty().addListener((observable, oldValue, newValue) -> {
+                stage.setMinWidth(newValue.doubleValue());
+            });
+            uISEditor.minHeightProperty().addListener((observable, oldValue, newValue) -> {
+                stage.setMinHeight(newValue.doubleValue());
+            });
         });
+    }
+
+    public void setCanvasSize(double aspectRatio, double zoomRate) {
+        double width = 720 * aspectRatio * zoomRate;
+        double height = 720 * zoomRate;
+
+        layerCanvasPane.setMinSize(width, height);
+        layerCanvasPane.setMaxSize(width, height);
+        setMinSize(width + tabPane.getMinWidth(), height);
+        setPrefSize(width + tabPane.getMinWidth(), height);
+
+        ExpressionVector.expressionCalculator.updateCanvasWidth(width);
+        for (ElementRenderer e : elements.values()) {
+            e.canvasResized(width, height, Orientation.HORIZONTAL);
+        }
+        ExpressionVector.expressionCalculator.updateCanvasHeight(height);
+        for (ElementRenderer e : elements.values()) {
+            e.canvasResized(width, height, Orientation.VERTICAL);
+        }
+
+
     }
 
     public void openFIle(Path path) {
@@ -266,13 +297,11 @@ public class UISEditor extends HBox {
     }
 
     private class ResolutionInfo {
-        private final double width;
-        private final double height;
+        private final double aspectRatio;
         private final String name;
 
-        public ResolutionInfo(double width, double height, String name) {
-            this.width = width;
-            this.height = height;
+        public ResolutionInfo(double aspectRatio, String name) {
+            this.aspectRatio = aspectRatio;
             this.name = name;
         }
 
@@ -281,18 +310,64 @@ public class UISEditor extends HBox {
             return name;
         }
 
-        public double getWidthInfo() {
-            return width;
-        }
-
-        public double getHeightInfo() {
-            return height;
+        public double getAspectRatio() {
+            return aspectRatio;
         }
 
         public String getName() {
             return name;
         }
     }
+
+
+    Button openFileButton = new Button("打开mui文件") {
+        {
+            setOnAction(event -> {
+
+                // 创建文件选择器
+                FileChooser fileChooser = new FileChooser();
+                // 设置初始目录为上一次选择的目录
+                if (lastDirectory != null && lastDirectory.isDirectory()) {
+                    fileChooser.setInitialDirectory(lastDirectory);
+                }
+                fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("MUI 文件", "*.mui"));
+
+                // 显示文件选择对话框
+                File selectedFile = fileChooser.showOpenDialog(null);
+
+                if (selectedFile != null) {
+                    System.out.println("Selected File: " + selectedFile.getAbsolutePath());
+
+                    openFIle(selectedFile.toPath());
+                    // 记录本次选择的目录
+                    lastDirectory = selectedFile.getParentFile();
+                } else {
+                    System.out.println("No file selected.");
+                }
+
+
+            });
+        }
+    };
+
+
+    HBox toolbar = new HBox(resolutionChoiceBox, scalingFactorLabel, scalingFactorSlider, openFileButton) {
+        {
+            setMinHeight(40);
+            setBorder(new Border(new BorderStroke(Color.WHITE, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(0, 0, 1, 0), new Insets(0))));
+            setAlignment(Pos.CENTER_LEFT);
+            setSpacing(16);
+            setPadding(new Insets(0, 8, 0, 8));
+        }
+    };
+    VBox rightVBox = new VBox(toolbar, tabPane) {
+        {
+            setHgrow(this, Priority.ALWAYS);
+            setPrefWidth(260);
+            setBackground(Background.fill(Color.BLACK));
+            setBorder(new Border(new BorderStroke(Color.WHITE, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(0, 1, 0, 0), new Insets(0))));
+        }
+    };
 
 
 }
