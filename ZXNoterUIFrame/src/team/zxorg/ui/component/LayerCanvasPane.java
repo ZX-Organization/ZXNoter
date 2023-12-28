@@ -2,6 +2,7 @@ package team.zxorg.ui.component;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 
 import java.util.ArrayList;
@@ -14,8 +15,8 @@ public class LayerCanvasPane extends StackPane {
     private final HashMap<String, Canvas> canvasMap = new HashMap<>();
     private final ArrayList<Canvas> canvasList = new ArrayList<>();
 
-
-
+    public LayerCanvasPane() {
+    }
 
     /**
      * 获取与此 Canvas 关联的 GraphicsContext

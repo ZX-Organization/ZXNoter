@@ -376,7 +376,7 @@ public class Sonic {
         return numSamples;
     }
 
-    // Read data out of the stream.  Sometimes no data will be available, and zero
+    // Read component out of the stream.  Sometimes no component will be available, and zero
     // is returned, which is not an error condition.
     public int readFloatFromStream(
             float samples[],
@@ -399,7 +399,7 @@ public class Sonic {
         return numSamples;
     }
 
-    // Read short data out of the stream.  Sometimes no data will be available, and zero
+    // Read short component out of the stream.  Sometimes no component will be available, and zero
     // is returned, which is not an error condition.
     public int readShortFromStream(
             short samples[],
@@ -420,7 +420,7 @@ public class Sonic {
         return numSamples;
     }
 
-    // Read unsigned byte data out of the stream.  Sometimes no data will be available, and zero
+    // Read unsigned byte component out of the stream.  Sometimes no component will be available, and zero
     // is returned, which is not an error condition.
     public int readUnsignedByteFromStream(
             byte samples[],
@@ -443,7 +443,7 @@ public class Sonic {
         return numSamples;
     }
 
-    // Read unsigned byte data out of the stream.  Sometimes no data will be available, and zero
+    // Read unsigned byte component out of the stream.  Sometimes no component will be available, and zero
     // is returned, which is not an error condition.
     public int readBytesFromStream(
             byte outBuffer[],
@@ -469,7 +469,7 @@ public class Sonic {
         return 2 * numSamples * numChannels;
     }
 
-    // Force the AudioPlayer.sonic stream to generate output using whatever data it currently
+    // Force the AudioPlayer.sonic stream to generate output using whatever component it currently
     // has.  No extra delay will be added to the output, but flushing in the middle of
     // words could introduce distortion.
     public void flushStream() {
@@ -948,7 +948,7 @@ public class Sonic {
         }
     }
 
-    // Write floating point data to the input buffer and process it.
+    // Write floating point component to the input buffer and process it.
     public void writeFloatToStream(
             float samples[],
             int numSamples) {
@@ -956,7 +956,7 @@ public class Sonic {
         processStreamInput();
     }
 
-    // Write the data to the input stream, and process it.
+    // Write the component to the input stream, and process it.
     public void writeShortToStream(
             short samples[],
             int numSamples) {

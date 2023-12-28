@@ -2,6 +2,7 @@ package team.zxorg.newskin;
 
 import com.sun.javafx.application.PlatformImpl;
 import com.sun.javafx.util.Logging;
+import team.zxorg.newskin.uis.ExpressionCalculator;
 import team.zxorg.newskin.uis.UISSkin;
 import team.zxorg.zxncore.ZXLogger;
 
@@ -19,9 +20,12 @@ public class Test {
             //初始化 (载入配置 使用资源)
             ZXLogger.info("初始化配置");
 
-
-            UISSkin skin = new UISSkin(Path.of("D:\\malody\\skin\\ttb5原始 -最新测试\\script-key-4K.mui"));
-            skin.getExpressionCalculator().setCanvasSize(1920, 1080);
+            ExpressionCalculator expressionCalculator=new ExpressionCalculator();
+            expressionCalculator.setCanvasSize(1920, 1080);
+            UISSkin skin = new UISSkin(Path.of("D:\\malody\\skin\\Xiang Vma-3.3\\pc-4K.mui"),expressionCalculator);
+            System.out.println(skin.getComponent("_black-1"));
+            System.out.println(skin.getComponent("_black-1").getImage("tex"));
+            System.out.println(skin.getComponent("_black-1").getPath("bg/bg-4k.png"));
         });
     }
 

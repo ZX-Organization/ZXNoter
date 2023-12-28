@@ -5,6 +5,7 @@ import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.effect.PerspectiveTransform;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
@@ -13,8 +14,13 @@ import javafx.scene.paint.Color;
  */
 public class RenderRectangle {
     private double left, top, right, bottom, width, height;
+    Orientation flip = null;
 
     public RenderRectangle() {
+    }
+
+    public void setFlip(Orientation flip) {
+        this.flip = flip;
     }
 
     public RenderRectangle(double left, double top, double right, double bottom) {
@@ -66,6 +72,22 @@ public class RenderRectangle {
 
     public double getCenterY() {
         return top + height / 2;
+    }
+
+    public double getPosX(HPos pos) {
+        return switch (pos) {
+            case LEFT -> left;
+            case CENTER -> left + width / 2;
+            case RIGHT -> right;
+        };
+    }
+
+    public double getPosY(VPos pos) {
+        return switch (pos) {
+            case TOP -> top;
+            case CENTER, BASELINE -> left + width / 2;
+            case BOTTOM -> bottom;
+        };
     }
 
     public boolean setLeft(double left) {
@@ -322,7 +344,33 @@ public class RenderRectangle {
      * @param image 图片
      */
     public void drawImage(GraphicsContext gc, Image image) {
-        gc.drawImage(image, getLeft(), getTop(), getWidth(), getHeight());
+        if (image != null)
+            drawImage(gc, image, flip);
+    }
+
+    PerspectiveTransform pt;
+
+    /**
+     * 绘制图片 透视
+     *
+     * @param gc    图形上下文
+     * @param image 图片
+     */
+    public void drawImage(GraphicsContext gc, Image image, double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4) {
+        if (pt == null)
+            pt = new PerspectiveTransform();
+        pt.setUlx(x1);
+        pt.setUly(y1);
+        pt.setUrx(x2);
+        pt.setUry(y2);
+
+        pt.setLlx(x3);
+        pt.setLly(y3);
+        pt.setLrx(x4);
+        pt.setLry(y4);
+        gc.setEffect(pt);
+        drawImage(gc, image);
+        gc.setEffect(null);
     }
 
     /**
@@ -359,7 +407,7 @@ public class RenderRectangle {
             gc.scale(-1, 1);  // 水平翻转
             gc.drawImage(image, -getLeft() - getWidth(), getTop(), getWidth(), getHeight());
         } else {
-            drawImage(gc, image);
+            gc.drawImage(image, getLeft(), getTop(), getWidth(), getHeight());
         }
         gc.restore();
     }

@@ -1,5 +1,6 @@
 package team.zxorg.newskin.uis;
 
+import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.image.Image;
 import team.zxorg.zxncore.ZXLogger;
@@ -81,6 +82,16 @@ public class UISComponent {
     }
 
     /**
+     * 包含属性
+     *
+     * @param name 属性名
+     * @return 是否包含
+     */
+    public boolean contains(String name) {
+        return properties.containsKey(name);
+    }
+
+    /**
      * 如果属性被修改过，则会返回true并复位。
      *
      * @return 是否被修改过
@@ -95,6 +106,8 @@ public class UISComponent {
 
     public String getString(String name, String defaultValue) {
         String value = properties.getOrDefault(name, defaultValue);
+        if (value == null)
+            return null;
         // 匹配{}差值变量并覆盖
         Pattern pattern = Pattern.compile("\\{([^{}]+)\\}");
         Matcher matcher = pattern.matcher(value);
@@ -112,6 +125,9 @@ public class UISComponent {
         return result.toString().isEmpty() ? value : result.toString();
     }
 
+    public UISFrame getFrame(String name) {
+        return new UISFrame(this, name);
+    }
 
     /**
      * 获取整数
@@ -126,6 +142,19 @@ public class UISComponent {
         } catch (NumberFormatException e) {
             return defaultValue;
         }
+    }
+
+    /**
+     * 获取方向
+     * @param name 属性名
+     * @return 方向
+     */
+    public Orientation getOrientation(String name) {
+        return switch (getInt(name, -1)) {
+            case 0 -> Orientation.HORIZONTAL;
+            case 1 -> Orientation.VERTICAL;
+            default -> null;
+        };
     }
 
     /**
@@ -160,15 +189,30 @@ public class UISComponent {
      * @return 图片 没找到返回UNKNOWN
      */
     public Image getImage(String name) {
-        Path path = getPath(name);
+        String str = getString(name, null);
+        if (str == null) {
+            ZXLogger.warning(getFullName() + " 没有属性 " + name);
+            return UNKNOWN;
+        }
+        return getImageFromPath(str);
+    }
+
+    /**
+     * 获取图片
+     *
+     * @param str 路径名
+     * @return 图片 没找到返回UNKNOWN
+     */
+    public Image getImageFromPath(String str) {
+        Path path = getPath(str);
         if (path == null) {
-            ZXLogger.warning("没有此图片 " + name);
+            ZXLogger.warning(getFullName() + " 未找到资源 " + str);
             return UNKNOWN;
         }
         try {
             return new Image(Files.newInputStream(path));
         } catch (IOException e) {
-            ZXLogger.warning("无法载入图片 " + path);
+            ZXLogger.warning(getFullName() + " 无法载入图片 " + path);
         }
         return UNKNOWN;
     }
@@ -200,16 +244,23 @@ public class UISComponent {
      * @return 图片序列
      */
     public List<Image> getImageList(String name) {
-        String frameInfo = getString(name, "");
+        String frameInfo = getString(name, null);
+        if (frameInfo == null)
+            return new ArrayList<>();
 
         int delimiter = frameInfo.lastIndexOf("/");
+        if (delimiter <= 0) {
+            ZXLogger.warning("Invalid image list: " + frameInfo + "  --  " + this);
+            return new ArrayList<>();
+        }
+
         String path = frameInfo.substring(0, delimiter);
         String[] indexes = frameInfo.substring(delimiter + 1).split("-");
         int from = Integer.parseInt(indexes[0]);
         int to = Integer.parseInt(indexes[1]);
         List<Image> images = new ArrayList<>(to - from + 1);
         for (int i = from; i < to + 1; i++) {
-            images.add(getImage(path + "-" + i + ".png"));
+            images.add(getImageFromPath(path + "-" + i + ".png"));
         }
         return images;
     }

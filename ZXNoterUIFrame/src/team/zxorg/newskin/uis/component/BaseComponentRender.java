@@ -1,5 +1,6 @@
-package team.zxorg.newskin.uis.data;
+package team.zxorg.newskin.uis.component;
 
+import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.effect.Shadow;
@@ -14,6 +15,7 @@ import team.zxorg.newskin.uis.UISComponent;
  * 组件属性数据
  */
 public abstract class BaseComponentRender implements ElementRenderInterface {
+
     /**
      * 元件名
      */
@@ -64,14 +66,37 @@ public abstract class BaseComponentRender implements ElementRenderInterface {
      * 渲染矩形
      */
     private RenderRectangle rr = new RenderRectangle();
-
     private Shadow shadow = new Shadow();
+
+    protected Orientation flip;
 
     public BaseComponentRender(UISComponent component) {
         this.component = component;
+        reloadComponent_();
     }
 
-    private void reloadComponent() {
+    public final UISComponent getComponent() {
+        return component;
+    }
+
+    /**
+     * top 3d bottom
+     *
+     * @return
+     */
+    public final String getLayoutName() {
+        return (getZindex() < 0 ? "bottom" : (getZindex() <= 100 ? "3d" : "bottom"));
+    }
+
+    public final String getName() {
+        return name;
+    }
+
+    public final int getZindex() {
+        return zindex;
+    }
+
+    private void reloadComponent_() {
         name = component.getName();
         tex = component.getImage("tex");
         pos = component.getExpressionVector("pos");
@@ -84,15 +109,19 @@ public abstract class BaseComponentRender implements ElementRenderInterface {
         type = component.getInt("type", 0);
         index = component.getIndex();
         shadow.setColor(color);
+        flip = component.getOrientation("flip");
+        rr.setFlip(flip);
+        reloadComponent(component);
     }
+
+    abstract void reloadComponent(UISComponent component);
 
     @Override
     final public void draw(GraphicsContext gc, double width, double height) {
         //检查是否被改动过，如果被改动过，重新加载元件信息
         if (component.isChanged()) {
-            reloadComponent();
+            reloadComponent_();
         }
-
 
         double proportionalWidth = size.getWidth();
         double proportionalHeight = size.getHeight();
@@ -114,7 +143,7 @@ public abstract class BaseComponentRender implements ElementRenderInterface {
             gc.translate(-pos.getX(), -pos.getY());
         }
         drawComponent(gc, rr, width, height);
-        gc.applyEffect(shadow);
+        //gc.applyEffect(shadow);
 
         gc.restore();
     }

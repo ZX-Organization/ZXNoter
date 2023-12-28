@@ -9,38 +9,75 @@ import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
-import javafx.scene.effect.BlendMode;
-import javafx.scene.input.MouseButton;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.fxmisc.flowless.VirtualizedScrollPane;
-import team.zxorg.skin.ExpressionCalculator;
-import team.zxorg.skin.LayerCanvasPane;
-import team.zxorg.skin.basis.ElementRenderInterface;
-import team.zxorg.skin.components.*;
+import team.zxorg.newskin.uis.ExpressionCalculator;
+import team.zxorg.newskin.uis.UISComponent;
+import team.zxorg.newskin.uis.UISSkin;
+import team.zxorg.newskin.uis.component.*;
+import team.zxorg.ui.component.LayerCanvasPane;
 import team.zxorg.zxncore.ZXLogger;
 import team.zxorg.zxncore.ZXVersion;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.HashMap;
+import java.util.ArrayList;
 
 public class UISEditor extends HBox {
+    UISSkin skin;
+    Perspective perspective = new Perspective();
     ExpressionCalculator expressionCalculator = new ExpressionCalculator();
-    MeasuringRulerRendererInterface measuringRulerRenderer = new MeasuringRulerRendererInterface();
-    HashMap<String, ElementRenderInterface> elements = new HashMap<>();
+
+    ArrayList<BaseComponentRender> componentRenders = new ArrayList<>();
     LayerCanvasPane layerCanvasPane = new LayerCanvasPane() {
         {
             setBorder(new Border(new BorderStroke(Color.WHITE, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(1), new Insets(0))));
         }
     };
+    TabPane tabPane = new TabPane() {
+        {
+            VBox.setVgrow(this, Priority.ALWAYS);
+            setPrefWidth(600);
+            setMinWidth(600);
+        }
+    };
+    ChoiceBox<ResolutionInfo> resolutionChoiceBox = new ChoiceBox<>() {
+        {
+            getItems().addAll(
+                    new ResolutionInfo(1.333333333333333, "ipad 4:3"),
+                    new ResolutionInfo(1.333984375, "ipad Evans ≈4:3"),
+                    new ResolutionInfo(1.431654676258993, "ipad xu ≈4:3"),
+                    new ResolutionInfo(1.6, "平板 16:10"),
+                    new ResolutionInfo(1.706666666666667, "手机 17:10"),
+                    new ResolutionInfo(1.777777777777778, "电脑 16:9")
+            );
 
+        }
+    };
+    ChoiceBox<UnitInfo> unitChoiceBox = new ChoiceBox<>() {
+        {
+            getItems().addAll(
+                    new UnitInfo("像素", "px", 1),
+                    new UnitInfo("游戏像素", "gpx", 0),
+                    new UnitInfo("百分比", "%", 2)
+            );
+            valueProperty().addListener((observable, oldValue, newValue) -> {
+                //measuringRulerRenderer.unit = newValue;
+            });
+            getSelectionModel().selectFirst();
+        }
+    };
+    Label scalingFactorLabel = new Label("缩放: 100%") {
+        {
+            setPrefWidth(70);
+        }
+    };
     Slider scalingFactorSlider = new Slider() {
         {
             setMin(0.2);
@@ -65,53 +102,6 @@ public class UISEditor extends HBox {
             });
         }
     };
-
-    TabPane tabPane = new TabPane() {
-        {
-            VBox.setVgrow(this, Priority.ALWAYS);
-            setPrefWidth(600);
-            setMinWidth(600);
-        }
-    };
-    ChoiceBox<ResolutionInfo> resolutionChoiceBox = new ChoiceBox<>() {
-        {
-            getItems().addAll(
-                    new ResolutionInfo(1.333333333333333, "ipad 4:3"),
-                    new ResolutionInfo(1.333984375, "ipad Evans ≈4:3"),
-                    new ResolutionInfo(1.431654676258993, "ipad xu ≈4:3"),
-                    new ResolutionInfo(1.6, "平板 16:10"),
-                    new ResolutionInfo(1.706666666666667, "手机 17:10"),
-                    new ResolutionInfo(1.777777777777778, "电脑 16:9")
-            );
-
-        }
-    };
-
-    ChoiceBox<UnitInfo> unitChoiceBox = new ChoiceBox<>() {
-        {
-            getItems().addAll(
-                    new UnitInfo("像素", "px", 1),
-                    new UnitInfo("游戏像素", "gpx", 0),
-                    new UnitInfo("百分比", "%", 2)
-            );
-            valueProperty().addListener((observable, oldValue, newValue) -> {
-                measuringRulerRenderer.unit = newValue;
-            });
-            getSelectionModel().selectFirst();
-        }
-    };
-
-
-    Label scalingFactorLabel = new Label("缩放: 100%") {
-        {
-            setPrefWidth(70);
-        }
-    };
-    Button reloadButton = new Button("重载") {
-        {
-            setOnAction(event -> reload());
-        }
-    };
     private File lastDirectory = new File("D:\\malody\\skin\\Evans-进行中"); // 记录上一次选择的目录
 
     public UISEditor() {
@@ -119,7 +109,8 @@ public class UISEditor extends HBox {
         tabPane.getSelectionModel().selectedItemProperty().addListener(observable -> reloadButton.getOnAction().handle(new ActionEvent()));
 
         resolutionChoiceBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            setCanvasSize(newValue.getAspectRatio(), scalingFactorSlider.getValue());
+            //setCanvasSize(newValue.getAspectRatio(), scalingFactorSlider.getValue());
+            reload();
         });
         resolutionChoiceBox.getSelectionModel().selectLast();
 
@@ -132,15 +123,11 @@ public class UISEditor extends HBox {
         });*/
         setBackground(Background.fill(Color.BLACK));
 
-        layerCanvasPane.createCanvas("other");
-        layerCanvasPane.createCanvas("note");
-        layerCanvasPane.createCanvas("press");
-        layerCanvasPane.createCanvas("hit").setBlendMode(BlendMode.LIGHTEN);
-        layerCanvasPane.createCanvas("judge");
-        layerCanvasPane.createCanvas("touch");
-        Canvas canvas = layerCanvasPane.createCanvas("$mark");
+        layerCanvasPane.createCanvas("bottom");
+        layerCanvasPane.createCanvas("3d").setEffect(perspective.getEffect());
+        layerCanvasPane.createCanvas("top");
 
-        canvas.setOnMousePressed(event -> {
+        /*canvas.setOnMousePressed(event -> {
             if (event.getButton().equals(MouseButton.PRIMARY)) {
                 measuringRulerRenderer.setPos = 1;
             } else {
@@ -160,49 +147,19 @@ public class UISEditor extends HBox {
                 case 2 -> measuringRulerRenderer.setPos2(event.getX(), event.getY());
             }
         });
-        canvas.setOnMouseReleased(event -> measuringRulerRenderer.setPos = 0);
+        canvas.setOnMouseReleased(event -> measuringRulerRenderer.setPos = 0);*/
         //画布更新线程常驻
         AnimationTimer animationTimer = new AnimationTimer() {
             @Override
             public void handle(long l) {
                 layerCanvasPane.clearRect();
-                PerspectiveComponent perspectiveComponent = null;
-                for (ElementRenderInterface e : elements.values()) {
-
-                    String key = "other";
-                    if (e instanceof NoteComponent) {
-                        key = "note";
-                    } else if (e instanceof PressComponent) {
-                        key = "press";
-                    } else if (e instanceof HitComponent) {
-                        key = "hit";
-                    } else if (e instanceof TouchComponent) {
-                        key = "touch";
-                    } else if (e instanceof MeasuringRulerRendererInterface) {
-                        key = "$mark";
-                    } else if (e instanceof JudgeComponent) {
-                        key = "judge";
-                    } else if (e instanceof PerspectiveComponent perspectiveComponent_) {
-                        perspectiveComponent = perspectiveComponent_;
-                        continue;
-                    }
-
-                    GraphicsContext gc = layerCanvasPane.getGraphicsContext2D(key);
-
-
+                for (BaseComponentRender cr : componentRenders) {
+                    GraphicsContext gc = layerCanvasPane.getGraphicsContext2D(cr.getLayoutName());
                     try {
-                        e.draw(gc, layerCanvasPane.getWidth(), layerCanvasPane.getHeight());
-                    } catch (Exception exception) {
-
+                        cr.draw(gc, expressionCalculator.getCanvasWidth(), expressionCalculator.getCanvasHeight());
+                    } catch (Exception e) {
                     }
                 }
-
-                if (perspectiveComponent != null) {
-                    GraphicsContext gc = layerCanvasPane.getGraphicsContext2D("note");
-                    perspectiveComponent.draw(gc, layerCanvasPane.getWidth(), layerCanvasPane.getHeight());
-                }
-                //透视
-
             }
         };
 
@@ -210,19 +167,6 @@ public class UISEditor extends HBox {
         animationTimer.start();
         HBox.setHgrow(layerCanvasPane, Priority.ALWAYS);
         getChildren().addAll(sideVBox, layerCanvasPane);
-    }
-
-    public void reload() {
-        setCanvasSize(resolutionChoiceBox.getValue().getAspectRatio(), scalingFactorSlider.getValue());
-
-
-        if (tabPane.getSelectionModel().getSelectedItem() != null)
-            if (tabPane.getSelectionModel().getSelectedItem().getContent() instanceof VirtualizedScrollPane uis) {
-
-                elements.clear();
-                elements.putAll(UISParser.parseToElementMap(((UISCodeArea) uis.getContent()).getFile()));
-                elements.put("$mark", measuringRulerRenderer);
-            }
     }
 
     public static void main(String[] args) {
@@ -272,15 +216,64 @@ public class UISEditor extends HBox {
         });
     }
 
+    public void reload() {
+
+
+        if (tabPane.getSelectionModel().getSelectedItem() != null)
+            if (tabPane.getSelectionModel().getSelectedItem().getContent() instanceof VirtualizedScrollPane uis) {
+                componentRenders.clear();
+
+
+                skin = new UISSkin(((UISCodeArea) uis.getContent()).getFile(), expressionCalculator);
+                perspective.setAngle(skin.getAngle());
+                for (UISComponent component : skin.getLinkedComponents()) {
+                    BaseComponentRender r;
+                    if (component.getName().startsWith("_")) {
+                        r = switch (component.getInt("type", 0)) {
+                            case 0 -> new ImageComponentRender(component);
+                            case 1 -> new TextComponentRender(component);
+                            case 2 -> new RectangleComponentRender(component);
+                            case 3 -> new AnimationComponentRender(component);
+                            default -> null;
+                        };
+
+                    } else {
+                        r = switch (component.getName()) {
+                            case "note" -> new NoteComponentRender(component);
+                            case "key" -> new KeyComponentRender(component);
+                            case "hit" -> new HitComponentRender(component);
+                            case "press" -> new PressComponentRender(component);
+                            case "judge" -> new JudgeComponentRender(component);
+                            default -> null;
+                        };
+                    }
+
+
+                    if (r != null) {
+                        //System.out.println("载入组件: " + r);
+                        r.initialize(layerCanvasPane.getCanvas(r.getLayoutName()));
+                        componentRenders.add(r);
+                    }
+                }
+
+                //componentRenders.putAll(UISParser.parseToElementMap();
+                //componentRenders.put("$mark", measuringRulerRenderer);
+            }
+        setCanvasSize(resolutionChoiceBox.getValue().getAspectRatio(), scalingFactorSlider.getValue());
+    }
+
     public void setCanvasSize(double aspectRatio, double zoomRate) {
-        double width = 720 * aspectRatio * zoomRate;
-        double height = 720 * zoomRate;
+        double unitHeight = expressionCalculator.getUnitCanvasHeight();
+        double width = unitHeight * aspectRatio * zoomRate;
+        double height = unitHeight * zoomRate;
 
         layerCanvasPane.setMinSize(width, height);
         layerCanvasPane.setMaxSize(width, height);
         setMinSize(width + tabPane.getMinWidth(), height);
         setPrefSize(width + tabPane.getMinWidth(), height);
         expressionCalculator.setCanvasSize(width, height);
+        perspective.setSize(width, height);
+        //expressionCalculator.setCanvasSize(width, height);
         /*ExpressionVector.expressionCalculator.updateCanvasWidth(width);
         for (ElementRenderer e : elements.values()) {
             e.canvasResized(width, height, Orientation.HORIZONTAL);
@@ -289,8 +282,7 @@ public class UISEditor extends HBox {
         for (ElementRenderer e : elements.values()) {
             e.canvasResized(width, height, Orientation.VERTICAL);
         }*/
-        reload();
-
+        //reload();
     }
 
     public void openFIle(Path path) {
@@ -363,6 +355,12 @@ public class UISEditor extends HBox {
             return name;
         }
     }
+
+    Button reloadButton = new Button("重载") {
+        {
+            setOnAction(event -> reload());
+        }
+    };
 
 
     Button openFileButton = new Button("打开mui文件") {

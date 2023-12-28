@@ -150,12 +150,12 @@ public class App2 extends Application {
 
             buf.position(0);
             for (int i = 0; i < N; i++) {
-                data[i] = new Complex(buf.getShort() / 80., 0);
+                component[i] = new Complex(buf.getShort() / 80., 0);
             }
 
             //傅里叶变换计算
-            data = FFT.getFFT(data, N);//傅里叶变换
-            Double[] x2 = Complex.toModArray(data);//计算傅里叶变换得到的复数数组的模值
+            component = FFT.getFFT(component, N);//傅里叶变换
+            Double[] x2 = Complex.toModArray(component);//计算傅里叶变换得到的复数数组的模值
             for (int i = 0; i < N / 2; i++) {
                 x2[N / 2 + i] = x2[N / 2 + i] / N * 3;
                 int c = (int) (x2[N / 2 + i] * 20);
