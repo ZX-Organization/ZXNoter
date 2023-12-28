@@ -1,4 +1,4 @@
-package team.zxorg.skin;
+package team.zxorg.ui.component;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;

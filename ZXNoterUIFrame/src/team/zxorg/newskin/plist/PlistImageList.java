@@ -1,14 +1,17 @@
-package team.zxorg.skin.plist;
+package team.zxorg.newskin.plist;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 import javax.imageio.ImageIO;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,8 +28,7 @@ public class PlistImageList {
         return textureFileName;
     }
 
-    public PlistImageList(Path plistPath) {
-        try {
+    public PlistImageList(Path plistPath) throws ParserConfigurationException, IOException, SAXException {
             // 读取plist文件
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
@@ -48,9 +50,7 @@ public class PlistImageList {
                 images.add(image);
                 frameNode = frameInfo.getNextSibling().getNextSibling();
             }
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+
     }
 
 

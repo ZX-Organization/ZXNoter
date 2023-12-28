@@ -1,35 +1,15 @@
-[03:56:28] [UISEditor.main/INFO]: ZXLogger 日志系统 初始化完毕
-[03:56:28] [UISEditor.main/INFO]: ===== > ZXNoter Skin Editor < =====
-[03:56:28] [UISEditor.main/INFO]: Version: 0.0.0-Alpha Code: 0
-[03:56:28] [UISEditor.main/WARNING]: 当前为 [早期开发版本] 请谨慎测试软件功能
-[03:56:28] [UISEditor.main/INFO]: ZXNoter Skin Editor启动
-[03:56:28] [UISEditor.main/INFO]: 初始化图形系统
-[03:56:28] [UISEditor.lambda$main$10/INFO]: 初始化配置
-[03:56:36] [UISEditor$8.lambda$new$0/INFO]: Selected File: D:\malody\skin\ttb5测试-再修改\script-key-6K.mui
-[03:56:36] [UISParser.parseToMap/INFO]: uis 开始解析: script-key-6K.mui
-[03:56:36] [UISParser.parseToMap/INFO]: uis 插入: base.mui
-[03:56:36] [UISParser.parseToMap/INFO]: uis 开始解析: base.mui
-[03:56:36] [UISParser.parseToMap/INFO]: uis 解析完成: base.mui
-[03:56:36] [UISParser.parseToMap/INFO]: uis 解析完成: script-key-6K.mui
-[03:56:36] [UISParser.parseToElementMap/INFO]: 解析组件: _bgbg
-[03:56:36] [UISParser.parseToElementMap/INFO]: 解析组件: _pause
-[03:56:36] [UISParser.parseToElementMap/INFO]: 解析组件: _hpbg
-[03:56:36] [PerspectiveComponent.<init>/INFO]: 补偿值: 0.4712964082761413
-[03:56:36] [UISParser.parseToElementMap/INFO]: 解析组件: _scorebg
-[03:56:36] [UISParser.parseToElementMap/INFO]: 解析组件: _accbg
-[03:56:36] [UISParser.parseToElementMap/INFO]: 解析组件: _t
-[03:56:36] [UISParser.parseToElementMap/INFO]: 解析组件: _scoremaxcombobg
-[03:56:37] [UISCodeArea$1.accept/INFO]: 自动保存
-[03:56:37] [UISParser.parseToMap/INFO]: uis 开始解析: script-key-6K.mui
-[03:56:37] [UISParser.parseToMap/INFO]: uis 插入: base.mui
-[03:56:37] [UISParser.parseToMap/INFO]: uis 开始解析: base.mui
-[03:56:37] [UISParser.parseToMap/INFO]: uis 解析完成: base.mui
-[03:56:37] [UISParser.parseToMap/INFO]: uis 解析完成: script-key-6K.mui
-[03:56:37] [UISParser.parseToElementMap/INFO]: 解析组件: _bgbg
-[03:56:37] [UISParser.parseToElementMap/INFO]: 解析组件: _pause
-[03:56:37] [UISParser.parseToElementMap/INFO]: 解析组件: _hpbg
-[03:56:37] [PerspectiveComponent.<init>/INFO]: 补偿值: 0.4712964082761413
-[03:56:37] [UISParser.parseToElementMap/INFO]: 解析组件: _scorebg
-[03:56:37] [UISParser.parseToElementMap/INFO]: 解析组件: _accbg
-[03:56:37] [UISParser.parseToElementMap/INFO]: 解析组件: _t
-[03:56:37] [UISParser.parseToElementMap/INFO]: 解析组件: _scoremaxcombobg
+[20:17:13] [Test.main/INFO]: ZXLogger 日志系统 初始化完毕
+[20:17:13] [Test.main/INFO]: 内部测试类
+[20:17:13] [Test.main/INFO]: 初始化图形系统
+[20:17:13] [Test.lambda$main$0/INFO]: 初始化配置
+[20:17:13] [UISSkin.parseMUI/INFO]: 引用 mui: base.mui
+[20:17:13] [UISSkin.parseMUI/INFO]: 引用 纹理包: number
+[20:17:13] [UISSkin.parseMUI/INFO]: 引用 纹理包: beco
+[20:17:14] [UISSkin.parseMUI/INFO]: 引用 纹理包: gomi
+[20:17:14] [UISSkin.parseMUI/INFO]: 引用 纹理包: hits
+[20:17:14] [UISSkin.parseMUI/INFO]: 引用 纹理包: hitlg
+[20:17:14] [UISSkin.parseMUI/INFO]: 引用 纹理包: cat
+[20:17:14] [UISSkin.parseMUI/INFO]: 引用 纹理包: ot
+[20:17:14] [UISSkin.parseMUI/INFO]: 引用 纹理包: man
+[20:17:14] [UISSkin.parseMUI/INFO]: 引用 纹理包: note
+[20:17:14] [UISComponent.<clinit>/INFO]: 载入基本资源

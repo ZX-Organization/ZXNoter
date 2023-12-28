@@ -4,7 +4,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class ExpressionVector {
-    public static final ExpressionCalculator expressionCalculator = new ExpressionCalculator();
+    public final ExpressionCalculator expressionCalculator;
     private final StringProperty xExpression = new SimpleStringProperty();
     private final StringProperty yExpression = new SimpleStringProperty();
 
@@ -23,16 +23,17 @@ public class ExpressionVector {
                 '}';
     }
 
-    public ExpressionVector() {
-        this("", "");
+    public ExpressionVector(ExpressionCalculator expressionCalculator) {
+        this("", "", expressionCalculator);
     }
 
-    public ExpressionVector(String xValue, String yValue) {
+    public ExpressionVector(String xValue, String yValue, ExpressionCalculator expressionCalculator) {
+        this.expressionCalculator = expressionCalculator;
         xExpression.addListener((observable, oldValue, newValue) -> {
             String[] values = newValue.split("\\$");
             if (values.length >= 3) {
                 //有偏移
-                x = expressionCalculator.calculateX(values[0] + "+" + expressionCalculator.calculateX(values[1])*Integer.parseInt(values[2])+"px");
+                x = expressionCalculator.calculateX(values[0] + "+" + expressionCalculator.calculateX(values[1]) * Integer.parseInt(values[2]) + "px");
             } else {
                 x = expressionCalculator.calculateX(newValue);
                 w = expressionCalculator.calculateW(newValue);
@@ -43,14 +44,14 @@ public class ExpressionVector {
             String[] values = newValue.split("\\$");
             if (values.length >= 3) {
                 //有偏移
-                y = expressionCalculator.calculateY(values[0] + "+" +expressionCalculator.calculateX(values[1])*Integer.parseInt(values[2])+ "px");
+                y = expressionCalculator.calculateY(values[0] + "+" + expressionCalculator.calculateX(values[1]) * Integer.parseInt(values[2]) + "px");
             } else {
                 y = expressionCalculator.calculateY(newValue);
                 h = expressionCalculator.calculateH(newValue);
             }
 
         });
-        expressionCalculator.addCanvasSizeChangeEvent((orientation) -> {
+        /*expressionCalculator.addCanvasSizeChangeEvent((orientation) -> {
             switch (orientation) {
                 case HORIZONTAL -> {
                     x = expressionCalculator.calculateX(xExpression.getValue());
@@ -61,16 +62,16 @@ public class ExpressionVector {
                     h = expressionCalculator.calculateH(yExpression.getValue());
                 }
             }
-        });
+        });*/
         setX(xValue);
         setY(yValue);
     }
 
-    public static ExpressionVector parse(String expression) {
+    public static ExpressionVector parse(String expression, ExpressionCalculator expressionCalculator) {
         if (expression == null) return null;
         String[] str = expression.split(",");
-        if (str.length == 1) return new ExpressionVector(str[0].trim(), "");
-        if (str.length == 2) return new ExpressionVector(str[0].trim(), str[1].trim());
+        if (str.length == 1) return new ExpressionVector(str[0].trim(), "", expressionCalculator);
+        if (str.length == 2) return new ExpressionVector(str[0].trim(), str[1].trim(), expressionCalculator);
         if (str.length == 3) {
             int index = Integer.parseInt(str[2].trim()) - 1;
             String x = str[0].trim();
@@ -79,7 +80,7 @@ public class ExpressionVector {
                 x += "$" + index;
             if (y.contains("$"))
                 y += "$" + index;
-            return new ExpressionVector(x, y);
+            return new ExpressionVector(x, y, expressionCalculator);
         }
         return null;
     }

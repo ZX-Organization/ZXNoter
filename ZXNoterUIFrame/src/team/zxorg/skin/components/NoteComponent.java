@@ -5,7 +5,7 @@ import javafx.geometry.Pos;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import team.zxorg.skin.ExpressionVector;
-import team.zxorg.skin.basis.ElementRenderer;
+import team.zxorg.skin.basis.ElementRenderInterface;
 import team.zxorg.skin.basis.RenderRectangle;
 
 import java.io.InputStream;
@@ -16,7 +16,7 @@ import java.util.Random;
 import static team.zxorg.skin.uis.UISParser.getAnchorPos;
 import static team.zxorg.skin.uis.UISParser.getResource;
 
-public class NoteComponent implements ElementRenderer {
+public class NoteComponent implements ElementRenderInterface {
 
     /**
      * 定义note出现的位置
@@ -105,31 +105,12 @@ public class NoteComponent implements ElementRenderer {
 
         //设置渲染矩阵
         gc.save();
-        gc.setGlobalAlpha(0.5);
-        rr.setSize(anchor, imgW, imgH);
-        rr.setPos(anchor, imgX, imgY);
-        rr.drawImageTest(gc, tex);
-        gc.restore();
 
-        progress2 += (progress3 ? -0.01 : 0.01);
-        if (progress2 >= 1 || progress2 <= 0)
-            progress3 = !progress3;
-        gc.save();
-        gc.setGlobalAlpha(progress2);
-        rr.setSize(anchor, size.getWidth(), size.getHeight());
-        rr.setPos(anchor, pos.getX(), pos.getY());
-        rr.drawImageTest(gc, tex);
-        gc.restore();
-        gc.save();
-        gc.setGlobalAlpha(progress2);
-        rr.setSize(anchor, size2.getWidth(), size2.getHeight());
-        rr.setPos(anchor, pos2.getX(), pos2.getY());
-        rr.drawImageTest(gc, tex);
         gc.restore();
     }
 
     @Override
-    public void render(GraphicsContext gc, double canvasWidth, double canvasHeight) {
+    public void draw(GraphicsContext gc, double canvasWidth, double canvasHeight) {
         progress += 0.004;
         progress %= 1;
         if (type == 0) {

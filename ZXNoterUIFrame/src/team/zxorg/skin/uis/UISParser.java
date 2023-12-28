@@ -1,7 +1,7 @@
 package team.zxorg.skin.uis;
 
 import javafx.geometry.Pos;
-import team.zxorg.skin.basis.ElementRenderer;
+import team.zxorg.skin.basis.ElementRenderInterface;
 import team.zxorg.skin.components.*;
 import team.zxorg.zxncore.ZXLogger;
 
@@ -83,7 +83,7 @@ public class UISParser {
                 //是元素 更新元素
                 //System.out.println("Element: " + line);
                 currentElements.clear();
-                for (String elementName : parseElementNames(line)) {
+                for (String elementName : parseComponentNames(line)) {
                     if (uis.containsKey(elementName)) {
                         currentElements.put(elementName, uis.get(elementName));
                     } else {
@@ -102,7 +102,7 @@ public class UISParser {
         return uis;
     }
 
-    public static HashMap<String, ElementRenderer> parseToElementMap(Path file) {
+    public static HashMap<String, ElementRenderInterface> parseToElementMap(Path file) {
         HashMap<String, HashMap<String, String>> uisMap;
         try {
             uisMap = parseToMap(file);
@@ -113,13 +113,13 @@ public class UISParser {
         return parseToElementMap(file.getParent(), uisMap);
     }
 
-    public static HashMap<String, ElementRenderer> parseToElementMap(Path divPath, HashMap<String, HashMap<String, String>> uisMap) {
+    public static HashMap<String, ElementRenderInterface> parseToElementMap(Path divPath, HashMap<String, HashMap<String, String>> uisMap) {
 
-        HashMap<String, ElementRenderer> uis = new HashMap<>();
+        HashMap<String, ElementRenderInterface> uis = new HashMap<>();
 
 
         for (String elementName : uisMap.keySet()) {
-            ElementRenderer element = null;
+            ElementRenderInterface element = null;
             HashMap<String, String> properties = uisMap.get(elementName);
             try {
                 if (elementName.startsWith("note-")) {
@@ -132,11 +132,15 @@ public class UISParser {
                     element = new PerspectiveComponent(properties.getOrDefault("angle", "0"));
                 } else if (elementName.equals("touch")) {
                     element = new TouchComponent(properties, divPath);
+                } else if (elementName.equals("pause")) {
+                    element = new OrdinaryComponent(properties, divPath);
+                }  else if (elementName.startsWith("key-")) {
+                    element = new OrdinaryComponent(properties, divPath);
                 } else if (elementName.startsWith("judge-")) {
                     element = new JudgeComponent(properties, divPath);
                 } else if (elementName.startsWith("_")) {
-                    switch (UISConventionalElementType.values()[Integer.parseInt(properties.getOrDefault("type", "0"))]) {
-                        case ORDINARY -> {
+                    switch (ConventionalComponentType.values()[Integer.parseInt(properties.getOrDefault("type", "0"))]) {
+                        case ORDINARY,TEXT,ANIMATION,SOLID_COLOR_RECTANGLE -> {
                             System.out.println("解析组件: " + elementName);
                             element = new OrdinaryComponent(properties, divPath);
                         }
@@ -165,11 +169,16 @@ public class UISParser {
         return null;
     }
 
-    private static List<String> parseElementNames(String line) {
+    /**
+     * 解析元件名
+     * @param line 元件名 如'customPrefix-[1-4]'
+     * @return 包含的所有元件名
+     */
+    private static List<String> parseComponentNames(String line) {
         List<String> elementNames = new ArrayList<>();
 
         Pattern pattern = Pattern.compile("([a-zA-Z_\\d]+)-?\\[([^\\]]+)\\]|([a-zA-Z_\\d]+)-?([a-zA-Z_\\d]*)");
-        Matcher matcher = pattern.matcher(line);
+        Matcher matcher = pattern.matcher(line.trim());
 
         if (matcher.find()) {
             String prefix = matcher.group(1) != null ? matcher.group(1) : matcher.group(3);

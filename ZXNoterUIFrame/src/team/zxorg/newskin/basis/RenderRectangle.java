@@ -1,4 +1,4 @@
-package team.zxorg.skin.basis;
+package team.zxorg.newskin.basis;
 
 import javafx.geometry.HPos;
 import javafx.geometry.Orientation;
@@ -315,11 +315,24 @@ public class RenderRectangle {
         this.height = sourceRectangle.height;
     }
 
+    /**
+     * 绘制图片
+     *
+     * @param gc    图形上下文
+     * @param image 图片
+     */
     public void drawImage(GraphicsContext gc, Image image) {
         gc.drawImage(image, getLeft(), getTop(), getWidth(), getHeight());
     }
 
+    /**
+     * 绘制图片 测试
+     *
+     * @param gc    图形上下文
+     * @param image 图片
+     */
     public void drawImageTest(GraphicsContext gc, Image image) {
+        gc.save();
         gc.drawImage(image, getLeft(), getTop(), getWidth(), getHeight());
         gc.setStroke(Color.RED);
         gc.strokeLine(getLeft(), getTop() + getHeight() / 2, getLeft() + getWidth(), getTop() + getHeight() / 2);
@@ -327,23 +340,27 @@ public class RenderRectangle {
         gc.strokeLine(getLeft() + getWidth() / 2, getTop(), getLeft() + getWidth() / 2, getTop() + getHeight());
         gc.setStroke(Color.BLUE);
         gc.strokeRect(getLeft(), getTop(), getWidth(), getHeight());
+        gc.restore();
     }
 
+    /**
+     * 绘制翻转图片
+     *
+     * @param gc    图形上下文
+     * @param image 图片
+     * @param flip  翻转方向 为null则不处理
+     */
     public void drawImage(GraphicsContext gc, Image image, Orientation flip) {
-        double x = getLeft();  // 根据具体的类实现获取 x 的方法
-        double y = getTop();  // 根据具体的类实现获取 y 的方法
-        double width = getWidth();  // 根据具体的类实现获取 width 的方法
-        double height = getHeight();  // 根据具体的类实现获取 height 的方法
         gc.save();
         if (flip == Orientation.VERTICAL) {
             gc.scale(1, -1);  // 垂直翻转
-            gc.drawImage(image, x, -y - height, width, height);
+            gc.drawImage(image, getLeft(), -getTop() - getHeight(), getWidth(), getHeight());
         } else if (flip == Orientation.HORIZONTAL) {
             gc.scale(-1, 1);  // 水平翻转
-            gc.drawImage(image, -x - width, y, width, height);
+            gc.drawImage(image, -getLeft() - getWidth(), getTop(), getWidth(), getHeight());
+        } else {
+            drawImage(gc, image);
         }
-
-
         gc.restore();
     }
 }

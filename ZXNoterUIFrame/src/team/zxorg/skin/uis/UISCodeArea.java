@@ -93,21 +93,22 @@ public class UISCodeArea extends CodeArea {
         });
 
 
-
             /*textProperty().addListener((obs, oldText, newText) -> {
                 codeArea.setStyleSpans(0, computeHighlighting(newText));
             });*/
     }
 
-    public UISCodeArea(Path file, Runnable saved) {
-        try {
-            replaceText(0, 0, Files.readString(file));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    public UISCodeArea(Path file, Runnable saved) throws IOException {
+        super(Files.readString(file));
         this.file = file;
         this.saved = saved;
+
+
+       applyHighlighting(computeHighlighting(getText()));
+
+
     }
+
 
     private static StyleSpans<Collection<String>> computeHighlighting(String text) {
         Matcher matcher = PATTERN.matcher(text);

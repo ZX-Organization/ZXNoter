@@ -3,7 +3,7 @@ package team.zxorg.skin.uis;
 /**
  * 常规原件类型
  */
-public enum UISConventionalElementType {
+public enum ConventionalComponentType {
     /**
      * 普通元件, 表示一个图片
      */

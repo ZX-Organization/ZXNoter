@@ -1,4 +1,4 @@
-package team.zxorg.skin.plist;
+package team.zxorg.newskin.plist;
 
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;

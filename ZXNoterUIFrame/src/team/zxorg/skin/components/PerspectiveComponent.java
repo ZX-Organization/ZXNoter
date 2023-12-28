@@ -7,9 +7,9 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.effect.PerspectiveTransform;
 import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
-import team.zxorg.skin.basis.ElementRenderer;
+import team.zxorg.skin.basis.ElementRenderInterface;
 
-public class PerspectiveComponent implements ElementRenderer {
+public class PerspectiveComponent implements ElementRenderInterface {
     // 角度变量 角度为0时，画面平行 角度增大时画面上面变小，底部不变
     // 二次多项式的系数
     private static final double a = 3.7832580504765276e-05;
@@ -50,7 +50,7 @@ public class PerspectiveComponent implements ElementRenderer {
     double angle;
 
     @Override
-    public void render(GraphicsContext gc, double width, double height) {
+    public void draw(GraphicsContext gc, double width, double height) {
         Canvas canvas3d = gc.getCanvas();
         PerspectiveTransform pt = new PerspectiveTransform();
         //计算透视

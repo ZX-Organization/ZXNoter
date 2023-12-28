@@ -1,4 +1,4 @@
-package team.zxorg.skin.components;
+package team.zxorg.newskin.property.data.old;
 
 import javafx.scene.image.Image;
 import team.zxorg.zxncore.ZXLogger;
@@ -8,14 +8,14 @@ import java.nio.file.Path;
 
 import static team.zxorg.skin.uis.UISParser.getResource;
 
-public class AnimationComponent {
+public class FrameProperty {
     Image[] frames;
     double interval;
     int currentIndex;
     long timer = System.currentTimeMillis();
     boolean loop;
 
-    public AnimationComponent(String frameInfo, double interval, Path uisPath) {
+    public FrameProperty(String frameInfo, double interval, Path uisPath) {
         this.interval = interval;
         int delimiter = frameInfo.lastIndexOf("/");
         String path = frameInfo.substring(0, delimiter);

@@ -6,8 +6,9 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.effect.BlendMode;
 import javafx.scene.image.Image;
 import team.zxorg.skin.ExpressionVector;
-import team.zxorg.skin.basis.ElementRenderer;
+import team.zxorg.skin.basis.ElementRenderInterface;
 import team.zxorg.skin.basis.RenderRectangle;
+import team.zxorg.newskin.property.data.FrameProperty;
 
 import java.nio.file.Path;
 import java.util.HashMap;
@@ -15,10 +16,10 @@ import java.util.Random;
 
 import static team.zxorg.skin.uis.UISParser.getAnchorPos;
 
-public class HitComponent implements ElementRenderer {
-    private final AnimationComponent frame;
-    private final AnimationComponent frame2;
-    private final AnimationComponent frame3;
+public class HitComponent implements ElementRenderInterface {
+    private final FrameProperty frame;
+    private final FrameProperty frame2;
+    private final FrameProperty frame3;
 
     /**
      * 定义原件出现的位置
@@ -60,12 +61,12 @@ public class HitComponent implements ElementRenderer {
         } catch (NumberFormatException ignored) {
         }
 
-        frame = new AnimationComponent(properties.get("frame"), interval, uisPath);
+        frame = new FrameProperty(properties.get("frame"), interval, uisPath);
         frame.loop = true;
         frame.setCurrentFrameTo(new Random().nextInt(frame.frames.length));
 
-        frame2 = new AnimationComponent(properties.get("frame2"), interval, uisPath);
-        frame3 = new AnimationComponent(properties.get("frame3"), interval, uisPath);
+        frame2 = new FrameProperty(properties.get("frame2"), interval, uisPath);
+        frame3 = new FrameProperty(properties.get("frame3"), interval, uisPath);
 
 
         String elementName = properties.get("$elementName");
@@ -92,7 +93,7 @@ public class HitComponent implements ElementRenderer {
     }
 
     @Override
-    public void render(GraphicsContext gc, double width, double height) {
+    public void draw(GraphicsContext gc, double width, double height) {
         rr.setSize(anchor, size.getWidth(), size.getHeight());
         rr.setPos(anchor, pos.getX(), pos.getY());
         gc.save();
@@ -113,8 +114,5 @@ public class HitComponent implements ElementRenderer {
         gc.restore();
     }
 
-    @Override
-    public void canvasResized(double width, double height, Orientation orientation) {
 
-    }
 }

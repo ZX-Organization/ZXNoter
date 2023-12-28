@@ -1,4 +1,4 @@
-package team.zxorg.skin;
+package team.zxorg.newskin.uis;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -7,8 +7,6 @@ import java.util.regex.Pattern;
  * 表达式计算器
  */
 public class ExpressionCalculator {
-
-    //    private final ArrayList<Consumer<Orientation>> canvasSizeChangeEvent = new ArrayList<>();
     /**
      * 画布宽度
      */
@@ -25,18 +23,9 @@ public class ExpressionCalculator {
      * 单位画布高度
      */
     private double unitCanvasHeight;
-
-    /**
-     * 获取像素倍率
-     */
-    public double getPixelMagnification() {
-        return pixelMagnification;
-    }
-
     public ExpressionCalculator() {
         this(0, 0, 720);
     }
-
 
     public ExpressionCalculator(double canvasWidth, double canvasHeight, double unitCanvasHeight) {
         this.canvasWidth = canvasWidth;
@@ -45,10 +34,39 @@ public class ExpressionCalculator {
         pixelMagnification = canvasHeight / unitCanvasHeight;
     }
 
+    @Override
+    public String toString() {
+        return "ExpressionCalculator{" +
+                "canvasWidth=" + canvasWidth +
+                ", canvasHeight=" + canvasHeight +
+                ", pixelMagnification=" + pixelMagnification +
+                ", unitCanvasHeight=" + unitCanvasHeight +
+                '}';
+    }
+
+    /**
+     * 获取像素倍率
+     */
+    public double getPixelMagnification() {
+        return pixelMagnification;
+    }
+
     public void setCanvasSize(double width, double height) {
         this.canvasWidth = width;
         this.canvasHeight = height;
         pixelMagnification = canvasHeight / unitCanvasHeight;
+    }
+
+    public double getCanvasWidth() {
+        return canvasWidth;
+    }
+
+    public double getCanvasHeight() {
+        return canvasHeight;
+    }
+
+    public double getUnitCanvasHeight() {
+        return unitCanvasHeight;
     }
 
     public void setUnitCanvasHeight(double unitCanvasHeight) {
@@ -56,46 +74,13 @@ public class ExpressionCalculator {
         pixelMagnification = canvasHeight / unitCanvasHeight;
     }
 
-    /*public double getCanvasWidth() {
-        return canvasWidth;
-    }
-
-    public double getCanvasHeight() {
-        return canvasHeight;
-    }*/
-
-   /* public void addCanvasSizeChangeEvent(Consumer<Orientation> recalculate) {
-        canvasSizeChangeEvent.add(recalculate);
-    }
-
-    public void updateCanvasWidth(double width) {
-        canvasWidth = width;
-//        widthRelativeMagnification = width / CanvasConstants.DEFAULT_CANVAS_WIDTH;
-        for (Consumer<Orientation> consumer : canvasSizeChangeEvent) {
-            consumer.accept(Orientation.HORIZONTAL);
-        }
-    }
-
-    public void updateCanvasHeight(double height) {
-        canvasHeight = height;
-        heightRelativeMagnification = height / defaultCanvasHeight;
-        for (Consumer<Orientation> consumer : canvasSizeChangeEvent) {
-            consumer.accept(Orientation.VERTICAL);
-        }
-    }
-
-    public void updateCanvasSize(double width, double height) {
-        updateCanvasWidth(width);
-        updateCanvasHeight(height);
-    }*/
-
     /**
      * 计算X坐标
      *
      * @param expression 表达式
      * @return 值
      */
-    public double calculateX(String expression) {
+    protected double calculateX(String expression) {
         return calculateValue(expression, canvasWidth);
     }
 
@@ -105,27 +90,7 @@ public class ExpressionCalculator {
      * @param expression 表达式
      * @return 值
      */
-    public double calculateY(String expression) {
-        return canvasHeight - calculateValue(expression, canvasHeight);
-    }
-
-    /**
-     * 计算宽度
-     *
-     * @param expression 表达式
-     * @return 值
-     */
-    public double calculateW(String expression) {
-        return calculateValue(expression, canvasWidth);
-    }
-
-    /**
-     * 计算高度
-     *
-     * @param expression 表达式
-     * @return 值
-     */
-    public double calculateH(String expression) {
+    protected double calculateY(String expression) {
         return calculateValue(expression, canvasHeight);
     }
 
@@ -162,14 +127,4 @@ public class ExpressionCalculator {
 
         return result;
     }
-
-    /*public void setDefaultCanvasHeight(double defaultCanvasHeight) {
-        ExpressionCalculator.defaultCanvasHeight = defaultCanvasHeight;
-        for (Consumer<Orientation> consumer : canvasSizeChangeEvent) {
-            consumer.accept(Orientation.VERTICAL);
-            consumer.accept(Orientation.HORIZONTAL);
-        }
-    }*/
-
-
 }

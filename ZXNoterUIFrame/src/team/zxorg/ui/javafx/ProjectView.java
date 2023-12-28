@@ -8,7 +8,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import team.zxorg.skin.CanvasPane;
+import team.zxorg.ui.component.CanvasPane;
 import team.zxorg.ui.javafx.sub.*;
 import team.zxorg.ui.javafx.sub.editor.flexeditor.FlexArea;
 import team.zxorg.ui.javafx.sub.editor.flexeditor.FlexSplitPane;

@@ -5,22 +5,23 @@ import javafx.geometry.Pos;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import team.zxorg.skin.ExpressionVector;
-import team.zxorg.skin.basis.ElementRenderer;
+import team.zxorg.skin.basis.ElementRenderInterface;
 import team.zxorg.skin.basis.RenderRectangle;
+import team.zxorg.newskin.property.data.FrameProperty;
 
 import java.nio.file.Path;
 import java.util.HashMap;
 
 import static team.zxorg.skin.uis.UISParser.getAnchorPos;
 
-public class JudgeComponent implements ElementRenderer {
+public class JudgeComponent implements ElementRenderInterface {
 
     private final ExpressionVector pos;
     private final ExpressionVector size;
-    private final AnimationComponent frame;
-    private AnimationComponent frame2;
-    private AnimationComponent frame3;
-    private AnimationComponent frame4;
+    private final FrameProperty frame;
+    private FrameProperty frame2;
+    private FrameProperty frame3;
+    private FrameProperty frame4;
     private int state = 0;
     /**
      * type=1时, 判定是单张图片, 而Malody有4种判定, 即Best/Cool/Good/Miss, 因此使用frame属性同时定义4种图片.
@@ -46,14 +47,14 @@ public class JudgeComponent implements ElementRenderer {
         } catch (NumberFormatException ignored) {
         }
 
-        frame = new AnimationComponent(properties.get("frame"), interval, uisPath);
+        frame = new FrameProperty(properties.get("frame"), interval, uisPath);
         frame.loop = true;
         if (type == 3) {
-            frame2 = new AnimationComponent(properties.get("frame2"), interval, uisPath);
+            frame2 = new FrameProperty(properties.get("frame2"), interval, uisPath);
             frame2.loop = true;
-            frame3 = new AnimationComponent(properties.get("frame3"), interval, uisPath);
+            frame3 = new FrameProperty(properties.get("frame3"), interval, uisPath);
             frame3.loop = true;
-            frame4 = new AnimationComponent(properties.get("frame4"), interval, uisPath);
+            frame4 = new FrameProperty(properties.get("frame4"), interval, uisPath);
             frame4.loop = true;
         } else {
             {
@@ -70,13 +71,13 @@ public class JudgeComponent implements ElementRenderer {
     }
 
     @Override
-    public void render(GraphicsContext gc, double width, double height) {
+    public void draw(GraphicsContext gc, double width, double height) {
         rr.setSize(anchor, size.getWidth(), size.getHeight());
         rr.setPos(anchor, pos.getX(), pos.getY());
         gc.save();
 
 
-        AnimationComponent currentFrame = null;
+        FrameProperty currentFrame = null;
         if (type == 1) {
             currentFrame = frame;
         } else {

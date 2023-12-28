@@ -1,4 +1,4 @@
-package team.zxorg.skin.uis;
+package team.zxorg.newskin.uis.ui;
 
 import com.sun.javafx.application.PlatformImpl;
 import com.sun.javafx.util.Logging;

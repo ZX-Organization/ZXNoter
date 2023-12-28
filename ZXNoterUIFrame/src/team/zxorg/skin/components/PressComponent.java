@@ -5,8 +5,9 @@ import javafx.geometry.Pos;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import team.zxorg.skin.ExpressionVector;
-import team.zxorg.skin.basis.ElementRenderer;
+import team.zxorg.skin.basis.ElementRenderInterface;
 import team.zxorg.skin.basis.RenderRectangle;
+import team.zxorg.newskin.property.data.FrameProperty;
 
 import java.nio.file.Path;
 import java.util.HashMap;
@@ -16,11 +17,11 @@ import static team.zxorg.skin.uis.UISParser.getAnchorPos;
 /**
  * 普通元件
  */
-public class PressComponent implements ElementRenderer {
+public class PressComponent implements ElementRenderInterface {
     /**
      * 按下的图片
      */
-    private final AnimationComponent frame;
+    private final FrameProperty frame;
     /**
      * 定义原件出现的位置
      */
@@ -42,7 +43,7 @@ public class PressComponent implements ElementRenderer {
     /**
      * 松开的图片
      */
-    private AnimationComponent frame2;
+    private FrameProperty frame2;
     /**
      * 基于锚点位置的旋转角度 数值表示元件逆时针的转角,单位角度
      */
@@ -63,10 +64,10 @@ public class PressComponent implements ElementRenderer {
         }
 
 
-        frame = new AnimationComponent(properties.get("frame"), interval, uisPath);
+        frame = new FrameProperty(properties.get("frame"), interval, uisPath);
 
         if (properties.get("frame2") != null)
-            frame2 = new AnimationComponent(properties.get("frame2"), interval, uisPath);
+            frame2 = new FrameProperty(properties.get("frame2"), interval, uisPath);
 
 
         String elementName = properties.get("$elementName");
@@ -92,7 +93,7 @@ public class PressComponent implements ElementRenderer {
     }
 
     @Override
-    public void render(GraphicsContext gc, double width, double height) {
+    public void draw(GraphicsContext gc, double width, double height) {
         rr.setSize(anchor, size.getWidth(), size.getHeight());
         rr.setPos(anchor, pos.getX(), pos.getY());
         gc.save();

@@ -1,4 +1,4 @@
-package team.zxorg.skin.basis;
+package team.zxorg.newskin.basis;
 
 /**
  * 渲染点坐标

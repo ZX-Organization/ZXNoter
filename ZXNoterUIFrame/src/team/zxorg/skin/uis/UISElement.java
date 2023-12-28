@@ -50,7 +50,7 @@ public abstract class UISElement {
     /**
      * 定义元件类型
      */
-    public UISConventionalElementType type;
+    public ConventionalComponentType type;
 
     /**
      * 定义一个动态图所使用的所有图片,贴图文件必须为png,采用前缀/帧数格式书写,无需指定完整文件名即有light-0.png到light-4.png的序列帧

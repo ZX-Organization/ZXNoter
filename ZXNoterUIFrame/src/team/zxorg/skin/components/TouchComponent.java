@@ -5,7 +5,7 @@ import javafx.geometry.Pos;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import team.zxorg.skin.ExpressionVector;
-import team.zxorg.skin.basis.ElementRenderer;
+import team.zxorg.skin.basis.ElementRenderInterface;
 import team.zxorg.skin.basis.RenderRectangle;
 
 import java.nio.file.Path;
@@ -13,9 +13,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TouchComponent implements ElementRenderer {
+public class TouchComponent implements ElementRenderInterface {
     int type;
-    ArrayList<ElementRenderer> subRenderList = new ArrayList<ElementRenderer>();
+    ArrayList<ElementRenderInterface> subRenderList = new ArrayList<ElementRenderInterface>();
 
     public TouchComponent(HashMap<String, String> properties, Path uisPath) {
         type = Integer.parseInt(properties.get("type"));
@@ -37,9 +37,9 @@ public class TouchComponent implements ElementRenderer {
     }
 
     @Override
-    public void render(GraphicsContext gc, double width, double height) {
-        for (ElementRenderer render : subRenderList)
-            render.render(gc, width, height);
+    public void draw(GraphicsContext gc, double width, double height) {
+        for (ElementRenderInterface render : subRenderList)
+            render.draw(gc, width, height);
     }
 
     @Override
@@ -47,7 +47,7 @@ public class TouchComponent implements ElementRenderer {
 
     }
 
-    private class TouchSquare implements ElementRenderer {
+    private class TouchSquare implements ElementRenderInterface {
         ExpressionVector pos;
         ExpressionVector size;
         RenderRectangle rr = new RenderRectangle();
@@ -61,7 +61,7 @@ public class TouchComponent implements ElementRenderer {
         }
 
         @Override
-        public void render(GraphicsContext gc, double width, double height) {
+        public void draw(GraphicsContext gc, double width, double height) {
             gc.setStroke(Color.PINK);
             rr.setPos(Pos.BOTTOM_LEFT, pos.getX(), pos.getY());
             rr.setSize(Pos.BOTTOM_LEFT, size.getWidth(), size.getHeight());
@@ -74,7 +74,7 @@ public class TouchComponent implements ElementRenderer {
         }
     }
 
-    private class TouchRound implements ElementRenderer {
+    private class TouchRound implements ElementRenderInterface {
         ExpressionVector pos;
         ExpressionVector size;
 
@@ -87,7 +87,7 @@ public class TouchComponent implements ElementRenderer {
         }
 
         @Override
-        public void render(GraphicsContext gc, double width, double height) {
+        public void draw(GraphicsContext gc, double width, double height) {
             gc.setStroke(Color.PINK);
             gc.strokeRoundRect(pos.getX(), pos.getX(), pos.getX() + size.getWidth(), pos.getY() + size.getHeight(), 100, 100);
         }
@@ -98,7 +98,7 @@ public class TouchComponent implements ElementRenderer {
         }
     }
 
-    private class TouchTriangle implements ElementRenderer {
+    private class TouchTriangle implements ElementRenderInterface {
         ExpressionVector pos;
         ExpressionVector pos2;
         ExpressionVector pos3;
@@ -113,7 +113,7 @@ public class TouchComponent implements ElementRenderer {
         }
 
         @Override
-        public void render(GraphicsContext gc, double width, double height) {
+        public void draw(GraphicsContext gc, double width, double height) {
             gc.setStroke(Color.PINK);
             gc.strokeLine(pos.getX(), pos.getY(), pos2.getX(), pos2.getY());
             gc.strokeLine(pos2.getX(), pos2.getY(), pos3.getX(), pos3.getY());
