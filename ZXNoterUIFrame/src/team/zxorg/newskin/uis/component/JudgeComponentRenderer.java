@@ -5,21 +5,18 @@ import team.zxorg.newskin.basis.RenderRectangle;
 import team.zxorg.newskin.uis.UISComponent;
 import team.zxorg.newskin.uis.UISFrameAnimation;
 
-public class JudgeComponentRender extends BaseComponentRender {
+public class JudgeComponentRenderer extends AbstractComponentRenderer {
     UISFrameAnimation animation;
 
-    public JudgeComponentRender(UISComponent component) {
+    public JudgeComponentRenderer(UISComponent component) {
         super(component);
     }
 
     @Override
-    void reloadComponent(UISComponent component) {
+    void reloadResComponent() {
         animation = new UISFrameAnimation(component, "frame", "frame2", "frame3", "frame4");
         switch (type) {
-            case 1 -> {
-                animation.addBehavior("frame", 1);
-            }
-            case 2 -> {
+            case 1, 2 -> {
                 animation.addBehavior("frame", 1);
             }
             case 3 -> {
@@ -30,6 +27,12 @@ public class JudgeComponentRender extends BaseComponentRender {
             }
         }
     }
+
+    @Override
+    void reloadPosComponent() {
+
+    }
+
 
     @Override
     void drawComponent(GraphicsContext gc, RenderRectangle rr, double width, double height) {

@@ -7,18 +7,18 @@ import team.zxorg.newskin.basis.RenderRectangle;
 import team.zxorg.newskin.uis.UISComponent;
 import team.zxorg.newskin.uis.UISFrameAnimation;
 
-public class HitComponentRender extends BaseComponentRender {
+public class HitComponentRenderer extends AbstractComponentRenderer {
 
     int blend;
 
     UISFrameAnimation animation;
 
-    public HitComponentRender(UISComponent component) {
+    public HitComponentRenderer(UISComponent component) {
         super(component);
     }
 
     @Override
-    void reloadComponent(UISComponent component) {
+    void reloadResComponent() {
         blend = component.getInt("blend", 0);
 
         animation = new UISFrameAnimation(component, "frame", "frame2", "frame3");
@@ -28,6 +28,12 @@ public class HitComponentRender extends BaseComponentRender {
         animation.addBehavior("frame3", 1);
         animation.addBehavior(null, 800);
     }
+
+    @Override
+    void reloadPosComponent() {
+
+    }
+
 
     @Override
     void drawComponent(GraphicsContext gc, RenderRectangle rr, double width, double height) {

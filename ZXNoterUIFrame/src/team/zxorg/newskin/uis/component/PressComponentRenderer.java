@@ -6,16 +6,16 @@ import team.zxorg.newskin.basis.RenderRectangle;
 import team.zxorg.newskin.uis.UISComponent;
 import team.zxorg.newskin.uis.UISFrameAnimation;
 
-public class PressComponentRender extends BaseComponentRender {
+public class PressComponentRenderer extends AbstractComponentRenderer {
 
     UISFrameAnimation animation;
 
-    public PressComponentRender(UISComponent component) {
+    public PressComponentRenderer(UISComponent component) {
         super(component);
     }
 
     @Override
-    void reloadComponent(UISComponent component) {
+    void reloadResComponent() {
         animation = new UISFrameAnimation(component, "frame", "frame2");
         animation.addBehavior("frame", 1);
         if (component.contains("frame2")) {
@@ -27,6 +27,12 @@ public class PressComponentRender extends BaseComponentRender {
         }
 
     }
+
+    @Override
+    void reloadPosComponent() {
+
+    }
+
 
     @Override
     void drawComponent(GraphicsContext gc, RenderRectangle rr, double width, double height) {

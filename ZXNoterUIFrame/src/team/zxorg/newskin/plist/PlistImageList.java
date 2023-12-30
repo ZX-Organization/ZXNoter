@@ -18,7 +18,8 @@ import java.util.List;
 
 public class PlistImageList {
     private final List<SubImage> images;
-    private String textureFileName;
+    private final String textureFileName;
+    private final Path textureFilePath;
 
     public List<SubImage> getImages() {
         return images;
@@ -39,20 +40,21 @@ public class PlistImageList {
             Element frames = (Element) getNode(rootPlist, "frames");
             Element metadata = (Element) getNode(rootPlist, "metadata");
             textureFileName = getNode(metadata, "textureFileName").getTextContent();
-            Path textureFilePath = plistPath.getParent().resolve(textureFileName);
-            BufferedImage textureImage = ImageIO.read(textureFilePath.toFile());
+         textureFilePath = plistPath.getParent().resolve(textureFileName);
             images = new ArrayList<>();
             Node frameNode = frames.getFirstChild().getNextSibling();
             while (frameNode != null) {
                 String name = frameNode.getTextContent();
                 Node frameInfo = frameNode.getNextSibling().getNextSibling();
-                SubImage image = new SubImage(textureImage, name, (Element) frameInfo);
+                SubImage image = new SubImage(name, (Element) frameInfo);
                 images.add(image);
                 frameNode = frameInfo.getNextSibling().getNextSibling();
             }
-
     }
 
+    public BufferedImage getTexture() throws IOException {
+        return ImageIO.read(textureFilePath.toFile());
+    }
 
     public static Node getNode(Element parent, String keyName) {
         NodeList nodeList = parent.getChildNodes();

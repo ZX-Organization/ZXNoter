@@ -3,8 +3,6 @@ package team.zxorg.newskin.uis.ui;
 import com.sun.javafx.application.PlatformImpl;
 import com.sun.javafx.util.Logging;
 import javafx.animation.AnimationTimer;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -16,10 +14,13 @@ import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.fxmisc.flowless.VirtualizedScrollPane;
+import team.zxorg.newskin.DeviceType;
+import team.zxorg.newskin.ResolutionInfo;
 import team.zxorg.newskin.uis.ExpressionCalculator;
 import team.zxorg.newskin.uis.UISComponent;
 import team.zxorg.newskin.uis.UISSkin;
-import team.zxorg.newskin.uis.component.*;
+import team.zxorg.newskin.uis.component.AbstractComponentRenderer;
+import team.zxorg.newskin.uis.component.AnimationComponentRenderer;
 import team.zxorg.ui.component.LayerCanvasPane;
 import team.zxorg.zxncore.ZXLogger;
 import team.zxorg.zxncore.ZXVersion;
@@ -28,13 +29,16 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class UISEditor extends HBox {
     UISSkin skin;
     Perspective perspective = new Perspective();
     ExpressionCalculator expressionCalculator = new ExpressionCalculator();
 
-    ArrayList<BaseComponentRender> componentRenders = new ArrayList<>();
+    ArrayList<AbstractComponentRenderer> componentRenders = new ArrayList<>();
+    HashMap<UISComponent, AbstractComponentRenderer> componentMap = new HashMap<>();
+
     LayerCanvasPane layerCanvasPane = new LayerCanvasPane() {
         {
             setBorder(new Border(new BorderStroke(Color.WHITE, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(1), new Insets(0))));
@@ -43,23 +47,33 @@ public class UISEditor extends HBox {
     TabPane tabPane = new TabPane() {
         {
             VBox.setVgrow(this, Priority.ALWAYS);
-            setPrefWidth(600);
-            setMinWidth(600);
+            setPrefWidth(640);
+            setMinWidth(640);
+        }
+    };
+
+    ChoiceBox<DeviceType> deviceTypeChoiceBox = new ChoiceBox<>() {
+        {
+            getItems().addAll(DeviceType.values());
+            setPrefWidth(60);
+            getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+                updateSize();
+            });
+            //getSelectionModel().selectLast();
         }
     };
     ChoiceBox<ResolutionInfo> resolutionChoiceBox = new ChoiceBox<>() {
         {
-            getItems().addAll(
-                    new ResolutionInfo(1.333333333333333, "ipad 4:3"),
-                    new ResolutionInfo(1.333984375, "ipad Evans ≈4:3"),
-                    new ResolutionInfo(1.431654676258993, "ipad xu ≈4:3"),
-                    new ResolutionInfo(1.6, "平板 16:10"),
-                    new ResolutionInfo(1.706666666666667, "手机 17:10"),
-                    new ResolutionInfo(1.777777777777778, "电脑 16:9")
-            );
-
+            getItems().addAll(ResolutionInfo.values());
+            setPrefWidth(100);
+            getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+                deviceTypeChoiceBox.setValue(newValue.getDevice());
+                updateSize();
+            });
+            getSelectionModel().selectLast();
         }
     };
+
     ChoiceBox<UnitInfo> unitChoiceBox = new ChoiceBox<>() {
         {
             getItems().addAll(
@@ -71,6 +85,7 @@ public class UISEditor extends HBox {
                 //measuringRulerRenderer.unit = newValue;
             });
             getSelectionModel().selectFirst();
+            setPrefWidth(80);
         }
     };
     Label scalingFactorLabel = new Label("缩放: 100%") {
@@ -91,13 +106,10 @@ public class UISEditor extends HBox {
             setPrefWidth(100);
             setSnapToTicks(true);
             setSnapToPixel(true);
-            valueProperty().addListener(new ChangeListener<Number>() {
-                @Override
-                public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                    if (!isValueChanging()) {
-                        scalingFactorLabel.setText("缩放: " + (int) (newValue.doubleValue() * 100) + "%");
-                        reload();
-                    }
+            valueProperty().addListener((observable, oldValue, newValue) -> {
+                if (!isValueChanging()) {
+                    scalingFactorLabel.setText("缩放: " + (int) (newValue.doubleValue() * 100) + "%");
+                    updateSize();
                 }
             });
         }
@@ -108,11 +120,7 @@ public class UISEditor extends HBox {
         setAlignment(Pos.CENTER_LEFT);
         tabPane.getSelectionModel().selectedItemProperty().addListener(observable -> reloadButton.getOnAction().handle(new ActionEvent()));
 
-        resolutionChoiceBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            //setCanvasSize(newValue.getAspectRatio(), scalingFactorSlider.getValue());
-            reload();
-        });
-        resolutionChoiceBox.getSelectionModel().selectLast();
+
 
 
         /*pane.widthProperty().addListener(observable -> {
@@ -153,11 +161,18 @@ public class UISEditor extends HBox {
             @Override
             public void handle(long l) {
                 layerCanvasPane.clearRect();
-                for (BaseComponentRender cr : componentRenders) {
+                for (AbstractComponentRenderer cr : componentRenders) {
                     GraphicsContext gc = layerCanvasPane.getGraphicsContext2D(cr.getLayoutName());
                     try {
+                        AbstractComponentRenderer anim = componentMap.get(cr.getMotion());
+                        gc.save();
+                        if (anim instanceof AnimationComponentRenderer renderer) {
+                            renderer.update(gc, expressionCalculator.getCanvasWidth(), expressionCalculator.getCanvasHeight(), cr);
+                        }
                         cr.draw(gc, expressionCalculator.getCanvasWidth(), expressionCalculator.getCanvasHeight());
+                        gc.restore();
                     } catch (Exception e) {
+                        e.printStackTrace();
                     }
                 }
             }
@@ -216,50 +231,45 @@ public class UISEditor extends HBox {
         });
     }
 
+    public void update() {
+        if (skin == null)
+            return;
+        skin.setDeviceType(deviceTypeChoiceBox.getValue());
+        setCanvasSize(resolutionChoiceBox.getValue().getAspectRatio(), scalingFactorSlider.getValue());
+        skin.updateRenderer(componentRenders, componentMap, layerCanvasPane);
+        perspective.setAngle(skin.getAngle());
+
+    }
+
+    public void updateSize() {
+        update();
+        for (AbstractComponentRenderer component : componentMap.values()) {
+            component.reloadPos();
+        }
+    }
+
     public void reload() {
-
-
         if (tabPane.getSelectionModel().getSelectedItem() != null)
             if (tabPane.getSelectionModel().getSelectedItem().getContent() instanceof VirtualizedScrollPane uis) {
                 componentRenders.clear();
-
+                componentMap.clear();
 
                 skin = new UISSkin(((UISCodeArea) uis.getContent()).getFile(), expressionCalculator);
+                setCanvasSize(resolutionChoiceBox.getValue().getAspectRatio(), scalingFactorSlider.getValue());
+
                 perspective.setAngle(skin.getAngle());
-                for (UISComponent component : skin.getLinkedComponents()) {
-                    BaseComponentRender r;
-                    if (component.getName().startsWith("_")) {
-                        r = switch (component.getInt("type", 0)) {
-                            case 0 -> new ImageComponentRender(component);
-                            case 1 -> new TextComponentRender(component);
-                            case 2 -> new RectangleComponentRender(component);
-                            case 3 -> new AnimationComponentRender(component);
-                            default -> null;
-                        };
+                for (UISComponent component : skin.getComponents()) {
+                    AbstractComponentRenderer render = AbstractComponentRenderer.toRenderer(component, layerCanvasPane);
+                    if (render != null) {
+                        componentRenders.add(render);
+                        componentMap.put(component, render);
 
-                    } else {
-                        r = switch (component.getName()) {
-                            case "note" -> new NoteComponentRender(component);
-                            case "key" -> new KeyComponentRender(component);
-                            case "hit" -> new HitComponentRender(component);
-                            case "press" -> new PressComponentRender(component);
-                            case "judge" -> new JudgeComponentRender(component);
-                            default -> null;
-                        };
                     }
 
-
-                    if (r != null) {
-                        //System.out.println("载入组件: " + r);
-                        r.initialize(layerCanvasPane.getCanvas(r.getLayoutName()));
-                        componentRenders.add(r);
-                    }
                 }
-
-                //componentRenders.putAll(UISParser.parseToElementMap();
-                //componentRenders.put("$mark", measuringRulerRenderer);
+                UISSkin.sortRenders(componentRenders);
             }
-        setCanvasSize(resolutionChoiceBox.getValue().getAspectRatio(), scalingFactorSlider.getValue());
+
     }
 
     public void setCanvasSize(double aspectRatio, double zoomRate) {
@@ -290,7 +300,7 @@ public class UISEditor extends HBox {
         tab.setText(path.getFileName().toString());
         UISCodeArea uisCodeArea = null;
         try {
-            uisCodeArea = new UISCodeArea(path, this::reload);
+            uisCodeArea = new UISCodeArea(path, this::update);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -303,29 +313,7 @@ public class UISEditor extends HBox {
         tabPane.getSelectionModel().select(tab);
     }
 
-    public static class UnitInfo {
-        private final String name;
-        private final String unit;
-        private final int id;
-
-        public UnitInfo(String name, String unit, int id) {
-            this.name = name;
-            this.unit = unit;
-            this.id = id;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public String getUnit() {
-            return unit;
-        }
-
-        public int getId() {
-            return id;
-        }
-
+    public record UnitInfo(String name, String unit, int id) {
         @Override
         public String toString() {
             return name + "(" + unit + ")";
@@ -333,28 +321,6 @@ public class UISEditor extends HBox {
 
     }
 
-    private static class ResolutionInfo {
-        private final double aspectRatio;
-        private final String name;
-
-        public ResolutionInfo(double aspectRatio, String name) {
-            this.aspectRatio = aspectRatio;
-            this.name = name;
-        }
-
-        @Override
-        public String toString() {
-            return name;
-        }
-
-        public double getAspectRatio() {
-            return aspectRatio;
-        }
-
-        public String getName() {
-            return name;
-        }
-    }
 
     Button reloadButton = new Button("重载") {
         {
@@ -393,12 +359,12 @@ public class UISEditor extends HBox {
     };
 
 
-    HBox toolbar = new HBox(reloadButton, resolutionChoiceBox, unitChoiceBox, scalingFactorLabel, scalingFactorSlider, openFileButton) {
+    HBox toolbar = new HBox(reloadButton, resolutionChoiceBox, deviceTypeChoiceBox, unitChoiceBox, scalingFactorLabel, scalingFactorSlider, openFileButton) {
         {
             setMinHeight(40);
             setBorder(new Border(new BorderStroke(Color.WHITE, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(0, 0, 1, 0), new Insets(0))));
             setAlignment(Pos.CENTER_LEFT);
-            setSpacing(16);
+            setSpacing(8);
             setPadding(new Insets(0, 8, 0, 8));
         }
     };

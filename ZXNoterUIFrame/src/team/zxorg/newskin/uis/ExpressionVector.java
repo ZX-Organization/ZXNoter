@@ -1,7 +1,5 @@
 package team.zxorg.newskin.uis;
 
-import team.zxorg.zxncore.ZXLogger;
-
 public class ExpressionVector {
     public final ExpressionCalculator expressionCalculator;
     private String xExpression;
@@ -17,11 +15,12 @@ public class ExpressionVector {
         this.expressionCalculator = expressionCalculator;
         this.index = index;
         String[] v = expression.split(",");
-        if (v.length != 2)
-            ZXLogger.warning("ExpressionVector: expression length is not 2");
-        else {
+        if (v.length > 0) {
             setX(v[0].trim());
-            setY(v[1].trim());
+            if (v.length == 2)
+                setY(v[1].trim());
+            else
+                setY(v[0].trim());
         }
     }
 
@@ -64,6 +63,22 @@ public class ExpressionVector {
         }
         w = x;
 
+    }
+
+    public void setX(double x) {
+        this.x = x;
+    }
+
+    public void setY(double y) {
+        this.y = y;
+    }
+
+    public void setW(double w) {
+        this.w = w;
+    }
+
+    public void setH(double h) {
+        this.h = h;
     }
 
     public double getY() {

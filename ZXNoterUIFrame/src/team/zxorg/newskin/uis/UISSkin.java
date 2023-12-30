@@ -1,6 +1,9 @@
 package team.zxorg.newskin.uis;
 
+import team.zxorg.newskin.DeviceType;
 import team.zxorg.newskin.plist.PlistParser;
+import team.zxorg.newskin.uis.component.AbstractComponentRenderer;
+import team.zxorg.ui.component.LayerCanvasPane;
 import team.zxorg.zxncore.ZXLogger;
 
 import java.io.BufferedReader;
@@ -30,7 +33,8 @@ public class UISSkin {
     /**
      * 资源映射表
      */
-    private final HashMap<String, Path> imageMap = new HashMap<>();
+    private final HashMap<String, Path> imagePathMap = new HashMap<>();
+
     /**
      * 组件表
      */
@@ -52,8 +56,19 @@ public class UISSkin {
      */
     int unit = 720;
 
+    DeviceType deviceType = DeviceType.WINDOWS;
+
     public int getAngle() {
         return angle;
+    }
+
+    /**
+     * 设置设备类型 会影响到include判断
+     *
+     * @param deviceType 设备类型
+     */
+    public void setDeviceType(DeviceType deviceType) {
+        this.deviceType = deviceType;
     }
 
     /**
@@ -67,16 +82,18 @@ public class UISSkin {
         variable.put("artist", "{ 歌曲艺术家 }");
         variable.put("creator", "{ 谱面作者名 }");
         variable.put("version", "{ 谱面难度名 }");
+        variable.put("player", "{ 玩家ID }");
+        variable.put("bpm", "{ BPM }");
 
         this.muiPath = muiPath;
         basePath = muiPath.getParent();
 
         try {
-            parseMUI(muiPath);
+            parseMUI(muiPath, componentMap);
+            expressionCalculator.setUnitCanvasHeight(unit);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            ZXLogger.warning("解析mui文件失败: " + e.getMessage());
         }
-        expressionCalculator.setUnitCanvasHeight(unit);
     }
 
     /**
@@ -86,8 +103,12 @@ public class UISSkin {
      * @return 包含的所有元件名
      */
     private static List<String> parseComponentNames(String line) {
-        List<String> elementNames = new ArrayList<>();
 
+        List<String> elementNames = new ArrayList<>();
+        if (!line.contains("[") || !line.contains("]")) {
+            elementNames.add(line.trim());
+            return elementNames;
+        }
         Pattern pattern = Pattern.compile("([a-zA-Z_\\d]+)-?\\[([^\\]]+)\\]|([a-zA-Z_\\d]+)-?([a-zA-Z_\\d]*)");
         Matcher matcher = pattern.matcher(line.trim());
 
@@ -140,9 +161,9 @@ public class UISSkin {
     public String toString() {
 
 
-        return "UISSkin{" +
+        return "UISSkin {" +
                 "calculator=" + expressionCalculator +
-                ", imageMap=" + imageMap.size() +
+                ", imageMap=" + imagePathMap.size() +
                 ", componentMap=" + componentMap.size() +
                 ", angle=" + angle +
                 ", unit=" + unit +
@@ -189,7 +210,7 @@ public class UISSkin {
                 public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) {
                     // 判断文件类型是否为图片类型
                     if (isImageFile(file)) {
-                        imageMap.put(basePath.relativize(file).toString().replaceAll("\\\\", "/"), file);
+                        imagePathMap.put(basePath.relativize(file).toString().replaceAll("\\\\", "/"), file);
                     }
                     return FileVisitResult.CONTINUE;
                 }
@@ -210,11 +231,104 @@ public class UISSkin {
     }
 
     /**
+     * 更新渲染器
+     */
+    public void updateRenderer(List<AbstractComponentRenderer> renderers, HashMap<UISComponent, AbstractComponentRenderer> currentComponentMap, LayerCanvasPane layerCanvasPane) {
+        angle = 0;
+        HashMap<String, UISComponent> newComponentMap = new HashMap<>();
+        try {
+            parseMUI(muiPath, newComponentMap);
+            expressionCalculator.setUnitCanvasHeight(unit);
+        } catch (IOException e) {
+            ZXLogger.warning("解析mui文件失败: " + e.getMessage());
+            return;
+        }
+
+        //检查多余的组件
+        List<String> needRemoval = new ArrayList<>();
+        for (String name : componentMap.keySet()) {
+            if (!newComponentMap.containsKey(name)) {
+                needRemoval.add(name);
+                System.out.println("移除组件：" + name);
+            }
+        }
+        //移除多余组件
+        for (String name : needRemoval) {
+            UISComponent component = componentMap.get(name);
+            AbstractComponentRenderer renderer = currentComponentMap.get(component);
+            renderers.remove(renderer);
+            currentComponentMap.remove(component);
+            componentMap.remove(name);
+        }
+
+        //检查新组件
+        for (UISComponent component : newComponentMap.values()) {
+            if (!componentMap.containsKey(component.getFullName())) {
+                AbstractComponentRenderer renderer = AbstractComponentRenderer.toRenderer(component, layerCanvasPane);
+                if (renderer == null) {
+                    ZXLogger.warning("Unsupported component: " + component.getFullName());
+                    continue;
+                }
+                renderers.add(renderer);
+                currentComponentMap.put(component, renderer);
+                componentMap.put(component.getFullName(), component);
+            }
+        }
+
+        //更新其余组件属性
+        for (UISComponent component : componentMap.values()) {
+            UISComponent newComponent = newComponentMap.get(component.getFullName());
+            if (!component.equals(newComponent)) {
+                component.copyFrom(newComponent);
+            }
+        }
+
+        //再次排序渲染器
+        sortRenders(renderers);
+    }
+
+
+    /**
+     * 排序渲染器 按照zindex排序
+     *
+     * @param renderers 渲染器
+     */
+    public static void sortRenders(List<AbstractComponentRenderer> renderers) {
+        renderers.sort(Comparator.comparingInt(AbstractComponentRenderer::getZindex));
+    }
+
+    /**
+     * 条件判断
+     *
+     * @param condition 条件  可以判断设备和宽高比
+     * @return 是否符合条件
+     */
+    private boolean conditionalJudgment(String condition) {
+        double proportion = expressionCalculator.getCanvasWidth() / expressionCalculator.getCanvasHeight();
+
+        if (condition.equalsIgnoreCase(deviceType.name())) {
+            return true;
+        } else {
+            boolean more = condition.contains("<");
+            try {
+                double v = Double.parseDouble(condition.replaceAll("[<>]", ""));
+                //检查是否满足条件
+                if (more && v > proportion || !more && v < proportion) {
+                    return true;
+                }
+            } catch (NumberFormatException e) {
+
+            }
+        }
+        return false;
+    }
+
+    /**
      * 解析mui文件
      *
      * @param muiPath mui的路径
      */
-    private void parseMUI(Path muiPath) throws IOException {
+    private void parseMUI(Path muiPath, HashMap<String, UISComponent> componentMap) throws IOException {
         Path muiDivPath = muiPath.getParent();
         enumerateImagesResource(muiDivPath);
         try (BufferedReader reader = Files.newBufferedReader(muiPath)) {
@@ -223,6 +337,10 @@ public class UISSkin {
             HashMap<String, UISComponent> currentComponents = new HashMap<>();
             //是属性值
             boolean isProperty;
+            //跳过  (条件判断)
+            boolean skip = false;
+            //是动画
+            boolean isAnimation = false;
             //解析mui
             while ((line = reader.readLine()) != null) {
                 //判断是否是属性
@@ -248,7 +366,7 @@ public class UISSkin {
                                 List<Path> images = PlistParser.parser(texpackPath, cache, true);
                                 //加入到图片索引里
                                 for (Path image : images) {
-                                    imageMap.put(cache.relativize(image).toString().replaceAll("\\\\", "/"), image);
+                                    imagePathMap.put(cache.relativize(image).toString().replaceAll("\\\\", "/"), image);
                                 }
                             } else {
                                 ZXLogger.warning("引用 纹理包: " + texpackPath.getFileName() + " 文件不存在");
@@ -258,36 +376,18 @@ public class UISSkin {
 
                             String mui = null;
                             if (args.length == 3) {
-                                double proportion = expressionCalculator.getCanvasWidth() / expressionCalculator.getCanvasHeight();
-                                if (Math.abs(proportion - 1.7777) < 0.01) {
-                                    if (args[1].contains("windows") || args[1].contains("mac")) {
-                                        mui = args[2];
-                                    }
-                                } else if (args[1].contains("android") || args[1].contains("ios") || args[1].contains("touch")) {
+                                if (conditionalJudgment(args[1])) {
                                     mui = args[2];
-                                } else {
-                                    boolean more = args[1].contains(">");
-                                    try {
-                                        double v = Double.parseDouble(args[1].replaceAll("[<>]", ""));
-                                        //检查是否满足条件
-                                        if (more && v < proportion || !more && v > proportion) {
-                                            mui = args[2];
-                                        }
-                                    }catch (NumberFormatException e){
-
-                                    }
                                 }
-
                             } else if (args.length == 2) {
                                 mui = args[1];
                             }
-
                             if (mui != null) {
                                 //插入
                                 Path includeMuiPath = muiPath.getParent().resolve(mui);
                                 if (Files.exists(includeMuiPath)) {
                                     ZXLogger.info("引用 mui: " + includeMuiPath.getFileName());
-                                    parseMUI(includeMuiPath);
+                                    parseMUI(includeMuiPath, componentMap);
                                 } else {
                                     ZXLogger.warning("引用 mui: " + includeMuiPath.getFileName() + " 文件不存在");
                                 }
@@ -300,19 +400,36 @@ public class UISSkin {
                             expressionCalculator.setUnitCanvasHeight(unit);
                         }//单位像素
                         case "@define" -> variable.put(args[1], args[2]);//变量
+                        case "@if" -> {
+                            if (conditionalJudgment(args[1])) {
+                                skip = false;
+                            } else {
+                                skip = true;
+                            }
+                        }
+                        case "@endif" -> skip = false;
                     }
                     continue;
                 }
+                if (skip)
+                    continue;
                 if (isProperty) {
                     //是属性 为当前元素解析
                     int delimiter = line.indexOf("=");
                     String propertyName = line.substring(0, delimiter);
                     String value = line.substring(delimiter + 1);
 
-                    //为当前组件设置属性
-                    for (UISComponent property : currentComponents.values()) {
-                        property.put(propertyName, value);
+                    if (isAnimation) {
+                        for (UISComponent property : currentComponents.values()) {
+                            property.putAnimation(value);
+                        }
+                    } else {
+                        //为当前组件设置属性
+                        for (UISComponent property : currentComponents.values()) {
+                            property.putProperty(propertyName, value);
+                        }
                     }
+
 
                 } else {
                     //是元件 更新元件
@@ -322,11 +439,12 @@ public class UISSkin {
                         if (componentMap.containsKey(componentName)) {
                             currentComponents.put(componentName, componentMap.get(componentName));
                         } else {
-                            UISComponent newComponent = new UISComponent(componentName, imageMap, this);
+                            UISComponent newComponent = new UISComponent(componentName, imagePathMap, this);
                             currentComponents.put(componentName, newComponent);
                             componentMap.put(componentName, newComponent);
                         }
                     }
+                    isAnimation = line.startsWith(":");
                 }
 
             }
@@ -340,7 +458,7 @@ public class UISSkin {
      * @return 资源数据流
      */
     public InputStream getResource(String path) {
-        Path file = imageMap.get(path.replaceAll("\\\\", "/"));
+        Path file = imagePathMap.get(path.replaceAll("\\\\", "/"));
         if (Files.exists(file)) {
             try {
                 return Files.newInputStream(file);
@@ -372,14 +490,4 @@ public class UISSkin {
     }
 
 
-    /**
-     * 获取被排序过的所有组件
-     *
-     * @return 所有组件
-     */
-    public List<UISComponent> getLinkedComponents() {
-        List<UISComponent> sortedComponents = new ArrayList<>(componentMap.values());
-        sortedComponents.sort(Comparator.comparingInt(component -> component.getInt("zindex", 0)));
-        return sortedComponents;
-    }
 }

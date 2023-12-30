@@ -6,7 +6,7 @@ import javafx.scene.canvas.GraphicsContext;
 /**
  * 元素渲染接口
  */
-public interface ElementRenderInterface {
+public interface RenderInterface {
     /**
      * 绘制
      *

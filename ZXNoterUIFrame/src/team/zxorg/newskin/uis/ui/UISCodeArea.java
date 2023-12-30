@@ -69,7 +69,7 @@ public class UISCodeArea extends CodeArea {
         getStyleClass().add("code-area");
 
         executor = Executors.newSingleThreadExecutor();
-        Subscription cleanupWhenDone = multiPlainChanges().successionEnds(Duration.ofMillis(20)).retainLatestUntilLater(executor).supplyTask(this::computeHighlightingAsync).awaitLatest(multiPlainChanges()).filterMap(t -> {
+         multiPlainChanges().successionEnds(Duration.ofMillis(20)).retainLatestUntilLater(executor).supplyTask(this::computeHighlightingAsync).awaitLatest(multiPlainChanges()).filterMap(t -> {
             if (t.isSuccess()) {
                 return Optional.of(t.get());
             } else {
@@ -78,7 +78,7 @@ public class UISCodeArea extends CodeArea {
             }
         }).subscribe(this::applyHighlighting);
 
-        multiPlainChanges().successionEnds(Duration.ofMillis(200)).retainLatestUntilLater(autoSaveExecutor).subscribe(new Consumer<List<PlainTextChange>>() {
+        multiPlainChanges().successionEnds(Duration.ofMillis(200)).retainLatestUntilLater(autoSaveExecutor).subscribe(new Consumer<>() {
             @Override
             public void accept(List<PlainTextChange> plainTextChanges) {
                 System.out.println("自动保存");
@@ -89,6 +89,8 @@ public class UISCodeArea extends CodeArea {
                     e.printStackTrace();
                 }
                 saved.run();
+
+
             }
         });
 
@@ -97,6 +99,11 @@ public class UISCodeArea extends CodeArea {
                 codeArea.setStyleSpans(0, computeHighlighting(newText));
             });*/
     }
+
+
+
+
+
 
     public UISCodeArea(Path file, Runnable saved) throws IOException {
         super(Files.readString(file));
@@ -186,7 +193,7 @@ public class UISCodeArea extends CodeArea {
         public static Pattern getPattern() {
             StringBuilder sb = new StringBuilder();
             for (CodePattern pattern : CodePattern.values()) {
-                sb.append("|(?<" + pattern.className + ">" + pattern.patternString + ")");
+                sb.append("|(?<").append(pattern.className).append(">").append(pattern.patternString).append(")");
             }
             sb.deleteCharAt(0);
             return Pattern.compile(sb.toString(), Pattern.MULTILINE);

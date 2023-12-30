@@ -7,11 +7,11 @@ import javafx.scene.text.TextAlignment;
 import team.zxorg.newskin.basis.RenderRectangle;
 import team.zxorg.newskin.uis.UISComponent;
 
-public class TextComponentRender extends BaseComponentRender {
+public class TextComponentRenderer extends AbstractComponentRenderer {
     String text;
     double fsize;
 
-    public TextComponentRender(UISComponent component) {
+    public TextComponentRenderer(UISComponent component) {
         super(component);
     }
 
@@ -31,9 +31,14 @@ public class TextComponentRender extends BaseComponentRender {
     }
 
     @Override
-    void reloadComponent(UISComponent component) {
+    void reloadResComponent() {
         text = component.getString("text", "<<无文字>>");
         fsize=component.getDouble("fsize", 16);
+    }
+
+    @Override
+    void reloadPosComponent() {
+
     }
 
     @Override

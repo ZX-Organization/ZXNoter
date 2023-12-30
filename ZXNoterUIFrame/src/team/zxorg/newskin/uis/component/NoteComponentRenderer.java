@@ -1,17 +1,32 @@
 package team.zxorg.newskin.uis.component;
 
-import javafx.geometry.Pos;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.input.MouseEvent;
 import team.zxorg.newskin.basis.RenderRectangle;
 import team.zxorg.newskin.uis.ExpressionVector;
 import team.zxorg.newskin.uis.UISComponent;
 
-public class NoteComponentRender extends BaseComponentRender {
-    public NoteComponentRender(UISComponent component) {
+public class NoteComponentRenderer extends AbstractComponentRenderer {
+    public NoteComponentRenderer(UISComponent component) {
         super(component);
+        zindex = 10;
+    }
+
+    @Override
+    void reloadResComponent() {
+        tex2 = component.getImage("tex2");
+        tex3 = component.getImage("tex3");
+        tex4 = component.getImage("tex4");
+        tex5 = component.getImageOrNull("tex5");
+    }
+
+    @Override
+    void reloadPosComponent() {
+        pos2 = component.getExpressionVector("pos2");
+        size2 = component.getExpressionVector("size2");
+        if (!component.contains("size2"))
+            size2 = size;
+        size3 = component.getExpressionVector("size3");
     }
 
 
@@ -60,35 +75,12 @@ public class NoteComponentRender extends BaseComponentRender {
         super.resize(width, height);
     }
 
-    double x, y;
-
-    @Override
-    public void initialize(Canvas canvas) {
-
-        canvas.addEventFilter(MouseEvent.ANY, event -> {
-            System.out.println(event);
-            x = event.getX();
-            y = event.getY();
-        });
-    }
 
     @Override
     public void message(Object value) {
         super.message(value);
     }
 
-    @Override
-    void reloadComponent(UISComponent component) {
-        pos2 = component.getExpressionVector("pos2");
-        size2 = component.getExpressionVector("size2");
-        if (!component.contains("size2"))
-            size2 = size;
-        size3 = component.getExpressionVector("size3");
-        tex2 = component.getImage("tex2");
-        tex3 = component.getImage("tex3");
-        tex4 = component.getImage("tex4");
-        tex5 = component.getImage("tex5");
-    }
 
     @Override
     void drawComponent(GraphicsContext gc, RenderRectangle rr, double width, double height) {
@@ -98,8 +90,8 @@ public class NoteComponentRender extends BaseComponentRender {
 
         if (type == 1) {
 
-        }
-        if (type == 2) {
+
+        } else if (type == 2) {
 
             //绘制身体
             progressCalculation(rr, progress - 0.2);
@@ -112,18 +104,33 @@ public class NoteComponentRender extends BaseComponentRender {
             double w2 = rr.getWidth() / 2;
 
             rr.drawImage(gc, tex2, x1 - w1, y1, x1 + w1, y1, x2 - w2, y2, x2 + w2, y2);
-
+            //绘制尾部
             progressCalculation(rr, progress - 0.2);
             rr.drawImage(gc, tex3);
-        }
 
+        } else if (type == 3) {
+
+            //绘制身体  间隔
+            progressCalculation(rr, progress - 0.2);
+            double x1 = rr.getCenterX();
+            double y1 = rr.getCenterY();
+            double w1 = rr.getWidth() / 2;
+            progressCalculation(rr, progress);
+            double x2 = rr.getCenterX();
+            double y2 = rr.getCenterY();
+            double w2 = rr.getWidth() / 2;
+
+            rr.drawImage(gc, tex2, x1 - w1, y1, x1 + w1, y1, x2 - w2, y2, x2 + w2, y2);
+
+            //绘制尾部
+            progressCalculation(rr, progress - 0.2);
+            rr.drawImage(gc, tex3);
+
+        }
         //绘制头部
         progressCalculation(rr, progress);
-        rr.drawImage(gc, tex);
-        rr.setPos(Pos.CENTER, x, y);
-        rr.setSize(Pos.CENTER, 50, 50);
+        rr.drawImage(gc, (tex5 != null ? tex5 : tex));
 
-        rr.drawImageTest(gc, UISComponent.UNKNOWN);
     }
 
     private void progressCalculation(RenderRectangle rr, double p) {

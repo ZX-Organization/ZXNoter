@@ -6,6 +6,11 @@ import java.util.List;
 
 public class UISFrame {
     List<Image> frames;
+
+    public List<Image> getFrames() {
+        return frames;
+    }
+
     double interval;
     int currentIndex;
     long timer = System.currentTimeMillis();
@@ -57,4 +62,12 @@ public class UISFrame {
         return result;
     }
 
+    public Image getFrame(int index) {
+        if (frames == null) return null;
+        Image result = null;
+        if (index < frames.size() && index >= 0) {
+            result = frames.get(index);
+        }
+        return result;
+    }
 }

@@ -35,16 +35,17 @@ public class SubImage {
     }
 
     private BufferedImage image;
-
     public String getImageName() {
         return imageName;
     }
 
-    public BufferedImage getImage() {
+    public BufferedImage getImage(BufferedImage sourceImage) {
+        if (image == null)
+            this.image = extractImage(sourceImage, this.textureRect, textureRotated);
         return image;
     }
 
-    public SubImage(BufferedImage sourceImage, String imageName, Element info) {
+    public SubImage(String imageName, Element info) {
         //System.out.println(imageName);
         this.imageName = imageName;
 
@@ -72,12 +73,11 @@ public class SubImage {
             this.textureRotated = parseBoolean(info, "rotated");
 
 
-        this.image = extractImage(sourceImage, this.textureRect, textureRotated);
         //System.out.println(textureRotated);
 
     }
 
-    private BufferedImage extractImage(BufferedImage sourceImage, Rectangle region, boolean rotated) {
+    private static BufferedImage extractImage(BufferedImage sourceImage, Rectangle region, boolean rotated) {
         if (rotated) {
             BufferedImage subImage = sourceImage.getSubimage(region.x, region.y, region.height, region.width);
             return rotateImage(subImage);
@@ -87,7 +87,7 @@ public class SubImage {
         }
     }
 
-    private BufferedImage rotateImage(BufferedImage image) {
+    private static BufferedImage rotateImage(BufferedImage image) {
         int width = image.getWidth();
         int height = image.getHeight();
         BufferedImage rotatedImage = new BufferedImage(height, width, image.getType());

@@ -1,22 +1,27 @@
 package team.zxorg.newskin.uis.component;
 
-import javafx.geometry.Orientation;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import team.zxorg.newskin.basis.RenderRectangle;
 import team.zxorg.newskin.uis.UISComponent;
 
-public class KeyComponentRender extends BaseComponentRender {
+public class KeyComponentRenderer extends AbstractComponentRenderer {
     Image tex2;
 
-    public KeyComponentRender(UISComponent component) {
+    public KeyComponentRenderer(UISComponent component) {
         super(component);
     }
 
     @Override
-    void reloadComponent(UISComponent component) {
+    void reloadResComponent() {
         tex2 = component.getImage("tex2");
     }
+
+    @Override
+    void reloadPosComponent() {
+
+    }
+
 
     @Override
     void drawComponent(GraphicsContext gc, RenderRectangle rr, double width, double height) {

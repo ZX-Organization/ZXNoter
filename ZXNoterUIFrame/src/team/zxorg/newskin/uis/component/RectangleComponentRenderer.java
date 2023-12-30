@@ -1,23 +1,24 @@
 package team.zxorg.newskin.uis.component;
 
-import javafx.geometry.Orientation;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.effect.BlendMode;
 import team.zxorg.newskin.basis.RenderRectangle;
 import team.zxorg.newskin.uis.UISComponent;
 
-public class ImageComponentRender extends BaseComponentRender {
-    protected BlendMode blend;
-
-    public ImageComponentRender(UISComponent component) {
+public class RectangleComponentRenderer extends AbstractComponentRenderer {
+    public RectangleComponentRenderer(UISComponent component) {
         super(component);
     }
 
     @Override
-    void reloadComponent(UISComponent component) {
+    void reloadResComponent() {
+
     }
 
+    @Override
+    void reloadPosComponent() {
+
+    }
 
     @Override
     public void resize(double width, double height) {
@@ -34,15 +35,11 @@ public class ImageComponentRender extends BaseComponentRender {
         super.message(value);
     }
 
-    @Override
-    void drawComponent(GraphicsContext gc, RenderRectangle rr, double width, double height) {
-        rr.drawImage(gc, tex);
-    }
+
 
     @Override
-    public String toString() {
-        return "ImageComponentRender{" +
-                "component=" + component +
-                '}';
+    void drawComponent(GraphicsContext gc, RenderRectangle rr, double width, double height) {
+        gc.setFill(color);
+        gc.fillRect(pos.getX(), pos.getY(), size.getWidth(), size.getHeight());
     }
 }

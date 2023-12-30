@@ -9,11 +9,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class UISComponent {
     public static final Image UNKNOWN;
@@ -29,32 +28,63 @@ public class UISComponent {
         }
     }
 
+    public void setChanged() {
+        this.changed = true;
+    }
+
     public final ExpressionCalculator expressionCalculator;
     public final UISSkin uisSkin;
     /**
      * 资源映射表
      */
     private final HashMap<String, Path> imageMap;
-    private final String name;
+    private String name;
     private final String fullName;
     private final HashMap<String, String> properties = new HashMap<>();
+    private final Set<String> animations = new HashSet<>();
     private int index = 0;
     private boolean changed = false;
+    private boolean isAnimation = false;
 
+    /**
+     * 获取动画
+     *
+     * @return 动画
+     */
+    public Set<String> getAnimations() {
+        return animations;
+    }
+
+    public void copyFrom(UISComponent component) {
+        if (component == null)
+            ZXLogger.warning("尝试从null复制: " + this);
+        index = component.index;
+        properties.clear();
+        animations.clear();
+        properties.putAll(component.properties);
+        animations.addAll(component.animations);
+        changed = true;
+    }
+
+    public boolean isAnimation() {
+        return isAnimation;
+    }
 
     public UISComponent(String fullName, HashMap<String, Path> imageMap, UISSkin uisSkin) {
         this.imageMap = imageMap;
+
         this.fullName = fullName;
-        if (fullName.contains("-"))
-            this.name = fullName.substring(0, fullName.indexOf("-"));
-        else
-            this.name = fullName;
+        this.name = this.fullName;
+
         this.uisSkin = uisSkin;
         this.expressionCalculator = uisSkin.getExpressionCalculator();
         try {
             index = Integer.parseInt(fullName.substring(fullName.indexOf("-") + 1)) - 1;
+            this.name = fullName.substring(0, fullName.indexOf("-"));
         } catch (NumberFormatException ignored) {
         }
+        isAnimation = fullName.startsWith(":");
+
     }
 
     @Override
@@ -63,9 +93,20 @@ public class UISComponent {
                 "name='" + name + '\'' +
                 "fullName='" + fullName + '\'' +
                 ", index=" + index +
-                ", properties=" + properties +
+                (isAnimation ? ", animations=" + animations : ", properties=" + properties) +
                 '}';
     }
+
+    /**
+     * 寻找属性
+     *
+     * @param name 属性名 (匹配开头)
+     * @return 找到的属性名
+     */
+    public List<String> findProperties(String name) {
+        return properties.keySet().stream().filter(s -> s.startsWith(name)).collect(Collectors.toList());
+    }
+
 
     /**
      * 设置属性
@@ -73,13 +114,16 @@ public class UISComponent {
      * @param name  属性名
      * @param value 属性值 如果是null为移除属性
      */
-    public void put(String name, String value) {
-        if (value == null)
-            properties.remove(name);
-        else
-            properties.put(name, value.trim());
+    public void putProperty(String name, String value) {
+        properties.put(name, value.trim());
         changed = true;
     }
+
+    public void putAnimation(String value) {
+        animations.add(value);
+        changed = true;
+    }
+
 
     /**
      * 包含属性
@@ -109,19 +153,16 @@ public class UISComponent {
         if (value == null)
             return null;
         // 匹配{}差值变量并覆盖
-        Pattern pattern = Pattern.compile("\\{([^{}]+)\\}");
+        Pattern pattern = Pattern.compile("\\{([^{}]+)}");
         Matcher matcher = pattern.matcher(value);
-
-        StringBuffer result = new StringBuffer();
-
+        StringBuilder result = new StringBuilder();
         while (matcher.find()) {
             String variableName = matcher.group(1);
-            String replacement = uisSkin.variable.getOrDefault(variableName, "(未定义的变量: " + variableName + ")");
+            String replacement = uisSkin.variable.getOrDefault(variableName, "(!未定义的变量: " + variableName + "!)");
             matcher.appendReplacement(result, Matcher.quoteReplacement(replacement));
         }
 
         matcher.appendTail(result);
-
         return result.toString().isEmpty() ? value : result.toString();
     }
 
@@ -146,6 +187,7 @@ public class UISComponent {
 
     /**
      * 获取方向
+     *
      * @param name 属性名
      * @return 方向
      */
@@ -155,6 +197,15 @@ public class UISComponent {
             case 1 -> Orientation.VERTICAL;
             default -> null;
         };
+    }
+
+    /**
+     * 获取皮肤对象
+     *
+     * @return 皮肤对象
+     */
+    public UISSkin getSkin() {
+        return uisSkin;
     }
 
     /**
@@ -193,6 +244,20 @@ public class UISComponent {
         if (str == null) {
             ZXLogger.warning(getFullName() + " 没有属性 " + name);
             return UNKNOWN;
+        }
+        return getImageFromPath(str);
+    }
+
+    /**
+     * 获取图片 可以是null
+     *
+     * @param name 属性名
+     * @return 图片 没找到返回null
+     */
+    public Image getImageOrNull(String name) {
+        String str = getString(name, null);
+        if (str == null) {
+            return null;
         }
         return getImageFromPath(str);
     }
@@ -275,6 +340,7 @@ public class UISComponent {
         return new ExpressionVector(expressionCalculator, getString(name, "0,0"), index);
     }
 
+
     /**
      * 获取原件名
      *
@@ -300,5 +366,18 @@ public class UISComponent {
      */
     public int getIndex() {
         return index;
+    }
+
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        UISComponent otherComponent = (UISComponent) obj;
+        return index == otherComponent.index &&
+                Objects.equals(name, otherComponent.name) &&
+                Objects.equals(fullName, otherComponent.fullName) &&
+                properties.equals(otherComponent.properties) &&
+                animations.equals(otherComponent.animations);
     }
 }

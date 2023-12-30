@@ -4,35 +4,47 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dd78a4ca-7956-492b-9d75-ff82bf57b657" name="更改" comment="重写uis编辑器">
-      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/newskin/uis/UISFrame.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/newskin/uis/UISFrameAnimation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/newskin/uis/component/AnimationComponentRender.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/newskin/uis/component/HitComponentRender.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/newskin/uis/component/ImageComponentRender.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/newskin/uis/component/JudgeComponentRender.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/newskin/uis/component/KeyComponentRender.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/newskin/uis/component/NoteComponentRender.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/newskin/uis/component/PressComponentRender.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/newskin/uis/component/RectangleComponentRender.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/newskin/uis/component/TextComponentRender.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/newskin/uis/ui/Perspective.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/newskin/uis/ui/UISCodeArea.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/latest.log.lck" afterDir="false" />
+    <list default="true" id="dd78a4ca-7956-492b-9d75-ff82bf57b657" name="更改" comment="大更新">
+      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/newskin/DeviceType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/newskin/ResolutionInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/newskin/uis/animaion/AbstractAnimationRenderer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/newskin/uis/animaion/FadeAnimationRender.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/newskin/uis/animaion/HideAnimationRenderer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/newskin/uis/animaion/MoveAnimationRenderer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/newskin/uis/animaion/RotateAnimationRenderer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/newskin/uis/animaion/ScaleAnimationRender.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/newskin/uis/animaion/SizeAnimationRender.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/newskin/uis/component/AnimationComponentRenderer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/newskin/uis/component/ProgressComponentRenderer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/newskin/uis/component/ScoreComponentRenderer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/newskin/uis/component/TouchComponentRenderer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/newskin/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/newskin/Test.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/newskin/basis/RenderRectangle.java" beforeDir="false" afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/newskin/basis/RenderRectangle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ZXNoterCore/src/team/zxorg/zxncore/lib/plist/PlistImageList.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ZXNoterCore/src/team/zxorg/zxncore/lib/plist/SubImage.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/newskin/basis/ElementRenderInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/newskin/basis/RenderInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/newskin/plist/PlistImageList.java" beforeDir="false" afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/newskin/plist/PlistImageList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/newskin/plist/PlistParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/newskin/plist/PlistParser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/newskin/plist/SubImage.java" beforeDir="false" afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/newskin/plist/SubImage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/newskin/uis/ExpressionVector.java" beforeDir="false" afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/newskin/uis/ExpressionVector.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/newskin/uis/UISComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/newskin/uis/UISComponent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/newskin/uis/UISFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/newskin/uis/UISFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/newskin/uis/UISSkin.java" beforeDir="false" afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/newskin/uis/UISSkin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/newskin/uis/data/BaseComponentRender.java" beforeDir="false" afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/newskin/uis/component/BaseComponentRender.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/newskin/uis/data/old/FrameProperty.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/newskin/uis/component/AnimationComponentRender.java" beforeDir="false" afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/newskin/uis/component/FrameAnimationComponentRenderer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/newskin/uis/component/BaseComponentRender.java" beforeDir="false" afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/newskin/uis/component/AbstractComponentRenderer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/newskin/uis/component/HitComponentRender.java" beforeDir="false" afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/newskin/uis/component/HitComponentRenderer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/newskin/uis/component/ImageComponentRender.java" beforeDir="false" afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/newskin/uis/component/ImageComponentRenderer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/newskin/uis/component/JudgeComponentRender.java" beforeDir="false" afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/newskin/uis/component/JudgeComponentRenderer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/newskin/uis/component/KeyComponentRender.java" beforeDir="false" afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/newskin/uis/component/KeyComponentRenderer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/newskin/uis/component/NoteComponentRender.java" beforeDir="false" afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/newskin/uis/component/NoteComponentRenderer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/newskin/uis/component/PressComponentRender.java" beforeDir="false" afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/newskin/uis/component/PressComponentRenderer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/newskin/uis/component/RectangleComponentRender.java" beforeDir="false" afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/newskin/uis/component/RectangleComponentRenderer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/newskin/uis/component/TextComponentRender.java" beforeDir="false" afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/newskin/uis/component/TextComponentRenderer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/newskin/uis/ui/UISCodeArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/newskin/uis/ui/UISCodeArea.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/newskin/uis/ui/UISEditor.java" beforeDir="false" afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/newskin/uis/ui/UISEditor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/ui/component/LayerCanvasPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/ui/component/LayerCanvasPane.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.$编辑器自适应布局.drawio.bkp" beforeDir="false" afterPath="$PROJECT_DIR$/docs/.$编辑器自适应布局.drawio.bkp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.$编辑器自适应布局.drawio.dtmp" beforeDir="false" afterPath="$PROJECT_DIR$/docs/.$编辑器自适应布局.drawio.dtmp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/latest.log" beforeDir="false" afterPath="$PROJECT_DIR$/latest.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/latest.log.1" beforeDir="false" afterPath="$PROJECT_DIR$/latest.log.1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/old/audiochannel/Sonic.java" beforeDir="false" afterPath="$PROJECT_DIR$/old/audiochannel/Sonic.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/old/team/zxorg/zxnoter/test/fft/App2.java" beforeDir="false" afterPath="$PROJECT_DIR$/old/team/zxorg/zxnoter/test/fft/App2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/old/team/zxorg/zxnoter/test/sound/audiomixer/Sonic.java" beforeDir="false" afterPath="$PROJECT_DIR$/old/team/zxorg/zxnoter/test/sound/audiomixer/Sonic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/latest.log.lck" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,8 +55,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="CSS File" />
-        <option value="Enum" />
         <option value="Interface" />
+        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
@@ -101,6 +113,7 @@
     "project.structure.side.proportion": "0.2874845",
     "settings.editor.selected.configurable": "preferences.pluginManager",
     "vue.rearranger.settings.migration": "true",
+    "应用程序.AbstractAnimationRenderer.executor": "Run",
     "应用程序.Main.executor": "Run",
     "应用程序.PlistParser.executor": "Run",
     "应用程序.SkinEditor (1).executor": "Run",
@@ -132,11 +145,11 @@
       <recent name="" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="team.zxorg.newskin.uis.animaion" />
       <recent name="team.zxorg.newskin.uis" />
       <recent name="team.zxorg.ui.javafx.sub.editor.aa" />
       <recent name="team.zxorg.skin" />
       <recent name="team.zxorg.skin.components" />
-      <recent name="team.zxorg.skin.elements" />
     </key>
   </component>
   <component name="RunManager" selected="应用程序.UISEditor">
@@ -166,24 +179,14 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="UISSkin" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="team.zxorg.newskin.uis.UISSkin" />
-      <module name="ZXNoterUIFrame" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="team.zxorg.newskin.uis.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+    <list>
+      <item itemvalue="应用程序.Test" />
+      <item itemvalue="应用程序.UISEditor" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="应用程序.UISEditor" />
         <item itemvalue="应用程序.Test" />
-        <item itemvalue="应用程序.UISSkin" />
       </list>
     </recent_temporary>
   </component>
@@ -245,7 +248,8 @@
       <workItem from="1702972869959" duration="37623000" />
       <workItem from="1703245085575" duration="61216000" />
       <workItem from="1703443106785" duration="40797000" />
-      <workItem from="1703577380816" duration="43831000" />
+      <workItem from="1703577380816" duration="44009000" />
+      <workItem from="1703781068059" duration="74137000" />
     </task>
     <task id="LOCAL-00002" summary="update ui">
       <option name="closed" value="true" />
@@ -359,13 +363,36 @@
       <option name="project" value="LOCAL" />
       <updated>1703738750250</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="大更新">
+      <option name="closed" value="true" />
+      <created>1703780895732</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1703780895732</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="main" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
@@ -400,7 +427,8 @@
     <MESSAGE value="更新一点，但不多" />
     <MESSAGE value="UIS编辑器-修复3d、支持新元件" />
     <MESSAGE value="重写uis编辑器" />
-    <option name="LAST_COMMIT_MESSAGE" value="重写uis编辑器" />
+    <MESSAGE value="大更新" />
+    <option name="LAST_COMMIT_MESSAGE" value="大更新" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/ZXNoter$Main.ic" NAME="Main 覆盖结果" MODIFIED="1688229822928" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

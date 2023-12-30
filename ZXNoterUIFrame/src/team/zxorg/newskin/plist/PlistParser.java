@@ -21,6 +21,7 @@ public class PlistParser {
      * @throws Exception
      */
     public static void main(String[] args) throws Exception {
+/*
 
         Files.list(Path.of("D:\\malody\\skin\\Evans-进行中")).forEach(path -> {
             if (!path.getFileName().toString().endsWith(".plist")) return;
@@ -49,6 +50,7 @@ public class PlistParser {
             }
 
         });
+*/
 
 
     }
@@ -65,35 +67,37 @@ public class PlistParser {
         if (!plistPath.getFileName().toString().endsWith(".plist")) return paths;
 
         PlistImageList plistImageList;
+        BufferedImage texture;
         try {
             plistImageList = new PlistImageList(plistPath);
-            //Files.copy(plistPath, outputPath.resolve(plistPath.getFileName()));
+            texture = plistImageList.getTexture();
         } catch (ParserConfigurationException | IOException | SAXException e) {
             ZXLogger.warning("解析Plist文件失败 " + e.getMessage());
             return paths;
         }
 
 
-
         for (SubImage subImage : plistImageList.getImages()) {
+            Path outPath = outputPath.resolve(subImage.getImageName());
+            paths.add(outPath);
+            if (Files.exists(outPath) && skip)
+                continue;
+
             Dimension size = subImage.getSpriteSourceSize();
+            BufferedImage in = subImage.getImage(texture);
             BufferedImage outImage;
             if (size == null) {
-                outImage = subImage.getImage();
+                outImage = in;
             } else {
-                BufferedImage sizeImage = new BufferedImage(size.width, size.height, subImage.getImage().getType());
+                BufferedImage sizeImage = new BufferedImage(size.width, size.height, in.getType());
                 Graphics2D g2d = sizeImage.createGraphics();
-                BufferedImage image = subImage.getImage();
-                g2d.drawImage(image, sizeImage.getWidth() / 2 - image.getWidth() / 2 + subImage.getSpriteOffset().x, sizeImage.getHeight() / 2 - image.getHeight() / 2 - subImage.getSpriteOffset().y, image.getWidth(), image.getHeight(), null);
+                g2d.drawImage(in, sizeImage.getWidth() / 2 - in.getWidth() / 2 + subImage.getSpriteOffset().x, sizeImage.getHeight() / 2 - in.getHeight() / 2 - subImage.getSpriteOffset().y, in.getWidth(), in.getHeight(), null);
                 g2d.dispose();
                 outImage = sizeImage;
             }
 
-            Path outPath = outputPath.resolve(subImage.getImageName());
-            paths.add(outPath);
+
             try {
-                if (Files.exists(outPath) && skip)
-                    continue;
                 ImageIO.write(outImage, "png", outPath.toFile());
             } catch (IOException e) {
                 ZXLogger.warning("写出图片失败 " + e.getMessage());

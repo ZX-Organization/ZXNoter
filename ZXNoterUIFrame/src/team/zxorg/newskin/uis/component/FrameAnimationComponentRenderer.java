@@ -6,11 +6,21 @@ import team.zxorg.newskin.basis.RenderRectangle;
 import team.zxorg.newskin.uis.UISComponent;
 import team.zxorg.newskin.uis.UISFrame;
 
-public class AnimationComponentRender extends BaseComponentRender {
+public class FrameAnimationComponentRenderer extends AbstractComponentRenderer {
     UISFrame frame;
 
-    public AnimationComponentRender(UISComponent component) {
+    public FrameAnimationComponentRenderer(UISComponent component) {
         super(component);
+    }
+
+    @Override
+    void reloadResComponent() {
+        frame = component.getFrame("frame");
+    }
+
+    @Override
+    void reloadPosComponent() {
+
     }
 
     @Override
@@ -28,10 +38,6 @@ public class AnimationComponentRender extends BaseComponentRender {
         super.message(value);
     }
 
-    @Override
-    void reloadComponent(UISComponent component) {
-        frame = component.getFrame("frame");
-    }
 
     @Override
     void drawComponent(GraphicsContext gc, RenderRectangle rr, double width, double height) {
