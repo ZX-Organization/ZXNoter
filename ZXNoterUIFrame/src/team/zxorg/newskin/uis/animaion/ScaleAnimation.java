@@ -5,12 +5,12 @@ import team.zxorg.newskin.uis.ExpressionVector;
 import team.zxorg.newskin.uis.UISComponent;
 import team.zxorg.newskin.uis.component.AbstractComponentRenderer;
 
-public class ScaleAnimationRender extends AbstractAnimationRenderer {
+public class ScaleAnimation extends AbstractAnimation {
     ExpressionVector from;
     ExpressionVector to;
     int type = 0;
 
-    public ScaleAnimationRender(UISComponent component, String animation, int type) {
+    public ScaleAnimation(UISComponent component, String animation, int type) {
         super(component, animation);
         this.type = type;
     }

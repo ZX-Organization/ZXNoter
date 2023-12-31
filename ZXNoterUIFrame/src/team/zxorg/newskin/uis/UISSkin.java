@@ -233,15 +233,16 @@ public class UISSkin {
     /**
      * 更新渲染器
      */
-    public void updateRenderer(List<AbstractComponentRenderer> renderers, HashMap<UISComponent, AbstractComponentRenderer> currentComponentMap, LayerCanvasPane layerCanvasPane) {
+    public boolean updateRenderer(List<AbstractComponentRenderer> renderers, HashMap<UISComponent, AbstractComponentRenderer> currentComponentMap, LayerCanvasPane layerCanvasPane) {
         angle = 0;
         HashMap<String, UISComponent> newComponentMap = new HashMap<>();
+        boolean isChanged = false;
         try {
             parseMUI(muiPath, newComponentMap);
             expressionCalculator.setUnitCanvasHeight(unit);
         } catch (IOException e) {
             ZXLogger.warning("解析mui文件失败: " + e.getMessage());
-            return;
+            return isChanged;
         }
 
         //检查多余的组件
@@ -259,6 +260,8 @@ public class UISSkin {
             renderers.remove(renderer);
             currentComponentMap.remove(component);
             componentMap.remove(name);
+            if (component.isAnimation())
+                isChanged = true;
         }
 
         //检查新组件
@@ -272,6 +275,8 @@ public class UISSkin {
                 renderers.add(renderer);
                 currentComponentMap.put(component, renderer);
                 componentMap.put(component.getFullName(), component);
+                if (component.isAnimation())
+                    isChanged = true;
             }
         }
 
@@ -280,11 +285,14 @@ public class UISSkin {
             UISComponent newComponent = newComponentMap.get(component.getFullName());
             if (!component.equals(newComponent)) {
                 component.copyFrom(newComponent);
+                if (component.isAnimation())
+                    isChanged = true;
             }
         }
 
         //再次排序渲染器
         sortRenders(renderers);
+        return isChanged;
     }
 
 

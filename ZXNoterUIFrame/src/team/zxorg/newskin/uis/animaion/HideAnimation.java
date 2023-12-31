@@ -4,21 +4,21 @@ import javafx.scene.canvas.GraphicsContext;
 import team.zxorg.newskin.uis.UISComponent;
 import team.zxorg.newskin.uis.component.AbstractComponentRenderer;
 
-public class RotateAnimationRenderer extends AbstractAnimationRenderer{
-    double from;
-    double to;
-    public RotateAnimationRenderer(UISComponent component, String animation) {
+public class HideAnimation extends AbstractAnimation {
+    boolean isHide = true;
+
+    public HideAnimation(UISComponent component, String animation) {
         super(component, animation);
+        isHide = animation.contains("hide");
     }
 
     @Override
     void reload() {
-        from = getDouble("from",0);
-        to = getDouble("to",0);
+
     }
 
     @Override
     protected void draw(GraphicsContext gc, double width, double height, double progress, AbstractComponentRenderer cr) {
-        cr.rotate = from + (to - from) * progress;
+        cr.hide = isHide;
     }
 }

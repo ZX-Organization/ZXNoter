@@ -129,7 +129,8 @@ public class NoteComponentRenderer extends AbstractComponentRenderer {
         }
         //绘制头部
         progressCalculation(rr, progress);
-        rr.drawImage(gc, (tex5 != null ? tex5 : tex));
+        //rr.drawImage(gc, (tex5 != null ? tex5 : tex));
+        rr.drawImage(gc, tex);
 
     }
 

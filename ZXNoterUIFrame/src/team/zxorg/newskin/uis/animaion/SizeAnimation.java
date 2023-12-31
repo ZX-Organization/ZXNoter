@@ -5,12 +5,12 @@ import team.zxorg.newskin.uis.ExpressionVector;
 import team.zxorg.newskin.uis.UISComponent;
 import team.zxorg.newskin.uis.component.AbstractComponentRenderer;
 
-public class MoveAnimationRenderer extends AbstractAnimationRenderer {
+public class SizeAnimation extends AbstractAnimation {
     ExpressionVector from;
     ExpressionVector to;
     int type = 0;
 
-    public MoveAnimationRenderer(UISComponent component, String animation, int type) {
+    public SizeAnimation(UISComponent component, String animation, int type) {
         super(component, animation);
         this.type = type;
     }
@@ -21,25 +21,22 @@ public class MoveAnimationRenderer extends AbstractAnimationRenderer {
         to = getExpressionVector("to");
     }
 
-
     @Override
     protected void draw(GraphicsContext gc, double width, double height, double progress, AbstractComponentRenderer cr) {
-        ExpressionVector p = cr.pos;
-        double x = from.getX() + (to.getX() - from.getX()) * progress;
-        double y = from.getY() + (to.getY() - from.getY()) * progress;
+        ExpressionVector p = cr.size;
+        double w = from.getWidth() + (to.getWidth() - from.getWidth()) * progress;
+        double h = from.getHeight() + (to.getHeight() - from.getHeight()) * progress;
         switch (type) {
-            case 0 -> {
-                p.setX(x);
-                p.setY(y);
+            case 0->{
+                p.setW(w);
+                p.setH(h);
             }
-            case 1 -> {
-                p.setX(x);
+            case 1->{
+                p.setW(w);
             }
-            case 2 -> {
-                p.setY(y);
+            case 2->{
+                p.setH(h);
             }
         }
     }
-
-
 }

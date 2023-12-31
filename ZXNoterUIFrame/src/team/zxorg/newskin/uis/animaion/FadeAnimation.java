@@ -4,21 +4,22 @@ import javafx.scene.canvas.GraphicsContext;
 import team.zxorg.newskin.uis.UISComponent;
 import team.zxorg.newskin.uis.component.AbstractComponentRenderer;
 
-public class HideAnimationRenderer extends AbstractAnimationRenderer {
-    boolean isHide = true;
+public class FadeAnimation extends AbstractAnimation {
+    double from;
+    double to;
 
-    public HideAnimationRenderer(UISComponent component, String animation) {
+    public FadeAnimation(UISComponent component, String animation) {
         super(component, animation);
-        isHide = animation.contains("hide");
     }
 
     @Override
     void reload() {
-
+        from = getDouble("from", 100) / 100.;
+        to = getDouble("to", 100) / 100.;
     }
 
     @Override
     protected void draw(GraphicsContext gc, double width, double height, double progress, AbstractComponentRenderer cr) {
-        cr.hide = isHide;
+        cr.opacity = from + (to - from) * progress;
     }
 }

@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public abstract class AbstractAnimationRenderer {
+public abstract class AbstractAnimation {
     public final ExpressionCalculator expressionCalculator;
     private final UISComponent component;
     private final HashMap<String, String> properties;
@@ -79,7 +79,7 @@ public abstract class AbstractAnimationRenderer {
         return y;
     }
 
-    public AbstractAnimationRenderer(UISComponent component, String animation) {
+    public AbstractAnimation(UISComponent component, String animation) {
         this.component = component;
         properties = parseProperties(animation.replaceAll(" ", ""));
         if (component.isAnimation()) {
@@ -207,6 +207,7 @@ public abstract class AbstractAnimationRenderer {
             animationTimeIndex += 2;
             //索引超出开摆
             if (animationTimeIndex >= animationTimes.size()) {
+                //draw(gc, width, height,1., cr);
                 return;
             }
 
@@ -217,13 +218,14 @@ public abstract class AbstractAnimationRenderer {
                 repeatFlipped = !repeatFlipped;
         } else if (repeatStartTime > time) {
             //如果超出起始时间 则需要回退
-            /*do {
-                if (animationTimeIndex <= 0)
-                    return;
-                animationTimeIndex -= 2;
-                repeatStartTime = animationTimes.get(animationTimeIndex);
-                repeatEndTime = animationTimes.get(animationTimeIndex + 1);
-            } while (repeatStartTime > time);*/
+            //检查是否能回退
+            if (animationTimeIndex - 2 >= 0) {
+                //检查起始时间和当前时间 判断是否需要回退
+                if (repeatEndTime > time) {
+                    animationTimeIndex = 0;
+                    cr.reloadStyle();
+                }
+            }
         }
 
         double progress = (double) (time - repeatStartTime) / (repeatEndTime - repeatStartTime);

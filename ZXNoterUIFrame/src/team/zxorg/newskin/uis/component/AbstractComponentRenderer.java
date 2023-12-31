@@ -123,16 +123,11 @@ public abstract class AbstractComponentRenderer implements RenderInterface {
             shadow = new Shadow(BlurType.ONE_PASS_BOX, color, 0);
             shadow.setColor(color);
         }
-        rotate = component.getDouble("rotate", 0);
-        opacity = component.getInt("opacity", 100) / 100.;
+        reloadStyle();
         zindex = component.getInt("zindex", zindex);
         type = component.getInt("type", 0);
         index = component.getIndex();
-        scale = component.getExpressionVector("scale");
-        if (!component.contains("scale")) {
-            scale.setW(1);
-            scale.setH(1);
-        }
+
 
         flip = component.getOrientation("flip");
         rr.setFlip(flip);
@@ -146,6 +141,19 @@ public abstract class AbstractComponentRenderer implements RenderInterface {
 
     public void reloadPos() {
         reloadPosComponent_();
+    }
+
+    public void reloadStyle() {
+        pos = component.getExpressionVector("pos");
+        size = component.getExpressionVector("size");
+        rotate = component.getDouble("rotate", 0);
+        opacity = component.getInt("opacity", 100) / 100.;
+        scale = component.getExpressionVector("scale");
+        if (!component.contains("scale")) {
+            scale.setW(1);
+            scale.setH(1);
+        }
+        hide = false;
     }
 
     private void reloadPosComponent_() {

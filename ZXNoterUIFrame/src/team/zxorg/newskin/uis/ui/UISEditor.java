@@ -21,6 +21,7 @@ import team.zxorg.newskin.uis.UISComponent;
 import team.zxorg.newskin.uis.UISSkin;
 import team.zxorg.newskin.uis.component.AbstractComponentRenderer;
 import team.zxorg.newskin.uis.component.AnimationComponentRenderer;
+import team.zxorg.newskin.uis.component.MeasuringRulerRenderer;
 import team.zxorg.ui.component.LayerCanvasPane;
 import team.zxorg.zxncore.ZXLogger;
 import team.zxorg.zxncore.ZXVersion;
@@ -36,8 +37,16 @@ public class UISEditor extends HBox {
     Perspective perspective = new Perspective();
     ExpressionCalculator expressionCalculator = new ExpressionCalculator();
 
+    MeasuringRulerRenderer measureRuler = new MeasuringRulerRenderer(expressionCalculator);
+
     ArrayList<AbstractComponentRenderer> componentRenders = new ArrayList<>();
     HashMap<UISComponent, AbstractComponentRenderer> componentMap = new HashMap<>();
+    //开始播放时的时间戳
+    public long startTime = 0;
+    //暂停时的时间位置
+    public long pauseTime = 0;
+    //暂停状态
+    public boolean isPaused = true;
 
     LayerCanvasPane layerCanvasPane = new LayerCanvasPane() {
         {
@@ -82,7 +91,7 @@ public class UISEditor extends HBox {
                     new UnitInfo("百分比", "%", 2)
             );
             valueProperty().addListener((observable, oldValue, newValue) -> {
-                //measuringRulerRenderer.unit = newValue;
+                measureRuler.unit = newValue;
             });
             getSelectionModel().selectFirst();
             setPrefWidth(80);
@@ -135,6 +144,8 @@ public class UISEditor extends HBox {
         layerCanvasPane.createCanvas("3d").setEffect(perspective.getEffect());
         layerCanvasPane.createCanvas("top");
 
+        measureRuler.initialize(layerCanvasPane.createCanvas("mark"));
+
         /*canvas.setOnMousePressed(event -> {
             if (event.getButton().equals(MouseButton.PRIMARY)) {
                 measuringRulerRenderer.setPos = 1;
@@ -160,6 +171,13 @@ public class UISEditor extends HBox {
         AnimationTimer animationTimer = new AnimationTimer() {
             @Override
             public void handle(long l) {
+                long currentTime = (isPaused ? pauseTime : System.currentTimeMillis() - startTime);
+                if (!isPaused) {
+                    if (!timeLineSlider.isValueChanging())
+                        timeLineSlider.setValue(currentTime / 1000.);
+                }
+                timeLabel.setText(currentTime + " ms");
+
                 layerCanvasPane.clearRect();
                 for (AbstractComponentRenderer cr : componentRenders) {
                     GraphicsContext gc = layerCanvasPane.getGraphicsContext2D(cr.getLayoutName());
@@ -167,13 +185,18 @@ public class UISEditor extends HBox {
                         AbstractComponentRenderer anim = componentMap.get(cr.getMotion());
                         gc.save();
                         if (anim instanceof AnimationComponentRenderer renderer) {
-                            renderer.update(gc, expressionCalculator.getCanvasWidth(), expressionCalculator.getCanvasHeight(), cr);
+                            renderer.update(gc, expressionCalculator.getCanvasWidth(), expressionCalculator.getCanvasHeight(), cr, currentTime);
                         }
                         cr.draw(gc, expressionCalculator.getCanvasWidth(), expressionCalculator.getCanvasHeight());
                         gc.restore();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+                }
+
+                {
+                    GraphicsContext gc = layerCanvasPane.getGraphicsContext2D("mark");
+                    measureRuler.draw(gc, expressionCalculator.getCanvasWidth(), expressionCalculator.getCanvasHeight());
                 }
             }
         };
@@ -236,7 +259,8 @@ public class UISEditor extends HBox {
             return;
         skin.setDeviceType(deviceTypeChoiceBox.getValue());
         setCanvasSize(resolutionChoiceBox.getValue().getAspectRatio(), scalingFactorSlider.getValue());
-        skin.updateRenderer(componentRenders, componentMap, layerCanvasPane);
+        if (autoReplayCheckBox.isSelected() && skin.updateRenderer(componentRenders, componentMap, layerCanvasPane))
+            resetTime();
         perspective.setAngle(skin.getAngle());
 
     }
@@ -246,9 +270,11 @@ public class UISEditor extends HBox {
         for (AbstractComponentRenderer component : componentMap.values()) {
             component.reloadPos();
         }
+        resetTime();
     }
 
     public void reload() {
+        resetTime();
         if (tabPane.getSelectionModel().getSelectedItem() != null)
             if (tabPane.getSelectionModel().getSelectedItem().getContent() instanceof VirtualizedScrollPane uis) {
                 componentRenders.clear();
@@ -263,7 +289,6 @@ public class UISEditor extends HBox {
                     if (render != null) {
                         componentRenders.add(render);
                         componentMap.put(component, render);
-
                     }
 
                 }
@@ -319,6 +344,20 @@ public class UISEditor extends HBox {
             return name + "(" + unit + ")";
         }
 
+        @Override
+        public String name() {
+            return name;
+        }
+
+        @Override
+        public String unit() {
+            return unit;
+        }
+
+        @Override
+        public int id() {
+            return id;
+        }
     }
 
 
@@ -359,7 +398,7 @@ public class UISEditor extends HBox {
     };
 
 
-    HBox toolbar = new HBox(reloadButton, resolutionChoiceBox, deviceTypeChoiceBox, unitChoiceBox, scalingFactorLabel, scalingFactorSlider, openFileButton) {
+    HBox topToolbar = new HBox(reloadButton, resolutionChoiceBox, deviceTypeChoiceBox, unitChoiceBox, scalingFactorLabel, scalingFactorSlider, openFileButton) {
         {
             setMinHeight(40);
             setBorder(new Border(new BorderStroke(Color.WHITE, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(0, 0, 1, 0), new Insets(0))));
@@ -369,7 +408,86 @@ public class UISEditor extends HBox {
         }
     };
 
-    VBox sideVBox = new VBox(toolbar, tabPane) {
+
+    private void resetTime() {
+        if (isPaused) {
+            pauseTime = -3000;
+        } else {
+            startTime = System.currentTimeMillis() + 3000;
+        }
+
+    }
+
+    CheckBox autoReplayCheckBox = new CheckBox("自动重播");
+    Button replayButton = new Button("重放") {
+        {
+            setOnAction(event -> resetTime());
+        }
+    };
+
+    Button playButton = new Button("播放") {
+        {
+            setOnAction(event -> {
+                if (isPaused) {
+                    isPaused = false;
+                    startTime = System.currentTimeMillis() - pauseTime;
+                }
+            });
+        }
+    };
+    Button pauseButton = new Button("暂停") {
+        {
+            setOnAction(event -> {
+                if (!isPaused) {
+                    isPaused = true;
+                    pauseTime = System.currentTimeMillis() - startTime;
+                }
+            });
+        }
+    };
+
+    Label timeLabel = new Label() {
+        {
+            setPrefWidth(80);
+            setAlignment(Pos.CENTER_RIGHT);
+        }
+    };
+    Slider timeLineSlider = new Slider(-3, 20, -3) {
+        {
+            HBox.setHgrow(this, Priority.ALWAYS);
+            setPrefWidth(240);
+
+            //设置块增量
+            setBlockIncrement(0.01);
+            //设置主要刻度单位
+            setMajorTickUnit(0.5);
+            setShowTickLabels(true);
+            setMinorTickCount(1);
+            setSnapToTicks(true);
+            setSnapToPixel(true);
+            valueProperty().addListener((observable, oldValue, newValue) -> {
+                if (isValueChanging()) {
+                    if (isPaused) {
+                        pauseTime = (long) (newValue.doubleValue() * 1000);
+                    } else {
+                        startTime = System.currentTimeMillis() - (long) (newValue.doubleValue() * 1000);
+                    }
+                }
+            });
+        }
+    };
+
+    HBox bottomToolbar = new HBox(autoReplayCheckBox, timeLabel, timeLineSlider, playButton, pauseButton, replayButton) {
+        {
+            setMinHeight(40);
+            setBorder(new Border(new BorderStroke(Color.WHITE, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(1, 0, 0, 0), new Insets(0))));
+            setAlignment(Pos.CENTER_LEFT);
+            setSpacing(8);
+            setPadding(new Insets(0, 8, 0, 8));
+        }
+    };
+
+    VBox sideVBox = new VBox(topToolbar, tabPane, bottomToolbar) {
         {
             setHgrow(this, Priority.ALWAYS);
             setPrefWidth(260);
