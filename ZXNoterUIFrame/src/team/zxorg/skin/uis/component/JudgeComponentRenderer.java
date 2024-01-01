@@ -1,0 +1,41 @@
+package team.zxorg.skin.uis.component;
+
+import javafx.scene.canvas.GraphicsContext;
+import team.zxorg.skin.basis.RenderRectangle;
+import team.zxorg.skin.uis.UISComponent;
+import team.zxorg.skin.uis.UISFrameAnimation;
+
+public class JudgeComponentRenderer extends AbstractComponentRenderer {
+    UISFrameAnimation animation;
+
+    public JudgeComponentRenderer(UISComponent component) {
+        super(component);
+    }
+
+    @Override
+    void reloadResComponent() {
+        animation = new UISFrameAnimation(component, "frame", "frame2", "frame3", "frame4");
+        switch (type) {
+            case 1, 2 -> {
+                animation.addBehavior("frame", 1);
+            }
+            case 3 -> {
+                animation.addBehavior("frame", 1);
+                animation.addBehavior("frame2", 1);
+                animation.addBehavior("frame3", 1);
+                animation.addBehavior("frame4", 1);
+            }
+        }
+    }
+
+    @Override
+    void reloadPosComponent() {
+
+    }
+
+
+    @Override
+    void drawComponent(GraphicsContext gc, RenderRectangle rr, double width, double height) {
+        rr.drawImage(gc,animation.getCurrentFrames());
+    }
+}

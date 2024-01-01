@@ -1,0 +1,54 @@
+package team.zxorg.skin.uis.component;
+
+import javafx.scene.canvas.GraphicsContext;
+import team.zxorg.skin.basis.RenderRectangle;
+import team.zxorg.skin.uis.ExpressionVector;
+import team.zxorg.skin.uis.UISComponent;
+
+public class BarComponentRender extends AbstractComponentRenderer {
+    private ExpressionVector pos2;
+    private ExpressionVector size2;
+    private double progress;
+
+    public BarComponentRender(UISComponent component) {
+        super(component);
+    }
+
+    @Override
+    void reloadResComponent() {
+
+    }
+
+    @Override
+    void reloadPosComponent() {
+        pos2 = component.getExpressionVector("pos2");
+        size2 = component.getExpressionVector("size2");
+    }
+
+    @Override
+    void drawComponent(GraphicsContext gc, RenderRectangle rr, double width, double height) {
+        progress += 0.004;
+        progress %= 1;
+
+        progressCalculation(rr, progress + 1);
+        rr.drawImage(gc, tex);
+        progressCalculation(rr, progress + 0.5);
+        rr.drawImage(gc, tex);
+        progressCalculation(rr, progress);
+        rr.drawImage(gc, tex);
+        progressCalculation(rr, progress - 0.5);
+        rr.drawImage(gc, tex);
+        progressCalculation(rr, progress - 1);
+        rr.drawImage(gc, tex);
+
+    }
+
+    private void progressCalculation(RenderRectangle rr, double p) {
+        double imgX = pos.getX() + (pos2.getX() - pos.getX()) * p;
+        double imgY = pos.getY() + (pos2.getY() - pos.getY()) * p;
+        double imgW = size.getWidth() + (size2.getWidth() - size.getWidth()) * p;
+        double imgH = size.getHeight() + (size2.getHeight() - size.getHeight()) * p;
+        rr.setPos(anchor, imgX, imgY);
+        rr.setSize(anchor, imgW, imgH);
+    }
+}
