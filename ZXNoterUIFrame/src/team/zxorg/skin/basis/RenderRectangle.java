@@ -289,6 +289,11 @@ public class RenderRectangle {
         setHeight(pos.getVpos(), height);
     }
 
+    public void setSize(double width, double height) {
+        setWidth(Pos.TOP_LEFT.getHpos(), width);
+        setHeight(Pos.TOP_LEFT.getVpos(), height);
+    }
+
     /**
      * 矩形等比缩放 (系数缩放)
      *
@@ -317,6 +322,9 @@ public class RenderRectangle {
         setHeight(pos.getVpos(), height * scale);
     }
 
+    public void setPos(double x, double y) {
+        setPos(Pos.TOP_LEFT, x, y);
+    }
 
     public void setPos(Pos pos, double x, double y) {
         setX(pos.getHpos(), x);

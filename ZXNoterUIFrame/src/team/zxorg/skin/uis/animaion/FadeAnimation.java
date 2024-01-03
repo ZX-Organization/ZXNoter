@@ -19,7 +19,7 @@ public class FadeAnimation extends AbstractAnimation {
     }
 
     @Override
-    protected void draw(GraphicsContext gc, double width, double height, double progress, AbstractComponentRenderer cr) {
+    protected void handle(GraphicsContext gc, double width, double height, double progress, AbstractComponentRenderer cr) {
         cr.opacity = from + (to - from) * progress;
     }
 }

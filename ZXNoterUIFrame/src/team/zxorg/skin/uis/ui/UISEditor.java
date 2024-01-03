@@ -3,7 +3,6 @@ package team.zxorg.skin.uis.ui;
 import com.sun.javafx.application.PlatformImpl;
 import com.sun.javafx.util.Logging;
 import javafx.animation.AnimationTimer;
-import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -34,7 +33,7 @@ import java.util.HashMap;
 
 public class UISEditor extends HBox {
 
-    public static final ZXVersion VERSION = new ZXVersion(1, 0, 1, ZXVersion.ReleaseStatus.BETA);
+    public static final ZXVersion VERSION = new ZXVersion(1, 0, 2, ZXVersion.ReleaseStatus.BETA);
     UISSkin skin;
     Perspective perspective = new Perspective();
     ExpressionCalculator expressionCalculator = new ExpressionCalculator();
@@ -48,7 +47,7 @@ public class UISEditor extends HBox {
     //暂停时的时间位置
     public long pauseTime = 0;
     //暂停状态
-    public boolean isPaused = true;
+    public boolean isPaused = false;
 
     LayerCanvasPane layerCanvasPane = new LayerCanvasPane() {
         {
@@ -131,7 +130,7 @@ public class UISEditor extends HBox {
 
     public UISEditor() {
         setAlignment(Pos.CENTER_LEFT);
-        tabPane.getSelectionModel().selectedItemProperty().addListener(observable -> reloadButton.getOnAction().handle(new ActionEvent()));
+        tabPane.getSelectionModel().selectedItemProperty().addListener(observable -> reload());
 
 
 
@@ -202,6 +201,9 @@ public class UISEditor extends HBox {
                         }
                         cr.draw(gc, width, height);
                         gc.restore();
+                        gc.restore();
+                        gc.restore();
+                        gc.restore();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -211,6 +213,9 @@ public class UISEditor extends HBox {
                     GraphicsContext gc = layerCanvasPane.getGraphicsContext2D("mark");
                     measureRuler.draw(gc, width, height);
                 }
+                gc3d.restore();
+                gc3d.restore();
+                gc3d.restore();
                 gc3d.restore();
             }
         };
@@ -288,9 +293,6 @@ public class UISEditor extends HBox {
     }
 
     public void reload() {
-
-
-        resetTime();
         if (tabPane.getSelectionModel().getSelectedItem() != null)
             if (tabPane.getSelectionModel().getSelectedItem().getContent() instanceof VirtualizedScrollPane uis) {
                 componentRenders.clear();
@@ -298,9 +300,8 @@ public class UISEditor extends HBox {
 
                 skin = new UISSkin(((UISCodeArea) uis.getContent()).getFile(), expressionCalculator);
                 skin.setDeviceType(deviceTypeChoiceBox.getValue());
-                setCanvasSize(resolutionChoiceBox.getValue().getAspectRatio(), scalingFactorSlider.getValue());
+                //setCanvasSize(resolutionChoiceBox.getValue().getAspectRatio(), scalingFactorSlider.getValue());
                 skin.parse();
-
                 perspective.setAngle(skin.getAngle());
                 for (UISComponent component : skin.getComponents()) {
                     AbstractComponentRenderer render = AbstractComponentRenderer.toRenderer(component, layerCanvasPane);
@@ -311,15 +312,15 @@ public class UISEditor extends HBox {
 
                 }
                 UISSkin.sortRenders(componentRenders);
+                updateSize();
             }
-
+        resetTime();
     }
 
     public void setCanvasSize(double aspectRatio, double zoomRate) {
         double unitHeight = expressionCalculator.getUnitCanvasHeight();
         double width = unitHeight * aspectRatio * zoomRate;
         double height = unitHeight * zoomRate;
-
         layerCanvasPane.setMinSize(width, height);
         layerCanvasPane.setMaxSize(width, height);
         setMinSize(width + tabPane.getMinWidth(), height + 40);
@@ -436,7 +437,11 @@ public class UISEditor extends HBox {
 
     }
 
-    CheckBox autoReplayCheckBox = new CheckBox("自动重播");
+    CheckBox autoReplayCheckBox = new CheckBox("自动重播") {
+        {
+            setSelected(true);
+        }
+    };
     Button replayButton = new Button("重放") {
         {
             setOnAction(event -> resetTime());

@@ -8,6 +8,10 @@ import java.util.List;
 
 
 public class UISFrameAnimation {
+    public Image getFirstFrame() {
+        return firstFrame;
+    }
+
     private static class AnimationBehavior {
         /**
          * 动画名称 如果name为null则为延迟且repeat为延迟时间ms
@@ -25,9 +29,9 @@ public class UISFrameAnimation {
     }
 
     //帧动画表
-    private HashMap<String, List<Image>> animationMap = new HashMap<>();
+    private final HashMap<String, List<Image>> animationMap = new HashMap<>();
     // 动画行为队列
-    private ArrayList<AnimationBehavior> behaviors = new ArrayList<>();
+    private final ArrayList<AnimationBehavior> behaviors = new ArrayList<>();
     // 当前行为索引
     private int currentBehaviorIndex = 0;
     // 当前帧索引
@@ -42,11 +46,18 @@ public class UISFrameAnimation {
     private final double interval;
     //计时器
     private long timer;
+    private Image firstFrame;
 
     public UISFrameAnimation(UISComponent component, String... names) {
         this.interval = component.getDouble("interval", 500);
         for (String name : names) {
-            animationMap.put(name, component.getImageList(name));
+            List<Image> animationList = component.getImageList(name);
+            animationMap.put(name, animationList);
+            if (animationList != null)
+                if (firstFrame == null)
+                    if (!animationList.isEmpty())
+
+                        firstFrame = animationList.getFirst();
         }
     }
 

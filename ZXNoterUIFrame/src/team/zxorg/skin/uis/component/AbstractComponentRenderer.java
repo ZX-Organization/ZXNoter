@@ -80,11 +80,13 @@ public abstract class AbstractComponentRenderer implements RenderInterface {
     protected Orientation flip;
 
     public ExpressionVector scale;
-    UISComponent motion;
+    private UISComponent motion;
 
     public boolean hide;
 
     public ExpressionVector skew;
+    protected ExpressionVector texSize;
+    protected double pixelMagnification;
 
     public AbstractComponentRenderer(UISComponent component) {
         this.component = component;
@@ -100,7 +102,7 @@ public abstract class AbstractComponentRenderer implements RenderInterface {
      *
      * @return
      */
-    public final String getLayoutName() {
+    public String getLayoutName() {
         return (getZindex() < 1 ? "bottom" : (getZindex() < 99 ? "3d" : "top"));
     }
 
@@ -117,8 +119,13 @@ public abstract class AbstractComponentRenderer implements RenderInterface {
     }
 
     private void reloadResComponent_() {
+        texSize = component.getExpressionVector("___texSize");
         name = component.getName();
         tex = component.getImageOrNull("tex");
+        if (tex != null) {
+            texSize.setW(tex.getWidth());
+            texSize.setH(tex.getHeight());
+        }
         anchor = component.getAnchorPos("anchor");
         if (component.contains("color")) {
             color = Color.web(component.getString("color", "#00000000"));
@@ -133,7 +140,7 @@ public abstract class AbstractComponentRenderer implements RenderInterface {
 
         flip = component.getOrientation("flip");
         rr.setFlip(flip);
-        motion = component.getSkin().getComponent(":" + component.getString("motion", ""));
+        motion = component.getSkin().getComponent(":" + component.getString("motion", "notfound"));
         //parent=component.
         reloadStyle();
         reloadPosComponent_();
@@ -151,16 +158,13 @@ public abstract class AbstractComponentRenderer implements RenderInterface {
         size = component.getExpressionVector("size");
         rotate = component.getDouble("rotate", 0);
         opacity = component.getInt("opacity", 100) / 100.;
-        scale = component.getExpressionVector("scale");
+        scale = component.getExpressionVector("scale", "1,1");
         skew = component.getExpressionVector("skew");
-        if (!component.contains("scale")) {
-            scale.setW(1);
-            scale.setH(1);
-        }
         hide = false;
     }
 
     private void reloadPosComponent_() {
+        pixelMagnification = pos.expressionCalculator.getPixelMagnification();
         pos = component.getExpressionVector("pos");
         size = component.getExpressionVector("size");
         reloadPosComponent();
@@ -178,13 +182,12 @@ public abstract class AbstractComponentRenderer implements RenderInterface {
         double proportionalWidth = size.getWidth() * scale.getWidth();
         double proportionalHeight = size.getHeight() * scale.getHeight();
 
-        if (tex != null) {
-            // 根据 高度\宽度 计算比例尺寸
-            if (size.getWidth() == 0) {
-                proportionalWidth = proportionalHeight * tex.getWidth() / tex.getHeight();
-            } else if (size.getHeight() == 0) {
-                proportionalHeight = proportionalWidth * tex.getHeight() / tex.getWidth();
-            }
+
+        // 根据 高度\宽度 计算比例尺寸
+        if (size.getWidth() == 0) {
+            proportionalWidth = proportionalHeight * (texSize.getWidth() / texSize.getHeight() * pixelMagnification);
+        } else if (size.getHeight() == 0) {
+            proportionalHeight = proportionalWidth * (texSize.getHeight() / texSize.getWidth() * pixelMagnification);
         }
 
         rr.setSize(anchor, proportionalWidth, proportionalHeight);
@@ -196,50 +199,10 @@ public abstract class AbstractComponentRenderer implements RenderInterface {
             gc.setEffect(shadow);
         }
 
-        if (rotate != 0) {
-            // 进行旋转变换
-            gc.translate(pos.getX(), pos.getY());
-            gc.rotate(rotate);
-            gc.translate(-pos.getX(), -pos.getY());
-        }
         gc.setGlobalAlpha(opacity);
 
 
-        {
-            // 斜切角度
-            double shearX = skew.getHeight();
-            double shearY = skew.getWidth();
-
-            ExpressionVector p = pos;
-
-            {
-                // 斜切换算
-                shearX = Math.tan(-Math.toRadians(shearX));
-                shearY = Math.tan(-Math.toRadians(shearY));
-
-                //补偿
-                double x = p.getY() * shearY;
-                double y = p.getX() * shearX;
-
-                if (shearX != 0) {
-                    // 平移到斜切中心点
-                    gc.translate(-p.getX(), -p.getY() - y);
-                    // 应用透视变换
-                    gc.transform(1, shearX, 0, 1, 0, 0);
-                    gc.translate(p.getX(), p.getY() - y);
-                }
-
-
-                if (shearY != 0) {
-                    // 平移到斜切中心点
-                    gc.translate(-p.getX() - x, -p.getY());
-                    // 应用透视变换
-                    gc.transform(1, 0, shearY, 1, 0, 0);
-                    gc.translate(p.getX() - x, p.getY());
-                }
-            }
-        }
-
+        transform(gc);
 
         if (!hide)
             drawComponent(gc, rr, width, height);
@@ -248,6 +211,63 @@ public abstract class AbstractComponentRenderer implements RenderInterface {
         }
 
         gc.restore();
+    }
+
+    public void transform(GraphicsContext gc) {
+        // 旋转变换
+        if (rotate != 0) {
+            gc.translate(pos.getX(), pos.getY());
+            gc.rotate(rotate);
+            gc.translate(-pos.getX(), -pos.getY());
+        }
+        //斜切变换
+
+        if (skew.getWidth() != 0 || skew.getHeight() != 0) {
+            //计算比例
+            double texWidth = texSize.getWidth();
+            double texHeight = texSize.getHeight();
+            double renderWidth = rr.getWidth();
+            double renderHeight = rr.getHeight();
+
+            // 计算宽高比
+            double textureAspectRatio = texWidth / texHeight;
+            double renderAspectRatio = renderWidth / renderHeight;
+
+            // 斜切角度 shear是倾斜度数
+            double shearX = skew.getHeight();
+            double shearY = skew.getWidth();
+
+            {
+                // 斜切换算
+                shearX = Math.tan(-Math.toRadians(shearX));
+                shearY = Math.tan(-Math.toRadians(shearY));
+
+                // 根据宽高比调整斜切
+                shearX *= textureAspectRatio / renderAspectRatio;
+                shearY *= renderAspectRatio / textureAspectRatio;
+
+                //补偿
+                double x = pos.getY() * shearY;
+                double y = pos.getX() * shearX;
+
+                if (shearX != 0) {
+                    // 平移到斜切中心点
+                    gc.translate(-pos.getX(), -pos.getY() - y);
+                    // 应用透视变换
+                    gc.transform(1, shearX, 0, 1, 0, 0);
+                    gc.translate(pos.getX(), pos.getY() - y);
+                }
+
+
+                if (shearY != 0) {
+                    // 平移到斜切中心点
+                    gc.translate(-pos.getX() - x, -pos.getY());
+                    // 应用透视变换
+                    gc.transform(1, 0, shearY, 1, 0, 0);
+                    gc.translate(pos.getX() - x, pos.getY());
+                }
+            }
+        }
     }
 
     /**
@@ -273,7 +293,7 @@ public abstract class AbstractComponentRenderer implements RenderInterface {
                 case 1 -> new TextComponentRenderer(component);
                 case 2 -> new RectangleComponentRenderer(component);
                 case 3 -> new FrameAnimationComponentRenderer(component);
-                case 4-> new Scale3ComponentRender(component);
+                case 4 -> new Scale3ComponentRender(component);
                 default -> null;
             };
 
@@ -283,7 +303,7 @@ public abstract class AbstractComponentRenderer implements RenderInterface {
             r = switch (component.getName()) {
                 case "note" -> new NoteComponentRenderer(component);
                 case "key" -> new KeyComponentRenderer(component);
-                case "hit" -> new HitComponentRenderer(component);
+                case "hit", "hit-fast", "hit-slow" -> new HitComponentRenderer(component);
                 case "press" -> new PressComponentRenderer(component);
                 case "judge" -> new JudgeComponentRenderer(component);
                 case "pause" -> new ImageComponentRenderer(component);

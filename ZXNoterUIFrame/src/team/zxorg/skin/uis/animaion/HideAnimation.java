@@ -18,7 +18,7 @@ public class HideAnimation extends AbstractAnimation {
     }
 
     @Override
-    protected void draw(GraphicsContext gc, double width, double height, double progress, AbstractComponentRenderer cr) {
+    protected void handle(GraphicsContext gc, double width, double height, double progress, AbstractComponentRenderer cr) {
         cr.hide = isHide;
     }
 }

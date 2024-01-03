@@ -7,6 +7,7 @@ import team.zxorg.skin.uis.animaion.*;
 import team.zxorg.zxncore.ZXLogger;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class AnimationComponentRenderer extends AbstractComponentRenderer {
@@ -17,6 +18,7 @@ public class AnimationComponentRenderer extends AbstractComponentRenderer {
     }
 
     private AbstractAnimation toAnimationRenderer(String value) {
+        value = value.replaceAll(" ", "");
         return switch (value.substring(0, value.indexOf(","))) {
             default -> null;
             case "move", "m" -> new MoveAnimation(component, value, 0);
@@ -30,7 +32,7 @@ public class AnimationComponentRenderer extends AbstractComponentRenderer {
             case "scaley", "sy" -> new ScaleAnimation(component, value, 2);
             case "fade", "f" -> new FadeAnimation(component, value);
             case "hide", "show" -> new HideAnimation(component, value);
-            case "rotate","r" -> new RotateAnimation(component, value);
+            case "rotate", "r" -> new RotateAnimation(component, value);
             case "skew" -> new SkewAnimation(component, value, 0);
             case "skewx" -> new SkewAnimation(component, value, 1);
             case "skewy" -> new SkewAnimation(component, value, 2);
@@ -48,6 +50,7 @@ public class AnimationComponentRenderer extends AbstractComponentRenderer {
             else
                 ZXLogger.warning("动画组件解析失败: " + value);
         }
+        //animations.sort(Comparator.comparingLong(AbstractAnimation::getStartTime));
     }
 
     @Override
@@ -61,9 +64,20 @@ public class AnimationComponentRenderer extends AbstractComponentRenderer {
     }
 
 
-    public void update(GraphicsContext gc, double width, double height, AbstractComponentRenderer cr,long time) {
+    public void update(GraphicsContext gc, double width, double height, AbstractComponentRenderer cr, long time) {
+        HashMap<String, AbstractAnimation> preExecutionAnimations = new HashMap<>();
         for (AbstractAnimation renderer : animations) {
-            renderer.draw(gc, width, height, time, cr);
+            renderer.updateAnimationTime(time);
+            if (renderer.isDisengaged()) {
+                if (!preExecutionAnimations.containsKey(renderer.getName()))
+                    preExecutionAnimations.put(renderer.getName(), renderer);
+            } else {
+                preExecutionAnimations.put(renderer.getName(), renderer);
+            }
+        }
+
+        for (AbstractAnimation renderer : preExecutionAnimations.values()) {
+            renderer.handleAnimation(gc, width, height, time, cr);
         }
     }
 

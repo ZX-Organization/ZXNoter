@@ -60,6 +60,9 @@ public class MeasuringRulerRenderer implements RenderInterface {
             } else {
                 pos1X = pos2X;
             }
+        } else if (state == 2) {
+            this.pos1X = Math.round(x);
+            this.pos1Y = Math.round(y);
         }
         updatePos();
     }
@@ -74,6 +77,9 @@ public class MeasuringRulerRenderer implements RenderInterface {
             } else {
                 pos2X = pos1X;
             }
+        }else if (state == 2) {
+            this.pos2X = Math.round(x);
+            this.pos2Y = Math.round(y);
         }
         updatePos();
     }
@@ -100,7 +106,7 @@ public class MeasuringRulerRenderer implements RenderInterface {
         double relativeMagnification = expressionCalculator.getPixelMagnification();
         return switch (unit.id()) {
             case 1 -> (int) (v * 100) / 100f + unit.unit();
-            case 2 -> (int) (v / (isHorizontal ? width : height) * 100000) / 100f + unit.unit();
+            case 2 -> (int) (v / (isHorizontal ? width : height) * 10000) / 100f + unit.unit();
             default -> (int) (v / relativeMagnification * 100) / 100f + unit.unit();
         };
     }

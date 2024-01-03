@@ -22,7 +22,7 @@ public class SizeAnimation extends AbstractAnimation {
     }
 
     @Override
-    protected void draw(GraphicsContext gc, double width, double height, double progress, AbstractComponentRenderer cr) {
+    protected void handle(GraphicsContext gc, double width, double height, double progress, AbstractComponentRenderer cr) {
         ExpressionVector p = cr.size;
         double w = from.getWidth() + (to.getWidth() - from.getWidth()) * progress;
         double h = from.getHeight() + (to.getHeight() - from.getHeight()) * progress;

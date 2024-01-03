@@ -1,6 +1,7 @@
 package team.zxorg.skin.uis.component;
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import team.zxorg.skin.basis.RenderRectangle;
 import team.zxorg.skin.uis.UISComponent;
 import team.zxorg.skin.uis.UISFrameAnimation;
@@ -15,6 +16,11 @@ public class JudgeComponentRenderer extends AbstractComponentRenderer {
     @Override
     void reloadResComponent() {
         animation = new UISFrameAnimation(component, "frame", "frame2", "frame3", "frame4");
+        Image image = animation.getFirstFrame();
+        if (image!=null) {
+            texSize.setW(image.getWidth());
+            texSize.setH(image.getHeight());
+        }
         switch (type) {
             case 1, 2 -> {
                 animation.addBehavior("frame", 1);

@@ -1,16 +1,13 @@
 package team.zxorg.skin.uis.component;
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import team.zxorg.skin.basis.RenderRectangle;
 import team.zxorg.skin.uis.ExpressionVector;
 import team.zxorg.skin.uis.UISComponent;
 import team.zxorg.skin.uis.UISFrame;
 
 public class ProgressComponentRenderer extends AbstractComponentRenderer {
-    UISFrame frame;
-    ExpressionVector pos2;
-    int count;
-    int type2;
     double progress;
 
     public ProgressComponentRenderer(UISComponent component) {
@@ -19,14 +16,11 @@ public class ProgressComponentRenderer extends AbstractComponentRenderer {
 
     @Override
     void reloadResComponent() {
-        frame = component.getFrame("frame");
-        count = component.getInt("count", 0);
-        type2 = component.getInt("type2", -1);
+
     }
 
     @Override
     void reloadPosComponent() {
-        pos2 = component.getExpressionVector("pos2");
     }
 
     @Override

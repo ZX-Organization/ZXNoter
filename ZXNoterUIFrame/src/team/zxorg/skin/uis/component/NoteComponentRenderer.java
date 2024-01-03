@@ -137,6 +137,7 @@ public class NoteComponentRenderer extends AbstractComponentRenderer {
             progressCalculation(rr, 0);
             gc.fillRect(rr.getCenterX() - 2, rr.getCenterY() - 2, 4, 4);
             progressCalculation(rr, 1);
+            rr.drawImageTest(gc, tex);
             gc.fillRect(rr.getCenterX() - 2, rr.getCenterY() - 2, 4, 4);
         }
     }

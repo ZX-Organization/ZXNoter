@@ -1,5 +1,6 @@
 package team.zxorg.skin.uis;
 
+import javafx.scene.image.Image;
 import team.zxorg.skin.DeviceType;
 import team.zxorg.skin.plist.PlistParser;
 import team.zxorg.skin.uis.component.AbstractComponentRenderer;
@@ -34,6 +35,8 @@ public class UISSkin {
      * 资源映射表
      */
     private final HashMap<String, Path> imagePathMap = new HashMap<>();
+
+
 
     /**
      * 组件表
@@ -90,12 +93,12 @@ public class UISSkin {
     }
 
     public void parse() {
-        try {
+        /*try {
             parseMUI(muiPath, componentMap);
             expressionCalculator.setUnitCanvasHeight(unit);
         } catch (IOException e) {
             ZXLogger.warning("解析mui文件失败: " + e.getMessage());
-        }
+        }*/
     }
 
     /**
@@ -437,8 +440,8 @@ public class UISSkin {
                         }
                     } else {
 
-                        boolean isEmbeddedAnimation = propertyName.equals("motion") && (value.startsWith("!name=") || value.startsWith(":name="));
-                        String componentName = "ea_" + value;
+                        boolean isEmbeddedAnimation = propertyName.equals("motion") && (value.startsWith(":name="));
+                        String componentName = "ea_" + currentComponents.getFirst().getFullName();
                         //为当前组件设置属性
                         for (int i = 0; i < currentComponents.size(); i++) {
                             if (isEmbeddedAnimation) {
@@ -452,7 +455,6 @@ public class UISSkin {
                             UISComponent newComponent = new UISComponent(":" + componentName, imagePathMap, this);
                             newComponent.putAnimation(value.substring(6));
                             componentMap.put(":" + componentName, newComponent);
-                            System.out.println(newComponent);
                         }
                     }
 
@@ -477,24 +479,6 @@ public class UISSkin {
         }
     }
 
-    /**
-     * 获取资源文件
-     *
-     * @param path 资源路径
-     * @return 资源数据流
-     */
-    public InputStream getResource(String path) {
-        Path file = imagePathMap.get(path.replaceAll("\\\\", "/"));
-        if (Files.exists(file)) {
-            try {
-                return Files.newInputStream(file);
-            } catch (IOException ignored) {
-                ZXLogger.warning("打开 uis 文件时出错: " + file.getFileName());
-            }
-        }
-        ZXLogger.warning("找不到 uis 文件: " + file.getFileName());
-        return null;
-    }
 
     /**
      * 获取组件

@@ -24,7 +24,7 @@ public class MoveAnimation extends AbstractAnimation {
 
 
     @Override
-    protected void draw(GraphicsContext gc, double width, double height, double progress, AbstractComponentRenderer cr) {
+    protected void handle(GraphicsContext gc, double width, double height, double progress, AbstractComponentRenderer cr) {
         ExpressionVector p = cr.pos;
         double x = from.getX() + (to.getX() - from.getX()) * progress;
         double y = from.getY() + (to.getY() - from.getY()) * progress;

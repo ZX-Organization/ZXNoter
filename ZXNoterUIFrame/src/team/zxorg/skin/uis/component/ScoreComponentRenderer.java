@@ -16,7 +16,7 @@ public class ScoreComponentRenderer extends AbstractComponentRenderer {
     UISFrame frame;
     List<Double> frameWeight;
     //字体的高度 宽度需要结合图片计算比例缩放
-    double fsize;
+    ExpressionVector fsize;
     //固定子字宽 跟随第一帧
     double fixWeight;
     //x值表示每个字符之间的空隙间距
@@ -33,17 +33,24 @@ public class ScoreComponentRenderer extends AbstractComponentRenderer {
     @Override
     void reloadResComponent() {
         frame = component.getFrame("frame");
+
+
         frameWeight = new ArrayList<>();
         for (Image image : frame.getFrames()) {
             frameWeight.add(image.getWidth() / image.getHeight());
         }
         fixWeight = frameWeight.getFirst();
-        fsize = component.getDouble("fsize", 32);
+        Image image = frame.getFrame(0);
+        if (image!=null) {
+            texSize.setW(image.getWidth());
+            texSize.setH(image.getHeight());
+        }
     }
 
     @Override
     void reloadPosComponent() {
         pos2 = component.getExpressionVector("pos2");
+        fsize = component.getExpressionVector("fsize");
     }
 
     @Override
@@ -59,9 +66,8 @@ public class ScoreComponentRenderer extends AbstractComponentRenderer {
             scoreStr = (int) score + "";
         }
 
-
         double aw = 0;
-        double cw = fixWeight * fsize;
+        double cw = fixWeight * fsize.getWidth();
 
         //计算所需宽度
         for (char c : scoreStr.toCharArray()) {
@@ -78,8 +84,8 @@ public class ScoreComponentRenderer extends AbstractComponentRenderer {
             case RIGHT -> pos.getX() - aw;
         };
         double y = switch (anchor.getVpos()) {
-            case TOP -> pos.getY() + fsize;
-            case CENTER, BASELINE -> pos.getY() + fsize / 2;
+            case TOP -> pos.getY() + fsize.getWidth();
+            case CENTER, BASELINE -> pos.getY() + fsize.getWidth() / 2;
             case BOTTOM -> pos.getY();
         };
         // 遍历字符串中的每个字符
@@ -89,13 +95,13 @@ public class ScoreComponentRenderer extends AbstractComponentRenderer {
                 //double cw = frameWeight.get(index) * fsize;
                 // 获取当前字符对应的图片
                 Image charFrame = frame.getFrame(index);
+
                 // 绘制字符图片
                 rr.setPos(Pos.BOTTOM_LEFT, x, y);
                 double fw = 8;
                 if (frameWeight.size() > index)
                     fw = frameWeight.get(index);
-                rr.setSize(Pos.BOTTOM_LEFT, fw * fsize, fsize);
-
+                rr.setSize(Pos.BOTTOM_LEFT, fw * fsize.getWidth(), fsize.getWidth());
                 rr.drawImage(gc, charFrame);
                 // 调整下一个字符的绘制位置
             }

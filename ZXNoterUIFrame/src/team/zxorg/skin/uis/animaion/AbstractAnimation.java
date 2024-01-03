@@ -17,6 +17,16 @@ public abstract class AbstractAnimation {
     public final ExpressionCalculator expressionCalculator;
     private final UISComponent component;
     private final HashMap<String, String> properties;
+    private final String name;
+
+    public long getStartTime() {
+        return startTime;
+    }
+
+    public long getEndTime() {
+        return endTime;
+    }
+
     private final long startTime;
     private final long endTime;
     private final double[] bezierControlPoints;
@@ -24,20 +34,14 @@ public abstract class AbstractAnimation {
      * 元件索引值 如'_sprite-4'为 3
      */
     protected int index;
-    /**
-     * 重复类型
-     * 0	A: 重复A次
-     * 1	rA: 以往返运动方式重复A次
-     * 2	A,B: 重复A次, 每次重复前等待B时间
-     */
-    private final int repeatType;
 
-    /**
-     * 重复反转中
-     */
-    private boolean repeatFlipped;
-    List<Long> animationTimes = new ArrayList<>();
+
+    List<AnimationTime> animationTimes = new ArrayList<>();
     private int animationTimeIndex = 0;
+
+    public String getName() {
+        return name;
+    }
 
     private static HashMap<String, String> parseProperties(String input) {
         HashMap<String, String> properties = new HashMap<>();
@@ -66,6 +70,8 @@ public abstract class AbstractAnimation {
         return cubicBezier(p, bezierControlPoints[0], bezierControlPoints[1], bezierControlPoints[2], bezierControlPoints[3]);
     }
 
+    AnimationTime currentAnimationTime;
+
     public static double cubicBezier(double t, double x1, double y1, double x2, double y2) {
         double u = 1 - t;
         double tt = t * t;
@@ -81,8 +87,9 @@ public abstract class AbstractAnimation {
     }
 
     public AbstractAnimation(UISComponent component, String animation) {
+        name = animation.substring(0, animation.indexOf(","));
         this.component = component;
-        properties = parseProperties(animation.replaceAll(" ", ""));
+        properties = parseProperties(animation);
         if (component.isAnimation()) {
             index = component.getIndex();
             expressionCalculator = component.expressionCalculator;
@@ -125,42 +132,46 @@ public abstract class AbstractAnimation {
             //解析重复
             String repeatV = properties.getOrDefault("repeat", "0");
             if (repeatV.contains("r")) {
-                repeatType = 1;
+                //rA: 以往返运动方式重复A次
                 repeatNumber = Integer.parseInt(repeatV.substring(1));
 
                 repeatStartTime = startTime;
                 repeatEndTime = endTime;
+                animationTimes.add(new AnimationTime(Long.MIN_VALUE, repeatStartTime, 0));
                 for (int i = 0; i < (repeatNumber + 1) * 2; i++) {
-                    animationTimes.add(repeatStartTime);
-                    animationTimes.add(repeatEndTime);
+                    animationTimes.add(new AnimationTime(repeatStartTime, repeatEndTime, (i + 1) % 2 == 0));
                     repeatStartTime += duration;
                     repeatEndTime += duration;
                 }
+                animationTimes.add(new AnimationTime(repeatEndTime, Long.MAX_VALUE, 0));
             } else if (repeatV.contains(",")) {
-                repeatType = 2;
+                //A,B: 重复A次, 每次重复前等待B时间
                 String[] repeatValues = repeatV.split(",");
                 repeatNumber = Integer.parseInt(repeatValues[0]);
                 repeatDelay = Integer.parseInt(repeatValues[1]);
                 repeatStartTime = startTime;
                 repeatEndTime = endTime;
+                animationTimes.add(new AnimationTime(Long.MIN_VALUE, repeatStartTime, 0));
                 for (int i = 0; i < repeatNumber + 1; i++) {
-                    animationTimes.add(repeatStartTime);
-                    animationTimes.add(repeatEndTime);
+                    animationTimes.add(new AnimationTime(repeatStartTime, repeatEndTime, false));
+                    animationTimes.add(new AnimationTime(repeatEndTime, repeatEndTime + repeatDelay, 1));
+
                     repeatStartTime += duration + repeatDelay;
                     repeatEndTime += duration + repeatDelay;
                 }
+                animationTimes.add(new AnimationTime(repeatEndTime, Long.MAX_VALUE, 1));
             } else {
-                repeatType = 0;
+                //A: 重复A次
                 repeatNumber = Integer.parseInt(repeatV);
                 repeatStartTime = startTime;
                 repeatEndTime = endTime;
-
+                animationTimes.add(new AnimationTime(Long.MIN_VALUE, repeatStartTime, 0));
                 for (int i = 0; i < repeatNumber + 1; i++) {
-                    animationTimes.add(repeatStartTime);
-                    animationTimes.add(repeatEndTime);
+                    animationTimes.add(new AnimationTime(repeatStartTime, repeatEndTime, false));
                     repeatStartTime += duration;
                     repeatEndTime += duration;
                 }
+                animationTimes.add(new AnimationTime(repeatEndTime, Long.MAX_VALUE, 1));
             }
             String[] trans = properties.getOrDefault("trans", "0,0,1,1").split(",");
             bezierControlPoints = new double[4];
@@ -175,73 +186,58 @@ public abstract class AbstractAnimation {
 
     abstract void reload();
 
+    public final boolean isDisengaged() {
+        return currentAnimationTime.isFixedProgress();
+    }
+
     /**
-     * 播放处理动画
+     * 更新动画时间
+     *
+     * @param time 当前时间
+     */
+    public final void updateAnimationTime(long time) {
+        currentAnimationTime = animationTimes.get(animationTimeIndex);
+        if (currentAnimationTime.endTime < time && animationTimeIndex + 1 < animationTimes.size()) {
+            //当前 时间大于动画结束时间 向后检查
+            do {
+                animationTimeIndex++;
+                currentAnimationTime = animationTimes.get(animationTimeIndex);
+            } while (currentAnimationTime.endTime < time);
+        } else if (currentAnimationTime.startTime > time && animationTimeIndex - 1 > -1) {
+            //当前 时间小于动画开始时间 向前检查
+            do {
+                animationTimeIndex--;
+                currentAnimationTime = animationTimes.get(animationTimeIndex);
+            } while (currentAnimationTime.startTime > time);
+        }
+    }
+
+    /**
+     * 处理动画
      * 注: 需要自行控制是time还是atime
      * atime时间跟随音乐, 当音乐暂停时动画也暂停,
      *
      * @param time 当前的时间 ms
      */
-    public final void draw(GraphicsContext gc, double width, double height, long time, AbstractComponentRenderer cr) {
-        /*
-    0	A: 重复A次
-    1	rA: 以往返运动方式重复A次
-    2	A,B: 重复A次, 每次重复前等待B时间
-        */
-        long repeatStartTime;
-        long repeatEndTime;
-
-        // 获取当前动画的起始和结束时间
-        if (animationTimeIndex >= animationTimes.size()) {
-            //如果索引超出 应该停止 但也有可能需要回退
-            repeatStartTime = animationTimes.getLast();
-            repeatEndTime = repeatStartTime;
-        } else {
-            //正常获取起始和结束时间
-            repeatStartTime = animationTimes.get(animationTimeIndex);
-            repeatEndTime = animationTimes.get(animationTimeIndex + 1);
-        }
-
-        //检查是否超出结束时间
-        if (repeatEndTime < time) {
-            //增加索引并重新获取新时间
-            animationTimeIndex += 2;
-            //索引超出开摆
-            if (animationTimeIndex >= animationTimes.size()) {
-                //draw(gc, width, height,1., cr);
-                return;
-            }
-
-            repeatStartTime = animationTimes.get(animationTimeIndex);
-            repeatEndTime = animationTimes.get(animationTimeIndex + 1);
-            //康康有必要翻转不
-            if (repeatType == 1)
-                repeatFlipped = !repeatFlipped;
-        } else if (repeatStartTime > time) {
-            //如果超出起始时间 则需要回退
-            //检查是否能回退
-            if (animationTimeIndex - 2 >= 0) {
-                //检查起始时间和当前时间 判断是否需要回退
-                if (repeatEndTime > time) {
-                    animationTimeIndex = 0;
-                    cr.reloadStyle();
-                }
-            }
-        }
-
-        double progress = (double) (time - repeatStartTime) / (repeatEndTime - repeatStartTime);
-        if (progress < 0 || progress > 1) return;
-        draw(gc, width, height, calculateBezier((repeatFlipped ? 1 - progress : progress)), cr);
+    public final void handleAnimation(GraphicsContext gc, double width, double height, long time, AbstractComponentRenderer cr) {
+        double progress = currentAnimationTime.getProgress(time);
+        if (progress>1 ||progress<0)
+            return;
+        handle(gc, width, height, calculateBezier(progress), cr);
     }
 
+
     /**
+     * 处理进度
+     *
      * @param gc       渲染上下文
      * @param width    宽度
      * @param height   高度
      * @param progress 进度
      */
-    protected abstract void draw(GraphicsContext gc, double width, double height,
-                                 double progress, AbstractComponentRenderer cr);
+
+    protected abstract void handle(GraphicsContext gc, double width, double height,
+                                   double progress, AbstractComponentRenderer cr);
 
     /**
      * 获取表达式坐标
@@ -258,4 +254,10 @@ public abstract class AbstractAnimation {
         return Double.parseDouble(properties.getOrDefault(name, String.valueOf(defaultValue)));
     }
 
+    @Override
+    public String toString() {
+        return "AbstractAnimation{" +
+                "properties=" + properties +
+                '}';
+    }
 }

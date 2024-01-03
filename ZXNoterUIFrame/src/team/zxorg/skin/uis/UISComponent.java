@@ -357,6 +357,24 @@ public class UISComponent {
         }
         return new ExpressionVector(expressionCalculator, value, propertiesIndex.getOrDefault(name, 0));
     }
+    /**
+     * 获取表达式向量
+     *
+     * @param name 属性名
+     * @return 表达式向量
+     */
+    public ExpressionVector getExpressionVector(String name,String defaultValue) {
+        String value = getString(name, defaultValue);
+        //检查父组件位置
+        int index = value.indexOf(" ");
+        if (index != -1) {
+            String parentName = value.substring(0, value.indexOf(" "));
+            UISComponent parent = uisSkin.getComponent(parentName);
+            if (parent != null)
+                return new ExpressionVector(expressionCalculator, value.substring(value.indexOf(" ") + 1), propertiesIndex.getOrDefault(name, 0), parent.getExpressionVector("pos"));
+        }
+        return new ExpressionVector(expressionCalculator, value, propertiesIndex.getOrDefault(name, 0));
+    }
 
 
     /**

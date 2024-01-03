@@ -17,14 +17,15 @@ public class TouchComponentRenderer extends AbstractComponentRenderer {
 
     public TouchComponentRenderer(UISComponent component) {
         super(component);
-        zindex = 800;
+
     }
 
     @Override
     void reloadResComponent() {
-
-
+        zindex = 1000;
+        color = null;
     }
+
 
     @Override
     void reloadPosComponent() {
@@ -49,6 +50,11 @@ public class TouchComponentRenderer extends AbstractComponentRenderer {
 
     @Override
     void drawComponent(GraphicsContext gc, RenderRectangle rr, double width, double height) {
+        gc.restore();
+        gc.setGlobalAlpha(0.5);
+        gc.setLineWidth(1);
+        gc.setFill(Color.PINK);
+        gc.setStroke(Color.PINK);
         for (RenderInterface render : subRenderList)
             render.draw(gc, width, height);
     }
@@ -71,7 +77,7 @@ public class TouchComponentRenderer extends AbstractComponentRenderer {
 
         @Override
         public void draw(GraphicsContext gc, double width, double height) {
-            gc.setStroke(Color.PINK);
+
             rr.setPos(Pos.BOTTOM_LEFT, pos.getX(), pos.getY());
             rr.setSize(Pos.BOTTOM_LEFT, size.getWidth(), size.getHeight());
             gc.strokeRect(rr.getLeft(), rr.getTop(), rr.getWidth(), rr.getHeight());
@@ -96,8 +102,7 @@ public class TouchComponentRenderer extends AbstractComponentRenderer {
 
         @Override
         public void draw(GraphicsContext gc, double width, double height) {
-            gc.setStroke(Color.PINK);
-            gc.strokeRoundRect(pos.getX(), pos.getX(), pos.getX() + size.getWidth(), pos.getY() + size.getHeight(), 100, 100);
+            gc.strokeOval(pos.getX(), pos.getY(), size.getWidth(), size.getHeight());
         }
 
     }
@@ -122,7 +127,6 @@ public class TouchComponentRenderer extends AbstractComponentRenderer {
 
         @Override
         public void draw(GraphicsContext gc, double width, double height) {
-            gc.setStroke(Color.PINK);
             gc.strokeLine(pos.getX(), pos.getY(), pos2.getX(), pos2.getY());
             gc.strokeLine(pos2.getX(), pos2.getY(), pos3.getX(), pos3.getY());
             gc.strokeLine(pos3.getX(), pos3.getY(), pos.getX(), pos.getY());

@@ -22,6 +22,11 @@ public class HitComponentRenderer extends AbstractComponentRenderer {
         blend = component.getInt("blend", 0);
 
         animation = new UISFrameAnimation(component, "frame", "frame2", "frame3");
+        Image image = animation.getFirstFrame();
+        if (image!=null) {
+            texSize.setW(image.getWidth());
+            texSize.setH(image.getHeight());
+        }
         animation.addBehavior("frame", 1);
         animation.addBehavior(null, 800);
         animation.addBehavior("frame2", 4);

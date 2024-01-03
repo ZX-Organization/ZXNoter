@@ -22,7 +22,7 @@ public class SkewAnimation extends AbstractAnimation {
     }
 
     @Override
-    protected void draw(GraphicsContext gc, double width, double height, double progress, AbstractComponentRenderer cr) {
+    protected void handle(GraphicsContext gc, double width, double height, double progress, AbstractComponentRenderer cr) {
         // 斜切角度
         double w = from.getWidth() + (to.getWidth() - from.getWidth()) * progress;
         double h = from.getHeight() + (to.getHeight() - from.getHeight()) * progress;
@@ -41,35 +41,6 @@ public class SkewAnimation extends AbstractAnimation {
                 p.setH(h);
             }
         }
-        /*ExpressionVector p = cr.pos;
 
-        {
-            // 斜切换算
-            shearX = Math.tan(-Math.toRadians(shearX));
-            shearY = Math.tan(-Math.toRadians(shearY));
-
-            //补偿
-            double x = p.getY() * shearY;
-            double y = p.getX() * shearX;
-
-            if (shearX != 0) {
-                // 平移到斜切中心点
-                gc.translate(-p.getX(), -p.getY()-y );
-                // 应用透视变换
-                gc.transform(1, shearX, 0, 1, 0, 0);
-                gc.translate(p.getX(), p.getY()-y);
-            }
-
-
-            if (shearY != 0) {
-                // 平移到斜切中心点
-                gc.translate(-p.getX() - x, -p.getY());
-                // 应用透视变换
-                gc.transform(1, 0, shearY, 1, 0, 0);
-                gc.translate(p.getX() - x, p.getY() );
-            }
-
-
-        }*/
     }
 }

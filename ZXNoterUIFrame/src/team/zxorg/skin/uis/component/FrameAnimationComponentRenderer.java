@@ -2,6 +2,7 @@ package team.zxorg.skin.uis.component;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import team.zxorg.skin.basis.RenderRectangle;
 import team.zxorg.skin.uis.UISComponent;
 import team.zxorg.skin.uis.UISFrame;
@@ -16,6 +17,11 @@ public class FrameAnimationComponentRenderer extends AbstractComponentRenderer {
     @Override
     void reloadResComponent() {
         frame = component.getFrame("frame");
+        Image image = frame.getFrame(0);
+        if (image!=null) {
+            texSize.setW(image.getWidth());
+            texSize.setH(image.getHeight());
+        }
     }
 
     @Override

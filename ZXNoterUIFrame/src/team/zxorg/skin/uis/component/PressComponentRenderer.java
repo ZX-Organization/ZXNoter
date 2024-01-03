@@ -17,6 +17,11 @@ public class PressComponentRenderer extends AbstractComponentRenderer {
     @Override
     void reloadResComponent() {
         animation = new UISFrameAnimation(component, "frame", "frame2");
+        Image image = animation.getFirstFrame();
+        if (image!=null) {
+            texSize.setW(image.getWidth());
+            texSize.setH(image.getHeight());
+        }
         animation.addBehavior("frame", 1);
         if (component.contains("frame2")) {
             animation.addBehavior(null, 500);
