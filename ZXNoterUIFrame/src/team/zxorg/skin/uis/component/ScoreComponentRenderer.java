@@ -54,7 +54,7 @@ public class ScoreComponentRenderer extends AbstractComponentRenderer {
     }
 
     @Override
-    void drawComponent(GraphicsContext gc, RenderRectangle rr, double width, double height) {
+    void drawComponent(GraphicsContext gc, RenderRectangle rr, double width, double height,long time) {
         String scoreStr;
         if (isACC) {
             score += 0.11;

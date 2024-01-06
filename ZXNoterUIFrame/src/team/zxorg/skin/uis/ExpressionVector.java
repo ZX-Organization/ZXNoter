@@ -92,7 +92,7 @@ public class ExpressionVector {
 
     public double getY() {
         if (parent != null)
-            return expressionCalculator.getCanvasHeight() - (parent.getHeight() + h);
+            return expressionCalculator.getUnitCanvasHeight() - (parent.getHeight() + h);
         return y;
     }
 

@@ -1,5 +1,7 @@
 package team.zxorg.skin.uis;
 
+import team.zxorg.zxncore.ZXLogger;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -23,15 +25,19 @@ public class ExpressionCalculator {
      * 单位画布高度
      */
     private double unitCanvasHeight;
+
+
     public ExpressionCalculator() {
         this(0, 0, 720);
     }
 
     public ExpressionCalculator(double canvasWidth, double canvasHeight, double unitCanvasHeight) {
-        this.canvasWidth = canvasWidth;
-        this.canvasHeight = canvasHeight;
+        //this.canvasWidth = canvasWidth;
+        //this.canvasHeight = canvasHeight;
         this.unitCanvasHeight = unitCanvasHeight;
-        pixelMagnification = canvasHeight / unitCanvasHeight;
+        //pixelMagnification = canvasHeight / unitCanvasHeight;
+        setCanvasSize(canvasWidth,canvasHeight);
+
     }
 
     @Override
@@ -51,10 +57,11 @@ public class ExpressionCalculator {
         return pixelMagnification;
     }
 
+
     public void setCanvasSize(double width, double height) {
         this.canvasWidth = width;
         this.canvasHeight = height;
-        pixelMagnification = canvasHeight / unitCanvasHeight;
+        pixelMagnification = height / unitCanvasHeight;
     }
 
     public double getCanvasWidth() {
@@ -70,6 +77,7 @@ public class ExpressionCalculator {
     }
 
     public void setUnitCanvasHeight(double unitCanvasHeight) {
+        ZXLogger.info("设置单位画布高度为："+ unitCanvasHeight );
         this.unitCanvasHeight = unitCanvasHeight;
         pixelMagnification = canvasHeight / unitCanvasHeight;
     }

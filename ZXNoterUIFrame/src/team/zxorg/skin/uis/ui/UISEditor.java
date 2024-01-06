@@ -6,7 +6,6 @@ import javafx.animation.AnimationTimer;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -15,75 +14,63 @@ import javafx.stage.Stage;
 import org.fxmisc.flowless.VirtualizedScrollPane;
 import team.zxorg.skin.DeviceType;
 import team.zxorg.skin.ResolutionInfo;
-import team.zxorg.skin.uis.ExpressionCalculator;
-import team.zxorg.skin.uis.UISComponent;
-import team.zxorg.skin.uis.UISSkin;
-import team.zxorg.skin.uis.component.AbstractComponentRenderer;
-import team.zxorg.skin.uis.component.AnimationComponentRenderer;
-import team.zxorg.skin.uis.component.MeasuringRulerRenderer;
-import team.zxorg.ui.component.LayerCanvasPane;
+import team.zxorg.skin.uis.UISCanvas;
 import team.zxorg.zxncore.ZXLogger;
 import team.zxorg.zxncore.ZXVersion;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.HashMap;
 
 public class UISEditor extends HBox {
 
-    public static final ZXVersion VERSION = new ZXVersion(1, 0, 2, ZXVersion.ReleaseStatus.BETA);
-    UISSkin skin;
-    Perspective perspective = new Perspective();
-    ExpressionCalculator expressionCalculator = new ExpressionCalculator();
+    public static final ZXVersion VERSION = new ZXVersion(1, 0, 3, ZXVersion.ReleaseStatus.BETA);
 
-    MeasuringRulerRenderer measureRuler = new MeasuringRulerRenderer(expressionCalculator);
-
-    ArrayList<AbstractComponentRenderer> componentRenders = new ArrayList<>();
-    HashMap<UISComponent, AbstractComponentRenderer> componentMap = new HashMap<>();
-    //开始播放时的时间戳
-    public long startTime = 0;
-    //暂停时的时间位置
-    public long pauseTime = 0;
-    //暂停状态
-    public boolean isPaused = false;
-
-    LayerCanvasPane layerCanvasPane = new LayerCanvasPane() {
+    UISCanvas uisCanvas = new UISCanvas() {
         {
             setBorder(new Border(new BorderStroke(Color.WHITE, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(1), new Insets(0))));
         }
     };
     TabPane tabPane = new TabPane() {
         {
+            //getSelectionModel().selectedItemProperty().addListener(observable -> reload());
             VBox.setVgrow(this, Priority.ALWAYS);
             setPrefWidth(640);
             setMinWidth(640);
+            setTabClosingPolicy(TabClosingPolicy.ALL_TABS);
         }
     };
 
+    /**
+     * 设备类型选择框
+     */
     ChoiceBox<DeviceType> deviceTypeChoiceBox = new ChoiceBox<>() {
         {
             getItems().addAll(DeviceType.values());
             setPrefWidth(60);
             getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-                updateSize();
+                uisCanvas.setDeviceType(newValue);
             });
             //getSelectionModel().selectLast();
         }
     };
+    /**
+     * 屏幕比例选择框
+     */
     ChoiceBox<ResolutionInfo> resolutionChoiceBox = new ChoiceBox<>() {
         {
             getItems().addAll(ResolutionInfo.values());
             setPrefWidth(100);
             getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
                 deviceTypeChoiceBox.setValue(newValue.getDevice());
-                updateSize();
+                uisCanvas.setAspectRatio(newValue.getAspectRatio());
             });
             getSelectionModel().selectLast();
         }
     };
-
+    /**
+     * 单位选择框
+     */
     ChoiceBox<UnitInfo> unitChoiceBox = new ChoiceBox<>() {
         {
             getItems().addAll(
@@ -92,7 +79,7 @@ public class UISEditor extends HBox {
                     new UnitInfo("百分比", "%", 2)
             );
             valueProperty().addListener((observable, oldValue, newValue) -> {
-                measureRuler.unit = newValue;
+                uisCanvas.measureRuler.unit = newValue;
             });
             getSelectionModel().selectFirst();
             setPrefWidth(80);
@@ -103,6 +90,9 @@ public class UISEditor extends HBox {
             setPrefWidth(70);
         }
     };
+    /**
+     * 缩放因子滑块
+     */
     Slider scalingFactorSlider = new Slider() {
         {
             setMin(0.2);
@@ -119,7 +109,7 @@ public class UISEditor extends HBox {
             valueProperty().addListener((observable, oldValue, newValue) -> {
                 if (!isValueChanging()) {
                     scalingFactorLabel.setText("缩放: " + (int) (newValue.doubleValue() * 100) + "%");
-                    updateSize();
+                    uisCanvas.setZoomRate(newValue.doubleValue());
                 }
             });
         }
@@ -130,9 +120,14 @@ public class UISEditor extends HBox {
 
     public UISEditor() {
         setAlignment(Pos.CENTER_LEFT);
-        tabPane.getSelectionModel().selectedItemProperty().addListener(observable -> reload());
 
 
+        uisCanvas.minWidthProperty().addListener((observable, oldValue, newValue) -> {
+            this.setMinWidth(newValue.doubleValue() + tabPane.getMinWidth());
+        });
+        uisCanvas.minHeightProperty().addListener((observable, oldValue, newValue) -> {
+            this.setMinHeight(newValue.doubleValue() + 40);
+        });
 
 
         /*pane.widthProperty().addListener(observable -> {
@@ -143,11 +138,9 @@ public class UISEditor extends HBox {
         });*/
         setBackground(Background.fill(Color.BLACK));
 
-        layerCanvasPane.createCanvas("bottom");
-        layerCanvasPane.createCanvas("3d").setEffect(perspective.getEffect());
-        layerCanvasPane.createCanvas("top");
 
-        measureRuler.initialize(layerCanvasPane.createCanvas("mark"));
+
+
 
         /*canvas.setOnMousePressed(event -> {
             if (event.getButton().equals(MouseButton.PRIMARY)) {
@@ -174,56 +167,14 @@ public class UISEditor extends HBox {
         AnimationTimer animationTimer = new AnimationTimer() {
             @Override
             public void handle(long l) {
-                double width = expressionCalculator.getCanvasWidth();
-                double height = expressionCalculator.getCanvasHeight();
-                long currentTime = (isPaused ? pauseTime : System.currentTimeMillis() - startTime);
-                if (!isPaused) {
-                    if (!timeLineSlider.isValueChanging())
-                        timeLineSlider.setValue(currentTime / 1000.);
-                }
-                timeLabel.setText(currentTime + " ms");
-
-                layerCanvasPane.clearRect();
-
-                GraphicsContext gc3d = layerCanvasPane.getGraphicsContext2D("3d");
-                gc3d.save();
-                gc3d.beginPath();
-                gc3d.rect(-width, 0, width * 4, height);
-                gc3d.clip();
-
-                for (AbstractComponentRenderer cr : componentRenders) {
-                    GraphicsContext gc = layerCanvasPane.getGraphicsContext2D(cr.getLayoutName());
-                    try {
-                        AbstractComponentRenderer anim = componentMap.get(cr.getMotion());
-                        gc.save();
-                        if (anim instanceof AnimationComponentRenderer renderer) {
-                            renderer.update(gc, width, height, cr, currentTime);
-                        }
-                        cr.draw(gc, width, height);
-                        gc.restore();
-                        gc.restore();
-                        gc.restore();
-                        gc.restore();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-
-                {
-                    GraphicsContext gc = layerCanvasPane.getGraphicsContext2D("mark");
-                    measureRuler.draw(gc, width, height);
-                }
-                gc3d.restore();
-                gc3d.restore();
-                gc3d.restore();
-                gc3d.restore();
+                uisCanvas.draw();
             }
         };
 
 
         animationTimer.start();
-        HBox.setHgrow(layerCanvasPane, Priority.ALWAYS);
-        getChildren().addAll(sideVBox, layerCanvasPane);
+        HBox.setHgrow(uisCanvas, Priority.ALWAYS);
+        getChildren().addAll(sideVBox, uisCanvas);
     }
 
     public static void main(String[] args) {
@@ -273,78 +224,13 @@ public class UISEditor extends HBox {
         });
     }
 
-    public void update() {
-        if (skin == null)
-            return;
-        skin.setDeviceType(deviceTypeChoiceBox.getValue());
-        setCanvasSize(resolutionChoiceBox.getValue().getAspectRatio(), scalingFactorSlider.getValue());
-        if (autoReplayCheckBox.isSelected() & skin.updateRenderer(componentRenders, componentMap, layerCanvasPane))
-            resetTime();
-        perspective.setAngle(skin.getAngle());
-
-    }
-
-    public void updateSize() {
-        update();
-        for (AbstractComponentRenderer component : componentMap.values()) {
-            component.reloadPos();
-        }
-        resetTime();
-    }
-
-    public void reload() {
-        if (tabPane.getSelectionModel().getSelectedItem() != null)
-            if (tabPane.getSelectionModel().getSelectedItem().getContent() instanceof VirtualizedScrollPane uis) {
-                componentRenders.clear();
-                componentMap.clear();
-
-                skin = new UISSkin(((UISCodeArea) uis.getContent()).getFile(), expressionCalculator);
-                skin.setDeviceType(deviceTypeChoiceBox.getValue());
-                //setCanvasSize(resolutionChoiceBox.getValue().getAspectRatio(), scalingFactorSlider.getValue());
-                skin.parse();
-                perspective.setAngle(skin.getAngle());
-                for (UISComponent component : skin.getComponents()) {
-                    AbstractComponentRenderer render = AbstractComponentRenderer.toRenderer(component, layerCanvasPane);
-                    if (render != null) {
-                        componentRenders.add(render);
-                        componentMap.put(component, render);
-                    }
-
-                }
-                UISSkin.sortRenders(componentRenders);
-                updateSize();
-            }
-        resetTime();
-    }
-
-    public void setCanvasSize(double aspectRatio, double zoomRate) {
-        double unitHeight = expressionCalculator.getUnitCanvasHeight();
-        double width = unitHeight * aspectRatio * zoomRate;
-        double height = unitHeight * zoomRate;
-        layerCanvasPane.setMinSize(width, height);
-        layerCanvasPane.setMaxSize(width, height);
-        setMinSize(width + tabPane.getMinWidth(), height + 40);
-        setPrefSize(width + tabPane.getMinWidth(), height + 40);
-        expressionCalculator.setCanvasSize(width, height);
-        perspective.setSize(width, height);
-        //expressionCalculator.setCanvasSize(width, height);
-        /*ExpressionVector.expressionCalculator.updateCanvasWidth(width);
-        for (ElementRenderer e : elements.values()) {
-            e.canvasResized(width, height, Orientation.HORIZONTAL);
-        }
-        ExpressionVector.expressionCalculator.updateCanvasHeight(height);
-        for (ElementRenderer e : elements.values()) {
-            e.canvasResized(width, height, Orientation.VERTICAL);
-        }*/
-        //reload();
-    }
 
     public void openFIle(Path path) {
         Tab tab = new Tab();
         tab.setText(path.getFileName().toString());
         UISCodeArea uisCodeArea = null;
         try {
-            uisCodeArea = new UISCodeArea(path, this::update);
+            uisCodeArea = new UISCodeArea(path, uisCanvas::updateSkin);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -355,6 +241,7 @@ public class UISEditor extends HBox {
         tab.setContent(vsPane);
         tabPane.getTabs().add(tab);
         tabPane.getSelectionModel().select(tab);
+        uisCanvas.loadSkin(path);
     }
 
     public record UnitInfo(String name, String unit, int id) {
@@ -380,11 +267,11 @@ public class UISEditor extends HBox {
     }
 
 
-    Button reloadButton = new Button("重载") {
+    /*Button reloadButton = new Button("重载") {
         {
-            setOnAction(event -> reload());
+            setOnAction(event -> uisCanvas.updateSkin());
         }
-    };
+    };*/
 
 
     Button openFileButton = new Button("打开mui文件") {
@@ -416,8 +303,10 @@ public class UISEditor extends HBox {
         }
     };
 
-
-    HBox topToolbar = new HBox(reloadButton, resolutionChoiceBox, deviceTypeChoiceBox, unitChoiceBox, scalingFactorLabel, scalingFactorSlider, openFileButton) {
+    /**
+     * 顶部工具栏
+     */
+    HBox topToolbar = new HBox(resolutionChoiceBox, deviceTypeChoiceBox, unitChoiceBox, scalingFactorLabel, scalingFactorSlider, openFileButton) {
         {
             setMinHeight(40);
             setBorder(new Border(new BorderStroke(Color.WHITE, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(0, 0, 1, 0), new Insets(0))));
@@ -428,15 +317,6 @@ public class UISEditor extends HBox {
     };
 
 
-    private void resetTime() {
-        if (isPaused) {
-            pauseTime = -3500;
-        } else {
-            startTime = System.currentTimeMillis() + 3500;
-        }
-
-    }
-
     CheckBox autoReplayCheckBox = new CheckBox("自动重播") {
         {
             setSelected(true);
@@ -444,27 +324,27 @@ public class UISEditor extends HBox {
     };
     Button replayButton = new Button("重放") {
         {
-            setOnAction(event -> resetTime());
+            setOnAction(event -> uisCanvas.resetTime());
         }
     };
 
     Button playButton = new Button("播放") {
         {
             setOnAction(event -> {
-                if (isPaused) {
+                /*if (isPaused) {
                     isPaused = false;
                     startTime = System.currentTimeMillis() - pauseTime;
-                }
+                }*/
             });
         }
     };
     Button pauseButton = new Button("暂停") {
         {
             setOnAction(event -> {
-                if (!isPaused) {
+               /* if (!isPaused) {
                     isPaused = true;
                     pauseTime = System.currentTimeMillis() - startTime;
-                }
+                }*/
             });
         }
     };
@@ -490,11 +370,11 @@ public class UISEditor extends HBox {
             setSnapToPixel(true);
             valueProperty().addListener((observable, oldValue, newValue) -> {
                 if (isValueChanging()) {
-                    if (isPaused) {
+                    /*if (isPaused) {
                         pauseTime = (long) (newValue.doubleValue() * 1000);
                     } else {
                         startTime = System.currentTimeMillis() - (long) (newValue.doubleValue() * 1000);
-                    }
+                    }*/
                 }
             });
         }

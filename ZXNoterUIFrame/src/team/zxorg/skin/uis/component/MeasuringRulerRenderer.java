@@ -77,7 +77,7 @@ public class MeasuringRulerRenderer implements RenderInterface {
             } else {
                 pos2X = pos1X;
             }
-        }else if (state == 2) {
+        } else if (state == 2) {
             this.pos2X = Math.round(x);
             this.pos2Y = Math.round(y);
         }
@@ -113,7 +113,7 @@ public class MeasuringRulerRenderer implements RenderInterface {
 
 
     @Override
-    public void draw(GraphicsContext gc, double width, double height) {
+    public void draw(GraphicsContext gc, double width, double height, long time) {
         this.width = width;
         this.height = height;
         gc.save();

@@ -40,7 +40,7 @@ public class Scale3ComponentRender extends AbstractComponentRenderer {
     }
 
     @Override
-    void drawComponent(GraphicsContext gc, RenderRectangle rr, double width, double height) {
+    void drawComponent(GraphicsContext gc, RenderRectangle rr, double width, double height,long time) {
 
 
         //计算材质位置
@@ -67,36 +67,36 @@ public class Scale3ComponentRender extends AbstractComponentRenderer {
 
 
             gc.drawImage(tex,
-                    0, scale1TexPos, tex.getWidth(), scale1TexSize,
+                    0, scale1TexPos, texSize.getWidth(), scale1TexSize,
                     rr.getLeft(), scale1Pos, rr.getWidth(), scale1Size
             );
 
             gc.drawImage(tex,
-                    0, scale3TexPos, tex.getWidth(), scale3TexSize,
+                    0, scale3TexPos, texSize.getWidth(), scale3TexSize,
                     rr.getLeft(), scale3Pos, rr.getWidth(), scale3Size
             );
 
             // 横向拉伸，默认拉伸区域0点在素材左部
             gc.drawImage(tex,
-                    0, scale2TexPos, tex.getWidth(), scale2TexSize,
+                    0, scale2TexPos, texSize.getWidth(), scale2TexSize,
                     rr.getLeft(), scale2Pos, rr.getWidth(), scale2Size
             );
 
         } else {
             // 横向拉伸，默认拉伸区域0点在素材左部
             gc.drawImage(tex,
-                    scale1TexPos, 0, scale1TexSize, tex.getHeight(),
+                    scale1TexPos, 0, scale1TexSize, texSize.getHeight(),
                     scale1Pos, rr.getTop(), scale1Size, rr.getHeight()
             );
 
             gc.drawImage(tex,
-                    scale3TexPos, 0, scale3TexSize, tex.getHeight(),
+                    scale3TexPos, 0, scale3TexSize, texSize.getHeight(),
                     scale3Pos, rr.getTop(), scale3Size, rr.getHeight()
             );
 
             // 横向拉伸，默认拉伸区域0点在素材左部
             gc.drawImage(tex,
-                    scale2TexPos, 0, scale2TexSize, tex.getHeight(),
+                    scale2TexPos, 0, scale2TexSize, texSize.getHeight(),
                     scale2Pos, rr.getTop(), scale2Size, rr.getHeight()
             );
         }

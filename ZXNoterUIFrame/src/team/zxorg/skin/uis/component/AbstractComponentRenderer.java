@@ -154,6 +154,7 @@ public abstract class AbstractComponentRenderer implements RenderInterface {
     }
 
     public final void reloadStyle() {
+        pixelMagnification = component.expressionCalculator.getPixelMagnification();
         pos = component.getExpressionVector("pos");
         size = component.getExpressionVector("size");
         rotate = component.getDouble("rotate", 0);
@@ -164,7 +165,7 @@ public abstract class AbstractComponentRenderer implements RenderInterface {
     }
 
     private void reloadPosComponent_() {
-        pixelMagnification = pos.expressionCalculator.getPixelMagnification();
+        pixelMagnification = component.expressionCalculator.getPixelMagnification();
         pos = component.getExpressionVector("pos");
         size = component.getExpressionVector("size");
         reloadPosComponent();
@@ -173,7 +174,7 @@ public abstract class AbstractComponentRenderer implements RenderInterface {
     abstract void reloadPosComponent();
 
     @Override
-    final public void draw(GraphicsContext gc, double width, double height) {
+    final public void draw(GraphicsContext gc, double width, double height,long time) {
         //检查是否被改动过，如果被改动过，重新加载元件信息
         if (component.isChanged()) {
             reloadResComponent_();
@@ -205,7 +206,7 @@ public abstract class AbstractComponentRenderer implements RenderInterface {
         transform(gc);
 
         if (!hide)
-            drawComponent(gc, rr, width, height);
+            drawComponent(gc, rr, width, height,time);
         if (color != null) {
             gc.setEffect(null);
         }
@@ -277,7 +278,7 @@ public abstract class AbstractComponentRenderer implements RenderInterface {
      * @param width  画布宽度
      * @param height 画布高度
      */
-    abstract void drawComponent(GraphicsContext gc, RenderRectangle rr, double width, double height);
+    abstract void drawComponent(GraphicsContext gc, RenderRectangle rr, double width, double height,long time);
 
 
     /**

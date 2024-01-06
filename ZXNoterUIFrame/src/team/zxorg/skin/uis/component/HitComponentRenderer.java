@@ -41,7 +41,7 @@ public class HitComponentRenderer extends AbstractComponentRenderer {
 
 
     @Override
-    void drawComponent(GraphicsContext gc, RenderRectangle rr, double width, double height) {
+    void drawComponent(GraphicsContext gc, RenderRectangle rr, double width, double height,long time) {
 
 
         Image currImage = animation.getCurrentFrames();

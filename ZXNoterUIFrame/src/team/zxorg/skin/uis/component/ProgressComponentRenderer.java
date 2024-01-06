@@ -24,7 +24,7 @@ public class ProgressComponentRenderer extends AbstractComponentRenderer {
     }
 
     @Override
-    void drawComponent(GraphicsContext gc, RenderRectangle rr, double width, double height) {
+    void drawComponent(GraphicsContext gc, RenderRectangle rr, double width, double height,long time) {
         progress += 0.001;
         progress %= 1;
         if (type == 0) {

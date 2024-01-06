@@ -15,10 +15,6 @@ public class TextComponentRenderer extends AbstractComponentRenderer {
         super(component);
     }
 
-    @Override
-    public void resize(double width, double height) {
-        super.resize(width, height);
-    }
 
     @Override
     public void initialize(Canvas canvas) {
@@ -42,7 +38,7 @@ public class TextComponentRenderer extends AbstractComponentRenderer {
     }
 
     @Override
-    void drawComponent(GraphicsContext gc, RenderRectangle rr, double width, double height) {
+    void drawComponent(GraphicsContext gc, RenderRectangle rr, double width, double height,long time) {
         gc.setFont(Font.font(fsize));
         gc.setFill(color);
         switch (anchor.getHpos()) {

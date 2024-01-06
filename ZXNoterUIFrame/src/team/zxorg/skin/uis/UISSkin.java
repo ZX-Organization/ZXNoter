@@ -73,6 +73,9 @@ public class UISSkin {
     public void setDeviceType(DeviceType deviceType) {
         this.deviceType = deviceType;
     }
+    public void clear() {
+        componentMap.clear();
+    }
 
     /**
      * 通过mui文件 解析到皮肤
@@ -245,6 +248,7 @@ public class UISSkin {
         try {
             parseMUI(muiPath, newComponentMap);
             expressionCalculator.setUnitCanvasHeight(unit);
+            ZXLogger.info("更新渲染器");
         } catch (IOException e) {
             ZXLogger.warning("解析mui文件失败: " + e.getMessage());
             return isChanged;
@@ -412,7 +416,7 @@ public class UISSkin {
                         case "@angle" -> angle = Integer.parseInt(args[1]);//角度
                         case "@unit" -> {
                             unit = Integer.parseInt(args[1]);
-                            expressionCalculator.setUnitCanvasHeight(unit);
+                            //expressionCalculator.setUnitCanvasHeight(unit);
                         }//单位像素
                         case "@define" -> variable.put(args[1], args[2]);//变量
                         case "@if" -> {

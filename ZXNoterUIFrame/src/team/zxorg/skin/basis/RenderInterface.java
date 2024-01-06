@@ -10,21 +10,12 @@ public interface RenderInterface {
     /**
      * 绘制
      *
-     * @param gc     图形上下文
-     * @param width  画布宽度
-     * @param height 画布高度
+     * @param gc 图形上下文
+     * @param cw 画布宽度
+     * @param ch 画布高度
+     * @param t  当前时间
      */
-    default void draw(GraphicsContext gc, double width, double height) {
-
-    }
-
-    /**
-     * 大小改变
-     *
-     * @param width  画布宽度
-     * @param height 画布高度
-     */
-    default void resize(double width, double height) {
+    default void draw(GraphicsContext gc, double cw, double ch, long t) {
 
     }
 

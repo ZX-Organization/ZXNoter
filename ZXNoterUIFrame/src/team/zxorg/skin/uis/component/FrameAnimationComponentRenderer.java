@@ -29,10 +29,6 @@ public class FrameAnimationComponentRenderer extends AbstractComponentRenderer {
 
     }
 
-    @Override
-    public void resize(double width, double height) {
-        super.resize(width, height);
-    }
 
     @Override
     public void initialize(Canvas canvas) {
@@ -46,7 +42,7 @@ public class FrameAnimationComponentRenderer extends AbstractComponentRenderer {
 
 
     @Override
-    void drawComponent(GraphicsContext gc, RenderRectangle rr, double width, double height) {
+    void drawComponent(GraphicsContext gc, RenderRectangle rr, double width, double height,long time) {
         frame.update();
         rr.drawImage(gc, frame.getCurrentFrame());
     }

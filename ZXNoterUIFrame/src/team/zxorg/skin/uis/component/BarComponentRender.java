@@ -26,7 +26,7 @@ public class BarComponentRender extends AbstractComponentRenderer {
     }
 
     @Override
-    void drawComponent(GraphicsContext gc, RenderRectangle rr, double width, double height) {
+    void drawComponent(GraphicsContext gc, RenderRectangle rr, double width, double height,long time) {
         progress += 0.004;
         progress %= 1;
 

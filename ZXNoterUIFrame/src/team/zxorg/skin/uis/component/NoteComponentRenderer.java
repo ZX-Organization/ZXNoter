@@ -71,10 +71,6 @@ public class NoteComponentRenderer extends AbstractComponentRenderer {
     private boolean pressed;
 
 
-    @Override
-    public void resize(double width, double height) {
-        super.resize(width, height);
-    }
 
 
     @Override
@@ -84,7 +80,7 @@ public class NoteComponentRenderer extends AbstractComponentRenderer {
 
 
     @Override
-    void drawComponent(GraphicsContext gc, RenderRectangle rr, double width, double height) {
+    void drawComponent(GraphicsContext gc, RenderRectangle rr, double width, double height,long time) {
         progress += 0.004;
         progress %= 1.4;
         gc.setGlobalAlpha(1);
@@ -136,6 +132,8 @@ public class NoteComponentRenderer extends AbstractComponentRenderer {
             gc.setFill(Color.HOTPINK);
             progressCalculation(rr, 0);
             gc.fillRect(rr.getCenterX() - 2, rr.getCenterY() - 2, 4, 4);
+            rr.drawImageTest(gc, tex);
+
             progressCalculation(rr, 1);
             rr.drawImageTest(gc, tex);
             gc.fillRect(rr.getCenterX() - 2, rr.getCenterY() - 2, 4, 4);
