@@ -1,6 +1,5 @@
 package team.zxorg.skin.uis;
 
-import javafx.scene.image.Image;
 import team.zxorg.skin.DeviceType;
 import team.zxorg.skin.plist.PlistParser;
 import team.zxorg.skin.uis.component.AbstractComponentRenderer;
@@ -9,7 +8,6 @@ import team.zxorg.zxncore.ZXLogger;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.file.FileVisitResult;
 import java.nio.file.FileVisitor;
 import java.nio.file.Files;
@@ -37,7 +35,6 @@ public class UISSkin {
     private final HashMap<String, Path> imagePathMap = new HashMap<>();
 
 
-
     /**
      * 组件表
      */
@@ -61,6 +58,7 @@ public class UISSkin {
 
     DeviceType deviceType = DeviceType.WINDOWS;
 
+
     public int getAngle() {
         return angle;
     }
@@ -72,9 +70,6 @@ public class UISSkin {
      */
     public void setDeviceType(DeviceType deviceType) {
         this.deviceType = deviceType;
-    }
-    public void clear() {
-        componentMap.clear();
     }
 
     /**
@@ -95,14 +90,6 @@ public class UISSkin {
         basePath = muiPath.getParent();
     }
 
-    public void parse() {
-        /*try {
-            parseMUI(muiPath, componentMap);
-            expressionCalculator.setUnitCanvasHeight(unit);
-        } catch (IOException e) {
-            ZXLogger.warning("解析mui文件失败: " + e.getMessage());
-        }*/
-    }
 
     /**
      * 解析元件名
@@ -253,7 +240,7 @@ public class UISSkin {
             ZXLogger.warning("解析mui文件失败: " + e.getMessage());
             return isChanged;
         }
-
+        expressionCalculator.setAngle(angle);
         //检查多余的组件
         List<String> needRemoval = new ArrayList<>();
         for (String name : componentMap.keySet()) {
@@ -310,7 +297,7 @@ public class UISSkin {
      *
      * @param renderers 渲染器
      */
-    public static void sortRenders(List<AbstractComponentRenderer> renderers) {
+    private static void sortRenders(List<AbstractComponentRenderer> renderers) {
         renderers.sort(Comparator.comparingInt(AbstractComponentRenderer::getZindex));
     }
 

@@ -24,8 +24,8 @@ public class ScaleAnimation extends AbstractAnimation {
     @Override
     protected void handle(GraphicsContext gc, double width, double height, double progress, AbstractComponentRenderer cr) {
         ExpressionVector p = cr.scale;
-        double w = from.getWidth() + (to.getWidth() - from.getWidth()) * progress;
-        double h = from.getHeight() + (to.getHeight() - from.getHeight()) * progress;
+        double w = from.getW() + (to.getW() - from.getW()) * progress;
+        double h = from.getH() + (to.getH() - from.getH()) * progress;
         switch (type) {
             case 0 -> {
                 p.setW(w);

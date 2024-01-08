@@ -14,14 +14,14 @@ import javafx.scene.paint.Color;
  */
 public class RenderRectangle {
     private double left, top, right, bottom, width, height;
-    Orientation flip = null;
+    //Orientation flip = null;
 
     public RenderRectangle() {
     }
 
-    public void setFlip(Orientation flip) {
+   /* public void setFlip(Orientation flip) {
         this.flip = flip;
-    }
+    }*/
 
     public RenderRectangle(double left, double top, double right, double bottom) {
         this.left = left;
@@ -344,26 +344,26 @@ public class RenderRectangle {
         this.width = sourceRectangle.width;
         this.height = sourceRectangle.height;
     }
-
-    /**
+/*
+    *//**
      * 绘制图片
      *
      * @param gc    图形上下文
      * @param image 图片
-     */
+     *//*
     public void drawImage(GraphicsContext gc, Image image) {
         if (image != null)
-            drawImage(gc, image, flip);
+            gc.drawImage(image, getLeft(), getTop(), getWidth(), getHeight());
     }
 
     PerspectiveTransform pt;
 
-    /**
+    *//**
      * 绘制图片 透视
      *
      * @param gc    图形上下文
      * @param image 图片
-     */
+     *//*
     public void drawImage(GraphicsContext gc, Image image, double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4) {
         if (pt == null)
             pt = new PerspectiveTransform();
@@ -381,12 +381,12 @@ public class RenderRectangle {
         gc.setEffect(null);
     }
 
-    /**
+    *//**
      * 绘制图片 测试
      *
      * @param gc    图形上下文
      * @param image 图片
-     */
+     *//*
     public void drawImageTest(GraphicsContext gc, Image image) {
         gc.save();
         gc.drawImage(image, getLeft(), getTop(), getWidth(), getHeight());
@@ -399,13 +399,14 @@ public class RenderRectangle {
         gc.restore();
     }
 
-    /**
+    *//**
      * 绘制翻转图片
      *
      * @param gc    图形上下文
      * @param image 图片
      * @param flip  翻转方向 为null则不处理
-     */
+     *//*
+    @Deprecated
     public void drawImage(GraphicsContext gc, Image image, Orientation flip) {
         gc.save();
         if (flip == Orientation.VERTICAL) {
@@ -418,5 +419,5 @@ public class RenderRectangle {
             gc.drawImage(image, getLeft(), getTop(), getWidth(), getHeight());
         }
         gc.restore();
-    }
+    }*/
 }

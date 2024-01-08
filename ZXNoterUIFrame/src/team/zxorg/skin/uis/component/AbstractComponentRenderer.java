@@ -1,14 +1,16 @@
 package team.zxorg.skin.uis.component;
 
 import javafx.geometry.Orientation;
+import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.effect.BlurType;
+import javafx.scene.effect.PerspectiveTransform;
 import javafx.scene.effect.Shadow;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import team.zxorg.skin.basis.RenderInterface;
-import team.zxorg.skin.basis.RenderRectangle;
+import team.zxorg.skin.uis.ExpressionCalculator;
 import team.zxorg.skin.uis.ExpressionVector;
 import team.zxorg.skin.uis.UISComponent;
 import team.zxorg.ui.component.LayerCanvasPane;
@@ -17,12 +19,12 @@ import team.zxorg.ui.component.LayerCanvasPane;
  * 组件属性数据
  */
 public abstract class AbstractComponentRenderer implements RenderInterface {
+    protected ExpressionCalculator ec;
+
     /**
      * 父元件
      */
     protected AbstractComponentRenderer parent;
-
-
     /**
      * 元件名
      */
@@ -65,31 +67,56 @@ public abstract class AbstractComponentRenderer implements RenderInterface {
      */
     protected int type;
 
-
     /**
      * 元件索引值 如'_sprite-4'为 3
      */
     protected int index;
+    /**
+     * 原始组件
+     */
     protected UISComponent component;
     /**
      * 渲染矩形
      */
-    private final RenderRectangle rr = new RenderRectangle();
+    //private final RenderRectangle rr = new RenderRectangle();
     private Shadow shadow;
-
+    /**
+     * 翻转
+     */
     protected Orientation flip;
-
+    /**
+     * 缩放
+     */
     public ExpressionVector scale;
+    /**
+     * 动画组件
+     */
     private UISComponent motion;
-
+    /**
+     * 是否隐藏
+     */
     public boolean hide;
-
+    /**
+     * 倾斜
+     */
     public ExpressionVector skew;
+    /**
+     * 材质尺寸
+     */
     protected ExpressionVector texSize;
+    /**
+     * 像素倍率
+     */
     protected double pixelMagnification;
+
+    /**
+     * 渲染上下文
+     */
+    GraphicsContext gc;
 
     public AbstractComponentRenderer(UISComponent component) {
         this.component = component;
+        ec = component.expressionCalculator;
         reloadResComponent_();
     }
 
@@ -102,8 +129,21 @@ public abstract class AbstractComponentRenderer implements RenderInterface {
      *
      * @return
      */
-    public String getLayoutName() {
+    /*public String getLayoutName() {
         return (getZindex() < 1 ? "bottom" : (getZindex() < 99 ? "3d" : "top"));
+    }*/
+
+    /**
+     * 是否是3d图层
+     *
+     * @return 是否受到3d
+     */
+    public boolean is3DLayout() {
+        return (getZindex() >= 1 & getZindex() < 99);
+    }
+
+    public String getLayoutName() {
+        return "view";
     }
 
     public UISComponent getMotion() {
@@ -126,20 +166,18 @@ public abstract class AbstractComponentRenderer implements RenderInterface {
             texSize.setW(tex.getWidth());
             texSize.setH(tex.getHeight());
         }
-        anchor = component.getAnchorPos("anchor");
+
         if (component.contains("color")) {
             color = Color.web(component.getString("color", "#00000000"));
             shadow = new Shadow(BlurType.ONE_PASS_BOX, color, 0);
             shadow.setColor(color);
         }
         reloadStyle();
-        zindex = component.getInt("zindex", zindex);
+
         type = component.getInt("type", 0);
         index = component.getIndex();
 
-
-        flip = component.getOrientation("flip");
-        rr.setFlip(flip);
+        //rr.setFlip(flip);
         motion = component.getSkin().getComponent(":" + component.getString("motion", "notfound"));
         //parent=component.
         reloadStyle();
@@ -155,12 +193,16 @@ public abstract class AbstractComponentRenderer implements RenderInterface {
 
     public final void reloadStyle() {
         pixelMagnification = component.expressionCalculator.getPixelMagnification();
-        pos = component.getExpressionVector("pos");
-        size = component.getExpressionVector("size");
+       /* pos = component.getExpressionVector("pos");
+        size = component.getExpressionVector("size");*/
+
         rotate = component.getDouble("rotate", 0);
         opacity = component.getInt("opacity", 100) / 100.;
-        scale = component.getExpressionVector("scale", "1,1");
+        scale = component.getExpressionVector("scale", "1px,1px");
         skew = component.getExpressionVector("skew");
+
+        zindex = component.getInt("zindex", zindex);
+
         hide = false;
     }
 
@@ -168,31 +210,42 @@ public abstract class AbstractComponentRenderer implements RenderInterface {
         pixelMagnification = component.expressionCalculator.getPixelMagnification();
         pos = component.getExpressionVector("pos");
         size = component.getExpressionVector("size");
+
+        flip = component.getOrientation("flip");
+        anchor = component.getAnchorPos("anchor");
+
+        double proportionalWidth = size.getW();
+        double proportionalHeight = size.getH();
+
+
+        // 根据 高度\宽度 计算比例尺寸
+        if (proportionalWidth == 0) {
+            proportionalWidth = proportionalHeight * (texSize.getW() / texSize.getH());
+        } else if (proportionalHeight == 0) {
+            proportionalHeight = proportionalWidth * (texSize.getH() / texSize.getW());
+        }
+
+        proportionalWidth *= scale.getW();
+        proportionalHeight *= scale.getH();
+        size.setW(proportionalWidth);
+        size.setH(proportionalHeight);
+
         reloadPosComponent();
     }
 
     abstract void reloadPosComponent();
 
     @Override
-    final public void draw(GraphicsContext gc, double width, double height,long time) {
+    final public void draw(GraphicsContext gc, double width, double height, long time) {
         //检查是否被改动过，如果被改动过，重新加载元件信息
         if (component.isChanged()) {
             reloadResComponent_();
         }
-
-        double proportionalWidth = size.getWidth() * scale.getWidth();
-        double proportionalHeight = size.getHeight() * scale.getHeight();
+        this.gc = gc;
 
 
-        // 根据 高度\宽度 计算比例尺寸
-        if (size.getWidth() == 0) {
-            proportionalWidth = proportionalHeight * (texSize.getWidth() / texSize.getHeight() * pixelMagnification);
-        } else if (size.getHeight() == 0) {
-            proportionalHeight = proportionalWidth * (texSize.getHeight() / texSize.getWidth() * pixelMagnification);
-        }
-
-        rr.setSize(anchor, proportionalWidth, proportionalHeight);
-        rr.setPos(anchor, pos.getX(), pos.getY());
+        /*rr.setSize(Pos.TOP_LEFT, proportionalWidth, proportionalHeight);
+        rr.setPos(Pos.TOP_LEFT, pos.getX(), pos.getY());*/
 
         gc.save();
 
@@ -203,10 +256,10 @@ public abstract class AbstractComponentRenderer implements RenderInterface {
         gc.setGlobalAlpha(opacity);
 
 
-        transform(gc);
+        transform();
 
         if (!hide)
-            drawComponent(gc, rr, width, height,time);
+            drawComponent(width, height, time);
         if (color != null) {
             gc.setEffect(null);
         }
@@ -214,29 +267,67 @@ public abstract class AbstractComponentRenderer implements RenderInterface {
         gc.restore();
     }
 
-    public void transform(GraphicsContext gc) {
+    protected void drawImage(Image tex) {
+        if (tex != null)
+            drawImage(tex, pos.getX(), pos.getY(), size.getW(), size.getH());
+    }
+
+    protected void drawImage(Image tex, double x, double y, double w, double h) {
+        if (is3DLayout()) {
+            Point2D p1 = ec.transform(new Point2D(x, y));
+            Point2D p2 = ec.transform(new Point2D(x + w, y));
+            Point2D p3 = ec.transform(new Point2D(x, y + h));
+            Point2D p4 = ec.transform(new Point2D(x + w, y + h));
+            PerspectiveTransform perspectiveTransform = new PerspectiveTransform(p1.getX(), p1.getY(), p2.getX(), p2.getY(), p4.getX(), p4.getY(), p3.getX(), p3.getY());
+            gc.setEffect(perspectiveTransform);
+            /*PerspectiveTransform transform = ec.transform(x, y, w, h);
+            gc.setEffect(transform);
+*/
+        }
+        gc.drawImage(tex, x, y, w, h);
+        if (is3DLayout()) {
+            gc.setEffect(null);
+        }
+        //gc.drawImage(tex, x, y, w, h);
+    }
+
+    public void transform() {
+
+        double anchorX = switch (anchor.getHpos()) {
+            case LEFT -> 0;
+            case CENTER -> size.getW() / 2;
+            case RIGHT -> size.getW();
+        };
+
+        double anchorY = switch (anchor.getVpos()) {
+            case TOP -> 0;
+            case CENTER, BASELINE -> size.getH() / 2;
+            case BOTTOM -> size.getH();
+        };
+
+
         // 旋转变换
         if (rotate != 0) {
             gc.translate(pos.getX(), pos.getY());
             gc.rotate(rotate);
             gc.translate(-pos.getX(), -pos.getY());
         }
-        //斜切变换
 
-        if (skew.getWidth() != 0 || skew.getHeight() != 0) {
+        //斜切变换
+        if (skew.getW() != 0 || skew.getH() != 0) {
             //计算比例
-            double texWidth = texSize.getWidth();
-            double texHeight = texSize.getHeight();
-            double renderWidth = rr.getWidth();
-            double renderHeight = rr.getHeight();
+            double texWidth = texSize.getW();
+            double texHeight = texSize.getH();
+            double renderWidth = size.getW();
+            double renderHeight = size.getH();
 
             // 计算宽高比
             double textureAspectRatio = texWidth / texHeight;
             double renderAspectRatio = renderWidth / renderHeight;
 
             // 斜切角度 shear是倾斜度数
-            double shearX = skew.getHeight();
-            double shearY = skew.getWidth();
+            double shearX = skew.getH();
+            double shearY = skew.getW();
 
             {
                 // 斜切换算
@@ -269,16 +360,32 @@ public abstract class AbstractComponentRenderer implements RenderInterface {
                 }
             }
         }
+
+        gc.setFill(Color.LIGHTGREEN);
+        gc.fillRect(pos.getX() - 1, pos.getY() - 1, 3, 3);
+
+        //锚点
+        gc.translate(-anchorX, -anchorY);
+
+        //翻转
+        if (flip == Orientation.VERTICAL) {
+            gc.scale(1, -1);  // 垂直翻转
+            gc.translate(0, -pos.getY() * 2 - size.getH());
+        } else if (flip == Orientation.HORIZONTAL) {
+            gc.scale(-1, 1);  // 水平翻转
+            gc.translate(-pos.getX() * 2 - size.getW(), 0);
+        }
+
+
     }
 
     /**
      * 绘制组件
      *
-     * @param gc     图形上下文
      * @param width  画布宽度
      * @param height 画布高度
      */
-    abstract void drawComponent(GraphicsContext gc, RenderRectangle rr, double width, double height,long time);
+    abstract void drawComponent(double width, double height, long time);
 
 
     /**
@@ -321,5 +428,6 @@ public abstract class AbstractComponentRenderer implements RenderInterface {
         }
         return r;
     }
+
 
 }

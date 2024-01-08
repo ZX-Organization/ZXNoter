@@ -41,7 +41,7 @@ public class HitComponentRenderer extends AbstractComponentRenderer {
 
 
     @Override
-    void drawComponent(GraphicsContext gc, RenderRectangle rr, double width, double height,long time) {
+    void drawComponent(  double width, double height,long time) {
 
 
         Image currImage = animation.getCurrentFrames();
@@ -50,7 +50,7 @@ public class HitComponentRenderer extends AbstractComponentRenderer {
         } else if (blend == 2) {
             gc.setGlobalBlendMode(BlendMode.SCREEN);
         }
-        rr.drawImage(gc, currImage);
+        //rr.drawImage(gc, currImage);
 
     }
 }

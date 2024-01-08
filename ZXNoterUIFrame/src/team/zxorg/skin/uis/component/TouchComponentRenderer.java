@@ -49,7 +49,7 @@ public class TouchComponentRenderer extends AbstractComponentRenderer {
     }
 
     @Override
-    void drawComponent(GraphicsContext gc, RenderRectangle rr, double width, double height,long time) {
+    void drawComponent( double width, double height,long time) {
         gc.restore();
         gc.setGlobalAlpha(0.5);
         gc.setLineWidth(1);
@@ -79,7 +79,7 @@ public class TouchComponentRenderer extends AbstractComponentRenderer {
         public void draw(GraphicsContext gc, double width, double height,long time) {
 
             rr.setPos(Pos.BOTTOM_LEFT, pos.getX(), pos.getY());
-            rr.setSize(Pos.BOTTOM_LEFT, size.getWidth(), size.getHeight());
+            rr.setSize(Pos.BOTTOM_LEFT, size.getW(), size.getH());
             gc.strokeRect(rr.getLeft(), rr.getTop(), rr.getWidth(), rr.getHeight());
         }
 
@@ -102,7 +102,7 @@ public class TouchComponentRenderer extends AbstractComponentRenderer {
 
         @Override
         public void draw(GraphicsContext gc, double width, double height,long time) {
-            gc.strokeOval(pos.getX(), pos.getY(), size.getWidth(), size.getHeight());
+            gc.strokeOval(pos.getX(), pos.getY(), size.getW(), size.getH());
         }
 
     }

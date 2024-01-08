@@ -40,8 +40,9 @@ public class PressComponentRenderer extends AbstractComponentRenderer {
 
 
     @Override
-    void drawComponent(GraphicsContext gc, RenderRectangle rr, double width, double height,long time) {
+    void drawComponent( double width, double height,long time) {
         Image currImage = animation.getCurrentFrames();
-        rr.drawImage(gc, currImage);
+        drawImage(currImage);
+        //rr.drawImage(gc, currImage);
     }
 }

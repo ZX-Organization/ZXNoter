@@ -24,8 +24,9 @@ public class KeyComponentRenderer extends AbstractComponentRenderer {
 
 
     @Override
-    void drawComponent(GraphicsContext gc, RenderRectangle rr, double width, double height,long time) {
+    void drawComponent(  double width, double height,long time) {
         Image currImage = (System.currentTimeMillis() % 1000 > 500 ? tex2 : tex);
-        rr.drawImage(gc, currImage);
+        drawImage(currImage);
+        //rr.drawImage(gc, currImage);
     }
 }

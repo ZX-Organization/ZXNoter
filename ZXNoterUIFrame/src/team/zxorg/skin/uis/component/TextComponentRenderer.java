@@ -38,7 +38,7 @@ public class TextComponentRenderer extends AbstractComponentRenderer {
     }
 
     @Override
-    void drawComponent(GraphicsContext gc, RenderRectangle rr, double width, double height,long time) {
+    void drawComponent(  double width, double height,long time) {
         gc.setFont(Font.font(fsize));
         gc.setFill(color);
         switch (anchor.getHpos()) {

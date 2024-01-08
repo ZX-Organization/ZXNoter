@@ -1,6 +1,5 @@
 package team.zxorg.skin.uis.component;
 
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import team.zxorg.skin.basis.RenderRectangle;
@@ -70,7 +69,7 @@ public class NoteComponentRenderer extends AbstractComponentRenderer {
      */
     private boolean pressed;
 
-
+    RenderRectangle rr = new RenderRectangle();
 
 
     @Override
@@ -80,7 +79,7 @@ public class NoteComponentRenderer extends AbstractComponentRenderer {
 
 
     @Override
-    void drawComponent(GraphicsContext gc, RenderRectangle rr, double width, double height,long time) {
+    void drawComponent(double width, double height, long time) {
         progress += 0.004;
         progress %= 1.4;
         gc.setGlobalAlpha(1);
@@ -99,10 +98,10 @@ public class NoteComponentRenderer extends AbstractComponentRenderer {
             double y2 = rr.getCenterY();
             double w2 = rr.getWidth() / 2;
 
-            rr.drawImage(gc, tex2, x1 - w1, y1, x1 + w1, y1, x2 - w2, y2, x2 + w2, y2);
+            //rr.drawImage(gc, tex2, x1 - w1, y1, x1 + w1, y1, x2 - w2, y2, x2 + w2, y2);
             //绘制尾部
             progressCalculation(rr, progress - 0.2);
-            rr.drawImageTest(gc, tex3);
+            //rr.drawImageTest(gc, tex3);
 
         } else if (type == 3) {
 
@@ -116,26 +115,28 @@ public class NoteComponentRenderer extends AbstractComponentRenderer {
             double y2 = rr.getCenterY();
             double w2 = rr.getWidth() / 2;
 
-            rr.drawImage(gc, tex2, x1 - w1, y1, x1 + w1, y1, x2 - w2, y2, x2 + w2, y2);
+            //rr.drawImage(gc, tex2, x1 - w1, y1, x1 + w1, y1, x2 - w2, y2, x2 + w2, y2);
 
             //绘制尾部
             progressCalculation(rr, progress - 0.2);
-            rr.drawImageTest(gc, tex3);
+            //rr.drawImageTest(gc, tex3);
 
         }
         //绘制头部
         progressCalculation(rr, progress);
+        drawImage(tex, rr.getLeft(), rr.getTop(), rr.getWidth(), rr.getHeight());
         //rr.drawImage(gc, (tex5 != null ? tex5 : tex));
-        rr.drawImageTest(gc, tex);
+        //rr.drawImageTest(gc, tex);
 
         {
             gc.setFill(Color.HOTPINK);
             progressCalculation(rr, 0);
             gc.fillRect(rr.getCenterX() - 2, rr.getCenterY() - 2, 4, 4);
-            rr.drawImageTest(gc, tex);
+
+            //rr.drawImageTest(gc, tex);
 
             progressCalculation(rr, 1);
-            rr.drawImageTest(gc, tex);
+            //rr.drawImageTest(gc, tex);
             gc.fillRect(rr.getCenterX() - 2, rr.getCenterY() - 2, 4, 4);
         }
     }
@@ -143,8 +144,8 @@ public class NoteComponentRenderer extends AbstractComponentRenderer {
     private void progressCalculation(RenderRectangle rr, double p) {
         double imgX = pos.getX() + (pos2.getX() - pos.getX()) * p;
         double imgY = pos.getY() + (pos2.getY() - pos.getY()) * p;
-        double imgW = size.getWidth() + (size2.getWidth() - size.getWidth()) * p;
-        double imgH = size.getHeight() + (size2.getHeight() - size.getHeight()) * p;
+        double imgW = size.getW() + (size2.getW() - size.getW()) * p;
+        double imgH = size.getH() + (size2.getH() - size.getH()) * p;
         rr.setPos(anchor, imgX, imgY);
         rr.setSize(anchor, imgW, imgH);
     }

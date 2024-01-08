@@ -16,6 +16,7 @@ public class LayerCanvasPane extends StackPane {
     private final ArrayList<Canvas> canvasList = new ArrayList<>();
 
     public LayerCanvasPane() {
+
     }
 
     /**

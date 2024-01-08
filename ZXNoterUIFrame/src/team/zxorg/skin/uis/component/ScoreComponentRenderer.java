@@ -1,9 +1,6 @@
 package team.zxorg.skin.uis.component;
 
-import javafx.geometry.Pos;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import team.zxorg.skin.basis.RenderRectangle;
 import team.zxorg.skin.uis.ExpressionVector;
 import team.zxorg.skin.uis.UISComponent;
 import team.zxorg.skin.uis.UISFrame;
@@ -41,7 +38,7 @@ public class ScoreComponentRenderer extends AbstractComponentRenderer {
         }
         fixWeight = frameWeight.getFirst();
         Image image = frame.getFrame(0);
-        if (image!=null) {
+        if (image != null) {
             texSize.setW(image.getWidth());
             texSize.setH(image.getHeight());
         }
@@ -54,7 +51,7 @@ public class ScoreComponentRenderer extends AbstractComponentRenderer {
     }
 
     @Override
-    void drawComponent(GraphicsContext gc, RenderRectangle rr, double width, double height,long time) {
+    void drawComponent(double width, double height, long time) {
         String scoreStr;
         if (isACC) {
             score += 0.11;
@@ -67,7 +64,7 @@ public class ScoreComponentRenderer extends AbstractComponentRenderer {
         }
 
         double aw = 0;
-        double cw = fixWeight * fsize.getWidth();
+        double cw = fixWeight * fsize.getW();
 
         //计算所需宽度
         for (char c : scoreStr.toCharArray()) {
@@ -78,15 +75,16 @@ public class ScoreComponentRenderer extends AbstractComponentRenderer {
 
 
         // 设置初始绘制位置
-        double x = switch (anchor.getHpos()) {
-            case LEFT -> pos.getX();
-            case CENTER -> pos.getX() - aw / 2;
-            case RIGHT -> pos.getX() - aw;
+
+        double x = pos.getX() - switch (anchor.getHpos()) {
+            case LEFT -> 0;
+            case CENTER -> aw / 2;
+            case RIGHT -> aw;
         };
-        double y = switch (anchor.getVpos()) {
-            case TOP -> pos.getY() + fsize.getWidth();
-            case CENTER, BASELINE -> pos.getY() + fsize.getWidth() / 2;
-            case BOTTOM -> pos.getY();
+        double y = pos.getY() - switch (anchor.getVpos()) {
+            case TOP -> 0;
+            case CENTER, BASELINE -> fsize.getW() / 2;
+            case BOTTOM -> fsize.getW();
         };
         // 遍历字符串中的每个字符
         for (char c : scoreStr.toCharArray()) {
@@ -97,12 +95,13 @@ public class ScoreComponentRenderer extends AbstractComponentRenderer {
                 Image charFrame = frame.getFrame(index);
 
                 // 绘制字符图片
-                rr.setPos(Pos.BOTTOM_LEFT, x, y);
+                //rr.setPos(Pos.BOTTOM_LEFT, x, y);
                 double fw = 8;
                 if (frameWeight.size() > index)
                     fw = frameWeight.get(index);
-                rr.setSize(Pos.BOTTOM_LEFT, fw * fsize.getWidth(), fsize.getWidth());
-                rr.drawImage(gc, charFrame);
+                //rr.setSize(Pos.BOTTOM_LEFT, );
+                drawImage(charFrame, x, y, fw * fsize.getW(), fsize.getW());
+                // rr.drawImage(gc, charFrame);
                 // 调整下一个字符的绘制位置
             }
             x += cw + pos2.getX(); // 使用 pos2.getX() 作为字符之间的空隙

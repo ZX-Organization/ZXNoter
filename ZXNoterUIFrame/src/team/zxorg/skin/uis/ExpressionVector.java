@@ -50,8 +50,8 @@ public class ExpressionVector {
                 ", yExpression=" + yExpression +
                 ", x=" + getX() +
                 ", y=" + getY() +
-                ", w=" + getWidth() +
-                ", h=" + getHeight() +
+                ", w=" + getW() +
+                ", h=" + getH() +
                 ", parent=" + parent +
                 '}';
     }
@@ -71,7 +71,6 @@ public class ExpressionVector {
             x = expressionCalculator.calculateX(value);
         }
         w = x;
-
     }
 
     public void setX(double x) {
@@ -92,7 +91,7 @@ public class ExpressionVector {
 
     public double getY() {
         if (parent != null)
-            return expressionCalculator.getUnitCanvasHeight() - (parent.getHeight() + h);
+            return expressionCalculator.getUnitCanvasHeight() - (parent.getH() + h);
         return y;
     }
 
@@ -108,16 +107,16 @@ public class ExpressionVector {
     }
 
 
-    public double getWidth() {
+    public double getW() {
         if (parent != null)
-            return parent.getWidth() + w;
+            return parent.getW() + w;
         return w;
     }
 
 
-    public double getHeight() {
+    public double getH() {
         if (parent != null)
-            return parent.getHeight() + h;
+            return parent.getH() + h;
         return h;
     }
 

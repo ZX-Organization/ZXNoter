@@ -5,7 +5,6 @@ import team.zxorg.skin.DeviceType;
 import team.zxorg.skin.uis.component.AbstractComponentRenderer;
 import team.zxorg.skin.uis.component.AnimationComponentRenderer;
 import team.zxorg.skin.uis.component.MeasuringRulerRenderer;
-import team.zxorg.skin.uis.ui.Perspective;
 import team.zxorg.ui.component.LayerCanvasPane;
 import team.zxorg.zxncore.ZXLogger;
 
@@ -15,7 +14,7 @@ import java.util.HashMap;
 
 public class UISCanvas extends LayerCanvasPane {
     UISSkin skin;
-    Perspective perspective = new Perspective();
+    //UISPerspectiveTransform perspective = new UISPerspectiveTransform();
     ExpressionCalculator expressionCalculator = new ExpressionCalculator();
 
     public MeasuringRulerRenderer measureRuler = new MeasuringRulerRenderer(expressionCalculator);
@@ -34,9 +33,10 @@ public class UISCanvas extends LayerCanvasPane {
     double zoomRate = 1;
 
     public UISCanvas() {
-        createCanvas("bottom");
-        createCanvas("3d").setEffect(perspective.getEffect());
-        createCanvas("top");
+        /*createCanvas("bottom");
+        createCanvas("3d");//.setEffect(perspective.getEffect());
+        createCanvas("top");*/
+        createCanvas("view");
         measureRuler.initialize(createCanvas("mark"));
     }
 
@@ -53,11 +53,11 @@ public class UISCanvas extends LayerCanvasPane {
 
         clearRect();
 
-        GraphicsContext gc3d = getGraphicsContext2D("3d");
+        /*GraphicsContext gc3d = getGraphicsContext2D("3d");
         gc3d.save();
         gc3d.beginPath();
         gc3d.rect(-width, 0, width * 4, height);
-        gc3d.clip();
+        gc3d.clip();*/
 
         for (AbstractComponentRenderer cr : componentRenders) {
             GraphicsContext gc = getGraphicsContext2D(cr.getLayoutName());
@@ -81,10 +81,10 @@ public class UISCanvas extends LayerCanvasPane {
             GraphicsContext gc = getGraphicsContext2D("mark");
             measureRuler.draw(gc, width, height, currentTime);
         }
+        /*gc3d.restore();
         gc3d.restore();
         gc3d.restore();
-        gc3d.restore();
-        gc3d.restore();
+        gc3d.restore();*/
     }
 
 
@@ -101,9 +101,9 @@ public class UISCanvas extends LayerCanvasPane {
         skin.setDeviceType(deviceType);
 
         skin.updateRenderer(componentRenders, componentMap, this);
-        UISSkin.sortRenders(componentRenders);
+        //UISSkin.sortRenders(componentRenders);
 
-        perspective.setAngle(skin.getAngle());
+        expressionCalculator.setAngle(skin.getAngle());
 
         /*if (autoReplayCheckBox.isSelected() & skin.updateRenderer(componentRenders, componentMap, this))
             resetTime();*/
@@ -117,7 +117,8 @@ public class UISCanvas extends LayerCanvasPane {
             setMinSize(width, height);
             setMaxSize(width, height);
             expressionCalculator.setCanvasSize(width, height);
-            perspective.setSize(width, height);
+            expressionCalculator.setUnitCanvasHeight(unitHeight);
+            //expressionCalculator.setSize(width, height);
 
         }
 

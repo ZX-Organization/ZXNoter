@@ -21,9 +21,8 @@ public class ImageComponentRenderer extends AbstractComponentRenderer {
 
     @Override
     void reloadPosComponent() {
-
+        //System.out.println(this.getName() + " pos: " + pos + "    size: " + size);
     }
-
 
 
     @Override
@@ -37,8 +36,9 @@ public class ImageComponentRenderer extends AbstractComponentRenderer {
     }
 
     @Override
-    void drawComponent(GraphicsContext gc, RenderRectangle rr, double width, double height,long time) {
-        rr.drawImage(gc, tex);
+    void drawComponent(double width, double height, long time) {
+        //rr.drawImage(gc, tex);
+        drawImage(tex);
     }
 
     @Override

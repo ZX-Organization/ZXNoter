@@ -34,9 +34,8 @@ public class RectangleComponentRenderer extends AbstractComponentRenderer {
 
 
     @Override
-    void drawComponent(GraphicsContext gc, RenderRectangle rr, double width, double height,long time) {
+    void drawComponent( double width, double height,long time) {
         gc.setFill(color);
-
-        gc.fillRect(rr.getLeft(), rr.getTop(),rr.getWidth(), rr.getHeight());
+        gc.fillRect(pos.getX(), pos.getY(),size.getW(), size.getH());
     }
 }

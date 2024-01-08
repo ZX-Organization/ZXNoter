@@ -2,13 +2,13 @@
   <library name="alibaba.fastjson2" type="repository">
     <properties maven-id="com.alibaba.fastjson2:fastjson2:LATEST" />
     <CLASSES>
-      <root url="jar://$MAVEN_REPOSITORY$/com/alibaba/fastjson2/fastjson2/2.0.44.android4/fastjson2-2.0.44.android4.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/alibaba/fastjson2/fastjson2/2.0.45.android4/fastjson2-2.0.45.android4.jar!/" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$MAVEN_REPOSITORY$/com/alibaba/fastjson2/fastjson2/2.0.44.android4/fastjson2-2.0.44.android4-javadoc.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/alibaba/fastjson2/fastjson2/2.0.45.android4/fastjson2-2.0.45.android4-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://$MAVEN_REPOSITORY$/com/alibaba/fastjson2/fastjson2/2.0.44.android4/fastjson2-2.0.44.android4-sources.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/alibaba/fastjson2/fastjson2/2.0.45.android4/fastjson2-2.0.45.android4-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

@@ -1,5 +1,6 @@
 package team.zxorg.skin.uis;
 
+import javafx.geometry.Point2D;
 import team.zxorg.zxncore.ZXLogger;
 
 import java.util.regex.Matcher;
@@ -9,6 +10,30 @@ import java.util.regex.Pattern;
  * 表达式计算器
  */
 public class ExpressionCalculator {
+
+    UISPerspectiveTransform perspectiveTransform=new UISPerspectiveTransform();
+
+
+    public Point2D transform(Point2D point) {
+        return perspectiveTransform.transform(point);
+    }
+
+
+
+    public static void main(String[] args) {
+        ExpressionCalculator expressionCalculator = new ExpressionCalculator();
+        expressionCalculator.setUnitCanvasHeight(720);
+        ExpressionVector expressionVector = new ExpressionVector(expressionCalculator, "100%,100%", 0);
+
+        expressionCalculator.setCanvasSize(1920, 1080);
+        expressionVector.setX("100%");
+        System.out.println(expressionVector);
+
+        expressionCalculator.setCanvasSize(1280, 720);
+        expressionVector.setX("100%");
+        System.out.println(expressionVector);
+    }
+
     /**
      * 画布宽度
      */
@@ -26,6 +51,14 @@ public class ExpressionCalculator {
      */
     private double unitCanvasHeight;
 
+    /**
+     * 设置变换角度
+     *
+     * @param angle 角度
+     */
+    public void setAngle(double angle) {
+        perspectiveTransform.setAngle(angle);
+    }
 
     public ExpressionCalculator() {
         this(0, 0, 720);
@@ -36,7 +69,7 @@ public class ExpressionCalculator {
         //this.canvasHeight = canvasHeight;
         this.unitCanvasHeight = unitCanvasHeight;
         //pixelMagnification = canvasHeight / unitCanvasHeight;
-        setCanvasSize(canvasWidth,canvasHeight);
+        setCanvasSize(canvasWidth, canvasHeight);
 
     }
 
@@ -59,9 +92,12 @@ public class ExpressionCalculator {
 
 
     public void setCanvasSize(double width, double height) {
+        ZXLogger.info("setCanvasSize: " + width + "," + height);
         this.canvasWidth = width;
         this.canvasHeight = height;
         pixelMagnification = height / unitCanvasHeight;
+        if (perspectiveTransform != null)
+            perspectiveTransform.setSize(width, height);
     }
 
     public double getCanvasWidth() {
@@ -77,7 +113,7 @@ public class ExpressionCalculator {
     }
 
     public void setUnitCanvasHeight(double unitCanvasHeight) {
-        ZXLogger.info("设置单位画布高度为："+ unitCanvasHeight );
+        ZXLogger.info("设置单位画布高度为：" + unitCanvasHeight);
         this.unitCanvasHeight = unitCanvasHeight;
         pixelMagnification = canvasHeight / unitCanvasHeight;
     }

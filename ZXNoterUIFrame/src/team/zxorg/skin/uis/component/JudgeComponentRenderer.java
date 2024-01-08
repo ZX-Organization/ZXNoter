@@ -41,7 +41,8 @@ public class JudgeComponentRenderer extends AbstractComponentRenderer {
 
 
     @Override
-    void drawComponent(GraphicsContext gc, RenderRectangle rr, double width, double height,long time) {
-        rr.drawImage(gc,animation.getCurrentFrames());
+    void drawComponent(double width, double height,long time) {
+        drawImage(animation.getCurrentFrames());
+        //rr.drawImage(gc,animation.getCurrentFrames());
     }
 }

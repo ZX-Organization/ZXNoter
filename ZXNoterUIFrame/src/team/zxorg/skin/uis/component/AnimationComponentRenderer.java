@@ -59,7 +59,7 @@ public class AnimationComponentRenderer extends AbstractComponentRenderer {
     }
 
     @Override
-    void drawComponent(GraphicsContext gc, RenderRectangle rr, double width, double height,long time) {
+    void drawComponent(  double width, double height,long time) {
 
     }
 
