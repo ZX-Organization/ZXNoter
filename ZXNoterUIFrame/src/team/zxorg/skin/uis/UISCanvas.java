@@ -69,11 +69,9 @@ public class UISCanvas extends LayerCanvasPane {
                 }
                 cr.draw(gc, width, height, currentTime);
                 gc.restore();
-                gc.restore();
-                gc.restore();
-                gc.restore();
             } catch (Exception e) {
-                e.printStackTrace();
+                ZXLogger.warning("绘制组件: " + cr.getComponent() + " 发生异常: " + e.getMessage());
+                cr.hide = true;
             }
         }
 

@@ -1,5 +1,3 @@
-package team.zxorg.skin;
-
 import com.sun.javafx.application.PlatformImpl;
 import com.sun.javafx.util.Logging;
 import team.zxorg.skin.uis.ExpressionCalculator;

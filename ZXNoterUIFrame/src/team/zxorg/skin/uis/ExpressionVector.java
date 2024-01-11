@@ -17,6 +17,11 @@ public class ExpressionVector {
         this.parent = parent;
     }
 
+    public ExpressionVector(ExpressionCalculator expressionCalculator, String xExpression, String yExpression, int index, ExpressionVector parent) {
+        this(expressionCalculator, xExpression, yExpression, index);
+        this.parent = parent;
+    }
+
     public ExpressionVector(ExpressionCalculator expressionCalculator, String expression, int index) {
         this.expressionCalculator = expressionCalculator;
         this.index = index;
@@ -120,4 +125,7 @@ public class ExpressionVector {
         return h;
     }
 
+    public ExpressionVector clone() {
+        return new ExpressionVector(expressionCalculator, xExpression, yExpression, index, parent);
+    }
 }

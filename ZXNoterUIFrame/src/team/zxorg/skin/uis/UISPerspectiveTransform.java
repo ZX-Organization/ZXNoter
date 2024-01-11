@@ -1,7 +1,9 @@
 package team.zxorg.skin.uis;
 
-import javafx.geometry.Point2D;
 import com.sun.scenario.effect.impl.state.PerspectiveTransformState;
+import javafx.geometry.Point2D;
+import javafx.scene.effect.PerspectiveTransform;
+import team.zxorg.zxncore.ZXLogger;
 
 public class UISPerspectiveTransform {
     private static final double a = 3.7832580504765276e-05;
@@ -13,79 +15,78 @@ public class UISPerspectiveTransform {
     private double angle;
 
 
-    private float tx[][] = new float[3][3];
-    private float ulx, uly, urx, ury, lrx, lry, llx, lly;
-    private float devcoords[] = new float[8];
+    private final float[][] tx = new float[3][3];
     private final PerspectiveTransformState state = new PerspectiveTransformState();
 
-
-    //private final PerspectiveTransform pt = new PerspectiveTransform();
-    // private final Rectangle rectangle = new Rectangle();
-
-    public UISPerspectiveTransform() {
-        //rectangle.setEffect(pt);
-    }
-
-    // 计算角度补偿系数  为了适应Malody
+    /**
+     * 计算角度补偿系数  为了适应Malody
+     *
+     * @param angle 原始角度
+     * @return 补偿后角度
+     */
     private static double calculateCompensation(double angle) {
-        return a * Math.pow(angle, 2) + b * angle + c;
+        return (a * Math.pow(angle, 2) + b * angle + c) * angle;
     }
 
     public void setSize(double width, double height) {
+        //ZXLogger.info("设置3d大小: " + width + " " + height);
         this.width = width;
         this.height = height;
-        //rectangle.setWidth(width);
-        //rectangle.setHeight(height);
-
         update();
     }
 
+    public void setFixedSize(double width, double height) {
+        this.width = width;
+        this.height = height;
+    }
+
     public void setAngle(double angle) {
-        this.angle = calculateCompensation(angle) * angle;
+        ZXLogger.info("设置3d角度: " + angle);
+        this.angle = angle;
         update();
     }
 
     private void update() {
         // 计算透视，使用角度变量
-        double perspectiveAngle = Math.toRadians(angle);
+        double perspectiveAngle = Math.toRadians(calculateCompensation(angle));
         double perspectiveFactor = Math.tan(perspectiveAngle);
 
         // 根据需求设置透视变换的参数
         double offsetX = perspectiveFactor * width;
-       /* pt.setUlx(offsetX);
-        pt.setUly(0);
-        pt.setUrx(width - offsetX);
-        pt.setUry(0);
 
-        pt.setLlx(0);
-        pt.setLly(height);
-        pt.setLrx(width);
-        pt.setLry(height);
-*/
-
-        setQuadMapping((float) offsetX, (float) 0, (float) (width - offsetX), (float) 0, (float) 0, (float) height, (float) width, (float) height);
-
-        devcoords[0] = ulx;
-        devcoords[1] = uly;
-        devcoords[2] = urx;
-        devcoords[3] = ury;
-        devcoords[4] = lrx;
-        devcoords[5] = lry;
-        devcoords[6] = llx;
-        devcoords[7] = lly;
-
-        setUnitQuadMapping(devcoords[0], devcoords[1],
-                devcoords[2], devcoords[3],
-                devcoords[4], devcoords[5],
-                devcoords[6], devcoords[7]);
-
+        // 设置透视变换的参数
+        setUnitQuadMapping(offsetX, 0,
+                width - offsetX, 0,
+                width, height,
+                0, height);
 
     }
 
+    public Point2D untransform(Point2D p) {
+        float dx = (float) p.getX();
+        float dy = (float) p.getY();
+        float itx[][] = state.getITX();
+        float sx = itx[0][0] * dx + itx[0][1] * dy + itx[0][2];
+        float sy = itx[1][0] * dx + itx[1][1] * dy + itx[1][2];
+        float sw = itx[2][0] * dx + itx[2][1] * dy + itx[2][2];
+        p = new Point2D(0 + (sx / sw) * width,
+                0 + (sy / sw) * height);
+        return p;
+    }
+
+    public Point2D untransform(Point2D p, float minX, float minY, float width, float height) {
+        float dx = (float) p.getX();
+        float dy = (float) p.getY();
+        float[][] itx = state.getITX();
+        float sx = itx[0][0] * dx + itx[0][1] * dy + itx[0][2];
+        float sy = itx[1][0] * dx + itx[1][1] * dy + itx[1][2];
+        float sw = itx[2][0] * dx + itx[2][1] * dy + itx[2][2];
+        p = new Point2D(minX + (sx / sw) * width,
+                minY + (sy / sw) * height);
+        return p;
+    }
 
     public Point2D transform(Point2D p) {
-        /*float sx = (p.x - b.getMinX()) / b.getWidth();
-        float sy = (p.y - b.getMinY()) / b.getHeight();*/
         float sx = (float) ((p.getX() - 0) / width);
         float sy = (float) ((p.getY() - 0) / height);
         float dx = tx[0][0] * sx + tx[0][1] * sy + tx[0][2];
@@ -95,53 +96,33 @@ public class UISPerspectiveTransform {
         return p;
     }
 
-    /**
-     * 通过渲染矩形变换3d后的场景坐标
-     */
-    @Deprecated
-    public void transform(double x, double y, double x2, double y2, double x3, double y3, double x4, double y4) {
-        System.out.println(transform(new Point2D( 0, 0)));
-        System.out.println(transform(new Point2D( 1920, 0)));
-        System.out.println(transform(new Point2D( 1920, 1080)));
-        System.out.println(transform(new Point2D( 0, 1080)));
-
-        ;
-        //System.out.println(polygon.getPoints());
-        /*System.out.println(y);
-        System.out.println(rectangle.localToScreen(x, y));
-        Point2D point = rectangle.localToScreen(x, y);
-        setUlx(point.getX());
-        setUly(point.getY());
-        point = rectangle.localToScreen(x2, y2);
-        setUrx(point.getX());
-        setUry(point.getY());
-        point = rectangle.localToScreen(x3, y3);
-        setLlx(point.getX());
-        setLly(point.getY());
-        point = rectangle.localToScreen(x4, y4);
-        setLrx(point.getX());
-        setLry(point.getY());*/
+    public Point2D transform(Point2D p, float minX, float minY, float width, float height) {
+        float sx = (float) ((p.getX() - minX) / width);
+        float sy = (float) ((p.getY() - minY) / height);
+        float dx = tx[0][0] * sx + tx[0][1] * sy + tx[0][2];
+        float dy = tx[1][0] * sx + tx[1][1] * sy + tx[1][2];
+        float dw = tx[2][0] * sx + tx[2][1] * sy + tx[2][2];
+        p = new Point2D(dx / dw, dy / dw);
+        return p;
     }
 
-
-    public static void main(String[] args) {
-        UISPerspectiveTransform transform = new UISPerspectiveTransform();
-        transform.setSize(1920, 1080);
-        transform.setAngle(45);
-        transform.transform(50, 50, 100, 50, 50, 100, 100, 100);
-        System.out.println(transform);
+    public void setUnitQuadMapping(double ulx, double uly,
+                                   double urx, double ury,
+                                   double lrx, double lry,
+                                   double llx, double lly) {
+        setUnitQuadMapping((float) ulx, (float) uly, (float) urx, (float) ury, (float) lrx, (float) lry, (float) llx, (float) lly);
     }
 
-    private void setUnitQuadMapping(float ulx, float uly,
-                                    float urx, float ury,
-                                    float lrx, float lry,
-                                    float llx, float lly) {
+    public void setUnitQuadMapping(float ulx, float uly,
+                                   float urx, float ury,
+                                   float lrx, float lry,
+                                   float llx, float lly) {
         float dx3 = ulx - urx + lrx - llx;
         float dy3 = uly - ury + lry - lly;
 
         tx[2][2] = 1.0F;
 
-        if ((dx3 == 0.0F) && (dy3 == 0.0F)) { // TODO: use tolerance (RT-27402)
+        if ((dx3 == 0.0F) && (dy3 == 0.0F)) {
             tx[0][0] = urx - ulx;
             tx[0][1] = lrx - urx;
             tx[0][2] = ulx;
@@ -169,17 +150,17 @@ public class UISPerspectiveTransform {
         state.updateTx(tx);
     }
 
-    public final void setQuadMapping(float ulx, float uly,
-                                     float urx, float ury,
-                                     float lrx, float lry,
-                                     float llx, float lly) {
-        this.ulx = ulx;
-        this.uly = uly;
-        this.urx = urx;
-        this.ury = ury;
-        this.lrx = lrx;
-        this.lry = lry;
-        this.llx = llx;
-        this.lly = lly;
+
+    public static void setPerspectiveTransform(PerspectiveTransform pt, Point2D ul, Point2D ur, Point2D ll, Point2D lr) {
+        pt.setUlx(ul.getX());
+        pt.setUly(ul.getY());
+        pt.setUrx(ur.getX());
+        pt.setUry(ur.getY());
+        pt.setLlx(ll.getX());
+        pt.setLly(ll.getY());
+        pt.setLrx(lr.getX());
+        pt.setLry(lr.getY());
     }
+
+
 }

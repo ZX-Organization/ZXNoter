@@ -1,7 +1,6 @@
 package team.zxorg.skin.uis.component;
 
 import javafx.scene.canvas.GraphicsContext;
-import team.zxorg.skin.basis.RenderRectangle;
 import team.zxorg.skin.uis.UISComponent;
 import team.zxorg.skin.uis.animaion.*;
 import team.zxorg.zxncore.ZXLogger;
@@ -59,18 +58,29 @@ public class AnimationComponentRenderer extends AbstractComponentRenderer {
     }
 
     @Override
-    void drawComponent(  double width, double height,long time) {
+    void drawComponent(double width, double height, long time) {
 
     }
 
 
     public void update(GraphicsContext gc, double width, double height, AbstractComponentRenderer cr, long time) {
+        //欲播放动画表
         HashMap<String, AbstractAnimation> preExecutionAnimations = new HashMap<>();
+        //检查所有动画
         for (AbstractAnimation renderer : animations) {
+            //更新动画时间
             renderer.updateAnimationTime(time);
+            //检查是否是闲置的
             if (renderer.isDisengaged()) {
-                if (!preExecutionAnimations.containsKey(renderer.getName()))
+                //如果欲播放动画表不包含此类型动画则放进去
+                AbstractAnimation currAnimation = preExecutionAnimations.get(renderer.getName());
+                if (currAnimation == null) {
                     preExecutionAnimations.put(renderer.getName(), renderer);
+                } else {
+                    if (currAnimation.getLastEndTime() < renderer.getLastEndTime()) {
+                        preExecutionAnimations.put(renderer.getName(), renderer);
+                    }
+                }
             } else {
                 preExecutionAnimations.put(renderer.getName(), renderer);
             }

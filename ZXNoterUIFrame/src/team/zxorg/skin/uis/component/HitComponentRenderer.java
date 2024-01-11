@@ -9,7 +9,7 @@ import team.zxorg.skin.uis.UISFrameAnimation;
 
 public class HitComponentRenderer extends AbstractComponentRenderer {
 
-    int blend;
+
 
     UISFrameAnimation animation;
 
@@ -19,7 +19,7 @@ public class HitComponentRenderer extends AbstractComponentRenderer {
 
     @Override
     void reloadResComponent() {
-        blend = component.getInt("blend", 0);
+
 
         animation = new UISFrameAnimation(component, "frame", "frame2", "frame3");
         Image image = animation.getFirstFrame();

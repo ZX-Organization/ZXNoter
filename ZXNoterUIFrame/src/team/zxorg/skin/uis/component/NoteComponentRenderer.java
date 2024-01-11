@@ -1,5 +1,6 @@
 package team.zxorg.skin.uis.component;
 
+import javafx.geometry.Pos;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import team.zxorg.skin.basis.RenderRectangle;
@@ -7,6 +8,9 @@ import team.zxorg.skin.uis.ExpressionVector;
 import team.zxorg.skin.uis.UISComponent;
 
 public class NoteComponentRenderer extends AbstractComponentRenderer {
+    ExpressionVector pos1;
+    ExpressionVector size1;
+
     public NoteComponentRenderer(UISComponent component) {
         super(component);
         zindex = 10;
@@ -22,6 +26,9 @@ public class NoteComponentRenderer extends AbstractComponentRenderer {
 
     @Override
     void reloadPosComponent() {
+        pos1 = pos.clone();
+        size1 = size.clone();
+
         pos2 = component.getExpressionVector("pos2");
         size2 = component.getExpressionVector("size2");
         if (!component.contains("size2"))
@@ -124,20 +131,32 @@ public class NoteComponentRenderer extends AbstractComponentRenderer {
         }
         //绘制头部
         progressCalculation(rr, progress);
-        drawImage(tex, rr.getLeft(), rr.getTop(), rr.getWidth(), rr.getHeight());
+
+
+        double imgX = pos1.getX() + (pos2.getX() - pos1.getX()) * progress;
+        double imgY = pos1.getY() + (pos2.getY() - pos1.getY()) * progress;
+        double imgW = size1.getW() + (size2.getW() - size1.getW()) * progress;
+        double imgH = size1.getH() + (size2.getH() - size1.getH()) * progress;
+        pos.setX(imgX);
+        pos.setY(imgY);
+        size.setW(imgW);
+        size.setH(imgH);
+        drawImage(tex, imgX, imgY, imgW, imgH);
+
+
         //rr.drawImage(gc, (tex5 != null ? tex5 : tex));
         //rr.drawImageTest(gc, tex);
 
         {
             gc.setFill(Color.HOTPINK);
             progressCalculation(rr, 0);
-            gc.fillRect(rr.getCenterX() - 2, rr.getCenterY() - 2, 4, 4);
+            gc.fillRect(rr.getLeft() - 2, rr.getTop() - 2, 4, 4);
 
             //rr.drawImageTest(gc, tex);
 
             progressCalculation(rr, 1);
             //rr.drawImageTest(gc, tex);
-            gc.fillRect(rr.getCenterX() - 2, rr.getCenterY() - 2, 4, 4);
+            gc.fillRect(rr.getLeft() - 2, rr.getTop() - 2, 4, 4);
         }
     }
 
@@ -146,7 +165,7 @@ public class NoteComponentRenderer extends AbstractComponentRenderer {
         double imgY = pos.getY() + (pos2.getY() - pos.getY()) * p;
         double imgW = size.getW() + (size2.getW() - size.getW()) * p;
         double imgH = size.getH() + (size2.getH() - size.getH()) * p;
-        rr.setPos(anchor, imgX, imgY);
-        rr.setSize(anchor, imgW, imgH);
+        rr.setPos(Pos.TOP_LEFT, imgX, imgY);
+        rr.setSize(Pos.TOP_LEFT, imgW, imgH);
     }
 }

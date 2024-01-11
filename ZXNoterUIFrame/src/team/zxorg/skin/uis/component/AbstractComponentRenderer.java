@@ -4,23 +4,29 @@ import javafx.geometry.Orientation;
 import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.effect.BlendMode;
 import javafx.scene.effect.BlurType;
 import javafx.scene.effect.PerspectiveTransform;
 import javafx.scene.effect.Shadow;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+import javafx.scene.transform.Affine;
 import team.zxorg.skin.basis.RenderInterface;
 import team.zxorg.skin.uis.ExpressionCalculator;
 import team.zxorg.skin.uis.ExpressionVector;
 import team.zxorg.skin.uis.UISComponent;
+import team.zxorg.skin.uis.UISPerspectiveTransform;
 import team.zxorg.ui.component.LayerCanvasPane;
 
 /**
  * 组件属性数据
  */
 public abstract class AbstractComponentRenderer implements RenderInterface {
-    protected ExpressionCalculator ec;
 
+
+    protected Affine affine = new Affine();
+    protected ExpressionCalculator ec;
+    PerspectiveTransform pt = new PerspectiveTransform();
     /**
      * 父元件
      */
@@ -108,7 +114,10 @@ public abstract class AbstractComponentRenderer implements RenderInterface {
      * 像素倍率
      */
     protected double pixelMagnification;
-
+    /**
+     * 混合模式 1=additive 2=screen
+     */
+    int blend;
     /**
      * 渲染上下文
      */
@@ -159,6 +168,7 @@ public abstract class AbstractComponentRenderer implements RenderInterface {
     }
 
     private void reloadResComponent_() {
+        blend = component.getInt("blend", 0);
         texSize = component.getExpressionVector("___texSize");
         name = component.getName();
         tex = component.getImageOrNull("tex");
@@ -255,9 +265,16 @@ public abstract class AbstractComponentRenderer implements RenderInterface {
 
         gc.setGlobalAlpha(opacity);
 
+        switch (blend) {
+            case 1 -> {
+                gc.setGlobalBlendMode(BlendMode.ADD);
+            }
+            case 2 -> {
+                gc.setGlobalBlendMode(BlendMode.SCREEN);
+            }
+        }
 
         transform();
-
         if (!hide)
             drawComponent(width, height, time);
         if (color != null) {
@@ -273,26 +290,146 @@ public abstract class AbstractComponentRenderer implements RenderInterface {
     }
 
     protected void drawImage(Image tex, double x, double y, double w, double h) {
+        if (tex == null || tex.isError())
+            return;
+
+        //进行基本变换
+        Point2D ul = affine.transform(x, y);
+        Point2D ur = affine.transform(x + w, y);
+        Point2D lr = affine.transform(x + w, y + h);
+        Point2D ll = affine.transform(x, y + h);
+
+        //进行3d变换
         if (is3DLayout()) {
-            Point2D p1 = ec.transform(new Point2D(x, y));
-            Point2D p2 = ec.transform(new Point2D(x + w, y));
-            Point2D p3 = ec.transform(new Point2D(x, y + h));
-            Point2D p4 = ec.transform(new Point2D(x + w, y + h));
-            PerspectiveTransform perspectiveTransform = new PerspectiveTransform(p1.getX(), p1.getY(), p2.getX(), p2.getY(), p4.getX(), p4.getY(), p3.getX(), p3.getY());
-            gc.setEffect(perspectiveTransform);
-            /*PerspectiveTransform transform = ec.transform(x, y, w, h);
-            gc.setEffect(transform);
-*/
+            ul = ec.transform(ul);
+            ur = ec.transform(ur);
+            lr = ec.transform(lr);
+            ll = ec.transform(ll);
         }
-        gc.drawImage(tex, x, y, w, h);
-        if (is3DLayout()) {
-            gc.setEffect(null);
+
+        // 添加坐标检查
+        if (Double.isNaN(ul.getX()) || Double.isNaN(ul.getY()) ||
+                Double.isNaN(ur.getX()) || Double.isNaN(ur.getY()) ||
+                Double.isNaN(lr.getX()) || Double.isNaN(lr.getY()) ||
+                Double.isNaN(ll.getX()) || Double.isNaN(ll.getY())) {
+            return;
         }
-        //gc.drawImage(tex, x, y, w, h);
+
+
+        boolean isToBig = false;
+
+        int maxSize = 2000;
+        //限制图片尺寸
+        if (Math.abs(ul.getX()) > maxSize || Math.abs(ul.getY()) > maxSize ||
+                Math.abs(ur.getX()) > maxSize || Math.abs(ur.getY()) > maxSize ||
+                Math.abs(lr.getX()) > maxSize || Math.abs(lr.getY()) > maxSize ||
+                Math.abs(ll.getX()) > maxSize || Math.abs(ll.getY()) > maxSize) {
+            /*ZXLogger.info("图片尺寸过大，无法绘制: " + ul.getX() + "," + ul.getY() + "," + ur.getX() + "," + ur.getY() + "," + lr.getX() + "," + lr.getY() + "," + ll.getX() + "," + ll.getY());
+            return;*/
+            isToBig = true;
+        }
+
+        // 判断绘制的图片是否在屏幕内
+        double canvasWidth = ec.getCanvasWidth();
+        double canvasHeight = ec.getCanvasHeight();
+
+        // 判断绘制的图片是否完全不在屏幕内
+        if ((ul.getX() < 0 && ur.getX() < 0 && lr.getX() < 0 && ll.getX() < 0) ||
+                (ul.getX() > canvasWidth && ur.getX() > canvasWidth && lr.getX() > canvasWidth && ll.getX() > canvasWidth) ||
+                (ul.getY() < 0 && ur.getY() < 0 && lr.getY() < 0 && ll.getY() < 0) ||
+                (ul.getY() > canvasHeight && ur.getY() > canvasHeight && lr.getY() > canvasHeight && ll.getY() > canvasHeight)) {
+            return;
+        }
+
+
+        //将坐标应用到变换
+        pt.setUlx(ul.getX());
+        pt.setUly(ul.getY());
+        pt.setUrx(ur.getX());
+        pt.setUry(ur.getY());
+        pt.setLrx(lr.getX());
+        pt.setLry(lr.getY());
+        pt.setLlx(ll.getX());
+        pt.setLly(ll.getY());
+
+
+        // 尺寸检查和限制
+        w = Math.min(w, 2000);
+        h = Math.min(h, 2000);
+
+
+        if (isToBig) {
+            // 将透视变换优化到屏幕内
+            // 图像源矩形
+            double sw = tex.getWidth();  // 使用整个图像的宽度
+            double sh = tex.getHeight(); // 使用整个图像的高度
+
+            //材质变换
+            UISPerspectiveTransform texPt = new UISPerspectiveTransform();
+            texPt.setFixedSize(sw, sh);
+            texPt.setUnitQuadMapping(ul.getX(), ul.getY(), ur.getX(), ur.getY()
+                    , lr.getX(), lr.getY(), ll.getX(), ll.getY());
+
+            // 计算画布矩形四个点在材质中的位置
+            Point2D texUL = texPt.untransform(new Point2D(0, 0));
+            Point2D texUR = texPt.untransform(new Point2D(canvasWidth, 0));
+            Point2D texLR = texPt.untransform(new Point2D(canvasWidth, canvasHeight));
+            Point2D texLL = texPt.untransform(new Point2D(0, canvasHeight));
+
+
+
+
+
+            //计算裁剪后的材质尺寸
+            double dx = Math.min(texUL.getX(), Math.min(texUR.getX(), Math.min(texLR.getX(), texLL.getX())));
+            double dy = Math.min(texUL.getY(), Math.min(texUR.getY(), Math.min(texLR.getY(), texLL.getY())));
+            double dw = Math.max(texUL.getX(), Math.max(texUR.getX(), Math.max(texLR.getX(), texLL.getX())));
+            double dh = Math.max(texUL.getY(), Math.max(texUR.getY(), Math.max(texLR.getY(), texLL.getY())));
+            double dw2 = dw - dx;
+            double dh2 = dh - dy;
+            double sw2 = sw * dw2 / dw;
+            double sh2 = sh * dh2 / dh;
+            double sx = (sw - sw2) / 2;
+            double sy = (sh - sh2) / 2;
+
+            //进行基本变换
+             ul = affine.transform(dx, dy);
+             ur = affine.transform(dx + dw2, dy);
+             lr = affine.transform(dx + dw2, dy + dh2);
+             ll = affine.transform(dx, dy + dh2);
+
+            //进行3d变换
+            if (is3DLayout()) {
+                ul = ec.transform(ul);
+                ur = ec.transform(ur);
+                lr = ec.transform(lr);
+                ll = ec.transform(ll);
+            }
+
+
+            //将坐标应用到变换
+            pt.setUlx(ul.getX());
+            pt.setUly(ul.getY());
+            pt.setUrx(ur.getX());
+            pt.setUry(ur.getY());
+            pt.setLrx(lr.getX());
+            pt.setLry(lr.getY());
+            pt.setLlx(ll.getX());
+            pt.setLly(ll.getY());
+
+
+            // 应用透视变换和绘制
+            gc.setEffect(pt);
+            gc.drawImage(tex, sx, sy, sw2, sh2, dx, dy, dw, dh);
+        } else {
+            gc.setEffect(pt);
+            gc.drawImage(tex, x, y, w, h);
+        }
+        gc.setEffect(null);
     }
 
     public void transform() {
-
+        affine = new Affine();
         double anchorX = switch (anchor.getHpos()) {
             case LEFT -> 0;
             case CENTER -> size.getW() / 2;
@@ -308,9 +445,9 @@ public abstract class AbstractComponentRenderer implements RenderInterface {
 
         // 旋转变换
         if (rotate != 0) {
-            gc.translate(pos.getX(), pos.getY());
-            gc.rotate(rotate);
-            gc.translate(-pos.getX(), -pos.getY());
+            //affine.translate(pos.getX(), pos.getY());
+            affine.appendRotation(rotate, pos.getX(), pos.getY());
+            //affine.translate(-pos.getX(), -pos.getY());
         }
 
         //斜切变换
@@ -342,41 +479,25 @@ public abstract class AbstractComponentRenderer implements RenderInterface {
                 double x = pos.getY() * shearY;
                 double y = pos.getX() * shearX;
 
-                if (shearX != 0) {
-                    // 平移到斜切中心点
-                    gc.translate(-pos.getX(), -pos.getY() - y);
-                    // 应用透视变换
-                    gc.transform(1, shearX, 0, 1, 0, 0);
-                    gc.translate(pos.getX(), pos.getY() - y);
-                }
-
-
-                if (shearY != 0) {
-                    // 平移到斜切中心点
-                    gc.translate(-pos.getX() - x, -pos.getY());
-                    // 应用透视变换
-                    gc.transform(1, 0, shearY, 1, 0, 0);
-                    gc.translate(pos.getX() - x, pos.getY());
-                }
+                affine.appendShear(shearY, shearX, new Point2D(pos.getX(), pos.getY()));
             }
         }
 
-        gc.setFill(Color.LIGHTGREEN);
-        gc.fillRect(pos.getX() - 1, pos.getY() - 1, 3, 3);
+        //gc.setFill(Color.LIGHTGREEN);
+        //gc.fillRect(pos.getX() - 1, pos.getY() - 1, 3, 3);
 
         //锚点
-        gc.translate(-anchorX, -anchorY);
+        //affine.translate(-anchorX, -anchorY);
+        affine.appendTranslation(-anchorX, -anchorY);
 
         //翻转
         if (flip == Orientation.VERTICAL) {
-            gc.scale(1, -1);  // 垂直翻转
-            gc.translate(0, -pos.getY() * 2 - size.getH());
+            affine.appendScale(1, -1);  // 垂直翻转
+            affine.appendTranslation(0, -pos.getY() * 2 - size.getH());
         } else if (flip == Orientation.HORIZONTAL) {
-            gc.scale(-1, 1);  // 水平翻转
-            gc.translate(-pos.getX() * 2 - size.getW(), 0);
+            affine.appendScale(-1, 1);  // 水平翻转
+            affine.appendTranslation(-pos.getX() * 2 - size.getW(), 0);
         }
-
-
     }
 
     /**

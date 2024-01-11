@@ -27,6 +27,13 @@ public abstract class AbstractAnimation {
         return endTime;
     }
 
+    public long getLastEndTime() {
+        int index = animationTimeIndex;
+        if (animationTimeIndex - 1 > 0)
+            index--;
+        return animationTimes.get(index).endTime;
+    }
+
     private final long startTime;
     private final long endTime;
     private final double[] bezierControlPoints;
@@ -71,6 +78,10 @@ public abstract class AbstractAnimation {
     }
 
     AnimationTime currentAnimationTime;
+
+    public AnimationTime getCurrentAnimationTime() {
+        return currentAnimationTime;
+    }
 
     public static double cubicBezier(double t, double x1, double y1, double x2, double y2) {
         double u = 1 - t;
@@ -173,7 +184,7 @@ public abstract class AbstractAnimation {
                 }
                 animationTimes.add(new AnimationTime(repeatEndTime, Long.MAX_VALUE, 1));
             }
-            String[] trans = properties.getOrDefault("trans", "0,0,1,1").split(",");
+            String[] trans = properties.getOrDefault("trans", "0.5,0.5,0.5,0.5").split(",");
             bezierControlPoints = new double[4];
             for (int i = 0; i < 4; i++) {
                 bezierControlPoints[i] = Double.parseDouble(trans[i]);
@@ -221,7 +232,7 @@ public abstract class AbstractAnimation {
      */
     public final void handleAnimation(GraphicsContext gc, double width, double height, long time, AbstractComponentRenderer cr) {
         double progress = currentAnimationTime.getProgress(time);
-        if (progress>1 ||progress<0)
+        if (progress > 1 || progress < 0)
             return;
         handle(gc, width, height, calculateBezier(progress), cr);
     }

@@ -15,6 +15,7 @@ public class AnimationTime {
         return fixedProgress;
     }
 
+
     public boolean isFixedProgress() {
         return fixedProgress != -1;
     }
