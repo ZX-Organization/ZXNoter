@@ -40,7 +40,7 @@ public class UISPerspectiveTransformTest {
     }
 
     public static void testWindow() throws IOException {
-        Image testImage = new Image(Files.newInputStream(Path.of("D:\\malody\\skin\\动画测试用\\preview.png")));
+        Image testImage = new Image(Files.newInputStream(Path.of("D:\\malody\\skin\\Editor测试\\preview.png")));
         ResizableCanvas canvas = new ResizableCanvas();
         HBox.setHgrow(canvas, Priority.ALWAYS);
         HBox hBox = new HBox(canvas);
@@ -52,13 +52,15 @@ public class UISPerspectiveTransformTest {
         stage.setMaxWidth(1280);
         stage.setMaxHeight(720);
         stage.show();
+        double canvasWidth = 1280;
+        double canvasHeight = 720;
 
 
         GraphicsContext gc = canvas.getGraphicsContext2D();
 
 
         UISPerspectiveTransform uisPt = new UISPerspectiveTransform();
-        UISPerspectiveTransform uisPt2 = new UISPerspectiveTransform();
+        UISPerspectiveTransform texPt = new UISPerspectiveTransform();
         uisPt.setSize(1280, 720);
         uisPt.setAngle(45);
 
@@ -83,14 +85,29 @@ public class UISPerspectiveTransformTest {
                 Point2D lr = uisPt.transform(new Point2D(x + w, y + h));
                 Point2D ll = uisPt.transform(new Point2D(x, y + h));
 
-                uisPt2.setSize(texW, texH);
-                uisPt2.setUnitQuadMapping(ul.getX(), ul.getY(), ur.getX(), ur.getY(), lr.getX(), lr.getY(), ll.getX(), ll.getY());
+                texPt.setSize(texW, texH);
+                texPt.setUnitQuadMapping(ul.getX(), ul.getY(), ur.getX(), ur.getY(), lr.getX(), lr.getY(), ll.getX(), ll.getY());
 
 
                 Point2D cutoff = new Point2D(640, 360);
 
-                Point2D texPos = uisPt2.untransform(cutoff);
-                //texH -= texPos.getY();
+                //限制在屏幕内的图形区域
+                Point2D inUL = new Point2D(Math.max(0, Math.min(canvasWidth, ul.getX())), Math.max(0, Math.min(canvasHeight, ul.getY())));
+                Point2D inUR = new Point2D(Math.max(0, Math.min(canvasWidth, ur.getX())), Math.max(0, Math.min(canvasHeight, ur.getY())));
+                Point2D inLR = new Point2D(Math.max(0, Math.min(canvasWidth, lr.getX())), Math.max(0, Math.min(canvasHeight, lr.getY())));
+                Point2D inLL = new Point2D(Math.max(0, Math.min(canvasWidth, ll.getX())), Math.max(0, Math.min(canvasHeight, ll.getY())));
+
+
+                Point2D texUL = texPt.untransform(inUL);
+                Point2D texUR = texPt.untransform(inUR);
+                Point2D texLR = texPt.untransform(inLR);
+                Point2D texLL = texPt.untransform(inLL);
+
+
+                ul = texPt.transform(texUL);
+                ur = texPt.transform(texUR);
+                lr = texPt.transform(texLR);
+                ll = texPt.transform(texLL);
 
 
                 pt.setUlx(ul.getX());

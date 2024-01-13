@@ -1,5 +1,6 @@
 package team.zxorg.skin.uis.component;
 
+import com.sun.javafx.geom.Line2D;
 import javafx.geometry.Orientation;
 import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
@@ -338,7 +339,7 @@ public abstract class AbstractComponentRenderer implements RenderInterface {
                 (ul.getX() > canvasWidth && ur.getX() > canvasWidth && lr.getX() > canvasWidth && ll.getX() > canvasWidth) ||
                 (ul.getY() < 0 && ur.getY() < 0 && lr.getY() < 0 && ll.getY() < 0) ||
                 (ul.getY() > canvasHeight && ur.getY() > canvasHeight && lr.getY() > canvasHeight && ll.getY() > canvasHeight)) {
-            return;
+            //return;
         }
 
 
@@ -359,8 +360,9 @@ public abstract class AbstractComponentRenderer implements RenderInterface {
 
 
         if (isToBig) {
-            // 将透视变换优化到屏幕内
-            // 图像源矩形
+            //裁剪渲染  只渲染屏幕内的部分 裁剪掉屏幕外的优化性能
+
+            // 图像源尺寸
             double sw = tex.getWidth();  // 使用整个图像的宽度
             double sh = tex.getHeight(); // 使用整个图像的高度
 
@@ -370,41 +372,48 @@ public abstract class AbstractComponentRenderer implements RenderInterface {
             texPt.setUnitQuadMapping(ul.getX(), ul.getY(), ur.getX(), ur.getY()
                     , lr.getX(), lr.getY(), ll.getX(), ll.getY());
 
-            // 计算画布矩形四个点在材质中的位置
-            Point2D texUL = texPt.untransform(new Point2D(0, 0));
-            Point2D texUR = texPt.untransform(new Point2D(canvasWidth, 0));
-            Point2D texLR = texPt.untransform(new Point2D(canvasWidth, canvasHeight));
-            Point2D texLL = texPt.untransform(new Point2D(0, canvasHeight));
+
+            //图形上边
+            Line2D lineU = new Line2D((float) ul.getX(), (float) ul.getY(), (float) ur.getX(), (float) ur.getY());
+            //距离左上角距离
+            double dist = lineU.ptLineDist(0, 0);
 
 
+            //限制在屏幕内的图形区域
+            Point2D inUL = new Point2D(Math.max(0, Math.min(canvasWidth, ul.getX())), Math.max(0, Math.min(canvasHeight, ul.getY())));
+            Point2D inUR = new Point2D(Math.max(0, Math.min(canvasWidth, ur.getX())), Math.max(0, Math.min(canvasHeight, ur.getY())));
+            Point2D inLR = new Point2D(Math.max(0, Math.min(canvasWidth, lr.getX())), Math.max(0, Math.min(canvasHeight, lr.getY())));
+            Point2D inLL = new Point2D(Math.max(0, Math.min(canvasWidth, ll.getX())), Math.max(0, Math.min(canvasHeight, ll.getY())));
 
 
+            // 计算屏幕内的图形区域在材质中的位置
+            Point2D texUL = texPt.untransform(ul);
+            Point2D texUR = texPt.untransform(ur);
+            Point2D texLR = texPt.untransform(lr);
+            Point2D texLL = texPt.untransform(ll);
 
-            //计算裁剪后的材质尺寸
-            double dx = Math.min(texUL.getX(), Math.min(texUR.getX(), Math.min(texLR.getX(), texLL.getX())));
-            double dy = Math.min(texUL.getY(), Math.min(texUR.getY(), Math.min(texLR.getY(), texLL.getY())));
-            double dw = Math.max(texUL.getX(), Math.max(texUR.getX(), Math.max(texLR.getX(), texLL.getX())));
-            double dh = Math.max(texUL.getY(), Math.max(texUR.getY(), Math.max(texLR.getY(), texLL.getY())));
-            double dw2 = dw - dx;
-            double dh2 = dh - dy;
-            double sw2 = sw * dw2 / dw;
-            double sh2 = sh * dh2 / dh;
-            double sx = (sw - sw2) / 2;
-            double sy = (sh - sh2) / 2;
 
-            //进行基本变换
-             ul = affine.transform(dx, dy);
-             ur = affine.transform(dx + dw2, dy);
-             lr = affine.transform(dx + dw2, dy + dh2);
-             ll = affine.transform(dx, dy + dh2);
+            //后面就不会写了
 
-            //进行3d变换
-            if (is3DLayout()) {
-                ul = ec.transform(ul);
-                ur = ec.transform(ur);
-                lr = ec.transform(lr);
-                ll = ec.transform(ll);
-            }
+            double texMinX = Math.min(texUL.getX(), Math.min(texUR.getX(), Math.min(texLR.getX(), texLL.getX())));
+            double texMinY = Math.min(texUL.getY(), Math.min(texUR.getY(), Math.min(texLR.getY(), texLL.getY())));
+            double texMaxX = Math.max(texUL.getX(), Math.max(texUR.getX(), Math.max(texLR.getX(), texLL.getX())));
+            double texMaxY = Math.max(texUL.getY(), Math.max(texUR.getY(), Math.max(texLR.getY(), texLL.getY())));
+
+            double texWidth = texMaxX - texMinX;
+            double texHeight = texMaxY - texMinY;
+
+
+            ul = texPt.transform(new Point2D(texMinX, texMinY));
+            ur = texPt.transform(new Point2D(texMinX + texWidth, texMinY));
+            lr = texPt.transform(new Point2D(texMinX + texWidth, texMinY + texHeight));
+            ll = texPt.transform(new Point2D(texMinX, texMinY + texHeight));
+
+
+            ul = texPt.transform(texUL);
+            ur = texPt.transform(texUR);
+            lr = texPt.transform(texLR);
+            ll = texPt.transform(texLL);
 
 
             //将坐标应用到变换
@@ -418,9 +427,18 @@ public abstract class AbstractComponentRenderer implements RenderInterface {
             pt.setLly(ll.getY());
 
 
+            // 计算裁剪后的材质在屏幕上的位置和尺寸
+            double dx = Math.min(ul.getX(), Math.min(ur.getX(), Math.min(lr.getX(), ll.getX())));
+            double dy = Math.min(ul.getY(), Math.min(ur.getY(), Math.min(lr.getY(), ll.getY())));
+            double dw = Math.max(ul.getX(), Math.max(ur.getX(), Math.max(lr.getX(), ll.getX()))) - dx;
+            double dh = Math.max(ul.getY(), Math.max(ur.getY(), Math.max(lr.getY(), ll.getY()))) - dy;
+
+
             // 应用透视变换和绘制
             gc.setEffect(pt);
-            gc.drawImage(tex, sx, sy, sw2, sh2, dx, dy, dw, dh);
+            // gc.drawImage(tex, texMinX, texMinY, texWidth, texHeight, dx, dy, dw, dh);
+            gc.drawImage(tex, x, y, w, h);
+
         } else {
             gc.setEffect(pt);
             gc.drawImage(tex, x, y, w, h);

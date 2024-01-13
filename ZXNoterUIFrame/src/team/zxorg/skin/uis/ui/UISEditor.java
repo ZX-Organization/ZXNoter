@@ -119,6 +119,10 @@ public class UISEditor extends HBox {
     private File lastDirectory = new File(System.getProperty("user.dir")); // 记录上一次选择的目录
 
     public UISEditor() {
+
+        if (DEBUG)
+            lastDirectory=new File("D:\\malody\\skin\\Editor测试");
+
         setAlignment(Pos.CENTER_LEFT);
 
 
@@ -177,7 +181,11 @@ public class UISEditor extends HBox {
         getChildren().addAll(sideVBox, uisCanvas);
     }
 
+    public static boolean DEBUG = false;
+
     public static void main(String[] args) {
+        if (args.length == 1 & args[0].equals("DEBUG"))
+            DEBUG = true;
         ZXLogger.info("===== > ZXNoter Skin Editor < =====");
         ZXLogger.info("Version: " + VERSION + " Code: " + VERSION.getVersionCode());
         switch (VERSION.status()) {

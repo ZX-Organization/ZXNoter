@@ -9,19 +9,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dd78a4ca-7956-492b-9d75-ff82bf57b657" name="更改" comment="更新了框架≠没有Bug">
-      <change afterPath="$PROJECT_DIR$/ZXNoterUIFrame/test/UISPerspectiveTransformTest.java" afterDir="false" />
+    <list default="true" id="dd78a4ca-7956-492b-9d75-ff82bf57b657" name="更改" comment="新的渲染框架≠没有Bug">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/skin/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/ZXNoterUIFrame/test/Test.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/skin/uis/ExpressionVector.java" beforeDir="false" afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/skin/uis/ExpressionVector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/skin/uis/UISCanvas.java" beforeDir="false" afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/skin/uis/UISCanvas.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/skin/uis/UISPerspectiveTransform.java" beforeDir="false" afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/skin/uis/UISPerspectiveTransform.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/skin/uis/animaion/AbstractAnimation.java" beforeDir="false" afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/skin/uis/animaion/AbstractAnimation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/skin/uis/animaion/AnimationTime.java" beforeDir="false" afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/skin/uis/animaion/AnimationTime.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/skin/uis/component/AbstractComponentRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/skin/uis/component/AbstractComponentRenderer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/skin/uis/component/AnimationComponentRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/skin/uis/component/AnimationComponentRenderer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/skin/uis/component/HitComponentRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/skin/uis/component/HitComponentRenderer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/skin/uis/component/NoteComponentRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/skin/uis/component/NoteComponentRenderer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/skin/uis/ui/UISEditor.java" beforeDir="false" afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/skin/uis/ui/UISEditor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ZXNoterUIFrame/test/UISPerspectiveTransformTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/ZXNoterUIFrame/test/UISPerspectiveTransformTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/latest.log" beforeDir="false" afterPath="$PROJECT_DIR$/latest.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/latest.log.1" beforeDir="false" afterPath="$PROJECT_DIR$/latest.log.1" afterDir="false" />
     </list>
@@ -118,6 +110,7 @@
     "应用程序.UISEditor.executor": "Run",
     "应用程序.UISParser.executor": "Run",
     "应用程序.UISPerspectiveTransform.executor": "Run",
+    "应用程序.UISPerspectiveTransformTest (1).executor": "Run",
     "应用程序.UISPerspectiveTransformTest.executor": "Run",
     "应用程序.UISSkin.executor": "Run"
   }
@@ -162,22 +155,10 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Test" />
-      <module name="ZXNoterUIFrame" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value=".*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="UISEditor" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="team.zxorg.skin.uis.ui.UISEditor" />
       <module name="ZXNoterUIFrame" />
+      <option name="PROGRAM_PARAMETERS" value="DEBUG" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="team.zxorg.skin.uis.*" />
@@ -212,7 +193,6 @@
       <item itemvalue="应用程序.UISPerspectiveTransformTest" />
       <item itemvalue="应用程序.ExpressionCalculator" />
       <item itemvalue="应用程序.UISPerspectiveTransform" />
-      <item itemvalue="应用程序.Test" />
       <item itemvalue="应用程序.UISEditor" />
     </list>
     <recent_temporary>
@@ -221,7 +201,6 @@
         <item itemvalue="应用程序.UISEditor" />
         <item itemvalue="应用程序.UISPerspectiveTransform" />
         <item itemvalue="应用程序.ExpressionCalculator" />
-        <item itemvalue="应用程序.Test" />
       </list>
     </recent_temporary>
   </component>
@@ -293,7 +272,8 @@
       <workItem from="1704130558029" duration="55839000" />
       <workItem from="1704348958694" duration="3676000" />
       <workItem from="1704429866544" duration="63476000" />
-      <workItem from="1704869893170" duration="22683000" />
+      <workItem from="1704869893170" duration="23312000" />
+      <workItem from="1705048106421" duration="10596000" />
     </task>
     <task id="LOCAL-00002" summary="update ui">
       <option name="closed" value="true" />
@@ -471,7 +451,15 @@
       <option name="project" value="LOCAL" />
       <updated>1704736240980</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="新的渲染框架≠没有Bug">
+      <option name="closed" value="true" />
+      <created>1704992733248</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1704992733248</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -543,7 +531,8 @@
     <MESSAGE value="修复带多bug，已经能用了" />
     <MESSAGE value="整理了代码≠没有Bug" />
     <MESSAGE value="更新了框架≠没有Bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="更新了框架≠没有Bug" />
+    <MESSAGE value="新的渲染框架≠没有Bug" />
+    <option name="LAST_COMMIT_MESSAGE" value="新的渲染框架≠没有Bug" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/ZXNoter$Main.ic" NAME="Main 覆盖结果" MODIFIED="1688229822928" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
