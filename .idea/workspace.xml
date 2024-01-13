@@ -141,7 +141,7 @@
       <recent name="team.zxorg.skin.components" />
     </key>
   </component>
-  <component name="RunManager" selected="应用程序.UISPerspectiveTransformTest">
+  <component name="RunManager" selected="应用程序.UISEditor">
     <configuration name="ExpressionCalculator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="team.zxorg.skin.uis.ExpressionCalculator" />
       <module name="ZXNoterUIFrame" />
@@ -197,8 +197,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="应用程序.UISPerspectiveTransformTest" />
         <item itemvalue="应用程序.UISEditor" />
+        <item itemvalue="应用程序.UISPerspectiveTransformTest" />
         <item itemvalue="应用程序.UISPerspectiveTransform" />
         <item itemvalue="应用程序.ExpressionCalculator" />
       </list>

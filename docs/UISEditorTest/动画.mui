@@ -1,0 +1,24 @@
+@angle 40
+#@unit 720
+
+
+_p-[1-4]
+	anchor=4
+	tex=preview.png
+	size=90,90
+	pos=25%,10%$10%
+	zindex=-100
+_p-1
+	motion=a1
+_p-2
+	motion=a2
+_p-3
+	motion=a3
+:a1
+	name=mx,from=0%,to=100%,atime=(-3000,-2000),repeat=999999
+
+:a2
+	name=mx,from=0%,to=100%,atime=(-3000,-2000),repeat=(999999,1000)
+
+:a3
+	name=move,from=(37.71%,720),to=(124.34%,-1440),atime=(-3500,-2000),repeat=999999

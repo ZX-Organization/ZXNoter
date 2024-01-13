@@ -1,0 +1,43 @@
+
+@texpack ibse
+@texpack ibseII
+@texpack ibseIII
+@apply 3d
+@angle 42
+
+
+
+#uis by dreamcat
+#(=^▽^=)
+
+
+:trackslidestarleft
+	name=skew,from=(0,0),to=(37.6px,0),atime=(-3500,-3490)
+	name=move,from=(62.29%,720),to=(-24.34%,-1440),atime=(-3500,0),repeat=4
+:trackslidestarright
+	name=skew,from=(0,0),to=(-37.6px,0),atime=(-3500,-3490)
+	name=move,from=(37.71%,720),to=(124.34%,-1440),atime=(-3500,0),repeat=4
+
+
+_trackslidestarleft-[1-2]
+	anchor=2
+	tex=ibse-s1.png
+	size=154.6875%,2160
+	pos=62.29%,720
+	zindex=2
+	motion=trackslidestarleft
+_trackslidestarleft-2
+	anchor=8
+
+
+_trackslidestarright-[1-2]
+	anchor=0
+	flip=0
+	tex=ibse-s1.png
+	size=154.6875%,2160
+	pos=37.71%,720
+	zindex=2
+	motion=trackslidestarright
+_trackslidestarright-2
+	anchor=6
+

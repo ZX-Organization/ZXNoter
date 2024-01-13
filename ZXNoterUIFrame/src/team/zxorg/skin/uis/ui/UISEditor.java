@@ -121,7 +121,7 @@ public class UISEditor extends HBox {
     public UISEditor() {
 
         if (DEBUG)
-            lastDirectory=new File("D:\\malody\\skin\\Editor测试");
+            lastDirectory=new File("./docs/UISEditorTest");
 
         setAlignment(Pos.CENTER_LEFT);
 
