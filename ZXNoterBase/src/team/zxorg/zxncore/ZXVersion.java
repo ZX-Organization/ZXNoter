@@ -11,10 +11,6 @@ import java.util.regex.Pattern;
  */
 public record ZXVersion(int major, int minor, int patch, ReleaseStatus status) {
     /**
-     * 现在的版本号
-     */
-    public static final ZXVersion VERSION = new ZXVersion(0, 0, 0, ReleaseStatus.ALPHA);
-    /**
      * 正则表达式模式，用于匹配版本
      * 例如：1.0.0-Alpha
      */
@@ -56,6 +52,27 @@ public record ZXVersion(int major, int minor, int patch, ReleaseStatus status) {
      */
     public int getVersionCode() {
         return major * 100000 + minor * 1000 + patch * 10 + status().ordinal();
+    }
+
+    /**
+     * 打印版本信息
+     */
+    public void printInfo() {
+        ZXLogger.info("Version: " + this + " Code: " + this.getVersionCode());
+        switch (this.status()) {
+            case RC -> {
+                ZXLogger.warning("当前为 [内部测试版本] 请不要泄漏软件到外部");
+            }
+            case BETA -> {
+                ZXLogger.warning("当前为 [提前预览版本] 如有问题请联系开发者");
+            }
+            case ALPHA -> {
+                ZXLogger.warning("当前为 [早期开发版本] 请谨慎测试软件功能");
+            }
+            case STABLE -> {
+                ZXLogger.info("当前为 [稳定发布版本] 请尽情使用");
+            }
+        }
     }
 
     public enum ReleaseStatus {

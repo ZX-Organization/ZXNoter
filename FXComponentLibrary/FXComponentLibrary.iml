@@ -9,13 +9,13 @@
       <excludeFolder url="file://$MODULE_DIR$/component" />
       <excludeFolder url="file://$MODULE_DIR$/main" />
       <excludeFolder url="file://$MODULE_DIR$/src/team/zxorg/engine2d" />
-      <excludeFolder url="file://$MODULE_DIR$/src/team/zxorg/ui/javafx/sub/editor/temp" />
       <excludeFolder url="file://$MODULE_DIR$/src/team/zxorg/skin/uis/component/old" />
       <excludeFolder url="file://$MODULE_DIR$/src/team/zxorg/skin_old" />
       <excludeFolder url="file://$MODULE_DIR$/src/team/zxorg/skin_old/test" />
+      <excludeFolder url="file://$MODULE_DIR$/src/team/zxorg/ui/javafx/sub/editor/temp" />
     </content>
     <orderEntry type="inheritedJdk" />
-    <orderEntry type="module" module-name="ZXNoterCore" exported="" />
+    <orderEntry type="module" module-name="ZXNoterBase" exported="" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="openjfx.javafx.graphics" level="project" />
     <orderEntry type="library" name="openjfx.javafx.base" level="project" />

@@ -36,14 +36,14 @@ import java.nio.file.Path;
 import java.util.List;
 
 public class Main {
-
+    public static ZXVersion VERSION=new ZXVersion(0,0,0, ZXVersion.ReleaseStatus.RC);
 
     public static void main(String[] args) {
 
 
         ZXLogger.info("===== > ZXNoter User Interface Frame < =====");
-        ZXLogger.info("Version: " + ZXVersion.VERSION + " Code: " + ZXVersion.VERSION.getVersionCode());
-        switch (ZXVersion.VERSION.status()) {
+        ZXLogger.info("Version: " +VERSION + " Code: " +VERSION.getVersionCode());
+        switch (VERSION.status()) {
             case RC -> {
                 ZXLogger.warning("当前为 [内部测试版本] 请不要泄漏软件到外部");
             }

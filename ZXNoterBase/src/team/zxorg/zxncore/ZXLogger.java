@@ -40,7 +40,7 @@ public class ZXLogger {
             fileHandler.setFormatter(formatter);
             logger.addHandler(fileHandler);
         } catch (IOException e) {
-            logger.warning("日志文件IO异常");
+            logger.warning("日志文件IO异常。");
         }
 
 
