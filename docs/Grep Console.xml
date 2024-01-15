@@ -1,0 +1,125 @@
+<GrepConsoleItems>
+    <option name="items">
+        <GrepExpressionGroup>
+            <option name="grepExpressionItems">
+                <list>
+                    <GrepExpressionItem>
+                        <option name="action" value="REMOVE" />
+                        <option name="caseInsensitive" value="false" />
+                        <option name="clearConsole" value="false" />
+                        <option name="continueMatching" value="false" />
+                        <option name="defaultEnabled" value="true" />
+                        <option name="defaultFilter" value="true" />
+                        <option name="enabled" value="false" />
+                        <option name="fold" value="false" />
+                        <option name="foldPlaceholderTextPrefix" value="" />
+                        <option name="grepExpression" value=".*unwanted line.*" />
+                        <option name="highlightOnlyMatchingText" value="false" />
+                        <option name="inputFilter" value="false" />
+                        <option name="multiline" value="false" />
+                        <option name="name" />
+                        <option name="operationOnMatch" value="EXIT" />
+                        <option name="showCountInConsole" value="false" />
+                        <option name="showCountInStatusBar" value="false" />
+                        <option name="sound">
+                            <Sound>
+                                <option name="enabled" value="false" />
+                                <option name="path" />
+                            </Sound>
+                        </option>
+                        <option name="startFolding" value="false" />
+                        <option name="stopFolding" value="false" />
+                        <option name="style">
+                            <GrepStyle>
+                                <option name="backgroundColor">
+                                    <GrepColor>
+                                        <option name="color" />
+                                        <option name="colorKey" />
+                                        <option name="enabled" value="false" />
+                                    </GrepColor>
+                                </option>
+                                <option name="bold" value="false" />
+                                <option name="effectColor">
+                                    <GrepColor>
+                                        <option name="color" />
+                                        <option name="colorKey" />
+                                        <option name="enabled" value="false" />
+                                    </GrepColor>
+                                </option>
+                                <option name="effectType" />
+                                <option name="foregroundColor">
+                                    <GrepColor>
+                                        <option name="color" />
+                                        <option name="colorKey" />
+                                        <option name="enabled" value="false" />
+                                    </GrepColor>
+                                </option>
+                                <option name="italic" value="false" />
+                                <option name="name" />
+                            </GrepStyle>
+                        </option>
+                        <option name="unlessGrepExpression" />
+                    </GrepExpressionItem>
+                    <GrepExpressionItem>
+                        <option name="action" value="REMOVE_UNLESS_PREVIOUSLY_MATCHED" />
+                        <option name="caseInsensitive" value="false" />
+                        <option name="clearConsole" value="false" />
+                        <option name="continueMatching" value="false" />
+                        <option name="defaultEnabled" value="true" />
+                        <option name="defaultFilter" value="true" />
+                        <option name="enabled" value="false" />
+                        <option name="fold" value="false" />
+                        <option name="foldPlaceholderTextPrefix" value="" />
+                        <option name="grepExpression" value=".*unwanted line.*" />
+                        <option name="highlightOnlyMatchingText" value="false" />
+                        <option name="inputFilter" value="false" />
+                        <option name="multiline" value="false" />
+                        <option name="name" />
+                        <option name="operationOnMatch" value="EXIT" />
+                        <option name="showCountInConsole" value="false" />
+                        <option name="showCountInStatusBar" value="false" />
+                        <option name="sound">
+                            <Sound>
+                                <option name="enabled" value="false" />
+                                <option name="path" />
+                            </Sound>
+                        </option>
+                        <option name="startFolding" value="false" />
+                        <option name="stopFolding" value="false" />
+                        <option name="style">
+                            <GrepStyle>
+                                <option name="backgroundColor">
+                                    <GrepColor>
+                                        <option name="color" />
+                                        <option name="colorKey" />
+                                        <option name="enabled" value="false" />
+                                    </GrepColor>
+                                </option>
+                                <option name="bold" value="false" />
+                                <option name="effectColor">
+                                    <GrepColor>
+                                        <option name="color" />
+                                        <option name="colorKey" />
+                                        <option name="enabled" value="false" />
+                                    </GrepColor>
+                                </option>
+                                <option name="effectType" />
+                                <option name="foregroundColor">
+                                    <GrepColor>
+                                        <option name="color" />
+                                        <option name="colorKey" />
+                                        <option name="enabled" value="false" />
+                                    </GrepColor>
+                                </option>
+                                <option name="italic" value="false" />
+                                <option name="name" />
+                            </GrepStyle>
+                        </option>
+                        <option name="unlessGrepExpression" />
+                    </GrepExpressionItem>
+                </list>
+            </option>
+            <option name="name" value="default" />
+        </GrepExpressionGroup>
+    </option>
+</GrepConsoleItems>
