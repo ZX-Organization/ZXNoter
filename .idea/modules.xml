@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/module/FXComponentLibrary/FXComponentLibrary.iml" filepath="$PROJECT_DIR$/module/FXComponentLibrary/FXComponentLibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/module/extensions/MapEditCore/MapEditCore.iml" filepath="$PROJECT_DIR$/module/extensions/MapEditCore/MapEditCore.iml" />
       <module fileurl="file://$PROJECT_DIR$/ZXNoter.iml" filepath="$PROJECT_DIR$/ZXNoter.iml" />
       <module fileurl="file://$PROJECT_DIR$/module/ZXNoterBase/ZXNoterBase.iml" filepath="$PROJECT_DIR$/module/ZXNoterBase/ZXNoterBase.iml" />
       <module fileurl="file://$PROJECT_DIR$/module/ZXNoterExtension/ZXNoterExtension.iml" filepath="$PROJECT_DIR$/module/ZXNoterExtension/ZXNoterExtension.iml" />
