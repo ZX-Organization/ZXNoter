@@ -1,0 +1,24 @@
+{
+  "id": "extended-template",
+  "version": "0.0.0 RC",
+  "name": "扩展模板",
+  "description": "扩展模板示例",
+  "author": [
+    "你!"
+  ],
+  "contact": {
+    "homepage": "https://github.com/ZX-Organization",
+    "sources": "https://github.com/ZX-Organization/ZXNoter"
+  },
+  "entrypoints": [
+    "team.zxorg.fxcl.FXCL"
+  ],
+  "depends": {
+    "extensionLoader": ">=0.0.0",
+    "extensionApi": ">=0.0.0",
+    "extensions": [
+      "zxnoter-base"
+    ]
+  },
+  "icon": "assets/icon.png"
+}

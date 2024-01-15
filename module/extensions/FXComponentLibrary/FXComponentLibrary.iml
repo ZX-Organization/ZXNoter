@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/test" isTestSource="true" />
+      <excludeFolder url="file://$MODULE_DIR$/component" />
+      <excludeFolder url="file://$MODULE_DIR$/main" />
+      <excludeFolder url="file://$MODULE_DIR$/src/team/zxorg/engine2d" />
+      <excludeFolder url="file://$MODULE_DIR$/src/team/zxorg/fxcl/javafx/sub/editor/temp" />
+      <excludeFolder url="file://$MODULE_DIR$/src/team/zxorg/skin/uis/component/old" />
+      <excludeFolder url="file://$MODULE_DIR$/src/team/zxorg/skin_old" />
+      <excludeFolder url="file://$MODULE_DIR$/src/team/zxorg/skin_old/test" />
+      <excludeFolder url="file://$MODULE_DIR$/test/uis" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" exported="" name="openjfx.javafx.graphics" level="project" />
+    <orderEntry type="library" exported="" name="openjfx.javafx.base" level="project" />
+    <orderEntry type="library" exported="" name="openjfx.javafx.controls" level="project" />
+    <orderEntry type="library" exported="" name="openjfx.javafx.media" level="project" />
+    <orderEntry type="library" exported="" name="fxmisc.richtext.richtextfx" level="project" />
+    <orderEntry type="module" module-name="ExtensionLoader" exported="" />
+  </component>
+</module>
