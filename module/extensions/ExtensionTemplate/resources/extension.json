@@ -1,6 +1,6 @@
 {
   "id": "extended-template",
-  "version": "0.0.0 RC",
+  "version": "0.0.0-RC",
   "name": "扩展模板",
   "description": "扩展模板示例",
   "author": [
@@ -14,8 +14,7 @@
     "team.zxorg.extendedtemplate.ExtensionTemplate"
   ],
   "depends": {
-    "extensionLoader": ">=0.0.0",
-    "extensionApi": ">0.0.0",
+    "extensionApi": ">=0.0.0",
     "extensions": [
       "zxnoter-base"
     ]

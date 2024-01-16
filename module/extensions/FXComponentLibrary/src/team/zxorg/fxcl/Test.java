@@ -13,21 +13,8 @@ public class Test {
 
 
         ZXLogger.info("===== > ZXNoter User Interface Frame < =====");
-        ZXLogger.info("Version: " +VERSION + " Code: " +VERSION.getVersionCode());
-        switch (VERSION.status()) {
-            case RC -> {
-                ZXLogger.warning("当前为 [内部测试版本] 请不要泄漏软件到外部");
-            }
-            case BETA -> {
-                ZXLogger.warning("当前为 [提前预览版本] 如有问题请联系开发者");
-            }
-            case ALPHA -> {
-                ZXLogger.warning("当前为 [早期开发版本] 请谨慎测试软件功能");
-            }
-            case STABLE -> {
-                ZXLogger.info("当前为 [稳定发布版本] 请尽情使用");
-            }
-        }
+        ZXLogger.info("Version: " +VERSION + " Code: " +VERSION.getCode());
+        VERSION.printInfo();
 
         ZXLogger.info("ZXNoter启动");
 

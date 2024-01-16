@@ -2,11 +2,11 @@ package team.zxorg.fxcl;
 
 import com.sun.javafx.application.PlatformImpl;
 import com.sun.javafx.util.Logging;
-import team.zxorg.api.ExtensionInitializer;
+import team.zxorg.api.ExtensionEntrypoint;
 import team.zxorg.core.ZXLogger;
 import team.zxorg.fxcl.javafx.ProjectView;
 
-public class FXCL implements ExtensionInitializer {
+public class FXCL implements ExtensionEntrypoint {
     @Override
     public void onInitialize() {
 

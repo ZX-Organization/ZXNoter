@@ -1,8 +1,8 @@
 {
-  "id": "extended-template",
-  "version": "0.0.0 RC",
-  "name": "扩展模板",
-  "description": "扩展模板示例",
+  "id": "fx-component-library",
+  "version": "0.0.0-RC",
+  "name": "FX组件库",
+  "description": "提供javafx和打包的组件",
   "author": [
     "你!"
   ],
@@ -14,7 +14,6 @@
     "team.zxorg.fxcl.FXCL"
   ],
   "depends": {
-    "extensionLoader": ">=0.0.0",
     "extensionApi": ">=0.0.0",
     "extensions": [
       "zxnoter-base"
