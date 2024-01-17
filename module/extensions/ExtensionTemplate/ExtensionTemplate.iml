@@ -9,5 +9,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="ExtensionLoader" exported="" />
+    <orderEntry type="module" module-name="FXComponentLibrary" exported="" />
   </component>
 </module>

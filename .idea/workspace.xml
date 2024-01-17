@@ -9,29 +9,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dd78a4ca-7956-492b-9d75-ff82bf57b657" name="更改" comment="更改结构">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/ExtensionTemplate_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/FXComponentLibrary_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/extensions/ExtensionTemplate.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/extensions/FXComponentLibrary.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/latest.log.lck" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/module/ExtensionLoader/src/team/zxorg/gson/VersionSerializer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/module/ExtensionLoader/src/team/zxorg/gson/ZXGson.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/module/extensions/ResourcePack/ResourcePack.iml" afterDir="false" />
+    <list default="true" id="dd78a4ca-7956-492b-9d75-ff82bf57b657" name="更改" comment="统一Gson，增加了依赖版本支持检查">
+      <change afterPath="$PROJECT_DIR$/module/ExtensionLoader/src/team/zxorg/api/SharedInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/extensions/ExtensionTemplate.jar" beforeDir="false" afterPath="$PROJECT_DIR$/extensions/ExtensionTemplate.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/extensions/FXComponentLibrary.jar" beforeDir="false" afterPath="$PROJECT_DIR$/extensions/FXComponentLibrary.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/latest.log" beforeDir="false" afterPath="$PROJECT_DIR$/latest.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module/ExtensionLoader/src/team/zxorg/api/ExtensionInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/ExtensionLoader/src/team/zxorg/api/ExtensionEntrypoint.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module/ExtensionLoader/src/team/zxorg/core/ZXVersion.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/ExtensionLoader/src/team/zxorg/core/ZXVersion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module/ExtensionLoader/src/team/zxorg/info/ExtensionInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/ExtensionLoader/src/team/zxorg/extension/ExtensionInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module/ExtensionLoader/src/team/zxorg/loader/Extension.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/ExtensionLoader/src/team/zxorg/extension/Extension.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module/ExtensionLoader/src/team/zxorg/loader/ExtensionLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/ExtensionLoader/src/team/zxorg/extension/ExtensionManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module/ExtensionLoader/test/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/ExtensionLoader/test/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/ExtensionLoader/src/team/zxorg/api/ExtensionEntrypoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/ExtensionLoader/src/team/zxorg/api/ExtensionEntrypoint.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/ExtensionLoader/src/team/zxorg/extension/Extension.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/ExtensionLoader/src/team/zxorg/extension/Extension.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/ExtensionLoader/src/team/zxorg/extension/ExtensionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/ExtensionLoader/src/team/zxorg/extension/ExtensionManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/extensions/ExtensionTemplate/ExtensionTemplate.iml" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/ExtensionTemplate/ExtensionTemplate.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/module/extensions/ExtensionTemplate/java/team/zxorg/extendedtemplate/ExtensionTemplate.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/ExtensionTemplate/java/team/zxorg/extendedtemplate/ExtensionTemplate.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/module/extensions/ExtensionTemplate/resources/extension.json" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/ExtensionTemplate/resources/extension.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/module/extensions/FXComponentLibrary/resources/extension.json" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/FXComponentLibrary/resources/extension.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/module/extensions/FXComponentLibrary/src/team/zxorg/fxcl/FXCL.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/FXComponentLibrary/src/team/zxorg/fxcl/FXCL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module/extensions/FXComponentLibrary/src/team/zxorg/fxcl/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/FXComponentLibrary/src/team/zxorg/fxcl/Test.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RunApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RunApp.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,9 +33,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="CSS File" />
-        <option value="Interface" />
         <option value="Enum" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -272,7 +263,7 @@
       <workItem from="1705048106421" duration="10750000" />
       <workItem from="1705212097068" duration="7160000" />
       <workItem from="1705296124043" duration="2373000" />
-      <workItem from="1705299899773" duration="34194000" />
+      <workItem from="1705299899773" duration="43017000" />
     </task>
     <task id="LOCAL-00002" summary="update ui">
       <option name="closed" value="true" />
@@ -538,7 +529,15 @@
       <option name="project" value="LOCAL" />
       <updated>1705341568251</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="统一Gson，增加了依赖版本支持检查">
+      <option name="closed" value="true" />
+      <created>1705397121148</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1705397121148</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -555,7 +554,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/main" />
+                        <option value="UI" />
                       </list>
                     </value>
                   </entry>
@@ -589,7 +588,8 @@
     <MESSAGE value="更新项目结构" />
     <MESSAGE value="模块配置" />
     <MESSAGE value="更改结构" />
-    <option name="LAST_COMMIT_MESSAGE" value="更改结构" />
+    <MESSAGE value="统一Gson，增加了依赖版本支持检查" />
+    <option name="LAST_COMMIT_MESSAGE" value="统一Gson，增加了依赖版本支持检查" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

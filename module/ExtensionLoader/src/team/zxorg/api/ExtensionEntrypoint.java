@@ -1,5 +1,6 @@
 package team.zxorg.api;
 
+import team.zxorg.extension.Extension;
 import team.zxorg.extension.ExtensionManager;
 
 /**
@@ -9,9 +10,10 @@ public interface ExtensionEntrypoint {
     /**
      * 扩展初始化
      */
-    default void onInitialize() {
+    default void onInitialize(Extension extension, ExtensionManager manager) {
 
     }
+
 
     /**
      * 扩展被启用
@@ -27,12 +29,5 @@ public interface ExtensionEntrypoint {
 
     }
 
-    /**
-     * 设置扩展管理器
-     *
-     * @param manager 扩展管理器
-     */
-    default void setExtensionManager(ExtensionManager manager) {
 
-    }
 }

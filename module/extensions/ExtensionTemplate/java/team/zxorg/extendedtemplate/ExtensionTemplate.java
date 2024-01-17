@@ -1,13 +1,17 @@
 package team.zxorg.extendedtemplate;
 
-import com.google.gson.Gson;
 import team.zxorg.api.ExtensionEntrypoint;
 import team.zxorg.core.ZXLogger;
+import team.zxorg.extension.Extension;
+import team.zxorg.extension.ExtensionManager;
+import team.zxorg.fxcl.FXCL;
 
 public class ExtensionTemplate implements ExtensionEntrypoint {
     @Override
-    public void onInitialize() {
+    public void onInitialize(Extension extension, ExtensionManager manager) {
         ZXLogger.info("扩展模板 初始化完毕.");
-        ZXLogger.info(new Gson().toJson(this));
+        Extension fx = manager.getExtension("fx-component-library");
+        new FXCL().onInitialize(extension, manager);
+        System.out.println(getClass().getClassLoader());
     }
 }

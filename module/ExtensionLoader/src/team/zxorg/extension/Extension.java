@@ -14,6 +14,7 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -52,21 +53,22 @@ public class Extension {
         return "扩展[id: " + info.id + ", 版本: " + info.version + "]";
     }
 
-    private ExtensionInfo info;
+    private final ExtensionInfo info;
     List<ExtensionEntrypoint> initializers;
-    URLClassLoader classLoader;
+    ExtensionManager manager;
+    URL jarUrl;
 
-    public Extension(Path jarPath) {
+    public Extension(ExtensionManager manager, Path jarPath) {
+        this.manager = manager;
         ZXLogger.info("即将加载扩展: " + jarPath);
 
-        URL jarUrl;
         try {
             jarUrl = jarPath.toUri().toURL();
         } catch (MalformedURLException e) {
             throw new RuntimeException("扩展载入异常: " + e);
         }
 
-        classLoader = new URLClassLoader(new URL[]{jarUrl});
+        URLClassLoader classLoader = new URLClassLoader(new URL[]{jarUrl});
         try (InputStream is = classLoader.getResourceAsStream("extension.json")) {
             if (is == null)
                 throw new FileNotFoundException("extension.json");
@@ -77,10 +79,15 @@ public class Extension {
         }
         ZXLogger.info("读取扩展信息: " + this);
 
+
+    }
+
+
+    protected void loadJar(URLClassLoader classLoader) {
         initializers = new ArrayList<>();
         for (String entrypoint : info.entrypoints) {
             // 加载类
-            Class<?> loadedClass = null; // 替换为你的类的完整路径
+            Class<?> loadedClass; // 替换为你的类的完整路径
             try {
                 loadedClass = classLoader.loadClass(entrypoint);
             } catch (ClassNotFoundException e) {
@@ -92,22 +99,31 @@ public class Extension {
                 if (loadedClass.newInstance() instanceof ExtensionEntrypoint ei) {
                     initializers.add(ei);
                 } else {
-                    throw new RuntimeException("入口 " + entrypoint + " 没有实现 ExtensionInitializer 接口");
+                    ZXLogger.warning("入口 " + entrypoint + " 没有实现 ExtensionEntrypoint 接口");
                 }
             } catch (InstantiationException | IllegalAccessException e) {
-                throw new RuntimeException("实例化入口 " + entrypoint + " 时发生错误 " + e);
+                ZXLogger.warning("实例化入口 " + entrypoint + " 时发生错误 " + e);
             }
         }
-
-
     }
 
     /**
      * 初始化扩展
      */
-    public void initialize() {
+    protected void initialize() {
+        Collection<String> extensionIdList = manager.getExtensionIdList();
+
+        //检查依赖扩展
+        for (String dependExtension : info.depends.extensions) {
+            if (!extensionIdList.contains(dependExtension)) {
+                ZXLogger.warning("依赖扩展 " + dependExtension + " 未找到，无法加载扩展 " + info.id);
+                return;
+            }
+        }
+
+        // 初始化扩展
         for (ExtensionEntrypoint initializer : initializers) {
-            initializer.onInitialize();
+            initializer.onInitialize(this, manager);
         }
     }
 }

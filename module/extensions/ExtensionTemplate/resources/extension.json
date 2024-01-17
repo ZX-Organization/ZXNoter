@@ -16,7 +16,7 @@
   "depends": {
     "extensionApi": ">=0.0.0",
     "extensions": [
-      "zxnoter-base"
+      "fx-component-library"
     ]
   },
   "icon": "assets/icon.png"

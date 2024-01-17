@@ -4,11 +4,13 @@ import com.sun.javafx.application.PlatformImpl;
 import com.sun.javafx.util.Logging;
 import team.zxorg.api.ExtensionEntrypoint;
 import team.zxorg.core.ZXLogger;
+import team.zxorg.extension.Extension;
+import team.zxorg.extension.ExtensionManager;
 import team.zxorg.fxcl.javafx.ProjectView;
 
 public class FXCL implements ExtensionEntrypoint {
     @Override
-    public void onInitialize() {
+    public void onInitialize(Extension extension, ExtensionManager manager) {
 
         ZXLogger.info("===== > FX Component Library Test < =====");
 

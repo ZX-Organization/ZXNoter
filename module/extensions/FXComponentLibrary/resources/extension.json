@@ -11,12 +11,11 @@
     "sources": "https://github.com/ZX-Organization/ZXNoter"
   },
   "entrypoints": [
-    "team.zxorg.fxcl.FXCL"
   ],
   "depends": {
     "extensionApi": ">=0.0.0",
     "extensions": [
-      "zxnoter-base"
+
     ]
   },
   "icon": "assets/icon.png"
