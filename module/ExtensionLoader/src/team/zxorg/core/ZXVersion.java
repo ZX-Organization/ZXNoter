@@ -89,7 +89,7 @@ public class ZXVersion {
 
     @Override
     public String toString() {
-        return major + "." + minor + "." + patch + "-" + status.getSign();
+        return (compare == null ? "" : compare.sign) + major + "." + minor + "." + patch + "-" + status.getSign();
     }
 
     public int getCode() {
@@ -99,9 +99,9 @@ public class ZXVersion {
     public void printInfo() {
         System.out.println("Version: " + this + " Code: " + this.getCode());
         switch (this.status) {
+            case ALPHA -> ZXLogger.warning("当前为 [早期开发版本] 请谨慎测试软件功能");
+            case BETA -> ZXLogger.warning("当前为 [提前预览版本] 如有问题请联系开发者");
             case RC -> ZXLogger.warning("当前为 [内部测试版本] 请不要泄漏软件到外部");
-            case BETA -> ZXLogger.info("当前为 [提前预览版本] 如有问题请联系开发者");
-            case ALPHA -> ZXLogger.info("当前为 [早期开发版本] 请谨慎测试软件功能");
             case STABLE -> ZXLogger.info("当前为 [稳定发布版本] 请尽情使用");
         }
     }

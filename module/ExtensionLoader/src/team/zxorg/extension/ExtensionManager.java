@@ -45,11 +45,11 @@ public class ExtensionManager {
     private void loadExtension(Path extensionPath) {
         Extension extension = new Extension(this, extensionPath);
         if (!extension.getApiVersion().isSupported(EXTENSION_API_VERSION)) {
-            ZXLogger.warning("扩展 " + extension + " 需要的扩展Api版本不受支持，无法加载");
+            ZXLogger.warning("无法加载扩展 (" + extension.getId() + ")，因为所需的扩展 API 版本 " + extension.getApiVersion() + " 与当前版本 " + EXTENSION_API_VERSION + " 不兼容。");
             return;
         }
         if (extensions.containsKey(extension.getId())) {
-            ZXLogger.warning("扩展 " + extension + " 重复载入，无法加载");
+            ZXLogger.warning("无法加载扩展 (" + extension.getId() + ")，因为其与已安装的扩展冲突，此扩展路径为 " + extensionPath + "。");
             return;
         }
         extensions.put(extension.getId(), extension);
@@ -82,7 +82,7 @@ public class ExtensionManager {
             jarFiles[index++] = (extension.jarUrl);
         }
 
-        URLClassLoader classLoader = new URLClassLoader( jarFiles);
+        URLClassLoader classLoader = new URLClassLoader(jarFiles);
 
         for (Extension extension : extensions.values()) {
             extension.loadJar(classLoader);

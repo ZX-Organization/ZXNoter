@@ -14,9 +14,12 @@
   ],
   "depends": {
     "extensionApi": ">=0.0.0",
-    "extensions": [
-
-    ]
+    "extensions": {
+    }
   },
-  "icon": "assets/icon.png"
+  "icon": "assets/fx-component-library/icon.png",
+  "tags": [
+    "library",
+    "ui-component"
+  ]
 }

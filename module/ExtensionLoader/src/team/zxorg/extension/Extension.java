@@ -9,13 +9,14 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 扩展对象
@@ -65,21 +66,21 @@ public class Extension {
         try {
             jarUrl = jarPath.toUri().toURL();
         } catch (MalformedURLException e) {
-            throw new RuntimeException("扩展载入异常: " + e);
+            throw new RuntimeException(jarPath + " 扩展载入异常: " + e);
         }
 
-        URLClassLoader classLoader = new URLClassLoader(new URL[]{jarUrl});
-        try (InputStream is = classLoader.getResourceAsStream("extension.json")) {
-            if (is == null)
-                throw new FileNotFoundException("extension.json");
-            InputStreamReader reader = new InputStreamReader(is);
-            info = ZXGson.fromJson(reader, ExtensionInfo.class);
+        try (URLClassLoader classLoader = new URLClassLoader(new URL[]{jarUrl})) {
+            try (InputStream is = classLoader.getResourceAsStream("extension.json")) {
+                if (is == null)
+                    throw new FileNotFoundException("extension.json");
+                InputStreamReader reader = new InputStreamReader(is);
+                info = ZXGson.fromJson(reader, ExtensionInfo.class);
+            } catch (IOException e) {
+                throw new RuntimeException(jarUrl + " 读取扩展信息失败: " + e);
+            }
         } catch (IOException e) {
-            throw new RuntimeException("读取扩展信息失败: " + e);
+            throw new RuntimeException(e);
         }
-        ZXLogger.info("读取扩展信息: " + this);
-
-
     }
 
 
@@ -87,22 +88,23 @@ public class Extension {
         initializers = new ArrayList<>();
         for (String entrypoint : info.entrypoints) {
             // 加载类
-            Class<?> loadedClass; // 替换为你的类的完整路径
+            Class<?> loadedClass;
             try {
                 loadedClass = classLoader.loadClass(entrypoint);
             } catch (ClassNotFoundException e) {
-                throw new RuntimeException("未找到入口 " + entrypoint + " " + e);
+                throw new RuntimeException("(" + getId() + ") 未找到入口点 " + entrypoint + " " + e);
             }
 
             // 实例化程序入口
             try {
-                if (loadedClass.newInstance() instanceof ExtensionEntrypoint ei) {
+                if (loadedClass.getDeclaredConstructor().newInstance() instanceof ExtensionEntrypoint ei) {
                     initializers.add(ei);
                 } else {
-                    ZXLogger.warning("入口 " + entrypoint + " 没有实现 ExtensionEntrypoint 接口");
+                    ZXLogger.warning("(" + getId() + ") 入口点 " + entrypoint + " 没有实现入口接口");
                 }
-            } catch (InstantiationException | IllegalAccessException e) {
-                ZXLogger.warning("实例化入口 " + entrypoint + " 时发生错误 " + e);
+            } catch (InstantiationException | IllegalAccessException | NoSuchMethodException |
+                     InvocationTargetException e) {
+                ZXLogger.warning("(" + getId() + ") 实例化入口点 " + entrypoint + " 时发生错误 " + e);
             }
         }
     }
@@ -111,16 +113,21 @@ public class Extension {
      * 初始化扩展
      */
     protected void initialize() {
-        Collection<String> extensionIdList = manager.getExtensionIdList();
 
         //检查依赖扩展
-        for (String dependExtension : info.depends.extensions) {
-            if (!extensionIdList.contains(dependExtension)) {
-                ZXLogger.warning("依赖扩展 " + dependExtension + " 未找到，无法加载扩展 " + info.id);
+        for (Map.Entry<String, ZXVersion> dependExtension : info.depends.extensions.entrySet()) {
+            String dependExtensionId = dependExtension.getKey();
+
+            Extension dependExt = manager.getExtension(dependExtensionId);
+            if (dependExt == null) {
+                ZXLogger.warning("无法加载扩展 (" + getId() + ")，请先安装依赖扩展 (" + dependExtensionId + " " + dependExtension.getValue() + ") ");
+                return;
+            }
+            if (!dependExtension.getValue().isSupported(dependExt.getVersion())) {
+                ZXLogger.warning("无法加载扩展 (" + getId() + ")，因为依赖扩展 (" + dependExtensionId + ") 的版本不兼容，需要版本 " + dependExtension.getValue() + "，当前版本为 " + dependExt.getVersion());
                 return;
             }
         }
-
         // 初始化扩展
         for (ExtensionEntrypoint initializer : initializers) {
             initializer.onInitialize(this, manager);

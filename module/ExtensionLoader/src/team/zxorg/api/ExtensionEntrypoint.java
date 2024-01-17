@@ -13,21 +13,4 @@ public interface ExtensionEntrypoint {
     default void onInitialize(Extension extension, ExtensionManager manager) {
 
     }
-
-
-    /**
-     * 扩展被启用
-     */
-    default void onEnable() {
-
-    }
-
-    /**
-     * 扩展被禁用
-     */
-    default void onDisable() {
-
-    }
-
-
 }

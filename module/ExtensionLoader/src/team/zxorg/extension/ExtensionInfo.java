@@ -3,6 +3,7 @@ package team.zxorg.extension;
 import team.zxorg.core.ZXVersion;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 扩展信息
@@ -50,6 +51,11 @@ public class ExtensionInfo {
     Depends depends;
 
     /**
+     * 扩展标签
+     */
+    List<String> tags;
+
+    /**
      * 依赖类
      */
     public static class Depends {
@@ -60,7 +66,7 @@ public class ExtensionInfo {
         /**
          * 依赖的扩展列表
          */
-        List<String> extensions;
+        Map<String, ZXVersion> extensions;
     }
 
     /**
