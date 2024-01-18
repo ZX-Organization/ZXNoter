@@ -16,11 +16,14 @@
   "depends": {
     "extensionApi": ">=0.0.0",
     "extensions": {
-      "fx-component-library": ">=2.0.0"
+      "fx-component-library": ">=0.0.0"
     }
   },
   "icon": "assets/extended-template/icon.png",
   "tags": [
     "example"
+  ],
+  "languages": [
+    "assets/extended-template/languages/zh-cn.json"
   ]
 }

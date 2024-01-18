@@ -1,14 +1,12 @@
 package team.zxorg.extension;
 
 import team.zxorg.api.ExtensionEntrypoint;
+import team.zxorg.core.ZXLanguage;
 import team.zxorg.core.ZXLogger;
 import team.zxorg.core.ZXVersion;
 import team.zxorg.gson.ZXGson;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -51,60 +49,78 @@ public class Extension {
 
     @Override
     public String toString() {
-        return "扩展[id: " + info.id + ", 版本: " + info.version + "]";
+        return "(" + info.id + " " + info.version + ")";
     }
 
+    /**
+     * 扩展配置信息
+     */
     private final ExtensionInfo info;
-    List<ExtensionEntrypoint> initializers;
+    /**
+     * 扩展入口点列表
+     */
+    List<ExtensionEntrypoint> entrypointList;
+    /**
+     * 扩展管理器
+     */
     ExtensionManager manager;
+    /**
+     * 扩展jar文件路径
+     */
     URL jarUrl;
+    /**
+     * 扩展jar文件路径
+     */
+    Path jarPath;
+    /**
+     * 扩展类加载器
+     */
+    URLClassLoader classLoader;
 
     public Extension(ExtensionManager manager, Path jarPath) {
+        this.jarPath = jarPath;
         this.manager = manager;
-        ZXLogger.info("即将加载扩展: " + jarPath);
-
+        //ZXLogger.info("正在读取扩展: " + jarPath);
         try {
             jarUrl = jarPath.toUri().toURL();
         } catch (MalformedURLException e) {
-            throw new RuntimeException(jarPath + " 扩展载入异常: " + e);
+            throw new RuntimeException(getLanguage(MESSAGE_ERROR + "url", jarPath, e));
         }
-
         try (URLClassLoader classLoader = new URLClassLoader(new URL[]{jarUrl})) {
-            try (InputStream is = classLoader.getResourceAsStream("extension.json")) {
-                if (is == null)
-                    throw new FileNotFoundException("extension.json");
-                InputStreamReader reader = new InputStreamReader(is);
-                info = ZXGson.fromJson(reader, ExtensionInfo.class);
-            } catch (IOException e) {
-                throw new RuntimeException(jarUrl + " 读取扩展信息失败: " + e);
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+            info = ZXGson.fromJson(classLoader, "extension.json", ExtensionInfo.class);
+        } catch (Exception e) {
+            throw new RuntimeException(getLanguage(MESSAGE_ERROR + "info-read-failed", jarPath, e));
         }
     }
 
-
+    /**
+     * 载入扩展
+     *
+     * @param classLoader 类加载器
+     */
     protected void loadJar(URLClassLoader classLoader) {
-        initializers = new ArrayList<>();
+        this.classLoader = classLoader;
+        entrypointList = new ArrayList<>();
         for (String entrypoint : info.entrypoints) {
             // 加载类
             Class<?> loadedClass;
             try {
                 loadedClass = classLoader.loadClass(entrypoint);
             } catch (ClassNotFoundException e) {
-                throw new RuntimeException("(" + getId() + ") 未找到入口点 " + entrypoint + " " + e);
+                ZXLogger.warning(getLanguage(MESSAGE_ERROR + "entrypoint-not-found", getId(), entrypoint));
+                continue;
             }
 
             // 实例化程序入口
             try {
                 if (loadedClass.getDeclaredConstructor().newInstance() instanceof ExtensionEntrypoint ei) {
-                    initializers.add(ei);
+                    this.entrypointList.add(ei);
                 } else {
-                    ZXLogger.warning("(" + getId() + ") 入口点 " + entrypoint + " 没有实现入口接口");
+                    ZXLogger.warning(getLanguage(MESSAGE_ERROR + "entrypoint-not-implemented", getId(), entrypoint));
                 }
             } catch (InstantiationException | IllegalAccessException | NoSuchMethodException |
                      InvocationTargetException e) {
-                ZXLogger.warning("(" + getId() + ") 实例化入口点 " + entrypoint + " 时发生错误 " + e);
+                ZXLogger.warning(getLanguage(MESSAGE_ERROR + "entrypoint-instance-failed", getId(), entrypoint, e));
             }
         }
     }
@@ -113,24 +129,50 @@ public class Extension {
      * 初始化扩展
      */
     protected void initialize() {
-
         //检查依赖扩展
         for (Map.Entry<String, ZXVersion> dependExtension : info.depends.extensions.entrySet()) {
             String dependExtensionId = dependExtension.getKey();
-
             Extension dependExt = manager.getExtension(dependExtensionId);
             if (dependExt == null) {
-                ZXLogger.warning("无法加载扩展 (" + getId() + ")，请先安装依赖扩展 (" + dependExtensionId + " " + dependExtension.getValue() + ") ");
+                ZXLogger.warning(getLanguage(MESSAGE_ERROR + "message.extension.error.depend-extension-lost", getId(), dependExtensionId, dependExtension.getValue()));
                 return;
             }
             if (!dependExtension.getValue().isSupported(dependExt.getVersion())) {
-                ZXLogger.warning("无法加载扩展 (" + getId() + ")，因为依赖扩展 (" + dependExtensionId + ") 的版本不兼容，需要版本 " + dependExtension.getValue() + "，当前版本为 " + dependExt.getVersion());
+                ZXLogger.warning(getLanguage(MESSAGE_ERROR + "message.extension.error.depend-extension-not-compatible", getId(), dependExtensionId, dependExtension.getValue(), dependExt.getVersion()));
                 return;
             }
         }
         // 初始化扩展
-        for (ExtensionEntrypoint initializer : initializers) {
+        for (ExtensionEntrypoint initializer : entrypointList) {
             initializer.onInitialize(this, manager);
         }
     }
+
+
+    /**
+     * 获取全局资源
+     *
+     * @param name 资源路径
+     * @return 资源数据
+     */
+    public InputStream getGlobalResourceAsStream(String name) {
+        return classLoader.getResourceAsStream(name);
+    }
+
+    /**
+     * 获取assets下的资源
+     *
+     * @param name 资源路径 'assets.id.name'
+     * @return 资源数据
+     */
+    public InputStream getResourceAsStream(String name) {
+        return classLoader.getResourceAsStream("assets." + info.id + "." + name);
+    }
+
+
+    private String getLanguage(String key, Object... args) {
+        return ZXLanguage.get(key, args);
+    }
+
+    public static final String MESSAGE_ERROR = "message.extension.error.";
 }

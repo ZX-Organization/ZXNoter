@@ -1,0 +1,60 @@
+{
+  "common": {
+    "unknown": "未知",
+    "yes": "是",
+    "no": "否",
+    "ok": "确定",
+    "cancel": "取消",
+    "close": "关闭",
+    "loading": "加载中...",
+    "error": "错误",
+    "warning": "警告",
+    "success": "成功",
+    "info": "信息",
+    "confirm": "确认",
+    "prompt": "提示",
+    "select": "选择"
+  },
+  "language": {
+    "code": "zh-CN",
+    "name": "中文",
+    "lost": "丢失语言 {0}"
+  },
+  "version": {
+    "alpha": "内部测试版本",
+    "beta": "外部测试版本",
+    "rc": "候选发布版本",
+    "release": "正式版本"
+  },
+  "message": {
+    "language": {
+      "lost": "丢失语言 语言路径: {0}"
+    },
+    "logger": {
+      "initialize": "初始化日志系统...",
+      "error": "日志系统初始化失败，请检查日志目录是否可写。"
+    },
+    "version": {
+      "alpha": "当前为 [{{version.alpha}}] 正处于早期开发阶段，请谨慎测试软件功能。",
+      "beta": "当前为 [{{version.beta}}] 正处于测试阶段，请不要泄漏软件到外部。",
+      "rc": "当前为 [{{version.rc}}] 正处于最后测试阶段，如有问题请联系开发者。",
+      "release": "当前为 [{{version.release}}] 请尽情使用。",
+      "tip": "版本: {{version.name}} 代号: {{version.code}}"
+    },
+    "extension": {
+      "loading": "初始化扩展加载器...",
+      "error": {
+        "cant-load": "无法加载扩展 ({0})",
+        "url": "{{cant-load}} : {1}",
+        "depend-api-not-compatible": "{{cant-load}} ，因为所需的扩展 API 版本 {1} 与当前版本 {2} 不兼容。",
+        "id-conflict": "{{cant-load}} ，因为其与已安装的扩展冲突，冲突的扩展路径 {1} {2}。",
+        "info-read-failed": "{{cant-load}} ，读取扩展配置文件失败: {1}",
+        "depend-extension-lost": "{{cant-load}} ，请先安装依赖扩展 ({1}) {2}。",
+        "depend-extension-not-compatible": "{{cant-load}} ，依赖的扩展 ({1}) 的版本不兼容，需要版本 {2} ，当前版本 {3} 。",
+        "entrypoint-not-found": "加载扩展 ({0}) 时，入口点 {1} 类未找到。",
+        "entrypoint-not-implemented": "加载扩展({0}) 时，入口点 {1} 类未实现 ExtensionEntrypoint 接口。",
+        "entrypoint-instance-failed": "加载扩展 ({0}) 时，入口点 {1} 实例化失败: {1}"
+      }
+    }
+  }
+}

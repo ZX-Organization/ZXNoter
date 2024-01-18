@@ -1,5 +1,6 @@
 package team.zxorg.extension;
 
+import team.zxorg.core.ZXLanguage;
 import team.zxorg.core.ZXLogger;
 import team.zxorg.core.ZXVersion;
 
@@ -10,6 +11,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collection;
 import java.util.HashMap;
+
+import static team.zxorg.extension.Extension.MESSAGE_ERROR;
 
 /**
  * 扩展管理器
@@ -45,11 +48,12 @@ public class ExtensionManager {
     private void loadExtension(Path extensionPath) {
         Extension extension = new Extension(this, extensionPath);
         if (!extension.getApiVersion().isSupported(EXTENSION_API_VERSION)) {
-            ZXLogger.warning("无法加载扩展 (" + extension.getId() + ")，因为所需的扩展 API 版本 " + extension.getApiVersion() + " 与当前版本 " + EXTENSION_API_VERSION + " 不兼容。");
+            ZXLogger.warning(ZXLanguage.get(MESSAGE_ERROR + "depend-api-not-compatible", extension.getId(), extension.getApiVersion(), EXTENSION_API_VERSION));
             return;
         }
+
         if (extensions.containsKey(extension.getId())) {
-            ZXLogger.warning("无法加载扩展 (" + extension.getId() + ")，因为其与已安装的扩展冲突，此扩展路径为 " + extensionPath + "。");
+            ZXLogger.warning(ZXLanguage.get(MESSAGE_ERROR + "id-conflict", extension.getId(), extensionPath.toAbsolutePath(), extensions.get(extension.getId()).jarPath.toAbsolutePath()));
             return;
         }
         extensions.put(extension.getId(), extension);

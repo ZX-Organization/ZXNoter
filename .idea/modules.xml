@@ -7,7 +7,6 @@
       <module fileurl="file://$PROJECT_DIR$/module/ExtensionLoader/ExtensionLoader.iml" filepath="$PROJECT_DIR$/module/ExtensionLoader/ExtensionLoader.iml" />
       <module fileurl="file://$PROJECT_DIR$/module/extensions/ExtensionTemplate/ExtensionTemplate.iml" filepath="$PROJECT_DIR$/module/extensions/ExtensionTemplate/ExtensionTemplate.iml" />
       <module fileurl="file://$PROJECT_DIR$/module/extensions/FXComponentLibrary/FXComponentLibrary.iml" filepath="$PROJECT_DIR$/module/extensions/FXComponentLibrary/FXComponentLibrary.iml" />
-      <module fileurl="file://$PROJECT_DIR$/module/extensions/Language/Language.iml" filepath="$PROJECT_DIR$/module/extensions/Language/Language.iml" />
       <module fileurl="file://$PROJECT_DIR$/module/extensions/MapEditCore/MapEditCore.iml" filepath="$PROJECT_DIR$/module/extensions/MapEditCore/MapEditCore.iml" />
       <module fileurl="file://$PROJECT_DIR$/module/extensions/ProjectFrame/ProjectFrame.iml" filepath="$PROJECT_DIR$/module/extensions/ProjectFrame/ProjectFrame.iml" />
       <module fileurl="file://$PROJECT_DIR$/module/extensions/ResourcePack/ResourcePack.iml" filepath="$PROJECT_DIR$/module/extensions/ResourcePack/ResourcePack.iml" />

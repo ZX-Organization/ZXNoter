@@ -1,0 +1,127 @@
+{
+  "language-code": "simplified_chinese",
+  "language-name": "简体中文",
+  "ui": {
+    "projectView": {
+      "titleBar": {
+        "title": "ZXNoter",
+        "close": "关闭",
+        "minimize": "最小化",
+        "maximize": "最大化",
+        "restore": "还原",
+        "about": "关于",
+        "about_title": "关于ZXNoter",
+        "about_content": "ZXNoter v{version}\nCopyright © 2018-2021 ZXNoter Team\nAll rights reserved.",
+        "about_button": "查看源码",
+        "menu": {
+          "success": "操作成功",
+          "error": "操作失败",
+          "warning": "警告",
+          "info": "信息",
+          "confirm": "确认",
+          "cancel": "取消",
+          "close": "关闭",
+          "submit": "提交",
+          "reset": "重置",
+          "delete": "删除",
+          "edit": "编辑",
+          "add": "添加",
+          "save": "保存",
+          "update": "更新",
+          "search": "搜索"
+        }
+      },
+      "activityBar": {
+      },
+      "sideBar": {
+      },
+      "editorArea": {
+      },
+      "statusBar": {
+      }
+    },
+    "editorView": {
+    }
+  },
+  "file": {
+    "sort": {
+      "folder": "文件夹",
+      "music-map": "音游谱面",
+      "compression": "压缩文件",
+      "audio": "音频文件",
+      "image": "图片文件",
+      "video": "视频文件",
+      "text": "文本文件",
+      "unknown": "未知文件"
+    },
+    "type": {
+      "zxm": "ZXNoter谱面文件",
+      "osu": "osu!谱面文件",
+      "imd": "节奏大师谱面文件",
+      "mc": "Malody谱面文件",
+      "mp3": "MPEG音频层3文件",
+      "ogg": "开放音频文件",
+      "wav": "波形音频文件",
+      "png": "可移植网络图形文件",
+      "jpg": "JPEG图像文件",
+      "jpeg": "JPEG图像文件",
+      "svg": "可缩放矢量图形文件",
+      "bmp": "位图文件",
+      "gif": "图形交换文件",
+      "tiff": "标签图像文件",
+      "webp": "Web图片文件",
+      "raw": "原始图像文件",
+      "ico": "图标文件",
+      "mp4": "MPEG-4视频文件",
+      "avi": "音频视频交错文件",
+      "mkv": "Matroska视频文件",
+      "mov": "QuickTime视频文件",
+      "wmv": "Windows Media视频文件",
+      "flv": "Flash视频文件",
+      "webm": "WebM视频文件",
+      "3gp": "第三代合作伙伴项目视频文件",
+      "m4v": "MPEG-4视频文件",
+      "mpg": "MPEG视频文件",
+      "txt": "纯文本文件",
+      "csv": "逗号分隔值文件",
+      "xml": "可扩展标记语言文件",
+      "json": "JavaScript对象表示法文件",
+      "md": "Markdown文件",
+      "log": "日志文件",
+      "ini": "初始化文件",
+      "cfg": "配置文件",
+      "zip": "ZIP压缩文件",
+      "rar": "RAR压缩文件",
+      "7z": "7-Zip压缩文件",
+      "tar": "TAR压缩文件",
+      "gz": "Gzip压缩文件",
+      "bz2": "BZip2压缩文件",
+      "osz": "OSU!谱包文件",
+      "mcz": "Malody谱包文件",
+      "unknown": "未知文件"
+    }
+  },
+  "version": {
+    "alpha": "内部测试版本",
+    "beta": "外部测试版本",
+    "rc": "候选发布版本",
+    "release": "正式版本"
+  },
+  "message": {
+    "version-tip": {
+      "alpha": "当前为 [{{version.alpha}}] 正处于早期开发阶段，请谨慎测试软件功能。",
+      "beta": "当前为 [{{version.beta}}] 正处于测试阶段，请不要泄漏软件到外部。",
+      "rc": "当前为 [{{version.rc}}] 正处于最后测试阶段，如有问题请联系开发者。",
+      "release": "当前为 [{{version.release}}] 请尽情使用。"
+    },
+    "extension": {
+      "load-error": {
+        "api-low": "无法加载扩展 ({0})，因为所需的扩展 API 版本 {1} 与当前版本 {2} 不兼容。",
+        "id-conflict": "无法加载扩展 ({0})，因为其与已安装的扩展冲突，此扩展路径为 {1} 。",
+        "info-error": "{0} 无法读取扩展配置文件"
+      }
+    }
+  },
+  "extension": {
+  }
+}

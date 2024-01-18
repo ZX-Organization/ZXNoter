@@ -29,10 +29,11 @@ public class ZXVersion {
         String status;
         if (marker == -1) {
             version = versionString;
-            status = "alpha";
+            this.status = ReleaseStatus.EMPTY;
         } else {
             version = versionString.substring(0, marker);
             status = versionString.substring(marker + 1);
+            this.status = ReleaseStatus.valueOf(status.toUpperCase());
         }
 
 
@@ -40,8 +41,6 @@ public class ZXVersion {
         major = parseVersionPart(versionParts, 0);
         minor = parseVersionPart(versionParts, 1);
         patch = parseVersionPart(versionParts, 2);
-
-        this.status = ReleaseStatus.valueOf(status.toUpperCase());
 
 
     }
@@ -89,20 +88,23 @@ public class ZXVersion {
 
     @Override
     public String toString() {
-        return (compare == null ? "" : compare.sign) + major + "." + minor + "." + patch + "-" + status.getSign();
+        return (compare == null ? "" : compare.sign) + major + "." + minor + "." + patch + (status == ReleaseStatus.EMPTY ? "" : "-" + status.getSign());
     }
 
     public int getCode() {
         return major * 100000 + minor * 1000 + patch * 10 + status.ordinal();
     }
 
+    /**
+     * 打印版本信息
+     */
     public void printInfo() {
-        System.out.println("Version: " + this + " Code: " + this.getCode());
+        ZXLogger.info(ZXLanguage.get("message.version.tip"), 1);
         switch (this.status) {
-            case ALPHA -> ZXLogger.warning("当前为 [早期开发版本] 请谨慎测试软件功能");
-            case BETA -> ZXLogger.warning("当前为 [提前预览版本] 如有问题请联系开发者");
-            case RC -> ZXLogger.warning("当前为 [内部测试版本] 请不要泄漏软件到外部");
-            case STABLE -> ZXLogger.info("当前为 [稳定发布版本] 请尽情使用");
+            case ALPHA -> ZXLogger.warning(ZXLanguage.get("message.version.alpha"));
+            case BETA -> ZXLogger.warning(ZXLanguage.get("message.version.beta"));
+            case RC -> ZXLogger.warning(ZXLanguage.get("message.version.rc"));
+            case STABLE -> ZXLogger.info(ZXLanguage.get("message.version.release"));
         }
     }
 
@@ -110,6 +112,7 @@ public class ZXVersion {
      * 发布状态
      */
     public enum ReleaseStatus {
+        EMPTY(null),
         ALPHA("alpha"),
         BETA("beta"),
         RC("rc"),

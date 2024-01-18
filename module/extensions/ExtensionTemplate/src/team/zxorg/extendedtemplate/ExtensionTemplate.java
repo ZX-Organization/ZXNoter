@@ -11,7 +11,7 @@ public class ExtensionTemplate implements ExtensionEntrypoint {
     public void onInitialize(Extension extension, ExtensionManager manager) {
         ZXLogger.info("扩展模板 初始化完毕.");
         Extension fx = manager.getExtension("fx-component-library");
-        new FXCL().onInitialize(extension, manager);
-        System.out.println(getClass().getClassLoader());
+        //new FXCL().onInitialize(extension, manager);
+        //System.out.println(getClass().getClassLoader());
     }
 }

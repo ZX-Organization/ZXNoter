@@ -39,7 +39,7 @@ public class ZXLogger {
             fileHandler.setFormatter(formatter);
             logger.addHandler(fileHandler);
         } catch (IOException e) {
-            logger.warning("日志文件IO异常。");
+            warning(ZXLanguage.get("message.logger.error"));
         }
 
 
@@ -59,7 +59,7 @@ public class ZXLogger {
         System.setErr(printErr);
         System.setOut(printOut);
         System.out.println();
-        info("ZX日志系统 初始化完毕");
+        info(ZXLanguage.get("message.logger.initialize"));
     }
 
     private static void printSystemLog(byte[] buf, int off, int len, OutType outType) {
@@ -98,8 +98,9 @@ public class ZXLogger {
                 isFind = false;
             }
         }
-        ZXLogger.logger.log(record);
+        logger.log(record);
     }
+
 
     /**
      * 信息
@@ -122,18 +123,45 @@ public class ZXLogger {
         log(Level.SEVERE, message);
     }
 
-    public static void log(Level level, String message) {
-        LogRecord record = new LogRecord(level, message);
-        record.setSourceMethodName("unknown");
-        boolean isFind = false;
-        for (StackTraceElement stackTraceElement : Thread.currentThread().getStackTrace()) {
 
-            if (stackTraceElement.getClassName().contains(ZXLogger.class.getPackageName() + ".ZXLogger")) {
+    /**
+     * 信息
+     */
+    public static void info(String message, int cutoff) {
+        log(Level.INFO, message, cutoff);
+    }
+
+    /**
+     * 警告
+     */
+    public static void warning(String message, int cutoff) {
+        log(Level.WARNING, message, cutoff);
+    }
+
+    /**
+     * 严重
+     */
+    public static void severe(String message, int cutoff) {
+        log(Level.SEVERE, message, cutoff);
+    }
+
+
+    public static void log(Level level, String message) {
+        log(level, message, 0);
+    }
+
+    public static void log(Level level, String message, int cutoff) {
+        LogRecord record = new LogRecord(level, message);
+        record.setSourceMethodName("UNKNOWN");
+        boolean isFind = false;
+        StackTraceElement[] stackTraceElements = Thread.currentThread().getStackTrace();
+        for (int i = cutoff; i < stackTraceElements.length; i++) {
+            if (stackTraceElements[i].getClassName().contains(ZXLogger.class.getName())) {
                 isFind = true;
             } else {
                 if (isFind) {
-                    record.setSourceMethodName(stackTraceElement.getMethodName());
-                    record.setSourceClassName(stackTraceElement.getClassName());
+                    record.setSourceMethodName(stackTraceElements[i + cutoff].getMethodName() + "(" + stackTraceElements[i + cutoff].getLineNumber() + ")");
+                    record.setSourceClassName(stackTraceElements[i + cutoff].getClassName());
                 }
                 isFind = false;
             }
@@ -142,6 +170,11 @@ public class ZXLogger {
         logger.log(record);
     }
 
+    public static void printStackTrace() {
+        for (StackTraceElement stackTraceElement : Thread.currentThread().getStackTrace()) {
+            warning(stackTraceElement.toString());
+        }
+    }
 
     private enum OutType {
         ERROR(Level.WARNING), STANDARD(Level.INFO);

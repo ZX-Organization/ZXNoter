@@ -1,21 +1,21 @@
-[19:27:55] [UISEditor.main/INFO]: ZXLogger 日志系统 初始化完毕
-[19:27:55] [UISEditor.main/INFO]: ===== > ZXNoter Skin Editor < =====
-[19:27:55] [UISEditor.main/INFO]: Version: 1.0.3-Beta Code: 100031
-[19:27:55] [UISEditor.main/WARNING]: 当前为 [提前预览版本] 如有问题请联系开发者
-[19:27:55] [UISEditor.main/INFO]: ZXNoter Skin Editor启动
-[19:27:55] [UISEditor.main/INFO]: 初始化图形系统
-[19:27:56] [UISEditor.lambda$main$4/INFO]: 初始化配置
-[19:27:56] [ExpressionCalculator.setCanvasSize/INFO]: setCanvasSize: 0.0,0.0
-[19:27:56] [UISCanvas.setDeviceType/INFO]: 设置设备类型: Win
-[19:27:56] [UISCanvas.setAspectRatio/INFO]: 设置纵横比: 1.777777777777778
-[19:27:56] [UISCanvas.updateSkin/INFO]: 更新皮肤
-[19:28:12] [UISEditor$9.lambda$new$0/INFO]: Selected File: D:\Projects\ZXNoter\docs\UISEditorTest\动画.mui
-[19:28:12] [UISCanvas.loadSkin/INFO]: 加载皮肤: D:\Projects\ZXNoter\docs\UISEditorTest\动画.mui
-[19:28:12] [UISCanvas.updateSkin/INFO]: 更新皮肤
-[19:28:12] [UISComponent.<clinit>/INFO]: 载入基本资源
-[19:28:12] [ExpressionCalculator.setUnitCanvasHeight/INFO]: 设置单位画布高度为：720.0
-[19:28:12] [UISSkin.updateRenderer/INFO]: 更新渲染器
-[19:28:12] [UISPerspectiveTransform.setAngle/INFO]: 设置3d角度: 40.0
-[19:28:12] [UISPerspectiveTransform.setAngle/INFO]: 设置3d角度: 40.0
-[19:28:12] [ExpressionCalculator.setCanvasSize/INFO]: setCanvasSize: 1280.0,720.0
-[19:28:12] [ExpressionCalculator.setUnitCanvasHeight/INFO]: 设置单位画布高度为：720.0
+[16:49:53] [ZXVersion.printInfo(102)/INFO]: 初始化日志系统...
+[16:49:53] [RunApp.main(19)/INFO]: 版本: 0.0.0-alpha 代号: 1
+[16:49:53] [ZXVersion.printInfo(104)/WARNING]: 当前为 [内部测试版本] 正处于早期开发阶段，请谨慎测试软件功能。
+[16:49:53] [RunApp.main(20)/INFO]: 初始化扩展加载器...
+[16:49:53] [ExtensionTemplate.onInitialize(12)/INFO]: 扩展模板 初始化完毕.
+[16:49:53] [FXCL.onInitialize(15)/INFO]: ===== > FX Component Library Test < =====
+[16:49:53] [FXCL.onInitialize(19)/INFO]: 初始化图形系统
+[16:49:53] [FXCL.lambda$onInitialize$1(26)/INFO]: 初始化配置
+[16:49:53] [StyleManager.loadStylesheetUnPrivileged/WARNING]: 警告: Resource "packs/baseExpansionPack/color/style.css" not found.
+[16:49:53] [StyleManager.loadStylesheetUnPrivileged/WARNING]: 警告: Resource "packs/baseExpansionPack/color/dark.css" not found.
+[16:49:54] [FlexSkinProcessor.updateTabContentRegion/INFO]: 更新 TabPaneSkin$TabContentRegion@70a5c662[styleClass=tab-content-area]
+[16:49:54] [FlexSkinProcessor.updateTabHeaderArea/INFO]: 更新 TabPaneSkin$TabHeaderArea@97f3e74[styleClass=tab-header-area]
+[16:49:54] [FlexSkinProcessor.handleTabHeaderArea(60)/INFO]: 初始化和更新 TabHeaderSkin
+[16:49:54] [FlexSkinProcessor.updateTabContentRegion/INFO]: 更新 TabPaneSkin$TabContentRegion@21ae0843[styleClass=tab-content-area]
+[16:49:54] [FlexSkinProcessor.updateTabHeaderArea/INFO]: 更新 TabPaneSkin$TabHeaderArea@1e701c11[styleClass=tab-header-area]
+[16:49:54] [FlexSkinProcessor.handleTabHeaderArea(60)/INFO]: 初始化和更新 TabHeaderSkin
+[16:49:54] [FlexSkinProcessor.updateTabContentRegion/INFO]: 更新 TabPaneSkin$TabContentRegion@5901052[styleClass=tab-content-area]
+[16:49:54] [FlexSkinProcessor.updateTabContentRegion/INFO]: 更新 TabPaneSkin$TabContentRegion@5e381d85[styleClass=tab-content-area]
+[16:49:54] [FlexSkinProcessor.updateTabHeaderArea/INFO]: 更新 TabPaneSkin$TabHeaderArea@1afab5b2[styleClass=tab-header-area]
+[16:49:54] [FlexSkinProcessor.handleTabHeaderArea(60)/INFO]: 初始化和更新 TabHeaderSkin
+[16:49:54] [FlexSkinProcessor.updateTabContentRegion/INFO]: 更新 TabPaneSkin$TabContentRegion@3b65d00c[styleClass=tab-content-area]

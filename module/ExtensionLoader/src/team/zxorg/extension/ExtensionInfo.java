@@ -56,6 +56,11 @@ public class ExtensionInfo {
     List<String> tags;
 
     /**
+     * 语言列表
+     */
+    List<String> languages;
+
+    /**
      * 依赖类
      */
     public static class Depends {
