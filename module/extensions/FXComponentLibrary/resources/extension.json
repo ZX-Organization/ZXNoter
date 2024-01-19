@@ -2,9 +2,9 @@
   "id": "fx-component-library",
   "version": "0.0.0-RC",
   "name": "FX组件库",
-  "description": "提供javafx和打包的组件",
+  "description": "提供javafx和组件",
   "author": [
-    "你!"
+    "zedoCN"
   ],
   "contact": {
     "homepage": "https://github.com/ZX-Organization",

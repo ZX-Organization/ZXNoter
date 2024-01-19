@@ -2,37 +2,82 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="FXComponentLibrary:jar" />
+      <artifact name="ZXNoterUIFrame:jar" />
     </artifacts-to-build>
   </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dd78a4ca-7956-492b-9d75-ff82bf57b657" name="更改" comment="更新了扩展版本检查、重新定义了资源路径">
-      <change afterPath="$PROJECT_DIR$/module/ExtensionLoader/src/team/zxorg/core/LanguageInfo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/module/ExtensionLoader/src/team/zxorg/core/ZXLanguage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/module/extensions/ExtensionTemplate/resources/assets/extended-template/languages/zh-cn.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/module/extensions/ExtensionTemplate/resources/assets/extended-template/languages/zh-cn.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/languages/zh-cn.json" afterDir="false" />
+    <list default="true" id="dd78a4ca-7956-492b-9d75-ff82bf57b657" name="更改" comment="更新了语言">
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/ZXNoterUIFrame_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/extensions/ZXNoterUIFrame.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module/ExtensionLoader/resources/languages/zh-cn.json5" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module/ExtensionLoader/src/team/zxorg/extensionloader/event/LanguageEventListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module/extensions/ExtensionTemplate/resources/languages/zh-cn.json5" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module/extensions/ZXNoterUIFrame/resources/extension.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module/extensions/ZXNoterUIFrame/resources/languages/zh-cn.json5" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module/extensions/ZXNoterUIFrame/src/team/zxorg/zxnoter/uiframe/ZXNoterManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/FXComponentLibrary_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/FXComponentLibrary_jar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ZXNoter.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ZXNoter.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/ZXNoterDoc.xmind" beforeDir="false" afterPath="$PROJECT_DIR$/docs/ZXNoterDoc.xmind" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/extensions/ExtensionTemplate.jar" beforeDir="false" afterPath="$PROJECT_DIR$/extensions/ExtensionTemplate.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/extensions/FXComponentLibrary.jar" beforeDir="false" afterPath="$PROJECT_DIR$/extensions/FXComponentLibrary.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/latest.log" beforeDir="false" afterPath="$PROJECT_DIR$/latest.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/latest.log.1" beforeDir="false" afterPath="$PROJECT_DIR$/latest.log.1" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/module/ExtensionLoader/ExtensionLoader.iml" beforeDir="false" afterPath="$PROJECT_DIR$/module/ExtensionLoader/ExtensionLoader.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module/ExtensionLoader/src/team/zxorg/core/ZXLogger.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/ExtensionLoader/src/team/zxorg/core/ZXLogger.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module/ExtensionLoader/src/team/zxorg/core/ZXVersion.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/ExtensionLoader/src/team/zxorg/core/ZXVersion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module/ExtensionLoader/src/team/zxorg/extension/Extension.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/ExtensionLoader/src/team/zxorg/extension/Extension.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module/ExtensionLoader/src/team/zxorg/extension/ExtensionInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/ExtensionLoader/src/team/zxorg/extension/ExtensionInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module/ExtensionLoader/src/team/zxorg/extension/ExtensionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/ExtensionLoader/src/team/zxorg/extension/ExtensionManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module/ExtensionLoader/src/team/zxorg/gson/ZXGson.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/ExtensionLoader/src/team/zxorg/gson/ZXGson.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/ExtensionLoader/src/team/zxorg/api/ExtensionEntrypoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/ExtensionLoader/src/team/zxorg/extensionloader/extension/ExtensionEntrypoint.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/ExtensionLoader/src/team/zxorg/api/SharedInterface.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/ExtensionLoader/src/team/zxorg/core/LanguageInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/ExtensionLoader/src/team/zxorg/extensionloader/core/LanguageInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/ExtensionLoader/src/team/zxorg/core/ZXLanguage.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/ExtensionLoader/src/team/zxorg/extensionloader/core/ZXLanguage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/ExtensionLoader/src/team/zxorg/core/ZXLogger.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/ExtensionLoader/src/team/zxorg/extensionloader/core/ZXLogger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/ExtensionLoader/src/team/zxorg/core/ZXVersion.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/ExtensionLoader/src/team/zxorg/extensionloader/core/ZXVersion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/ExtensionLoader/src/team/zxorg/extension/Extension.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/ExtensionLoader/src/team/zxorg/extensionloader/extension/Extension.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/ExtensionLoader/src/team/zxorg/extension/ExtensionInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/ExtensionLoader/src/team/zxorg/extensionloader/extension/ExtensionInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/ExtensionLoader/src/team/zxorg/extension/ExtensionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/ExtensionLoader/src/team/zxorg/extensionloader/extension/ExtensionManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/ExtensionLoader/src/team/zxorg/gson/VersionSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/ExtensionLoader/src/team/zxorg/extensionloader/gson/VersionSerializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/ExtensionLoader/src/team/zxorg/gson/ZXGson.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/ExtensionLoader/src/team/zxorg/extensionloader/gson/ZXGson.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/module/ExtensionLoader/test/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/ExtensionLoader/test/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/extensions/ExtensionTemplate/resources/assets/extended-template/languages/zh-cn.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/extensions/ExtensionTemplate/resources/assets/extended-template/languages/zh-cn.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/module/extensions/ExtensionTemplate/resources/extension.json" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/ExtensionTemplate/resources/extension.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/module/extensions/ExtensionTemplate/src/team/zxorg/extendedtemplate/ExtensionTemplate.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/ExtensionTemplate/src/team/zxorg/extendedtemplate/ExtensionTemplate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module/extensions/Language/Language.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/extensions/FXComponentLibrary/FXComponentLibrary.iml" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/FXComponentLibrary/FXComponentLibrary.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/extensions/FXComponentLibrary/resources/extension.json" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/FXComponentLibrary/resources/extension.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/extensions/FXComponentLibrary/src/team/zxorg/fxcl/FXCL.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/extensions/FXComponentLibrary/src/team/zxorg/fxcl/Test.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/extensions/FXComponentLibrary/src/team/zxorg/fxcl/javafx/ProjectView.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/ZXNoterUIFrame/src/team/zxorg/zxnoter/uiframe/ProjectView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/extensions/FXComponentLibrary/src/team/zxorg/fxcl/javafx/sub/ActivityBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/ZXNoterUIFrame/src/team/zxorg/zxnoter/uiframe/sub/ActivityBar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/extensions/FXComponentLibrary/src/team/zxorg/fxcl/javafx/sub/FileViewStage.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/ZXNoterUIFrame/src/team/zxorg/zxnoter/uiframe/sub/FileViewStage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/extensions/FXComponentLibrary/src/team/zxorg/fxcl/javafx/sub/FunctionalComponent.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/extensions/FXComponentLibrary/src/team/zxorg/fxcl/javafx/sub/SideBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/ZXNoterUIFrame/src/team/zxorg/zxnoter/uiframe/sub/SideBar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/extensions/FXComponentLibrary/src/team/zxorg/fxcl/javafx/sub/StatusBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/ZXNoterUIFrame/src/team/zxorg/zxnoter/uiframe/sub/StatusBar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/extensions/FXComponentLibrary/src/team/zxorg/fxcl/javafx/sub/TitleBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/ZXNoterUIFrame/src/team/zxorg/zxnoter/uiframe/sub/TitleBar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/extensions/FXComponentLibrary/src/team/zxorg/fxcl/javafx/sub/editor/flexeditor/FlexArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/ZXNoterUIFrame/src/team/zxorg/zxnoter/uiframe/sub/editor/flexeditor/FlexArea.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/extensions/FXComponentLibrary/src/team/zxorg/fxcl/javafx/sub/editor/flexeditor/FlexSkinProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/ZXNoterUIFrame/src/team/zxorg/zxnoter/uiframe/sub/editor/flexeditor/FlexSkinProcessor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/extensions/FXComponentLibrary/src/team/zxorg/fxcl/javafx/sub/editor/flexeditor/FlexSplitPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/ZXNoterUIFrame/src/team/zxorg/zxnoter/uiframe/sub/editor/flexeditor/FlexSplitPane.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/extensions/FXComponentLibrary/src/team/zxorg/fxcl/javafx/sub/editor/flexeditor/FlexTab.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/ZXNoterUIFrame/src/team/zxorg/zxnoter/uiframe/sub/editor/flexeditor/FlexTab.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/extensions/FXComponentLibrary/src/team/zxorg/fxcl/javafx/sub/editor/flexeditor/FlexTabPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/ZXNoterUIFrame/src/team/zxorg/zxnoter/uiframe/sub/editor/flexeditor/FlexTabPane.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/extensions/FXComponentLibrary/src/team/zxorg/fxcl/javafx/sub/editor/temp/EditorArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/olds/temp/EditorArea.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/extensions/FXComponentLibrary/src/team/zxorg/fxcl/javafx/sub/editor/temp/EditorSplitPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/olds/temp/EditorSplitPane.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/extensions/FXComponentLibrary/src/team/zxorg/fxcl/javafx/sub/editor/temp/EditorTabPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/olds/temp/EditorTabPane.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/extensions/ZXNoterBase/ZXNoterBase.iml" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/ZXNoterBase/ZXNoterBase.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/extensions/ZXNoterBase/src/team/zxorg/extensionloader/info/InfoManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/ZXNoterBase/src/team/zxorg/zxnoter/base/info/InfoManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/extensions/ZXNoterBase/src/team/zxorg/extensionloader/info/root/ConfigurationInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/ZXNoterBase/src/team/zxorg/zxnoter/base/info/root/ConfigurationInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/extensions/ZXNoterBase/src/team/zxorg/extensionloader/info/root/DefaultConfigurationInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/ZXNoterBase/src/team/zxorg/zxnoter/base/info/root/DefaultConfigurationInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/extensions/ZXNoterBase/src/team/zxorg/extensionloader/info/root/ExpansionPackInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/ZXNoterBase/src/team/zxorg/zxnoter/base/info/root/ExpansionPackInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/extensions/ZXNoterBase/src/team/zxorg/extensionloader/info/root/ProjectConfigInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/ZXNoterBase/src/team/zxorg/zxnoter/base/info/root/ProjectConfigInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/extensions/ZXNoterBase/src/team/zxorg/extensionloader/info/root/ResourceInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/ZXNoterBase/src/team/zxorg/zxnoter/base/info/root/ResourceInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/extensions/ZXNoterBase/src/team/zxorg/extensionloader/info/sub/LastTimeStatesInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/ZXNoterBase/src/team/zxorg/zxnoter/base/info/sub/LastTimeStatesInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/extensions/ZXNoterBase/src/team/zxorg/extensionloader/info/sub/preference/MiniProjectInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/ZXNoterBase/src/team/zxorg/zxnoter/base/info/sub/preference/MiniProjectInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/extensions/ZXNoterBase/src/team/zxorg/extensionloader/info/sub/preference/UserPreferenceInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/ZXNoterBase/src/team/zxorg/zxnoter/base/info/sub/preference/UserPreferenceInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/extensions/ZXNoterBase/src/team/zxorg/extensionloader/info/sub/preference/editor/EditorInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/ZXNoterBase/src/team/zxorg/zxnoter/base/info/sub/preference/editor/EditorInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/extensions/ZXNoterBase/src/team/zxorg/extensionloader/info/sub/preference/res/ResourcesPackInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/ZXNoterBase/src/team/zxorg/zxnoter/base/info/sub/preference/res/ResourcesPackInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/extensions/ZXNoterBase/src/team/zxorg/extensionloader/info/sub/preference/side/FileManagerInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/ZXNoterBase/src/team/zxorg/zxnoter/base/info/sub/preference/side/FileManagerInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/extensions/ZXNoterBase/src/team/zxorg/extensionloader/info/sub/preference/side/SideBarInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/ZXNoterBase/src/team/zxorg/zxnoter/base/info/sub/preference/side/SideBarInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/extensions/ZXNoterBase/src/team/zxorg/extensionloader/info/sub/project/EditorLayoutInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/ZXNoterBase/src/team/zxorg/zxnoter/base/info/sub/project/EditorLayoutInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/extensions/ZXNoterUIFrame/ZXNoterUIFrame.iml" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/ZXNoterUIFrame/ZXNoterUIFrame.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/languages/zh-cn.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/RunApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RunApp.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -45,15 +90,15 @@
       <list>
         <option value="CSS File" />
         <option value="Enum" />
-        <option value="Interface" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="UI" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -96,66 +141,66 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Annotations&quot;: &quot;true&quot;,
-    &quot;Repository.Attach.JavaDocs&quot;: &quot;true&quot;,
-    &quot;Repository.Attach.Sources&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;UI&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;21&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Projects/ZXNoter/module/ExtensionLoader/resources&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;工件&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.21134493&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2874845&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;,
-    &quot;应用程序.AbstractAnimationRenderer.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.ExpressionCalculator.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.Main (1).executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.Main.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.PlistParser.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.RunApp.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.SkinEditor (1).executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.SkinEditor.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.Test.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.UISEditor (1).executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.UISEditor (2).executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.UISEditor.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.UISParser.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.UISPerspectiveTransform.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.UISPerspectiveTransformTest (1).executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.UISPerspectiveTransformTest.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.UISSkin.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.ZXVersion.executor&quot;: &quot;Run&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Downloaded.Files.Path.Enabled": "false",
+    "Repository.Attach.Annotations": "true",
+    "Repository.Attach.JavaDocs": "true",
+    "Repository.Attach.Sources": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "jdk.selected.JAVA_MODULE": "21",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/Projects/ZXNoter/module/extensions/ZXNoterUIFrame/resources",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "模块",
+    "project.structure.proportion": "0.21134493",
+    "project.structure.side.proportion": "0.2874845",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true",
+    "应用程序.AbstractAnimationRenderer.executor": "Run",
+    "应用程序.ExpressionCalculator.executor": "Run",
+    "应用程序.Main (1).executor": "Run",
+    "应用程序.Main.executor": "Run",
+    "应用程序.PlistParser.executor": "Run",
+    "应用程序.RunApp.executor": "Run",
+    "应用程序.SkinEditor (1).executor": "Run",
+    "应用程序.SkinEditor.executor": "Run",
+    "应用程序.Test.executor": "Run",
+    "应用程序.UISEditor (1).executor": "Run",
+    "应用程序.UISEditor (2).executor": "Run",
+    "应用程序.UISEditor.executor": "Run",
+    "应用程序.UISParser.executor": "Run",
+    "应用程序.UISPerspectiveTransform.executor": "Run",
+    "应用程序.UISPerspectiveTransformTest (1).executor": "Run",
+    "应用程序.UISPerspectiveTransformTest.executor": "Run",
+    "应用程序.UISSkin.executor": "Run",
+    "应用程序.ZXVersion.executor": "Run"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Projects\ZXNoter\module\extensions\ZXNoterUIFrame\resources" />
       <recent name="D:\Projects\ZXNoter\module\ExtensionLoader\resources" />
       <recent name="D:\Projects\ZXNoter\module\extensions\ExtensionTemplate\resources\assets\extended-template\langs" />
       <recent name="D:\Projects\ZXNoter\module\extensions\FXComponentLibrary\resources" />
       <recent name="D:\Projects\ZXNoter\module\extensions\ZXNoterBase\resources" />
-      <recent name="D:\Projects\ZXNoter\module\extensions\ExtensionTemplate\resources\assets\extended-template" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\Projects\ZXNoter" />
-      <recent name="D:\Projects\ZXNoter\module\ExtensionLoader\resources\languages" />
-      <recent name="D:\Projects\ZXNoter\module\extensions\FXComponentLibrary\resources\assets\fx-component-library" />
-      <recent name="D:\Projects\ZXNoter\module\extensions\ExtensionTemplate\resources\assets\extended-template" />
+      <recent name="D:\Projects\ZXNoter\module\extensions\ExtensionTemplate\resources" />
       <recent name="D:\Projects\ZXNoter\olds" />
+      <recent name="D:\Projects\ZXNoter\module\ExtensionLoader\resources\languages" />
+      <recent name="D:\Projects\ZXNoter\module\ExtensionLoader" />
+      <recent name="D:\Projects\ZXNoter" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="" />
@@ -178,6 +223,9 @@
         </option>
         <option name="BuildArtifacts" enabled="true">
           <artifact name="FXComponentLibrary:jar" />
+        </option>
+        <option name="BuildArtifacts" enabled="true">
+          <artifact name="ZXNoterUIFrame:jar" />
         </option>
         <option name="Make" enabled="true" />
       </method>
@@ -277,6 +325,7 @@
       <workItem from="1705299899773" duration="79163000" />
       <workItem from="1705564777480" duration="56000" />
       <workItem from="1705564861035" duration="3005000" />
+      <workItem from="1705572455911" duration="17720000" />
     </task>
     <task id="LOCAL-00002" summary="update ui">
       <option name="closed" value="true" />

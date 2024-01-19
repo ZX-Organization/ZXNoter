@@ -1,0 +1,17 @@
+{
+  configuration: {
+    languageCode: "zh-CN"
+  },
+  zxnoterUiFrame: {
+    projectView: {
+      titleBar: {
+      },
+      activityBar: {
+      },
+      viewArea: {
+      },
+      statusBar: {
+      }
+    }
+  }
+}

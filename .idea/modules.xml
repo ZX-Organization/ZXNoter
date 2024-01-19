@@ -8,7 +8,7 @@
       <module fileurl="file://$PROJECT_DIR$/module/extensions/ExtensionTemplate/ExtensionTemplate.iml" filepath="$PROJECT_DIR$/module/extensions/ExtensionTemplate/ExtensionTemplate.iml" />
       <module fileurl="file://$PROJECT_DIR$/module/extensions/FXComponentLibrary/FXComponentLibrary.iml" filepath="$PROJECT_DIR$/module/extensions/FXComponentLibrary/FXComponentLibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/module/extensions/MapEditCore/MapEditCore.iml" filepath="$PROJECT_DIR$/module/extensions/MapEditCore/MapEditCore.iml" />
-      <module fileurl="file://$PROJECT_DIR$/module/extensions/ProjectFrame/ProjectFrame.iml" filepath="$PROJECT_DIR$/module/extensions/ProjectFrame/ProjectFrame.iml" />
+      <module fileurl="file://$PROJECT_DIR$/module/extensions/ZXNoterUIFrame/ZXNoterUIFrame.iml" filepath="$PROJECT_DIR$/module/extensions/ZXNoterUIFrame/ZXNoterUIFrame.iml" />
       <module fileurl="file://$PROJECT_DIR$/module/extensions/ResourcePack/ResourcePack.iml" filepath="$PROJECT_DIR$/module/extensions/ResourcePack/ResourcePack.iml" />
       <module fileurl="file://$PROJECT_DIR$/module/extensions/UISEditor/UISEditor.iml" filepath="$PROJECT_DIR$/module/extensions/UISEditor/UISEditor.iml" />
       <module fileurl="file://$PROJECT_DIR$/ZXNoter.iml" filepath="$PROJECT_DIR$/ZXNoter.iml" />

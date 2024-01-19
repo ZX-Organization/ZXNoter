@@ -1,10 +1,9 @@
 package team.zxorg.extendedtemplate;
 
-import team.zxorg.api.ExtensionEntrypoint;
-import team.zxorg.core.ZXLogger;
-import team.zxorg.extension.Extension;
-import team.zxorg.extension.ExtensionManager;
-import team.zxorg.fxcl.FXCL;
+import team.zxorg.extensionloader.extension.ExtensionEntrypoint;
+import team.zxorg.extensionloader.core.ZXLogger;
+import team.zxorg.extensionloader.extension.Extension;
+import team.zxorg.extensionloader.extension.ExtensionManager;
 
 public class ExtensionTemplate implements ExtensionEntrypoint {
     @Override
