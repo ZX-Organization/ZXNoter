@@ -9,7 +9,7 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Orientation;
 import javafx.scene.Node;
 import javafx.scene.control.SplitPane;
-import team.zxorg.extensionloader.core.ZXLogger;
+import team.zxorg.extensionloader.core.Logger;
 
 /**
  * 灵活编辑器 拆分窗格
@@ -43,7 +43,7 @@ public class FlexSplitPane extends SplitPane {
                 //判断是被移除时 列表为空
                 if (c.wasRemoved()) {
                     if (c.getList().isEmpty()) {
-                        ZXLogger.info("拆分窗格列表为空 删除自身");
+                        Logger.info("拆分窗格列表为空 删除自身");
                         if (getParent().getParent() instanceof FlexSplitPane editorSplitPane) {
                             editorSplitPane.getItems().remove(this);
                         }
@@ -52,7 +52,7 @@ public class FlexSplitPane extends SplitPane {
                         //如果是根，则不精简
                         if (flexSplitPane != null) {
                             //精简
-                            ZXLogger.info("拆分窗格列表精简");
+                            Logger.info("拆分窗格列表精简");
                             flexSplitPane.getItems().addAll(c.getList());
                             Platform.runLater(() -> {
                                 getItems().clear();

@@ -1,0 +1,14 @@
+{
+  "namespace": "zxnoter",
+  "author": "zedoCN",
+  "version": "0.0.0-Alpha",
+  "dateReleased": 114514,
+  "packFormat": 0,
+  "dependencies": [
+    {
+      "namespace": "zxnoter",
+      "id": "base"
+    }
+  ],
+  "defaultLanguageCode": "zh-cn"
+}

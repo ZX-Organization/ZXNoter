@@ -1,0 +1,26 @@
+{
+  id: "fxComponentLibrary",
+  version: "0.0.0-RC",
+  name: "FX组件库",
+  description: "提供javafx和组件",
+  author: [
+    "zedoCN"
+  ],
+  contact: {
+    homepage: "https://github.com/ZX-Organization",
+    sources: "https://github.com/ZX-Organization/ZXNoter"
+  },
+  entrypoints: [
+    "team.zxorg.fxcl.Test"
+  ],
+  depends: {
+    extensionApi: ">=0.0.0",
+    extensions: {
+    }
+  },
+  icon: "assets/fxComponentLibrary/icon.png",
+  tags: [
+    "library",
+    "ui-component"
+  ]
+}

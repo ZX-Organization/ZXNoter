@@ -1,33 +1,13 @@
-[16:05:00] [ZXVersion.printInfo(102)/INFO]: 初始化日志系统...
-[16:05:00] [RunApp.main(19)/INFO]: ZXNoter 当前版本: 0.0.0-alpha 版本代号: 1
-[16:05:00] [ZXVersion.printInfo(104)/WARNING]: 当前为 [内部测试版本] 正处于早期开发阶段，请谨慎测试软件功能。
-[16:05:00] [RunApp.main(20)/INFO]: 初始化扩展加载器...
-[16:05:00] [ExtensionTemplate.onInitialize(11)/INFO]: 扩展模板 初始化完毕.
-[16:05:00] [ZXLanguage.get(162)/WARNING]: java.base/java.lang.Thread.getStackTrace(Thread.java:2450)
-[16:05:00] [ZXLanguage.get(162)/WARNING]: team.zxorg.extensionloader.core.ZXLogger.printStackTrace(ZXLogger.java:174)
-[16:05:00] [ZXLanguage.get(162)/WARNING]: team.zxorg.extensionloader.core.ZXLanguage.get(ZXLanguage.java:162)
-[16:05:00] [ZXLanguage.get(162)/WARNING]: team.zxorg.extensionloader.extension.Extension.getLanguage(Extension.java:178)
-[16:05:00] [ZXLanguage.get(162)/WARNING]: team.zxorg.zxnoter.uiframe.ZXNoterManager.onInitialize(ZXNoterManager.java:14)
-[16:05:00] [ZXLanguage.get(162)/WARNING]: team.zxorg.extensionloader.extension.Extension.initialize(Extension.java:151)
-[16:05:00] [ZXLanguage.get(162)/WARNING]: team.zxorg.extensionloader.extension.ExtensionManager.initializeAllExtensions(ExtensionManager.java:65)
-[16:05:00] [ZXLanguage.get(162)/WARNING]: RunApp.main(RunApp.java:28)
-[16:05:00] [ZXLanguage.get(165)/WARNING]: 丢失语言 语言路径: test.123
-[16:05:00] [ZXNoterManager.onInitialize(14)/SEVERE]: 丢失语言 语言路径: test.123
-[16:05:00] [ZXNoterManager.onInitialize(17)/INFO]: ===== > ZXNoter User Interface Frame < =====
-[16:05:00] [ZXNoterManager.onInitialize(19)/INFO]: ZXNoter启动
-[16:05:00] [ZXNoterManager.onInitialize(24)/INFO]: 初始化图形系统
-[16:05:01] [ZXNoterManager.lambda$onInitialize$1(31)/INFO]: 初始化配置
-[16:05:01] [StyleManager.loadStylesheetUnPrivileged/WARNING]: 警告: Resource "packs/baseExpansionPack/color/style.css" not found.
-[16:05:01] [StyleManager.loadStylesheetUnPrivileged/WARNING]: 警告: Resource "packs/baseExpansionPack/color/dark.css" not found.
-[16:05:01] [FlexSkinProcessor.updateTabContentRegion/INFO]: 更新 TabPaneSkin$TabContentRegion@78651e0c[styleClass=tab-content-area]
-[16:05:01] [FlexSkinProcessor.updateTabHeaderArea/INFO]: 更新 TabPaneSkin$TabHeaderArea@4a5d66e9[styleClass=tab-header-area]
-[16:05:01] [FlexSkinProcessor.handleTabHeaderArea(60)/INFO]: 初始化和更新 TabHeaderSkin
-[16:05:01] [FlexSkinProcessor.updateTabContentRegion/INFO]: 更新 TabPaneSkin$TabContentRegion@129ccb76[styleClass=tab-content-area]
-[16:05:01] [FlexSkinProcessor.updateTabHeaderArea/INFO]: 更新 TabPaneSkin$TabHeaderArea@2471d3f8[styleClass=tab-header-area]
-[16:05:01] [FlexSkinProcessor.handleTabHeaderArea(60)/INFO]: 初始化和更新 TabHeaderSkin
-[16:05:01] [FlexSkinProcessor.updateTabContentRegion/INFO]: 更新 TabPaneSkin$TabContentRegion@1e78eb96[styleClass=tab-content-area]
-[16:05:01] [FlexSkinProcessor.updateTabContentRegion/INFO]: 更新 TabPaneSkin$TabContentRegion@461a74da[styleClass=tab-content-area]
-[16:05:01] [FlexSkinProcessor.updateTabHeaderArea/INFO]: 更新 TabPaneSkin$TabHeaderArea@10b35bc5[styleClass=tab-header-area]
-[16:05:01] [FlexSkinProcessor.handleTabHeaderArea(60)/INFO]: 初始化和更新 TabHeaderSkin
-[16:05:01] [FlexSkinProcessor.updateTabContentRegion/INFO]: 更新 TabPaneSkin$TabContentRegion@472453f9[styleClass=tab-content-area]
-[16:56:57] [ZXNoterManager.lambda$onInitialize$0(38)/INFO]: 关闭程序
+[02:48:37] [Version.printInfo(102)/INFO]: 初始化日志系统...
+[02:48:37] [RunApp.main(19)/INFO]: ZXNoter 当前版本: 0.0.0-alpha 版本代号: 1
+[02:48:37] [Version.printInfo(104)/WARNING]: 当前为 [内部测试版本] 正处于早期开发阶段，请谨慎测试软件功能。
+[02:48:37] [RunApp.main(20)/INFO]: 初始化扩展加载器...
+[02:48:37] [Configuration.<init>/INFO]: class java.lang.Object
+[02:48:37] [Configuration.<init>/INFO]: T
+[02:48:37] [ThreadGroup.uncaughtException/WARNING]: Exception in thread "main"
+[02:48:37] [Throwable$WrappedPrintStream.println/WARNING]: java.lang.NullPointerException: Cannot invoke "Object.getClass()" because "values[0]" is null
+[02:48:37] [Throwable$WrappedPrintStream.println/WARNING]: at team.zxorg.extensionloader.core.Configuration.<init>(Configuration.java:41)
+[02:48:37] [Throwable$WrappedPrintStream.println/WARNING]: at team.zxorg.fxcl.Test.onInitialize(Test.java:28)
+[02:48:37] [Throwable$WrappedPrintStream.println/WARNING]: at team.zxorg.extensionloader.extension.Extension.initialize(Extension.java:171)
+[02:48:37] [Throwable$WrappedPrintStream.println/WARNING]: at team.zxorg.extensionloader.extension.ExtensionManager.initializeAllExtensions(ExtensionManager.java:65)
+[02:48:37] [Throwable$WrappedPrintStream.println/WARNING]: at RunApp.main(RunApp.java:26)

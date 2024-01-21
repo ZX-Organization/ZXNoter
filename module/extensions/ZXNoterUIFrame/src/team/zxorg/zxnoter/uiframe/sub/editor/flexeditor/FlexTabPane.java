@@ -7,7 +7,7 @@ import javafx.collections.ListChangeListener;
 import javafx.scene.Node;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-import team.zxorg.extensionloader.core.ZXLogger;
+import team.zxorg.extensionloader.core.Logger;
 
 
 /**
@@ -34,7 +34,7 @@ public class FlexTabPane extends TabPane {
                 //判断是被移除时 列表为空
                 if (c.wasRemoved()) {
                     if (c.getList().isEmpty()) {
-                        ZXLogger.info("选项卡窗格列表为空 删除自身");
+                        Logger.info("选项卡窗格列表为空 删除自身");
                         if (getParent().getParent() instanceof FlexSplitPane editorSplitPane) {
                             editorSplitPane.getItems().remove(this);
                         }

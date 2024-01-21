@@ -1,0 +1,22 @@
+{
+  configuration: {
+    languageCode: "zh-CN"
+  },
+  zxnoterUiFrame: {
+    projectView: {
+      titleBar: {
+      },
+      activityBar: {
+      },
+      viewArea: {
+      },
+      statusBar: {
+      }
+    }
+  },
+  extension: {
+    zxnoterUiFrame: {
+      initialize: "===>> ZXNoter 用户界面框架 初始化... <<==="
+    }
+  }
+}

@@ -1,15 +1,17 @@
 package team.zxorg.zxnoter.uiframe;
 
 import javafx.application.Platform;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import team.zxorg.fxcl.component.CanvasPane;
-import team.zxorg.zxnoter.uiframe.sub.*;
+import team.zxorg.fxcl.component.ResizableCanvas;
+import team.zxorg.zxnoter.uiframe.sub.ActivityBar;
+import team.zxorg.zxnoter.uiframe.sub.SideBar;
+import team.zxorg.zxnoter.uiframe.sub.StatusBar;
+import team.zxorg.zxnoter.uiframe.sub.TitleBar;
 import team.zxorg.zxnoter.uiframe.sub.editor.flexeditor.FlexArea;
 import team.zxorg.zxnoter.uiframe.sub.editor.flexeditor.FlexSplitPane;
 import team.zxorg.zxnoter.uiframe.sub.editor.flexeditor.FlexTab;
@@ -81,7 +83,7 @@ public class ProjectView {
             Tab tab = new Tab();
             tab.setText("111");
             tabPane.addTab(tab);
-            VBox hBox = new VBox(new TextField(), new Button(), new TextArea(), new CanvasPane());
+            VBox hBox = new VBox(new TextField(), new Button(), new TextArea(), new ResizableCanvas());
             tab.setContent(hBox);
         }
 
@@ -123,8 +125,8 @@ public class ProjectView {
 
 
     public ProjectView() {
-        scene.getStylesheets().addAll("packs/baseExpansionPack/color/style.css");
-        scene.getStylesheets().addAll("packs/baseExpansionPack/color/dark.css");
+        scene.getStylesheets().addAll(ZXNoterManager.extension.getGlobalResource("assets/zxnoterUiFrame/baseResourcePack/color/style.css").toString());
+        scene.getStylesheets().addAll(ZXNoterManager.extension.getGlobalResource("assets/zxnoterUiFrame/baseResourcePack/color/dark.css").toString());
         stage.setScene(scene);
         stage.setMinWidth(800);
         stage.setMinHeight(600);

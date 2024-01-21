@@ -14,7 +14,7 @@ import javafx.scene.image.Image;
 import javafx.scene.input.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import team.zxorg.extensionloader.core.ZXLogger;
+import team.zxorg.extensionloader.core.Logger;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -57,7 +57,7 @@ public class FlexSkinProcessor {
     private void handleTabHeaderArea(Node node) {
         updateTabHeaderArea(node);
         if (tabPane.lookup(".headers-region") instanceof Pane headersRegion) {
-            ZXLogger.info("初始化和更新 TabHeaderSkin");
+            Logger.info("初始化和更新 TabHeaderSkin");
             headersRegion.getChildren().forEach(this::updateTabHeaderSkin);
             headersRegion.getChildren().addListener((ListChangeListener<Node>) c1 -> {
                 while (c1.next())

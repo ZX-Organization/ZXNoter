@@ -1,8 +1,8 @@
 package team.zxorg.extensionloader.extension;
 
-import team.zxorg.extensionloader.core.ZXLanguage;
-import team.zxorg.extensionloader.core.ZXLogger;
-import team.zxorg.extensionloader.core.ZXVersion;
+import team.zxorg.extensionloader.core.Language;
+import team.zxorg.extensionloader.core.Logger;
+import team.zxorg.extensionloader.core.Version;
 
 import java.io.IOException;
 import java.net.URL;
@@ -16,7 +16,7 @@ import java.util.HashMap;
  * 扩展管理器
  */
 public class ExtensionManager {
-    public static final ZXVersion EXTENSION_API_VERSION = new ZXVersion(0, 0, 0, ZXVersion.ReleaseStatus.ALPHA);
+    public static final Version EXTENSION_API_VERSION = new Version(0, 0, 0, Version.ReleaseStatus.ALPHA);
     private final HashMap<String, Extension> extensions = new HashMap<>();
 
     /**
@@ -46,12 +46,12 @@ public class ExtensionManager {
     private void loadExtension(Path extensionPath) {
         Extension extension = new Extension(this, extensionPath);
         if (!extension.getApiVersion().isSupported(EXTENSION_API_VERSION)) {
-            ZXLogger.warning(ZXLanguage.get(Extension.MESSAGE_ERROR + "dependApiNotCompatible", extension.getId(), extension.getApiVersion(), EXTENSION_API_VERSION));
+            Logger.warning(Language.get(Extension.MESSAGE_ERROR + "dependApiNotCompatible", extension.getId(), extension.getApiVersion(), EXTENSION_API_VERSION));
             return;
         }
 
         if (extensions.containsKey(extension.getId())) {
-            ZXLogger.warning(ZXLanguage.get(Extension.MESSAGE_ERROR + "idConflict", extension.getId(), extensionPath.toAbsolutePath(), extensions.get(extension.getId()).jarPath.toAbsolutePath()));
+            Logger.warning(Language.get(Extension.MESSAGE_ERROR + "idConflict", extension.getId(), extensionPath.toAbsolutePath(), extensions.get(extension.getId()).jarPath.toAbsolutePath()));
             return;
         }
         extensions.put(extension.getId(), extension);

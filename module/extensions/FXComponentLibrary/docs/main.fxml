@@ -51,7 +51,7 @@
    <children>
       <HBox id="titleBar" prefHeight="30.0" prefWidth="600.0" styleClass="title-bar">
          <children>
-            <ImageView id="icon" fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true" styleClass="icon">
+            <ImageView id="svgIcon" fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true" styleClass="svgIcon">
                <image>
                   <Image url="@../resources/assets/logo-x26.png" />
                </image>
@@ -101,7 +101,7 @@
                      <children>
                         <AnchorPane prefHeight="371.0" prefWidth="260.0">
                            <children>
-                              <ImageView id="icon" fitHeight="176.0" fitWidth="171.0" layoutX="40.0" layoutY="103.0" pickOnBounds="true" preserveRatio="true" rotate="-12.1" styleClass="icon">
+                              <ImageView id="svgIcon" fitHeight="176.0" fitWidth="171.0" layoutX="40.0" layoutY="103.0" pickOnBounds="true" preserveRatio="true" rotate="-12.1" styleClass="svgIcon">
                                  <image>
                                     <Image url="@../resources/assets/logo-x26.png" />
                                  </image>
