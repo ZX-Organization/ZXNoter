@@ -51,7 +51,7 @@ public class ExtensionManager {
         }
 
         if (extensions.containsKey(extension.getId())) {
-            Logger.warning(Language.get(Extension.MESSAGE_ERROR + "idConflict", extension.getId(), extensionPath.toAbsolutePath(), extensions.get(extension.getId()).jarPath.toAbsolutePath()));
+            Logger.warning(Language.get(Extension.MESSAGE_ERROR + "idConflict", extension.getId(), extensionPath.toAbsolutePath(), extensions.get(extension.getId()).getJarPath().toAbsolutePath()));
             return;
         }
         extensions.put(extension.getId(), extension);
@@ -81,7 +81,7 @@ public class ExtensionManager {
         URL[] jarFiles = new URL[extensions.size()];
         int index = 0;
         for (Extension extension : extensions.values()) {
-            jarFiles[index++] = (extension.jarUrl);
+            jarFiles[index++] = (extension.getJarUrl());
         }
 
         URLClassLoader classLoader = new URLClassLoader(jarFiles);

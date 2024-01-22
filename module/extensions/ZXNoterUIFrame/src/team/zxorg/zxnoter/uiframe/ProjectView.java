@@ -125,8 +125,8 @@ public class ProjectView {
 
 
     public ProjectView() {
-        scene.getStylesheets().addAll(ZXNoterManager.extension.getGlobalResource("assets/zxnoterUiFrame/baseResourcePack/color/style.css").toString());
-        scene.getStylesheets().addAll(ZXNoterManager.extension.getGlobalResource("assets/zxnoterUiFrame/baseResourcePack/color/dark.css").toString());
+        scene.getStylesheets().addAll(ZXNoterManager.extension.getGlobalClassResource("assets/zxnoterUiFrame/baseResourcePack/color/style.css").toString());
+        scene.getStylesheets().addAll(ZXNoterManager.extension.getGlobalClassResource("assets/zxnoterUiFrame/baseResourcePack/color/dark.css").toString());
         stage.setScene(scene);
         stage.setMinWidth(800);
         stage.setMinHeight(600);

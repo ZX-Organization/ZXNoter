@@ -1,5 +1,6 @@
 package team.zxorg.extensionloader.extension;
 
+import team.zxorg.extensionloader.core.Configuration;
 import team.zxorg.extensionloader.core.Language;
 import team.zxorg.extensionloader.core.Logger;
 import team.zxorg.extensionloader.core.Version;
@@ -14,6 +15,7 @@ import java.net.URLClassLoader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,6 +23,76 @@ import java.util.Map;
  * 扩展对象
  */
 public class Extension {
+    public static final String MESSAGE_ERROR = "message.extension.error.";
+    /**
+     * 扩展配置信息
+     */
+    private final ExtensionInfo info;
+    /**
+     * 扩展管理器
+     */
+    private final ExtensionManager manager;
+    /**
+     * 扩展jar文件路径
+     */
+    private final Path jarPath;
+    /**
+     * 扩展jar文件路径
+     */
+    private final URL jarUrl;
+    private final Configuration configuration;
+    /**
+     * 扩展入口点列表
+     */
+    private List<ExtensionEntrypoint> entrypointList;
+    /**
+     * 扩展类加载器
+     */
+    private URLClassLoader classLoader;
+
+    public Extension(ExtensionManager manager, Path jarPath) {
+        this.jarPath = jarPath;
+        this.manager = manager;
+        //ZXLogger.info("正在读取扩展: " + jarPath);
+        /**
+         * 扩展jar文件路径
+         */
+        try {
+            jarUrl = jarPath.toUri().toURL();
+        } catch (MalformedURLException e) {
+            throw new RuntimeException(getLanguage(MESSAGE_ERROR + "url", jarPath, e));
+        }
+        try (URLClassLoader classLoader = new URLClassLoader(new URL[]{jarUrl})) {
+            info = GsonManager.fromJson(classLoader, "extension.json5", ExtensionInfo.class);
+            configuration = new Configuration(info.id);
+            Language.setGlobalLanguage("extension." + info.id + ".version", info.version.toString());
+
+
+            if (info.languages != null) for (Path language : info.languages)
+                Language.loadLanguage(classLoader, language);
+
+            if (info.author != null) {
+                StringBuilder sb = new StringBuilder();
+                for (Language author : info.author)
+                    sb.append(author).append(",");
+                sb.deleteCharAt(sb.length() - 1);
+                Language.setGlobalLanguage("extension." + info.id + ".author", sb.toString());
+            }
+
+            if (info.tags != null) {
+                StringBuilder sb = new StringBuilder();
+                for (Language tag : info.tags)
+                    sb.append(tag).append(",");
+                sb.deleteCharAt(sb.length() - 1);
+                Language.setGlobalLanguage("extension." + info.id + ".tags", sb.toString());
+            }
+
+
+        } catch (Exception e) {
+            throw new RuntimeException(getLanguage(MESSAGE_ERROR + "infoReadFailed", jarPath, e));
+        }
+    }
+
     /**
      * 获取扩展id
      *
@@ -53,69 +125,9 @@ public class Extension {
         return "(" + info.id + " " + info.version + ")";
     }
 
-    /**
-     * 扩展配置信息
-     */
-    private final ExtensionInfo info;
-    /**
-     * 扩展入口点列表
-     */
-    List<ExtensionEntrypoint> entrypointList;
-    /**
-     * 扩展管理器
-     */
-    ExtensionManager manager;
-    /**
-     * 扩展jar文件路径
-     */
-    URL jarUrl;
-    /**
-     * 扩展jar文件路径
-     */
-    Path jarPath;
-    /**
-     * 扩展类加载器
-     */
-    URLClassLoader classLoader;
-
-    public Extension(ExtensionManager manager, Path jarPath) {
-        this.jarPath = jarPath;
-        this.manager = manager;
-        //ZXLogger.info("正在读取扩展: " + jarPath);
-        try {
-            jarUrl = jarPath.toUri().toURL();
-        } catch (MalformedURLException e) {
-            throw new RuntimeException(getLanguage(MESSAGE_ERROR + "url", jarPath, e));
-        }
-        try (URLClassLoader classLoader = new URLClassLoader(new URL[]{jarUrl})) {
-            info = GsonManager.fromJson(classLoader, "extension.json5", ExtensionInfo.class);
-
-            Language.setGlobalLanguage("extension." + info.id + ".version", info.version.toString());
-
-            if (info.author != null) {
-                StringBuilder sb = new StringBuilder();
-                for (String author : info.author)
-                    sb.append(author).append(",");
-                sb.deleteCharAt(sb.length() - 1);
-                Language.setGlobalLanguage("extension." + info.id + ".author", sb.toString());
-            }
-
-            if (info.tags != null) {
-                StringBuilder sb = new StringBuilder();
-                for (String tag : info.tags)
-                    sb.append(tag).append(",");
-                sb.deleteCharAt(sb.length() - 1);
-                Language.setGlobalLanguage("extension." + info.id + ".tags", sb.toString());
-            }
-
-            if (info.languages != null)
-                for (String language : info.languages)
-                    Language.loadLanguage(classLoader, language);
-        } catch (Exception e) {
-            throw new RuntimeException(getLanguage(MESSAGE_ERROR + "infoReadFailed", jarPath, e));
-        }
+    public URL getJarUrl() {
+        return jarUrl;
     }
-
 
     /**
      * 载入扩展
@@ -172,14 +184,13 @@ public class Extension {
         }
     }
 
-
     /**
      * 获取全局资源
      *
      * @param name 资源路径
      * @return 资源数据
      */
-    public InputStream getGlobalResourceAsStream(String name) {
+    public InputStream getGlobalClassResourceAsStream(String name) {
         return classLoader.getResourceAsStream(name);
     }
 
@@ -189,7 +200,7 @@ public class Extension {
      * @param name 资源路径
      * @return 资源数据
      */
-    public URL getGlobalResource(String name) {
+    public URL getGlobalClassResource(String name) {
         return classLoader.getResource(name);
     }
 
@@ -199,17 +210,18 @@ public class Extension {
      * @param name 资源路径 'assets.id.name'
      * @return 资源数据
      */
-    public InputStream getResourceAsStream(String name) {
+    public InputStream getClassResourceAsStream(String name) {
         return classLoader.getResourceAsStream("assets/" + info.id + "/" + name);
     }
 
     /**
-     *  获取assets下的资源
+     * 获取assets下的资源
+     *
      * @param name 资源路径 'assets.id.name'
      * @return 资源数据
      */
-    public String getResourceAsString(String name) {
-        try (InputStream is = getResourceAsStream(name)) {
+    public String getClassResourceAsString(String name) {
+        try (InputStream is = getClassResourceAsStream(name)) {
             return new String(is.readAllBytes(), StandardCharsets.UTF_8);
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -222,16 +234,21 @@ public class Extension {
      * @param name 资源路径
      * @return 资源数据
      */
-    public URL getResource(String name) {
+    public URL getClassResource(String name) {
         return classLoader.getResource("assets/" + info.id + "/" + name);
     }
-
 
     public String getLanguage(String key, Object... args) {
         return Language.get(key, args);
     }
 
-    public static final String MESSAGE_ERROR = "message.extension.error.";
+    public Configuration getConfiguration() {
+        return configuration;
+    }
+
+    public Path getJarPath() {
+        return jarPath;
+    }
 
 
     /**
@@ -250,19 +267,19 @@ public class Extension {
         /**
          * 名称
          */
-        String name;
+        Language name;
         /**
          * 描述
          */
-        String description;
+        Language description;
         /**
          * 扩展图标
          */
-        String icon;
+        Path icon;
         /**
          * 开发者
          */
-        List<String> author;
+        List<Language> author;
         /**
          * 联系方式
          */
@@ -282,12 +299,12 @@ public class Extension {
         /**
          * 扩展标签
          */
-        List<String> tags;
+        List<Language> tags;
 
         /**
          * 语言列表
          */
-        List<String> languages;
+        List<Path> languages;
 
         /**
          * 依赖类

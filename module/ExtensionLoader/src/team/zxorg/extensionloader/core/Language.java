@@ -7,13 +7,25 @@ import team.zxorg.extensionloader.event.LanguageEventListener;
 import team.zxorg.extensionloader.gson.GsonManager;
 
 import java.net.URL;
+import java.nio.file.Path;
 import java.text.MessageFormat;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Language {
-    private static final List<LanguageEventListener> languageEventListeners = new ArrayList<>();
+    private final String lang;
+
+    public Language(String lang) {
+        this.lang = lang;
+    }
+
+    @Override
+    public String toString() {
+        return getLang(lang);
+    }
+
+    private static final List<LanguageEventListener> eventListeners = new ArrayList<>();
     private static Locale locale = Locale.CHINA;
     /**
      * 缓存的消息格式化表
@@ -52,6 +64,18 @@ public class Language {
      */
     public static void loadLanguage(ClassLoader classLoader, String resourceName) {
         LanguageInfo languageInfo = new LanguageInfo(classLoader.getResource(resourceName), GsonManager.parseJson(classLoader, resourceName));
+        languageInfoMap.computeIfAbsent(languageInfo.getCode(), k -> new ArrayList<>()).add(languageInfo);
+    }
+
+    /**
+     * 载入语言
+     *
+     * @param classLoader  类加载器
+     * @param resourceName 语言资源名
+     */
+    public static void loadLanguage(ClassLoader classLoader, Path resourceName) {
+        String name = resourceName.toString().replaceAll("\\\\", "/");
+        LanguageInfo languageInfo = new LanguageInfo(classLoader.getResource(name), GsonManager.parseJson(classLoader, name));
         languageInfoMap.computeIfAbsent(languageInfo.getCode(), k -> new ArrayList<>()).add(languageInfo);
     }
 
@@ -114,21 +138,21 @@ public class Language {
         MessageFormat mf;
 
         for (Map.Entry<String, String> entry : added.entrySet()) {
-            mf = languageToMessageFormat(entry.getKey(), entry.getValue());
-            for (LanguageEventListener listener : languageEventListeners)
+            mf = toMessageFormat(entry.getKey(), entry.getValue());
+            for (LanguageEventListener listener : eventListeners)
                 listener.onLanguageAdded(entry.getKey(), mf);
             messageFormatMap.put(entry.getKey(), mf);
         }
         for (Map.Entry<String, String> entry : removed.entrySet()) {
             mf = messageFormatMap.get(entry.getKey());
-            for (LanguageEventListener listener : languageEventListeners)
+            for (LanguageEventListener listener : eventListeners)
                 listener.onLanguageRemoved(entry.getKey(), mf);
             messageFormatMap.remove(entry.getKey());
         }
         for (Map.Entry<String, String> entry : changed.entrySet()) {
-            mf = languageToMessageFormat(entry.getKey(), entry.getValue());
+            mf = toMessageFormat(entry.getKey(), entry.getValue());
             messageFormatMap.put(entry.getKey(), mf);
-            for (LanguageEventListener listener : languageEventListeners)
+            for (LanguageEventListener listener : eventListeners)
                 listener.onLanguageChange(entry.getKey(), mf);
         }
     }
@@ -140,7 +164,7 @@ public class Language {
      * @param value 语言值
      * @return 消息格式化
      */
-    private static MessageFormat languageToMessageFormat(String key, String value) {
+    private static MessageFormat toMessageFormat(String key, String value) {
         Matcher matcher = pattern.matcher(value);
         StringBuilder resultBuffer = new StringBuilder();
         // 查找匹配并替换
@@ -157,6 +181,26 @@ public class Language {
         // 将剩余的部分追加到结果中
         matcher.appendTail(resultBuffer);
         return new MessageFormat(resultBuffer.toString());
+    }
+
+    /**
+     * 语言转消息格式化
+     *
+     * @param value 语言值
+     * @return 消息格式化
+     */
+    private static String getLang(String value) {
+        Matcher matcher = pattern.matcher(value);
+        StringBuilder resultBuffer = new StringBuilder();
+        // 查找匹配并替换
+        while (matcher.find()) {
+            String match = matcher.group(1);
+            String v = get(match);
+            matcher.appendReplacement(resultBuffer, v);
+        }
+        // 将剩余的部分追加到结果中
+        matcher.appendTail(resultBuffer);
+        return resultBuffer.toString();
     }
 
     /**
@@ -178,6 +222,7 @@ public class Language {
         return v;
     }
 
+
     /**
      * 获取语言
      *
@@ -196,7 +241,7 @@ public class Language {
      * @param listener 要添加的监听器
      */
     public static void addEventListener(LanguageEventListener listener) {
-        languageEventListeners.add(listener);
+        eventListeners.add(listener);
     }
 
     /**
@@ -205,7 +250,7 @@ public class Language {
      * @param listener 被移除的监听器
      */
     public static void removeEventListener(LanguageEventListener listener) {
-        languageEventListeners.remove(listener);
+        eventListeners.remove(listener);
     }
 
     private static class LanguageInfo {

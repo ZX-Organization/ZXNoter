@@ -1,13 +1,20 @@
-[02:48:37] [Version.printInfo(102)/INFO]: 初始化日志系统...
-[02:48:37] [RunApp.main(19)/INFO]: ZXNoter 当前版本: 0.0.0-alpha 版本代号: 1
-[02:48:37] [Version.printInfo(104)/WARNING]: 当前为 [内部测试版本] 正处于早期开发阶段，请谨慎测试软件功能。
-[02:48:37] [RunApp.main(20)/INFO]: 初始化扩展加载器...
-[02:48:37] [Configuration.<init>/INFO]: class java.lang.Object
-[02:48:37] [Configuration.<init>/INFO]: T
-[02:48:37] [ThreadGroup.uncaughtException/WARNING]: Exception in thread "main"
-[02:48:37] [Throwable$WrappedPrintStream.println/WARNING]: java.lang.NullPointerException: Cannot invoke "Object.getClass()" because "values[0]" is null
-[02:48:37] [Throwable$WrappedPrintStream.println/WARNING]: at team.zxorg.extensionloader.core.Configuration.<init>(Configuration.java:41)
-[02:48:37] [Throwable$WrappedPrintStream.println/WARNING]: at team.zxorg.fxcl.Test.onInitialize(Test.java:28)
-[02:48:37] [Throwable$WrappedPrintStream.println/WARNING]: at team.zxorg.extensionloader.extension.Extension.initialize(Extension.java:171)
-[02:48:37] [Throwable$WrappedPrintStream.println/WARNING]: at team.zxorg.extensionloader.extension.ExtensionManager.initializeAllExtensions(ExtensionManager.java:65)
-[02:48:37] [Throwable$WrappedPrintStream.println/WARNING]: at RunApp.main(RunApp.java:26)
+[22:10:04] [Version.printInfo(102)/INFO]: 初始化日志系统...
+[22:10:04] [RunApp.main(19)/INFO]: ZXNoter 当前版本: 0.0.0-alpha 版本代号: 1
+[22:10:04] [Version.printInfo(104)/WARNING]: 当前为 [内部测试版本] 正处于早期开发阶段，请谨慎测试软件功能。
+[22:10:04] [RunApp.main(20)/INFO]: 初始化扩展加载器...
+[22:10:04] [Resource.initialize(39)/INFO]: 初始化资源包...
+[22:10:04] [Resource.lambda$reloadResourcePacks$0(59)/INFO]: 正在载入资源包: .\resourcepacks\editorPack-pink
+[22:10:04] [Resource.lambda$reloadResourcePacks$0(64)/WARNING]: 资源包丢失信息: .\resourcepacks\editorPack-pink
+[22:10:04] [Resource.lambda$reloadResourcePacks$0(59)/INFO]: 正在载入资源包: .\resourcepacks\iconPack-fill
+[22:10:04] [Resource.lambda$reloadResourcePacks$0(59)/INFO]: 正在载入资源包: .\resourcepacks\iconPack-line
+[22:10:04] [Resource.lambda$reloadResourcePacks$0(59)/INFO]: 正在载入资源包: .\resourcepacks\soundPack-default
+[22:10:04] [Resource.lambda$reloadResourcePacks$0(64)/WARNING]: 资源包丢失信息: .\resourcepacks\soundPack-default
+[22:10:04] [Resource.lambda$reloadResourcePacks$0(59)/INFO]: 正在载入资源包: .\resourcepacks\stylePack-dark
+[22:10:04] [Resource.lambda$reloadResourcePacks$0(64)/WARNING]: 资源包丢失信息: .\resourcepacks\stylePack-dark
+[22:10:04] [Resource.lambda$reloadResourcePacks$0(59)/INFO]: 正在载入资源包: .\resourcepacks\stylePack-light
+[22:10:04] [Resource.lambda$reloadResourcePacks$0(64)/WARNING]: 资源包丢失信息: .\resourcepacks\stylePack-light
+[22:10:04] [Resource.reloadResourcePacks(79)/INFO]: 丢失资源包: iconPack-fill.zip
+[22:10:04] [Resource.reloadResourcePacks(90)/INFO]: 正在应用资源包: Icon Pack
+[22:10:04] [Test.onInitialize(28)/WARNING]: 测试FX组件库
+[22:10:04] [Test.onInitialize(32)/INFO]: 初始化FX图形系统
+[22:10:05] [ExtensionTemplate.onInitialize(11)/INFO]: 扩展模板消息 你好世界!

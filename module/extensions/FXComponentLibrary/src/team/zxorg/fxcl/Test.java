@@ -12,23 +12,19 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.SVGPath;
 import javafx.stage.Stage;
-import team.zxorg.extensionloader.core.Configuration;
 import team.zxorg.extensionloader.core.Logger;
+import team.zxorg.extensionloader.core.Resource;
 import team.zxorg.extensionloader.extension.Extension;
 import team.zxorg.extensionloader.extension.ExtensionEntrypoint;
 import team.zxorg.extensionloader.extension.ExtensionManager;
 import team.zxorg.fxcl.component.LangLabel;
-import team.zxorg.fxcl.resource.IconManager;
 
 public class Test implements ExtensionEntrypoint {
-    public String cnmd = "WDNMD";
 
     @Override
     public void onInitialize(Extension extension, ExtensionManager manager) {
-        Configuration<Test> config = new Configuration<>("Test");
-        config.save();
-        System.out.println(config.getConfig().cnmd);
 
+        Resource resource = new Resource();
         Logger.warning("测试FX组件库");
 
         //屏蔽javafx歌姬初始化时的异常
@@ -41,7 +37,7 @@ public class Test implements ExtensionEntrypoint {
             StringProperty sp = new SimpleStringProperty("HELLO");
 
 
-            IconManager.loadIconPack(extension.getClass().getClassLoader(), "assets/fxComponentLibrary/baseResourcePack/icon/line/software/");
+            //IconManager.loadIconPack(extension.getClass().getClassLoader(), "assets/fxComponentLibrary/baseResourcePack/icon/line/software/");
 
             Pane svgIcon = new Pane();
             svgIcon.setMinSize(80, 80);
@@ -59,8 +55,8 @@ public class Test implements ExtensionEntrypoint {
 
             Scene scene = new Scene(root);
 
-            scene.getStylesheets().addAll(extension.getResource("baseResourcePack/color/style.css").toString());
-            scene.getStylesheets().addAll(extension.getResource("baseResourcePack/color/dark.css").toString());
+            //scene.getStylesheets().addAll(extension.getClassResource("baseResourcePack/color/style.css").toString());
+            //scene.getStylesheets().addAll(extension.getClassResource("baseResourcePack/color/dark.css").toString());
             Stage stage = new Stage();
             stage.setScene(scene);
             stage.setMinWidth(800);

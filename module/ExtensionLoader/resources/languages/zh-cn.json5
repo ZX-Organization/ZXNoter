@@ -32,6 +32,17 @@
   },
   // 信息
   message: {
+    resource: {
+      initialize: "初始化资源包...",
+      lost: "丢失资源包: {0}",
+      loading: "正在载入资源包: {0}",
+      notFound: "资源包不存在: {0}",
+      loadFailed: "资源包载入失败: {0} 异常: {1}",
+      application: "正在应用资源包: {0}",
+      noName: "未命名的资源包",
+      noDescription: "没有描述",
+      lostInfo: "资源包丢失信息: {0}"
+    },
     language: {
       lost: "丢失语言 语言路径: {0}",
       noCode: "{0} 语言文件没有设置语言代码 'configuration.languageCode'"
