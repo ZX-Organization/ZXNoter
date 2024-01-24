@@ -1,6 +1,7 @@
 package team.zxorg.extensionloader.extension;
 
 import team.zxorg.extensionloader.core.Language;
+import team.zxorg.extensionloader.core.LanguageKey;
 import team.zxorg.extensionloader.core.Logger;
 import team.zxorg.extensionloader.core.Version;
 
@@ -46,12 +47,12 @@ public class ExtensionManager {
     private void loadExtension(Path extensionPath) {
         Extension extension = new Extension(this, extensionPath);
         if (!extension.getApiVersion().isSupported(EXTENSION_API_VERSION)) {
-            Logger.warning(Language.get(Extension.MESSAGE_ERROR + "dependApiNotCompatible", extension.getId(), extension.getApiVersion(), EXTENSION_API_VERSION));
+            Logger.warning(Language.get(LanguageKey.MESSAGE_EXTENSION_ERROR_DEPEND_API_NOT_COMPATIBLE, extension.getId(), extension.getApiVersion(), EXTENSION_API_VERSION));
             return;
         }
 
         if (extensions.containsKey(extension.getId())) {
-            Logger.warning(Language.get(Extension.MESSAGE_ERROR + "idConflict", extension.getId(), extensionPath.toAbsolutePath(), extensions.get(extension.getId()).getJarPath().toAbsolutePath()));
+            Logger.warning(Language.get(LanguageKey.MESSAGE_EXTENSION_ERROR_ID_CONFLICT, extension.getId(), extensionPath.toAbsolutePath(), extensions.get(extension.getId()).getJarPath().toAbsolutePath()));
             return;
         }
         extensions.put(extension.getId(), extension);

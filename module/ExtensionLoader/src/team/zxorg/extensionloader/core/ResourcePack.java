@@ -46,8 +46,8 @@ public class ResourcePack {
         Path icon;
 
         public ResourcePackInfo() {
-            name = new Language("message.resource.noName");
-            description = new Language("message.resource.noDescription");
+            name = new Language(LanguageKey.MESSAGE_RESOURCE_PACK_NO_NAME);
+            description = new Language(LanguageKey.MESSAGE_RESOURCE_PACK_NO_DESCRIPTION);
             tags = new ArrayList<>();
             author = new ArrayList<>();
             icon = Path.of("");
@@ -55,7 +55,7 @@ public class ResourcePack {
         }
     }
 
-    private ResourcePackInfo info;
+    private final ResourcePackInfo info;
 
     /**
      * 获取资源包作者
@@ -129,20 +129,22 @@ public class ResourcePack {
 
     public ResourcePack(Path path) {
         if (!Files.exists(path))
-            throw new IllegalStateException(Language.get("message.resource.notFound", path));
+            throw new IllegalStateException(Language.get(LanguageKey.MESSAGE_RESOURCE_PACK_NOT_FOUND, path));
         if (!Files.isDirectory(path)) {
             try {
                 zipFileSystem = createZipFileSystem(path);
                 path = zipFileSystem.getPath("/");
             } catch (IOException e) {
-                throw new RuntimeException(Language.get("message.resource.loadFailed", path, e));
+                close();
+                throw new RuntimeException(Language.get(LanguageKey.MESSAGE_RESOURCE_PACK_LOAD_FAILED, path, e));
             }
         }
         this.path = path;
         // 读取资源包的配置文件，获取资源包的名称、版本和描述等信息
         info = GsonManager.fromJson(path.resolve("pack.json5"), ResourcePackInfo.class);
         if (info == null) {
-            throw new RuntimeException(Language.get("message.resource.lostInfo", path));
+            close();
+            throw new RuntimeException(Language.get(LanguageKey.MESSAGE_RESOURCE_PACK_LOST_INFO, path));
         }
     }
 

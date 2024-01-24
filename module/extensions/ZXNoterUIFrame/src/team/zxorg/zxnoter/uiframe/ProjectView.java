@@ -8,14 +8,14 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import team.zxorg.fxcl.component.ResizableCanvas;
-import team.zxorg.zxnoter.uiframe.sub.ActivityBar;
-import team.zxorg.zxnoter.uiframe.sub.SideBar;
-import team.zxorg.zxnoter.uiframe.sub.StatusBar;
-import team.zxorg.zxnoter.uiframe.sub.TitleBar;
-import team.zxorg.zxnoter.uiframe.sub.editor.flexeditor.FlexArea;
-import team.zxorg.zxnoter.uiframe.sub.editor.flexeditor.FlexSplitPane;
-import team.zxorg.zxnoter.uiframe.sub.editor.flexeditor.FlexTab;
-import team.zxorg.zxnoter.uiframe.sub.editor.flexeditor.FlexTabPane;
+import team.zxorg.zxnoter.uiframe.component.ActivityBar;
+import team.zxorg.zxnoter.uiframe.component.SideBar;
+import team.zxorg.zxnoter.uiframe.component.StatusBar;
+import team.zxorg.zxnoter.uiframe.component.TitleBar;
+import team.zxorg.zxnoter.uiframe.component.flexeditor.FlexArea;
+import team.zxorg.zxnoter.uiframe.component.flexeditor.FlexSplitPane;
+import team.zxorg.zxnoter.uiframe.component.flexeditor.FlexTab;
+import team.zxorg.zxnoter.uiframe.component.flexeditor.FlexTabPane;
 
 import java.nio.file.Path;
 

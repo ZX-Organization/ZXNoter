@@ -3,12 +3,17 @@ package team.zxorg.extensionloader.core;
 import team.zxorg.extensionloader.event.ResourceEventListener;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Stream;
 
 public class Resource {
@@ -16,6 +21,7 @@ public class Resource {
     private static final Configuration config = new Configuration("resource");
     private static ResourceConfig resourceConfig;
     private static final HashMap<Path, Path> resources = new HashMap<>();
+
     /**
      * 启用的资源包列表
      */
@@ -36,15 +42,14 @@ public class Resource {
      * 初始化资源包
      */
     private static void initialize() {
-        Logger.info(Language.get("message.resource.initialize"));
+        Logger.info(Language.get(LanguageKey.MESSAGE_RESOURCE_PACK_INITIALIZE));
         resourceConfig = config.get(ResourceConfig.class);
-        reloadResourcePacks();
     }
 
     /**
      * 重载所有资源包
      */
-    private static void reloadResourcePacks() {
+    public static void reloadResourcePacks() {
         //释放之前的资源包
         for (ResourcePack pack : loadedResourcePacks.values()) {
             pack.close();
@@ -52,11 +57,10 @@ public class Resource {
 
         //读取全部资源包
         loadedResourcePacks.clear();
-        try {
+        try (Stream<Path> fileStream = Files.list(resourcesPath)) {
             //重新读取资源包
-
-            Files.list(resourcesPath).forEach(file -> {
-                Logger.info(Language.get("message.resource.loading", file));
+            fileStream.forEach(file -> {
+                Logger.info(Language.get(LanguageKey.MESSAGE_RESOURCE_PACK_LOADING, file));
                 ResourcePack pack;
                 try {
                     pack = new ResourcePack(file);
@@ -76,7 +80,7 @@ public class Resource {
         for (String name : resourceConfig.resources) {
             ResourcePack resourcePack = loadedResourcePacks.get(Paths.get(name));
             if (resourcePack == null) {
-                Logger.info(Language.get("message.resource.lost", name));
+                Logger.info(Language.get(LanguageKey.MESSAGE_RESOURCE_PACK_LOST, name));
                 continue;
             }
             enableResourcePacks.add(resourcePack);
@@ -87,10 +91,12 @@ public class Resource {
         //为资源重新索引
         resources.clear();
         for (ResourcePack pack : enableResourcePacks) {
-            Logger.info(Language.get("message.resource.application", pack.getName()));
+            Logger.info(Language.get(LanguageKey.MESSAGE_RESOURCE_PACK_APPLICATION, pack.getName()));
             HashMap<Path, Path> indexed = application(pack.getPath());
             newResources.putAll(indexed);
         }
+
+        resources.putAll(newResources);
 
 
         for (ResourceEventListener listener : eventListeners)
@@ -134,6 +140,74 @@ public class Resource {
      */
     public static void removeEventListener(ResourceEventListener listener) {
         eventListeners.remove(listener);
+    }
+
+    public static String getResourceToString(Path path) {
+        try (InputStream in = getResourceToInputStream(path)) {
+            return new String(in.readAllBytes(), StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static String getResourceToString(String path) {
+        return getResourceToString(Paths.get(path));
+    }
+
+    public static InputStream getResourceToInputStream(Path path) {
+        try {
+            return Files.newInputStream(getResourceToPath(path));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static InputStream getResourceToInputStream(String path) {
+        return getResourceToInputStream(Path.of(path));
+    }
+
+    public static Path getResourceToPath(String path) {
+        return getResourceToPath(Path.of(path));
+    }
+
+    public static Path getResourceToPath(Path path) {
+        Path file = resources.get(path);
+        if (file == null)
+            throw new RuntimeException(Language.get(LanguageKey.MESSAGE_RESOURCE_NOT_FOUND, path));
+        return file;
+    }
+
+    public static URL getResourceToUrl(String path) {
+        return getResourceToUrl(Path.of(path));
+    }
+
+    public static URL getResourceToUrl(Path path) {
+        try {
+            return getResourceToPath(path).toUri().toURL();
+        } catch (MalformedURLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static List<Path> listResourceFiles(String findPath) {
+        return listResourceFiles(Path.of(findPath));
+    }
+
+    /**
+     * 获取全局资源中指定路径下的所有子文件
+     *
+     * @param findPath 要寻找的目录
+     * @return 目录下的子文件路径列表
+     */
+    public static List<Path> listResourceFiles(Path findPath) {
+        List<Path> childFiles = new ArrayList<>();
+        for (Map.Entry<Path, Path> entry : resources.entrySet()) {
+            Path virtualPath = entry.getKey();
+            if (virtualPath.startsWith(findPath) && !virtualPath.equals(findPath)) {
+                childFiles.add(virtualPath);
+            }
+        }
+        return childFiles;
     }
 
 }

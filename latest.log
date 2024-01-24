@@ -1,20 +1,274 @@
-[22:10:04] [Version.printInfo(102)/INFO]: 初始化日志系统...
-[22:10:04] [RunApp.main(19)/INFO]: ZXNoter 当前版本: 0.0.0-alpha 版本代号: 1
-[22:10:04] [Version.printInfo(104)/WARNING]: 当前为 [内部测试版本] 正处于早期开发阶段，请谨慎测试软件功能。
-[22:10:04] [RunApp.main(20)/INFO]: 初始化扩展加载器...
-[22:10:04] [Resource.initialize(39)/INFO]: 初始化资源包...
-[22:10:04] [Resource.lambda$reloadResourcePacks$0(59)/INFO]: 正在载入资源包: .\resourcepacks\editorPack-pink
-[22:10:04] [Resource.lambda$reloadResourcePacks$0(64)/WARNING]: 资源包丢失信息: .\resourcepacks\editorPack-pink
-[22:10:04] [Resource.lambda$reloadResourcePacks$0(59)/INFO]: 正在载入资源包: .\resourcepacks\iconPack-fill
-[22:10:04] [Resource.lambda$reloadResourcePacks$0(59)/INFO]: 正在载入资源包: .\resourcepacks\iconPack-line
-[22:10:04] [Resource.lambda$reloadResourcePacks$0(59)/INFO]: 正在载入资源包: .\resourcepacks\soundPack-default
-[22:10:04] [Resource.lambda$reloadResourcePacks$0(64)/WARNING]: 资源包丢失信息: .\resourcepacks\soundPack-default
-[22:10:04] [Resource.lambda$reloadResourcePacks$0(59)/INFO]: 正在载入资源包: .\resourcepacks\stylePack-dark
-[22:10:04] [Resource.lambda$reloadResourcePacks$0(64)/WARNING]: 资源包丢失信息: .\resourcepacks\stylePack-dark
-[22:10:04] [Resource.lambda$reloadResourcePacks$0(59)/INFO]: 正在载入资源包: .\resourcepacks\stylePack-light
-[22:10:04] [Resource.lambda$reloadResourcePacks$0(64)/WARNING]: 资源包丢失信息: .\resourcepacks\stylePack-light
-[22:10:04] [Resource.reloadResourcePacks(79)/INFO]: 丢失资源包: iconPack-fill.zip
-[22:10:04] [Resource.reloadResourcePacks(90)/INFO]: 正在应用资源包: Icon Pack
-[22:10:04] [Test.onInitialize(28)/WARNING]: 测试FX组件库
-[22:10:04] [Test.onInitialize(32)/INFO]: 初始化FX图形系统
-[22:10:05] [ExtensionTemplate.onInitialize(11)/INFO]: 扩展模板消息 你好世界!
+[19:06:44] [Resource.initialize(45)/INFO]: 初始化日志系统...⏳
+[19:06:44] [Resource.initialize(45)/INFO]: 初始化资源包...⏳
+[19:06:44] [Resource.lambda$reloadResourcePacks$0(63)/INFO]: 正在载入资源包: .\resourcepacks\editorPack-pink
+[19:06:44] [Resource.lambda$reloadResourcePacks$0(68)/WARNING]: 资源包丢失信息: .\resourcepacks\editorPack-pink
+[19:06:44] [Resource.lambda$reloadResourcePacks$0(63)/INFO]: 正在载入资源包: .\resourcepacks\iconPack-fill
+[19:06:44] [Resource.lambda$reloadResourcePacks$0(63)/INFO]: 正在载入资源包: .\resourcepacks\iconPack-line
+[19:06:44] [Resource.lambda$reloadResourcePacks$0(68)/WARNING]: 资源包丢失信息: .\resourcepacks\iconPack-line
+[19:06:44] [Resource.lambda$reloadResourcePacks$0(63)/INFO]: 正在载入资源包: .\resourcepacks\soundPack-default
+[19:06:44] [Resource.lambda$reloadResourcePacks$0(68)/WARNING]: 资源包丢失信息: .\resourcepacks\soundPack-default
+[19:06:44] [Resource.lambda$reloadResourcePacks$0(63)/INFO]: 正在载入资源包: .\resourcepacks\stylePack-dark
+[19:06:44] [Resource.lambda$reloadResourcePacks$0(63)/INFO]: 正在载入资源包: .\resourcepacks\stylePack-light
+[19:06:44] [Resource.lambda$reloadResourcePacks$0(68)/WARNING]: 资源包丢失信息: .\resourcepacks\stylePack-light
+[19:06:44] [Resource.lambda$reloadResourcePacks$0(63)/INFO]: 正在载入资源包: .\resourcepacks\测试
+[19:06:44] [Resource.lambda$reloadResourcePacks$0(68)/WARNING]: 资源包丢失信息: .\resourcepacks\测试
+[19:06:44] [Resource.reloadResourcePacks(94)/INFO]: 正在应用资源包: style pack - dark
+[19:06:44] [Resource.reloadResourcePacks(94)/INFO]: 正在应用资源包: icon pack - fill
+[19:06:44] [RunApp.main(29)/INFO]: ZXNoter 当前版本: 0.0.0-alpha 版本代号: 1
+[19:06:44] [Version.printInfo(104)/WARNING]: 当前为 [内部测试版本] 正处于早期开发阶段，请谨慎测试软件功能。
+[19:06:44] [RunApp.main(30)/INFO]: 初始化扩展加载器...⏳
+[19:06:44] [ZXNoterManager.onInitialize(17)/INFO]: ===>> ZXNoter 用户界面框架 初始化... <<===
+[19:06:44] [ZXNoterManager.onInitialize(22)/INFO]: 初始化图形系统
+[19:06:44] [ZXNoterManager.lambda$onInitialize$1(28)/INFO]: 初始化配置
+[19:06:44] [ExtensionTemplate.onInitialize(11)/INFO]: 扩展模板消息 你好世界!
+[19:06:45] [FlexSkinProcessor.updateTabContentRegion/INFO]: 更新 TabPaneSkin$TabContentRegion@724055c9[styleClass=tab-content-area]
+[19:06:45] [FlexSkinProcessor.updateTabHeaderArea/INFO]: 更新 TabPaneSkin$TabHeaderArea@4c9debf9[styleClass=tab-header-area]
+[19:06:45] [FlexSkinProcessor.handleTabHeaderArea(60)/INFO]: 初始化和更新 TabHeaderSkin
+[19:06:45] [FlexSkinProcessor.updateTabContentRegion/INFO]: 更新 TabPaneSkin$TabContentRegion@1dca8432[styleClass=tab-content-area]
+[19:06:45] [FlexSkinProcessor.updateTabHeaderArea/INFO]: 更新 TabPaneSkin$TabHeaderArea@50f23881[styleClass=tab-header-area]
+[19:06:45] [FlexSkinProcessor.handleTabHeaderArea(60)/INFO]: 初始化和更新 TabHeaderSkin
+[19:06:45] [FlexSkinProcessor.updateTabContentRegion/INFO]: 更新 TabPaneSkin$TabContentRegion@7b416f67[styleClass=tab-content-area]
+[19:06:45] [FlexSkinProcessor.updateTabContentRegion/INFO]: 更新 TabPaneSkin$TabContentRegion@d806467[styleClass=tab-content-area]
+[19:06:45] [FlexSkinProcessor.updateTabHeaderArea/INFO]: 更新 TabPaneSkin$TabHeaderArea@3d2fa9e9[styleClass=tab-header-area]
+[19:06:45] [FlexSkinProcessor.handleTabHeaderArea(60)/INFO]: 初始化和更新 TabHeaderSkin
+[19:06:45] [FlexSkinProcessor.updateTabContentRegion/INFO]: 更新 TabPaneSkin$TabContentRegion@34ad0d18[styleClass=tab-content-area]
+[19:06:49] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-left
+[19:06:49] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-top
+[19:06:49] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-center
+[19:06:49] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-right
+[19:06:49] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area
+[19:06:49] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-left
+[19:06:49] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-center
+[19:06:50] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-right
+[19:06:51] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-center
+[19:06:51] [FlexSkinProcessor.lambda$updateTabContentRegion$18/INFO]: drag-center
+[19:06:51] [FlexSkinProcessor.lambda$updateTabContentRegion$18/INFO]: VERTICAL
+[19:06:51] [FlexTabPane.lambda$new$1(37)/INFO]: 选项卡窗格列表为空 删除自身
+[19:06:51] [FlexSkinProcessor.updateTabContentRegion/INFO]: 更新 TabPaneSkin$TabContentRegion@484a0359[styleClass=tab-content-area]
+[19:06:51] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area
+[19:06:54] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-left
+[19:06:54] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area
+[19:06:55] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-left
+[19:06:55] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area
+[19:06:55] [FlexSkinProcessor.lambda$updateTabHeaderSkin$6/INFO]: tab drag-left
+[19:06:55] [FlexSkinProcessor.lambda$updateTabHeaderSkin$6/INFO]: tab
+[19:06:55] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-left
+[19:06:56] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area
+[19:06:56] [FlexSkinProcessor.lambda$updateTabHeaderSkin$6/INFO]: tab drag-left
+[19:06:56] [FlexSkinProcessor.lambda$updateTabHeaderSkin$6/INFO]: tab
+[19:06:56] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-left
+[19:06:56] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area
+[19:06:56] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-left
+[19:06:56] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area
+[19:06:56] [FlexSkinProcessor.lambda$updateTabHeaderSkin$6/INFO]: tab drag-left
+[19:06:57] [FlexSkinProcessor.lambda$updateTabHeaderSkin$6/INFO]: tab
+[19:06:57] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-left
+[19:06:58] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-center
+[19:06:58] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-right
+[19:07:00] [FlexSkinProcessor.lambda$updateTabContentRegion$18/INFO]: drag-right
+[19:07:00] [FlexSkinProcessor.lambda$updateTabContentRegion$18/INFO]: VERTICAL
+[19:07:00] [FlexSkinProcessor.lambda$updateTabContentRegion$18/INFO]: 非同方向拆分窗格
+[19:07:00] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area
+[19:07:00] [FlexSkinProcessor.updateTabContentRegion/INFO]: 更新 TabPaneSkin$TabContentRegion@4a8efd28[styleClass=tab-content-area]
+[19:07:00] [FlexSkinProcessor.updateTabHeaderArea/INFO]: 更新 TabPaneSkin$TabHeaderArea@452df60a[styleClass=tab-header-area]
+[19:07:00] [FlexSkinProcessor.handleTabHeaderArea(60)/INFO]: 初始化和更新 TabHeaderSkin
+[19:07:03] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-bottom
+[19:07:03] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-center
+[19:07:03] [FlexSkinProcessor.lambda$updateTabContentRegion$18/INFO]: drag-center
+[19:07:03] [FlexSkinProcessor.lambda$updateTabContentRegion$18/INFO]: VERTICAL
+[19:07:03] [FlexTabPane.lambda$new$1(37)/INFO]: 选项卡窗格列表为空 删除自身
+[19:07:03] [FlexSplitPane.lambda$new$1(55)/INFO]: 拆分窗格列表精简
+[19:07:03] [FlexSkinProcessor.updateTabContentRegion/INFO]: 更新 TabPaneSkin$TabContentRegion@177878ed[styleClass=tab-content-area]
+[19:07:03] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area
+[19:07:03] [FlexSplitPane.lambda$new$1(46)/INFO]: 拆分窗格列表为空 删除自身
+[19:07:05] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-left
+[19:07:05] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-top
+[19:07:05] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-center
+[19:07:05] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-bottom
+[19:07:05] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area
+[19:07:05] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-top
+[19:07:05] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-right
+[19:07:05] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-center
+[19:07:05] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-right
+[19:07:05] [FlexSkinProcessor.lambda$updateTabContentRegion$18/INFO]: drag-right
+[19:07:05] [FlexSkinProcessor.lambda$updateTabContentRegion$18/INFO]: VERTICAL
+[19:07:05] [FlexSkinProcessor.lambda$updateTabContentRegion$18/INFO]: 非同方向拆分窗格
+[19:07:05] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area
+[19:07:05] [FlexSkinProcessor.updateTabContentRegion/INFO]: 更新 TabPaneSkin$TabContentRegion@845650a[styleClass=tab-content-area]
+[19:07:05] [FlexSkinProcessor.updateTabHeaderArea/INFO]: 更新 TabPaneSkin$TabHeaderArea@43a69aca[styleClass=tab-header-area]
+[19:07:05] [FlexSkinProcessor.handleTabHeaderArea(60)/INFO]: 初始化和更新 TabHeaderSkin
+[19:07:06] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-right
+[19:07:06] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-top
+[19:07:06] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-center
+[19:07:06] [FlexSkinProcessor.lambda$updateTabContentRegion$18/INFO]: drag-center
+[19:07:06] [FlexSkinProcessor.lambda$updateTabContentRegion$18/INFO]: HORIZONTAL
+[19:07:06] [FlexTabPane.lambda$new$1(37)/INFO]: 选项卡窗格列表为空 删除自身
+[19:07:06] [FlexSplitPane.lambda$new$1(55)/INFO]: 拆分窗格列表精简
+[19:07:06] [FlexSkinProcessor.updateTabContentRegion/INFO]: 更新 TabPaneSkin$TabContentRegion@4f605343[styleClass=tab-content-area]
+[19:07:06] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area
+[19:07:06] [FlexSplitPane.lambda$new$1(46)/INFO]: 拆分窗格列表为空 删除自身
+[19:07:07] [FlexSkinProcessor.lambda$updateTabHeaderSkin$6/INFO]: tab drag-right
+[19:07:07] [FlexSkinProcessor.lambda$updateTabHeaderSkin$6/INFO]: tab
+[19:07:07] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-left
+[19:07:08] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area
+[19:07:09] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-left
+[19:07:09] [FlexSkinProcessor.lambda$updateTabContentRegion$18/INFO]: drag-left
+[19:07:09] [FlexSkinProcessor.lambda$updateTabContentRegion$18/INFO]: VERTICAL
+[19:07:09] [FlexSkinProcessor.lambda$updateTabContentRegion$18/INFO]: 非同方向拆分窗格
+[19:07:09] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area
+[19:07:09] [FlexSkinProcessor.updateTabContentRegion/INFO]: 更新 TabPaneSkin$TabContentRegion@38763607[styleClass=tab-content-area]
+[19:07:09] [FlexSkinProcessor.updateTabHeaderArea/INFO]: 更新 TabPaneSkin$TabHeaderArea@b18a901[styleClass=tab-header-area]
+[19:07:09] [FlexSkinProcessor.handleTabHeaderArea(60)/INFO]: 初始化和更新 TabHeaderSkin
+[19:07:11] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-bottom
+[19:07:11] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-center
+[19:07:11] [FlexSkinProcessor.lambda$updateTabContentRegion$18/INFO]: drag-center
+[19:07:11] [FlexSkinProcessor.lambda$updateTabContentRegion$18/INFO]: VERTICAL
+[19:07:11] [FlexTabPane.lambda$new$1(37)/INFO]: 选项卡窗格列表为空 删除自身
+[19:07:11] [FlexSplitPane.lambda$new$1(55)/INFO]: 拆分窗格列表精简
+[19:07:11] [FlexSkinProcessor.updateTabContentRegion/INFO]: 更新 TabPaneSkin$TabContentRegion@6dda8dbe[styleClass=tab-content-area]
+[19:07:11] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area
+[19:07:11] [FlexSplitPane.lambda$new$1(46)/INFO]: 拆分窗格列表为空 删除自身
+[19:07:13] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-left
+[19:07:13] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-center
+[19:07:13] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-left
+[19:07:13] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area
+[19:07:13] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-left
+[19:07:13] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-center
+[19:07:14] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-right
+[19:07:14] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area
+[19:07:14] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-right
+[19:07:14] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-center
+[19:07:15] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-right
+[19:07:16] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-center
+[19:07:16] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-right
+[19:07:16] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area
+[19:07:16] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-right
+[19:07:16] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-center
+[19:07:17] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-right
+[19:07:18] [FlexSkinProcessor.lambda$updateTabContentRegion$18/INFO]: drag-right
+[19:07:18] [FlexSkinProcessor.lambda$updateTabContentRegion$18/INFO]: VERTICAL
+[19:07:18] [FlexSkinProcessor.lambda$updateTabContentRegion$18/INFO]: 非同方向拆分窗格
+[19:07:18] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area
+[19:07:18] [FlexSkinProcessor.updateTabContentRegion/INFO]: 更新 TabPaneSkin$TabContentRegion@6d3b24d5[styleClass=tab-content-area]
+[19:07:18] [FlexSkinProcessor.updateTabHeaderArea/INFO]: 更新 TabPaneSkin$TabHeaderArea@1c20b076[styleClass=tab-header-area]
+[19:07:18] [FlexSkinProcessor.handleTabHeaderArea(60)/INFO]: 初始化和更新 TabHeaderSkin
+[19:07:22] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-bottom
+[19:07:22] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-center
+[19:07:22] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-right
+[19:07:23] [FlexSkinProcessor.lambda$updateTabContentRegion$18/INFO]: drag-right
+[19:07:23] [FlexSkinProcessor.lambda$updateTabContentRegion$18/INFO]: VERTICAL
+[19:07:23] [FlexSkinProcessor.lambda$updateTabContentRegion$18/INFO]: 非同方向拆分窗格
+[19:07:23] [FlexTabPane.lambda$new$1(37)/INFO]: 选项卡窗格列表为空 删除自身
+[19:07:23] [FlexSplitPane.lambda$new$1(55)/INFO]: 拆分窗格列表精简
+[19:07:23] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area
+[19:07:23] [FlexSplitPane.lambda$new$1(46)/INFO]: 拆分窗格列表为空 删除自身
+[19:07:23] [FlexSkinProcessor.updateTabContentRegion/INFO]: 更新 TabPaneSkin$TabContentRegion@1983da7d[styleClass=tab-content-area]
+[19:07:23] [FlexSkinProcessor.updateTabHeaderArea/INFO]: 更新 TabPaneSkin$TabHeaderArea@6916989b[styleClass=tab-header-area]
+[19:07:23] [FlexSkinProcessor.handleTabHeaderArea(60)/INFO]: 初始化和更新 TabHeaderSkin
+[19:07:24] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-left
+[19:07:24] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-center
+[19:07:24] [FlexSkinProcessor.lambda$updateTabContentRegion$18/INFO]: drag-center
+[19:07:24] [FlexSkinProcessor.lambda$updateTabContentRegion$18/INFO]: HORIZONTAL
+[19:07:24] [FlexTabPane.lambda$new$1(37)/INFO]: 选项卡窗格列表为空 删除自身
+[19:07:24] [FlexSplitPane.lambda$new$1(55)/INFO]: 拆分窗格列表精简
+[19:07:24] [FlexSkinProcessor.updateTabContentRegion/INFO]: 更新 TabPaneSkin$TabContentRegion@5f8a98f2[styleClass=tab-content-area]
+[19:07:24] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area
+[19:07:24] [FlexSplitPane.lambda$new$1(46)/INFO]: 拆分窗格列表为空 删除自身
+[19:07:28] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-bottom
+[19:07:28] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-center
+[19:07:28] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-right
+[19:07:28] [FlexSkinProcessor.lambda$updateTabContentRegion$18/INFO]: drag-right
+[19:07:28] [FlexSkinProcessor.lambda$updateTabContentRegion$18/INFO]: VERTICAL
+[19:07:28] [FlexSkinProcessor.lambda$updateTabContentRegion$18/INFO]: 非同方向拆分窗格
+[19:07:28] [FlexTabPane.lambda$new$1(37)/INFO]: 选项卡窗格列表为空 删除自身
+[19:07:28] [FlexSplitPane.lambda$new$1(55)/INFO]: 拆分窗格列表精简
+[19:07:28] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area
+[19:07:28] [FlexSplitPane.lambda$new$1(46)/INFO]: 拆分窗格列表为空 删除自身
+[19:07:28] [FlexSkinProcessor.updateTabContentRegion/INFO]: 更新 TabPaneSkin$TabContentRegion@3c94ff98[styleClass=tab-content-area]
+[19:07:28] [FlexSkinProcessor.updateTabHeaderArea/INFO]: 更新 TabPaneSkin$TabHeaderArea@282ea29b[styleClass=tab-header-area]
+[19:07:28] [FlexSkinProcessor.handleTabHeaderArea(60)/INFO]: 初始化和更新 TabHeaderSkin
+[19:07:30] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-left
+[19:07:30] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-bottom
+[19:07:30] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-center
+[19:07:30] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-right
+[19:07:31] [FlexSkinProcessor.lambda$updateTabContentRegion$18/INFO]: drag-right
+[19:07:31] [FlexSkinProcessor.lambda$updateTabContentRegion$18/INFO]: VERTICAL
+[19:07:31] [FlexSkinProcessor.lambda$updateTabContentRegion$18/INFO]: 非同方向拆分窗格
+[19:07:31] [FlexTabPane.lambda$new$1(37)/INFO]: 选项卡窗格列表为空 删除自身
+[19:07:31] [FlexSplitPane.lambda$new$1(55)/INFO]: 拆分窗格列表精简
+[19:07:31] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area
+[19:07:31] [FlexSplitPane.lambda$new$1(46)/INFO]: 拆分窗格列表为空 删除自身
+[19:07:31] [FlexSkinProcessor.updateTabContentRegion/INFO]: 更新 TabPaneSkin$TabContentRegion@7d918993[styleClass=tab-content-area]
+[19:07:31] [FlexSkinProcessor.updateTabHeaderArea/INFO]: 更新 TabPaneSkin$TabHeaderArea@dc2097[styleClass=tab-header-area]
+[19:07:31] [FlexSkinProcessor.handleTabHeaderArea(60)/INFO]: 初始化和更新 TabHeaderSkin
+[19:07:41] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-left
+[19:07:41] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-bottom
+[19:07:41] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-center
+[19:07:41] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-right
+[19:07:42] [FlexSkinProcessor.lambda$updateTabContentRegion$18/INFO]: drag-right
+[19:07:42] [FlexSkinProcessor.lambda$updateTabContentRegion$18/INFO]: VERTICAL
+[19:07:42] [FlexSkinProcessor.lambda$updateTabContentRegion$18/INFO]: 非同方向拆分窗格
+[19:07:42] [FlexTabPane.lambda$new$1(37)/INFO]: 选项卡窗格列表为空 删除自身
+[19:07:42] [FlexSplitPane.lambda$new$1(55)/INFO]: 拆分窗格列表精简
+[19:07:42] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area
+[19:07:42] [FlexSplitPane.lambda$new$1(46)/INFO]: 拆分窗格列表为空 删除自身
+[19:07:42] [FlexSkinProcessor.updateTabContentRegion/INFO]: 更新 TabPaneSkin$TabContentRegion@4cd86a64[styleClass=tab-content-area]
+[19:07:42] [FlexSkinProcessor.updateTabHeaderArea/INFO]: 更新 TabPaneSkin$TabHeaderArea@4dff7b6c[styleClass=tab-header-area]
+[19:07:42] [FlexSkinProcessor.handleTabHeaderArea(60)/INFO]: 初始化和更新 TabHeaderSkin
+[19:07:47] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-left
+[19:07:47] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-center
+[19:07:47] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-left
+[19:07:47] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area
+[19:07:47] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-left
+[19:07:47] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-center
+[19:07:47] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-right
+[19:07:48] [FlexSkinProcessor.lambda$updateTabContentRegion$18/INFO]: drag-right
+[19:07:48] [FlexSkinProcessor.lambda$updateTabContentRegion$18/INFO]: VERTICAL
+[19:07:48] [FlexSkinProcessor.lambda$updateTabContentRegion$18/INFO]: 非同方向拆分窗格
+[19:07:48] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area
+[19:07:48] [FlexSkinProcessor.updateTabContentRegion/INFO]: 更新 TabPaneSkin$TabContentRegion@609f7b77[styleClass=tab-content-area]
+[19:07:48] [FlexSkinProcessor.updateTabHeaderArea/INFO]: 更新 TabPaneSkin$TabHeaderArea@51cfb73b[styleClass=tab-header-area]
+[19:07:48] [FlexSkinProcessor.handleTabHeaderArea(60)/INFO]: 初始化和更新 TabHeaderSkin
+[19:07:49] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-left
+[19:07:49] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-center
+[19:07:49] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-left
+[19:07:49] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area
+[19:07:49] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-top
+[19:07:49] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-center
+[19:07:49] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-top
+[19:07:49] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area
+[19:07:49] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-left
+[19:07:49] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-center
+[19:07:49] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-left
+[19:07:49] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area
+[19:07:49] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-top
+[19:07:49] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-center
+[19:07:50] [FlexSkinProcessor.lambda$updateTabContentRegion$18/INFO]: drag-center
+[19:07:50] [FlexSkinProcessor.lambda$updateTabContentRegion$18/INFO]: HORIZONTAL
+[19:07:50] [FlexSkinProcessor.updateTabContentRegion/INFO]: 更新 TabPaneSkin$TabContentRegion@5fff6fe5[styleClass=tab-content-area]
+[19:07:50] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area
+[19:07:51] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-left
+[19:07:51] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-center
+[19:07:51] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-left
+[19:07:51] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area
+[19:07:51] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-top
+[19:07:51] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-center
+[19:07:51] [FlexSkinProcessor.lambda$updateTabContentRegion$18/INFO]: drag-center
+[19:07:51] [FlexSkinProcessor.lambda$updateTabContentRegion$18/INFO]: HORIZONTAL
+[19:07:51] [FlexSkinProcessor.updateTabContentRegion/INFO]: 更新 TabPaneSkin$TabContentRegion@237f7d18[styleClass=tab-content-area]
+[19:07:51] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area
+[19:07:52] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-left
+[19:07:52] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-center
+[19:07:52] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-left
+[19:07:52] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area
+[19:07:52] [FlexSkinProcessor.lambda$updateTabHeaderSkin$6/INFO]: tab drag-right
+[19:07:52] [FlexSkinProcessor.lambda$updateTabHeaderSkin$6/INFO]: tab
+[19:07:52] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-top
+[19:07:52] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area drag-center
+[19:07:52] [FlexSkinProcessor.lambda$updateTabContentRegion$18/INFO]: drag-center
+[19:07:52] [FlexSkinProcessor.lambda$updateTabContentRegion$18/INFO]: HORIZONTAL
+[19:07:52] [FlexTabPane.lambda$new$1(37)/INFO]: 选项卡窗格列表为空 删除自身
+[19:07:52] [FlexSplitPane.lambda$new$1(55)/INFO]: 拆分窗格列表精简
+[19:07:52] [FlexSkinProcessor.updateTabContentRegion/INFO]: 更新 TabPaneSkin$TabContentRegion@1ed77f86[styleClass=tab-content-area]
+[19:07:52] [FlexSkinProcessor.lambda$updateTabContentRegion$14/INFO]: tab-content-area
+[19:07:52] [FlexSplitPane.lambda$new$1(46)/INFO]: 拆分窗格列表为空 删除自身

@@ -6,6 +6,7 @@ import com.google.gson.JsonPrimitive;
 import team.zxorg.extensionloader.event.LanguageEventListener;
 import team.zxorg.extensionloader.gson.GsonManager;
 
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Path;
 import java.text.MessageFormat;
@@ -18,6 +19,10 @@ public class Language {
 
     public Language(String lang) {
         this.lang = lang;
+    }
+
+    public Language(Object lang) {
+        this.lang = lang.toString();
     }
 
     @Override
@@ -64,6 +69,21 @@ public class Language {
      */
     public static void loadLanguage(ClassLoader classLoader, String resourceName) {
         LanguageInfo languageInfo = new LanguageInfo(classLoader.getResource(resourceName), GsonManager.parseJson(classLoader, resourceName));
+        languageInfoMap.computeIfAbsent(languageInfo.getCode(), k -> new ArrayList<>()).add(languageInfo);
+    }
+
+    /**
+     * 载入语言
+     *
+     * @param languageFilePath 语言文件地址
+     */
+    public static void loadLanguage(Path languageFilePath) {
+        LanguageInfo languageInfo = null;
+        try {
+            languageInfo = new LanguageInfo(languageFilePath.toUri().toURL(), GsonManager.parseJson(languageFilePath));
+        } catch (MalformedURLException e) {
+            throw new RuntimeException(e);
+        }
         languageInfoMap.computeIfAbsent(languageInfo.getCode(), k -> new ArrayList<>()).add(languageInfo);
     }
 
@@ -214,7 +234,7 @@ public class Language {
         String v = getOrNull(key, args);
         if (v == null) {
             Logger.printStackTrace();
-            v = Language.getOrNull("message.language.lost", key);
+            v = Language.getOrNull(LanguageKey.MESSAGE_LANGUAGE_LOST, key);
             v = (v == null ? "LOST_LANGUAGE: " + key : v);
             Logger.warning(v);
             return v;
@@ -228,11 +248,33 @@ public class Language {
      *
      * @param key  语言key
      * @param args 参数
+     * @return 格式化后的语言
+     */
+    public static String get(Object key, Object... args) {
+        return get(key.toString(), args);
+    }
+
+    /**
+     * 获取语言
+     *
+     * @param key  语言key
+     * @param args 参数
      * @return 格式化后的语言 没有则返回null
      */
     public static String getOrNull(String key, Object... args) {
         MessageFormat format = messageFormatMap.get(key);
         return (format != null) ? format.format(args) : null;
+    }
+
+    /**
+     * 获取语言
+     *
+     * @param key  语言key
+     * @param args 参数
+     * @return 格式化后的语言 没有则返回null
+     */
+    public static String getOrNull(Object key, Object... args) {
+        return getOrNull(key.toString(), args);
     }
 
     /**
@@ -266,9 +308,9 @@ public class Language {
             this.from = from;
             this.languages = new HashMap<>();
             traverseLanguageElement(languagesJson, null);
-            code = languages.getOrDefault("configuration.languageCode", "null").toLowerCase();
+            code = languages.getOrDefault(LanguageKey.CONFIGURATION_LANGUAGE_CODE.toString(), "null").toLowerCase();
             if (code.equals("null"))
-                Logger.warning(from + " 'configuration.languageCode' Language code is null");
+                Logger.warning(from + " '" + LanguageKey.CONFIGURATION_LANGUAGE_CODE + "' Language code is null");
         }
 
         public URL getFrom() {

@@ -14,7 +14,7 @@
     ok: "确定",
     cancel: "取消",
     close: "关闭",
-    loading: "加载中...",
+    loading: "加载中...⏳",
     error: "错误",
     warning: "警告",
     success: "成功",
@@ -22,6 +22,7 @@
     confirm: "确认",
     prompt: "提示",
     select: "选择",
+    ellipsis: "...",
     // 版本
     version: {
       alpha: "内部测试版本",
@@ -32,8 +33,16 @@
   },
   // 信息
   message: {
-    resource: {
-      initialize: "初始化资源包...",
+    icon: {
+      initialize: "初始化图标库...⏳",
+      loading: "正在载入图标库...⏳"
+    },
+    image: {
+      initialize: "初始化图片库...⏳",
+      loading: "正在载入图片库...⏳"
+    },
+    resourcePack: {
+      initialize: "初始化资源包...⏳",
       lost: "丢失资源包: {0}",
       loading: "正在载入资源包: {0}",
       notFound: "资源包不存在: {0}",
@@ -43,13 +52,16 @@
       noDescription: "没有描述",
       lostInfo: "资源包丢失信息: {0}"
     },
+    resource: {
+      notFound: "资源不存在: {0}"
+    },
     language: {
       lost: "丢失语言 语言路径: {0}",
       noCode: "{0} 语言文件没有设置语言代码 'configuration.languageCode'"
     },
     // 日志信息
     logger: {
-      initialize: "初始化日志系统...",
+      initialize: "初始化日志系统...⏳",
       error: "日志系统初始化失败，请检查日志目录是否可写。"
     },
     // 版本信息
@@ -62,7 +74,7 @@
     },
     // 扩展信息
     extension: {
-      loading: "初始化扩展加载器...",
+      loading: "初始化扩展加载器...⏳",
       error: {
         cantLoad: "无法加载扩展 ({0})",
         url: "{{cantLoad}} : {1}",

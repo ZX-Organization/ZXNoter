@@ -1,6 +1,5 @@
-import team.zxorg.extensionloader.core.Language;
-import team.zxorg.extensionloader.core.Logger;
-import team.zxorg.extensionloader.core.Version;
+import team.zxorg.extensionloader.core.*;
+import team.zxorg.extensionloader.event.ResourceEventListener;
 import team.zxorg.extensionloader.extension.ExtensionManager;
 
 import java.nio.file.Path;
@@ -16,13 +15,25 @@ public class RunApp {
         Language.loadLanguage(Language.class.getClassLoader(), "languages/zh-cn.json5");
         Language.setLocale(Locale.CHINA);
 
+        Resource.addEventListener(new ResourceEventListener() {
+            @Override
+            public void onReload() {
+                for (Path lang : Resource.listResourceFiles("languages")) {
+                    Language.loadLanguage(lang);
+                }
+                Language.reloadLanguages();
+            }
+        });
+        Resource.reloadResourcePacks();
+
         VERSION.printInfo();
-        Logger.info(Language.get("message.extension.loading"));
+        Logger.info(Language.get(LanguageKey.MESSAGE_EXTENSION_LOADING));
 
         ExtensionManager extensionManager = new ExtensionManager();
         Path exceptionsPath = Path.of("./extensions");
         extensionManager.loadAllExtensions(exceptionsPath);
-        Language.reloadLanguages();
+
+
         extensionManager.initializeAllExtensions();
     }
 }

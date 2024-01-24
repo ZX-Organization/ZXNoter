@@ -7,16 +7,16 @@ import javafx.beans.property.StringProperty;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.layout.Background;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.SVGPath;
 import javafx.stage.Stage;
 import team.zxorg.extensionloader.core.Logger;
 import team.zxorg.extensionloader.core.Resource;
 import team.zxorg.extensionloader.extension.Extension;
 import team.zxorg.extensionloader.extension.ExtensionEntrypoint;
 import team.zxorg.extensionloader.extension.ExtensionManager;
+import team.zxorg.fxcl.component.Icon;
+import team.zxorg.fxcl.component.LangButton;
 import team.zxorg.fxcl.component.LangLabel;
 
 public class Test implements ExtensionEntrypoint {
@@ -24,7 +24,6 @@ public class Test implements ExtensionEntrypoint {
     @Override
     public void onInitialize(Extension extension, ExtensionManager manager) {
 
-        Resource resource = new Resource();
         Logger.warning("测试FX组件库");
 
         //屏蔽javafx歌姬初始化时的异常
@@ -37,17 +36,9 @@ public class Test implements ExtensionEntrypoint {
             StringProperty sp = new SimpleStringProperty("HELLO");
 
 
-            //IconManager.loadIconPack(extension.getClass().getClassLoader(), "assets/fxComponentLibrary/baseResourcePack/icon/line/software/");
+            Icon icon = new Icon("software.logo", 128);
 
-            Pane svgIcon = new Pane();
-            svgIcon.setMinSize(80, 80);
-            svgIcon.setMaxSize(80, 80);
-            SVGPath svgPath = new SVGPath();
-            //svgPath.setContent(ResourceUtils.readSvg(extension.getResourceAsString("baseResourcePack/icon/line/software/logo.svg")));
-            svgIcon.setShape(svgPath);
-            svgIcon.setBackground(Background.fill(Color.GREEN));
-
-            VBox root = new VBox(svgIcon, new LangLabel("message.language.noCode", sp));
+            VBox root = new VBox(icon, new LangButton(new Icon("business.inbox-archive", 64, Color.WHITE), "software.name"), new LangLabel("message.language.noCode", sp));
             sp.setValue("nnnn");
             root.setSpacing(20);
             root.setAlignment(Pos.CENTER);
@@ -55,14 +46,13 @@ public class Test implements ExtensionEntrypoint {
 
             Scene scene = new Scene(root);
 
-            //scene.getStylesheets().addAll(extension.getClassResource("baseResourcePack/color/style.css").toString());
-            //scene.getStylesheets().addAll(extension.getClassResource("baseResourcePack/color/dark.css").toString());
+            scene.getStylesheets().addAll(Resource.getResourceToUrl("style/dark.css").toString());
+            scene.getStylesheets().addAll(Resource.getResourceToUrl("style/style.css").toString());
             Stage stage = new Stage();
             stage.setScene(scene);
             stage.setMinWidth(800);
             stage.setMinHeight(600);
             stage.show();
-
 
         });
 

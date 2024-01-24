@@ -78,6 +78,14 @@ public class GsonManager {
         return JsonParser.parseString(json);
     }
 
+    public static JsonElement parseJson(Path json) {
+        try {
+            return JsonParser.parseReader(new InputStreamReader(Files.newInputStream(json)));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public static JsonElement parseJson(ClassLoader classLoader, String resourceName) {
         try (InputStream is = classLoader.getResourceAsStream(resourceName)) {
             if (is == null) {

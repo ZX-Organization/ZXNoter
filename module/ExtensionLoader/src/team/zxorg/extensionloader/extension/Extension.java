@@ -1,9 +1,6 @@
 package team.zxorg.extensionloader.extension;
 
-import team.zxorg.extensionloader.core.Configuration;
-import team.zxorg.extensionloader.core.Language;
-import team.zxorg.extensionloader.core.Logger;
-import team.zxorg.extensionloader.core.Version;
+import team.zxorg.extensionloader.core.*;
 import team.zxorg.extensionloader.gson.GsonManager;
 
 import java.io.IOException;
@@ -23,7 +20,6 @@ import java.util.Map;
  * 扩展对象
  */
 public class Extension {
-    public static final String MESSAGE_ERROR = "message.extension.error.";
     /**
      * 扩展配置信息
      */
@@ -60,7 +56,7 @@ public class Extension {
         try {
             jarUrl = jarPath.toUri().toURL();
         } catch (MalformedURLException e) {
-            throw new RuntimeException(getLanguage(MESSAGE_ERROR + "url", jarPath, e));
+            throw new RuntimeException(getLanguage(LanguageKey.MESSAGE_EXTENSION_ERROR_URL, jarPath, e));
         }
         try (URLClassLoader classLoader = new URLClassLoader(new URL[]{jarUrl})) {
             info = GsonManager.fromJson(classLoader, "extension.json5", ExtensionInfo.class);
@@ -89,7 +85,7 @@ public class Extension {
 
 
         } catch (Exception e) {
-            throw new RuntimeException(getLanguage(MESSAGE_ERROR + "infoReadFailed", jarPath, e));
+            throw new RuntimeException(getLanguage(LanguageKey.MESSAGE_EXTENSION_ERROR_INFO_READ_FAILED, jarPath, e));
         }
     }
 
@@ -143,7 +139,7 @@ public class Extension {
             try {
                 loadedClass = classLoader.loadClass(entrypoint);
             } catch (ClassNotFoundException e) {
-                Logger.warning(getLanguage(MESSAGE_ERROR + "entrypointNotFound", getId(), entrypoint));
+                Logger.warning(getLanguage(LanguageKey.MESSAGE_EXTENSION_ERROR_ENTRYPOINT_NOT_FOUND, getId(), entrypoint));
                 continue;
             }
 
@@ -152,11 +148,11 @@ public class Extension {
                 if (loadedClass.getDeclaredConstructor().newInstance() instanceof ExtensionEntrypoint ei) {
                     this.entrypointList.add(ei);
                 } else {
-                    Logger.warning(getLanguage(MESSAGE_ERROR + "entrypointNotImplemented", getId(), entrypoint));
+                    Logger.warning(getLanguage(LanguageKey.MESSAGE_EXTENSION_ERROR_ENTRYPOINT_NOT_IMPLEMENTED, getId(), entrypoint));
                 }
             } catch (InstantiationException | IllegalAccessException | NoSuchMethodException |
                      InvocationTargetException e) {
-                Logger.warning(getLanguage(MESSAGE_ERROR + "entrypointInstanceFailed", getId(), entrypoint, e));
+                Logger.warning(getLanguage(LanguageKey.MESSAGE_EXTENSION_ERROR_ENTRYPOINT_INSTANCE_FAILED, getId(), entrypoint, e));
             }
         }
     }
@@ -170,11 +166,11 @@ public class Extension {
             String dependExtensionId = dependExtension.getKey();
             Extension dependExt = manager.getExtension(dependExtensionId);
             if (dependExt == null) {
-                Logger.warning(getLanguage(MESSAGE_ERROR + "message.extension.error.dependExtensionLost", getId(), dependExtensionId, dependExtension.getValue()));
+                Logger.warning(getLanguage(LanguageKey.MESSAGE_EXTENSION_ERROR_DEPEND_EXTENSION_LOST, getId(), dependExtensionId, dependExtension.getValue()));
                 return;
             }
             if (!dependExtension.getValue().isSupported(dependExt.getVersion())) {
-                Logger.warning(getLanguage(MESSAGE_ERROR + "message.extension.error.dependExtensionNotCompatible", getId(), dependExtensionId, dependExtension.getValue(), dependExt.getVersion()));
+                Logger.warning(getLanguage(    LanguageKey.MESSAGE_EXTENSION_ERROR_DEPEND_EXTENSION_NOT_COMPATIBLE, getId(), dependExtensionId, dependExtension.getValue(), dependExt.getVersion()));
                 return;
             }
         }
@@ -239,6 +235,9 @@ public class Extension {
     }
 
     public String getLanguage(String key, Object... args) {
+        return Language.get(key, args);
+    }
+    public String getLanguage(Object key, Object... args) {
         return Language.get(key, args);
     }
 
