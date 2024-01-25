@@ -123,12 +123,14 @@
     /**
     活动栏选项
      */
-    -color-activity-bar-item-bg-usually: #505050; /*通常背景*/
-    -color-activity-bar-item-bg-hover: #505050; /*悬停背景*/
-    -color-activity-bar-item-bg-selected: #505050; /*选中背景*/
-    -color-activity-bar-item-text-usually: #505050; /*通常文本*/
-    -color-activity-bar-item-text-hover: #505050; /*悬停文本*/
-    -color-activity-bar-item-text-selected: #505050; /*选中文本*/
+    -color-activity-bar-item-bd-usually: transparent; /*通常背景*/
+    -color-activity-bar-item-bd-hover: transparent; /*悬停背景*/
+    -color-activity-bar-item-bd-selected: #519aba; /*选中背景*/
+
+    -color-activity-bar-item-icon-usually: #FFFFFF7C; /*通常背景*/
+    -color-activity-bar-item-icon-hover: #FFFFFF9C; /*悬停背景*/
+    -color-activity-bar-item-icon-selected: #FFFFFFE5; /*选中背景*/
+
     /**
     侧边栏面板
      */

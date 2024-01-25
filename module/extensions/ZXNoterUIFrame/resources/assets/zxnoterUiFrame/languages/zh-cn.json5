@@ -7,6 +7,14 @@
       titleBar: {
       },
       activityBar: {
+        menu: {
+          hideItem: "隐藏此项",
+          showItems: "显示更多"
+        },
+        item: {
+          fileManager: "文件管理器",
+          setup: "设置"
+        }
       },
       viewArea: {
       },

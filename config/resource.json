@@ -1,8 +1,0 @@
-{
-  "class team.zxorg.extensionloader.core.Resource$ResourceConfig": {
-    "resources": [
-      "stylePack-dark",
-      "iconPack-fill"
-    ]
-  }
-}

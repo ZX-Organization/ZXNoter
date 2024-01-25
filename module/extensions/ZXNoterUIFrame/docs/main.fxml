@@ -91,7 +91,13 @@
       </HBox>
       <HBox id="contentBody" prefHeight="100.0" prefWidth="200.0" styleClass="content-body" VBox.vgrow="ALWAYS">
          <children>
-            <VBox id="activityBar" prefHeight="200.0" prefWidth="100.0" styleClass="activity-bar" />
+            <VBox id="activityBar" prefHeight="200.0" prefWidth="100.0" styleClass="activity-bar">
+               <children>
+                  <Pane prefHeight="125.0" prefWidth="48.0" styleClass="activity-item" />
+                  <Pane prefHeight="125.0" prefWidth="48.0" styleClass="activity-item" />
+                  <Pane prefHeight="125.0" prefWidth="48.0" styleClass="activity-item" />
+                  <Pane prefHeight="125.0" prefWidth="48.0" styleClass="activity-item" />
+               </children></VBox>
             <SplitPane id="workArea" dividerPositions="0.2963594994311718" prefHeight="200.0" prefWidth="200.0" styleClass="work-area" HBox.hgrow="ALWAYS">
                <items>
                   <VBox id="sideBar" prefHeight="515.0" prefWidth="221.0" styleClass="side-bar" SplitPane.resizableWithParent="false" />

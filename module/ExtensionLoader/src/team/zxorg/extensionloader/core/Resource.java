@@ -16,9 +16,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
+import static team.zxorg.extensionloader.core.Configuration.config;
+
 public class Resource {
     private static final Path resourcesPath = Path.of("./resourcepacks");
-    private static final Configuration config = new Configuration("resource");
+
     private static ResourceConfig resourceConfig;
     private static final HashMap<Path, Path> resources = new HashMap<>();
 

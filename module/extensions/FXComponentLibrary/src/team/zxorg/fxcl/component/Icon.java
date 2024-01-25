@@ -38,6 +38,10 @@ public class Icon extends ImageView {
         return iconKeyProperty;
     }
 
+    public String getIconKey() {
+        return iconKeyProperty.get();
+    }
+
     public Icon(String key) {
         getStyleClass().add("icon");
         iconKeyProperty.addListener((observable, oldValue, newValue) -> {

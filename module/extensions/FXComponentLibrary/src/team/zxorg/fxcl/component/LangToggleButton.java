@@ -29,6 +29,10 @@ public class LangToggleButton extends ToggleButton {
         this(key, args);
         setGraphic(graphic);
     }
+    public LangToggleButton(Node graphic) {
+        this();
+        setGraphic(graphic);
+    }
 
     public LangToggleButton(String key, Property<?>... args) {
         this();
