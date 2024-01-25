@@ -27,10 +27,4 @@ public class LangMenu extends Menu {
         setGraphic(graphic);
     }
 
-    public LangMenu(Node graphic, String key, MenuItem... items) {
-        this();
-        langTextProperty.setLang(key);
-        setGraphic(graphic);
-        getItems().addAll(items);
-    }
 }

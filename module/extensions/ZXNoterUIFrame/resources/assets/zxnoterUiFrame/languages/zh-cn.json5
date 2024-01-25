@@ -8,8 +8,10 @@
       },
       activityBar: {
         menu: {
+          hideItemIcon: "system.delete-back",
           hideItem: "隐藏此项",
-          showItems: "显示更多"
+          itemConfigIcon: "system.list-settings",
+          itemConfig: "配置活动栏"
         },
         item: {
           fileManager: "文件管理器",

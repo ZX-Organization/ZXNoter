@@ -33,15 +33,15 @@
     /**
     简便颜色
      */
-    -color-blue: -color-blue-normal;/* 蓝色 */
-    -color-red: -color-red-normal;/* 红色 */
-    -color-purple: -color-purple-normal;/* 紫色 */
-    -color-yellow: -color-yellow-normal;/* 黄色 */
-    -color-green: -color-green-normal;/* 绿色 */
-    -color-orange: -color-orange-normal;/* 橙色 */
-    -color-pink: -color-pink-normal;/* 粉色 */
-    -color-gray: -color-gray-normal;/* 灰色 */
-    -color-white: -color-white-normal;/* 白色 */
+    -color-blue: -color-blue-normal; /* 蓝色 */
+    -color-red: -color-red-normal; /* 红色 */
+    -color-purple: -color-purple-normal; /* 紫色 */
+    -color-yellow: -color-yellow-normal; /* 黄色 */
+    -color-green: -color-green-normal; /* 绿色 */
+    -color-orange: -color-orange-normal; /* 橙色 */
+    -color-pink: -color-pink-normal; /* 粉色 */
+    -color-gray: -color-gray-normal; /* 灰色 */
+    -color-white: -color-white-normal; /* 白色 */
 
 
     /**
@@ -73,6 +73,7 @@
     菜单栏
      */
     -color-menu-bar-bg-usually: transparent; /*通常背景*/
+    -color-menu-border-usually: -color-border-pane;
 
     /**
     菜单按钮

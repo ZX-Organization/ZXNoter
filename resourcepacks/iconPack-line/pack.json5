@@ -1,0 +1,12 @@
+{
+  name: "icon pack - line",
+  version: "0.0.0",
+  description: "图标库 线条",
+  tags: [
+    "icon"
+  ],
+  author: [
+    "zedo"
+  ],
+  icon: "icon.png"
+}

@@ -590,10 +590,10 @@
     -fx-fill: -color-menu-item-text-hover;
 }
 
-.check-menu-item .box{
-    -fx-fill: -color-menu-item-text-hover;
+.check-menu-item .left-container .check ,
+.radio-menu-item .left-container .radio {
+    -fx-background-color: -color-text-active;
 }
-
 
 /**
 分割窗格 样式

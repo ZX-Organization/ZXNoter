@@ -9,6 +9,7 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.ColorPicker?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.ContextMenu?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
@@ -31,6 +32,7 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.control.TreeView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -72,6 +74,7 @@
                             <MenuItem mnemonicParsing="false" text="Action 1" />
                           </items>
                         </Menu>
+                        <RadioMenuItem mnemonicParsing="false" text="Unspecified Action" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Edit">
@@ -93,10 +96,103 @@
          <children>
             <VBox id="activityBar" prefHeight="200.0" prefWidth="100.0" styleClass="activity-bar">
                <children>
-                  <Pane prefHeight="125.0" prefWidth="48.0" styleClass="activity-item" />
-                  <Pane prefHeight="125.0" prefWidth="48.0" styleClass="activity-item" />
-                  <Pane prefHeight="125.0" prefWidth="48.0" styleClass="activity-item" />
-                  <Pane prefHeight="125.0" prefWidth="48.0" styleClass="activity-item" />
+                  <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <ToggleButton mnemonicParsing="false" styleClass="activity-item">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="activity" />
+                           </toggleGroup>
+                           <graphic>
+                              <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" smooth="false" styleClass="icon">
+                                 <image>
+                                    <Image url="@../../../../../../图标库/测试/arrows.arrow-down-circle.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <contextMenu>
+                              <ContextMenu>
+                                <items>
+                                    <RadioMenuItem mnemonicParsing="false" text="Unspecified Action" />
+                                  <MenuItem mnemonicParsing="false" text="Unspecified Action" />
+                                    <CheckMenuItem mnemonicParsing="false" text="Unspecified Action" />
+                                    <Menu mnemonicParsing="false" text="Unspecified Menu">
+                                      <items>
+                                        <MenuItem mnemonicParsing="false" text="Action 1" />
+                                      </items>
+                                    </Menu>
+                                </items>
+                              </ContextMenu>
+                           </contextMenu>
+                        </ToggleButton>
+                        <ToggleButton mnemonicParsing="false" styleClass="activity-item" toggleGroup="$activity">
+                           <graphic>
+                              <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" smooth="false" styleClass="icon">
+                                 <image>
+                                    <Image url="@../../../../../../图标库/测试/arrows.arrow-left-double.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </ToggleButton>
+                        <ToggleButton mnemonicParsing="false" styleClass="activity-item" toggleGroup="$activity">
+                           <graphic>
+                              <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" smooth="false" styleClass="icon">
+                                 <image>
+                                    <Image url="@../../../../../../图标库/测试/business.cloud-off.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </ToggleButton>
+                        <ToggleButton mnemonicParsing="false" styleClass="activity-item" toggleGroup="$activity">
+                           <graphic>
+                              <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" smooth="false" styleClass="icon">
+                                 <image>
+                                    <Image url="@../../../../../../图标库/测试/business.calculator.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </ToggleButton>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <ToggleButton mnemonicParsing="false" styleClass="activity-item" toggleGroup="$activity">
+                           <graphic>
+                              <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" smooth="false" styleClass="icon">
+                                 <image>
+                                    <Image url="@../../../../../../图标库/测试/arrows.arrow-down-circle.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </ToggleButton>
+                        <ToggleButton mnemonicParsing="false" styleClass="activity-item" toggleGroup="$activity">
+                           <graphic>
+                              <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" smooth="false" styleClass="icon">
+                                 <image>
+                                    <Image url="@../../../../../../图标库/测试/arrows.arrow-left-double.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </ToggleButton>
+                        <ToggleButton mnemonicParsing="false" styleClass="activity-item" toggleGroup="$activity">
+                           <graphic>
+                              <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" smooth="false" styleClass="icon">
+                                 <image>
+                                    <Image url="@../../../../../../图标库/测试/business.cloud-off.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </ToggleButton>
+                        <ToggleButton mnemonicParsing="false" styleClass="activity-item" toggleGroup="$activity">
+                           <graphic>
+                              <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" smooth="false" styleClass="icon">
+                                 <image>
+                                    <Image url="@../../../../../../图标库/测试/business.calculator.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </ToggleButton>
+                     </children>
+                  </VBox>
                </children></VBox>
             <SplitPane id="workArea" dividerPositions="0.2963594994311718" prefHeight="200.0" prefWidth="200.0" styleClass="work-area" HBox.hgrow="ALWAYS">
                <items>
