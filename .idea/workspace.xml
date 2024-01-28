@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="ExtensionTemplate:jar" />
-      <artifact name="FXComponentLibrary:jar" />
-      <artifact name="ZXNoter:jar" />
-      <artifact name="ZXNoterUIFrame:jar" />
+      <artifact name="MapEditCore:jar" />
     </artifacts-to-build>
   </component>
   <component name="AutoImportSettings">
@@ -13,50 +10,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dd78a4ca-7956-492b-9d75-ff82bf57b657" name="更改" comment="更新UI框架，增加了一个启动器">
-      <change afterPath="$PROJECT_DIR$/Launcher/target/debug/incremental/launcher-3kxsfzbenln6k/s-gssxxjb8ng-143zguj-4i3tpoi2zaafgy3yjb8weboqq/1091wa9mp9furyye.o" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Launcher/target/debug/incremental/launcher-3kxsfzbenln6k/s-gssxxjb8ng-143zguj-4i3tpoi2zaafgy3yjb8weboqq/18c0kbfb8geh23wa.o" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Launcher/target/debug/incremental/launcher-3kxsfzbenln6k/s-gssxxjb8ng-143zguj-4i3tpoi2zaafgy3yjb8weboqq/1n64qr55l3c779k.o" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Launcher/target/debug/incremental/launcher-3kxsfzbenln6k/s-gssxxjb8ng-143zguj-4i3tpoi2zaafgy3yjb8weboqq/1tmsmragzec0e0e9.o" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Launcher/target/debug/incremental/launcher-3kxsfzbenln6k/s-gssxxjb8ng-143zguj-4i3tpoi2zaafgy3yjb8weboqq/2cvlufgy9vmxc023.o" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Launcher/target/debug/incremental/launcher-3kxsfzbenln6k/s-gssxxjb8ng-143zguj-4i3tpoi2zaafgy3yjb8weboqq/2cw2vw3ye0pssrxm.o" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Launcher/target/debug/incremental/launcher-3kxsfzbenln6k/s-gssxxjb8ng-143zguj-4i3tpoi2zaafgy3yjb8weboqq/2uciphrxln25r3pe.o" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Launcher/target/debug/incremental/launcher-3kxsfzbenln6k/s-gssxxjb8ng-143zguj-4i3tpoi2zaafgy3yjb8weboqq/2wunkomkoewto9z2.o" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Launcher/target/debug/incremental/launcher-3kxsfzbenln6k/s-gssxxjb8ng-143zguj-4i3tpoi2zaafgy3yjb8weboqq/3m7gqff9f1bp9mfg.o" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Launcher/target/debug/incremental/launcher-3kxsfzbenln6k/s-gssxxjb8ng-143zguj-4i3tpoi2zaafgy3yjb8weboqq/3r3zl3w6pwdpsvw5.o" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Launcher/target/debug/incremental/launcher-3kxsfzbenln6k/s-gssxxjb8ng-143zguj-4i3tpoi2zaafgy3yjb8weboqq/41fm9urdy861m62y.o" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Launcher/target/debug/incremental/launcher-3kxsfzbenln6k/s-gssxxjb8ng-143zguj-4i3tpoi2zaafgy3yjb8weboqq/43vw9wlekf6ai590.o" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Launcher/target/debug/incremental/launcher-3kxsfzbenln6k/s-gssxxjb8ng-143zguj-4i3tpoi2zaafgy3yjb8weboqq/4z844692g46vjl5g.o" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Launcher/target/debug/incremental/launcher-3kxsfzbenln6k/s-gssxxjb8ng-143zguj-4i3tpoi2zaafgy3yjb8weboqq/53oon5l4so1qo3xh.o" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Launcher/target/debug/incremental/launcher-3kxsfzbenln6k/s-gssxxjb8ng-143zguj-4i3tpoi2zaafgy3yjb8weboqq/5aya5i2wkexql1zz.o" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Launcher/target/debug/incremental/launcher-3kxsfzbenln6k/s-gssxxjb8ng-143zguj-4i3tpoi2zaafgy3yjb8weboqq/b73spykrguaeu4f.o" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Launcher/target/debug/incremental/launcher-3kxsfzbenln6k/s-gssxxjb8ng-143zguj-4i3tpoi2zaafgy3yjb8weboqq/l4hrz68wq8bzx8.o" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Launcher/target/debug/incremental/launcher-3kxsfzbenln6k/s-gssxxjb8ng-143zguj-4i3tpoi2zaafgy3yjb8weboqq/qdmqaowv9isrdgr.o" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Launcher/target/debug/incremental/launcher-3kxsfzbenln6k/s-gssxxjb8ng-143zguj-4i3tpoi2zaafgy3yjb8weboqq/vtnz0terrkw67gu.o" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Launcher/target/debug/incremental/launcher-3kxsfzbenln6k/s-gssxxjb8ng-143zguj-4i3tpoi2zaafgy3yjb8weboqq/work-products.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Launcher/target/debug/incremental/launcher-3kxsfzbenln6k/s-gssxxjb8ng-143zguj-4i3tpoi2zaafgy3yjb8weboqq/xfcz97lnuoib2wt.o" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/module/extensions/FXComponentLibrary/src/team/zxorg/fxcl/component/TrackLangTooltip.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/module/extensions/ZXNoterUIFrame/src/team/zxorg/zxnoter/uiframe/base/FileManagerSideBar.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/module/extensions/ZXNoterUIFrame/src/team/zxorg/zxnoter/uiframe/factory/ComponentConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/module/extensions/ZXNoterUIFrame/src/team/zxorg/zxnoter/uiframe/factory/IconFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/module/extensions/ZXNoterUIFrame/src/team/zxorg/zxnoter/uiframe/factory/MenuFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/MapEditCore_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/intellij-javadocs-4.0.1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/mapEditCore/MapEditConfig.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/extensions/MapEditCore.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module/extensions/MapEditCore/resources/extension.json5" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module/extensions/MapEditCore/src/team/zxorg/mapeditcore/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module/extensions/MapEditCore/src/team/zxorg/mapeditcore/MapEditConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module/extensions/MapEditCore/src/team/zxorg/mapeditcore/map/MapIO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module/extensions/MapEditCore/src/team/zxorg/mapeditcore/map/ZXMap.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module/extensions/MapEditCore/src/team/zxorg/mapeditcore/note/LongNote.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module/extensions/MapEditCore/src/team/zxorg/mapeditcore/note/Note.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module/extensions/MapEditCore/src/team/zxorg/mapeditcore/note/SlideNote.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/KotlinJavaRuntime.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Launcher/.idea/Launcher.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Launcher/.idea/Launcher.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Launcher/cmake-build-debug/.cmake/api/v1/query/cmakeFiles-v1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Launcher/cmake-build-release/.cmake/api/v1/query/cache-v2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/extensions/FXComponentLibrary.jar" beforeDir="false" afterPath="$PROJECT_DIR$/extensions/FXComponentLibrary.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/extensions/ZXNoterUIFrame.jar" beforeDir="false" afterPath="$PROJECT_DIR$/extensions/ZXNoterUIFrame.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/extensions/ExtensionTemplate.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/extensions/FXComponentLibrary.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/extensions/ZXNoterUIFrame.jar" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/latest.log" beforeDir="false" afterPath="$PROJECT_DIR$/latest.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module/extensions/ZXNoterUIFrame/docs/main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/ZXNoterUIFrame/docs/main.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module/extensions/ZXNoterUIFrame/resources/assets/zxnoterUiFrame/languages/zh-cn.json5" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/ZXNoterUIFrame/resources/assets/zxnoterUiFrame/languages/zh-cn.json5" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module/extensions/ZXNoterUIFrame/src/team/zxorg/zxnoter/uiframe/ProjectViewStage.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/ZXNoterUIFrame/src/team/zxorg/zxnoter/uiframe/ProjectViewStage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module/extensions/ZXNoterUIFrame/src/team/zxorg/zxnoter/uiframe/ZXNoterManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/ZXNoterUIFrame/src/team/zxorg/zxnoter/uiframe/ZXNoterManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module/extensions/ZXNoterUIFrame/src/team/zxorg/zxnoter/uiframe/base/FileManagerActivityItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/ZXNoterUIFrame/src/team/zxorg/zxnoter/uiframe/base/FileManagerActivityItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module/extensions/ZXNoterUIFrame/src/team/zxorg/zxnoter/uiframe/base/SetupActivityItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/ZXNoterUIFrame/src/team/zxorg/zxnoter/uiframe/base/SetupActivityItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module/extensions/ZXNoterUIFrame/src/team/zxorg/zxnoter/uiframe/component/ActivityBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/ZXNoterUIFrame/src/team/zxorg/zxnoter/uiframe/component/ActivityBar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module/extensions/ZXNoterUIFrame/src/team/zxorg/zxnoter/uiframe/component/ActivityItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/ZXNoterUIFrame/src/team/zxorg/zxnoter/uiframe/component/ActivityItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module/extensions/ZXNoterUIFrame/src/team/zxorg/zxnoter/uiframe/component/SideBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/ZXNoterUIFrame/src/team/zxorg/zxnoter/uiframe/component/SideBar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module/extensions/ZXNoterUIFrame/src/team/zxorg/zxnoter/uiframe/component/TitleBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/ZXNoterUIFrame/src/team/zxorg/zxnoter/uiframe/component/TitleBar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resourcepacks/stylePack-dark/style/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/resourcepacks/stylePack-dark/style/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/ExtensionLoader/ExtensionLoader.iml" beforeDir="false" afterPath="$PROJECT_DIR$/module/ExtensionLoader/ExtensionLoader.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/extensions/MapEditCore/MapEditCore.iml" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MapEditCore/MapEditCore.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/extensions/MapEditCore/src/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -136,14 +112,14 @@
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;jdk.selected.JAVA_MODULE&quot;: &quot;21&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Projects/ZXNoter/module/extensions/FXComponentLibrary/src/team/zxorg/fxcl/component&quot;,
+    &quot;last_opened_file_path&quot;: &quot;F:/AllProjects/ZX-Organization/ZXNoter/ZXNoter.jar&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;项目&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;模块&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.21134493&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2874845&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
@@ -173,11 +149,11 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\AllProjects\ZX-Organization\ZXNoter\module\extensions\MapEditCore\resources" />
       <recent name="D:\Projects\ZXNoter\module\extensions\FXComponentLibrary\src\team\zxorg\fxcl\component" />
       <recent name="D:\Projects\ZXNoter\module\extensions\ZXNoterUIFrame\resources" />
       <recent name="D:\Projects\ZXNoter\module\extensions\ZXNoterUIFrame\docs" />
       <recent name="D:\Projects\ZXNoter\module\extensions\FXComponentLibrary\resources\assets\fxComponentLibrary" />
-      <recent name="D:\Projects\ZXNoter\module\ExtensionLoader\resources" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Projects\ZXNoter\config\resource" />
@@ -198,13 +174,6 @@
     </key>
   </component>
   <component name="RunManager" selected="JAR 应用程序.RunJar">
-    <configuration name="PackInfoTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="PackInfoTest" />
-      <module name="FXComponentLibrary" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="RunApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="RunApp" />
       <module name="ZXNoter" />
@@ -218,19 +187,28 @@
         <option name="BuildArtifacts" enabled="true">
           <artifact name="ZXNoterUIFrame:jar" />
         </option>
+        <option name="BuildArtifacts" enabled="true">
+          <artifact name="MapEditCore:jar" />
+        </option>
         <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="test" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="RunApp" />
+      <module name="ZXNoter" />
+      <method v="2">
+        <option name="BuildArtifacts" enabled="true">
+          <artifact name="MapEditCore:jar" />
+        </option>
       </method>
     </configuration>
     <configuration name="RunJar" type="JarApplication">
       <option name="JAR_PATH" value="$PROJECT_DIR$/ZXNoter.jar" />
-      <option name="WORKING_DIRECTORY" value="D:\Projects\ZXNoter" />
+      <option name="WORKING_DIRECTORY" value="F:\AllProjects\ZX-Organization\ZXNoter" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <method v="2">
         <option name="BuildArtifacts" enabled="true">
-          <artifact name="ExtensionTemplate:jar" />
-          <artifact name="FXComponentLibrary:jar" />
-          <artifact name="ZXNoter:jar" />
-          <artifact name="ZXNoterUIFrame:jar" />
+          <artifact name="MapEditCore:jar" />
         </option>
       </method>
     </configuration>
@@ -248,14 +226,13 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="应用程序.PackInfoTest" />
-      <item itemvalue="应用程序.RunApp" />
       <item itemvalue="JAR 应用程序.RunJar" />
+      <item itemvalue="应用程序.test" />
+      <item itemvalue="应用程序.RunApp" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="应用程序.RunApp" />
-        <item itemvalue="应用程序.PackInfoTest" />
         <item itemvalue="应用程序.RunApp" />
       </list>
     </recent_temporary>
@@ -342,6 +319,8 @@
       <workItem from="1706030137521" duration="50423000" />
       <workItem from="1706190874466" duration="7796000" />
       <workItem from="1706209143131" duration="15943000" />
+      <workItem from="1706408461377" duration="1110000" />
+      <workItem from="1706409592097" duration="4754000" />
     </task>
     <task id="LOCAL-00002" summary="update ui">
       <option name="closed" value="true" />
@@ -734,7 +713,10 @@
     <select />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/ZXNoter$Main.ic" NAME="Main 覆盖结果" MODIFIED="1688229822928" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/ZXNoter$IoTest.ic" NAME="IoTest 覆盖结果" MODIFIED="1688163428769" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>team.zxorg.zxnoter.io.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ZXNoter$Main.ic" NAME="Main 覆盖结果" MODIFIED="1688229821484" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>team.zxorg.zxnoter.*</FILTER>
     </SUITE>
   </component>

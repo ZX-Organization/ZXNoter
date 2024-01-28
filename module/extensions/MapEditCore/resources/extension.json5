@@ -1,0 +1,29 @@
+{
+  id: "mapEditCore",
+  version: "0.0.0-RC",
+  name: "编辑器",
+  description: "扩展模板示例",
+  author: [
+    "他!"
+  ],
+  contact: {
+    "homepage": "https://github.com/ZX-Organization",
+    "sources": "https://github.com/ZX-Organization/ZXNoter"
+  },
+  entrypoints: [
+    "team.zxorg.mapeditcore.Main"
+  ],
+  depends: {
+    extensionApi: ">=0.0.0",
+    extensions: {
+
+    }
+  },
+  icon: "",
+  tags: [
+    "example"
+  ],
+  languages: [
+
+  ]
+}
