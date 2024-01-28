@@ -8,6 +8,7 @@ import team.zxorg.extensionloader.extension.Extension;
 import team.zxorg.extensionloader.extension.ExtensionEntrypoint;
 import team.zxorg.extensionloader.extension.ExtensionManager;
 import team.zxorg.zxnoter.uiframe.base.FileManagerActivityItem;
+import team.zxorg.zxnoter.uiframe.base.FileManagerSideBar;
 import team.zxorg.zxnoter.uiframe.base.SetupActivityItem;
 import team.zxorg.zxnoter.uiframe.component.ActivityBar;
 
@@ -23,9 +24,6 @@ public class ZXNoterManager implements ExtensionEntrypoint {
         Logger.info(extension.getLanguage("extension.zxnoterUiFrame.initialize"));
 
 
-
-
-
         //屏蔽javafx歌姬初始化时的异常
         Logging.getJavaFXLogger().disableLogging();
         Logger.info("初始化图形系统");
@@ -37,9 +35,8 @@ public class ZXNoterManager implements ExtensionEntrypoint {
 
 
             //注册基本UI
-            ActivityBar.registerItem(SetupActivityItem.class);
-            ActivityBar.registerItem(FileManagerActivityItem.class);
-
+            ActivityBar.registerItem(SetupActivityItem.class, FileManagerSideBar.class);
+            ActivityBar.registerItem(FileManagerActivityItem.class, FileManagerSideBar.class);
 
 
             ProjectViewStage projectViewStage = new ProjectViewStage();

@@ -946,7 +946,9 @@
     -fx-padding: 0;
     -fx-pref-height: 30px;
 }
-
+.title-bar .title-icon {
+    -fx-effect: null;
+}
 
 /**
 内容本体
@@ -1016,7 +1018,7 @@
     -fx-background-color: -color-activity-bar-bg-usually;
     -fx-pref-width: 220;
     -fx-min-width: 160;
-    -fx-max-width: 260;
+    -fx-max-width: 400;
 
 }
 

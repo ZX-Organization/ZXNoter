@@ -5,17 +5,28 @@
   zxnoterUiFrame: {
     projectView: {
       titleBar: {
+        icon: "software.logo"
       },
       activityBar: {
         menu: {
-          hideItemIcon: "system.delete-back",
-          hideItem: "隐藏此项",
-          itemConfigIcon: "system.list-settings",
-          itemConfig: "配置活动栏"
+          hideItem: {
+            icon: "system.delete-back",
+            title: "隐藏此项"
+          },
+          itemConfig: {
+            title: "配置活动栏",
+            icon: "system.list-settings"
+          }
         },
         item: {
-          fileManager: "文件管理器",
-          setup: "设置"
+          fileManager: {
+            name: "文件管理器",
+            icon: "document.folder-3"
+          },
+          setup: {
+            name: "设置",
+            icon: "system.settings-4"
+          }
         }
       },
       viewArea: {

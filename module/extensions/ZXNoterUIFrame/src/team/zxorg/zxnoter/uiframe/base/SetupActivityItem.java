@@ -5,6 +5,6 @@ import team.zxorg.zxnoter.uiframe.component.ActivityItem;
 
 public class SetupActivityItem extends ActivityItem {
     public SetupActivityItem() {
-        init(ZXNoterManager.extension, "setup", "system.settings-4");
+        init(ZXNoterManager.extension, "setup");
     }
 }

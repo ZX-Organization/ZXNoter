@@ -113,13 +113,7 @@
                               <ContextMenu>
                                 <items>
                                     <RadioMenuItem mnemonicParsing="false" text="Unspecified Action" />
-                                  <MenuItem mnemonicParsing="false" text="Unspecified Action" />
                                     <CheckMenuItem mnemonicParsing="false" text="Unspecified Action" />
-                                    <Menu mnemonicParsing="false" text="Unspecified Menu">
-                                      <items>
-                                        <MenuItem mnemonicParsing="false" text="Action 1" />
-                                      </items>
-                                    </Menu>
                                 </items>
                               </ContextMenu>
                            </contextMenu>

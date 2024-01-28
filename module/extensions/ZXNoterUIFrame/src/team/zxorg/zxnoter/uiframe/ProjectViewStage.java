@@ -15,16 +15,12 @@ import team.zxorg.zxnoter.uiframe.component.StatusBar;
 import team.zxorg.zxnoter.uiframe.component.TitleBar;
 
 import java.nio.file.Path;
-import java.util.HashMap;
-import java.util.Map;
 
 
 /**
  * 项目视图窗口
  */
 public class ProjectViewStage {
-    public static Map<String, SideBar> sideBarMap = new HashMap<>();
-
 
     /**
      * 标题栏
@@ -33,7 +29,18 @@ public class ProjectViewStage {
     /**
      * 活动栏
      */
-    private final ActivityBar activityBar = new ActivityBar();
+    private final ActivityBar activityBar = new ActivityBar() {
+
+        @Override
+        protected void showSideBar(SideBar sideBar) {
+            workArea.getItems().addFirst(sideBar);
+        }
+
+        @Override
+        protected void hideSideBar() {
+            workArea.getItems().removeAll(workArea.getItems().filtered(node -> node.getStyleClass().contains("side-bar")));
+        }
+    };
 
 
     /**

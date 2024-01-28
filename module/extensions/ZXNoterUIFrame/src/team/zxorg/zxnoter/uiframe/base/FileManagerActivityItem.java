@@ -5,6 +5,6 @@ import team.zxorg.zxnoter.uiframe.component.ActivityItem;
 
 public class FileManagerActivityItem extends ActivityItem {
     public FileManagerActivityItem() {
-        init(ZXNoterManager.extension, "fileManager", "document.folder-3");
+        init(ZXNoterManager.extension, "fileManager");
     }
 }
