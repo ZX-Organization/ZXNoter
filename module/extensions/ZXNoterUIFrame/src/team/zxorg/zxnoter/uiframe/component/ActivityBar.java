@@ -12,7 +12,6 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
-import org.jetbrains.annotations.NotNull;
 import team.zxorg.extensionloader.core.Logger;
 import team.zxorg.extensionloader.event.ConfigEventListener;
 import team.zxorg.fxcl.component.menu.LangCheckMenuItem;
@@ -184,7 +183,6 @@ public abstract class ActivityBar extends VBox {
         }
     };
 
-    @NotNull
     private static LangCheckMenuItem getLangCheckMenuItem(ActivityItem newActivityItem) {
         LangCheckMenuItem item = new LangCheckMenuItem(IconFactory.getMenuIcon(newActivityItem.getIconKey()), newActivityItem.getNameKey());
         item.setId(newActivityItem.getItemId());
