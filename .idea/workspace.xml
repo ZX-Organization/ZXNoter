@@ -2,1338 +2,37 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="ZXNoterUIFrame:jar" />
+      <artifact name="MapEditCore:jar" />
     </artifacts-to-build>
   </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dd78a4ca-7956-492b-9d75-ff82bf57b657" name="更改" comment="增加了活动栏">
-      <change afterPath="$PROJECT_DIR$/module/extensions/ZXNoterUIFrame/src/team/zxorg/zxnoter/uiframe/util/SvgUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/arrows/arrow-down-circle.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/arrows/arrow-down-double.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/arrows/arrow-down-s.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/arrows/arrow-down.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/arrows/arrow-drop-down.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/arrows/arrow-drop-left.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/arrows/arrow-drop-right.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/arrows/arrow-drop-up.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/arrows/arrow-go-back.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/arrows/arrow-go-forward.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/arrows/arrow-left-circle.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/arrows/arrow-left-double.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/arrows/arrow-left-down.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/arrows/arrow-left-right.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/arrows/arrow-left-s.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/arrows/arrow-left-up.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/arrows/arrow-left.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/arrows/arrow-right-circle.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/arrows/arrow-right-double.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/arrows/arrow-right-down.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/arrows/arrow-right-s.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/arrows/arrow-right-up.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/arrows/arrow-right.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/arrows/arrow-turn-back.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/arrows/arrow-turn-forward.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/arrows/arrow-up-circle.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/arrows/arrow-up-double.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/arrows/arrow-up-down.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/arrows/arrow-up-s.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/arrows/arrow-up.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/arrows/contract-left-right.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/arrows/contract-left.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/arrows/contract-right.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/arrows/contract-up-down.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/arrows/corner-down-left.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/arrows/corner-down-right.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/arrows/corner-left-down.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/arrows/corner-left-up.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/arrows/corner-right-down.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/arrows/corner-right-up.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/arrows/corner-up-left-double.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/arrows/corner-up-left.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/arrows/corner-up-right-double.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/arrows/corner-up-right.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/arrows/drag-move-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/arrows/drag-move.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/arrows/expand-left-right.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/arrows/expand-left.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/arrows/expand-right.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/arrows/expand-up-down.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/arrows/skip-down.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/arrows/skip-left.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/arrows/skip-right.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/arrows/skip-up.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/buildings/ancient-gate.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/buildings/ancient-pavilion.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/buildings/bank.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/buildings/building-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/buildings/building-3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/buildings/building-4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/buildings/building.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/buildings/community.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/buildings/government.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/buildings/home-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/buildings/home-3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/buildings/home-4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/buildings/home-5.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/buildings/home-6.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/buildings/home-7.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/buildings/home-8.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/buildings/home-gear.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/buildings/home-heart.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/buildings/home-office.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/buildings/home-smile-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/buildings/home-smile.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/buildings/home-wifi.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/buildings/home.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/buildings/hospital.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/buildings/hotel.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/buildings/school.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/buildings/store-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/buildings/store-3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/buildings/store.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/advertisement.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/archive-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/archive-drawer.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/archive.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/at.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/attachment.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/award.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/bar-chart-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/bar-chart-box.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/bar-chart-grouped.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/bar-chart-horizontal.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/bar-chart.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/bookmark-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/bookmark-3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/bookmark.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/briefcase-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/briefcase-3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/briefcase-4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/briefcase-5.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/briefcase.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/bubble-chart.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/calculator.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/calendar-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/calendar-check.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/calendar-close.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/calendar-event.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/calendar-todo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/calendar.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/cloud-off.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/cloud.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/copyleft.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/copyright.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/creative-commons-by.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/creative-commons-nc.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/creative-commons-nd.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/creative-commons-sa.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/creative-commons-zero.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/creative-commons.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/customer-service-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/customer-service.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/donut-chart.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/flag-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/flag.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/global.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/honour.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/inbox-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/inbox-archive.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/inbox-unarchive.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/inbox.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/line-chart.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/links.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/mail-add.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/mail-check.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/mail-close.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/mail-download.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/mail-forbid.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/mail-lock.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/mail-open.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/mail-send.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/mail-settings.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/mail-star.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/mail-unread.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/mail-volume.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/mail.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/medal-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/medal.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/megaphone.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/pass-expired.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/pass-pending.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/pass-valid.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/pie-chart-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/pie-chart-box.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/pie-chart.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/presentation.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/printer-cloud.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/printer.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/profile.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/projector-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/projector.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/record-mail.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/registered.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/reply-all.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/reply.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/send-plane-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/send-plane.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/seo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/service.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/shake-hands.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/slideshow-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/slideshow-3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/slideshow-4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/slideshow.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/stack.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/trademark.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/window-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/business/window.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/communication/chat-1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/communication/chat-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/communication/chat-3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/communication/chat-4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/communication/chat-check.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/communication/chat-delete.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/communication/chat-download.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/communication/chat-follow-up.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/communication/chat-forward.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/communication/chat-heart.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/communication/chat-history.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/communication/chat-new.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/communication/chat-off.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/communication/chat-poll.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/communication/chat-private.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/communication/chat-quote.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/communication/chat-settings.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/communication/chat-smile-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/communication/chat-smile-3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/communication/chat-smile.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/communication/chat-upload.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/communication/chat-voice.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/communication/discuss.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/communication/emoji-sticker.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/communication/feedback.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/communication/message-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/communication/message-3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/communication/message.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/communication/question-answer.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/communication/questionnaire.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/communication/speak.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/communication/video-chat.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/anticlockwise-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/anticlockwise.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/artboard-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/artboard.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/ball-pen.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/blur-off.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/brush-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/brush-3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/brush-4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/brush.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/clockwise-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/clockwise.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/collage.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/compasses-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/compasses.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/contrast-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/contrast-drop-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/contrast-drop.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/contrast.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/crop-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/crop.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/drag-drop.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/drop.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/edit-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/edit-box.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/edit-circle.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/edit.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/eraser.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/focus-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/focus-3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/focus.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/grid.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/hammer.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/ink-bottle.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/input-method.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/layout-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/layout-3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/layout-4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/layout-5.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/layout-6.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/layout-bottom-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/layout-bottom.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/layout-column.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/layout-grid.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/layout-left-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/layout-left.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/layout-masonry.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/layout-right-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/layout-right.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/layout-row.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/layout-top-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/layout-top.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/layout.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/magic.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/mark-pen.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/markup.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/paint-brush.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/paint.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/palette.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/pantone.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/pen-nib.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/pencil-ruler-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/pencil-ruler.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/pencil.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/quill-pen.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/ruler-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/ruler.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/scissors-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/scissors-cut.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/scissors.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/screenshot-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/screenshot.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/shape-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/shape.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/sip.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/slice.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/t-box.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/table-alt.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/table.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/design/tools.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/development/braces.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/development/brackets.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/development/bug-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/development/bug.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/development/code-box.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/development/code-s-slash.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/development/code-s.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/development/code.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/development/command.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/development/css3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/development/cursor.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/development/git-branch.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/development/git-close-pull-request.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/development/git-commit.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/development/git-merge.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/development/git-pull-request.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/development/git-repository-commits.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/development/git-repository-private.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/development/git-repository.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/development/html5.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/development/javascript.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/development/parentheses.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/development/terminal-box.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/development/terminal-window.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/development/terminal.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/airplay.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/barcode-box.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/barcode.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/base-station.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/battery-2-charge.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/battery-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/battery-charge.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/battery-low.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/battery-saver.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/battery-share.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/battery.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/bluetooth-connect.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/bluetooth.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/cast.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/cellphone.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/computer.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/cpu.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/dashboard-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/dashboard-3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/database-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/database.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/device-recover.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/device.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/dual-sim-1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/dual-sim-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/fingerprint-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/fingerprint.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/gamepad.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/gps.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/gradienter.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/hard-drive-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/hard-drive-3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/hard-drive.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/hotspot.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/install.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/instance.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/keyboard-box.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/keyboard.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/mac.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/macbook.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/mouse.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/phone-find.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/phone-lock.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/phone.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/qr-code.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/qr-scan-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/qr-scan.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/radar.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/remote-control-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/remote-control.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/restart.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/rotate-lock.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/router.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/rss.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/save-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/save-3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/save.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/scan-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/scan.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/sd-card-mini.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/sd-card.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/sensor.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/server.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/shut-down.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/signal-wifi-1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/signal-wifi-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/signal-wifi-3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/signal-wifi-error.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/signal-wifi-off.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/signal-wifi.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/sim-card-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/sim-card.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/smartphone.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/tablet.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/tv-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/tv.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/u-disk.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/uninstall.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/usb.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/wifi-off.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/wifi.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/device/wireless-charging.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/article.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/bill.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/book-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/book-3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/book-mark.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/book-open.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/book-read.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/book.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/booklet.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/clipboard.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/contacts-book-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/contacts-book-upload.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/contacts-book.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/draft.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/file-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/file-3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/file-4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/file-add.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/file-chart-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/file-chart.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/file-cloud.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/file-code.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/file-copy-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/file-copy.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/file-damage.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/file-download.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/file-edit.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/file-excel-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/file-excel.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/file-forbid.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/file-gif.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/file-history.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/file-hwp.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/file-info.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/file-list-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/file-list-3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/file-list.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/file-lock.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/file-mark.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/file-music.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/file-paper-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/file-paper.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/file-pdf.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/file-ppt-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/file-ppt.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/file-reduce.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/file-search.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/file-settings.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/file-shield-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/file-shield.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/file-shred.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/file-text.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/file-transfer.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/file-unknow.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/file-upload.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/file-user.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/file-warning.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/file-word-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/file-word.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/file-zip.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/file.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/folder-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/folder-3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/folder-4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/folder-5.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/folder-add.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/folder-chart-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/folder-chart.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/folder-download.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/folder-forbid.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/folder-history.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/folder-info.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/folder-keyhole.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/folder-lock.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/folder-music.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/folder-open.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/folder-received.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/folder-reduce.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/folder-settings.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/folder-shared.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/folder-shield-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/folder-shield.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/folder-transfer.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/folder-unknow.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/folder-upload.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/folder-user.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/folder-warning.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/folder-zip.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/folder.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/folders.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/keynote.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/markdown.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/newspaper.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/numbers.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/pages.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/sticky-note-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/sticky-note.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/survey.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/task.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/document/todo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/a-b.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/ai-generate.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/align-bottom.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/align-center.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/align-justify.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/align-left.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/align-right.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/align-top.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/align-vertically.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/asterisk.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/attachment-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/bold.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/bring-forward.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/bring-to-front.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/code-view.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/delete-column.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/delete-row.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/double-quotes-l.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/double-quotes-r.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/draggable.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/emphasis-cn.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/emphasis.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/english-input.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/flow-chart.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/font-color.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/font-family.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/font-mono.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/font-sans-serif.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/font-sans.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/font-size-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/font-size.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/format-clear.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/functions.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/h-1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/h-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/h-3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/h-4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/h-5.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/h-6.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/hashtag.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/heading.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/indent-decrease.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/indent-increase.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/input-cursor-move.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/insert-column-left.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/insert-column-right.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/insert-row-bottom.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/insert-row-top.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/italic.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/line-height.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/link-m.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/link-unlink-m.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/link-unlink.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/link.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/list-check-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/list-check-3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/list-check.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/list-indefinite.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/list-ordered-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/list-ordered.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/list-radio.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/list-unordered.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/merge-cells-horizontal.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/merge-cells-vertical.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/mind-map.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/node-tree.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/number-0.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/number-1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/number-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/number-3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/number-4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/number-5.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/number-6.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/number-7.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/number-8.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/number-9.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/omega.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/organization-chart.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/overline.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/page-separator.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/paragraph.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/pinyin-input.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/question-mark.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/quote-text.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/rounded-corner.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/send-backward.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/send-to-back.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/separator.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/single-quotes-l.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/single-quotes-r.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/sketching.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/slash-commands.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/sort-asc.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/sort-desc.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/space.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/split-cells-horizontal.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/split-cells-vertical.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/strikethrough-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/strikethrough.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/subscript-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/subscript.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/superscript-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/superscript.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/table-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/text-direction-l.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/text-direction-r.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/text-spacing.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/text-wrap.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/text.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/translate-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/translate.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/underline.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/editor/wubi-input.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/finance/24-hours.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/finance/auction.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/finance/bank-card-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/finance/bank-card.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/finance/bit-coin.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/finance/cash.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/finance/coin.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/finance/coins.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/finance/copper-coin.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/finance/copper-diamond.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/finance/coupon-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/finance/coupon-3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/finance/coupon-4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/finance/coupon-5.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/finance/coupon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/finance/currency.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/finance/exchange-box.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/finance/exchange-cny.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/finance/exchange-dollar.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/finance/exchange-funds.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/finance/exchange.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/finance/funds-box.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/finance/funds.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/finance/gift-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/finance/gift.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/finance/hand-coin.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/finance/hand-heart.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/finance/increase-decrease.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/finance/money-cny-box.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/finance/money-cny-circle.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/finance/money-dollar-box.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/finance/money-dollar-circle.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/finance/money-euro-box.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/finance/money-euro-circle.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/finance/money-pound-box.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/finance/money-pound-circle.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/finance/nft.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/finance/p2p.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/finance/percent.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/finance/price-tag-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/finance/price-tag-3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/finance/price-tag.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/finance/red-packet.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/finance/refund-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/finance/refund.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/finance/safe-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/finance/safe.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/finance/secure-payment.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/finance/shopping-bag-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/finance/shopping-bag-3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/finance/shopping-bag.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/finance/shopping-basket-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/finance/shopping-basket.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/finance/shopping-cart-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/finance/shopping-cart.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/finance/stock.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/finance/swap-box.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/finance/swap.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/finance/ticket-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/finance/ticket.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/finance/token-swap.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/finance/trophy.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/finance/vip-crown-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/finance/vip-crown.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/finance/vip-diamond.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/finance/vip.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/finance/wallet-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/finance/wallet-3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/finance/wallet.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/finance/water-flash.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/health-medical/brain.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/health-medical/capsule.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/health-medical/dislike.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/health-medical/dossier.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/health-medical/empathize.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/health-medical/first-aid-kit.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/health-medical/flask.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/health-medical/hand-sanitizer.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/health-medical/health-book.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/health-medical/heart-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/health-medical/heart-3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/health-medical/heart-add.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/health-medical/heart-pulse.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/health-medical/heart.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/health-medical/hearts.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/health-medical/infrared-thermometer.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/health-medical/lungs.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/health-medical/medicine-bottle.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/health-medical/mental-health.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/health-medical/microscope.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/health-medical/nurse.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/health-medical/psychotherapy.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/health-medical/pulse.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/health-medical/rest-time.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/health-medical/stethoscope.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/health-medical/surgical-mask.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/health-medical/syringe.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/health-medical/test-tube.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/health-medical/thermometer.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/health-medical/virus.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/health-medical/zzz.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/alipay.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/amazon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/android.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/angularjs.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/app-store.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/apple.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/baidu.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/bard.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/behance.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/bilibili.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/blender.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/bootstrap.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/centos.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/chrome.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/codepen.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/copilot.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/coreos.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/dingding.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/discord.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/disqus.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/douban.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/dribbble.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/drive.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/dropbox.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/edge-new.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/edge.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/evernote.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/facebook-box.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/facebook-circle.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/facebook.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/finder.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/firefox.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/flickr.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/flutter.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/gatsby.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/github.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/gitlab.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/google-play.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/google.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/honor-of-kings.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/ie.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/instagram.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/invision.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/kakao-talk.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/kick.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/line.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/linkedin-box.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/linkedin.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/mastercard.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/mastodon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/medium.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/messenger.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/meta.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/microsoft-loop.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/microsoft.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/mini-program.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/netease-cloud-music.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/netflix.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/notion.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/npmjs.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/open-source.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/openai.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/openbase.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/opera.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/patreon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/paypal.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/pinterest.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/pixelfed.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/playstation.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/product-hunt.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/qq.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/reactjs.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/reddit.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/remixicon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/safari.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/skype.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/slack.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/snapchat.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/soundcloud.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/spectrum.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/spotify.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/stack-overflow.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/stackshare.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/steam.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/supabase.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/switch.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/taobao.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/telegram.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/tiktok.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/trello.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/tumblr.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/twitch.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/twitter.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/ubuntu.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/unsplash.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/vimeo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/visa.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/vuejs.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/wechat-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/wechat-channels.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/wechat-pay.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/wechat.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/weibo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/whatsapp.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/windows.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/wordpress.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/xbox.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/xing.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/youtube.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/yuque.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/zcool.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/logos/zhihu.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/anchor.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/barricade.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/bike.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/bus-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/bus-wifi.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/bus.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/car-washing.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/car.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/caravan.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/charging-pile-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/charging-pile.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/china-railway.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/compass-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/compass-3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/compass-4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/compass-discover.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/compass.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/cup.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/direction.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/e-bike-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/e-bike.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/earth.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/flight-land.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/flight-takeoff.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/footprint.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/gas-station.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/globe.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/goblet.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/guide.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/hotel-bed.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/lifebuoy.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/luggage-cart.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/luggage-deposit.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/map-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/map-pin-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/map-pin-3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/map-pin-4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/map-pin-5.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/map-pin-add.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/map-pin-range.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/map-pin-time.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/map-pin-user.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/map-pin.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/map.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/motorbike.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/navigation.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/oil.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/parking-box.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/parking.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/passport.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/pin-distance.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/plane.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/planet.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/police-car.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/pushpin-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/pushpin.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/restaurant-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/restaurant.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/riding.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/road-map.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/roadster.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/rocket-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/rocket.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/route.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/run.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/sailboat.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/ship-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/ship.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/signal-tower.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/space-ship.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/steering-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/steering.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/subway-wifi.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/subway.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/suitcase-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/suitcase-3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/suitcase.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/takeaway.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/taxi-wifi.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/taxi.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/traffic-light.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/train-wifi.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/train.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/treasure-map.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/truck.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/unpin.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/map/walk.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/4k.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/album.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/aspect-ratio.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/broadcast.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/camera-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/camera-3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/camera-lens.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/camera-off.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/camera-switch.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/camera.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/clapperboard.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/closed-captioning.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/disc.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/dv.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/dvd.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/eject.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/equalizer.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/film.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/forward-10.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/forward-15.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/forward-30.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/forward-5.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/fullscreen-exit.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/fullscreen.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/gallery-upload.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/gallery.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/hd.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/headphone.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/hq.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/image-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/image-add.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/image-edit.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/image.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/landscape.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/live.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/memories.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/mic-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/mic-off.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/mic.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/movie-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/movie.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/music-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/music.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/mv.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/notification-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/notification-3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/notification-4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/notification-off.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/notification.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/order-play.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/pause-circle.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/pause-mini.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/pause.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/phone-camera.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/picture-in-picture-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/picture-in-picture-exit.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/picture-in-picture.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/play-circle.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/play-list-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/play-list-add.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/play-list.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/play-mini.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/play.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/polaroid-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/polaroid.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/radio-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/radio.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/record-circle.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/repeat-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/repeat-one.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/repeat.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/replay-10.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/replay-15.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/replay-30.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/replay-5.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/rewind-mini.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/rewind.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/rhythm.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/shuffle.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/skip-back-mini.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/skip-back.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/skip-forward-mini.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/skip-forward.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/slow-down.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/sound-module.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/speaker-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/speaker-3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/speaker.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/speed-mini.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/speed-up.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/speed.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/stop-circle.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/stop-mini.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/stop.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/surround-sound.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/tape.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/video-add.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/video-download.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/video-upload.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/video.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/vidicon-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/vidicon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/voiceprint.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/volume-down.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/volume-mute.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/volume-off-vibrate.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/volume-up.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/volume-vibrate.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/media/webcam.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/others/basketball.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/others/bell.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/others/billiards.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/others/box-1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/others/box-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/others/box-3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/others/boxing.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/others/cactus.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/others/cake-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/others/cake-3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/others/cake.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/others/candle.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/others/character-recognition.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/others/cross.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/others/door-closed.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/others/door-lock-box.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/others/door-lock.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/others/door-open.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/others/door.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/others/football.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/others/fridge.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/others/game.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/others/graduation-cap.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/others/handbag.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/others/key-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/others/key.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/others/knife-blood.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/others/knife.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/others/leaf.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/others/lightbulb-flash.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/others/lightbulb.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/others/outlet-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/others/outlet.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/others/ping-pong.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/others/plant.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/others/plug-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/others/plug.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/others/recycle.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/others/reserved.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/others/scales-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/others/scales-3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/others/scales.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/others/seedling.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/others/shirt.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/others/sword.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/others/t-shirt-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/others/t-shirt-air.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/others/t-shirt.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/others/umbrella.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/others/voice-recognition.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/others/wheelchair.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/software/1K.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/software/2k.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/software/3k.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/software/4k.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/software/5k.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/software/6k.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/software/7k.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/software/8k.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/software/file-imd.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/software/file-mc.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/software/file-osu.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/software/file-zxm.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/software/judged-align.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/software/logo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/software/time-format.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/software/time-ms.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/software/unknown.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/add-box.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/add-circle.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/add.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/alarm-warning.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/alarm.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/alert.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/apps-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/apps.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/check-double.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/check.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/checkbox-blank-circle.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/checkbox-blank.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/checkbox-circle.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/checkbox-indeterminate.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/checkbox-multiple-blank.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/checkbox-multiple.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/checkbox.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/close-circle.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/close.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/dashboard.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/delete-back-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/delete-back.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/delete-bin-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/delete-bin-3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/delete-bin-4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/delete-bin-5.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/delete-bin-6.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/delete-bin-7.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/delete-bin.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/divide.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/download-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/download-cloud-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/download-cloud.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/download.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/equal.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/error-warning.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/external-link.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/eye-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/eye-close.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/eye-off.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/eye.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/filter-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/filter-3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/filter-off.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/filter.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/find-replace.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/forbid-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/forbid.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/function.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/history.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/hourglass-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/hourglass.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/indeterminate-circle.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/information.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/list-settings.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/loader-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/loader-3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/loader-4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/loader-5.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/loader.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/lock-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/lock-password.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/lock-unlock.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/lock.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/login-box.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/login-circle.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/logout-box-r.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/logout-box.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/logout-circle-r.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/logout-circle.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/loop-left.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/loop-right.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/menu-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/menu-3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/menu-4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/menu-5.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/menu-add.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/menu-fold.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/menu-unfold.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/menu.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/more-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/more.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/notification-badge.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/prohibited.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/question.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/radio-button.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/refresh.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/search-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/search-eye.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/search.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/settings-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/settings-3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/settings-4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/settings-5.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/settings-6.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/settings.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/share-box.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/share-circle.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/share-forward-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/share-forward-box.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/share-forward.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/share.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/shield-check.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/shield-cross.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/shield-flash.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/shield-keyhole.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/shield-star.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/shield-user.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/shield.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/side-bar.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/spam-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/spam-3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/spam.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/star-half-s.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/star-half.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/star-s.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/star.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/subtract.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/thumb-down.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/thumb-up.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/time.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/timer-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/timer-flash.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/timer.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/toggle.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/upload-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/upload-cloud-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/upload-cloud.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/upload.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/zoom-in.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/system/zoom-out.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/user-faces/account-box.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/user-faces/account-circle.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/user-faces/account-pin-box.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/user-faces/account-pin-circle.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/user-faces/admin.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/user-faces/aliens.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/user-faces/bear-smile.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/user-faces/body-scan.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/user-faces/contacts.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/user-faces/criminal.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/user-faces/emotion-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/user-faces/emotion-happy.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/user-faces/emotion-laugh.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/user-faces/emotion-normal.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/user-faces/emotion-sad.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/user-faces/emotion-unhappy.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/user-faces/emotion.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/user-faces/genderless.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/user-faces/ghost-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/user-faces/ghost-smile.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/user-faces/ghost.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/user-faces/group-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/user-faces/group.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/user-faces/men.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/user-faces/mickey.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/user-faces/open-arm.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/user-faces/parent.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/user-faces/robot.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/user-faces/skull-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/user-faces/skull.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/user-faces/spy.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/user-faces/star-smile.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/user-faces/team.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/user-faces/travesti.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/user-faces/user-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/user-faces/user-3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/user-faces/user-4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/user-faces/user-5.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/user-faces/user-6.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/user-faces/user-add.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/user-faces/user-follow.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/user-faces/user-heart.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/user-faces/user-location.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/user-faces/user-received-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/user-faces/user-received.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/user-faces/user-search.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/user-faces/user-settings.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/user-faces/user-shared-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/user-faces/user-shared.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/user-faces/user-smile.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/user-faces/user-star.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/user-faces/user-unfollow.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/user-faces/user-voice.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/user-faces/user.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/user-faces/women.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/weather/blaze.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/weather/celsius.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/weather/cloud-windy.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/weather/cloudy-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/weather/cloudy.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/weather/drizzle.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/weather/earthquake.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/weather/fahrenheit.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/weather/fire.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/weather/flashlight.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/weather/flood.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/weather/foggy.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/weather/hail.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/weather/haze-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/weather/haze.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/weather/heavy-showers.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/weather/meteor.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/weather/mist.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/weather/moon-clear.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/weather/moon-cloudy.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/weather/moon-foggy.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/weather/moon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/weather/rainbow.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/weather/rainy.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/weather/shining-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/weather/shining.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/weather/showers.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/weather/snowy.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/weather/sparkling-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/weather/sparkling.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/weather/sun-cloudy.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/weather/sun-foggy.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/weather/sun.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/weather/temp-cold.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/weather/temp-hot.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/weather/thunderstorms.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/weather/tornado.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/weather/typhoon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/weather/water-percent.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/icon/weather/windy.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/iconPack-line-fast/pack.json5" afterDir="false" />
+    <list default="true" id="dd78a4ca-7956-492b-9d75-ff82bf57b657" name="更改" comment="更新UI框架，增加了一个启动器">
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/MapEditCore_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/intellij-javadocs-4.0.1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/mapEditCore/MapEditConfig.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/extensions/MapEditCore.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module/extensions/MapEditCore/resources/extension.json5" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module/extensions/MapEditCore/src/team/zxorg/mapeditcore/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module/extensions/MapEditCore/src/team/zxorg/mapeditcore/MapEditConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module/extensions/MapEditCore/src/team/zxorg/mapeditcore/map/MapIO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module/extensions/MapEditCore/src/team/zxorg/mapeditcore/map/ZXMap.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module/extensions/MapEditCore/src/team/zxorg/mapeditcore/note/LongNote.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module/extensions/MapEditCore/src/team/zxorg/mapeditcore/note/Note.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module/extensions/MapEditCore/src/team/zxorg/mapeditcore/note/SlideNote.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/KotlinJavaRuntime.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Launcher/cmake-build-debug/.cmake/api/v1/query/cmakeFiles-v1" beforeDir="false" afterPath="$PROJECT_DIR$/latest.log.lck" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Launcher/cmake-build-release/.cmake/api/v1/query/cache-v2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/extensionLoader/ResourceConfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/config/extensionLoader/ResourceConfig.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/extensions/ZXNoterUIFrame.jar" beforeDir="false" afterPath="$PROJECT_DIR$/extensions/ZXNoterUIFrame.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/extensions/ExtensionTemplate.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/extensions/FXComponentLibrary.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/extensions/ZXNoterUIFrame.jar" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/latest.log" beforeDir="false" afterPath="$PROJECT_DIR$/latest.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module/extensions/FXComponentLibrary/src/team/zxorg/fxcl/resource/IconManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/FXComponentLibrary/src/team/zxorg/fxcl/resource/IconManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/ExtensionLoader/ExtensionLoader.iml" beforeDir="false" afterPath="$PROJECT_DIR$/module/ExtensionLoader/ExtensionLoader.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/extensions/MapEditCore/MapEditCore.iml" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MapEditCore/MapEditCore.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/extensions/MapEditCore/src/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1397,65 +96,64 @@
     <option name="foldersAlwaysOnTop" value="false" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "Downloaded.Files.Path.Enabled": "false",
-    "JAR 应用程序.RunJar.executor": "Run",
-    "JAR 应用程序.未命名.executor": "Run",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "true",
-    "Repository.Attach.Sources": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
-    "jdk.selected.JAVA_MODULE": "21",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/Projects/ZXNoter/module/extensions/FXComponentLibrary/src/team/zxorg/fxcl/component",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "项目",
-    "project.structure.proportion": "0.21134493",
-    "project.structure.side.proportion": "0.2874845",
-    "settings.editor.selected.configurable": "vcs.Git",
-    "vue.rearranger.settings.migration": "true",
-    "应用程序.AbstractAnimationRenderer.executor": "Run",
-    "应用程序.ExpressionCalculator.executor": "Run",
-    "应用程序.IconPackInfoTest.executor": "Run",
-    "应用程序.Main (1).executor": "Run",
-    "应用程序.Main.executor": "Run",
-    "应用程序.PackInfoTest.executor": "Run",
-    "应用程序.PlistParser.executor": "Run",
-    "应用程序.RunApp (1).executor": "Run",
-    "应用程序.RunApp.executor": "Run",
-    "应用程序.SkinEditor (1).executor": "Run",
-    "应用程序.SkinEditor.executor": "Run",
-    "应用程序.SvgUtils.executor": "Run",
-    "应用程序.Test.executor": "Run",
-    "应用程序.UISEditor (1).executor": "Run",
-    "应用程序.UISEditor (2).executor": "Run",
-    "应用程序.UISEditor.executor": "Run",
-    "应用程序.UISParser.executor": "Run",
-    "应用程序.UISPerspectiveTransform.executor": "Run",
-    "应用程序.UISPerspectiveTransformTest (1).executor": "Run",
-    "应用程序.UISPerspectiveTransformTest.executor": "Run",
-    "应用程序.UISSkin.executor": "Run",
-    "应用程序.ZXVersion.executor": "Run"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;JAR 应用程序.RunJar.executor&quot;: &quot;Run&quot;,
+    &quot;JAR 应用程序.未命名.executor&quot;: &quot;Run&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;true&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;21&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;F:/AllProjects/ZX-Organization/ZXNoter/ZXNoter.jar&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;模块&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.21134493&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2874845&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;,
+    &quot;应用程序.AbstractAnimationRenderer.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.ExpressionCalculator.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.IconPackInfoTest.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.Main (1).executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.Main.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.PackInfoTest.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.PlistParser.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.RunApp (1).executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.RunApp.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.SkinEditor (1).executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.SkinEditor.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.Test.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.UISEditor (1).executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.UISEditor (2).executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.UISEditor.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.UISParser.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.UISPerspectiveTransform.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.UISPerspectiveTransformTest (1).executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.UISPerspectiveTransformTest.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.UISSkin.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.ZXVersion.executor&quot;: &quot;Run&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\AllProjects\ZX-Organization\ZXNoter\module\extensions\MapEditCore\resources" />
       <recent name="D:\Projects\ZXNoter\module\extensions\FXComponentLibrary\src\team\zxorg\fxcl\component" />
       <recent name="D:\Projects\ZXNoter\module\extensions\ZXNoterUIFrame\resources" />
       <recent name="D:\Projects\ZXNoter\module\extensions\ZXNoterUIFrame\docs" />
       <recent name="D:\Projects\ZXNoter\module\extensions\FXComponentLibrary\resources\assets\fxComponentLibrary" />
-      <recent name="D:\Projects\ZXNoter\module\ExtensionLoader\resources" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Projects\ZXNoter\config\resource" />
@@ -1476,13 +174,6 @@
     </key>
   </component>
   <component name="RunManager" selected="JAR 应用程序.RunJar">
-    <configuration name="PackInfoTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="PackInfoTest" />
-      <module name="FXComponentLibrary" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="RunApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="RunApp" />
       <module name="ZXNoter" />
@@ -1496,29 +187,28 @@
         <option name="BuildArtifacts" enabled="true">
           <artifact name="ZXNoterUIFrame:jar" />
         </option>
+        <option name="BuildArtifacts" enabled="true">
+          <artifact name="MapEditCore:jar" />
+        </option>
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SvgUtils" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="team.zxorg.zxnoter.uiframe.util.SvgUtils" />
-      <module name="ZXNoterUIFrame" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="team.zxorg.zxnoter.uiframe.util.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
+    <configuration name="test" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="RunApp" />
+      <module name="ZXNoter" />
       <method v="2">
-        <option name="Make" enabled="true" />
+        <option name="BuildArtifacts" enabled="true">
+          <artifact name="MapEditCore:jar" />
+        </option>
       </method>
     </configuration>
     <configuration name="RunJar" type="JarApplication">
       <option name="JAR_PATH" value="$PROJECT_DIR$/ZXNoter.jar" />
-      <option name="WORKING_DIRECTORY" value="D:\Projects\ZXNoter" />
+      <option name="WORKING_DIRECTORY" value="F:\AllProjects\ZX-Organization\ZXNoter" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <method v="2">
         <option name="BuildArtifacts" enabled="true">
-          <artifact name="ZXNoterUIFrame:jar" />
+          <artifact name="MapEditCore:jar" />
         </option>
       </method>
     </configuration>
@@ -1537,15 +227,13 @@
     </configuration>
     <list>
       <item itemvalue="JAR 应用程序.RunJar" />
-      <item itemvalue="应用程序.SvgUtils" />
-      <item itemvalue="应用程序.PackInfoTest" />
+      <item itemvalue="应用程序.test" />
       <item itemvalue="应用程序.RunApp" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="应用程序.SvgUtils" />
         <item itemvalue="应用程序.RunApp" />
-        <item itemvalue="应用程序.PackInfoTest" />
+        <item itemvalue="应用程序.RunApp" />
       </list>
     </recent_temporary>
   </component>
@@ -1631,10 +319,8 @@
       <workItem from="1706030137521" duration="50423000" />
       <workItem from="1706190874466" duration="7796000" />
       <workItem from="1706209143131" duration="15943000" />
-      <workItem from="1706405095032" duration="1387000" />
-      <workItem from="1706535913048" duration="2405000" />
-      <workItem from="1706684297305" duration="632000" />
-      <workItem from="1706685261621" duration="1627000" />
+      <workItem from="1706408461377" duration="1110000" />
+      <workItem from="1706409592097" duration="4754000" />
     </task>
     <task id="LOCAL-00002" summary="update ui">
       <option name="closed" value="true" />
@@ -1964,15 +650,7 @@
       <option name="project" value="LOCAL" />
       <updated>1706218918993</updated>
     </task>
-    <task id="LOCAL-00043" summary="增加了活动栏">
-      <option name="closed" value="true" />
-      <created>1706405162764</created>
-      <option name="number" value="00043" />
-      <option name="presentableId" value="LOCAL-00043" />
-      <option name="project" value="LOCAL" />
-      <updated>1706405162764</updated>
-    </task>
-    <option name="localTasksCounter" value="44" />
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2003,6 +681,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="update localize method" />
     <MESSAGE value="update reader interface" />
     <MESSAGE value="update ZXMInfo" />
     <MESSAGE value="update file name" />
@@ -2027,15 +706,17 @@
     <MESSAGE value="更新fx组件库还有图标管理" />
     <MESSAGE value="更新UI框架" />
     <MESSAGE value="更新UI框架，增加了一个启动器" />
-    <MESSAGE value="增加了活动栏" />
-    <option name="LAST_COMMIT_MESSAGE" value="增加了活动栏" />
+    <option name="LAST_COMMIT_MESSAGE" value="更新UI框架，增加了一个启动器" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
     <select />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/ZXNoter$Main.ic" NAME="Main 覆盖结果" MODIFIED="1688229822928" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/ZXNoter$IoTest.ic" NAME="IoTest 覆盖结果" MODIFIED="1688163428769" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>team.zxorg.zxnoter.io.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ZXNoter$Main.ic" NAME="Main 覆盖结果" MODIFIED="1688229821484" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>team.zxorg.zxnoter.*</FILTER>
     </SUITE>
   </component>
