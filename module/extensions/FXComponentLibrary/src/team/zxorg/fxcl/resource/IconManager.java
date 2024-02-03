@@ -19,6 +19,7 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashMap;
 
@@ -61,7 +62,6 @@ public class IconManager {
                         throw new RuntimeException(e);
                     }
                     icon = new Image(new ByteArrayInputStream(outputStream.toByteArray()), 0, 0, true, true);
-
                 } else {
                     icon = new Image(Resource.getResourceToInputStream(file), 0, 0, true, true);
                 }

@@ -31,3 +31,14 @@ bin/
 # IntelliJ project files
 out
 gen
+
+target/
+
+/extensions/*.jar
+/ZXNoter.jar
+
+*.log
+*.log.lck
+
+.idea/workspace.xml
+.idea/misc.xml

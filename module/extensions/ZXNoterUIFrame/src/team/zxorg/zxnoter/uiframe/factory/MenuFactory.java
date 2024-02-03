@@ -15,6 +15,7 @@ public class MenuFactory {
         return langMenu;
     }
 
+
     public static LangMenuItem getLangMenuItem(String key, Property<?>... args) {
         String langKey = (Language.getOrNull(key) == null ? key + ".title" : key);
         LangMenuItem langMenu = new LangMenuItem(langKey, args);
