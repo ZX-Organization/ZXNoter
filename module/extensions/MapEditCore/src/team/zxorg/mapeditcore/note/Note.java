@@ -1,7 +1,11 @@
 package team.zxorg.mapeditcore.note;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import team.zxorg.extensionloader.core.Logger;
+
+import javax.sound.sampled.AudioInputStream;
+import java.lang.reflect.Modifier;
 
 public class Note {
     /**
@@ -14,6 +18,33 @@ public class Note {
     private double position;
 
     /**
+     * key音输入流引用
+     */
+    protected AudioInputStream keyAudio;
+
+    /**
+     * 无key音构造
+     * @param time 时间
+     * @param position 位置
+     */
+    public Note(int time, double position) {
+        setTime(time);
+        setPosition(position);
+    }
+
+    /**
+     * 带key音构造
+     * @param time 时间
+     * @param position 位置
+     * @param keyAudio key音
+     */
+    public Note(int time, double position, AudioInputStream keyAudio) {
+        this.time = time;
+        this.position = position;
+        this.keyAudio = keyAudio;
+    }
+
+    /**
      * 获取物件时间戳
      * @return 时间
      */
@@ -22,15 +53,13 @@ public class Note {
     /**
      * 设置物件时间戳
      * @param time 时间
-     * @return 结果
      */
-    public int setTime(int time){
+    public void setTime(int time){
         //设置时间不可小于0
         if (time>=0)
-            return this.time = time;
+            this.time = time;
         else {
             Logger.info("使用非法时间戳->" + time + '\n' + "物件:" + this);
-            return this.time;
         }
     }
 
@@ -49,12 +78,47 @@ public class Note {
             this.position = position;
     }
 
+    /**
+     * 获取此物件的key音
+     * @return 此物件key音音频流
+     */
+    public AudioInputStream getKeyAudio() {
+        return keyAudio;
+    }
+
+    /**
+     * 设置此物件的key音
+     * @param keyAudio 要设置的key音音频流
+     */
+    public void setKeyAudio(AudioInputStream keyAudio) {
+        this.keyAudio = keyAudio;
+    }
+
+    /**
+     * 根据定轨计算实际位置
+     * @param orbit 所处轨道(1~max)
+     * @param maxOrbit 最大轨道数
+     * @return 所处位置
+     */
+    public static double calPosByOrbit(int orbit,int maxOrbit){
+        return ((1.0/maxOrbit)/2) + (orbit-1)*(1.0/maxOrbit);
+    }
+
+    public String toJson(){
+        if (keyAudio == null) {
+            return new GsonBuilder().excludeFieldsWithModifiers(Modifier.PROTECTED).create().toJson(this);
+        }else {
+            return new Gson().toJson(this);
+        }
+
+    }
+
     @Override
     public String toString() {
-        return new Gson().toJson(this);
-        /*return "Note{" +
+        return '\n'+"Note{" +
                 "时间=" + time +
                 ", 位置=" + position +
-                '}';*/
+                ", key音=" + keyAudio +
+                '}';
     }
 }
