@@ -11,6 +11,11 @@ public class LongNote extends Note{
      */
     private int duration;
 
+    public LongNote(int time, double position,int duration) {
+        super(time, position);
+        setDuration(duration);
+    }
+
     /**
      * 获取长条持续时间
      * @return 持续时间

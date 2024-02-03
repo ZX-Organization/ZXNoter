@@ -8,6 +8,11 @@ public class SlideNote extends Note{
      */
     private double direction;
 
+    public SlideNote(int time, double position,double direction) {
+        super(time, position);
+        setDirection(direction);
+    }
+
     /**
      * 获取滑键方向
      * @return 方向
