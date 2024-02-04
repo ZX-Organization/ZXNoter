@@ -10,6 +10,13 @@
     -fx-fill: -color-text-usually;
 }
 
+.tooltip{
+    -fx-background-color: -color-component-bg-usually;
+    -fx-background-radius: 3;
+    -fx-border-radius: 3;
+    -fx-border-color: -color-component-border-usually;
+    -fx-border-width: 1;
+}
 
 /**
 按钮

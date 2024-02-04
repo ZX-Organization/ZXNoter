@@ -9,4 +9,9 @@ public class FileManagerSideBar extends SideBar {
         getChildren().addAll(new Label("文件管理器"));
         setAlignment(Pos.CENTER);
     }
+
+    public FileManagerSideBar() {
+        super("fileManager");
+
+    }
 }

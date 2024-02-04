@@ -1,5 +1,6 @@
 package team.zxorg.extensionloader.extension;
 
+import org.apache.commons.lang3.SystemUtils;
 import team.zxorg.extensionloader.core.*;
 import team.zxorg.extensionloader.gson.GsonManager;
 
@@ -12,9 +13,9 @@ import java.net.URLClassLoader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.StringJoiner;
 
 /**
  * 扩展对象
@@ -36,55 +37,68 @@ public class Extension {
      * 扩展jar文件路径
      */
     private final URL jarUrl;
-    private final Configuration configuration;
+    private final Configuration config;
     /**
      * 扩展入口点列表
      */
     private List<ExtensionEntrypoint> entrypointList;
+
+    public List<ExtensionEntrypoint> getEntrypointList() {
+        return entrypointList;
+    }
+
     /**
      * 扩展类加载器
      */
     private URLClassLoader classLoader;
+    /**
+     * 是否已加载
+     */
+    private boolean loaded;
+
+    /**
+     * 扩展是否已被载入
+     *
+     * @return 是否被载入
+     */
+    public boolean isLoaded() {
+        return loaded;
+    }
 
     public Extension(ExtensionManager manager, Path jarPath) {
         this.jarPath = jarPath;
         this.manager = manager;
-        //ZXLogger.info("正在读取扩展: " + jarPath);
-        /**
-         * 扩展jar文件路径
-         */
         try {
             jarUrl = jarPath.toUri().toURL();
         } catch (MalformedURLException e) {
             throw new RuntimeException(getLanguage(LanguageKey.MESSAGE_EXTENSION_ERROR_URL, jarPath, e));
         }
+
+        //载入jar读取扩展信息
         try (URLClassLoader classLoader = new URLClassLoader(new URL[]{jarUrl})) {
             info = GsonManager.fromJson(classLoader, "extension.json5", ExtensionInfo.class);
-            configuration = new Configuration(info.id);
-            Language.setGlobalLanguage("extension." + info.id + ".version", info.version.toString());
-
-
-            if (info.languages != null) for (Path language : info.languages)
+            config = new Configuration(info.id);
+            String Extension_LANG = "extension." + info.id;
+            Language.setGlobalLanguage(Extension_LANG + ".version", info.version.toString());
+            for (Path language : info.languages)
                 Language.loadLanguage(classLoader, language);
 
-            if (info.author != null) {
-                StringBuilder sb = new StringBuilder();
+            {
+                StringJoiner sj = new StringJoiner(", ");
                 for (Language author : info.author)
-                    sb.append(author).append(",");
-                sb.deleteCharAt(sb.length() - 1);
-                Language.setGlobalLanguage("extension." + info.id + ".author", sb.toString());
+                    sj.add(author.toString());
+                Language.setGlobalLanguage(Extension_LANG + ".author", sj.toString());
             }
 
-            if (info.tags != null) {
-                StringBuilder sb = new StringBuilder();
+            {
+                StringJoiner sj = new StringJoiner(", ");
                 for (Language tag : info.tags)
-                    sb.append(tag).append(",");
-                sb.deleteCharAt(sb.length() - 1);
-                Language.setGlobalLanguage("extension." + info.id + ".tags", sb.toString());
+                    sj.add(tag.toString());
+                Language.setGlobalLanguage(Extension_LANG + ".tags", sj.toString());
             }
-
 
         } catch (Exception e) {
+            e.printStackTrace();
             throw new RuntimeException(getLanguage(LanguageKey.MESSAGE_EXTENSION_ERROR_INFO_READ_FAILED, jarPath, e));
         }
     }
@@ -112,8 +126,21 @@ public class Extension {
      *
      * @return 版本
      */
-    public Version getApiVersion() {
+    public VersionChecker getApiVersion() {
         return info.depends.extensionApi;
+    }
+
+    /**
+     * 是否支持当前平台
+     *
+     * @return 是否支持
+     */
+    public boolean isPlatformSupported() {
+        //如果没有注明则默认支持所有平台
+        if (info.platforms.isEmpty())
+            return true;
+        String platform = (SystemUtils.IS_OS_WINDOWS ? "windows" : SystemUtils.IS_OS_LINUX ? "linux" : SystemUtils.IS_OS_MAC ? "macos" : "unknown");
+        return info.platforms.stream().anyMatch(p -> p.toLowerCase().equals(platform));
     }
 
     @Override
@@ -155,6 +182,12 @@ public class Extension {
                 Logger.warning(getLanguage(LanguageKey.MESSAGE_EXTENSION_ERROR_ENTRYPOINT_INSTANCE_FAILED, getId(), entrypoint, e));
             }
         }
+        loaded = true;
+
+        // 载入扩展
+        for (ExtensionEntrypoint initializer : entrypointList) {
+            initializer.onLoaded(this, manager);
+        }
     }
 
     /**
@@ -162,7 +195,7 @@ public class Extension {
      */
     protected void initialize() {
         //检查依赖扩展
-        for (Map.Entry<String, Version> dependExtension : info.depends.extensions.entrySet()) {
+        for (Map.Entry<String, VersionChecker> dependExtension : info.depends.extensions.entrySet()) {
             String dependExtensionId = dependExtension.getKey();
             Extension dependExt = manager.getExtension(dependExtensionId);
             if (dependExt == null) {
@@ -170,7 +203,7 @@ public class Extension {
                 return;
             }
             if (!dependExtension.getValue().isSupported(dependExt.getVersion())) {
-                Logger.warning(getLanguage(    LanguageKey.MESSAGE_EXTENSION_ERROR_DEPEND_EXTENSION_NOT_COMPATIBLE, getId(), dependExtensionId, dependExtension.getValue(), dependExt.getVersion()));
+                Logger.warning(getLanguage(LanguageKey.MESSAGE_EXTENSION_ERROR_DEPEND_EXTENSION_NOT_COMPATIBLE, getId(), dependExtensionId, dependExtension.getValue(), dependExt.getVersion()));
                 return;
             }
         }
@@ -180,10 +213,11 @@ public class Extension {
         }
     }
 
+
     /**
      * 获取全局资源
      *
-     * @param name 资源路径
+     * @param name 资源路径 'name'
      * @return 资源数据
      */
     public InputStream getGlobalClassResourceAsStream(String name) {
@@ -193,7 +227,7 @@ public class Extension {
     /**
      * 获取全局资源
      *
-     * @param name 资源路径
+     * @param name 资源路径 'name'
      * @return 资源数据
      */
     public URL getGlobalClassResource(String name) {
@@ -203,7 +237,7 @@ public class Extension {
     /**
      * 获取assets下的资源
      *
-     * @param name 资源路径 'assets.id.name'
+     * @param name 资源路径 'assets/id/name'
      * @return 资源数据
      */
     public InputStream getClassResourceAsStream(String name) {
@@ -213,7 +247,7 @@ public class Extension {
     /**
      * 获取assets下的资源
      *
-     * @param name 资源路径 'assets.id.name'
+     * @param name 资源路径 'assets/id/name'
      * @return 资源数据
      */
     public String getClassResourceAsString(String name) {
@@ -227,24 +261,49 @@ public class Extension {
     /**
      * 获取全局资源
      *
-     * @param name 资源路径
+     * @param name 资源路径 'assets/id/name'
      * @return 资源数据
      */
     public URL getClassResource(String name) {
         return classLoader.getResource("assets/" + info.id + "/" + name);
     }
 
+    /**
+     * 获取语言
+     *
+     * @param key  语言键
+     * @param args 语言参数
+     * @return 语言内容
+     */
     public String getLanguage(String key, Object... args) {
         return Language.get(key, args);
     }
+
+    /**
+     * 获取语言
+     *
+     * @param key  语言键
+     * @param args 语言参数
+     * @return 语言内容
+     */
     public String getLanguage(Object key, Object... args) {
         return Language.get(key, args);
     }
 
-    public Configuration getConfiguration() {
-        return configuration;
+    /**
+     * 获取扩展配置类
+     *
+     * @return 配置类
+     */
+    public Configuration getConfig() {
+        return config;
     }
 
+    /**
+     * 获取扩展jar路径
+     *
+     * @return jar路径
+     */
     public Path getJarPath() {
         return jarPath;
     }
@@ -294,6 +353,10 @@ public class Extension {
          */
 
         Depends depends;
+        /**
+         * 平台
+         */
+        List<String> platforms;
 
         /**
          * 扩展标签
@@ -305,6 +368,7 @@ public class Extension {
          */
         List<Path> languages;
 
+
         /**
          * 依赖类
          */
@@ -312,11 +376,11 @@ public class Extension {
             /**
              * 扩展API
              */
-            Version extensionApi;
+            VersionChecker extensionApi;
             /**
              * 依赖的扩展列表
              */
-            Map<String, Version> extensions;
+            Map<String, VersionChecker> extensions;
         }
 
         /**
@@ -332,7 +396,6 @@ public class Extension {
              */
             String source;
         }
-
 
     }
 

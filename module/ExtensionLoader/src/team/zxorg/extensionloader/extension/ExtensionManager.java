@@ -51,10 +51,16 @@ public class ExtensionManager {
             return;
         }
 
+        if (!extension.isPlatformSupported()) {
+            Logger.warning(Language.get(LanguageKey.MESSAGE_EXTENSION_ERROR_PLATFORM_NOT_SUPPORTED, extension.getId(), extension.getApiVersion(), EXTENSION_API_VERSION));
+            return;
+        }
+
         if (extensions.containsKey(extension.getId())) {
             Logger.warning(Language.get(LanguageKey.MESSAGE_EXTENSION_ERROR_ID_CONFLICT, extension.getId(), extensionPath.toAbsolutePath(), extensions.get(extension.getId()).getJarPath().toAbsolutePath()));
             return;
         }
+
         extensions.put(extension.getId(), extension);
     }
 
@@ -89,6 +95,13 @@ public class ExtensionManager {
 
         for (Extension extension : extensions.values()) {
             extension.loadJar(classLoader);
+        }
+
+        for (Extension extension : extensions.values()) {
+            // 初始化扩展
+            for (ExtensionEntrypoint initializer : extension.getEntrypointList()) {
+                initializer.onAllInitialized(extension, this);
+            }
         }
     }
 }

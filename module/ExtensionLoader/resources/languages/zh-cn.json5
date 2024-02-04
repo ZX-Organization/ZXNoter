@@ -9,6 +9,7 @@
   // 通用
   common: {
     unknown: "未知",
+    notSpecified: "未指定",
     yes: "是",
     no: "否",
     ok: "确定",
@@ -79,6 +80,7 @@
         cantLoad: "无法加载扩展 ({0})",
         url: "{{cantLoad}} : {1}",
         dependApiNotCompatible: "{{cantLoad}} ，因为所需的扩展 API 版本 {1} 与当前版本 {2} 不兼容。",
+        platformNotSupported: "{{cantLoad}} ，因为不支持当前平台。",
         idConflict: "{{cantLoad}} ，因为其与已安装的扩展冲突，冲突的扩展路径 {1} {2}。",
         infoReadFailed: "{{cantLoad}} ，读取扩展配置文件失败: {1}",
         dependExtensionLost: "{{cantLoad}} ，请先安装依赖扩展 ({1}) {2}。",

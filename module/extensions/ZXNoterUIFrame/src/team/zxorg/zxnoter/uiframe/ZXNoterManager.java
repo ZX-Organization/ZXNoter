@@ -7,9 +7,8 @@ import team.zxorg.extensionloader.core.Logger;
 import team.zxorg.extensionloader.extension.Extension;
 import team.zxorg.extensionloader.extension.ExtensionEntrypoint;
 import team.zxorg.extensionloader.extension.ExtensionManager;
-import team.zxorg.zxnoter.uiframe.base.FileManagerActivityItem;
 import team.zxorg.zxnoter.uiframe.base.FileManagerSideBar;
-import team.zxorg.zxnoter.uiframe.base.SetupActivityItem;
+import team.zxorg.zxnoter.uiframe.base.SetupSideBar;
 import team.zxorg.zxnoter.uiframe.component.ActivityBar;
 
 public class ZXNoterManager implements ExtensionEntrypoint {
@@ -19,7 +18,7 @@ public class ZXNoterManager implements ExtensionEntrypoint {
     @Override
     public void onInitialize(Extension extension, ExtensionManager manager) {
         ZXNoterManager.extension = extension;
-        config = extension.getConfiguration();
+        config = extension.getConfig();
 
         Logger.info(extension.getLanguage("extension.zxnoterUiFrame.initialize"));
 
@@ -35,8 +34,8 @@ public class ZXNoterManager implements ExtensionEntrypoint {
 
 
             //注册基本UI
-            ActivityBar.registerItem(SetupActivityItem.class, FileManagerSideBar.class);
-            ActivityBar.registerItem(FileManagerActivityItem.class, FileManagerSideBar.class);
+            ActivityBar.registerItem("fileManager", FileManagerSideBar.class);
+            ActivityBar.registerItem("setup", SetupSideBar.class);
 
 
             ProjectViewStage projectViewStage = new ProjectViewStage();

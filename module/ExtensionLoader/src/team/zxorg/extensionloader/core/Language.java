@@ -14,7 +14,7 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Language {
+public class Language{
     private final String lang;
 
     public Language(String lang) {

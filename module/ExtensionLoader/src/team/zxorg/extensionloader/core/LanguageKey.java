@@ -49,6 +49,7 @@ public enum LanguageKey {
     MESSAGE_EXTENSION_ERROR_CANT_LOAD("message.extension.error.cantLoad"),
     MESSAGE_EXTENSION_ERROR_URL("message.extension.error.url"),
     MESSAGE_EXTENSION_ERROR_DEPEND_API_NOT_COMPATIBLE("message.extension.error.dependApiNotCompatible"),
+    MESSAGE_EXTENSION_ERROR_PLATFORM_NOT_SUPPORTED("message.extension.error.platformNotSupported"),
     MESSAGE_EXTENSION_ERROR_ID_CONFLICT("message.extension.error.idConflict"),
     MESSAGE_EXTENSION_ERROR_INFO_READ_FAILED("message.extension.error.infoReadFailed"),
     MESSAGE_EXTENSION_ERROR_DEPEND_EXTENSION_LOST("message.extension.error.dependExtensionLost"),

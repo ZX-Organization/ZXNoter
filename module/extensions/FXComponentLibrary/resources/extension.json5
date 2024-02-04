@@ -6,12 +6,15 @@
   author: [
     "zedoCN"
   ],
+  platforms: [
+    "windows"
+  ],
   contact: {
     homepage: "https://github.com/ZX-Organization",
     sources: "https://github.com/ZX-Organization/ZXNoter"
   },
   entrypoints: [
-//    "team.zxorg.fxcl.Test"
+    //    "team.zxorg.fxcl.Test"
   ],
   depends: {
     extensionApi: ">=0.0.0",

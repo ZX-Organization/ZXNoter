@@ -4,17 +4,25 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import com.google.gson.stream.JsonReader;
 import team.zxorg.extensionloader.core.Language;
 import team.zxorg.extensionloader.core.Version;
+import team.zxorg.extensionloader.core.VersionChecker;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 支持更多类型的Gson管理类
@@ -25,6 +33,7 @@ public class GsonManager {
     static {
         gson = new GsonBuilder()
                 .registerTypeAdapter(Version.class, new VersionSerializer())
+                .registerTypeAdapter(VersionChecker.class, new VersionCheckerSerializer())
                 .registerTypeAdapter(Path.class, new PathSerializer())
                 .registerTypeAdapter(Language.class, new LanguageSerializer())
                 .setPrettyPrinting()
@@ -36,23 +45,27 @@ public class GsonManager {
     }
 
     public static <T> T fromJson(Reader reader, Class<T> classOfT) {
-        return gson.fromJson(reader, classOfT);
+        return checkNullValue(gson.fromJson(reader, classOfT));
+    }
+
+    public static <T> T fromJson(JsonReader reader, Type typeOfT) {
+        return checkNullValue(gson.fromJson(reader, typeOfT));
     }
 
     public static <T> T fromJson(JsonElement element, Class<T> classOfT) {
-        return gson.fromJson(element, classOfT);
+        return checkNullValue(gson.fromJson(element, classOfT));
     }
 
     public static <T> T fromJson(Path path, Class<T> classOfT) {
         try {
-            return GsonManager.fromJson(new InputStreamReader(Files.newInputStream(path), StandardCharsets.UTF_8), classOfT);
+            return fromJson(new InputStreamReader(Files.newInputStream(path), StandardCharsets.UTF_8), classOfT);
         } catch (IOException e) {
             return null;
         }
     }
 
     public static <T> T fromJson(InputStream is, Class<T> classOfT) {
-        return GsonManager.fromJson(new InputStreamReader(is, StandardCharsets.UTF_8), classOfT);
+        return fromJson(new InputStreamReader(is, StandardCharsets.UTF_8), classOfT);
     }
 
     public static <T> T fromJson(ClassLoader classLoader, String resourceName, Class<T> classOfT) {
@@ -60,18 +73,67 @@ public class GsonManager {
             if (is == null) {
                 throw new RuntimeException("Resource not found: " + resourceName);
             }
-            return GsonManager.fromJson(new InputStreamReader(is), classOfT);
+            return fromJson(new InputStreamReader(is), classOfT);
         } catch (IOException e) {
             throw new RuntimeException("Resource read failed: " + resourceName + " " + e);
         }
     }
 
-    public static <T> T fromJson(String string, Class<T> classOfT) {
-        return gson.fromJson(string, classOfT);
+    public static <T> T fromJson(String json, Class<T> classOfT) {
+        return checkNullValue(gson.fromJson(json, classOfT));
     }
 
-    public static <T> T fromJson(String string, Type type) {
-        return gson.fromJson(string, type);
+    public static <T> T fromJson(String json, Type type) {
+        return checkNullValue(gson.fromJson(json, type));
+    }
+
+    /**
+     * 检查对象空值
+     *
+     * @param obj 对象
+     */
+    public static <T> T checkNullValue(T obj) {
+        if (obj instanceof NullValueHandler nullValueHandler)
+            nullValueHandler.handleNullValues();
+        else {
+            try {
+                // 获取对象的所有字段
+                Field[] fields = obj.getClass().getDeclaredFields();
+                for (Field field : fields) {
+                    // 设置字段可访问
+                    field.setAccessible(true);
+                    // 根据类型进行赋值
+                    if (field.get(obj) == null) {
+                        Class<?> fieldType = field.getType();
+                        if (fieldType == String.class) {
+                            field.set(obj, Language.get("common.notSpecified"));
+                        } else if (fieldType == Integer.class || fieldType == int.class) {
+                            field.set(obj, 0);
+                        } else if (fieldType == Long.class || fieldType == long.class) {
+                            field.set(obj, 0L);
+                        } else if (List.class.isAssignableFrom(fieldType)) {
+                            field.set(obj, new ArrayList<>());
+                        } else if (Map.class.isAssignableFrom(fieldType)) {
+                            field.set(obj, new HashMap<>());
+                        } else {
+                            // 递归调用
+                            Object nestedObj = fieldType.getDeclaredConstructor().newInstance();
+                            field.set(obj, checkNullValue(nestedObj));
+                        }
+                    }
+                }
+
+            } catch (IllegalAccessException e) {
+                throw new RuntimeException(e);
+            } catch (InstantiationException e) {
+                throw new RuntimeException(e);
+            } catch (InvocationTargetException e) {
+                throw new RuntimeException(e);
+            } catch (NoSuchMethodException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return obj;
     }
 
     public static JsonElement parseJson(String json) {
