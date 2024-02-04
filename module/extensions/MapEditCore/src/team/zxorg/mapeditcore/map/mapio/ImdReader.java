@@ -1,5 +1,6 @@
 package team.zxorg.mapeditcore.map.mapio;
 
+import team.zxorg.mapeditcore.map.MapMetaData;
 import team.zxorg.mapeditcore.map.ZXMap;
 import team.zxorg.mapeditcore.note.Hold;
 import team.zxorg.mapeditcore.note.MixNote;
@@ -14,11 +15,26 @@ import java.nio.ByteOrder;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-public class ImdReader implements MapReader{
-    @Override
-    public ZXMap read(Path path) throws IOException {
+public class ImdReader extends MapReader{
+    private final ByteBuffer bf;
+    private int mapLength;
+    private int timingAmount;
+    private int tabRaws;
 
-        String fileName = path.getFileName().toString();
+    public ImdReader(Path path) throws IOException {
+        super(path);
+        InputStream inputStream = Files.newInputStream(path);
+        byte[] data = inputStream.readAllBytes();
+        bf = ByteBuffer.wrap(data);
+        inputStream.close();
+        bf.order(ByteOrder.LITTLE_ENDIAN);
+        ready();
+    }
+
+    @Override
+    public ZXMap readMap() {
+
+        String fileName = filePath.getFileName().toString();
 /*
         //检查合法性
         boolean illegalFile = !fileName.endsWith(".imd") && !((fileName.length() - fileName.replaceAll("_", "").length()) == 2);
@@ -26,11 +42,7 @@ public class ImdReader implements MapReader{
             throw new RuntimeException("imd文件名非法");
         }*/
 
-        InputStream inputStream = Files.newInputStream(path);
-        byte[] data = inputStream.readAllBytes();
-        ByteBuffer bf = ByteBuffer.wrap(data);
-        inputStream.close();
-        bf.order(ByteOrder.LITTLE_ENDIAN);
+
 
         //初始化
         ZXMap map = new ZXMap();
@@ -51,17 +63,13 @@ public class ImdReader implements MapReader{
         //图长度
         unLocalizedMapInfo.setInfo(ImdInfo.MapLength.unLocalize(), String.valueOf(bf.getInt()));*/
 
-        int maxOrbit = Integer.valueOf(
+        int maxOrbit = Integer.parseInt(
                 fileName.substring(
                         fileName.indexOf("_") + 1,
                         fileName.lastIndexOf("_")
                 ).replaceAll("k", "")
         );
 
-        //图长度
-        int length = bf.getInt();
-        //图时间点数
-        int timingAmount = bf.getInt();
         //unLocalizedMapInfo.setInfo(ImdInfo.TimingCount.unLocalize(), String.valueOf(timingAmount));
 
         //读取首时间点bpm作为基准bpm
@@ -121,9 +129,8 @@ public class ImdReader implements MapReader{
                 case 2->//长键
                     tempNote = new Hold(timeStamp , orbit,maxOrbit , notePar);
             }
-            if (complexPar != 0)
+            if (complexPar != 0){
             //组合参数不为零,处理组合键
-            {
                 switch (complexPar){
                     case 0x06->{
                         //组合头,重新初始化缓存组合键,并将此首按键加入组合键中
@@ -152,7 +159,54 @@ public class ImdReader implements MapReader{
     }
 
     @Override
-    public String getSuffix() {
-        return "imd";
+    public Note readNote() {
+        if (readNoteIndex!=0){
+            //已经读过Note
+            if (!isReadingNote){
+                //之前正在进行其他操作,重定位并设置正在读note
+                bf.position(4 + timingAmount * 12 + 2 + 4 + readNoteIndex * 11);
+                isReadingNote = true;
+            }
+        }else {
+            //未读过note,定位到note开始处
+            bf.position(4 + timingAmount * 12 + 2 + 4);
+            if (!isReadingNote){
+                isReadingNote = true;
+            }
+        }
+
+
+
+        readNoteIndex++;
+        return null;
+    }
+
+    @Override
+    public MapMetaData readMeta() {
+        MapMetaData metaData = new MapMetaData();
+        return metaData;
+    }
+
+    @Override
+    public String getSuffix() {return "imd";}
+
+    @Override
+    protected void ready() {
+        mapLength = bf.getInt();
+        timingAmount = bf.getInt();
+        bf.position(8+timingAmount*12 + 2 );
+        tabRaws = bf.getInt();
+    }
+
+    @Override
+    public String toString() {
+        return "ImdReader{" +
+                "mapLength=" + mapLength +
+                ", timingAmount=" + timingAmount +
+                ", tabRaws=" + tabRaws +
+                ", filePath=" + filePath +
+                ", isReadingNote=" + isReadingNote +
+                ", readNoteIndex=" + readNoteIndex +
+                '}';
     }
 }
