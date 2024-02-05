@@ -17,7 +17,7 @@ import team.zxorg.extensionloader.core.Logger;
 import team.zxorg.extensionloader.event.ConfigEventListener;
 import team.zxorg.fxcl.component.menu.LangCheckMenuItem;
 import team.zxorg.fxcl.component.menu.LangMenuItem;
-import team.zxorg.zxnoter.uiframe.ZXNoterManager;
+import team.zxorg.zxnoter.uiframe.ZXNoter;
 import team.zxorg.zxnoter.uiframe.factory.IconFactory;
 import team.zxorg.zxnoter.uiframe.factory.MenuFactory;
 
@@ -51,9 +51,9 @@ public abstract class ActivityBar extends VBox {
     private final ObjectProperty<SideBar> showedSideBar = new SimpleObjectProperty<>();
 
     static {
-        ACTIVITY_BAR_CONFIG = ZXNoterManager.config.get(ActivityBarConfig.class);
+        ACTIVITY_BAR_CONFIG = ZXNoter.config.get(ActivityBarConfig.class);
         //更新活动项配置菜单
-        ZXNoterManager.config.addEventListener(ActivityBarConfig.class, new ConfigEventListener() {
+        ZXNoter.config.addEventListener(ActivityBarConfig.class, new ConfigEventListener() {
             @Override
             public void ConfigSaved() {
                 updateConfigMenu();
@@ -106,6 +106,7 @@ public abstract class ActivityBar extends VBox {
     private final ContextMenu barContextMenu = new ContextMenu(activityItemConfigMenu);
 
     {
+        System.out.println("实例化活动栏");
         //初始化
         getChildren().addAll(top, bottom);
         getStyleClass().addAll("activity-bar");
@@ -115,7 +116,7 @@ public abstract class ActivityBar extends VBox {
         for (Map.Entry<String, Class<? extends SideBar>> entry : sideBarClassMap.entrySet()) {
             SideBar sideBar = newInstance(entry.getValue());
             sideBarMap.put(entry.getKey(), sideBar);
-
+            System.out.println("实例化 " + sideBar);
             ActivityItem item = sideBar.activityItem;
             item.setOnAction(e -> {
                 if (e.getSource() instanceof ActivityItem activityItem) {
@@ -130,7 +131,7 @@ public abstract class ActivityBar extends VBox {
         }
 
         //监听并初始化活动项
-        ZXNoterManager.config.addEventListener(ActivityBarConfig.class, updateConfig);
+        ZXNoter.config.addEventListener(ActivityBarConfig.class, updateConfig);
         updateConfig.ConfigSaved();
 
         //设置右键活动栏的配置菜单
@@ -165,7 +166,7 @@ public abstract class ActivityBar extends VBox {
     }
 
     /**
-     * 为活动栏注册一个活动项 (在javafx线程内调用)
+     * 为活动栏注册一个活动项
      *
      * @param id           侧边栏id
      * @param sideBarClass 被注册的侧边栏
@@ -176,6 +177,7 @@ public abstract class ActivityBar extends VBox {
             return;
         }
         sideBarClassMap.put(id, sideBarClass);
+        System.out.println("注册 " + id);
         LangCheckMenuItem item = getLangCheckMenuItem(id);
         activityItemConfigMenu.getItems().add(item);
     }
@@ -190,14 +192,14 @@ public abstract class ActivityBar extends VBox {
                 String id = activityItemContextMenu.getId();
                 ACTIVITY_BAR_CONFIG.topItems.remove(id);
                 ACTIVITY_BAR_CONFIG.bottomItems.remove(id);
-                ZXNoterManager.config.save(ActivityBarConfig.class);
+                ZXNoter.config.save(ActivityBarConfig.class);
             });
             getItems().addAll(hideMenuItem, activityItemConfigMenu);
         }
     };
 
     private static LangCheckMenuItem getLangCheckMenuItem(String id) {
-        LangCheckMenuItem item = new LangCheckMenuItem(IconFactory.getMenuIcon(Language.get(LANG + "item." + id + ".icon")), LANG + "item."+ id + ".name");
+        LangCheckMenuItem item = new LangCheckMenuItem(IconFactory.getMenuIcon(Language.get(LANG + "item." + id + ".icon")), LANG + "item." + id + ".name");
         item.setId(id);
         item.setOnAction(event -> {
             if (item.isSelected()) {
@@ -206,7 +208,7 @@ public abstract class ActivityBar extends VBox {
                 ACTIVITY_BAR_CONFIG.topItems.remove(id);
                 ACTIVITY_BAR_CONFIG.bottomItems.remove(id);
             }
-            ZXNoterManager.config.save(ActivityBarConfig.class);
+            ZXNoter.config.save(ActivityBarConfig.class);
         });
         return item;
     }

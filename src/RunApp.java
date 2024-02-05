@@ -27,13 +27,12 @@ public class RunApp {
         Resource.reloadResourcePacks();
 
         VERSION.printInfo();
-        Logger.info(Language.get(LanguageKey.MESSAGE_EXTENSION_LOADING));
+
 
         ExtensionManager extensionManager = new ExtensionManager();
         Path exceptionsPath = Path.of("./extensions");
         extensionManager.loadAllExtensions(exceptionsPath);
 
 
-        extensionManager.initializeAllExtensions();
     }
 }

@@ -49,7 +49,7 @@
   },
   extension: {
     zxnoterUiFrame: {
-      initialize: "===>> ZXNoter 用户界面框架 初始化... <<==="
+      start: "===>> ZXNoter UI框架 {{version}} <<==="
     }
   }
 }

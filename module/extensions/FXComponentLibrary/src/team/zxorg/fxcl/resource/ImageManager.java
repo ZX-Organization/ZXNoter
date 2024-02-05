@@ -4,6 +4,7 @@ import com.github.weisj.jsvg.parser.SVGLoader;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.image.Image;
+import org.apache.commons.lang3.time.StopWatch;
 import team.zxorg.extensionloader.core.Language;
 import team.zxorg.extensionloader.core.LanguageKey;
 import team.zxorg.extensionloader.core.Logger;
@@ -18,19 +19,19 @@ public class ImageManager {
     public static HashMap<String, ObjectProperty<Image>> icons = new HashMap<>();
 
     static {
-        Logger.info(Language.get(LanguageKey.MESSAGE_ICON_INITIALIZE));
         Resource.addEventListener(new ResourceEventListener() {
             @Override
             public void onReload() {
                 reloadImages();
             }
         });
-        reloadImages();
     }
 
     public static void reloadImages() {
-        Logger.info(Language.get(LanguageKey.MESSAGE_ICON_LOADING));
-        for (Path dir : Resource.listResourceFiles("icon")) {
+        StopWatch stopWatch = new StopWatch();
+        stopWatch.start();
+        Logger.info(Language.get("message.image.loading"));
+        for (Path dir : Resource.listResourceFiles("texture")) {
             for (Path file : Resource.listResourceFiles(dir)) {
                 Image icon;
                 String filename = file.getFileName().toString();
@@ -44,6 +45,9 @@ public class ImageManager {
                 }
             }
         }
+        stopWatch.stop();
+        Logger.info(Language.get("message.image.loaded", stopWatch.getTime()));
+
     }
 
 

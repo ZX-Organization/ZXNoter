@@ -1,6 +1,6 @@
 package team.zxorg.zxnoter.uiframe.factory;
 
-import team.zxorg.zxnoter.uiframe.ZXNoterManager;
+import team.zxorg.zxnoter.uiframe.ZXNoter;
 
 public class ComponentConfig {
     public static final ComponentConfig config;
@@ -8,7 +8,7 @@ public class ComponentConfig {
      double menuIconSize;
 
     static {
-        config = ZXNoterManager.config.get(ComponentConfig.class);
+        config = ZXNoter.config.get(ComponentConfig.class);
     }
 
     public ComponentConfig() {

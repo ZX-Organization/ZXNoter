@@ -1,5 +1,6 @@
 package team.zxorg.extensionloader.core;
 
+import org.apache.commons.lang3.time.StopWatch;
 import team.zxorg.extensionloader.event.ResourceEventListener;
 
 import java.io.IOException;
@@ -52,6 +53,8 @@ public class Resource {
      * 重载所有资源包
      */
     public static void reloadResourcePacks() {
+        StopWatch stopWatch = new StopWatch();
+        stopWatch.start();
         //释放之前的资源包
         for (ResourcePack pack : loadedResourcePacks.values()) {
             pack.close();
@@ -61,17 +64,17 @@ public class Resource {
         loadedResourcePacks.clear();
         try (Stream<Path> fileStream = Files.list(resourcesPath)) {
             //重新读取资源包
-            fileStream.forEach(file -> {
-                Logger.info(Language.get(LanguageKey.MESSAGE_RESOURCE_PACK_LOADING, file));
+            for (Path packPath : fileStream.toList()) {
+                Logger.info(Language.get(LanguageKey.MESSAGE_RESOURCE_PACK_LOADING, packPath));
                 ResourcePack pack;
                 try {
-                    pack = new ResourcePack(file);
+                    pack = new ResourcePack(packPath);
                 } catch (RuntimeException e) {
                     Logger.warning(e.getMessage());
-                    return;
+                    continue;
                 }
-                loadedResourcePacks.put(resourcesPath.relativize(file), pack);
-            });
+                loadedResourcePacks.put(resourcesPath.relativize(packPath), pack);
+            }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -103,6 +106,10 @@ public class Resource {
 
         for (ResourceEventListener listener : eventListeners)
             listener.onReload();
+
+        stopWatch.stop();
+        Logger.info(Language.get(LanguageKey.MESSAGE_RESOURCE_PACK_RELOADED, stopWatch.getTime()));
+
     }
 
     private static HashMap<Path, Path> application(Path root) {

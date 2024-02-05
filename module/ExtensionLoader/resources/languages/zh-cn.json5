@@ -34,10 +34,6 @@
   },
   // 信息
   message: {
-    icon: {
-      initialize: "初始化图标库...⏳",
-      loading: "正在载入图标库...⏳"
-    },
     image: {
       initialize: "初始化图片库...⏳",
       loading: "正在载入图片库...⏳"
@@ -46,6 +42,7 @@
       initialize: "初始化资源包...⏳",
       lost: "丢失资源包: {0}",
       loading: "正在载入资源包: {0}",
+      reloaded: "重载资源完成，用时 {0} ms",
       notFound: "资源包不存在: {0}",
       loadFailed: "资源包载入失败: {0} 异常: {1}",
       application: "正在应用资源包: {0}",
@@ -75,7 +72,8 @@
     },
     // 扩展信息
     extension: {
-      loading: "初始化扩展加载器...⏳",
+      loading: "加载所有扩展中...⏳",
+      loaded: "已加载 {0} 个扩展, 用时 {1} ms",
       error: {
         cantLoad: "无法加载扩展 ({0})",
         url: "{{cantLoad}} : {1}",

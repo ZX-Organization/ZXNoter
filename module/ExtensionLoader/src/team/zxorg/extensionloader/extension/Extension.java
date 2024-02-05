@@ -47,6 +47,10 @@ public class Extension {
         return entrypointList;
     }
 
+    public ClassLoader getClassLoader() {
+        return classLoader;
+    }
+
     /**
      * 扩展类加载器
      */
@@ -98,7 +102,7 @@ public class Extension {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            //e.printStackTrace();
             throw new RuntimeException(getLanguage(LanguageKey.MESSAGE_EXTENSION_ERROR_INFO_READ_FAILED, jarPath, e));
         }
     }
@@ -153,11 +157,31 @@ public class Extension {
     }
 
     /**
+     * 检查依赖扩展
+     * @return 检查结果
+     */
+    protected boolean dependencyCheck() {
+        for (Map.Entry<String, VersionChecker> dependExtension : info.depends.extensions.entrySet()) {
+            String dependExtensionId = dependExtension.getKey();
+            Extension dependExt = manager.getExtension(dependExtensionId);
+            if (dependExt == null) {
+                Logger.warning(getLanguage(LanguageKey.MESSAGE_EXTENSION_ERROR_DEPEND_EXTENSION_LOST, getId(), dependExtensionId, dependExtension.getValue()));
+                return false;
+            }
+            if (!dependExtension.getValue().isSupported(dependExt.getVersion())) {
+                Logger.warning(getLanguage(LanguageKey.MESSAGE_EXTENSION_ERROR_DEPEND_EXTENSION_NOT_COMPATIBLE, getId(), dependExtensionId, dependExtension.getValue(), dependExt.getVersion()));
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
      * 载入扩展
      *
      * @param classLoader 类加载器
      */
-    protected void loadJar(URLClassLoader classLoader) {
+    protected void load(URLClassLoader classLoader) {
         this.classLoader = classLoader;
         entrypointList = new ArrayList<>();
         for (String entrypoint : info.entrypoints) {
@@ -182,6 +206,7 @@ public class Extension {
                 Logger.warning(getLanguage(LanguageKey.MESSAGE_EXTENSION_ERROR_ENTRYPOINT_INSTANCE_FAILED, getId(), entrypoint, e));
             }
         }
+
         loaded = true;
 
         // 载入扩展
@@ -194,25 +219,18 @@ public class Extension {
      * 初始化扩展
      */
     protected void initialize() {
-        //检查依赖扩展
-        for (Map.Entry<String, VersionChecker> dependExtension : info.depends.extensions.entrySet()) {
-            String dependExtensionId = dependExtension.getKey();
-            Extension dependExt = manager.getExtension(dependExtensionId);
-            if (dependExt == null) {
-                Logger.warning(getLanguage(LanguageKey.MESSAGE_EXTENSION_ERROR_DEPEND_EXTENSION_LOST, getId(), dependExtensionId, dependExtension.getValue()));
-                return;
-            }
-            if (!dependExtension.getValue().isSupported(dependExt.getVersion())) {
-                Logger.warning(getLanguage(LanguageKey.MESSAGE_EXTENSION_ERROR_DEPEND_EXTENSION_NOT_COMPATIBLE, getId(), dependExtensionId, dependExtension.getValue(), dependExt.getVersion()));
-                return;
-            }
-        }
         // 初始化扩展
         for (ExtensionEntrypoint initializer : entrypointList) {
             initializer.onInitialize(this, manager);
         }
     }
 
+
+    protected void allInitialized() {
+        for (ExtensionEntrypoint initializer : entrypointList) {
+            initializer.onAllInitialized(this, manager);
+        }
+    }
 
     /**
      * 获取全局资源

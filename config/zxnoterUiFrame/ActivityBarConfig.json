@@ -1,7 +1,8 @@
 {
   "topItems": [
-    "setup",
-    "fileManager"
+    "fileManager",
+    "setup"
   ],
-  "bottomItems": []
+  "bottomItems": [],
+  "openedItem": "未指定"
 }
