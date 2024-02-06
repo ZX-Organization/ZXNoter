@@ -3,6 +3,11 @@
   version: "0.0.0-RC",
   name: "扩展模板",
   description: "扩展模板示例",
+  platforms: [
+    "windows",
+    "linux",
+    "macos"
+  ],
   author: [
     "你!"
   ],

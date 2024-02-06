@@ -9,6 +9,7 @@
   // 通用
   common: {
     unknown: "未知",
+    notSpecified: "未指定",
     yes: "是",
     no: "否",
     ok: "确定",
@@ -33,10 +34,6 @@
   },
   // 信息
   message: {
-    icon: {
-      initialize: "初始化图标库...⏳",
-      loading: "正在载入图标库...⏳"
-    },
     image: {
       initialize: "初始化图片库...⏳",
       loading: "正在载入图片库...⏳"
@@ -45,6 +42,7 @@
       initialize: "初始化资源包...⏳",
       lost: "丢失资源包: {0}",
       loading: "正在载入资源包: {0}",
+      reloaded: "重载资源完成，用时 {0} ms",
       notFound: "资源包不存在: {0}",
       loadFailed: "资源包载入失败: {0} 异常: {1}",
       application: "正在应用资源包: {0}",
@@ -74,11 +72,13 @@
     },
     // 扩展信息
     extension: {
-      loading: "初始化扩展加载器...⏳",
+      loading: "加载所有扩展中...⏳",
+      loaded: "已加载 {0} 个扩展, 用时 {1} ms",
       error: {
         cantLoad: "无法加载扩展 ({0})",
         url: "{{cantLoad}} : {1}",
         dependApiNotCompatible: "{{cantLoad}} ，因为所需的扩展 API 版本 {1} 与当前版本 {2} 不兼容。",
+        platformNotSupported: "{{cantLoad}} ，因为不支持当前平台。",
         idConflict: "{{cantLoad}} ，因为其与已安装的扩展冲突，冲突的扩展路径 {1} {2}。",
         infoReadFailed: "{{cantLoad}} ，读取扩展配置文件失败: {1}",
         dependExtensionLost: "{{cantLoad}} ，请先安装依赖扩展 ({1}) {2}。",

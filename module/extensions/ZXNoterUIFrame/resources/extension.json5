@@ -11,7 +11,7 @@
     sources: "https://github.com/ZX-Organization/ZXNoter"
   },
   entrypoints: [
-        "team.zxorg.zxnoter.uiframe.ZXNoterManager"
+        "team.zxorg.zxnoter.uiframe.ZXNoter"
   ],
   depends: {
     extensionApi: ">=0.0.0",

@@ -1,5 +1,6 @@
 package team.zxorg.extensionloader.extension;
 
+import org.apache.commons.lang3.time.StopWatch;
 import team.zxorg.extensionloader.core.Language;
 import team.zxorg.extensionloader.core.LanguageKey;
 import team.zxorg.extensionloader.core.Logger;
@@ -12,13 +13,16 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.stream.Stream;
 
 /**
  * 扩展管理器
  */
 public class ExtensionManager {
     public static final Version EXTENSION_API_VERSION = new Version(0, 0, 0, Version.ReleaseStatus.ALPHA);
-    private final HashMap<String, Extension> extensions = new HashMap<>();
+    private final HashMap<String, Extension> extensionMap = new HashMap<>();
 
     /**
      * 获取扩展
@@ -27,7 +31,7 @@ public class ExtensionManager {
      * @return 扩展对象
      */
     public Extension getExtension(String id) {
-        return extensions.get(id);
+        return extensionMap.get(id);
     }
 
     /**
@@ -36,7 +40,7 @@ public class ExtensionManager {
      * @return 所有扩展id
      */
     public Collection<String> getExtensionIdList() {
-        return extensions.keySet();
+        return extensionMap.keySet();
     }
 
     /**
@@ -51,21 +55,19 @@ public class ExtensionManager {
             return;
         }
 
-        if (extensions.containsKey(extension.getId())) {
-            Logger.warning(Language.get(LanguageKey.MESSAGE_EXTENSION_ERROR_ID_CONFLICT, extension.getId(), extensionPath.toAbsolutePath(), extensions.get(extension.getId()).getJarPath().toAbsolutePath()));
+        if (!extension.isPlatformSupported()) {
+            Logger.warning(Language.get(LanguageKey.MESSAGE_EXTENSION_ERROR_PLATFORM_NOT_SUPPORTED, extension.getId(), extension.getApiVersion(), EXTENSION_API_VERSION));
             return;
         }
-        extensions.put(extension.getId(), extension);
+
+        if (extensionMap.containsKey(extension.getId())) {
+            Logger.warning(Language.get(LanguageKey.MESSAGE_EXTENSION_ERROR_ID_CONFLICT, extension.getId(), extensionPath.toAbsolutePath(), extensionMap.get(extension.getId()).getJarPath().toAbsolutePath()));
+            return;
+        }
+
+        extensionMap.put(extension.getId(), extension);
     }
 
-    /**
-     * 初始化所有扩展
-     */
-    public void initializeAllExtensions() {
-        for (Extension extension : extensions.values()) {
-            extension.initialize();
-        }
-    }
 
     /**
      * 载入所有扩展
@@ -73,22 +75,56 @@ public class ExtensionManager {
      * @param extensionsPath 扩展目录
      */
     public void loadAllExtensions(Path extensionsPath) {
-        try {
-            Files.list(extensionsPath).forEach(this::loadExtension);
+
+        Logger.info(Language.get(LanguageKey.MESSAGE_EXTENSION_LOADING));
+        StopWatch stopWatch = new StopWatch();
+        stopWatch.start();
+
+        //读取所有扩展
+        try (Stream<Path> extensionPath = Files.list(extensionsPath)) {
+            for (Path path : extensionPath.toList()) {
+                loadExtension(path);
+            }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
-        URL[] jarFiles = new URL[extensions.size()];
+        //依赖检查
+        Iterator<Map.Entry<String, Extension>> iterator = extensionMap.entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry<String, Extension> entry = iterator.next();
+            Extension extension = entry.getValue();
+            if (!extension.dependencyCheck()) {
+                iterator.remove();
+            }
+        }
+
+        //载入所有扩展
+        URL[] jarFiles = new URL[extensionMap.size()];
         int index = 0;
-        for (Extension extension : extensions.values()) {
+        for (Extension extension : extensionMap.values()) {
             jarFiles[index++] = (extension.getJarUrl());
         }
 
         URLClassLoader classLoader = new URLClassLoader(jarFiles);
 
-        for (Extension extension : extensions.values()) {
-            extension.loadJar(classLoader);
+        // 载入扩展
+        for (Extension extension : extensionMap.values()) {
+            extension.load(classLoader);
         }
+
+        // 初始化扩展
+        for (Extension extension : extensionMap.values()) {
+            extension.initialize();
+        }
+
+        // 扩展全部初始化完毕
+        for (Extension extension : extensionMap.values()) {
+            extension.allInitialized();
+        }
+
+        stopWatch.stop();
+        Logger.info(Language.get(LanguageKey.MESSAGE_EXTENSION_LOADED, extensionMap.size(), stopWatch.getTime()));
+
     }
 }

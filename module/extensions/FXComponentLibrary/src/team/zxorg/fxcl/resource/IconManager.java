@@ -7,6 +7,7 @@ import com.github.weisj.jsvg.parser.SVGLoader;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.image.Image;
+import org.apache.commons.lang3.time.StopWatch;
 import team.zxorg.extensionloader.core.Language;
 import team.zxorg.extensionloader.core.LanguageKey;
 import team.zxorg.extensionloader.core.Logger;
@@ -28,18 +29,18 @@ public class IconManager {
     public static HashMap<String, ObjectProperty<Image>> icons = new HashMap<>();
 
     static {
-        Logger.info(Language.get(LanguageKey.MESSAGE_ICON_INITIALIZE));
         Resource.addEventListener(new ResourceEventListener() {
             @Override
             public void onReload() {
                 reloadIcons();
             }
         });
-        reloadIcons();
     }
 
     public static void reloadIcons() {
-        Logger.info(Language.get(LanguageKey.MESSAGE_ICON_LOADING));
+        StopWatch stopWatch = new StopWatch();
+        stopWatch.start();
+        Logger.info(Language.get("message.icon.loading"));
         SVGLoader svgLoader = new SVGLoader();
         for (Path dir : Resource.listResourceFiles("icon")) {
             for (Path file : Resource.listResourceFiles(dir)) {
@@ -73,6 +74,10 @@ public class IconManager {
                 }
             }
         }
+
+        stopWatch.stop();
+        Logger.info(Language.get("message.icon.loaded", stopWatch.getTime()));
+
     }
 
 

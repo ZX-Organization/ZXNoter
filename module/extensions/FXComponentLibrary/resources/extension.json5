@@ -6,12 +6,15 @@
   author: [
     "zedoCN"
   ],
+  platforms: [
+    "windows"
+  ],
   contact: {
     homepage: "https://github.com/ZX-Organization",
     sources: "https://github.com/ZX-Organization/ZXNoter"
   },
   entrypoints: [
-//    "team.zxorg.fxcl.Test"
+       "team.zxorg.fxcl.FXCL"
   ],
   depends: {
     extensionApi: ">=0.0.0",
@@ -22,5 +25,8 @@
   tags: [
     "library",
     "ui-component"
+  ],
+  languages: [
+    "assets/fxComponentLibrary/languages/zh-cn.json5"
   ]
 }

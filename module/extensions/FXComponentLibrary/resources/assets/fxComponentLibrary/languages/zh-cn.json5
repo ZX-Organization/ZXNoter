@@ -1,0 +1,23 @@
+{
+  configuration: {
+    languageCode: "zh-CN"
+  },
+  extension: {
+    fxComponentLibrary: {
+      javaFX: {
+        initializing: "JavaFX初始化...⏳",
+        initialized: "JavaFX初始化完毕, 用时 {0} ms"
+      }
+    }
+  },
+  message: {
+    icon: {
+      loading: "正在载入图标库...⏳",
+      loaded: "图标库载入完成, 用时 {0} ms"
+    },
+    image: {
+      loading: "正在载入纹理库...⏳",
+      loaded: "纹理库载入完成, 用时 {0} ms"
+    }
+  }
+  }

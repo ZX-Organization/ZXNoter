@@ -48,8 +48,6 @@ fn main() {
             });
 
 
-
-
             for list in checklist {
 
                 // 检查 Java 版本是否满足要求
@@ -59,13 +57,13 @@ fn main() {
                         if is_java_version_compatible(&launcher_info.required_java_version, &java_version.version) {
                             println!("Java version is compatible. Starting JAR...");
                             // 启动 JAR 文件
-                           match start_jar(&java_version.path,&launcher_info.jar_path) {
-                               Ok(_) => {
-                                   exit(0);
-                               }
-                               Err(_) => {}
-                           }
-                           // Command::new(java_version.path).arg("-jar").arg("zxnoter.jar");
+                            match start_jar(&java_version.path, &launcher_info.jar_path) {
+                                Ok(_) => {
+                                    exit(0);
+                                }
+                                Err(_) => {}
+                            }
+                            // Command::new(java_version.path).arg("-jar").arg("zxnoter.jar");
                         } else {
                             println!("Java version is not compatible.");
                         }
@@ -77,6 +75,7 @@ fn main() {
         Err(err) => eprintln!("Error reading Launcher.ini: {}", err),
     }
 }
+
 fn start_jar(java: &str, args: &str) -> Result<String, String> {
     println!("Starting JAR: {}", args);
 
@@ -92,13 +91,14 @@ fn start_jar(java: &str, args: &str) -> Result<String, String> {
         Err("Failed to start JAR".to_string())
     }
 }
+
 fn read_launcher_info(file_path: &str) -> Result<LauncherInfo, String> {
     let contents = fs::read_to_string(file_path).map_err(|e| format!("Error reading file: {}", e))?;
     let mut jar_path = None;
     let mut required_java_version = None;
 
     for line in contents.lines() {
-        let parts: Vec<&str> = line.trim().split('=').collect();
+        let parts: Vec<&str> = line.trim().splitn(2, '=').collect();
         if parts.len() == 2 {
             match parts[0].trim() {
                 "JarPath" => jar_path = Some(parts[1].trim().to_string()),
