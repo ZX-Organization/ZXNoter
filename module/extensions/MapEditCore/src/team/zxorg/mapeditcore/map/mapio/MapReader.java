@@ -4,6 +4,7 @@ import team.zxorg.mapeditcore.map.MapMetaData;
 import team.zxorg.mapeditcore.map.ZXMap;
 import team.zxorg.mapeditcore.note.Note;
 
+import java.io.IOException;
 import java.nio.file.Path;
 
 public abstract class MapReader{
@@ -18,9 +19,9 @@ public abstract class MapReader{
     /**
      * 读取为zxMap
      */
-    protected ZXMap readMap(){return new ZXMap();};
-    public abstract Note readNote();
-    public abstract MapMetaData readMeta();
+    protected ZXMap readMap()throws IOException {return new ZXMap();};
+    public abstract Note readNote()throws IOException;
+    public abstract MapMetaData readMeta()throws IOException;
     public abstract String getSuffix();
     public Path getPath(){return filePath;};
     protected abstract void ready();

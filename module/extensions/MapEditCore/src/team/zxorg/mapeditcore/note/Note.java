@@ -3,6 +3,7 @@ package team.zxorg.mapeditcore.note;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import team.zxorg.extensionloader.core.Logger;
+import team.zxorg.extensionloader.gson.GsonManager;
 
 import javax.sound.sampled.AudioInputStream;
 import java.lang.reflect.Modifier;
@@ -131,11 +132,9 @@ public class Note implements Comparable<Note>,Cloneable{
         if (keyAudio == null) {
             return new GsonBuilder().excludeFieldsWithModifiers(Modifier.PUBLIC).create().toJson(this);
         }else {
-            return new Gson().toJson(this);
+            return GsonManager.toJson(this);
         }
-
     }
-
     /**
      * 比较两note顺序
      */
