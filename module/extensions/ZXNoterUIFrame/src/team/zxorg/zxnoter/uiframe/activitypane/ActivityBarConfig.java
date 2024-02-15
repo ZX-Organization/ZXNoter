@@ -1,8 +1,8 @@
-package team.zxorg.zxnoter.uiframe.config;
+package team.zxorg.zxnoter.uiframe.activitypane;
 
 import team.zxorg.extensionloader.core.ConfigData;
 
-import java.util.Set;
+import java.util.LinkedHashSet;
 import java.util.TreeSet;
 
 public class ActivityBarConfig extends ConfigData {
@@ -22,13 +22,13 @@ public class ActivityBarConfig extends ConfigData {
     /**
      * 主栏的项
      */
-    TreeSet<String> mainBarItems;
+    LinkedHashSet<String> mainBarItems;
     /**
      * 主栏底部的项
      */
-    TreeSet<String> bottomBarItems;
+    LinkedHashSet<String> bottomBarItems;
     /**
      * 副栏的项
      */
-    TreeSet<String> secondBarItems;
+    LinkedHashSet<String> secondBarItems;
 }

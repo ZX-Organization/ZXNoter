@@ -1,4 +1,4 @@
-package team.zxorg.zxnoter.uiframe.component;
+package team.zxorg.zxnoter.uiframe.activitypane;
 
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
@@ -7,11 +7,10 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import team.zxorg.zxnoter.uiframe.ProjectView;
 import team.zxorg.zxnoter.uiframe.ZXNoter;
-import team.zxorg.zxnoter.uiframe.config.ActivityBarConfig;
 
 public class ActivityBarPane extends HBox {
 
-    ActivityBarConfig config = ZXNoter.config.get(ActivityBarConfig.class);
+    private static final ActivityBarConfig config = ZXNoter.config.get(ActivityBarConfig.class);
     private final ProjectView projectView;
     BorderPane activityBorderPane = new BorderPane();
     /**
@@ -42,7 +41,6 @@ public class ActivityBarPane extends HBox {
         activityBorderPane.setCenter(contentNode);
         HBox.setHgrow(activityBorderPane, Priority.ALWAYS);
 
-
         VBox mainBar = new VBox(mainActivityBar, mainBottomActivityBar);
         VBox.setVgrow(mainBottomActivityBar, Priority.ALWAYS);
 
@@ -58,19 +56,13 @@ public class ActivityBarPane extends HBox {
             System.out.println("实例化 " + sideBar);
         }*/
 
-
+        refresh();
     }
 
-    /*public static class ActivityBarConfig {
-        List<String> topItems;
-        List<String> bottomItems;
-        String openedItem;
-
-        public ActivityBarConfig() {
-            topItems = new ArrayList<>();
-            bottomItems = new ArrayList<>();
-        }
-    }*/
+    public void refresh() {
+        mainActivityBar.setVisible(!config.hideMainBar);
+        mainActivityBar.setManaged(!config.hideMainBar);
+    }
 
 
     private static class ActivityBar extends VBox {

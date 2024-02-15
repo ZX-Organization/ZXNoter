@@ -116,12 +116,7 @@ public class Resource {
         return result;
     }
 
-    /**
-     * 资源配置类
-     */
-    private static class ResourceConfig extends ConfigData {
-        TreeSet<String> resources;
-    }
+
 
     /**
      * 添加资源事件监听器
@@ -207,6 +202,12 @@ public class Resource {
             }
         }
         return childFiles;
+    }
+    /**
+     * 资源配置类
+     */
+    public static class ResourceConfig extends ConfigData {
+        LinkedHashSet<String> resources;
     }
 
 }

@@ -15,6 +15,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Modifier;
 import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -96,14 +97,18 @@ public class GsonManager {
             try {
                 // 获取对象的所有字段
                 Field[] fields = obj.getClass().getDeclaredFields();
+
+
                 for (Field field : fields) {
-                    // 设置字段可访问
+                    int modifiers = field.getModifiers();
+                    if (Modifier.isTransient(modifiers)) {
+                        continue;
+                    }
+
                     field.setAccessible(true);
-                    // 根据类型进行赋值
-
-
                     if (field.get(obj) == null) {
                         Class<?> fieldType = field.getType();
+
                         if (fieldType == String.class) {
                             field.set(obj, Language.get("common.notSpecified"));
                         } else if (fieldType == Integer.class || fieldType == int.class) {
@@ -116,6 +121,8 @@ public class GsonManager {
                             field.set(obj, new HashMap<>());
                         } else if (fieldType == Set.class) {
                             field.set(obj, new HashSet<>());
+                        } else if (fieldType == LinkedHashSet.class) {
+                            field.set(obj, new LinkedHashSet<>());
                         } else {
                             Object nestedObj = fieldType.getDeclaredConstructor().newInstance();
                             field.set(obj, checkNullValue(nestedObj));

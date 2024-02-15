@@ -1,4 +1,4 @@
-package team.zxorg.zxnoter.uiframe.component;
+package team.zxorg.zxnoter.uiframe.activitypane;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;

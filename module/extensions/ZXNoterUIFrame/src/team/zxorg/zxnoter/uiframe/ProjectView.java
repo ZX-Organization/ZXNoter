@@ -7,7 +7,7 @@ import javafx.stage.Stage;
 import team.zxorg.extensionloader.core.Resource;
 import team.zxorg.extensionloader.event.ResourceEventListener;
 import team.zxorg.fxcl.component.flexview.FlexArea;
-import team.zxorg.zxnoter.uiframe.component.ActivityBarPane;
+import team.zxorg.zxnoter.uiframe.activitypane.ActivityBarPane;
 import team.zxorg.zxnoter.uiframe.component.StatusBar;
 import team.zxorg.zxnoter.uiframe.component.TitleBar;
 

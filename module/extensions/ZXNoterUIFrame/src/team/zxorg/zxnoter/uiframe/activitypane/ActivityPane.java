@@ -1,10 +1,10 @@
-package team.zxorg.zxnoter.uiframe.component;
+package team.zxorg.zxnoter.uiframe.activitypane;
 
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import team.zxorg.zxnoter.uiframe.ProjectView;
 
-public abstract class ActivitySideBar extends VBox {
+public abstract class ActivityPane extends VBox {
     private ProjectView projectView;
     private ActivityItem activityItem;
 
@@ -30,9 +30,8 @@ public abstract class ActivitySideBar extends VBox {
         VBox.setVgrow(this, Priority.ALWAYS);
     }
 
-    protected void bind(ProjectView projectView, ActivityItem activityItem) {
+    protected void bind(ProjectView projectView) {
         this.projectView = projectView;
-        this.activityItem = activityItem;
     }
 
     /**
@@ -42,6 +41,7 @@ public abstract class ActivitySideBar extends VBox {
      */
     protected final void init(String id) {
         setId(id);
+        activityItem = new ActivityItem(id);
     }
 
 }

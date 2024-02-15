@@ -6,9 +6,7 @@ import team.zxorg.extensionloader.core.Logger;
 import team.zxorg.extensionloader.extension.Extension;
 import team.zxorg.extensionloader.extension.ExtensionEntrypoint;
 import team.zxorg.extensionloader.extension.ExtensionManager;
-import team.zxorg.zxnoter.uiframe.base.FileManagerSideBar;
-import team.zxorg.zxnoter.uiframe.base.SetupSideBar;
-import team.zxorg.zxnoter.uiframe.component.ActivitySideBar;
+import team.zxorg.zxnoter.uiframe.activitypane.ActivityPane;
 
 import java.util.HashMap;
 
@@ -19,16 +17,11 @@ public class ZXNoter implements ExtensionEntrypoint {
     /**
      * 当前所有被注册的侧边栏类
      */
-    protected static final HashMap<String, Class<? extends ActivitySideBar>> sideBarClassMap = new HashMap<>();
+    protected static final HashMap<String, Class<? extends ActivityPane>> ActivityPaneClassMap = new HashMap<>();
 
-
-
-
-
-
-
-
-
+    public static void registerActivityPane(Class<? extends ActivityPane> activityPaneClass) {
+        ActivityPaneClassMap.put(activityPaneClass.getSimpleName(), activityPaneClass);
+    }
 
     @Override
     public void onInitialize(Extension extension, ExtensionManager manager) {
