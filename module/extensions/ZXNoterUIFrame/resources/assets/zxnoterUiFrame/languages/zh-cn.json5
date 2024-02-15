@@ -23,7 +23,19 @@
         menu: {
           hideItem: {
             icon: "system.delete-back",
-            title: "隐藏此项"
+            title: "隐藏此活动项"
+          },
+          hideBar: {
+            icon: "system.delete-back",
+            title: "隐藏此活动栏"
+          },
+          moveToRight: {
+            icon: "design.layout-right",
+            title: "移动至右侧"
+          },
+          moveToLeft: {
+            icon: "design.layout-left",
+            title: "移动至左侧"
           },
           itemConfig: {
             title: "配置活动栏",

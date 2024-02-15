@@ -19,10 +19,7 @@ import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 支持更多类型的Gson管理类
@@ -103,6 +100,8 @@ public class GsonManager {
                     // 设置字段可访问
                     field.setAccessible(true);
                     // 根据类型进行赋值
+
+
                     if (field.get(obj) == null) {
                         Class<?> fieldType = field.getType();
                         if (fieldType == String.class) {
@@ -111,25 +110,21 @@ public class GsonManager {
                             field.set(obj, 0);
                         } else if (fieldType == Long.class || fieldType == long.class) {
                             field.set(obj, 0L);
-                        } else if (List.class.isAssignableFrom(fieldType)) {
+                        } else if (fieldType == List.class) {
                             field.set(obj, new ArrayList<>());
-                        } else if (Map.class.isAssignableFrom(fieldType)) {
+                        } else if (fieldType == Map.class) {
                             field.set(obj, new HashMap<>());
+                        } else if (fieldType == Set.class) {
+                            field.set(obj, new HashSet<>());
                         } else {
-                            // 递归调用
                             Object nestedObj = fieldType.getDeclaredConstructor().newInstance();
                             field.set(obj, checkNullValue(nestedObj));
                         }
                     }
                 }
 
-            } catch (IllegalAccessException e) {
-                throw new RuntimeException(e);
-            } catch (InstantiationException e) {
-                throw new RuntimeException(e);
-            } catch (InvocationTargetException e) {
-                throw new RuntimeException(e);
-            } catch (NoSuchMethodException e) {
+            } catch (IllegalAccessException | InstantiationException | InvocationTargetException |
+                     NoSuchMethodException e) {
                 throw new RuntimeException(e);
             }
         }

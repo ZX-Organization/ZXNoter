@@ -1,24 +1,27 @@
-package team.zxorg.zxnoter.uiframe.component;
+package team.zxorg.zxnoter.uiframe.component.old;
 
-import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseButton;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import team.zxorg.extensionloader.core.Language;
 import team.zxorg.extensionloader.core.Logger;
 import team.zxorg.extensionloader.event.ConfigEventListener;
+import team.zxorg.fxcl.component.Icon;
 import team.zxorg.fxcl.component.menu.LangCheckMenuItem;
 import team.zxorg.fxcl.component.menu.LangMenuItem;
+import team.zxorg.zxnoter.uiframe.ProjectView;
 import team.zxorg.zxnoter.uiframe.ZXNoter;
-import team.zxorg.zxnoter.uiframe.factory.IconFactory;
+import team.zxorg.zxnoter.uiframe.component.ActivityItem;
+import team.zxorg.zxnoter.uiframe.component.ActivitySideBar;
 import team.zxorg.zxnoter.uiframe.factory.MenuFactory;
 
 import java.lang.reflect.InvocationTargetException;
@@ -27,11 +30,44 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public abstract class ActivityBar extends VBox {
-    /**
-     * 当前所有被注册的侧边栏类
-     */
-    private static final HashMap<String, Class<? extends SideBar>> sideBarClassMap = new HashMap<>();
+public final class ActivityBar extends HBox {
+
+
+
+    public ActivityBar(ProjectView projectView) {
+
+        VBox.setVgrow(this, Priority.ALWAYS);
+
+        this.projectView = projectView;
+        System.out.println("实例化活动栏");
+        //初始化
+        getChildren().addAll(top, bottom);
+        getStyleClass().addAll("activity-border-pane");
+
+
+
+
+        //监听并初始化活动项
+        ZXNoter.config.addEventListener(ActivityBarConfig.class, updateConfig);
+        updateConfig.ConfigSaved();
+
+        //设置右键活动栏的配置菜单
+        setOnMouseClicked(event -> {
+            if (event.getButton().equals(MouseButton.SECONDARY)) {
+                barContextMenu.show(this.getScene().getWindow(), event.getScreenX(), event.getScreenY());
+            }
+        });
+        showedSideBar.addListener((observable, oldValue, newValue) -> {
+            hideSideBar();
+            if (newValue == null) {
+
+            } else {
+                showSideBar(showedSideBar.get());
+            }
+        });
+    }
+
+
     /**
      * 当前活动栏配置
      */
@@ -44,11 +80,13 @@ public abstract class ActivityBar extends VBox {
     /**
      * 活动栏当前侧边栏表
      */
-    private final HashMap<String, SideBar> sideBarMap = new HashMap<>();
+    private final HashMap<String, ActivitySideBar> sideBarMap = new HashMap<>();
     /**
      * 当前显示的侧边栏
      */
-    private final ObjectProperty<SideBar> showedSideBar = new SimpleObjectProperty<>();
+    private final ObjectProperty<ActivitySideBar> showedSideBar = new SimpleObjectProperty<>();
+
+    private final ProjectView projectView;
 
     static {
         ACTIVITY_BAR_CONFIG = ZXNoter.config.get(ActivityBarConfig.class);
@@ -59,8 +97,6 @@ public abstract class ActivityBar extends VBox {
                 updateConfigMenu();
             }
         });
-        Platform.runLater(ActivityBar::updateConfigMenu);
-
     }
 
     private final VBox top = new VBox() {
@@ -93,9 +129,9 @@ public abstract class ActivityBar extends VBox {
 
         private void loadActivityItems(List<String> items, Pane pane) {
             for (String id : items) {
-                SideBar sideBar = sideBarMap.get(id);
+                ActivitySideBar sideBar = sideBarMap.get(id);
                 if (sideBar != null) {
-                    pane.getChildren().add(sideBar.activityItem);
+                    pane.getChildren().add(sideBar.getActivityItem());
                 }
             }
         }
@@ -105,50 +141,19 @@ public abstract class ActivityBar extends VBox {
      */
     private final ContextMenu barContextMenu = new ContextMenu(activityItemConfigMenu);
 
-    {
-        System.out.println("实例化活动栏");
-        //初始化
-        getChildren().addAll(top, bottom);
-        getStyleClass().addAll("activity-bar");
-
-
-        //实例化所有侧边栏
-        for (Map.Entry<String, Class<? extends SideBar>> entry : sideBarClassMap.entrySet()) {
-            SideBar sideBar = newInstance(entry.getValue());
-            sideBarMap.put(entry.getKey(), sideBar);
-            System.out.println("实例化 " + sideBar);
-            ActivityItem item = sideBar.activityItem;
-            item.setOnAction(e -> {
-                if (e.getSource() instanceof ActivityItem activityItem) {
-                    if (activityItem.isSelected()) {
-                        showedSideBar.set(sideBarMap.get(activityItem.getId()));
-                    } else {
-                        showedSideBar.set(null);
-                    }
-                }
-            });
-
-        }
-
-        //监听并初始化活动项
-        ZXNoter.config.addEventListener(ActivityBarConfig.class, updateConfig);
-        updateConfig.ConfigSaved();
-
-        //设置右键活动栏的配置菜单
-        setOnMouseClicked(event -> {
-            if (event.getButton().equals(MouseButton.SECONDARY)) {
-                barContextMenu.show(this.getScene().getWindow(), event.getScreenX(), event.getScreenY());
-            }
-        });
-        showedSideBar.addListener((observable, oldValue, newValue) -> {
-            hideSideBar();
-            if (newValue == null) {
-
+    /**
+     * 活动项的动作事件
+     */
+    private final EventHandler<ActionEvent> itemAction = e -> {
+        if (e.getSource() instanceof ActivityItem activityItem) {
+            if (activityItem.isSelected()) {
+                showedSideBar.set(sideBarMap.get(activityItem.getId()));
             } else {
-                showSideBar(showedSideBar.get());
+                showedSideBar.set(null);
             }
-        });
-    }
+        }
+    };
+
 
     /**
      * 实例化类
@@ -171,7 +176,7 @@ public abstract class ActivityBar extends VBox {
      * @param id           侧边栏id
      * @param sideBarClass 被注册的侧边栏
      */
-    public static void registerItem(String id, Class<? extends SideBar> sideBarClass) {
+    public static void registerSideBar(String id, Class<? extends ActivitySideBar> sideBarClass) {
         if (sideBarClassMap.containsKey(id)) {
             Logger.warning("SideBar " + id + " has been registered");
             return;
@@ -180,6 +185,10 @@ public abstract class ActivityBar extends VBox {
         System.out.println("注册 " + id);
         LangCheckMenuItem item = getLangCheckMenuItem(id);
         activityItemConfigMenu.getItems().add(item);
+    }
+
+    public static void registerActivityItem(String id, Class<? extends ActivityItem> activityItemClass) {
+
     }
 
     /**
@@ -199,7 +208,7 @@ public abstract class ActivityBar extends VBox {
     };
 
     private static LangCheckMenuItem getLangCheckMenuItem(String id) {
-        LangCheckMenuItem item = new LangCheckMenuItem(IconFactory.getMenuIcon(Language.get(LANG + "item." + id + ".icon")), LANG + "item." + id + ".name");
+        LangCheckMenuItem item = new LangCheckMenuItem(new Icon(Language.get(LANG + "item." + id + ".icon")), LANG + "item." + id + ".name");
         item.setId(id);
         item.setOnAction(event -> {
             if (item.isSelected()) {
@@ -213,30 +222,12 @@ public abstract class ActivityBar extends VBox {
         return item;
     }
 
-    /**
-     * 更新配置菜单
-     */
-    private static void updateConfigMenu() {
-        for (MenuItem menu : activityItemConfigMenu.getItems()) {
-            if (menu instanceof CheckMenuItem checkMenuItem) {
-                String id = checkMenuItem.getId();
-                checkMenuItem.setSelected(ACTIVITY_BAR_CONFIG.topItems.contains(id) || ACTIVITY_BAR_CONFIG.bottomItems.contains(id));
-            }
-        }
-    }
 
-    public static class ActivityBarConfig {
-        List<String> topItems;
-        List<String> bottomItems;
-        String openedItem;
 
-        public ActivityBarConfig() {
-            topItems = new ArrayList<>();
-            bottomItems = new ArrayList<>();
-        }
-    }
 
-    protected abstract void showSideBar(SideBar sideBar);
 
-    protected abstract void hideSideBar();
+
+
+
+
 }

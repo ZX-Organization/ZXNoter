@@ -2,7 +2,6 @@
 
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.SubScene?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.CheckMenuItem?>
@@ -33,6 +32,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.control.TreeView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -40,11 +40,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.paint.Color?>
-<?import javafx.scene.paint.RadialGradient?>
-<?import javafx.scene.paint.Stop?>
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="575.0" prefWidth="928.0" styleClass="stage-focused" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
@@ -92,16 +88,13 @@
             <Label id="title" alignment="CENTER" maxWidth="1.7976931348623157E308" text="ZXNoter" HBox.hgrow="ALWAYS" />
          </children>
       </HBox>
-      <HBox id="contentBody" prefHeight="100.0" prefWidth="200.0" styleClass="content-body" VBox.vgrow="ALWAYS">
+      <HBox prefHeight="100.0" prefWidth="200.0" styleClass="activity-border-pane" VBox.vgrow="ALWAYS">
          <children>
             <VBox id="activityBar" prefHeight="200.0" prefWidth="100.0" styleClass="activity-bar">
                <children>
                   <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                      <children>
                         <ToggleButton mnemonicParsing="false" styleClass="activity-item">
-                           <toggleGroup>
-                              <ToggleGroup fx:id="activity" />
-                           </toggleGroup>
                            <graphic>
                               <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" smooth="false" styleClass="icon">
                                  <image>
@@ -117,8 +110,11 @@
                                 </items>
                               </ContextMenu>
                            </contextMenu>
+                           <toggleGroup>
+                              <ToggleGroup fx:id="activityLeft" />
+                           </toggleGroup>
                         </ToggleButton>
-                        <ToggleButton mnemonicParsing="false" styleClass="activity-item" toggleGroup="$activity">
+                        <ToggleButton mnemonicParsing="false" styleClass="activity-item" toggleGroup="$activityLeft">
                            <graphic>
                               <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" smooth="false" styleClass="icon">
                                  <image>
@@ -127,7 +123,7 @@
                               </ImageView>
                            </graphic>
                         </ToggleButton>
-                        <ToggleButton mnemonicParsing="false" styleClass="activity-item" toggleGroup="$activity">
+                        <ToggleButton mnemonicParsing="false" styleClass="activity-item" toggleGroup="$activityLeft">
                            <graphic>
                               <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" smooth="false" styleClass="icon">
                                  <image>
@@ -136,7 +132,7 @@
                               </ImageView>
                            </graphic>
                         </ToggleButton>
-                        <ToggleButton mnemonicParsing="false" styleClass="activity-item" toggleGroup="$activity">
+                        <ToggleButton mnemonicParsing="false" styleClass="activity-item" toggleGroup="$activityLeft">
                            <graphic>
                               <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" smooth="false" styleClass="icon">
                                  <image>
@@ -149,7 +145,7 @@
                   </VBox>
                   <VBox prefHeight="200.0" prefWidth="100.0">
                      <children>
-                        <ToggleButton mnemonicParsing="false" styleClass="activity-item" toggleGroup="$activity">
+                        <ToggleButton mnemonicParsing="false" styleClass="activity-item">
                            <graphic>
                               <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" smooth="false" styleClass="icon">
                                  <image>
@@ -157,8 +153,11 @@
                                  </image>
                               </ImageView>
                            </graphic>
+                           <toggleGroup>
+                              <ToggleGroup fx:id="activityBottom" />
+                           </toggleGroup>
                         </ToggleButton>
-                        <ToggleButton mnemonicParsing="false" styleClass="activity-item" toggleGroup="$activity">
+                        <ToggleButton mnemonicParsing="false" styleClass="activity-item" toggleGroup="$activityBottom">
                            <graphic>
                               <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" smooth="false" styleClass="icon">
                                  <image>
@@ -167,7 +166,7 @@
                               </ImageView>
                            </graphic>
                         </ToggleButton>
-                        <ToggleButton mnemonicParsing="false" styleClass="activity-item" toggleGroup="$activity">
+                        <ToggleButton mnemonicParsing="false" styleClass="activity-item" toggleGroup="$activityBottom">
                            <graphic>
                               <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" smooth="false" styleClass="icon">
                                  <image>
@@ -176,7 +175,7 @@
                               </ImageView>
                            </graphic>
                         </ToggleButton>
-                        <ToggleButton mnemonicParsing="false" styleClass="activity-item" toggleGroup="$activity">
+                        <ToggleButton mnemonicParsing="false" styleClass="activity-item" toggleGroup="$activityBottom">
                            <graphic>
                               <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" smooth="false" styleClass="icon">
                                  <image>
@@ -187,11 +186,11 @@
                         </ToggleButton>
                      </children>
                   </VBox>
-               </children></VBox>
-            <SplitPane id="workArea" dividerPositions="0.2963594994311718" prefHeight="200.0" prefWidth="200.0" styleClass="work-area" HBox.hgrow="ALWAYS">
-               <items>
-                  <VBox id="sideBar" prefHeight="515.0" prefWidth="221.0" styleClass="side-bar" SplitPane.resizableWithParent="false" />
-                  <SplitPane id="editorArea" dividerPositions="0.5" prefHeight="200.0" prefWidth="200.0" styleClass="UISEditor-area">
+               </children>
+            </VBox>
+            <BorderPane prefHeight="200.0" prefWidth="200.0" styleClass="activity-border-pane" HBox.hgrow="ALWAYS">
+               <center>
+                  <SplitPane id="editorArea" dividerPositions="0.5" prefHeight="200.0" prefWidth="200.0" styleClass="view-area" BorderPane.alignment="CENTER">
                      <items>
                         <SplitPane id="editorLayout" dividerPositions="0.5" orientation="VERTICAL" prefHeight="200.0" prefWidth="200.0" styleClass="UISEditor-layout">
                            <items>
@@ -222,7 +221,8 @@
                                                 </Pane>
                                              </center>
                                           </BorderPane>
-                                       </content></Tab>
+                                       </content>
+                                    </Tab>
                                     <Tab id="UISEditor" styleClass="UISEditor-tab" text="Untitled Tab 2">
                                        <content>
                                           <ScrollPane prefHeight="200.0" prefWidth="200.0">
@@ -230,7 +230,8 @@
                                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="368.0" prefWidth="482.0" />
                                             </content>
                                           </ScrollPane>
-                                       </content></Tab>
+                                       </content>
+                                    </Tab>
                                  </tabs>
                                  <styleClass>
                                     <String fx:value="focused" />
@@ -239,30 +240,7 @@
                               </TabPane>
                               <TabPane id="editorTab" prefHeight="200.0" prefWidth="309.0" tabClosingPolicy="ALL_TABS">
                                  <tabs>
-                                    <Tab id="UISEditor" text="Untitled Tab 1">
-                                       <content>
-                                          <SubScene height="200.0" width="200.0">
-                                            <root>
-                                              <Region />
-                                            </root>
-                                             <fill>
-                                                <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
-                                                   <stops>
-                                                      <Stop>
-                                                         <color>
-                                                            <Color />
-                                                         </color>
-                                                      </Stop>
-                                                      <Stop offset="1.0">
-                                                         <color>
-                                                            <Color red="1.0" green="1.0" blue="1.0" />
-                                                         </color>
-                                                      </Stop>
-                                                   </stops>
-                                                </RadialGradient>
-                                             </fill>
-                                          </SubScene>
-                                       </content></Tab>
+                                    <Tab id="UISEditor" text="Untitled Tab 1" />
                                     <Tab id="UISEditor" text="Untitled Tab 2" />
                                  </tabs>
                                  <styleClass>
@@ -310,12 +288,14 @@
                                           </Pane>
                                        </center>
                                     </BorderPane>
-                                 </content></Tab>
+                                 </content>
+                              </Tab>
                             <Tab id="UISEditor" text="Untitled Tab 2">
                                  <styleClass>
                                     <String fx:value="right" />
                                     <String fx:value="UISEditor-tab" />
-                                 </styleClass></Tab>
+                                 </styleClass>
+                              </Tab>
                               <Tab id="UISEditor" styleClass="UISEditor-tab" text="Untitled Tab 2" />
                           </tabs>
                            <styleClass>
@@ -325,8 +305,98 @@
                         </TabPane>
                      </items>
                   </SplitPane>
-               </items>
-            </SplitPane>
+               </center>
+               <left>
+                  <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <VBox id="sideBar" prefHeight="515.0" prefWidth="221.0" styleClass="side-bar">
+                           <children>
+                              <BorderPane prefHeight="334.0" prefWidth="200.0">
+                                 <right>
+                                    <ToolBar maxWidth="139.0" orientation="VERTICAL" prefHeight="334.0" prefWidth="139.0" styleClass="activity-bar" BorderPane.alignment="CENTER">
+                                      <items>
+                                        <Button mnemonicParsing="false" text="Button" />
+                                          <ToggleButton mnemonicParsing="false" text="ToggleButton" />
+                                          <ToggleButton mnemonicParsing="false" styleClass="activity-item" text="123" />
+                                      </items>
+                                    </ToolBar>
+                                 </right>
+                              </BorderPane>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </left>
+               <right>
+                  <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <VBox id="sideBar" prefHeight="515.0" prefWidth="221.0" styleClass="side-bar">
+                           <children>
+                              <BorderPane prefHeight="200.0" prefWidth="200.0" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </right>
+               <bottom>
+                  <VBox id="sideBar" minWidth="38.0" prefHeight="149.0" prefWidth="928.0" styleClass="side-bar" BorderPane.alignment="CENTER">
+                     <children>
+                        <BorderPane prefHeight="200.0" prefWidth="200.0" />
+                     </children>
+                  </VBox>
+               </bottom>
+            </BorderPane>
+            <VBox id="activityBar" prefHeight="200.0" prefWidth="100.0" styleClass="activity-bar">
+               <children>
+                  <ToggleButton mnemonicParsing="false" styleClass="activity-item">
+                     <graphic>
+                        <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" smooth="false" styleClass="icon">
+                           <image>
+                              <Image url="@../../../../../../图标库/测试/arrows.arrow-down-circle.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <contextMenu>
+                        <ContextMenu>
+                           <items>
+                              <RadioMenuItem mnemonicParsing="false" text="Unspecified Action" />
+                              <CheckMenuItem mnemonicParsing="false" text="Unspecified Action" />
+                           </items>
+                        </ContextMenu>
+                     </contextMenu>
+                     <toggleGroup>
+                        <ToggleGroup fx:id="activityRight" />
+                     </toggleGroup>
+                  </ToggleButton>
+                  <ToggleButton mnemonicParsing="false" styleClass="activity-item" toggleGroup="$activityRight">
+                     <graphic>
+                        <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" smooth="false" styleClass="icon">
+                           <image>
+                              <Image url="@../../../../../../图标库/测试/arrows.arrow-left-double.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </ToggleButton>
+                  <ToggleButton mnemonicParsing="false" styleClass="activity-item" toggleGroup="$activityRight">
+                     <graphic>
+                        <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" smooth="false" styleClass="icon">
+                           <image>
+                              <Image url="@../../../../../../图标库/测试/business.cloud-off.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </ToggleButton>
+                  <ToggleButton mnemonicParsing="false" styleClass="activity-item" toggleGroup="$activityRight">
+                     <graphic>
+                        <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" smooth="false" styleClass="icon">
+                           <image>
+                              <Image url="@../../../../../../图标库/测试/business.calculator.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </ToggleButton>
+               </children>
+            </VBox>
          </children>
       </HBox>
       <HBox id="statusBar" prefHeight="100.0" prefWidth="200.0" styleClass="status-bar">

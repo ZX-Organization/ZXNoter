@@ -1,6 +1,90 @@
 /**
+颜色填充
+ */
+.color-fill-blue {
+    -fx-fill: -color-blue;
+}
+
+.color-fill-red {
+    -fx-fill: -color-red;
+}
+
+.color-fill-purple {
+    -fx-fill: -color-purple;
+}
+
+.color-fill-yellow {
+    -fx-fill: -color-yellow;
+}
+
+.color-fill-green {
+    -fx-fill: -color-green;
+}
+
+.color-fill-orange {
+    -fx-fill: -color-orange;
+}
+
+.color-fill-pink {
+    -fx-fill: -color-pink;
+}
+
+.color-fill-gray {
+    -fx-fill: -color-gray;
+}
+
+.color-fill-white {
+    -fx-fill: -color-white;
+}
+
+/**
+子字体
+ */
+
+
+.color-font-blue .text {
+    -fx-fill: -color-blue;
+}
+
+.color-font-red .text {
+    -fx-fill: -color-red;
+}
+
+.color-font-purple .text {
+    -fx-fill: -color-purple;
+}
+
+.color-font-yellow .text {
+    -fx-fill: -color-yellow;
+}
+
+.color-font-green .text {
+    -fx-fill: -color-green;
+}
+
+.color-font-orange .text {
+    -fx-fill: -color-orange;
+}
+
+.color-font-pink .text {
+    -fx-fill: -color-pink;
+}
+
+.color-font-gray .text {
+    -fx-fill: -color-gray;
+}
+
+.color-font-white .text {
+    -fx-fill: -color-white;
+}
+
+
+/**
 基础控件
  */
+.icon {
+    -fx-effect: innershadow(gaussian, -color-activity-bar-item-icon-usually, 127, 0, 0, 0);
+}
 
 .label {
     -fx-text-fill: -color-text-usually;
@@ -10,7 +94,7 @@
     -fx-fill: -color-text-usually;
 }
 
-.tooltip{
+.tooltip {
     -fx-background-color: -color-component-bg-usually;
     -fx-background-radius: 3;
     -fx-border-radius: 3;
@@ -528,6 +612,11 @@
     -fx-background-color: -color-menu-bg-usually;
 }
 
+.menu .icon {
+    -fx-pref-height: 16;
+    -fx-pref-width: 16;
+}
+
 .menu .label {
     -fx-text-fill: -color-menu-text-usually;
 }
@@ -558,6 +647,12 @@
     -fx-border-color: -color-menu-border-usually;
     -fx-padding: 0;
 }
+
+.context-menu .icon {
+    -fx-pref-height: 16;
+    -fx-pref-width: 16;
+}
+
 
 /**
 分隔器
@@ -597,7 +692,7 @@
     -fx-fill: -color-menu-item-text-hover;
 }
 
-.check-menu-item .left-container .check ,
+.check-menu-item .left-container .check,
 .radio-menu-item .left-container .radio {
     -fx-background-color: -color-text-active;
 }
@@ -899,11 +994,6 @@
 }
 
 
-.icon {
-    -fx-effect: innershadow(gaussian ,-color-activity-bar-item-icon-usually,127,0,0,0 );
-}
-
-
 /*.tab-pane .tab-content-area:hover {
     -fx-border-width: 0 4 0 0;
     -fx-border-color: -color-tab-pane-tab-border-active;
@@ -927,8 +1017,8 @@
 }
 
 .title-bar .icon {
-    -fx-fit-to-width: 26;
-    -fx-fit-to-height: 26;
+    -fx-pref-width: 22;
+    -fx-pref-height: 22;
 }
 
 .title-bar .text {
@@ -953,29 +1043,32 @@
     -fx-padding: 0;
     -fx-pref-height: 30px;
 }
+
 .title-bar .title-icon {
     -fx-effect: null;
 }
 
-/**
-内容本体
- */
-.content-body {
-}
 
 /**
 活动栏
  */
-.content-body .activity-bar {
+.activity-border-pane .activity-bar {
     -fx-background-color: -color-activity-bar-bg-usually;
-
-
+    -fx-border-color: -color-border-pane;
+    -fx-border-width: 0 1 0 1;
     -fx-pref-width: 48;
     -fx-max-width: 48;
     -fx-min-width: 48;
 }
 
-.content-body .activity-bar .activity-item {
+.activity-border-pane .activity-bar.left {
+    -fx-border-width: 0 1 0 0;
+}
+.activity-border-pane .activity-bar.right {
+    -fx-border-width: 0 0 0 1;
+}
+
+.activity-border-pane .activity-bar .activity-item {
     -fx-padding: 2 2 2 0;
     -fx-background-color: transparent;
     -fx-pref-width: 48;
@@ -989,43 +1082,77 @@
     -fx-border-radius: 0;
 }
 
-.content-body .activity-bar .activity-item .icon {
-    -fx-effect: innershadow(gaussian ,-color-activity-bar-item-icon-usually,127,0,0,0 );
+.activity-border-pane .activity-bar .activity-item.drag-up {
+    -fx-border-color: -color-activity-bar-item-bd-selected transparent transparent -color-activity-bar-item-bd-usually;
+    -fx-border-width: 2 0 0 2;
+    -fx-border-insets: -1 0 0 0;
+    -fx-padding: 1 2 2 0;
 }
 
-.content-body .activity-bar .activity-item:hover{
+.activity-border-pane .activity-bar .activity-item.drag-down {
+    -fx-border-color: transparent transparent -color-activity-bar-item-bd-selected -color-activity-bar-item-bd-usually;
+    -fx-border-width: 0 0 2 2;
+    -fx-border-insets: 0 0 -1 0;
+    -fx-padding: 2 2 1 0;
+}
+
+.activity-border-pane .activity-bar .activity-item .icon {
+    -fx-padding: 6;
+}
+
+.activity-border-pane .activity-bar .activity-item .icon {
+    -fx-effect: innershadow(gaussian, -color-activity-bar-item-icon-usually, 127, 0, 0, 0);
+}
+
+.activity-border-pane .activity-bar .activity-item:hover {
     -fx-border-color: -color-activity-bar-item-bd-hover;
 }
-.content-body .activity-bar .activity-item:hover .icon {
-    -fx-effect: innershadow(gaussian , -color-activity-bar-item-icon-hover,127,0,0,0 );
+
+
+.activity-border-pane .activity-bar .activity-item:hover .icon {
+    -fx-effect: innershadow(gaussian, -color-activity-bar-item-icon-hover, 127, 0, 0, 0);
 }
 
+.activity-border-pane .activity-bar .activity-item:selected.drag-up {
+    -fx-border-color: -color-activity-bar-item-bd-selected transparent transparent -color-activity-bar-item-bd-selected;
+    -fx-border-width: 2 0 0 2;
+    -fx-border-insets: -1 0 0 0;
+    -fx-padding: 1 2 2 0;
+}
 
-.content-body .activity-bar .activity-item:selected {
+.activity-border-pane .activity-bar .activity-item:selected.drag-down {
+    -fx-border-color: transparent transparent -color-activity-bar-item-bd-selected -color-activity-bar-item-bd-selected;
+    -fx-border-width: 0 0 2 2;
+    -fx-border-insets: 0 0 -1 0;
+    -fx-padding: 2 2 1 0;
+}
+
+.activity-border-pane .activity-bar .activity-item:selected {
     -fx-border-color: -color-activity-bar-item-bd-selected;
 }
 
-.content-body .activity-bar .activity-item:selected .icon {
-    -fx-effect: innershadow(gaussian , -color-activity-bar-item-icon-selected,127,0,0,0 );
+.activity-border-pane .activity-bar .activity-item:selected .icon {
+    -fx-effect: innershadow(gaussian, -color-activity-bar-item-icon-selected, 127, 0, 0, 0);
 }
 
+
 /**
-工作区域
+视图区域
  */
-.content-body .work-area {
-    -fx-border-color: -color-border-pane;
-    -fx-border-width: 0 0 0 1;
-    -fx-background-color: -color-editor-bg-usually;
+.activity-border-pane .view-area {
+    /*-fx-border-color: -color-border-pane;
+    -fx-border-width: 0 0 0 1;*/
+    -fx-background-color: -color-view-area-bg-usually;
 }
 
 /**
 侧边栏
  */
-.content-body .work-area .side-bar {
+.activity-border-pane .side-bar {
     -fx-background-color: -color-activity-bar-bg-usually;
-    -fx-pref-width: 220;
+    /*-fx-pref-width: 220;
     -fx-min-width: 160;
-    -fx-max-width: 400;
+    -fx-max-width: 400;*/
 
 }
 
@@ -1033,7 +1160,7 @@
 /**
 编辑器区域
  */
-.content-body .work-area .editor-area {
+.activity-border-pane .editor-area {
 
 }
 
@@ -1064,86 +1191,6 @@
     -fx-pref-width: -1;
     -fx-spacing: 2;
     -fx-padding: 0 6 0 6;
-}
-
-/**
-颜色填充
- */
-.color-fill-blue {
-    -fx-fill: -color-blue;
-}
-
-.color-fill-red {
-    -fx-fill: -color-red;
-}
-
-.color-fill-purple {
-    -fx-fill: -color-purple;
-}
-
-.color-fill-yellow {
-    -fx-fill: -color-yellow;
-}
-
-.color-fill-green {
-    -fx-fill: -color-green;
-}
-
-.color-fill-orange {
-    -fx-fill: -color-orange;
-}
-
-.color-fill-pink {
-    -fx-fill: -color-pink;
-}
-
-.color-fill-gray {
-    -fx-fill: -color-gray;
-}
-
-.color-fill-white {
-    -fx-fill: -color-white;
-}
-
-/**
-子字体
- */
-
-
-.color-font-blue .text {
-    -fx-fill: -color-blue;
-}
-
-.color-font-red .text {
-    -fx-fill: -color-red;
-}
-
-.color-font-purple .text {
-    -fx-fill: -color-purple;
-}
-
-.color-font-yellow .text {
-    -fx-fill: -color-yellow;
-}
-
-.color-font-green .text {
-    -fx-fill: -color-green;
-}
-
-.color-font-orange .text {
-    -fx-fill: -color-orange;
-}
-
-.color-font-pink .text {
-    -fx-fill: -color-pink;
-}
-
-.color-font-gray .text {
-    -fx-fill: -color-gray;
-}
-
-.color-font-white .text {
-    -fx-fill: -color-white;
 }
 
 

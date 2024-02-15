@@ -141,11 +141,11 @@
     /**
     编辑区面板
      */
-    -color-editor-area-bg-usually: #505050; /*通常背景*/
+    -color-view-area-bg-usually: -color-theme-3; /*通常背景*/
     /**
     编辑器面板
     */
-    -color-editor-bg-usually: -color-theme-3; /*通常背景*/
+    -color-view-bg-usually: -color-theme-3; /*通常背景*/
 
     /**
     选项卡面板

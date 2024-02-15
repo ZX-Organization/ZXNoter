@@ -80,7 +80,7 @@ fn start_jar(java: &str, args: &str) -> Result<String, String> {
     println!("Starting JAR: {}", args);
 
     let output = Command::new(java)
-        .creation_flags(0x08000000)
+        //.creation_flags(0x08000000)
         .args(args.split_whitespace())
         .output()
         .map_err(|e| format!("Error starting JAR: {}", e))?;
@@ -152,7 +152,7 @@ fn build_checklist() -> Vec<String> {
 }
 
 fn check_java_version(java_path: &str) -> Result<JavaInfo, String> {
-    let java_exe_path = Path::new(java_path).join("bin").join("java.exe");
+    let java_exe_path = Path::new(java_path).join("bin").join("javaw.exe");
 
     if java_exe_path.exists() {
         let output = Command::new(&java_exe_path)

@@ -4,6 +4,7 @@ import team.zxorg.extensionloader.event.ConfigEventListener;
 import team.zxorg.extensionloader.gson.GsonManager;
 
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -34,13 +35,28 @@ public class Configuration {
     public <T> T get(Class<T> clazz) {
         Object value = configObject.computeIfAbsent(clazz, k -> {
             Path jsonPath = getConfigPath(clazz);
-            if (Files.exists(jsonPath))
-                return GsonManager.fromJson(jsonPath, clazz);
-            try {
-                return clazz.getDeclaredConstructor().newInstance();
-            } catch (Exception ex) {
-                throw new RuntimeException("Error creating instance of class: " + clazz.getName(), ex);
+            T t;
+            if (Files.exists(jsonPath)) {
+                t = GsonManager.fromJson(jsonPath, clazz);
+            } else {
+                try {
+                    t = clazz.getDeclaredConstructor().newInstance();
+                } catch (Exception ex) {
+                    throw new RuntimeException("Error creating instance of class: " + clazz.getName(), ex);
+                }
             }
+
+            //检查特定字段 并赋值
+            if (t instanceof ConfigData) {
+                try {
+                    System.out.println("检查 " + configPath + " " + clazz);
+                    Field field = ConfigData.class.getDeclaredField("config");
+                    field.setAccessible(true);
+                    field.set(t, this);
+                } catch (IllegalAccessException | NoSuchFieldException e) {
+                }
+            }
+            return t;
         });
 
         @SuppressWarnings("unchecked")

@@ -1,6 +1,7 @@
 package team.zxorg.zxnoter.uiframe.component;
 
 import javafx.scene.layout.HBox;
+import team.zxorg.zxnoter.uiframe.ProjectView;
 
 /**
  * 状态栏定义
@@ -14,6 +15,14 @@ public class StatusBar extends HBox{
      * 状态栏右部分
      */
     private final HBox statusBarRight = new HBox();
+
+
+    private final ProjectView projectView;
+
+    public StatusBar(ProjectView projectView) {
+        this.projectView = projectView;
+    }
+
     {
         getStyleClass().addAll("status-bar");
     }

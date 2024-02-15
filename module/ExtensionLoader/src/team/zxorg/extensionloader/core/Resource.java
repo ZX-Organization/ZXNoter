@@ -11,18 +11,13 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Stream;
-
-import static team.zxorg.extensionloader.core.Configuration.config;
 
 public class Resource {
     private static final Path resourcesPath = Path.of("./resourcepacks");
 
-    private static ResourceConfig resourceConfig;
+    private static final ResourceConfig config = Configuration.config.get(ResourceConfig.class);
     private static final HashMap<Path, Path> resources = new HashMap<>();
 
     /**
@@ -46,7 +41,6 @@ public class Resource {
      */
     private static void initialize() {
         Logger.info(Language.get(LanguageKey.MESSAGE_RESOURCE_PACK_INITIALIZE));
-        resourceConfig = config.get(ResourceConfig.class);
     }
 
     /**
@@ -82,7 +76,7 @@ public class Resource {
         //重新加载启用资源包
         enableResourcePacks.clear();
         //重新读取资源包
-        for (String name : resourceConfig.resources) {
+        for (String name : config.resources) {
             ResourcePack resourcePack = loadedResourcePacks.get(Paths.get(name));
             if (resourcePack == null) {
                 Logger.info(Language.get(LanguageKey.MESSAGE_RESOURCE_PACK_LOST, name));
@@ -125,12 +119,8 @@ public class Resource {
     /**
      * 资源配置类
      */
-    private static class ResourceConfig {
-        List<String> resources;
-
-        public ResourceConfig() {
-            resources = new ArrayList<>();
-        }
+    private static class ResourceConfig extends ConfigData {
+        TreeSet<String> resources;
     }
 
     /**

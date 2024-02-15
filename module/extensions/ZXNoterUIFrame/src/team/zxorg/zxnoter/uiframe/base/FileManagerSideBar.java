@@ -2,16 +2,17 @@ package team.zxorg.zxnoter.uiframe.base;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
-import team.zxorg.zxnoter.uiframe.component.SideBar;
+import team.zxorg.zxnoter.uiframe.component.ActivitySideBar;
 
-public class FileManagerSideBar extends SideBar {
+public class FileManagerSideBar extends ActivitySideBar {
     {
-        getChildren().addAll(new Label("文件管理器"));
-        setAlignment(Pos.CENTER);
     }
 
     public FileManagerSideBar() {
-        super("fileManager");
+
+        getChildren().addAll(new Label("文件管理器"));
+        setAlignment(Pos.CENTER);
+        init("fileManager");
 
     }
 }

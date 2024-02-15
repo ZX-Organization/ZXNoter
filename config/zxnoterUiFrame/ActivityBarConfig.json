@@ -1,8 +1,8 @@
 {
-  "topItems": [
-    "fileManager",
-    "setup"
-  ],
-  "bottomItems": [],
-  "openedItem": "未指定"
+  "hideMainBar": false,
+  "hideSecondBar": false,
+  "mainBarIsLeft": false,
+  "mainBarItems": [],
+  "bottomBarItems": [],
+  "secondBarItems": []
 }

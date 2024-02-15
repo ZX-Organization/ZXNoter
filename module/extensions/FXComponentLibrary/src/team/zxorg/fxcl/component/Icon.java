@@ -7,11 +7,15 @@ import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.scene.effect.Shadow;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import team.zxorg.fxcl.resource.IconManager;
 
-public class Icon extends ImageView {
+public class Icon extends StackPane {
+    ResizableImageView imageView = new ResizableImageView();
     StringProperty iconKeyProperty = new SimpleStringProperty();
     ObjectProperty<Image> icon = new SimpleObjectProperty<>();
     ObjectProperty<Color> fillColorProperty = new SimpleObjectProperty<>(null);
@@ -43,13 +47,14 @@ public class Icon extends ImageView {
     }
 
     public Icon(String key) {
+        getChildren().add(imageView);
         getStyleClass().add("icon");
         iconKeyProperty.addListener((observable, oldValue, newValue) -> {
             if (icon != null)
                 icon.removeListener(iconChangeListener);
             icon = IconManager.getIcon(newValue);
             icon.addListener(iconChangeListener);
-            setImage(icon.get());
+            imageView.setImage(icon.get());
         });
         fillColorProperty.addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
@@ -74,12 +79,13 @@ public class Icon extends ImageView {
     }
 
     private final ChangeListener<Image> iconChangeListener = (observable, oldValue, newValue) -> {
-        setImage(newValue);
+        imageView.setImage(newValue);
     };
 
     public void setSize(double width, double height) {
-        setFitWidth(width);
-        setFitHeight(height);
+        setPrefSize(width, height);
+        setMinSize(width, height);
+        setMaxSize(width, height);
     }
 
     public void setColor(Color color) {

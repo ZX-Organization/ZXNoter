@@ -8,12 +8,12 @@
       <sourceFolder url="file://$MODULE_DIR$/test" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/component" />
       <excludeFolder url="file://$MODULE_DIR$/main" />
-      <excludeFolder url="file://$MODULE_DIR$/src/team/zxorg/engine2d" />
       <excludeFolder url="file://$MODULE_DIR$/src/team/zxorg/skin/uis/component/old" />
-      <excludeFolder url="file://$MODULE_DIR$/src/team/zxorg/skin_old" />
-      <excludeFolder url="file://$MODULE_DIR$/src/team/zxorg/skin_old/test" />
       <excludeFolder url="file://$MODULE_DIR$/test/uis" />
       <excludeFolder url="file://$MODULE_DIR$/../../../olds/temp" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../olds/engine2d" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../olds/skin_old" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../olds/skin_old/test" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

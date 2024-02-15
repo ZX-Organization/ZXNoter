@@ -8,11 +8,26 @@ import team.zxorg.extensionloader.extension.ExtensionEntrypoint;
 import team.zxorg.extensionloader.extension.ExtensionManager;
 import team.zxorg.zxnoter.uiframe.base.FileManagerSideBar;
 import team.zxorg.zxnoter.uiframe.base.SetupSideBar;
-import team.zxorg.zxnoter.uiframe.component.ActivityBar;
+import team.zxorg.zxnoter.uiframe.component.ActivitySideBar;
+
+import java.util.HashMap;
 
 public class ZXNoter implements ExtensionEntrypoint {
     public static Extension extension;
     public static Configuration config;
+
+    /**
+     * 当前所有被注册的侧边栏类
+     */
+    protected static final HashMap<String, Class<? extends ActivitySideBar>> sideBarClassMap = new HashMap<>();
+
+
+
+
+
+
+
+
 
 
     @Override
@@ -28,17 +43,19 @@ public class ZXNoter implements ExtensionEntrypoint {
         }*/
 
         //注册基本UI
-        ActivityBar.registerItem("fileManager", FileManagerSideBar.class);
-        ActivityBar.registerItem("setup", SetupSideBar.class);
+        //ActivityBar.registerSideBar("fileManager", FileManagerSideBar.class);
+        //ActivityBar.registerSideBar("setup", SetupSideBar.class);
     }
 
     @Override
     public void onAllInitialized(Extension extension, ExtensionManager manager) {
         Logger.info(extension.getLanguage("extension.zxnoterUiFrame.start"));
 
+        //ActivityBar.updateConfigMenu();
+
         Platform.runLater(() -> {
-            ProjectViewStage projectViewStage = new ProjectViewStage();
-            projectViewStage.show();
+            ProjectView projectView = new ProjectView();
+            projectView.show();
         });
 
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {

@@ -174,8 +174,10 @@ public class FlexSkinProcessor {
             content.put(FLEX_TAB_DATA_FORMAT, "");
             dragboard.setContent(content);
 
+            Pane pane = (Pane) tabHeaderSkin;
             // 设置拖拽时的图标
-            dragboard.setDragView(snapshot);
+            dragboard.setDragView(snapshot, pane.getWidth() / 2, pane.getHeight() / 2);
+
 
             event.consume();
         });

@@ -1,10 +1,15 @@
 package team.zxorg.zxnoter.uiframe.base;
 
-import team.zxorg.zxnoter.uiframe.component.SideBar;
+import javafx.geometry.Pos;
+import javafx.scene.control.Label;
+import team.zxorg.zxnoter.uiframe.component.ActivitySideBar;
 
-public class SetupSideBar extends SideBar {
+public class SetupSideBar extends ActivitySideBar {
 
     public SetupSideBar() {
-        super("setup");
+
+        getChildren().addAll(new Label("设置"));
+        setAlignment(Pos.CENTER);
+        init("setup");
     }
 }
