@@ -26,14 +26,26 @@ public class ActivityBarConfig extends ConfigData {
     /**
      * 主栏的项
      */
-    LinkedHashSet<String> mainBarItems;
+    LinkedHashSet<String> mainTopBarItems;
     /**
      * 主栏底部的项
      */
-    LinkedHashSet<String> bottomBarItems;
+    LinkedHashSet<String> mainBottomBarItems;
     /**
      * 副栏的项
      */
     LinkedHashSet<String> secondBarItems;
 
+
+    int activeMainBarTopItemIndex;
+    int activeMainBarBottomItemIndex;
+    int activeSecondBarItemIndex;
+
+    public boolean containsItem(String item) {
+        return mainTopBarItems.contains(item) || secondBarItems.contains(item) || mainBottomBarItems.contains(item);
+    }
+
+    public boolean removeItem(String item) {
+        return mainTopBarItems.remove(item) || secondBarItems.remove(item) || mainBottomBarItems.remove(item);
+    }
 }

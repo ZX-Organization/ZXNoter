@@ -43,8 +43,10 @@ public class ZXNoter implements ExtensionEntrypoint {
         //ActivityBar.updateConfigMenu();
 
         Platform.runLater(() -> {
-            ProjectView projectView = new ProjectView();
-            projectView.show();
+            {
+                ProjectView projectView = new ProjectView();
+                projectView.show();
+            }
         });
 
     }

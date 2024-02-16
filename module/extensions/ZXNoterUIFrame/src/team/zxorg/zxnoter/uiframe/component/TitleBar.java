@@ -26,7 +26,7 @@ public final class TitleBar extends HBox {
             getStyleClass().add("title-icon");
         }
     };
-    private final MenuBar menuBar = new MenuBar(MenuFactory.getLangMenu(LANG + "menu.file"), MenuFactory.getLangMenu(LANG + "menu.edit"), MenuFactory.getLangMenu(LANG + "menu.help"));
+    private final MenuBar menuBar = new MenuBar(MenuFactory.getMenu(LANG + "menu.file"), MenuFactory.getMenu(LANG + "menu.edit"), MenuFactory.getMenu(LANG + "menu.help"));
     private final LangLabel titleLabel = new LangLabel(LANG + "title") {
         {
             HBox.setHgrow(this, Priority.ALWAYS);

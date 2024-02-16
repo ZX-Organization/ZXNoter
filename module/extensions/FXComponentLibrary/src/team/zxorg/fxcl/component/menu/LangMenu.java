@@ -8,7 +8,9 @@ import team.zxorg.fxcl.property.LangProperty;
 
 public class LangMenu extends Menu {
     LangProperty langTextProperty = new LangProperty();
-
+    public void setLang(String key, Property<?>... args){
+        langTextProperty.setLang(key, args);
+    }
     public LangProperty langTextProperty() {
         return langTextProperty;
     }

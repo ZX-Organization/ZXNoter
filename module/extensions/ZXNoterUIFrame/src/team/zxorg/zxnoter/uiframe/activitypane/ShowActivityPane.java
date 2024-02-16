@@ -114,9 +114,9 @@ class ShowActivityPane extends VBox {
      */
     public LinkedHashSet<String> getItems() {
         return switch (pos) {
-            case left -> (config.mainBarIsLeft ? config.mainBarItems : config.secondBarItems);
-            case right -> (!config.mainBarIsLeft ? config.mainBarItems : config.secondBarItems);
-            case bottom -> config.bottomBarItems;
+            case left -> (config.mainBarIsLeft ? config.mainTopBarItems : config.secondBarItems);
+            case right -> (!config.mainBarIsLeft ? config.mainTopBarItems : config.secondBarItems);
+            case bottom -> config.mainBottomBarItems;
         };
     }
 

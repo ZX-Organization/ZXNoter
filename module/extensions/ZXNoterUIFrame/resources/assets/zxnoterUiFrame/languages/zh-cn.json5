@@ -22,12 +22,12 @@
       activityBar: {
         menu: {
           hideItem: {
-            name: "system.delete-back",
-            title: "隐藏此活动项"
+            icon: "system.delete-back",
+            name: "隐藏此活动项"
           },
           hideBar: {
-            name: "system.delete-back",
-            title: "隐藏此活动栏"
+            icon: "system.eye-off",
+            name: "隐藏此活动栏"
           },
           moveToRight: {
             icon: "design.layout-right",
@@ -38,8 +38,8 @@
             name: "移动至左侧"
           },
           itemConfig: {
-            name: "配置活动栏",
-            icon: "system.list-settings"
+            icon: "system.list-settings",
+            name: "配置活动项"
           }
         },
         item: {

@@ -95,6 +95,8 @@ public class ProjectView {
         stage.setScene(scene);
         stage.setMinWidth(800);
         stage.setMinHeight(600);
+
+
         stage.setOnCloseRequest(event -> {
             Configuration.save();
         });

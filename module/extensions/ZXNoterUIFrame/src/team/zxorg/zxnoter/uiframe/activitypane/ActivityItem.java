@@ -140,9 +140,9 @@ public final class ActivityItem extends ToggleButton {
             if (activityBarPane.dragedActivityItem == null)
                 return;
             ActivityItem activityItem = activityBarPane.dragedActivityItem;
-            config.mainBarItems.remove(activityItem.getId());
+            config.mainTopBarItems.remove(activityItem.getId());
             config.secondBarItems.remove(activityItem.getId());
-            config.bottomBarItems.remove(activityItem.getId());
+            config.mainBottomBarItems.remove(activityItem.getId());
 
             LinkedHashSet<String> items = showActivityPane.getItems();
 
