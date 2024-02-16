@@ -88,9 +88,9 @@
             <Label id="title" alignment="CENTER" maxWidth="1.7976931348623157E308" text="ZXNoter" HBox.hgrow="ALWAYS" />
          </children>
       </HBox>
-      <HBox prefHeight="100.0" prefWidth="200.0" styleClass="activity-border-pane" VBox.vgrow="ALWAYS">
+      <HBox prefHeight="100.0" prefWidth="200.0" styleClass="activity-bar-pane" VBox.vgrow="ALWAYS">
          <children>
-            <VBox id="activityBar" prefHeight="200.0" prefWidth="100.0" styleClass="activity-bar">
+            <VBox id="activityBar" prefHeight="200.0" prefWidth="100.0">
                <children>
                   <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                      <children>
@@ -187,6 +187,10 @@
                      </children>
                   </VBox>
                </children>
+               <styleClass>
+                  <String fx:value="activity-bar" />
+                  <String fx:value="left" />
+               </styleClass>
             </VBox>
             <BorderPane prefHeight="200.0" prefWidth="200.0" styleClass="activity-border-pane" HBox.hgrow="ALWAYS">
                <center>
@@ -311,17 +315,7 @@
                      <children>
                         <VBox id="sideBar" prefHeight="515.0" prefWidth="221.0" styleClass="side-bar">
                            <children>
-                              <BorderPane prefHeight="334.0" prefWidth="200.0">
-                                 <right>
-                                    <ToolBar maxWidth="139.0" orientation="VERTICAL" prefHeight="334.0" prefWidth="139.0" styleClass="activity-bar" BorderPane.alignment="CENTER">
-                                      <items>
-                                        <Button mnemonicParsing="false" text="Button" />
-                                          <ToggleButton mnemonicParsing="false" text="ToggleButton" />
-                                          <ToggleButton mnemonicParsing="false" styleClass="activity-item" text="123" />
-                                      </items>
-                                    </ToolBar>
-                                 </right>
-                              </BorderPane>
+                              <BorderPane prefHeight="334.0" prefWidth="200.0" />
                            </children>
                         </VBox>
                      </children>
@@ -341,12 +335,19 @@
                <bottom>
                   <VBox id="sideBar" minWidth="38.0" prefHeight="149.0" prefWidth="928.0" styleClass="side-bar" BorderPane.alignment="CENTER">
                      <children>
-                        <BorderPane prefHeight="200.0" prefWidth="200.0" />
+                        <BorderPane prefHeight="200.0" prefWidth="200.0">
+                           <bottom>
+                              <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                <items>
+                                  <Button mnemonicParsing="false" text="Button" />
+                                </items>
+                              </ToolBar>
+                           </bottom></BorderPane>
                      </children>
                   </VBox>
                </bottom>
             </BorderPane>
-            <VBox id="activityBar" prefHeight="200.0" prefWidth="100.0" styleClass="activity-bar">
+            <VBox id="activityBar" prefHeight="200.0" prefWidth="100.0">
                <children>
                   <ToggleButton mnemonicParsing="false" styleClass="activity-item">
                      <graphic>
@@ -396,6 +397,10 @@
                      </graphic>
                   </ToggleButton>
                </children>
+               <styleClass>
+                  <String fx:value="activity-bar" />
+                  <String fx:value="drag-right" />
+               </styleClass>
             </VBox>
          </children>
       </HBox>

@@ -8,7 +8,7 @@ import team.zxorg.fxcl.component.menu.LangMenuItem;
 
 public class MenuFactory {
     public static LangMenu getLangMenu(String key, Property<?>... args) {
-        String langKey = (Language.getOrNull(key) == null ? key + ".title" : key);
+        String langKey = (Language.getOrNull(key) == null ? key + ".name" : key);
         LangMenu langMenu = new LangMenu(langKey, args);
         String iconKey = Language.getOrNull(key + ".icon");
         if (iconKey != null)
@@ -18,7 +18,7 @@ public class MenuFactory {
 
 
     public static LangMenuItem getLangMenuItem(String key, Property<?>... args) {
-        String langKey = (Language.getOrNull(key) == null ? key + ".title" : key);
+        String langKey = (Language.getOrNull(key) == null ? key + ".name" : key);
         LangMenuItem langMenu = new LangMenuItem(langKey, args);
         String iconKey = Language.getOrNull(key + ".icon");
         if (iconKey != null)

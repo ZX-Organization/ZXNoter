@@ -2,6 +2,7 @@ package team.zxorg.fxcl;
 
 import com.sun.javafx.application.PlatformImpl;
 import com.sun.javafx.util.Logging;
+import javafx.application.Platform;
 import org.apache.commons.lang3.time.StopWatch;
 import team.zxorg.extensionloader.core.Logger;
 import team.zxorg.extensionloader.extension.Extension;
@@ -30,5 +31,6 @@ public class FXCL implements ExtensionEntrypoint {
         Logger.info(extension.getLanguage(LANG + "javaFX.initialized", stopWatch.getTime()));
         IconManager.reloadIcons();
         ImageManager.reloadImages();
+
     }
 }

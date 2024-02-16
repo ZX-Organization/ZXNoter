@@ -7,13 +7,13 @@
       titleBar: {
         menu: {
           file: {
-            title: "文件"
+            name: "文件"
           },
           edit: {
-            title: "编辑"
+            name: "编辑"
           },
           help: {
-            title: "帮助"
+            name: "帮助"
           }
         },
         title: "ZXNote 项目视图",
@@ -22,23 +22,23 @@
       activityBar: {
         menu: {
           hideItem: {
-            icon: "system.delete-back",
+            name: "system.delete-back",
             title: "隐藏此活动项"
           },
           hideBar: {
-            icon: "system.delete-back",
+            name: "system.delete-back",
             title: "隐藏此活动栏"
           },
           moveToRight: {
             icon: "design.layout-right",
-            title: "移动至右侧"
+            name: "移动至右侧"
           },
           moveToLeft: {
             icon: "design.layout-left",
-            title: "移动至左侧"
+            name: "移动至左侧"
           },
           itemConfig: {
-            title: "配置活动栏",
+            name: "配置活动栏",
             icon: "system.list-settings"
           }
         },
@@ -50,6 +50,10 @@
           setup: {
             name: "设置",
             icon: "system.settings-4"
+          },
+          welcome: {
+            name: "欢迎",
+            icon: "buildings.home-3"
           }
         }
       },

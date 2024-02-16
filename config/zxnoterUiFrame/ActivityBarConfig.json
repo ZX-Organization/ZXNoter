@@ -1,8 +1,16 @@
 {
+  "leftPaneWidth": 120.80000000000001,
+  "rightPaneWidth": 195.2,
+  "bottomPaneHeight": 245.60000000000002,
   "hideMainBar": false,
   "hideSecondBar": false,
-  "mainBarIsLeft": false,
-  "mainBarItems": [],
-  "bottomBarItems": [],
+  "mainBarIsLeft": true,
+  "mainBarItems": [
+    "welcome"
+  ],
+  "bottomBarItems": [
+    "setup",
+    "fileManager"
+  ],
   "secondBarItems": []
 }

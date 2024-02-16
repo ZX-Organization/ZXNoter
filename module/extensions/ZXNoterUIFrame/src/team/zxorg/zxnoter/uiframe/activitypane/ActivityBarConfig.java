@@ -3,9 +3,13 @@ package team.zxorg.zxnoter.uiframe.activitypane;
 import team.zxorg.extensionloader.core.ConfigData;
 
 import java.util.LinkedHashSet;
-import java.util.TreeSet;
 
 public class ActivityBarConfig extends ConfigData {
+
+
+    double leftPaneWidth;
+    double rightPaneWidth;
+    double bottomPaneHeight;
 
     /**
      * 是否隐藏主栏
@@ -31,4 +35,5 @@ public class ActivityBarConfig extends ConfigData {
      * 副栏的项
      */
     LinkedHashSet<String> secondBarItems;
+
 }

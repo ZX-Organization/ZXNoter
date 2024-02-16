@@ -4,12 +4,10 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import team.zxorg.zxnoter.uiframe.activitypane.ActivityPane;
 
-public class SetupPane extends ActivityPane {
-
-    public SetupPane() {
-
-        getChildren().addAll(new Label("设置"));
+public class WelcomeActivityPane extends ActivityPane {
+    public WelcomeActivityPane() {
+        super("welcome");
         setAlignment(Pos.CENTER);
-        init("setup");
+        getChildren().addAll(new Label("欢迎"));
     }
 }

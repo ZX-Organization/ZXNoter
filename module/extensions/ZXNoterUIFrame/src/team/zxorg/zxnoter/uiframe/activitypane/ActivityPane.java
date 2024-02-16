@@ -7,6 +7,7 @@ import team.zxorg.zxnoter.uiframe.ProjectView;
 public abstract class ActivityPane extends VBox {
     private ProjectView projectView;
     private ActivityItem activityItem;
+    private ActivityBarPane activityBarPane;
 
     /**
      * 获取项目视图
@@ -30,18 +31,15 @@ public abstract class ActivityPane extends VBox {
         VBox.setVgrow(this, Priority.ALWAYS);
     }
 
-    protected void bind(ProjectView projectView) {
+    void bind(ProjectView projectView, ActivityBarPane activityBarPane) {
         this.projectView = projectView;
+        this.activityBarPane = activityBarPane;
     }
 
-    /**
-     * 初始化活动侧边栏
-     *
-     * @param id ID
-     */
-    protected final void init(String id) {
+    public ActivityPane(String id) {
         setId(id);
-        activityItem = new ActivityItem(id);
+        activityItem = new ActivityItem(this);
     }
+
 
 }

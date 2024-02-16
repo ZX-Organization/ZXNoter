@@ -4,6 +4,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import team.zxorg.extensionloader.core.Configuration;
 import team.zxorg.extensionloader.core.Resource;
 import team.zxorg.extensionloader.event.ResourceEventListener;
 import team.zxorg.fxcl.component.flexview.FlexArea;
@@ -22,27 +23,33 @@ public class ProjectView {
     /**
      * 标题栏
      */
-    private final TitleBar titleBar = new TitleBar(this);
+    private final TitleBar titleBar;
+
+    public Stage getStage() {
+        return stage;
+    }
+
+    public TitleBar getTitleBar() {
+        return titleBar;
+    }
+
+    public StatusBar getStatusBar() {
+        return statusBar;
+    }
 
     /**
      * 视图区域
      */
-    private final FlexArea viewArea = new FlexArea() {
-        {
-            getStyleClass().addAll("view-area");
-            createTabPane().addTab(new Tab());
-            createSplitPane().createTabPane().addTab(new Tab());
-        }
-    };
+    private final FlexArea viewArea;
     /**
      * 活动栏面板
      */
-    private final ActivityBarPane activityBar = new ActivityBarPane(this, viewArea);
+    private final ActivityBarPane activityBar;
 
     /**
      * 状态栏
      */
-    private final StatusBar statusBar = new StatusBar(this);
+    private final StatusBar statusBar;
     /**
      * 窗口
      */
@@ -51,12 +58,12 @@ public class ProjectView {
     /**
      * 根
      */
-    private final VBox root = new VBox(titleBar, activityBar, statusBar);
+    private final VBox root;
 
     /**
      * 场景
      */
-    private final Scene scene = new Scene(root);
+    private final Scene scene;
 
     private final ResourceEventListener loadStyle = new ResourceEventListener() {
         @Override
@@ -68,11 +75,29 @@ public class ProjectView {
     };
 
     public ProjectView() {
+
+        titleBar = new TitleBar(this);
+        viewArea = new FlexArea() {
+            {
+                getStyleClass().addAll("view-area");
+                createTabPane().addTab(new Tab());
+                createSplitPane().createTabPane().addTab(new Tab());
+            }
+        };
+        activityBar = new ActivityBarPane(this, viewArea);
+        statusBar = new StatusBar(this);
+        root = new VBox(titleBar, activityBar, statusBar);
+        scene = new Scene(root);
+
+
         Resource.addEventListener(loadStyle);
         loadStyle.onReload();
         stage.setScene(scene);
         stage.setMinWidth(800);
         stage.setMinHeight(600);
+        stage.setOnCloseRequest(event -> {
+            Configuration.save();
+        });
     }
 
     public void show() {

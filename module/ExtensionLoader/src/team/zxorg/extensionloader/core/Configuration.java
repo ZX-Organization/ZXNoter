@@ -13,13 +13,17 @@ import java.util.List;
 import java.util.Map;
 
 public class Configuration {
+
+    private static final List<Configuration> allConfigs = new ArrayList<>();
     protected static final Configuration config = new Configuration("extensionLoader");
     private final Map<Class<?>, Object> configObject = new HashMap<>();
     private final Map<Class<?>, List<ConfigEventListener>> eventListeners = new HashMap<>();
     private final Path configPath;
 
+
     public Configuration(String id) {
         configPath = Path.of("config", id);
+        allConfigs.add(this);
     }
 
     private Path getConfigPath(Class<?> clazz) {
@@ -55,17 +59,17 @@ public class Configuration {
             configObject.put(clazz, result);
             if (isNewConfig)
                 save(clazz);
-        }
-
-        //检查特定字段 并赋值
-        if (result instanceof ConfigData) {
-            try {
-                Field field = ConfigData.class.getDeclaredField("config");
-                if (field.get(result) == null) {
-                    field.setAccessible(true);
-                    field.set(result, this);
+            //检查特定字段 并赋值
+            if (result instanceof ConfigData configData) {
+                try {
+                    Field field = ConfigData.class.getDeclaredField("config");
+                    if (field.get(result) == null) {
+                        field.setAccessible(true);
+                        field.set(result, this);
+                    }
+                } catch (IllegalAccessException | NoSuchFieldException e) {
                 }
-            } catch (IllegalAccessException | NoSuchFieldException e) {
+                configData.loaded();
             }
         }
 
@@ -116,5 +120,20 @@ public class Configuration {
         }
     }
 
+    /**
+     * 保存所有需要保存的配置
+     */
+    public static void save() {
+        for (Configuration config : allConfigs) {
+            for (Object object : config.configObject.values()) {
+                if (object instanceof ConfigData configData) {
+                    if (configData.needSave) {
+                        System.out.println("自动保存配置: " + configData.getClass().getSimpleName());
+                        configData.save();
+                    }
+                }
+            }
+        }
+    }
 
 }

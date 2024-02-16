@@ -1048,11 +1048,36 @@
     -fx-effect: null;
 }
 
+.activity-bar .activity-item-pane {
+    -fx-min-height: 50;
+}
+
+.activity-bar .activity-item-pane.drag-top {
+    -fx-border-color: -color-border-active;
+    -fx-border-width: 2 0 0 0;
+    -fx-padding: -2 0 0 0;
+}
+
+.activity-bar .activity-item-pane.drag-bottom {
+    -fx-border-color: -color-border-active;
+    -fx-border-width: 0 0 2 0;
+    -fx-padding: 0 0 -2 0;
+}
+
+.activity-bar-pane {
+    -fx-max-width: inherit;
+    -fx-max-height: inherit;
+}
+
+.activity-bar-pane .border-pane {
+    -fx-max-width: inherit;
+    -fx-max-height: inherit;
+}
 
 /**
 活动栏
  */
-.activity-border-pane .activity-bar {
+.activity-bar-pane .activity-bar {
     -fx-background-color: -color-activity-bar-bg-usually;
     -fx-border-color: -color-border-pane;
     -fx-border-width: 0 1 0 1;
@@ -1061,14 +1086,54 @@
     -fx-min-width: 48;
 }
 
-.activity-border-pane .activity-bar.left {
+.activity-bar-pane .activity-bar.left {
     -fx-border-width: 0 1 0 0;
 }
-.activity-border-pane .activity-bar.right {
+
+.activity-bar-pane .activity-bar.right {
     -fx-border-width: 0 0 0 1;
 }
 
-.activity-border-pane .activity-bar .activity-item {
+.activity-bar-pane .activity-pane {
+    -fx-background-color: -color-activity-bar-bg-usually;
+    -fx-border-color: -color-border-pane;
+}
+
+
+.activity-bar-pane .activity-pane.left {
+    -fx-min-width: 100;
+    -fx-border-width: 0 1 0 0;
+}
+
+.activity-bar-pane .activity-pane.left.resize {
+    -fx-border-color: -color-border-active;
+    -fx-border-width: 0 2 0 0;
+    -fx-border-insets: 0 -1 0 0;
+}
+
+.activity-bar-pane .activity-pane.right {
+    -fx-min-width: 100;
+    -fx-border-width: 0 0 0 1;
+}
+
+.activity-bar-pane .activity-pane.right.resize {
+    -fx-border-color: -color-border-active;
+    -fx-border-width: 0 0 0 2;
+    -fx-border-insets: 0 0 0 -1;
+}
+
+.activity-bar-pane .activity-pane.bottom {
+    -fx-min-height: 100;
+    -fx-border-width: 1 0 0 0;
+}
+
+.activity-bar-pane .activity-pane.bottom.resize {
+    -fx-border-color: -color-border-active;
+    -fx-border-width: 2 0 0 0;
+    -fx-border-insets: -1 0 0 0;
+}
+
+.activity-bar-pane .activity-bar .activity-item {
     -fx-padding: 2 2 2 0;
     -fx-background-color: transparent;
     -fx-pref-width: 48;
@@ -1082,56 +1147,56 @@
     -fx-border-radius: 0;
 }
 
-.activity-border-pane .activity-bar .activity-item.drag-up {
+.activity-bar-pane .activity-bar .activity-item.drag-up {
     -fx-border-color: -color-activity-bar-item-bd-selected transparent transparent -color-activity-bar-item-bd-usually;
     -fx-border-width: 2 0 0 2;
     -fx-border-insets: -1 0 0 0;
     -fx-padding: 1 2 2 0;
 }
 
-.activity-border-pane .activity-bar .activity-item.drag-down {
+.activity-bar-pane .activity-bar .activity-item.drag-down {
     -fx-border-color: transparent transparent -color-activity-bar-item-bd-selected -color-activity-bar-item-bd-usually;
     -fx-border-width: 0 0 2 2;
     -fx-border-insets: 0 0 -1 0;
     -fx-padding: 2 2 1 0;
 }
 
-.activity-border-pane .activity-bar .activity-item .icon {
+.activity-bar-pane .activity-bar .activity-item .icon {
     -fx-padding: 6;
 }
 
-.activity-border-pane .activity-bar .activity-item .icon {
+.activity-bar-pane .activity-bar .activity-item .icon {
     -fx-effect: innershadow(gaussian, -color-activity-bar-item-icon-usually, 127, 0, 0, 0);
 }
 
-.activity-border-pane .activity-bar .activity-item:hover {
+.activity-bar-pane .activity-bar .activity-item:hover {
     -fx-border-color: -color-activity-bar-item-bd-hover;
 }
 
 
-.activity-border-pane .activity-bar .activity-item:hover .icon {
+.activity-bar-pane .activity-bar .activity-item:hover .icon {
     -fx-effect: innershadow(gaussian, -color-activity-bar-item-icon-hover, 127, 0, 0, 0);
 }
 
-.activity-border-pane .activity-bar .activity-item:selected.drag-up {
+.activity-bar-pane .activity-bar .activity-item:selected.drag-up {
     -fx-border-color: -color-activity-bar-item-bd-selected transparent transparent -color-activity-bar-item-bd-selected;
     -fx-border-width: 2 0 0 2;
     -fx-border-insets: -1 0 0 0;
     -fx-padding: 1 2 2 0;
 }
 
-.activity-border-pane .activity-bar .activity-item:selected.drag-down {
+.activity-bar-pane .activity-bar .activity-item:selected.drag-down {
     -fx-border-color: transparent transparent -color-activity-bar-item-bd-selected -color-activity-bar-item-bd-selected;
     -fx-border-width: 0 0 2 2;
     -fx-border-insets: 0 0 -1 0;
     -fx-padding: 2 2 1 0;
 }
 
-.activity-border-pane .activity-bar .activity-item:selected {
+.activity-bar-pane .activity-bar .activity-item:selected {
     -fx-border-color: -color-activity-bar-item-bd-selected;
 }
 
-.activity-border-pane .activity-bar .activity-item:selected .icon {
+.activity-bar-pane .activity-bar .activity-item:selected .icon {
     -fx-effect: innershadow(gaussian, -color-activity-bar-item-icon-selected, 127, 0, 0, 0);
 }
 
@@ -1139,7 +1204,9 @@
 /**
 视图区域
  */
-.activity-border-pane .view-area {
+.activity-bar-pane .view-area {
+    -fx-min-width: 100;
+    -fx-min-height: 100;
     /*-fx-border-color: -color-border-pane;
     -fx-border-width: 0 0 0 1;*/
     -fx-background-color: -color-view-area-bg-usually;
@@ -1148,7 +1215,7 @@
 /**
 侧边栏
  */
-.activity-border-pane .side-bar {
+.activity-bar-pane .side-bar {
     -fx-background-color: -color-activity-bar-bg-usually;
     /*-fx-pref-width: 220;
     -fx-min-width: 160;
@@ -1160,7 +1227,7 @@
 /**
 编辑器区域
  */
-.activity-border-pane .editor-area {
+.activity-bar-pane .editor-area {
 
 }
 

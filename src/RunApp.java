@@ -1,4 +1,7 @@
-import team.zxorg.extensionloader.core.*;
+import team.zxorg.extensionloader.core.Configuration;
+import team.zxorg.extensionloader.core.Language;
+import team.zxorg.extensionloader.core.Resource;
+import team.zxorg.extensionloader.core.Version;
 import team.zxorg.extensionloader.event.ResourceEventListener;
 import team.zxorg.extensionloader.extension.ExtensionManager;
 
@@ -32,7 +35,7 @@ public class RunApp {
         ExtensionManager extensionManager = new ExtensionManager();
         Path exceptionsPath = Path.of("./extensions");
         extensionManager.loadAllExtensions(exceptionsPath);
-
+        Configuration.save();
 
     }
 }
