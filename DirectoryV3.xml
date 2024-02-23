@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+ <trees>
+     <tree path="/module" title="java模块" extension="" presentableText="" tooltipTitle="" icon="NodesModuleGroup"/>
+     <tree path="/module/ExtensionLoader" title="扩展加载器"/>
+     <tree path="/module/extensions" title="所有扩展" extension="" presentableText="" tooltipTitle=""
+           icon="NodesModuleGroup"/>
+     <tree path="/launcher" title="启动器"/>
+     <tree path="/extensions" title="扩展目录" extension="" presentableText="" tooltipTitle=""
+           icon="NodesPlugin" textColor="255,241,96"/>
+     <tree path="/config" title="配置目录" extension="" presentableText="" tooltipTitle="" icon="ScopeProduction"
+           textColor="244,255,157"/>
+     <tree path="/docs" title="开发文档" extension="" presentableText="" tooltipTitle="" icon="NodesJavaDocFolder"/>
+     <tree path="/olds" title="旧资产"/>
+    <tree path="/resourcepacks" title="资源包目录" extension="" presentableText="" tooltipTitle=""
+          icon="GeneralTreeSelected" textColor="255,183,125"/>
+    <tree path="/src" title="ZXN启动入口"/>
+</trees>

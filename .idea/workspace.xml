@@ -2,37 +2,35 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="MapEditCore:jar" />
+      <artifact name="FXComponentLibrary:jar" />
+      <artifact name="ZXNoter:jar" />
+      <artifact name="ZXNoterUIFrame:jar" />
     </artifacts-to-build>
   </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dd78a4ca-7956-492b-9d75-ff82bf57b657" name="更改" comment="更新UI框架，增加了一个启动器">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/MapEditCore_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/intellij-javadocs-4.0.1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/mapEditCore/MapEditConfig.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/extensions/MapEditCore.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/module/extensions/MapEditCore/resources/extension.json5" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/module/extensions/MapEditCore/src/team/zxorg/mapeditcore/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/module/extensions/MapEditCore/src/team/zxorg/mapeditcore/MapEditConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/module/extensions/MapEditCore/src/team/zxorg/mapeditcore/map/MapIO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/module/extensions/MapEditCore/src/team/zxorg/mapeditcore/map/ZXMap.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/module/extensions/MapEditCore/src/team/zxorg/mapeditcore/note/LongNote.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/module/extensions/MapEditCore/src/team/zxorg/mapeditcore/note/Note.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/module/extensions/MapEditCore/src/team/zxorg/mapeditcore/note/SlideNote.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/KotlinJavaRuntime.xml" beforeDir="false" />
+    <list default="true" id="dd78a4ca-7956-492b-9d75-ff82bf57b657" name="更改" comment="整理项目结构、增加TreeInfotip插件的注释">
+      <change afterPath="$PROJECT_DIR$/.idea/checkstyle-idea.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DirectoryV3.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/FXComponentLibrary_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/FXComponentLibrary_jar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/ZXNoter_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/ZXNoter_jar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/apache_commons_lang3.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/apache_commons_lang3.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/github_weisj_jsvg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/github_weisj_jsvg.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/openjfx_javafx_base.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/openjfx_javafx_base.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/openjfx_javafx_controls.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/openjfx_javafx_controls.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/openjfx_javafx_graphics.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/openjfx_javafx_graphics.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/openjfx_javafx_media.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/openjfx_javafx_media.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/xxtea_java.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/xxtea_java.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/extensions/ExtensionTemplate.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/extensions/FXComponentLibrary.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/extensions/ZXNoterUIFrame.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/latest.log" beforeDir="false" afterPath="$PROJECT_DIR$/latest.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module/ExtensionLoader/ExtensionLoader.iml" beforeDir="false" afterPath="$PROJECT_DIR$/module/ExtensionLoader/ExtensionLoader.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module/extensions/MapEditCore/MapEditCore.iml" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MapEditCore/MapEditCore.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module/extensions/MapEditCore/src/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ZXNoter.jar" beforeDir="false" afterPath="$PROJECT_DIR$/ZXNoter.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/zxnoterUiFrame/ActivityBarConfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/config/zxnoterUiFrame/ActivityBarConfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/configuration.json" beforeDir="false" afterPath="$PROJECT_DIR$/olds/configuration.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/configurationBackup.json" beforeDir="false" afterPath="$PROJECT_DIR$/olds/configurationBackup.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/extensions/FXComponentLibrary/FXComponentLibrary.iml" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/FXComponentLibrary/FXComponentLibrary.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/extensions/FXComponentLibrary/resources/extension.json5" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/FXComponentLibrary/resources/extension.json5" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,10 +62,13 @@
     &quot;assignee&quot;: &quot;zedoCN&quot;
   }
 }</component>
+  <component name="GithubDefaultAccount">
+    <option name="defaultAccountId" value="7f78c711-05bc-4eb6-b5f6-f2df0e5afdf3" />
+  </component>
   <component name="GithubPullRequestsUISettings">
     <option name="selectedUrlAndAccountId">
       <UrlAndAccount>
-        <option name="accountId" value="34e16b20-084b-4e85-836b-502b126494f8" />
+        <option name="accountId" value="7f78c711-05bc-4eb6-b5f6-f2df0e5afdf3" />
         <option name="url" value="https://github.com/ZX-Organization/ZXNoter.git" />
       </UrlAndAccount>
     </option>
@@ -89,64 +90,64 @@
   &quot;associatedIndex&quot;: 2
 }</component>
   <component name="ProjectId" id="2Y1E1Kbqe3Ad7f7qSglNh6Icyer" />
-  <component name="ProjectLevelVcsManager">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
     <option name="foldersAlwaysOnTop" value="false" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
-    &quot;JAR 应用程序.RunJar.executor&quot;: &quot;Run&quot;,
-    &quot;JAR 应用程序.未命名.executor&quot;: &quot;Run&quot;,
-    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.JavaDocs&quot;: &quot;true&quot;,
-    &quot;Repository.Attach.Sources&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;21&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;F:/AllProjects/ZX-Organization/ZXNoter/ZXNoter.jar&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;模块&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.21134493&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2874845&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;,
-    &quot;应用程序.AbstractAnimationRenderer.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.ExpressionCalculator.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.IconPackInfoTest.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.Main (1).executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.Main.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.PackInfoTest.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.PlistParser.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.RunApp (1).executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.RunApp.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.SkinEditor (1).executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.SkinEditor.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.Test.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.UISEditor (1).executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.UISEditor (2).executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.UISEditor.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.UISParser.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.UISPerspectiveTransform.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.UISPerspectiveTransformTest (1).executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.UISPerspectiveTransformTest.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.UISSkin.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.ZXVersion.executor&quot;: &quot;Run&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Downloaded.Files.Path.Enabled": "false",
+    "JAR 应用程序.RunJar.executor": "Run",
+    "JAR 应用程序.未命名.executor": "Run",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "true",
+    "Repository.Attach.Sources": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "jdk.selected.JAVA_MODULE": "21",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "F:/AllProjects/ZX-Organization/ZXNoter/ZXNoter.jar",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "项目",
+    "project.structure.proportion": "0.21134493",
+    "project.structure.side.proportion": "0.2874845",
+    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable",
+    "vue.rearranger.settings.migration": "true",
+    "应用程序.AbstractAnimationRenderer.executor": "Run",
+    "应用程序.ExpressionCalculator.executor": "Run",
+    "应用程序.IconPackInfoTest.executor": "Run",
+    "应用程序.Main (1).executor": "Run",
+    "应用程序.Main.executor": "Run",
+    "应用程序.PackInfoTest.executor": "Run",
+    "应用程序.PlistParser.executor": "Run",
+    "应用程序.RunApp (1).executor": "Run",
+    "应用程序.RunApp.executor": "Run",
+    "应用程序.SkinEditor (1).executor": "Run",
+    "应用程序.SkinEditor.executor": "Run",
+    "应用程序.Test.executor": "Run",
+    "应用程序.UISEditor (1).executor": "Run",
+    "应用程序.UISEditor (2).executor": "Run",
+    "应用程序.UISEditor.executor": "Run",
+    "应用程序.UISParser.executor": "Run",
+    "应用程序.UISPerspectiveTransform.executor": "Run",
+    "应用程序.UISPerspectiveTransformTest (1).executor": "Run",
+    "应用程序.UISPerspectiveTransformTest.executor": "Run",
+    "应用程序.UISSkin.executor": "Run",
+    "应用程序.ZXVersion.executor": "Run"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="F:\AllProjects\ZX-Organization\ZXNoter\module\extensions\MapEditCore\resources" />
@@ -156,11 +157,11 @@
       <recent name="D:\Projects\ZXNoter\module\extensions\FXComponentLibrary\resources\assets\fxComponentLibrary" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/olds" />
       <recent name="D:\Projects\ZXNoter\config\resource" />
       <recent name="D:\Projects\ZXNoter\module\extensions\ZXNoterUIFrame" />
       <recent name="D:\Projects\ZXNoter\module\extensions\FXComponentLibrary\resources\assets\fxComponentLibrary\packs\stylePack-dark" />
       <recent name="D:\Projects\ZXNoter\module\extensions\FXComponentLibrary\resources\assets\fxComponentLibrary\packs\stylePack-dark\style" />
-      <recent name="D:\Projects\ZXNoter\module\extensions\FXComponentLibrary\resources\assets\fxComponentLibrary\packs" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="" />
@@ -204,11 +205,13 @@
     </configuration>
     <configuration name="RunJar" type="JarApplication">
       <option name="JAR_PATH" value="$PROJECT_DIR$/ZXNoter.jar" />
-      <option name="WORKING_DIRECTORY" value="F:\AllProjects\ZX-Organization\ZXNoter" />
+      <option name="WORKING_DIRECTORY" value="$ProjectFileDir$" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <method v="2">
         <option name="BuildArtifacts" enabled="true">
-          <artifact name="MapEditCore:jar" />
+          <artifact name="FXComponentLibrary:jar" />
+          <artifact name="ZXNoter:jar" />
+          <artifact name="ZXNoterUIFrame:jar" />
         </option>
       </method>
     </configuration>
@@ -240,12 +243,14 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="jdk-19.0.2-corretto-19.0.2-3183f394aec4-f0552fc0" />
-        <option value="jdk-19.0.2-corretto-19.0.2-f644763e9732-1e16d6ec" />
+        <option value="jdk-21.0.2-openjdk-21.0.2-4caba194b151-78a6f59c" />
       </set>
     </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration">
+    <configuration>$USER_HOME$/.subversion</configuration>
+  </component>
   <component name="TaskManager">
     <task id="LOCAL-00001" summary="update ui">
       <option name="closed" value="true" />
@@ -321,6 +326,20 @@
       <workItem from="1706209143131" duration="15943000" />
       <workItem from="1706408461377" duration="1110000" />
       <workItem from="1706409592097" duration="4754000" />
+      <workItem from="1708716885671" duration="968000" />
+      <workItem from="1708717864179" duration="564000" />
+      <workItem from="1708718435136" duration="190000" />
+      <workItem from="1708718839340" duration="120000" />
+      <workItem from="1708718967329" duration="925000" />
+      <workItem from="1708719906061" duration="291000" />
+      <workItem from="1708720204643" duration="11000" />
+      <workItem from="1708720226333" duration="1276000" />
+      <workItem from="1708722353091" duration="1328000" />
+      <workItem from="1708723694164" duration="110000" />
+      <workItem from="1708723877903" duration="4000" />
+      <workItem from="1708724127156" duration="368000" />
+      <workItem from="1708724503308" duration="9000" />
+      <workItem from="1708724696629" duration="74000" />
     </task>
     <task id="LOCAL-00002" summary="update ui">
       <option name="closed" value="true" />
@@ -650,7 +669,47 @@
       <option name="project" value="LOCAL" />
       <updated>1706218918993</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="整理项目结构、增加TreeInfotip插件的注释">
+      <option name="closed" value="true" />
+      <created>1708722475836</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1708722475836</updated>
+    </task>
+    <task id="LOCAL-00044" summary="整理项目结构、增加TreeInfotip插件的注释">
+      <option name="closed" value="true" />
+      <created>1708723145787</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1708723145787</updated>
+    </task>
+    <task id="LOCAL-00045" summary="整理项目结构、增加TreeInfotip插件的注释">
+      <option name="closed" value="true" />
+      <created>1708723647387</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1708723647387</updated>
+    </task>
+    <task id="LOCAL-00046" summary="整理项目结构、增加TreeInfotip插件的注释">
+      <option name="closed" value="true" />
+      <created>1708723711213</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1708723711213</updated>
+    </task>
+    <task id="LOCAL-00047" summary="整理项目结构、增加TreeInfotip插件的注释">
+      <option name="closed" value="true" />
+      <created>1708723779609</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1708723779609</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -667,7 +726,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/main" />
+                        <option value="main" />
                       </list>
                     </value>
                   </entry>
@@ -681,8 +740,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="update localize method" />
-    <MESSAGE value="update reader interface" />
     <MESSAGE value="update ZXMInfo" />
     <MESSAGE value="update file name" />
     <MESSAGE value="update reader and fix ZXMap" />
@@ -706,7 +763,9 @@
     <MESSAGE value="更新fx组件库还有图标管理" />
     <MESSAGE value="更新UI框架" />
     <MESSAGE value="更新UI框架，增加了一个启动器" />
-    <option name="LAST_COMMIT_MESSAGE" value="更新UI框架，增加了一个启动器" />
+    <MESSAGE value="更新活动栏菜单" />
+    <MESSAGE value="整理项目结构、增加TreeInfotip插件的注释" />
+    <option name="LAST_COMMIT_MESSAGE" value="整理项目结构、增加TreeInfotip插件的注释" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

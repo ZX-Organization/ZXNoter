@@ -7,7 +7,6 @@
     "zedoCN"
   ],
   platforms: [
-    "windows"
   ],
   contact: {
     homepage: "https://github.com/ZX-Organization",

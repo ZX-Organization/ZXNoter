@@ -13,7 +13,7 @@
     "setup"
   ],
   "secondBarItems": [],
-  "activeMainBarTopItemIndex": 0,
+  "activeMainBarTopItemIndex": -1,
   "activeMainBarBottomItemIndex": -1,
   "activeSecondBarItemIndex": -1
 }
