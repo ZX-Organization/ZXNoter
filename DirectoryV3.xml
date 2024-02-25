@@ -14,4 +14,14 @@
     <tree path="/resourcepacks" title="资源包目录" extension="" presentableText="" tooltipTitle=""
           icon="GeneralTreeSelected" textColor="255,183,125"/>
     <tree path="/src" title="ZXN启动入口"/>
+    <tree path="/tool" title="工具" extension="" presentableText="" tooltipTitle=""
+          icon="ToolwindowsToolWindowInternal"/>
+    <tree path="/module/extensions/ZXNoterUIFrame" title="UI框架"/>
+    <tree path="/module/extensions/AudioSystem" title="音频系统"/>
+    <tree path="/module/extensions/ExtensionTemplate" title="扩展模板"/>
+    <tree path="/module/extensions/FXComponentLibrary" title="JavaFX组件库"/>
+    <tree path="/module/extensions/MapEditCore" title="谱面编辑核心"/>
+    <tree path="/module/extensions/UISEditor" title="皮肤编辑器-旧"/>
+    <tree path="/librarys" title="所有依赖库" extension="" presentableText="" tooltipTitle=""
+          icon="NodesPpLibFolder" textColor="" backgroundColor=""/>
 </trees>

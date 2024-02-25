@@ -2,7 +2,7 @@
   <artifact type="jar" name="ZXNoterUIFrame:jar">
     <output-path>$PROJECT_DIR$/extensions</output-path>
     <root id="archive" name="ZXNoterUIFrame.jar">
-      <element id="module-output" name="ZXNoterUIFrame" />
+      <element id="module-output" name="ZXNoterUI" />
     </root>
   </artifact>
 </component>

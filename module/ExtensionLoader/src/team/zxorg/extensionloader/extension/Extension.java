@@ -158,6 +158,7 @@ public class Extension {
 
     /**
      * 检查依赖扩展
+     *
      * @return 检查结果
      */
     protected boolean dependencyCheck() {
@@ -253,23 +254,23 @@ public class Extension {
     }
 
     /**
-     * 获取assets下的资源
+     * 获取扩展下的资源
      *
      * @param name 资源路径 'assets/id/name'
      * @return 资源数据
      */
-    public InputStream getClassResourceAsStream(String name) {
+    public InputStream getExtensionResourceAsStream(String name) {
         return classLoader.getResourceAsStream("assets/" + info.id + "/" + name);
     }
 
     /**
-     * 获取assets下的资源
+     * 获取扩展下的资源
      *
      * @param name 资源路径 'assets/id/name'
      * @return 资源数据
      */
-    public String getClassResourceAsString(String name) {
-        try (InputStream is = getClassResourceAsStream(name)) {
+    public String getExtensionResourceAsString(String name) {
+        try (InputStream is = getExtensionResourceAsStream(name)) {
             return new String(is.readAllBytes(), StandardCharsets.UTF_8);
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -282,7 +283,7 @@ public class Extension {
      * @param name 资源路径 'assets/id/name'
      * @return 资源数据
      */
-    public URL getClassResource(String name) {
+    public URL getExtensionResource(String name) {
         return classLoader.getResource("assets/" + info.id + "/" + name);
     }
 
@@ -417,4 +418,46 @@ public class Extension {
 
     }
 
+    /**
+     * 实例化类
+     *
+     * @param name 类名
+     * @return 被实例化的类
+     */
+    public <T> T newInstance(String name) {
+        try {
+            return (T) newInstance(getClassLoader().loadClass(name));
+        } catch (ClassNotFoundException e) {
+            return null;
+        }
+    }
+
+    /**
+     * 实例化类
+     *
+     * @param clazz 类
+     * @return 被实例化的类
+     */
+    public <T> T newInstance(Class<T> clazz) {
+        try {
+            return clazz.getDeclaredConstructor().newInstance();
+        } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
+                 NoSuchMethodException | ClassCastException e) {
+            return null;
+        }
+    }
+
+    /**
+     * 获取扩展资源
+     *
+     * @param path  资源路径
+     * @param clazz 资源实例化类
+     * @return 资源类
+     */
+    public <T> T getExtensionResource(String path, Class<T> clazz) {
+        InputStream is = getExtensionResourceAsStream(path);
+        if (is == null)
+            return null;
+        return GsonManager.fromJson(is, clazz);
+    }
 }

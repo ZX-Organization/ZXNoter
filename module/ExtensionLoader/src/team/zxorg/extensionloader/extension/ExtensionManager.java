@@ -35,6 +35,15 @@ public class ExtensionManager {
     }
 
     /**
+     * 获取所有扩展
+     *
+     * @return 所有扩展对象
+     */
+    public Collection<Extension> getExtensions() {
+        return extensionMap.values();
+    }
+
+    /**
      * 获取已有的扩展表
      *
      * @return 所有扩展id
@@ -74,7 +83,7 @@ public class ExtensionManager {
      *
      * @param extensionsPath 扩展目录
      */
-    public void loadAllExtensions(Path extensionsPath) {
+    protected void loadAllExtensions(Path extensionsPath, ClassLoader parent) {
 
         Logger.info(Language.get(LanguageKey.MESSAGE_EXTENSION_LOADING));
         StopWatch stopWatch = new StopWatch();
@@ -106,7 +115,7 @@ public class ExtensionManager {
             jarFiles[index++] = (extension.getJarUrl());
         }
 
-        URLClassLoader classLoader = new URLClassLoader(jarFiles);
+        URLClassLoader classLoader = new URLClassLoader("ExtensionClassLoader", jarFiles, parent);
 
         // 载入扩展
         for (Extension extension : extensionMap.values()) {

@@ -8,7 +8,7 @@ import team.zxorg.extensionloader.extension.ExtensionManager;
 import java.nio.file.Path;
 import java.util.Locale;
 
-public class RunApp {
+public class RunApp extends ExtensionManager{
     public static Version VERSION = new Version(0, 0, 0, Version.ReleaseStatus.ALPHA);
 
     public static void main(String[] args) {
@@ -32,7 +32,7 @@ public class RunApp {
         VERSION.printInfo();
 
 
-        ExtensionManager extensionManager = new ExtensionManager();
+        RunApp extensionManager = new RunApp();
         Path exceptionsPath = Path.of("./extensions");
         extensionManager.loadAllExtensions(exceptionsPath);
         Configuration.save();

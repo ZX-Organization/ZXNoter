@@ -1,0 +1,100 @@
+{
+  configuration: {
+    languageCode: "zh-CN"
+  },
+  zxnoterUiFrame: {
+    projectView: {
+      titleBar: {
+        menuBar: {
+          //文件菜单项
+          file: {
+            name: "文件",
+            item: {
+              //新建菜单项
+              new: {
+                name: "新建",
+                //顺序
+                order: 0,
+                group: "file",
+                //组菜单项
+                items: {
+                  name: "项目...",
+                  order: 0,
+                  group: "",
+                  icon: "document.folder-add",
+                  action: "team.zxorg.zxnoter.uiframe.action.NewProject"
+                }
+              },
+              //打开菜单项
+              open: {
+                name: "打开",
+                order: 1,
+                group: "file",
+                action: "team.zxorg.zxnoter.uiframe.action.OpenProject",
+                items: {
+                }
+              }
+            }
+          },
+          edit: {
+            index: 10,
+            name: "编辑"
+          },
+          help: {
+            index: 20,
+            name: "帮助"
+          }
+        },
+        title: "ZXNote 项目视图",
+        icon: "software.logo"
+      },
+      activityBar: {
+        menu: {
+          hideItem: {
+            icon: "system.delete-back",
+            name: "隐藏此活动项"
+          },
+          hideBar: {
+            icon: "system.eye-off",
+            name: "隐藏此活动栏"
+          },
+          moveToRight: {
+            icon: "design.layout-right",
+            name: "移动至右侧"
+          },
+          moveToLeft: {
+            icon: "design.layout-left",
+            name: "移动至左侧"
+          },
+          itemConfig: {
+            icon: "system.list-settings",
+            name: "配置活动项"
+          }
+        },
+        item: {
+          fileManager: {
+            name: "文件管理器",
+            icon: "document.folder-3"
+          },
+          setup: {
+            name: "设置",
+            icon: "system.settings-4"
+          },
+          welcome: {
+            name: "欢迎",
+            icon: "buildings.home-3"
+          }
+        }
+      },
+      viewArea: {
+      },
+      statusBar: {
+      }
+    }
+  },
+  extension: {
+    zxnoterUiFrame: {
+      start: "===>> ZXNoter UI框架 {{version}} <<==="
+    }
+  }
+}
