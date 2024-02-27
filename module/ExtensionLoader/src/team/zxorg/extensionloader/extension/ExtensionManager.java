@@ -83,7 +83,7 @@ public class ExtensionManager {
      *
      * @param extensionsPath 扩展目录
      */
-    protected void loadAllExtensions(Path extensionsPath, ClassLoader parent) {
+    protected void loadAllExtensions( ClassLoader parent,Path extensionsPath) {
 
         Logger.info(Language.get(LanguageKey.MESSAGE_EXTENSION_LOADING));
         StopWatch stopWatch = new StopWatch();

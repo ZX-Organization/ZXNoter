@@ -22,6 +22,6 @@
     <tree path="/module/extensions/FXComponentLibrary" title="JavaFX组件库"/>
     <tree path="/module/extensions/MapEditCore" title="谱面编辑核心"/>
     <tree path="/module/extensions/UISEditor" title="皮肤编辑器-旧"/>
-    <tree path="/librarys" title="所有依赖库" extension="" presentableText="" tooltipTitle=""
+    <tree path="/libraries" title="所有依赖库" extension="" presentableText="" tooltipTitle=""
           icon="NodesPpLibFolder" textColor="" backgroundColor=""/>
 </trees>

@@ -1,6 +1,6 @@
 <component name="libraryTable">
   <library name="net.java.dev.jna" type="repository">
-    <properties maven-id="net.java.dev.jna:jna:LATEST" />
+    <properties maven-id="net.java.dev.jna:jna:5.14.0" />
     <CLASSES>
       <root url="jar://$MAVEN_REPOSITORY$/net/java/dev/jna/jna/5.14.0/jna-5.14.0.jar!/" />
     </CLASSES>

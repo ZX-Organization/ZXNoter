@@ -1,6 +1,6 @@
 <component name="libraryTable">
   <library name="github.weisj.jsvg" type="repository">
-    <properties maven-id="com.github.weisj:jsvg:LATEST" />
+    <properties maven-id="com.github.weisj:jsvg:1.4.0" />
     <CLASSES>
       <root url="jar://$MAVEN_REPOSITORY$/com/github/weisj/jsvg/1.4.0/jsvg-1.4.0.jar!/" />
     </CLASSES>
