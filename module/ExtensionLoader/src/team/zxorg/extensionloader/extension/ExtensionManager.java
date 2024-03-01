@@ -1,10 +1,6 @@
 package team.zxorg.extensionloader.extension;
 
-import org.apache.commons.lang3.time.StopWatch;
-import team.zxorg.extensionloader.core.Language;
-import team.zxorg.extensionloader.core.LanguageKey;
-import team.zxorg.extensionloader.core.Logger;
-import team.zxorg.extensionloader.core.Version;
+import team.zxorg.extensionloader.core.*;
 
 import java.io.IOException;
 import java.net.URL;
@@ -15,7 +11,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.logging.LogRecord;
 import java.util.stream.Stream;
 
 /**
@@ -84,7 +79,7 @@ public class ExtensionManager {
      *
      * @param extensionsPath 扩展目录
      */
-    protected void loadAllExtensions(ClassLoader parent, Path extensionsPath) {
+    public ClassLoader loadAllExtensions(ClassLoader parent, Path extensionsPath) {
 
         Logger.info(Language.get(LanguageKey.MESSAGE_EXTENSION_LOADING));
         StopWatch stopWatch = new StopWatch();
@@ -135,11 +130,14 @@ public class ExtensionManager {
 
         stopWatch.stop();
         Logger.info(Language.get(LanguageKey.MESSAGE_EXTENSION_LOADED, extensionMap.size(), stopWatch.getTime()));
-
+        return classLoader;
     }
 
     public static Extension getCurrentExtension(int cutoff) {
-
+        StackTraceElement[] stackTraceElements = Thread.currentThread().getStackTrace();
+        for (int i = 0; i < stackTraceElements.length; i++) {
+            System.out.println(stackTraceElements[i]);
+        }
         return null;
     }
 }

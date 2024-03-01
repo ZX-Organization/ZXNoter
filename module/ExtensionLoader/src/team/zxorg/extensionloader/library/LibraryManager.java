@@ -1,38 +1,23 @@
 package team.zxorg.extensionloader.library;
 
-import org.apache.commons.lang3.SystemUtils;
-import org.apache.commons.lang3.time.StopWatch;
+import team.zxorg.extensionloader.core.Language;
 import team.zxorg.extensionloader.core.Logger;
+import team.zxorg.extensionloader.core.PlatformType;
+import team.zxorg.extensionloader.core.StopWatch;
 
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Stream;
 
-import static team.zxorg.extensionloader.library.LibraryManager.PlatformType.*;
+import static team.zxorg.extensionloader.core.PlatformType.ALL;
+import static team.zxorg.extensionloader.core.PlatformType.CURRENT_PLATFORM;
+
 
 public class LibraryManager {
-    private static final PlatformType platform;
-
-    static {
-        boolean isArm64 = System.getProperty("os.arch").contains("aarch64");
-        String suffix = isArm64 ? "-aarch64" : "";
-        if (SystemUtils.IS_OS_MAC) {
-            platform = isArm64 ? MAC_ARM : MAC;
-        } else if (SystemUtils.IS_OS_LINUX) {
-            platform = isArm64 ? LINUX_ARM : LINUX;
-        } else if (SystemUtils.IS_OS_WINDOWS) {
-            platform = WINDOWS;
-        } else {
-            platform = ALL;
-        }
-    }
 
 
     /**
@@ -41,68 +26,57 @@ public class LibraryManager {
      * @param dirPath 指定目录
      * @return 加载完库的ClassLoader
      */
-    public static URLClassLoader loadingAllLibrary(ClassLoader parent, Path dirPath) {
+    public static ClassLoader loadingAllLibrary(ClassLoader parent, Path dirPath) {
         StopWatch stopWatch = new StopWatch();
         stopWatch.start();
         HashMap<String, URL> libraryMap = new HashMap<>();
+        Path file = null;
+        String name = null;
+        Logger.info(Language.get("message.library.loadingAll"));
         try (Stream<Path> pathStream = Files.walk(dirPath)) {
             Iterator<Path> iterator = pathStream.iterator();
             while (iterator.hasNext()) {
-                Path file = iterator.next();
+                file = iterator.next();
                 if (Files.isDirectory(file))
                     continue;
-                String name = file.getFileName().toString();
+                name = file.getFileName().toString();
                 if (!name.endsWith(".jar"))
                     continue;
                 PlatformType libPlatform = getPlatform(name.substring(0, name.lastIndexOf(".")));
                 if (libPlatform != ALL)
-                    if (libPlatform != platform)
+                    if (libPlatform != CURRENT_PLATFORM)
                         continue;
                 if (libraryMap.containsKey(name)) {
                     Logger.warning("库 " + name + " 重复载入");
+                    Logger.info(Language.get("message.library.repeat", file));
                     continue;
                 }
-                Logger.info("载入库: " + name);
+                Logger.info(Language.get("message.library.loading",file));
                 libraryMap.put(name, file.toUri().toURL());
             }
         } catch (IOException e) {
-            Logger.warning("载入库时发生异常: " + e);
+            Logger.info(Language.get("message.library.error", file, e));
+            Logger.logExceptionStackTrace(e);
         }
 
         URL[] jarUrl = new URL[libraryMap.size()];
-        stopWatch.stop();
-        Logger.info("共计 " + jarUrl.length + " 个库载入完成 用时: " + stopWatch.getTime() + " ms");
         libraryMap.values().toArray(jarUrl);
-        return new URLClassLoader(jarUrl, parent);
+        ClassLoader classLoader = new URLClassLoader(jarUrl, parent);
+        stopWatch.stop();
+        Logger.info(Language.get("message.library.loaded", jarUrl.length, stopWatch.getTime()));
+        return classLoader;
     }
 
-    public enum PlatformType {
-        MAC_ARM("mac", "aarch64"),
-        MAC("mac"),
-        LINUX_ARM("linux", "aarch64"),
-        LINUX("linux"),
-        WINDOWS("windows"),
-        ALL("");
-        private final String[] keywords;
-
-        PlatformType(String... keywords) {
-            this.keywords = keywords;
-        }
-    }
 
     private static PlatformType getPlatform(String libraryName) {
-        List<String> libraryNameParts = new ArrayList<>(List.of(libraryName.split("-")));
+        Set<String> libraryNameParts = new HashSet<>(Arrays.asList(libraryName.toLowerCase().split("-")));
         for (PlatformType platformType : PlatformType.values()) {
-            boolean isMatch = true;
-            for (String keyword : platformType.keywords) {
-                if (!libraryNameParts.contains(keyword)) {
-                    isMatch = false;
-                    break;
-                }
-            }
-            if (isMatch)
+            Set<String> keywords = platformType.getKeywords();
+            if (libraryNameParts.containsAll(keywords)) {
                 return platformType;
+            }
         }
-        return ALL;
+        return PlatformType.ALL;
     }
+
 }

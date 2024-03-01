@@ -11,13 +11,13 @@ import team.zxorg.zxnoter.ui.ZXNoter;
 
 import java.util.LinkedHashSet;
 
-class ShowActivityPane extends VBox {
-    ActivityBarPane activityBarPane;
-    ShowActivityPanePosition pos;
+class ActivityBarPaneSkin extends VBox {
+    ActivityPane activityPane;
+    ActivityPanePositionSkin pos;
     private static final ActivityBarConfig config = ZXNoter.config.get(ActivityBarConfig.class);
 
-    public ShowActivityPane(ActivityBarPane activityBarPane, ShowActivityPanePosition pos) {
-        this.activityBarPane = activityBarPane;
+    public ActivityBarPaneSkin(ActivityPane activityPane, ActivityPanePositionSkin pos) {
+        this.activityPane = activityPane;
         this.pos = pos;
 
         getStyleClass().addAll("activity-pane", pos.name());
@@ -44,7 +44,7 @@ class ShowActivityPane extends VBox {
         });
 
 
-        Stage stage = activityBarPane.projectView.getStage();
+        Stage stage = activityPane.projectView.getStage();
         stage.widthProperty().addListener((observable, oldValue, newValue) -> {
             Platform.runLater(this::refreshLimitSize);
         });
@@ -121,11 +121,11 @@ class ShowActivityPane extends VBox {
     }
 
     void refreshLimitSize() {
-        double limitW = activityBarPane.projectView.getTitleBar().getWidth();
-        double limitH = activityBarPane.projectView.getStage().getHeight();
+        double limitW = activityPane.projectView.getTitleBar().getWidth();
+        double limitH = activityPane.projectView.getStage().getHeight();
         switch (pos) {
-            case left -> setMaxWidth((limitW - activityBarPane.rightActivityPane.getWidth()) * 0.4);
-            case right -> setMaxWidth((limitW - activityBarPane.leftActivityPane.getWidth()) * 0.4);
+            case left -> setMaxWidth((limitW - activityPane.rightActivityPane.getWidth()) * 0.4);
+            case right -> setMaxWidth((limitW - activityPane.leftActivityPane.getWidth()) * 0.4);
             case bottom -> setMaxHeight(limitH * 0.6);
         }
     }
@@ -139,7 +139,7 @@ class ShowActivityPane extends VBox {
      */
     public void setShow(boolean isShow) {
         Node node = (isShow ? this : null);
-        BorderPane borderPane = activityBarPane.borderPane;
+        BorderPane borderPane = activityPane.borderPane;
         switch (pos) {
             case left -> borderPane.setLeft(node);
             case right -> borderPane.setRight(node);
@@ -159,10 +159,15 @@ class ShowActivityPane extends VBox {
     /**
      * 显示活动面板
      *
-     * @param activityPane 需要被显示的
+     * @param activityPaneSkin 需要被显示的
      */
-    public void showActivityPane(ActivityPane activityPane) {
+    public void showActivityPane(ActivityPaneSkin activityPaneSkin) {
         getChildren().clear();
-        getChildren().add(activityPane);
+        getChildren().add(activityPaneSkin);
     }
+
+    public enum ActivityPanePositionSkin {
+        left, right, bottom
+    }
+
 }

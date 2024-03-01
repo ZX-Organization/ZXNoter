@@ -1,6 +1,5 @@
 package team.zxorg.extensionloader.extension;
 
-import org.apache.commons.lang3.SystemUtils;
 import team.zxorg.extensionloader.core.*;
 import team.zxorg.extensionloader.gson.GsonManager;
 
@@ -12,10 +11,7 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.StringJoiner;
+import java.util.*;
 
 /**
  * 扩展对象
@@ -102,8 +98,9 @@ public class Extension {
             }
 
         } catch (Exception e) {
-            //e.printStackTrace();
-            throw new RuntimeException(getLanguage(LanguageKey.MESSAGE_EXTENSION_ERROR_INFO_READ_FAILED, jarPath, e));
+            RuntimeException re = new RuntimeException(getLanguage(LanguageKey.MESSAGE_EXTENSION_ERROR_INFO_READ_FAILED, jarPath, e));
+            Logger.logExceptionStackTrace(e);
+            throw re;
         }
     }
 
@@ -143,8 +140,7 @@ public class Extension {
         //如果没有注明则默认支持所有平台
         if (info.platforms.isEmpty())
             return true;
-        String platform = (SystemUtils.IS_OS_WINDOWS ? "windows" : SystemUtils.IS_OS_LINUX ? "linux" : SystemUtils.IS_OS_MAC ? "macos" : "unknown");
-        return info.platforms.stream().anyMatch(p -> p.toLowerCase().equals(platform));
+        return info.platforms.contains(PlatformType.CURRENT_PLATFORM.toString());
     }
 
     @Override
@@ -211,8 +207,13 @@ public class Extension {
         loaded = true;
 
         // 载入扩展
-        for (ExtensionEntrypoint initializer : entrypointList) {
-            initializer.onLoaded(this, manager);
+        for (ExtensionEntrypoint entrypoint : entrypointList) {
+            try {
+                entrypoint.onLoaded(this, manager);
+            } catch (Exception e) {
+                Logger.severe(Language.get("message.extension.error.entrypointOnLoadedException", getId(), entrypoint.getClass().getName(), e));
+                Logger.logExceptionStackTrace(e);
+            }
         }
     }
 
@@ -222,14 +223,24 @@ public class Extension {
     protected void initialize() {
         // 初始化扩展
         for (ExtensionEntrypoint initializer : entrypointList) {
-            initializer.onInitialize(this, manager);
+            try {
+                initializer.onInitialize(this, manager);
+            } catch (Exception e) {
+                Logger.severe(Language.get("message.extension.error.entrypointInitializeException", getId(), initializer.getClass().getName(), e));
+                Logger.logExceptionStackTrace(e);
+            }
         }
     }
 
 
     protected void allInitialized() {
         for (ExtensionEntrypoint initializer : entrypointList) {
-            initializer.onAllInitialized(this, manager);
+            try {
+                initializer.onAllInitialized(this, manager);
+            } catch (Exception e) {
+                Logger.severe(Language.get("message.extension.error.entrypointAllInitializedException", getId(), initializer.getClass().getName(), e));
+                Logger.logExceptionStackTrace(e);
+            }
         }
     }
 
@@ -356,7 +367,7 @@ public class Extension {
         /**
          * 开发者
          */
-        List<Language> author;
+        Set<Language> author;
         /**
          * 联系方式
          */
@@ -366,7 +377,7 @@ public class Extension {
          * 入口点
          */
 
-        List<String> entrypoints;
+        Set<String> entrypoints;
         /**
          * 依赖
          */
@@ -375,17 +386,17 @@ public class Extension {
         /**
          * 平台
          */
-        List<String> platforms;
+        Set<String> platforms;
 
         /**
          * 扩展标签
          */
-        List<Language> tags;
+        Set<Language> tags;
 
         /**
          * 语言列表
          */
-        List<Path> languages;
+        Set<Path> languages;
 
 
         /**

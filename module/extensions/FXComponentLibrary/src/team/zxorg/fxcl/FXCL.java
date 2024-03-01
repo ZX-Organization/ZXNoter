@@ -2,9 +2,8 @@ package team.zxorg.fxcl;
 
 import com.sun.javafx.application.PlatformImpl;
 import com.sun.javafx.util.Logging;
-import javafx.application.Platform;
-import org.apache.commons.lang3.time.StopWatch;
 import team.zxorg.extensionloader.core.Logger;
+import team.zxorg.extensionloader.core.StopWatch;
 import team.zxorg.extensionloader.extension.Extension;
 import team.zxorg.extensionloader.extension.ExtensionEntrypoint;
 import team.zxorg.extensionloader.extension.ExtensionManager;

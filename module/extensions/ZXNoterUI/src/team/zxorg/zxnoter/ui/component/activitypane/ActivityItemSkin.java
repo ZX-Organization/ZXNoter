@@ -19,18 +19,18 @@ import java.util.LinkedHashSet;
 import java.util.List;
 
 
-public final class ActivityItem extends ToggleButton {
+public final class ActivityItemSkin extends ToggleButton {
     public static final DataFormat ACTIVITY_ITEM_DATA_FORMAT = new DataFormat("application/x-activity-item");
 
     public static final String LANG = "zxnoterUiFrame.projectView.activityBar.item.";
-    private final ActivityPane activityPane;
-    private ActivityBarPane activityBarPane;
-    private ShowActivityPane showActivityPane;
+    private final ActivityPaneSkin activityPaneSkin;
+    private ActivityPane activityPane;
+    private ActivityBarPaneSkin activityBarPaneSkin;
     private static final ActivityBarConfig config = ZXNoter.config.get(ActivityBarConfig.class);
 
-    void bind(ActivityBarPane activityBarPane, ShowActivityPane showActivityPane) {
-        this.activityBarPane = activityBarPane;
-        this.showActivityPane = showActivityPane;
+    void bind(ActivityPane activityPane, ActivityBarPaneSkin activityBarPaneSkin) {
+        this.activityPane = activityPane;
+        this.activityBarPaneSkin = activityBarPaneSkin;
     }
 
 
@@ -53,8 +53,8 @@ public final class ActivityItem extends ToggleButton {
         return icon;
     }
 
-    public ActivityPane getActivityPane() {
-        return activityPane;
+    public ActivityPaneSkin getActivityPane() {
+        return activityPaneSkin;
     }
 
     public String getNameKey() {
@@ -65,11 +65,11 @@ public final class ActivityItem extends ToggleButton {
         return Language.get(LANG + getId() + ".icon");
     }
 
-    public ActivityItem(ActivityPane activityPane) {
-        this.activityPane = activityPane;
+    public ActivityItemSkin(ActivityPaneSkin activityPaneSkin) {
+        this.activityPaneSkin = activityPaneSkin;
         getStyleClass().add("activity-item");
         //setToggleGroup(GROUP);
-        setId(activityPane.getId());
+        setId(activityPaneSkin.getId());
         this.icon = new Icon(getIconKey());
         setGraphic(icon);
         //setContextMenu(ActivityItemContextMenu);
@@ -90,7 +90,7 @@ public final class ActivityItem extends ToggleButton {
 
         setOnDragDetected(event -> {
             if (event.getButton().equals(MouseButton.PRIMARY)) {
-                activityBarPane.dragedActivityItem = this;
+                activityPane.dragedActivityItemSkin = this;
                 // 创建快照
                 SnapshotParameters params = new SnapshotParameters();
                 params.setFill(Color.TRANSPARENT); // 快照背景透明
@@ -116,7 +116,7 @@ public final class ActivityItem extends ToggleButton {
                 return;
             }
 
-            if (activityBarPane.dragedActivityItem == null)
+            if (activityPane.dragedActivityItemSkin == null)
                 return;
             /*if (getParent() instanceof ActivityBar activityBar) {
 
@@ -137,21 +137,21 @@ public final class ActivityItem extends ToggleButton {
         setOnDragDropped(event -> {
             if (!event.getDragboard().getContentTypes().contains(ACTIVITY_ITEM_DATA_FORMAT))
                 return;
-            if (activityBarPane.dragedActivityItem == null)
+            if (activityPane.dragedActivityItemSkin == null)
                 return;
-            ActivityItem activityItem = activityBarPane.dragedActivityItem;
-            config.mainTopBarItems.remove(activityItem.getId());
-            config.secondBarItems.remove(activityItem.getId());
-            config.mainBottomBarItems.remove(activityItem.getId());
+            ActivityItemSkin activityItemSkin = activityPane.dragedActivityItemSkin;
+            config.mainTopBarItems.remove(activityItemSkin.getId());
+            config.secondBarItems.remove(activityItemSkin.getId());
+            config.mainBottomBarItems.remove(activityItemSkin.getId());
 
-            LinkedHashSet<String> items = showActivityPane.getItems();
+            LinkedHashSet<String> items = activityBarPaneSkin.getItems();
 
             List<String> list = new ArrayList<>(items);
-            list.add(list.indexOf(getId()) + (dragStyle.get().equals(DragStyle.up) ? 0 : 1), activityItem.getId());
+            list.add(list.indexOf(getId()) + (dragStyle.get().equals(DragStyle.up) ? 0 : 1), activityItemSkin.getId());
             items.clear();
             items.addAll(list);
 
-            activityBarPane.dragedActivityItem = null;
+            activityPane.dragedActivityItemSkin = null;
 
             //立即更新
             config.save();

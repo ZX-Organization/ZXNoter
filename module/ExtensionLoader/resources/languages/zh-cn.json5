@@ -41,10 +41,10 @@
     resourcePack: {
       initialize: "初始化资源包...⏳",
       lost: "丢失资源包: {0}",
-      loading: "正在载入资源包: {0}",
+      loading: "正在加载资源包: {0}",
       reloaded: "重载资源完成，用时 {0} ms",
       notFound: "资源包不存在: {0}",
-      loadFailed: "资源包载入失败: {0} 异常: {1}",
+      loadFailed: "资源包加载失败: {0} 异常: {1}",
       application: "正在应用资源包: {0}",
       noName: "未命名的资源包",
       noDescription: "没有描述",
@@ -85,8 +85,19 @@
         dependExtensionNotCompatible: "{{cantLoad}} ，依赖的扩展 ({1}) 的版本不兼容，需要版本 {2} ，当前版本 {3} 。",
         entrypointNotFound: "加载扩展 ({0}) 时，入口点 {1} 类未找到。",
         entrypointNotImplemented: "加载扩展({0}) 时，入口点 {1} 类未实现 ExtensionEntrypoint 接口。",
-        entrypointInstanceFailed: "加载扩展 ({0}) 时，入口点 {1} 实例化失败: {1}"
+        entrypointInstanceFailed: "加载扩展 ({0}) 时，入口点 {1} 实例化失败: {2}",
+        entrypointOnLoadedException: "初始化扩展 ({0}) 时，入口点 {1} 在载入时异常: {2}",
+        entrypointInitializeException: "初始化扩展 ({0}) 时，入口点 {1} 在初始化时异常: {2}",
+        entrypointAllInitializedException: "初始化扩展 ({0}) 时，入口点 {1} 在全初始化时异常: {2}"
       }
+    },
+    library: {
+      loadingAll: "加载所有库中...⏳",
+      loading: "正在加载库: {0}",
+      cantLoad: "无法加载库 {0}",
+      loaded: "已载入 {0} 个库，用时 {1} ms",
+      error: "{{cantLoad}} ，加载库时发生异常: {1}",
+      repeat: "{{cantLoad}} ，因为库被重复加载。"
     }
   }
 }

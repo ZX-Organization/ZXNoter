@@ -8,7 +8,7 @@ import team.zxorg.extensionloader.core.Configuration;
 import team.zxorg.extensionloader.core.Resource;
 import team.zxorg.extensionloader.event.ResourceEventListener;
 import team.zxorg.fxcl.component.flexview.FlexArea;
-import team.zxorg.zxnoter.ui.component.activitypane.ActivityBarPane;
+import team.zxorg.zxnoter.ui.component.activitypane.ActivityPane;
 import team.zxorg.zxnoter.ui.component.StatusBar;
 import team.zxorg.zxnoter.ui.component.titlebar.TitleBar;
 
@@ -44,7 +44,7 @@ public class ProjectView {
     /**
      * 活动栏面板
      */
-    private final ActivityBarPane activityBar;
+    private final ActivityPane activityBar;
 
     /**
      * 状态栏
@@ -84,7 +84,7 @@ public class ProjectView {
                 createSplitPane().createTabPane().addTab(new Tab());
             }
         };
-        activityBar = new ActivityBarPane(this, viewArea);
+        activityBar = new ActivityPane(this, viewArea);
         statusBar = new StatusBar(this);
         root = new VBox(titleBar, activityBar, statusBar);
         scene = new Scene(root);

@@ -6,11 +6,10 @@ import team.zxorg.extensionloader.core.Logger;
 import team.zxorg.extensionloader.extension.Extension;
 import team.zxorg.extensionloader.extension.ExtensionEntrypoint;
 import team.zxorg.extensionloader.extension.ExtensionManager;
-import team.zxorg.zxnoter.ui.base.FileManagerActivityPane;
-import team.zxorg.zxnoter.ui.base.SetupActivityPane;
-import team.zxorg.zxnoter.ui.base.WelcomeActivityPane;
-import team.zxorg.zxnoter.ui.component.activitypane.ActivityBarPane;
-import team.zxorg.zxnoter.ui.component.titlebar.menu.MenuItemInfo;
+import team.zxorg.zxnoter.ui.base.FileManagerActivityPaneSkin;
+import team.zxorg.zxnoter.ui.base.SetupActivityPaneSkin;
+import team.zxorg.zxnoter.ui.base.WelcomeActivityPaneSkin;
+import team.zxorg.zxnoter.ui.component.activitypane.ActivityPane;
 
 public class ZXNoter implements ExtensionEntrypoint {
     public static Extension extension;
@@ -29,22 +28,16 @@ public class ZXNoter implements ExtensionEntrypoint {
             throw new RuntimeException(e);
         }*/
 
-        System.out.println(ExtensionManager.getCurrentExtension(0));
+        //System.out.println(ExtensionManager.getCurrentExtension(0));
         //注册基本UI
         //ActivityBar.registerSideBar("fileManager", FileManagerSideBar.class);
         //ActivityBar.registerSideBar("setup", SetupSideBar.class);
-        ActivityBarPane.register(FileManagerActivityPane.class);
-        ActivityBarPane.register(SetupActivityPane.class);
-        ActivityBarPane.register(WelcomeActivityPane.class);
-        System.out.println("111\n1222\n333");
-        Logger.info("111\n1222\n333");
-        Logger.logExceptionStackTrace(new RuntimeException());
+        ActivityPane.register(FileManagerActivityPaneSkin.class);
+        ActivityPane.register(SetupActivityPaneSkin.class);
+        ActivityPane.register(WelcomeActivityPaneSkin.class);
 
-        for (Extension res : manager.getExtensions()) {
-            MenuItemInfo item = res.getExtensionResource("ui/menu/titleBar.json5", MenuItemInfo.class);
-            System.out.println(res);
-            System.out.println(item);
-        }
+
+
 
     }
 
@@ -60,6 +53,7 @@ public class ZXNoter implements ExtensionEntrypoint {
                 projectView.show();
             }
         });
+
 
     }
 }

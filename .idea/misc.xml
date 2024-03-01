@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ProjectRootManager" version="2" languageLevel="JDK_21" default="true" project-jdk-name="openjdk-21" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
@@ -6,7 +5,7 @@
   <component name="jsonEditor">
     <option name="stateMap">
       <map>
-        <entry key="ZXNoter" value="{&#10;  &quot;localized.rm.bg&quot;: &quot;BG&quot;&#10;}" />
+        <entry key="ZXNoter" value="{&#10;  configuration: {&#10;    languageCode: &quot;zh-CN&quot;&#10;  },&#10;  zxnoterUiFrame: {&#10;    projectView: {&#10;      titleBar: {&#10;        menu: {&#10;          file: {&#10;            title: &quot;文件&quot;&#10;          },&#10;          edit: {&#10;            title: &quot;编辑&quot;&#10;          },&#10;          help: {&#10;            title: &quot;帮助&quot;&#10;          }&#10;        },&#10;        title: &quot;ZXNote 项目视图&quot;,&#10;        icon: &quot;software.logo&quot;&#10;      },&#10;      activityBar: {&#10;        menu: {&#10;          hideItem: {&#10;            icon: &quot;system.delete-back&quot;,&#10;            title: &quot;隐藏此项&quot;&#10;          },&#10;          itemConfig: {&#10;            title: &quot;配置活动栏&quot;,&#10;            icon: &quot;system.list-settings&quot;&#10;          }&#10;        },&#10;        item: {&#10;          fileManager: {&#10;            name: &quot;文件管理器&quot;,&#10;            icon: &quot;document.folder-3&quot;&#10;          },&#10;          setup: {&#10;            name: &quot;设置&quot;,&#10;            icon: &quot;system.settings-4&quot;&#10;          }&#10;        }&#10;      },&#10;      viewArea: {&#10;      },&#10;      statusBar: {&#10;      }&#10;    }&#10;  },&#10;  extension: {&#10;    zxnoterUiFrame: {&#10;      start: &quot;===&gt;&gt; ZXNoter UI框架 {{version}} &lt;&lt;===&quot;&#10;    }&#10;  }&#10;}" />
       </map>
     </option>
   </component>

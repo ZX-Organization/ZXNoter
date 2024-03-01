@@ -1,7 +1,4 @@
-import team.zxorg.extensionloader.core.Configuration;
-import team.zxorg.extensionloader.core.Language;
-import team.zxorg.extensionloader.core.Resource;
-import team.zxorg.extensionloader.core.Version;
+import team.zxorg.extensionloader.core.*;
 import team.zxorg.extensionloader.event.ResourceEventListener;
 import team.zxorg.extensionloader.extension.ExtensionManager;
 import team.zxorg.extensionloader.library.LibraryManager;
@@ -9,7 +6,7 @@ import team.zxorg.extensionloader.library.LibraryManager;
 import java.nio.file.Path;
 import java.util.Locale;
 
-public class RunApp extends ExtensionManager {
+public class RunApp {
     public static Version VERSION = new Version(0, 0, 0, Version.ReleaseStatus.ALPHA);
 
     public static void main(String[] args) {
@@ -32,13 +29,14 @@ public class RunApp extends ExtensionManager {
 
         VERSION.printInfo();
 
+        ExtensionManager extensionManager = new ExtensionManager();
 
-        RunApp extensionManager = new RunApp();
+
         Path exceptionsPath = Path.of("./extensions");
+        Path librariesPath = Path.of("./libraries");
 
-        ClassLoader libraryClassLoader = LibraryManager.loadingAllLibrary(RunApp.class.getClassLoader(), Path.of("./libraries"));
+        ClassLoader libraryClassLoader = LibraryManager.loadingAllLibrary(RunApp.class.getClassLoader(), librariesPath);
         extensionManager.loadAllExtensions(libraryClassLoader, exceptionsPath);
         Configuration.save();
-
     }
 }

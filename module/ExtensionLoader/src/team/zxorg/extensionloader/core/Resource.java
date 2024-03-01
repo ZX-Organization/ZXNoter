@@ -1,6 +1,5 @@
 package team.zxorg.extensionloader.core;
 
-import org.apache.commons.lang3.time.StopWatch;
 import team.zxorg.extensionloader.event.ResourceEventListener;
 
 import java.io.IOException;

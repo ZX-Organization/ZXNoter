@@ -7,11 +7,7 @@ import com.github.weisj.jsvg.parser.SVGLoader;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.image.Image;
-import org.apache.commons.lang3.time.StopWatch;
-import team.zxorg.extensionloader.core.Language;
-import team.zxorg.extensionloader.core.LanguageKey;
-import team.zxorg.extensionloader.core.Logger;
-import team.zxorg.extensionloader.core.Resource;
+import team.zxorg.extensionloader.core.*;
 import team.zxorg.extensionloader.event.ResourceEventListener;
 
 import javax.imageio.ImageIO;

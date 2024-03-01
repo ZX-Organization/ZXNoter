@@ -33,7 +33,7 @@ public class Logger {
 
                 StringBuilder sb = new StringBuilder();
                 for (int i = 0; i < messageLines.length; i++) {
-                    sb.append(prefix).append(messageLines[i]).append("\n");
+                    sb.append(prefix).append(messageLines[i].trim()).append("\n");
                 }
                 return sb.toString();
             }
@@ -209,7 +209,11 @@ public class Logger {
         return null;
     }
 
-
+    /**
+     * 记录异常的堆栈追踪信息
+     *
+     * @param e 异常
+     */
     public static void logExceptionStackTrace(Exception e) {
         StringWriter sw = new StringWriter();
         try (PrintWriter pw = new PrintWriter(sw)) {
@@ -218,9 +222,14 @@ public class Logger {
         log(Level.WARNING, sw.toString(), 0);
     }
 
-    public static void printStackTrace() {
-        for (StackTraceElement stackTraceElement : Thread.currentThread().getStackTrace()) {
-            warning(stackTraceElement.toString());
+    /**
+     * 记录堆栈追踪信息
+     */
+    public static void logStackTrace() {
+        StackTraceElement[] elements = Thread.currentThread().getStackTrace();
+        log(Level.WARNING, "----StackTrace----", 0);
+        for (int i = 2; i < elements.length; i++) {
+            log(Level.WARNING, "at " + elements[i].toString(), 0);
         }
     }
 }

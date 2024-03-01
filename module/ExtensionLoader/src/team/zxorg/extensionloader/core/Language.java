@@ -233,7 +233,7 @@ public class Language{
     public static String get(String key, Object... args) {
         String v = getOrNull(key, args);
         if (v == null) {
-            Logger.printStackTrace();
+            Logger.logStackTrace();
             v = Language.getOrNull(LanguageKey.MESSAGE_LANGUAGE_LOST, key);
             v = (v == null ? "LOST_LANGUAGE: " + key : v);
             Logger.warning(v);

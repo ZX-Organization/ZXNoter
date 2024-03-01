@@ -44,11 +44,11 @@ public class Configuration {
             Path jsonPath = getConfigPath(clazz);
             boolean isNewConfig = false;
             if (Files.exists(jsonPath)) {
-                System.out.println("读取配置: " + jsonPath);
+                //System.out.println("读取配置: " + jsonPath);
                 result = GsonManager.fromJson(jsonPath, clazz);
             } else {
                 isNewConfig = true;
-                System.out.println("配置不存在，创建新配置: " + getConfigPath(clazz));
+                //System.out.println("配置不存在，创建新配置: " + getConfigPath(clazz));
                 try {
                     result = clazz.getDeclaredConstructor().newInstance();
                     GsonManager.checkNullValue(result);
@@ -128,7 +128,7 @@ public class Configuration {
             for (Object object : config.configObject.values()) {
                 if (object instanceof ConfigData configData) {
                     if (configData.needSave) {
-                        System.out.println("自动保存配置: " + configData.getClass().getSimpleName());
+                        //System.out.println("自动保存配置: " + configData.getClass().getSimpleName());
                         configData.save();
                     }
                 }
