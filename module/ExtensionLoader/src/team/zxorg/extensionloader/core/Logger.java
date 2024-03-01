@@ -2,6 +2,8 @@ package team.zxorg.extensionloader.core;
 
 import java.io.IOException;
 import java.io.PrintStream;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.*;
@@ -15,7 +17,28 @@ public class Logger {
             if (sourceClassName == null) {
                 sourceClassName = "";
             }
-            return simpleDateFormat.format(Date.from(record.getInstant())) + "[" + sourceClassName.substring(sourceClassName.lastIndexOf(".") + 1) + "." + record.getSourceMethodName() + "/" + record.getLevel() + "]: " + record.getMessage() + "\n";
+
+
+            String prefix = String.format("%s[%s.%s(%d)/%s]: ",
+                    simpleDateFormat.format(Date.from(record.getInstant())),
+                    sourceClassName.substring(sourceClassName.lastIndexOf(".") + 1),
+                    record.getSourceMethodName(),
+                    record.getParameters()[0],
+                    record.getLevel()
+            );
+
+            String message = record.getMessage();
+            if (message.contains("\n")) {
+                String[] messageLines = message.split("\n");
+
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < messageLines.length; i++) {
+                    sb.append(prefix).append(messageLines[i]).append("\n");
+                }
+                return sb.toString();
+            }
+
+            return prefix + message + "\n";
         }
     };
     private static final Handler handler = new ConsoleHandler();
@@ -28,74 +51,79 @@ public class Logger {
 
     static {
         Logger.initialize();
+
+        // 设置日志记录级别为 DEBUG
     }
 
     public static void initialize() {
         handler.setFormatter(formatter);
+        handler.setLevel(Level.ALL);
         logger.setUseParentHandlers(false); // 禁用父级处理程序
         logger.addHandler(handler);
+        logger.setLevel(Level.ALL);
+
         try {
             FileHandler fileHandler = new FileHandler("./latest.log");
             fileHandler.setFormatter(formatter);
+            fileHandler.setLevel(Level.ALL);
             logger.addHandler(fileHandler);
         } catch (IOException e) {
             warning(Language.get("message.logger.error"));
         }
 
-
-        PrintStream printErr = new PrintStream(System.err) {
+        System.setErr(new PrintStream(System.out) {
             @Override
             public void write(byte[] buf, int off, int len) {
-                printSystemLog(buf, off, len, OutType.ERROR);
+                printSystemLog(buf, off, len, Level.WARNING);
             }
-        };
-        PrintStream printOut = new PrintStream(System.out) {
+        });
+        System.setOut(new PrintStream(System.out) {
             @Override
             public void write(byte[] buf, int off, int len) {
-                printSystemLog(buf, off, len, OutType.STANDARD);
+                printSystemLog(buf, off, len, CustomizeLevel.DEBUG);
             }
-        };
-
-        System.setErr(printErr);
-        System.setOut(printOut);
+        });
         info(Language.get("message.logger.initialize"));
     }
 
-    private static void printSystemLog(byte[] buf, int off, int len, OutType outType) {
+
+    private static void printSystemLog(byte[] buf, int off, int len, Level level) {
         // 处理输出的日志消息
         String message = new String(buf, off, len).trim();
-        if (message.equals(""))
+        if (message.isEmpty())
             return;
-        String[] messageLines = message.split("\n");
 
-        LogRecord record = new LogRecord(outType.level, null);
-        if (messageLines.length > 1) {
+        LogRecord record = new LogRecord(level, null);
+        /*if (messageLines.length > 1) {
             String[] p = messageLines[0].split(" ");
             if (p.length > 2) {
+                record.setParameters(new Object[]{-1});
                 record.setSourceClassName(p[p.length - 2]);
                 record.setSourceMethodName(p[p.length - 1].trim());
                 record.setMessage(message.substring(messageLines[0].length() + 1));
-                Logger.logger.log(record);
+                logger.log(record);
                 return;
             }
+        }*/
+
+        //处理sout的打印
+        StackTraceElement stackTraceElement = getStackTraceElement("java.io.PrintStream", 0);
+        if (stackTraceElement != null) {
+            //record.setLevel(Level.FINE);
+            setLogRecord(record, stackTraceElement);
         }
 
-        boolean isFind = false;
-        for (StackTraceElement stackTraceElement : Thread.currentThread().getStackTrace()) {
-            if (stackTraceElement.getClassName().contains("java.io.PrintStream")) {
-                isFind = true;
-            } else {
-                if (isFind) {
-                    record.setSourceClassName(stackTraceElement.getClassName());
-                    record.setSourceMethodName(stackTraceElement.getMethodName());
-                    record.setMessage(message);
-                }
-                isFind = false;
-            }
-        }
+        record.setMessage(message);
         logger.log(record);
+
     }
 
+
+    private static void setLogRecord(LogRecord record, StackTraceElement ste) {
+        record.setParameters(new Object[]{ste.getLineNumber()});
+        record.setSourceClassName(ste.getClassName());
+        record.setSourceMethodName(ste.getMethodName());
+    }
 
     /**
      * 信息
@@ -148,35 +176,51 @@ public class Logger {
     public static void log(Level level, String message, int cutoff) {
         LogRecord record = new LogRecord(level, message);
         record.setSourceMethodName("UNKNOWN");
-        boolean isFind = false;
+        StackTraceElement ste = getStackTraceElement(Logger.class.getName(), cutoff);
+        record.setSourceMethodName(ste.getMethodName());
+        record.setParameters(new Object[]{ste.getLineNumber()});
+        record.setSourceClassName(ste.getClassName());
+        logger.log(record);
+    }
+
+    /**
+     * 追踪堆栈
+     *
+     * @param className 追踪类名
+     * @param cutoff    追踪深度偏移
+     * @return 堆栈信息
+     */
+    public static StackTraceElement getStackTraceElement(String className, int cutoff) {
+        if (className == null) {
+            throw new IllegalArgumentException("className cannot be null");
+        }
+        boolean foundClassName = false;
         StackTraceElement[] stackTraceElements = Thread.currentThread().getStackTrace();
-        for (int i = cutoff; i < stackTraceElements.length; i++) {
-            if (stackTraceElements[i].getClassName().contains(Logger.class.getName())) {
-                isFind = true;
-            } else {
-                if (isFind) {
-                    record.setSourceMethodName(stackTraceElements[i + cutoff].getMethodName() + "(" + stackTraceElements[i + cutoff].getLineNumber() + ")");
-                    record.setSourceClassName(stackTraceElements[i + cutoff].getClassName());
-                }
-                isFind = false;
+
+        for (int i = 0; i < stackTraceElements.length; i++) {
+            StackTraceElement ste = stackTraceElements[i];
+            String stackClassName = ste.getClassName();
+            if (stackClassName.contains(className)) {
+                foundClassName = true;
+            } else if (foundClassName) {
+                return stackTraceElements[i + cutoff];
             }
         }
+        return null;
+    }
 
-        logger.log(record);
+
+    public static void logExceptionStackTrace(Exception e) {
+        StringWriter sw = new StringWriter();
+        try (PrintWriter pw = new PrintWriter(sw)) {
+            e.printStackTrace(pw);
+        }
+        log(Level.WARNING, sw.toString(), 0);
     }
 
     public static void printStackTrace() {
         for (StackTraceElement stackTraceElement : Thread.currentThread().getStackTrace()) {
             warning(stackTraceElement.toString());
-        }
-    }
-
-    private enum OutType {
-        ERROR(Level.WARNING), STANDARD(Level.INFO);
-        public final Level level;
-
-        OutType(Level level) {
-            this.level = level;
         }
     }
 }

@@ -1,4 +1,6 @@
 {
+  "id": "file",
+  "action": "team.zxorg.zxnoter.ui.action.OpenProject",
   "menus": [
     {
       "id": "file",
@@ -10,13 +12,13 @@
           "name": "新建",
           "order": 0,
           "icon": "document.folder-add",
-          "action": "team.zxorg.zxnoter.uiframe.action.NewProject"
+          "action": "team.zxorg.zxnoter.ui.action.NewProject"
         },
         {
           "id": "open",
           "name": "打开",
           "order": 1,
-          "action": "team.zxorg.zxnoter.uiframe.action.OpenProject"
+          "action": "team.zxorg.zxnoter.ui.action.OpenProject"
         }
       ]
     },

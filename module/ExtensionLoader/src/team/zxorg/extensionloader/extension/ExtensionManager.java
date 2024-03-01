@@ -15,6 +15,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.logging.LogRecord;
 import java.util.stream.Stream;
 
 /**
@@ -83,7 +84,7 @@ public class ExtensionManager {
      *
      * @param extensionsPath 扩展目录
      */
-    protected void loadAllExtensions( ClassLoader parent,Path extensionsPath) {
+    protected void loadAllExtensions(ClassLoader parent, Path extensionsPath) {
 
         Logger.info(Language.get(LanguageKey.MESSAGE_EXTENSION_LOADING));
         StopWatch stopWatch = new StopWatch();
@@ -135,5 +136,10 @@ public class ExtensionManager {
         stopWatch.stop();
         Logger.info(Language.get(LanguageKey.MESSAGE_EXTENSION_LOADED, extensionMap.size(), stopWatch.getTime()));
 
+    }
+
+    public static Extension getCurrentExtension(int cutoff) {
+
+        return null;
     }
 }

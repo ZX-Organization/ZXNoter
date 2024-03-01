@@ -1,6 +1,0 @@
-{
-  //  "reference": "file-menu.json"
-  titleBar: {
-    menuBar: "menu/titleBar.json5"
-  }
-}

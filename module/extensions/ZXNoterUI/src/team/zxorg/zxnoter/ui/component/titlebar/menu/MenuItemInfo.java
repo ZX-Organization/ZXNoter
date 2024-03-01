@@ -7,7 +7,7 @@ public class MenuItemInfo {
     /**
      * 菜单项索引   根据索引排序 作用于菜单项分组
      */
-    private int index;
+    private int order;
     /**
      * 菜单项所属组
      */
@@ -23,5 +23,5 @@ public class MenuItemInfo {
     /**
      * 行为class路径 被选中后调用
      */
-    private String c;
+    private String action;
 }

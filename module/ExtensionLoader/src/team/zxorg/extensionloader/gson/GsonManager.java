@@ -33,6 +33,7 @@ public class GsonManager {
                 .registerTypeAdapter(Version.class, new VersionSerializer())
                 .registerTypeAdapter(VersionChecker.class, new VersionCheckerSerializer())
                 .registerTypeAdapter(Path.class, new PathSerializer())
+                .registerTypeAdapter(Class.class, new ClassSerializer())
                 .registerTypeAdapter(Language.class, new LanguageSerializer())
                 .setPrettyPrinting()
                 .create();
@@ -119,6 +120,8 @@ public class GsonManager {
                             field.set(obj, new ArrayList<>());
                         } else if (fieldType == Map.class) {
                             field.set(obj, new HashMap<>());
+                        } else if (fieldType == Class.class) {
+                            //field.set(obj, null);
                         } else if (fieldType == Set.class) {
                             field.set(obj, new HashSet<>());
                         } else if (fieldType == LinkedHashSet.class) {

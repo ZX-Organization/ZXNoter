@@ -1,14 +1,19 @@
 {
-  "leftPaneWidth": 0.0,
+  "leftPaneWidth": 290.4,
   "rightPaneWidth": 0.0,
   "bottomPaneHeight": 0.0,
   "hideMainBar": false,
-  "hideSecondBar": false,
-  "mainBarIsLeft": false,
-  "mainTopBarItems": [],
-  "mainBottomBarItems": [],
+  "hideSecondBar": true,
+  "mainBarIsLeft": true,
+  "mainTopBarItems": [
+    "welcome",
+    "fileManager"
+  ],
+  "mainBottomBarItems": [
+    "setup"
+  ],
   "secondBarItems": [],
-  "activeMainBarTopItemIndex": 0,
-  "activeMainBarBottomItemIndex": 0,
+  "activeMainBarTopItemIndex": -1,
+  "activeMainBarBottomItemIndex": -1,
   "activeSecondBarItemIndex": 0
 }
