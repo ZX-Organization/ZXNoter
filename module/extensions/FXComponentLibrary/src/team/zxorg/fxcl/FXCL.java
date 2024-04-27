@@ -20,11 +20,11 @@ public class FXCL implements ExtensionEntrypoint {
         //屏蔽javafx歌姬初始化时的异常
         Logger.info(extension.getLanguage(LANG + "javaFX.initializing"));
         stopWatch.start();
-        Logging.getJavaFXLogger().disableLogging();
-        PlatformImpl.startup(() -> {
-            //再次开启javafx日志
-            Logging.getJavaFXLogger().enableLogging();
-        });
+            Logging.getJavaFXLogger().disableLogging();
+            PlatformImpl.startup(() -> {
+                //再次开启javafx日志
+                Logging.getJavaFXLogger().enableLogging();
+            });
         PlatformImpl.setApplicationName(FXCL.class);
         stopWatch.stop();
         Logger.info(extension.getLanguage(LANG + "javaFX.initialized", stopWatch.getTime()));
