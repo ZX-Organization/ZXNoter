@@ -540,7 +540,7 @@ public class MapEditor extends BaseEditor {
 
         previewTimingRender = new FixedOrbitTimingRender(previewMapRender.getInfo(), zxMap, previewCanvas.canvas, "default");
 
-        previewBeatLineRender = new FixedOrbitBeatLineRender(previewMapRender.getInfo(), zxMap, previewCanvas.canvas, "default", renderBeats, mapTimeLength);
+        previewBeatLineRender = new FixedOrbitBeatLineRender(previewMapRender.getInfo(), zxMap, previewCanvas.canvas, "preview", renderBeats, mapTimeLength);
 
         previewBar.getChildren().addAll(previewCanvas, previewPane);
         HBox.setMargin(previewBar, new Insets(0, 0, 0, 26));
@@ -679,7 +679,7 @@ public class MapEditor extends BaseEditor {
 
 
         {//模式
-            ToggleGroup toggleGroup = new ToggleGroup();
+            /*ToggleGroup toggleGroup = new ToggleGroup();
             ToggleButton toggleButton;
             //编辑模式
             toggleButton = sideToolBar.addToggleButton("mode", "svg.icons.design.edit-line", "编辑模式");
@@ -690,13 +690,22 @@ public class MapEditor extends BaseEditor {
             toggleButton.setToggleGroup(toggleGroup);
             //只读模式
             toggleButton = sideToolBar.addToggleButton("mode", "svg.icons.system.eye-line", "只读模式");
-            toggleButton.setToggleGroup(toggleGroup);
+            toggleButton.setToggleGroup(toggleGroup);*/
         }
 
 
         {//状态
             //跳转开头
-            sideToolBar.addButton("state", "svg.icons.editor.align-top", "跳转开头");
+            {
+                Button button = sideToolBar.addButton("state", "svg.icons.editor.align-top", "跳转末尾");
+                if (zxMap.notes.isEmpty())
+                    return;
+                button.setOnAction((event -> {
+                    mainMapRender.getInfo().timelinePosition.setValue(zxMap.notes.getLast().timeStamp);
+                }));
+            }
+
+
             //播放
             {
                 Button button = sideToolBar.addButton("state", "svg.icons.media.play-line", "播放");
@@ -717,8 +726,14 @@ public class MapEditor extends BaseEditor {
                 });
             }
             //跳转末尾
-            sideToolBar.addButton("state", "svg.icons.editor.align-bottom", "跳转末尾");
-
+            {
+                Button button = sideToolBar.addButton("state", "svg.icons.editor.align-bottom", "跳转开头");
+                button.setOnAction((event -> {
+                    if (zxMap.notes.isEmpty())
+                        return;
+                    mainMapRender.getInfo().timelinePosition.setValue(zxMap.notes.getFirst().timeStamp);
+                }));
+            }
         }
 
         {//工具
@@ -1154,11 +1169,11 @@ public class MapEditor extends BaseEditor {
 
         {//布局
             //左侧扩展
-            topToolBar.addToggleButton("layout", "svg.icons.design.layout-left-line", "扩展");
+            //topToolBar.addToggleButton("layout", "svg.icons.design.layout-left-line", "扩展");
             //滚动栏
-            topToolBar.addToggleButton("layout", "svg.icons.design.layout-right-2-line", "滚动栏");
+            //topToolBar.addToggleButton("layout", "svg.icons.design.layout-right-2-line", "滚动栏");
             //右侧属性布局
-            topToolBar.addToggleButton("layout", "svg.icons.design.layout-right-line", "属性栏");
+            //topToolBar.addToggleButton("layout", "svg.icons.design.layout-right-line", "属性栏");
         }
 
 
@@ -1419,12 +1434,11 @@ public class MapEditor extends BaseEditor {
             if (!audioChannel.getPlayState().equals(AudioChannel.PlayState.PAUSE)) {
                 mainMapRender.getInfo().timelinePosition.set(audioChannel.getTime() + audioTimeOffset.get());
 
-                if (zxMap.notes.size() == 0)
+                if (zxMap.notes.isEmpty())
                     return;
-                ArrayList<BaseNote> findsNotes = zxMap.getScaleNotes(mainMapRender.getInfo().timelinePosition.get() - 1, 2000, true);
-                //System.out.println(findsNotes);
+                ArrayList<BaseNote> findsNotes = zxMap.getScaleNotes(mainMapRender.getInfo().timelinePosition.get() - 1, 700, true);
                 for (BaseNote note : findsNotes) {
-                    if (Math.abs(note.timeStamp - mainMapRender.getInfo().timelinePosition.get()) < 20)
+                    if (Math.abs(note.timeStamp - mainMapRender.getInfo().timelinePosition.get()) < 50)
                         if (!hitsNotes.contains(note)) {
                             hitsNotes.add(note);
                             if (System.currentTimeMillis() - hitTime > 10) {
@@ -1442,7 +1456,7 @@ public class MapEditor extends BaseEditor {
                                     throw new RuntimeException(e);
                                 }
                                 audioChannel1.setEndBehavior(AudioChannel.EndBehavior.CLOSE);
-                                audioChannel1.setVolume(hitKeyVolume + count * 0.12f * hitKeyVolume);
+                                audioChannel1.setVolume(Math.min(hitKeyVolume + count * 0.2f * hitKeyVolume, 1f));
                                 audioChannel1.play();
                                 hitTime = System.currentTimeMillis();
                             }

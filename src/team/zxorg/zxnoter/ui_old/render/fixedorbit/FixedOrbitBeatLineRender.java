@@ -2,13 +2,9 @@ package team.zxorg.zxnoter.ui_old.render.fixedorbit;
 
 import javafx.beans.property.LongProperty;
 import javafx.geometry.HPos;
-import javafx.geometry.Orientation;
-import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.paint.Color;
 import team.zxorg.zxnoter.map.ZXMap;
-import team.zxorg.zxnoter.ui_old.TimeUtils;
 import team.zxorg.zxnoter.ui_old.render.fixedorbit.key.FixedOrbitObjectKey;
 
 import java.util.ArrayList;
@@ -30,15 +26,48 @@ public class FixedOrbitBeatLineRender extends FixedOrbitRender {
     protected void renderHandle() {
         //绘制拍线和分拍线
 
-        int a = 0;
-
         for (RenderBeat renderBeat : renderBeats) {
-            a++;
             double beatCycleTime = 60000. / (renderBeat.timing.absBpm);
 
             if (showSubBeats)
-                for (int i = 0; i < renderBeat.measure; i++) {//分拍线
-                    loadImage(getImage(FixedOrbitObjectKey.SUB_BEAT_LINE));
+                for (int i = 1; i < renderBeat.measure; i++) {//分拍线
+                    //loadImage(getImage(FixedOrbitObjectKey.SUB_BEAT_LINE));
+                    switch (renderBeat.measure) {
+                        case 2 -> {
+                            loadImage(getImage(FixedOrbitObjectKey.SUB_BEAT_LINE_R));
+                        }
+                        case 4 -> {
+                            if (i == 2) {
+                                loadImage(getImage(FixedOrbitObjectKey.SUB_BEAT_LINE_R));
+                            } else {
+                                loadImage(getImage(FixedOrbitObjectKey.SUB_BEAT_LINE_B));
+                            }
+                        }
+                        case 6 -> {
+                            if (i == 3) {
+                                loadImage(getImage(FixedOrbitObjectKey.SUB_BEAT_LINE_R));
+                            } else {
+                                loadImage(getImage(FixedOrbitObjectKey.SUB_BEAT_LINE_P));
+                            }
+                        }
+                        case 8 -> {
+                            // 黄蓝黄红黄蓝黄
+                            if ((i - 1) % 2 == 0) {
+                                loadImage(getImage(FixedOrbitObjectKey.SUB_BEAT_LINE_Y));
+                            } else {
+                                if (i == 4) {
+                                    loadImage(getImage(FixedOrbitObjectKey.SUB_BEAT_LINE_R));
+                                } else {
+                                    loadImage(getImage(FixedOrbitObjectKey.SUB_BEAT_LINE_B));
+                                }
+                            }
+
+
+                        }
+                        default -> {
+                            loadImage(getImage(FixedOrbitObjectKey.SUB_BEAT_LINE));
+                        }
+                    }
                     renderRectangle.setWidth(HPos.LEFT, canvasRectangle.getWidth());
                     renderRectangle.setY(VPos.CENTER, getInfo().getTimeToPosition(renderBeat.time + (beatCycleTime / renderBeat.measure) * i));
                     drawImage();
@@ -46,12 +75,18 @@ public class FixedOrbitBeatLineRender extends FixedOrbitRender {
 
             //绘制拍线
             //loadImage(getImage(FixedOrbitObjectKey.BEAT_LINE));
-            if (a % 3 == 0)
+            /*if (a % 3 == 0)
                 loadImage(getImage(FixedOrbitObjectKey.BEAT_LINE1));
             if (a % 3 == 1)
                 loadImage(getImage(FixedOrbitObjectKey.BEAT_LINE2));
             if (a % 3 == 2)
-                loadImage(getImage(FixedOrbitObjectKey.BEAT_LINE3));
+                loadImage(getImage(FixedOrbitObjectKey.BEAT_LINE3));*/
+
+            if ("default".equals(theme))
+                loadImage(getImage(FixedOrbitObjectKey.BEAT_LINE5));
+           else if ("preview".equals(theme))
+                loadImage(getImage(FixedOrbitObjectKey.SUB_BEAT_LINE));
+
             renderRectangle.setWidth(HPos.LEFT, canvasRectangle.getWidth());
             renderRectangle.setY(VPos.CENTER, getInfo().getTimeToPosition(renderBeat.time));
             drawImage();

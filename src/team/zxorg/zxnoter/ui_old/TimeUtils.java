@@ -8,21 +8,19 @@ public class TimeUtils {
      */
     public static String formatTime(long timeInMillis) {
         long hours = timeInMillis / (60 * 60 * 1000);
-        long minutes = (timeInMillis % (60 * 60 * 1000)) / (60 * 1000);
-        long seconds = (timeInMillis % (60 * 1000)) / 1000;
-        long milliseconds = timeInMillis % 1000;
+        long remainingTime = timeInMillis % (60 * 60 * 1000);
+        long minutes = remainingTime / (60 * 1000);
+        remainingTime %= 60 * 1000;
+        long seconds = remainingTime / 1000;
+        long milliseconds = remainingTime % 1000;
 
-        StringBuilder formattedTime = new StringBuilder();
         if (hours > 0) {
-            formattedTime.append(hours).append(":");
+            return String.format("%d:%02d:%02d.%03d", hours, minutes, seconds, milliseconds);
+        } else {
+            return String.format("%02d:%02d.%03d", minutes, seconds, milliseconds);
         }
-        if (minutes > 0 || hours > 0) {
-            formattedTime.append(String.format("%02d", minutes)).append(":");
-        }
-        formattedTime.append(String.format("%02d", seconds)).append(".");
-        formattedTime.append(String.format("%03d", milliseconds));
-        return formattedTime.toString();
     }
+
 
     /**
      * 字符串解析到时间

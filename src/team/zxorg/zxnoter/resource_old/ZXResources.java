@@ -12,7 +12,10 @@ import javafx.scene.shape.Shape;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Stream;
 
 public class ZXResources {
@@ -142,14 +145,21 @@ public class ZXResources {
         return svg;
     }
 
+    public static HashMap<String, Image> cache = new HashMap<>();
+
     /**
      * 获取图片资源
      */
     public static Image getImage(String key) {
+        Image cache = ZXResources.cache.get(key);
+        if (cache != null)
+            return cache;
         if (allThings.get(key) instanceof Image image)
-            return image;
+            cache = image;
         else
-            return getImage("img.unknown");
+            cache = getImage("img.unknown");
+        ZXResources.cache.put(key, cache);
+        return cache;
     }
 
     public static void main(String[] args) {

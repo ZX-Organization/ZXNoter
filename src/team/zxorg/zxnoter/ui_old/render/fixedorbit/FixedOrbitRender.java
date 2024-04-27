@@ -10,9 +10,11 @@ import team.zxorg.zxnoter.ui_old.render.fixedorbit.key.FixedOrbitNotesKey;
 import team.zxorg.zxnoter.ui_old.render.fixedorbit.key.FixedOrbitObjectKey;
 
 public abstract class FixedOrbitRender extends Render {
+    protected String theme;
 
     public FixedOrbitRender(FixedOrbitRenderInfo renderInfo, ZXMap renderZXMap, Canvas canvas, String theme) {
         super(renderInfo, renderZXMap, canvas);
+        this.theme = theme;
         getOrbits();
     }
 

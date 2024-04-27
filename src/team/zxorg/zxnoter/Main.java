@@ -22,7 +22,7 @@ public class Main {
             for (String arg : args) {
                 if (arg.startsWith(quotationMark)) {
                     quotation.append(arg.substring(1));
-                } else if (quotation.length() > 0) {
+                } else if (!quotation.isEmpty()) {
                     if (!arg.endsWith(quotationMark)) {
                         quotation.append(" ").append(arg);
                     } else {
@@ -32,7 +32,7 @@ public class Main {
                     Main.args.add(arg);
                 }
             }
-            if (quotation.length() > 0) {
+            if (!quotation.isEmpty()) {
                 Main.args.add(quotation.toString());
             }
         }

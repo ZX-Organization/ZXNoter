@@ -85,12 +85,6 @@ public class ZXNApp extends Application {
     @Override
     public void start(Stage stage) {
 
-        try {
-
-        } catch (Exception e) {
-            System.out.println("音频播放设备载入失败");
-            throw new RuntimeException(e);
-        }
 
 
         //载入资源
@@ -147,10 +141,11 @@ public class ZXNApp extends Application {
                 fileChooser.setTitle("导出谱面到");
 
                 // 添加文件过滤器
-                FileChooser.ExtensionFilter allFilter = new FileChooser.ExtensionFilter("全部谱面", "*.osu", "*.imd");
+                FileChooser.ExtensionFilter allFilter = new FileChooser.ExtensionFilter("全部谱面", "*.osu", "*.imd", "*.zxn");
                 FileChooser.ExtensionFilter osuFilter = new FileChooser.ExtensionFilter("osu谱面", "*.osu");
+                FileChooser.ExtensionFilter zxnFilter = new FileChooser.ExtensionFilter("zxn谱面", "*.zxn");
                 FileChooser.ExtensionFilter imdFilter = new FileChooser.ExtensionFilter("节奏大师谱面", "*.imd");
-                fileChooser.getExtensionFilters().addAll(allFilter, osuFilter, imdFilter);
+                fileChooser.getExtensionFilters().addAll(allFilter,zxnFilter, osuFilter, imdFilter);
                 File file = fileChooser.showOpenDialog(stage.getOwner());
                 if (file != null) {
 
@@ -193,9 +188,9 @@ public class ZXNApp extends Application {
         });
 
 
-        menu.getItems().addAll(testMenuItem, openMenuItem, creatMenuItem);
+        menu.getItems().addAll(openMenuItem, creatMenuItem);
         Menu menu2 = new Menu("666");
-        menuBar.getMenus().addAll(menu, menu2);
+        menuBar.getMenus().addAll(menu);
         menuBar.setPadding(new Insets(0));
 
         //标题栏 添加控件
@@ -444,7 +439,7 @@ public class ZXNApp extends Application {
         }*/
 
         //正文容器 添加控件
-        bodyPane.getChildren().addAll(activityBar, sideBar, workspace);
+        bodyPane.getChildren().addAll( workspace);
 
 
         Scene mainScene = new Scene(rootPane);

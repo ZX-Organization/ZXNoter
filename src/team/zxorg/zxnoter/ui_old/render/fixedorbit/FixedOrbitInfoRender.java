@@ -115,7 +115,7 @@ public class FixedOrbitInfoRender extends FixedOrbitRender {
                 graphics.setFont(new Font(16));
                 graphics.setTextAlign(TextAlignment.RIGHT);
                 graphics.setTextBaseline(VPos.CENTER);
-                graphics.fillText((timeIsFormat ? TimeUtils.formatTime(time) : time) + "", getInfo().canvasWidth.getValue() - 16, getInfo().getTimeToPosition(time));
+                //graphics.fillText((timeIsFormat ? TimeUtils.formatTime(time) : time) + "", getInfo().canvasWidth.getValue() - 16, getInfo().getTimeToPosition(time));
             }
 
             //绘制拍线
@@ -129,9 +129,9 @@ public class FixedOrbitInfoRender extends FixedOrbitRender {
             graphics.setFont(new Font(16));
             graphics.setTextAlign(TextAlignment.RIGHT);
             graphics.setTextBaseline(VPos.CENTER);
-            graphics.fillText((timeIsFormat ? TimeUtils.formatTime(renderBeat.time) : renderBeat.time) + "",
+            /*graphics.fillText((timeIsFormat ? TimeUtils.formatTime(renderBeat.time) : renderBeat.time) + "",
                     getInfo().canvasWidth.getValue() - 16,
-                    getInfo().getTimeToPosition(renderBeat.time));
+                    getInfo().getTimeToPosition(renderBeat.time));*/
 
 
             graphics.setFill(Color.WHEAT);

@@ -10,11 +10,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dd78a4ca-7956-492b-9d75-ff82bf57b657" name="更改" comment="修改">
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/ZXNoter_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/ZXNoter_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/checkstyle-idea.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resourcespackage/img/note/theme/default/beat-line-4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resourcespackage/img/note/theme/default/beat-line-5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resourcespackage/img/note/theme/default/sub-beat-line-1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resourcespackage/img/note/theme/default/sub-beat-line-2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resourcespackage/img/note/theme/default/sub-beat-line-3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resourcespackage/img/note/theme/default/sub-beat-line-4.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resourcespackage.zip" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/resource_old/ZXResources.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/resource_old/ZXResources.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui_old/TimeUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui_old/TimeUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui_old/ZXNApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui_old/ZXNApp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui_old/editor/MapEditor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui_old/editor/MapEditor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui_old/render/fixedorbit/FixedOrbitBeatLineRender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui_old/render/fixedorbit/FixedOrbitBeatLineRender.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui_old/render/fixedorbit/FixedOrbitInfoRender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui_old/render/fixedorbit/FixedOrbitInfoRender.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui_old/render/fixedorbit/FixedOrbitRender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui_old/render/fixedorbit/FixedOrbitRender.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui_old/render/fixedorbit/key/FixedOrbitObjectKey.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui_old/render/fixedorbit/key/FixedOrbitObjectKey.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -161,19 +176,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="ZXNoter" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="ZXNoter" />
-      <option name="filePath" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <list>
       <item itemvalue="应用程序.IoTest" />
       <item itemvalue="应用程序.ImdReader" />
@@ -183,11 +185,11 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="应用程序.ZXNApp" />
+        <item itemvalue="应用程序.OsuReader" />
         <item itemvalue="应用程序.Main" />
         <item itemvalue="应用程序.IoTest" />
-        <item itemvalue="应用程序.ZXNApp" />
         <item itemvalue="应用程序.ImdReader" />
-        <item itemvalue="应用程序.OsuReader" />
       </list>
     </recent_temporary>
   </component>
@@ -321,7 +323,7 @@
       <workItem from="1710589058222" duration="42000" />
       <workItem from="1711967405581" duration="1553000" />
       <workItem from="1712669676670" duration="1846000" />
-      <workItem from="1714200736218" duration="1585000" />
+      <workItem from="1714200736218" duration="11231000" />
     </task>
     <task id="LOCAL-00002" summary="update ui">
       <option name="closed" value="true" />
@@ -683,7 +685,15 @@
       <option name="project" value="LOCAL" />
       <updated>1714200792669</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="修改">
+      <option name="closed" value="true" />
+      <created>1714202479308</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1714202479308</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -714,7 +724,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="fix mapEditor" />
     <MESSAGE value="fixed all edit orbit method bugs" />
     <MESSAGE value="fixed follow edit" />
     <MESSAGE value="fixed edit time" />
@@ -739,16 +748,12 @@
     <MESSAGE value="update editor" />
     <MESSAGE value="fixed" />
     <MESSAGE value="fixed objectCount" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed objectCount" />
+    <MESSAGE value="修改" />
+    <option name="LAST_COMMIT_MESSAGE" value="修改" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/team/zxorg/zxnoter/ui_old/editor/MapEditor.java</url>
-          <line>265</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/team/zxorg/zxnoter/io/IoTest.java</url>
           <line>49</line>
@@ -756,10 +761,15 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/team/zxorg/zxnoter/map/editor/ZXFixedOrbitMapEditor.java</url>
-          <line>697</line>
+          <line>671</line>
           <option name="timeStamp" value="8" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/ZXNoter$Main.ic" NAME="Main 覆盖结果" MODIFIED="1714203509435" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>team.zxorg.zxnoter.*</FILTER>
+    </SUITE>
   </component>
 </project>
