@@ -20,12 +20,12 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" exported="" name="openjfx.javafx.base" level="project" />
+    <orderEntry type="module" module-name="ExtensionLoader" exported="" />
     <orderEntry type="library" exported="" name="openjfx.javafx.controls" level="project" />
     <orderEntry type="library" exported="" name="openjfx.javafx.media" level="project" />
     <orderEntry type="library" exported="" name="fxmisc.richtext.richtextfx" level="project" />
-    <orderEntry type="library" exported="" name="openjfx.javafx.graphics" level="project" />
     <orderEntry type="library" exported="" name="github.weisj.jsvg" level="project" />
-    <orderEntry type="module" module-name="ExtensionLoader" exported="" />
+    <orderEntry type="library" exported="" name="openjfx.javafx.graphics" level="project" />
+    <orderEntry type="library" exported="" name="openjfx.javafx.base" level="project" />
   </component>
 </module>

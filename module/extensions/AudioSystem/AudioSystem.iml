@@ -11,5 +11,16 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="ExtensionLoader" exported="" />
+    <orderEntry type="library" exported="" name="bytedeco.ffmpeg" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../libraries/bytedeco/ffmpeg-6.1.1-1.5.10-linux-x86_64.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="library" name="openjfx.javafx.media" level="project" />
   </component>
 </module>

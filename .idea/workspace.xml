@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="FXComponentLibrary:jar" />
-      <artifact name="ZXNoter:jar" />
-      <artifact name="ZXNoterUIFrame:jar" />
+      <artifact name="ExtensionTemplate:jar" />
     </artifacts-to-build>
   </component>
   <component name="AutoImportSettings">
@@ -12,80 +10,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dd78a4ca-7956-492b-9d75-ff82bf57b657" name="更改" comment="修复库管理器">
-      <change afterPath="$PROJECT_DIR$/libraries/javafx/javafx-base-23-ea+3-linux-aarch64.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libraries/javafx/javafx-base-23-ea+3-linux.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libraries/javafx/javafx-base-23-ea+3-mac-aarch64.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libraries/javafx/javafx-base-23-ea+3-mac.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libraries/javafx/javafx-base-23-ea+3-win.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libraries/javafx/javafx-base-23-ea+3.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libraries/javafx/javafx-controls-23-ea+3-linux-aarch64.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libraries/javafx/javafx-controls-23-ea+3-linux.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libraries/javafx/javafx-controls-23-ea+3-mac-aarch64.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libraries/javafx/javafx-controls-23-ea+3-mac.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libraries/javafx/javafx-controls-23-ea+3-win.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libraries/javafx/javafx-controls-23-ea+3.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libraries/javafx/javafx-graphics-23-ea+3-linux-aarch64.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libraries/javafx/javafx-graphics-23-ea+3-linux.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libraries/javafx/javafx-graphics-23-ea+3-mac-aarch64.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libraries/javafx/javafx-graphics-23-ea+3-mac.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libraries/javafx/javafx-graphics-23-ea+3-win.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libraries/javafx/javafx-graphics-23-ea+3.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libraries/javafx/javafx-media-23-ea+3-linux-aarch64.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libraries/javafx/javafx-media-23-ea+3-linux.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libraries/javafx/javafx-media-23-ea+3-mac-aarch64.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libraries/javafx/javafx-media-23-ea+3-mac.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libraries/javafx/javafx-media-23-ea+3-win.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libraries/javafx/javafx-media-23-ea+3.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libraries/javafx/javafx-swing-23-ea+3-linux-aarch64.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libraries/javafx/javafx-swing-23-ea+3-linux.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libraries/javafx/javafx-swing-23-ea+3-mac-aarch64.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libraries/javafx/javafx-swing-23-ea+3-mac.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libraries/javafx/javafx-swing-23-ea+3-win.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libraries/javafx/javafx-swing-23-ea+3.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/bytedeco_ffmpeg.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/a.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/reference/jitaimei/0/audio-c1.ogg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/libraries/bytedeco/ffmpeg-6.1.1-1.5.10-linux-x86_64.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/libraries/bytedeco/ffmpeg-6.1.1-1.5.10-windows-x86_64.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module/extensions/AudioSystem/src/team/zxorg/audiosystem/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/openjfx_javafx_base.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/openjfx_javafx_base.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/openjfx_javafx_controls.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/openjfx_javafx_controls.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/openjfx_javafx_graphics.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/openjfx_javafx_graphics.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/openjfx_javafx_media.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/openjfx_javafx_media.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DirectoryV3.xml" beforeDir="false" afterPath="$PROJECT_DIR$/DirectoryV3.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ZXNoter.jar" beforeDir="false" afterPath="$PROJECT_DIR$/ZXNoter.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/zxnoterUiFrame/ActivityBarConfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/config/zxnoterUiFrame/ActivityBarConfig.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/扩展系统.xmind" beforeDir="false" afterPath="$PROJECT_DIR$/docs/扩展系统.xmind" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/librarys/javaFX/base/javafx-base-23-ea+3-linux-aarch64.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/librarys/javaFX/base/javafx-base-23-ea+3-linux.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/librarys/javaFX/base/javafx-base-23-ea+3-mac-aarch64.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/librarys/javaFX/base/javafx-base-23-ea+3-mac.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/librarys/javaFX/base/javafx-base-23-ea+3-win.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/librarys/javaFX/base/javafx-base-23-ea+3.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/librarys/javaFX/controls/javafx-controls-23-ea+3-linux-aarch64.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/librarys/javaFX/controls/javafx-controls-23-ea+3-linux.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/librarys/javaFX/controls/javafx-controls-23-ea+3-mac-aarch64.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/librarys/javaFX/controls/javafx-controls-23-ea+3-mac.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/librarys/javaFX/controls/javafx-controls-23-ea+3-win.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/librarys/javaFX/controls/javafx-controls-23-ea+3.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/librarys/javaFX/graphics/javafx-graphics-23-ea+3-linux-aarch64.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/librarys/javaFX/graphics/javafx-graphics-23-ea+3-linux.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/librarys/javaFX/graphics/javafx-graphics-23-ea+3-mac-aarch64.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/librarys/javaFX/graphics/javafx-graphics-23-ea+3-mac.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/librarys/javaFX/graphics/javafx-graphics-23-ea+3-win.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/librarys/javaFX/graphics/javafx-graphics-23-ea+3.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/librarys/javaFX/media/javafx-media-23-ea+3-linux-aarch64.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/librarys/javaFX/media/javafx-media-23-ea+3-linux.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/librarys/javaFX/media/javafx-media-23-ea+3-mac-aarch64.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/librarys/javaFX/media/javafx-media-23-ea+3-mac.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/librarys/javaFX/media/javafx-media-23-ea+3-win.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/librarys/javaFX/media/javafx-media-23-ea+3.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/librarys/javaFX/swing/javafx-swing-23-ea+3-linux-aarch64.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/librarys/javaFX/swing/javafx-swing-23-ea+3-linux.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/librarys/javaFX/swing/javafx-swing-23-ea+3-mac-aarch64.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/librarys/javaFX/swing/javafx-swing-23-ea+3-mac.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/librarys/javaFX/swing/javafx-swing-23-ea+3-win.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/librarys/javaFX/swing/javafx-swing-23-ea+3.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/module/ExtensionLoader/src/team/zxorg/extensionloader/extension/ExtensionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/ExtensionLoader/src/team/zxorg/extensionloader/extension/ExtensionManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module/ExtensionLoader/src/team/zxorg/extensionloader/library/LibraryManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/ExtensionLoader/src/team/zxorg/extensionloader/library/LibraryManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RunApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RunApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/ExtensionLoader/ExtensionLoader.iml" beforeDir="false" afterPath="$PROJECT_DIR$/module/ExtensionLoader/ExtensionLoader.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/extensions/AudioSystem/AudioSystem.iml" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/AudioSystem/AudioSystem.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/extensions/Configuration/Configuration.iml" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/Configuration/Configuration.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/extensions/ExtensionTemplate/ExtensionTemplate.iml" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/ExtensionTemplate/ExtensionTemplate.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/extensions/FXComponentLibrary/FXComponentLibrary.iml" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/FXComponentLibrary/FXComponentLibrary.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/extensions/MapEditCore/MapEditCore.iml" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MapEditCore/MapEditCore.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/extensions/UISEditor/UISEditor.iml" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/UISEditor/UISEditor.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/extensions/ZXNoterBase/ZXNoterBase.iml" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/ZXNoterBase/ZXNoterBase.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/extensions/ZXNoterUI/ZXNoterUI.iml" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/ZXNoterUI/ZXNoterUI.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -159,7 +104,7 @@
     "JAR 应用程序.未命名.executor": "Run",
     "Repository.Attach.Annotations": "false",
     "Repository.Attach.JavaDocs": "true",
-    "Repository.Attach.Sources": "true",
+    "Repository.Attach.Sources": "false",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
@@ -174,7 +119,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "库",
+    "project.structure.last.edited": "模块",
     "project.structure.proportion": "0.21134493",
     "project.structure.side.proportion": "0.2874845",
     "settings.editor.selected.configurable": "preferences.pluginManager",
@@ -212,11 +157,11 @@
       <recent name="D:\Projects\ZXNoter\module\extensions\FXComponentLibrary\resources\assets\fxComponentLibrary" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/libraries/bytedeco" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/module/extensions/ZXNoterUIFrame/resources/assets/zxnoterUiFrame/ui" />
       <recent name="$PROJECT_DIR$/module/extensions/ZXNoterUIFrame/resources/assets/zxnoterUiFrame/ui/menu" />
       <recent name="$PROJECT_DIR$/tool" />
-      <recent name="$PROJECT_DIR$/resourcepacks/iconPack-line" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="" />
@@ -229,7 +174,20 @@
       <recent name="team.zxorg.skin" />
     </key>
   </component>
-  <component name="RunManager" selected="JAR 应用程序.RunJar">
+  <component name="RunManager" selected="应用程序.Main">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="team.zxorg.audiosystem.Main" />
+      <module name="AudioSystem" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="team.zxorg.audiosystem.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="RunApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="RunApp" />
       <module name="ZXNoter" />
@@ -293,12 +251,14 @@
       <item itemvalue="JAR 应用程序.RunJar" />
       <item itemvalue="JAR 应用程序.tool-SvgReader" />
       <item itemvalue="应用程序.test" />
+      <item itemvalue="应用程序.Main" />
       <item itemvalue="应用程序.RunApp" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JAR 应用程序.tool-SvgReader" />
+        <item itemvalue="应用程序.Main" />
         <item itemvalue="应用程序.RunApp" />
+        <item itemvalue="JAR 应用程序.tool-SvgReader" />
       </list>
     </recent_temporary>
   </component>
