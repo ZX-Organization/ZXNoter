@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="ExtensionTemplate:jar" />
+      <artifact name="FXComponentLibrary:jar" />
+      <artifact name="ZXNoter:jar" />
+      <artifact name="ZXNoterUIFrame:jar" />
     </artifacts-to-build>
   </component>
   <component name="AutoImportSettings">
@@ -10,24 +12,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dd78a4ca-7956-492b-9d75-ff82bf57b657" name="更改" comment="修复库管理器">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/bytedeco_ffmpeg.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/a.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/reference/jitaimei/0/audio-c1.ogg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libraries/bytedeco/ffmpeg-6.1.1-1.5.10-linux-x86_64.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libraries/bytedeco/ffmpeg-6.1.1-1.5.10-windows-x86_64.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/module/extensions/AudioSystem/src/team/zxorg/audiosystem/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/openjfx_javafx_base.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/openjfx_javafx_base.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/openjfx_javafx_controls.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/openjfx_javafx_controls.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/openjfx_javafx_graphics.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/openjfx_javafx_graphics.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/openjfx_javafx_media.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/openjfx_javafx_media.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ZXNoter.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ZXNoter.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ZXNoter.jar" beforeDir="false" afterPath="$PROJECT_DIR$/ZXNoter.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/module/ExtensionLoader/ExtensionLoader.iml" beforeDir="false" afterPath="$PROJECT_DIR$/module/ExtensionLoader/ExtensionLoader.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/module/extensions/AudioSystem/AudioSystem.iml" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/AudioSystem/AudioSystem.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/module/extensions/Configuration/Configuration.iml" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/Configuration/Configuration.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/module/extensions/ExtensionTemplate/ExtensionTemplate.iml" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/ExtensionTemplate/ExtensionTemplate.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/module/extensions/FXComponentLibrary/FXComponentLibrary.iml" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/FXComponentLibrary/FXComponentLibrary.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module/extensions/MapEditCore/MapEditCore.iml" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MapEditCore/MapEditCore.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/module/extensions/UISEditor/UISEditor.iml" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/UISEditor/UISEditor.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/module/extensions/ZXNoterBase/ZXNoterBase.iml" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/ZXNoterBase/ZXNoterBase.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/module/extensions/ZXNoterUI/ZXNoterUI.iml" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/ZXNoterUI/ZXNoterUI.iml" afterDir="false" />
@@ -104,7 +101,7 @@
     "JAR 应用程序.未命名.executor": "Run",
     "Repository.Attach.Annotations": "false",
     "Repository.Attach.JavaDocs": "true",
-    "Repository.Attach.Sources": "false",
+    "Repository.Attach.Sources": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
@@ -112,7 +109,7 @@
     "git-widget-placeholder": "main",
     "jdk.selected.JAVA_MODULE": "openjdk-21",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/zedo/IdeaProjects/ZXNoter/module/librarys",
+    "last_opened_file_path": "D:/Projects/ZXNoter/module/extensions/ZXNoterUI",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -121,7 +118,7 @@
     "nodejs_package_manager_path": "npm",
     "project.structure.last.edited": "模块",
     "project.structure.proportion": "0.21134493",
-    "project.structure.side.proportion": "0.2874845",
+    "project.structure.side.proportion": "0.23445825",
     "settings.editor.selected.configurable": "preferences.pluginManager",
     "vue.rearranger.settings.migration": "true",
     "应用程序.AbstractAnimationRenderer.executor": "Run",
@@ -174,7 +171,7 @@
       <recent name="team.zxorg.skin" />
     </key>
   </component>
-  <component name="RunManager" selected="应用程序.Main">
+  <component name="RunManager" selected="JAR 应用程序.RunJar">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="team.zxorg.audiosystem.Main" />
       <module name="AudioSystem" />

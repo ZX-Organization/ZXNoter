@@ -18,7 +18,7 @@ import team.zxorg.extensionloader.event.ConfigEventListener;
 import team.zxorg.fxcl.component.Icon;
 import team.zxorg.fxcl.component.menu.LangCheckMenuItem;
 import team.zxorg.fxcl.component.menu.LangMenuItem;
-import team.zxorg.zxnoter.uiframe.ProjectView;
+import team.zxorg.zxnoter.ui.ProjectView;
 import team.zxorg.zxnoter.uiframe.ZXNoter;
 import team.zxorg.zxnoter.uiframe.component.ActivityItem;
 import team.zxorg.zxnoter.uiframe.component.ActivitySideBar;
