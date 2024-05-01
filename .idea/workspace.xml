@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
+      <artifact name="AudioSystem:jar" />
       <artifact name="FXComponentLibrary:jar" />
       <artifact name="ZXNoter:jar" />
       <artifact name="ZXNoterUIFrame:jar" />
@@ -11,23 +12,34 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dd78a4ca-7956-492b-9d75-ff82bf57b657" name="更改" comment="修复库管理器">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/openjfx_javafx_base.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/openjfx_javafx_base.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/openjfx_javafx_controls.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/openjfx_javafx_controls.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/openjfx_javafx_graphics.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/openjfx_javafx_graphics.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/openjfx_javafx_media.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/openjfx_javafx_media.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="dd78a4ca-7956-492b-9d75-ff82bf57b657" name="更改" comment="修复项目配置">
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/AudioSystem_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/reference/mp3Time/a.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/reference/mp3Time/audio.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/reference/mp3Time/audio.ogg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/reference/mp3Time/audio.pkf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/reference/mp3Time/audio.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/reference/mp3Time/audio_au.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/reference/mp3Time/audio_au_ff.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module/extensions/AudioSystem/resources/assets/audioSystem/icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module/extensions/AudioSystem/resources/assets/audioSystem/languages/zh-cn.json5" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module/extensions/AudioSystem/resources/extension.json5" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module/extensions/AudioSystem/src/team/zxorg/audiosystem/AudioMixer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module/extensions/AudioSystem/src/team/zxorg/audiosystem/AudioSampleChannel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module/extensions/AudioSystem/src/team/zxorg/audiosystem/AudioStreamMixNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module/extensions/AudioSystem/src/team/zxorg/audiosystem/AudioStreamNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module/extensions/AudioSystem/src/team/zxorg/audiosystem/AudioUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module/extensions/AudioSystem/src/team/zxorg/audiosystem/Entrypoint.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module/extensions/AudioSystem/src/team/zxorg/audiosystem/FileAudioStreamNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module/extensions/AudioSystem/src/team/zxorg/audiosystem/Sonic.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module/extensions/AudioSystem/src/team/zxorg/audiosystem/test/AudioMixerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module/extensions/AudioSystem/src/team/zxorg/audiosystem/test/FFmpegInfoTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module/extensions/AudioSystem/src/team/zxorg/audiosystem/test/InfoTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/module/extensions/AudioSystem/src/team/zxorg/audiosystem/test/PlayTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ZXNoter.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ZXNoter.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ZXNoter.jar" beforeDir="false" afterPath="$PROJECT_DIR$/ZXNoter.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module/ExtensionLoader/ExtensionLoader.iml" beforeDir="false" afterPath="$PROJECT_DIR$/module/ExtensionLoader/ExtensionLoader.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/ExtensionLoader/src/team/zxorg/extensionloader/core/Logger.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/ExtensionLoader/src/team/zxorg/extensionloader/core/Logger.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/module/extensions/AudioSystem/AudioSystem.iml" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/AudioSystem/AudioSystem.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module/extensions/Configuration/Configuration.iml" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/Configuration/Configuration.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module/extensions/ExtensionTemplate/ExtensionTemplate.iml" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/ExtensionTemplate/ExtensionTemplate.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module/extensions/FXComponentLibrary/FXComponentLibrary.iml" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/FXComponentLibrary/FXComponentLibrary.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module/extensions/UISEditor/UISEditor.iml" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/UISEditor/UISEditor.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module/extensions/ZXNoterBase/ZXNoterBase.iml" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/ZXNoterBase/ZXNoterBase.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module/extensions/ZXNoterUI/ZXNoterUI.iml" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/ZXNoterUI/ZXNoterUI.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/extensions/AudioSystem/src/team/zxorg/audiosystem/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/AudioSystem/src/team/zxorg/audiosystem/test/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,24 +121,28 @@
     "git-widget-placeholder": "main",
     "jdk.selected.JAVA_MODULE": "openjdk-21",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/Projects/ZXNoter/module/extensions/ZXNoterUI",
+    "last_opened_file_path": "D:/Projects/ZXNoter/module/extensions/AudioSystem",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "模块",
+    "project.structure.last.edited": "工件",
     "project.structure.proportion": "0.21134493",
     "project.structure.side.proportion": "0.23445825",
     "settings.editor.selected.configurable": "preferences.pluginManager",
     "vue.rearranger.settings.migration": "true",
     "应用程序.AbstractAnimationRenderer.executor": "Run",
+    "应用程序.AudioMixerTest.executor": "Run",
     "应用程序.ExpressionCalculator.executor": "Run",
+    "应用程序.FFmpegInfoTest.executor": "Run",
     "应用程序.IconPackInfoTest.executor": "Run",
+    "应用程序.InfoTest.executor": "Run",
     "应用程序.Main (1).executor": "Run",
     "应用程序.Main.executor": "Run",
     "应用程序.PackInfoTest.executor": "Run",
+    "应用程序.PlayTest.executor": "Run",
     "应用程序.PlistParser.executor": "Run",
     "应用程序.RunApp (1).executor": "Run",
     "应用程序.RunApp.executor": "Run",
@@ -147,37 +163,37 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Projects\ZXNoter\module\extensions\AudioSystem" />
       <recent name="F:\AllProjects\ZX-Organization\ZXNoter\module\extensions\MapEditCore\resources" />
       <recent name="D:\Projects\ZXNoter\module\extensions\FXComponentLibrary\src\team\zxorg\fxcl\component" />
       <recent name="D:\Projects\ZXNoter\module\extensions\ZXNoterUIFrame\resources" />
       <recent name="D:\Projects\ZXNoter\module\extensions\ZXNoterUIFrame\docs" />
-      <recent name="D:\Projects\ZXNoter\module\extensions\FXComponentLibrary\resources\assets\fxComponentLibrary" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Projects\ZXNoter\module\extensions\AudioSystem\src\team\zxorg\audiosystem" />
       <recent name="$PROJECT_DIR$/libraries/bytedeco" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/module/extensions/ZXNoterUIFrame/resources/assets/zxnoterUiFrame/ui" />
       <recent name="$PROJECT_DIR$/module/extensions/ZXNoterUIFrame/resources/assets/zxnoterUiFrame/ui/menu" />
-      <recent name="$PROJECT_DIR$/tool" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="team.zxorg.audiosystem" />
       <recent name="team.zxorg.zxnoter.uiframe.base" />
       <recent name="team.zxorg.newskin.uis.animaion" />
       <recent name="team.zxorg.newskin.uis" />
       <recent name="team.zxorg.ui.javafx.sub.editor.aa" />
-      <recent name="team.zxorg.skin" />
     </key>
   </component>
-  <component name="RunManager" selected="JAR 应用程序.RunJar">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="team.zxorg.audiosystem.Main" />
+  <component name="RunManager" selected="应用程序.AudioMixerTest">
+    <configuration name="AudioMixerTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="team.zxorg.audiosystem.test.AudioMixerTest" />
       <module name="AudioSystem" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="team.zxorg.audiosystem.*" />
+          <option name="PATTERN" value="team.zxorg.audiosystem.test.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -185,22 +201,55 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RunApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="RunApp" />
-      <module name="ZXNoter" />
+    <configuration name="FFmpegInfoTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="team.zxorg.audiosystem.test.FFmpegInfoTest" />
+      <module name="AudioSystem" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="team.zxorg.audiosystem.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
-        <option name="BuildArtifacts" enabled="true">
-          <artifact name="ExtensionTemplate:jar" />
-        </option>
-        <option name="BuildArtifacts" enabled="true">
-          <artifact name="FXComponentLibrary:jar" />
-        </option>
-        <option name="BuildArtifacts" enabled="true">
-          <artifact name="ZXNoterUIFrame:jar" />
-        </option>
-        <option name="BuildArtifacts" enabled="true">
-          <artifact name="MapEditCore:jar" />
-        </option>
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="InfoTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="team.zxorg.audiosystem.test.InfoTest" />
+      <module name="AudioSystem" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="team.zxorg.audiosystem.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="team.zxorg.audiosystem.test.Main" />
+      <module name="AudioSystem" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="team.zxorg.audiosystem.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PlayTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="team.zxorg.audiosystem.test.PlayTest" />
+      <module name="AudioSystem" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="team.zxorg.audiosystem.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
@@ -219,17 +268,12 @@
       <option name="ALTERNATIVE_JRE_PATH" />
       <method v="2">
         <option name="BuildArtifacts" enabled="true">
+          <artifact name="AudioSystem:jar" />
           <artifact name="FXComponentLibrary:jar" />
           <artifact name="ZXNoter:jar" />
           <artifact name="ZXNoterUIFrame:jar" />
         </option>
       </method>
-    </configuration>
-    <configuration name="tool-SvgReader" type="JarApplication" temporary="true">
-      <option name="JAR_PATH" value="$PROJECT_DIR$/tool/SVGReader-linux.jar" />
-      <option name="WORKING_DIRECTORY" value="$ProjectFileDir$\resourcepacks\iconPack-line" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <method v="2" />
     </configuration>
     <configuration default="true" type="JetRunConfigurationType">
       <module name="ZXNoterBase" />
@@ -246,16 +290,20 @@
     </configuration>
     <list>
       <item itemvalue="JAR 应用程序.RunJar" />
-      <item itemvalue="JAR 应用程序.tool-SvgReader" />
       <item itemvalue="应用程序.test" />
+      <item itemvalue="应用程序.AudioMixerTest" />
+      <item itemvalue="应用程序.FFmpegInfoTest" />
+      <item itemvalue="应用程序.InfoTest" />
+      <item itemvalue="应用程序.PlayTest" />
       <item itemvalue="应用程序.Main" />
-      <item itemvalue="应用程序.RunApp" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="应用程序.AudioMixerTest" />
+        <item itemvalue="应用程序.InfoTest" />
+        <item itemvalue="应用程序.PlayTest" />
         <item itemvalue="应用程序.Main" />
-        <item itemvalue="应用程序.RunApp" />
-        <item itemvalue="JAR 应用程序.tool-SvgReader" />
+        <item itemvalue="应用程序.FFmpegInfoTest" />
       </list>
     </recent_temporary>
   </component>
@@ -708,7 +756,15 @@
       <option name="project" value="LOCAL" />
       <updated>1706218918993</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="修复项目配置">
+      <option name="closed" value="true" />
+      <created>1714372184067</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1714372184067</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -739,7 +795,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="update reader interface" />
     <MESSAGE value="update ZXMInfo" />
     <MESSAGE value="update file name" />
     <MESSAGE value="update reader and fix ZXMap" />
@@ -764,7 +819,8 @@
     <MESSAGE value="更新UI框架" />
     <MESSAGE value="更新UI框架，增加了一个启动器" />
     <MESSAGE value="修复库管理器" />
-    <option name="LAST_COMMIT_MESSAGE" value="修复库管理器" />
+    <MESSAGE value="修复项目配置" />
+    <option name="LAST_COMMIT_MESSAGE" value="修复项目配置" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

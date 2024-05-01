@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="AudioSystem:jar">
+    <output-path>$PROJECT_DIR$/extensions</output-path>
+    <root id="archive" name="AudioSystem.jar">
+      <element id="module-output" name="AudioSystem" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/bytedeco/ffmpeg/6.1.1-1.5.10/ffmpeg-6.1.1-1.5.10.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/bytedeco/javacpp/1.5.10/javacpp-1.5.10.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

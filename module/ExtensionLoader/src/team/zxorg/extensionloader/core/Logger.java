@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Objects;
 import java.util.logging.*;
 
 public class Logger {
@@ -83,7 +84,7 @@ public class Logger {
                 printSystemLog(buf, off, len, CustomizeLevel.DEBUG);
             }
         });
-        info(Language.get("message.logger.initialize"));
+        info(Objects.requireNonNullElse(Language.getOrNull("message.logger.initialize"),"Logger is initialized"));
     }
 
 
