@@ -18,6 +18,11 @@ public class AudioStreamMixNode extends AudioStreamNode {
     private final List<AudioStreamNode> nodes = new ArrayList<>();
 
     @Override
+    void handle(AudioFormat targetFormat, byte[] buffer) {
+
+    }
+
+    @Override
     void handle(AudioFormat format, short[] buffer) {
         if (sampleBuffer == null)
             sampleBuffer = new short[buffer.length];
@@ -31,6 +36,11 @@ public class AudioStreamMixNode extends AudioStreamNode {
                 buffer[i] += sampleBuffer[i];
             }
         }
+    }
+
+    @Override
+    void handle(AudioFormat targetFormat, float[] buffer) {
+
     }
 
     /**

@@ -18,6 +18,11 @@ public class FileAudioStreamNode extends AudioStreamNode {
     }
 
     @Override
+    void handle(AudioFormat targetFormat, byte[] buffer) {
+
+    }
+
+    @Override
     void handle(AudioFormat format, short[] buffer) {
         if (byteBuffer == null) {
             byteBuffer = ByteBuffer.allocate(buffer.length * 2);
@@ -36,6 +41,11 @@ public class FileAudioStreamNode extends AudioStreamNode {
             for (int i = 0; i < buffer.length; i++) {
                 buffer[i] = byteBuffer.getShort();
             }
+
+    }
+
+    @Override
+    void handle(AudioFormat targetFormat, float[] buffer) {
 
     }
 }
