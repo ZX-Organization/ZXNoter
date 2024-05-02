@@ -6,6 +6,8 @@ import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.SourceDataLine;
+import java.nio.ByteBuffer;
+import java.nio.FloatBuffer;
 import java.util.Arrays;
 
 public class AudioMixer {
@@ -18,15 +20,19 @@ public class AudioMixer {
      */
     private AudioFormat audioFormat;
     /**
+     * 采样缓冲区
+     */
+    private FloatBuffer sampleBuffer;
+    /**
      * 字节缓冲区
      */
-    private byte[] buffer;
+    private ByteBuffer byteBuffer;
     /**
      * 缓冲区大小
      */
     private int bufferSize;
 
-    private AudioStreamMixNode mixNode = new AudioStreamMixNode();
+    private final AudioStreamMix mixNode = new AudioStreamMix();
 
 
     private final Thread AudioMixerThread = new Thread("AudioMixerThread") {
@@ -39,9 +45,22 @@ public class AudioMixer {
         @Override
         public void run() {
             while (!isInterrupted()) {
-                Arrays.fill(buffer, (byte) 0);
-                mixNode.read(audioFormat, buffer);
-                sourceDataLine.write(buffer, 0, buffer.length);
+                byteBuffer.rewind();
+                sampleBuffer.rewind();
+                Arrays.fill(sampleBuffer.array(), 0);
+                mixNode.handle(audioFormat, sampleBuffer);
+
+                sampleBuffer.rewind();
+                if (audioFormat.getEncoding() == AudioFormat.Encoding.PCM_SIGNED) {
+                    //转换编码
+                    while (sampleBuffer.hasRemaining()) {
+                        byteBuffer.putShort((short) Math.round(sampleBuffer.get() * Short.MAX_VALUE));
+                    }
+                } else if (audioFormat.getEncoding() == AudioFormat.Encoding.PCM_FLOAT) {
+                    byteBuffer.asFloatBuffer().put(sampleBuffer);
+                }
+                byteBuffer.flip();
+                sourceDataLine.write(byteBuffer.array(), 0, byteBuffer.capacity());
             }
             Logger.warning("AudioMixerThread 关闭");
         }
@@ -80,14 +99,15 @@ public class AudioMixer {
         if (sourceDataLine == null)
             sourceDataLine = AudioSystem.getSourceDataLine(audioFormat);
 
-
-        //sampleBuffer = new short[bufferSize * audioFormat.getChannels()];
-        //设置缓冲区2
-        //buffer = ByteBuffer.allocate(sampleBuffer.length * 2);
-        buffer = new byte[bufferSize];
+        //采样缓冲区
+        sampleBuffer = FloatBuffer.allocate(bufferSize * audioFormat.getChannels());
+        sampleBuffer.limit(sampleBuffer.capacity());
+        //根据目标格式初始化缓冲区
+        byteBuffer = ByteBuffer.allocate(bufferSize * audioFormat.getChannels() * (audioFormat.getEncoding() == AudioFormat.Encoding.PCM_SIGNED ? 2 : (audioFormat.getEncoding() == AudioFormat.Encoding.PCM_FLOAT ? 4 : -1)));
+        byteBuffer.limit(byteBuffer.capacity());
 
         //启动源数据线路
-        sourceDataLine.open(audioFormat, bufferSize * audioFormat.getFrameSize());
+        sourceDataLine.open(audioFormat, byteBuffer.capacity());
         sourceDataLine.start();
 
         //启动混音器线程
@@ -97,7 +117,7 @@ public class AudioMixer {
         Logger.info("AudioMixer open");
     }
 
-    public AudioStreamMixNode getMixNode() {
+    public AudioStreamMix getMixNode() {
         return mixNode;
     }
 

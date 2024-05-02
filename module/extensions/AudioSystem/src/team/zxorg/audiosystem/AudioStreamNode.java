@@ -1,56 +1,29 @@
 package team.zxorg.audiosystem;
 
+import team.zxorg.audiosystem.handler.AudioFloatHandler;
+
 import javax.sound.sampled.AudioFormat;
-import java.nio.ByteBuffer;
+import java.nio.FloatBuffer;
+import java.util.Objects;
 
-/**
- * 音频流节点
- */
-public abstract class AudioStreamNode {
-    /**
-     * 音频流子节点
-     */
-    private AudioStreamNode child;
+public class AudioStreamNode implements AudioFloatHandler {
+    private final AudioStreamNode child;
+    private final AudioFloatHandler handler;
 
-
-    private ByteBuffer byteBuffer;
-    private short[] shortBuffer;
-    private float[] floatBuffer;
-
-    /**
-     * 读取采样数据
-     *
-     * @param targetFormat 目标格式
-     * @param buffer       缓冲区
-     */
-    public final void read(AudioFormat targetFormat, byte[] buffer) {
-        if (child != null) child.read(targetFormat, buffer);
-        if (this.byteBuffer == null) this.byteBuffer = ByteBuffer.allocate(buffer.length);
-
-        handle(targetFormat, buffer);
+    public AudioStreamNode(AudioFloatHandler handler) {
+        this.handler = handler;
+        child = null;
     }
 
-    /**
-     * 处理音频
-     *
-     * @param targetFormat 目标格式
-     * @param buffer       缓冲区
-     */
-    abstract void handle(AudioFormat targetFormat, byte[] buffer);
+    public AudioStreamNode(AudioFloatHandler handler, AudioStreamNode child) {
+        this.handler = Objects.requireNonNull(handler);
+        this.child = Objects.requireNonNull(child);
+    }
 
-    /**
-     * 处理音频
-     *
-     * @param targetFormat 目标格式
-     * @param buffer       缓冲区
-     */
-    abstract void handle(AudioFormat targetFormat, short[] buffer);
-
-    /**
-     * 处理音频
-     *
-     * @param targetFormat 目标格式
-     * @param buffer       缓冲区
-     */
-    abstract void handle(AudioFormat targetFormat, float[] buffer);
+    @Override
+    public void handle(AudioFormat targetFormat, FloatBuffer buffer) {
+        buffer.rewind();
+        handler.handle(targetFormat, buffer);
+        if (child != null) child.handle(targetFormat, buffer);
+    }
 }

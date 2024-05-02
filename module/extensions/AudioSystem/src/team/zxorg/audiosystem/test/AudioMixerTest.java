@@ -1,7 +1,7 @@
 package team.zxorg.audiosystem.test;
 
 import team.zxorg.audiosystem.AudioMixer;
-import team.zxorg.audiosystem.FileAudioStreamNode;
+import team.zxorg.audiosystem.FileAudioStreamChannel;
 
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
@@ -15,10 +15,10 @@ public class AudioMixerTest {
         mixer.setBufferSize(2048);
         mixer.open();
 
-        FileAudioStreamNode fileAudioStreamNode = new FileAudioStreamNode();
+        FileAudioStreamChannel fileAudioStreamNode = new FileAudioStreamChannel();
         fileAudioStreamNode.openFile(file.toFile());
 
-        FileAudioStreamNode fileAudioStreamNode2 = new FileAudioStreamNode();
+        FileAudioStreamChannel fileAudioStreamNode2 = new FileAudioStreamChannel();
         fileAudioStreamNode2.openFile(file.toFile());
 
         mixer.getMixNode().addNode(fileAudioStreamNode);
