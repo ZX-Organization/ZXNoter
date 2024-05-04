@@ -10,12 +10,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dd78a4ca-7956-492b-9d75-ff82bf57b657" name="更改" comment="新的渲染框架≠没有Bug">
+      <change afterPath="$PROJECT_DIR$/a.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/openjfx_javafx_base.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/openjfx_javafx_base.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/openjfx_javafx_controls.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/openjfx_javafx_controls.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/openjfx_javafx_graphics.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/openjfx_javafx_graphics.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/skin/uis/component/AbstractComponentRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/skin/uis/component/AbstractComponentRenderer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/skin/uis/ui/UISEditor.java" beforeDir="false" afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/skin/uis/ui/UISEditor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ZXNoterUIFrame/test/UISPerspectiveTransformTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/ZXNoterUIFrame/test/UISPerspectiveTransformTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/latest.log" beforeDir="false" afterPath="$PROJECT_DIR$/latest.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/latest.log.1" beforeDir="false" afterPath="$PROJECT_DIR$/latest.log.1" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +32,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="aa4a23fb9555d955910992f4964bec48fdda4039" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -66,7 +70,7 @@
   &quot;associatedIndex&quot;: 2
 }</component>
   <component name="ProjectId" id="2Y1E1Kbqe3Ad7f7qSglNh6Icyer" />
-  <component name="ProjectLevelVcsManager">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
@@ -76,32 +80,45 @@
   "keyToString": {
     "ASKED_ADD_EXTERNAL_FILES": "true",
     "Downloaded.Files.Path.Enabled": "false",
+    "JAR 应用程序.RunJar.executor": "Run",
+    "JAR 应用程序.SVGReader.jar.executor": "Run",
+    "JAR 应用程序.tool-SvgReader.executor": "Run",
+    "JAR 应用程序.未命名.executor": "Run",
     "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
+    "Repository.Attach.JavaDocs": "true",
+    "Repository.Attach.Sources": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "deletionFromPopupRequiresConfirmation": "false",
-    "git-widget-placeholder": "UI",
+    "git-widget-placeholder": "UISEditor",
     "jdk.selected.JAVA_MODULE": "openjdk-21",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/Projects/ZXNoter/ZXNoterUIFrame/src/team/zxorg/newskin/uis/ui",
+    "last_opened_file_path": "D:/Projects/ZXNoter/module/extensions/AudioSystem",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "库",
+    "project.structure.last.edited": "工件",
     "project.structure.proportion": "0.21134493",
-    "project.structure.side.proportion": "0.2874845",
+    "project.structure.side.proportion": "0.23445825",
     "settings.editor.selected.configurable": "preferences.pluginManager",
     "vue.rearranger.settings.migration": "true",
     "应用程序.AbstractAnimationRenderer.executor": "Run",
+    "应用程序.AudioMixerTest.executor": "Run",
     "应用程序.ExpressionCalculator.executor": "Run",
+    "应用程序.FFmpegInfoTest.executor": "Run",
+    "应用程序.IconPackInfoTest.executor": "Run",
+    "应用程序.InfoTest.executor": "Run",
+    "应用程序.Main (1).executor": "Run",
     "应用程序.Main.executor": "Run",
+    "应用程序.PackInfoTest.executor": "Run",
+    "应用程序.PlayTest.executor": "Run",
     "应用程序.PlistParser.executor": "Run",
+    "应用程序.RunApp (1).executor": "Run",
+    "应用程序.RunApp.executor": "Run",
     "应用程序.SkinEditor (1).executor": "Run",
     "应用程序.SkinEditor.executor": "Run",
     "应用程序.Test.executor": "Run",
@@ -112,7 +129,9 @@
     "应用程序.UISPerspectiveTransform.executor": "Run",
     "应用程序.UISPerspectiveTransformTest (1).executor": "Run",
     "应用程序.UISPerspectiveTransformTest.executor": "Run",
-    "应用程序.UISSkin.executor": "Run"
+    "应用程序.UISSkin.executor": "Run",
+    "应用程序.ZXVersion.executor": "Run",
+    "应用程序.test.executor": "Run"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -198,9 +217,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="应用程序.UISEditor" />
-        <item itemvalue="应用程序.UISPerspectiveTransformTest" />
         <item itemvalue="应用程序.UISPerspectiveTransform" />
         <item itemvalue="应用程序.ExpressionCalculator" />
+        <item itemvalue="应用程序.UISPerspectiveTransformTest" />
+        <item itemvalue="应用程序.UISEditor" />
       </list>
     </recent_temporary>
   </component>
