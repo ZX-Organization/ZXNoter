@@ -3,6 +3,8 @@ package team.zxorg.skin.uis.ui;
 import com.sun.javafx.application.PlatformImpl;
 import com.sun.javafx.util.Logging;
 import javafx.animation.AnimationTimer;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -33,7 +35,13 @@ public class UISEditor extends HBox {
     };
     TabPane tabPane = new TabPane() {
         {
-            //getSelectionModel().selectedItemProperty().addListener(observable -> reload());
+            getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+                if (newValue != null)
+                    if (newValue.getContent() instanceof VirtualizedScrollPane code) {
+                        if (code.getContent() instanceof UISCodeArea codeArea)
+                            uisCanvas.loadSkin(codeArea.getFile());
+                    }
+            });
             VBox.setVgrow(this, Priority.ALWAYS);
             setPrefWidth(640);
             setMinWidth(640);
@@ -121,7 +129,7 @@ public class UISEditor extends HBox {
     public UISEditor() {
 
         if (DEBUG)
-            lastDirectory=new File("./docs/UISEditorTest");
+            lastDirectory = new File("./docs/UISEditorTest");
 
         setAlignment(Pos.CENTER_LEFT);
 
@@ -249,7 +257,7 @@ public class UISEditor extends HBox {
         tab.setContent(vsPane);
         tabPane.getTabs().add(tab);
         tabPane.getSelectionModel().select(tab);
-        uisCanvas.loadSkin(path);
+        //uisCanvas.loadSkin(path);
     }
 
     public record UnitInfo(String name, String unit, int id) {

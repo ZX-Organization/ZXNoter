@@ -9,12 +9,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dd78a4ca-7956-492b-9d75-ff82bf57b657" name="更改" comment="新的渲染框架≠没有Bug">
-      <change afterPath="$PROJECT_DIR$/a.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/openjfx_javafx_base.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/openjfx_javafx_base.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/openjfx_javafx_controls.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/openjfx_javafx_controls.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/openjfx_javafx_graphics.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/openjfx_javafx_graphics.xml" afterDir="false" />
+    <list default="true" id="dd78a4ca-7956-492b-9d75-ff82bf57b657" name="更改" comment="UIS皮肤编辑器分支">
+      <change afterPath="$PROJECT_DIR$/latest.log.lck" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ZXNoter.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ZXNoter.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/skin/uis/ui/UISEditor.java" beforeDir="false" afterPath="$PROJECT_DIR$/ZXNoterUIFrame/src/team/zxorg/skin/uis/ui/UISEditor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/latest.log" beforeDir="false" afterPath="$PROJECT_DIR$/latest.log" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,14 +47,12 @@
     &quot;assignee&quot;: &quot;zedoCN&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">
-    <option name="selectedUrlAndAccountId">
-      <UrlAndAccount>
-        <option name="accountId" value="34e16b20-084b-4e85-836b-502b126494f8" />
-        <option name="url" value="https://github.com/ZX-Organization/ZXNoter.git" />
-      </UrlAndAccount>
-    </option>
-  </component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/ZX-Organization/ZXNoter.git&quot;,
+    &quot;accountId&quot;: &quot;0cc25748-9719-4f46-99fe-a2eb3dc6be35&quot;
+  }
+}</component>
   <component name="HighlightingSettingsPerFile">
     <setting file="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-controls/22-ea+16/javafx-controls-22-ea+16-sources.jar!/javafx/scene/control/Label.java" root0="SKIP_INSPECTION" />
     <setting file="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-graphics/22-ea+16/javafx-graphics-22-ea+16-sources.jar!/javafx/animation/FadeTransition.java" root0="SKIP_INSPECTION" />
@@ -76,64 +76,64 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "Downloaded.Files.Path.Enabled": "false",
-    "JAR 应用程序.RunJar.executor": "Run",
-    "JAR 应用程序.SVGReader.jar.executor": "Run",
-    "JAR 应用程序.tool-SvgReader.executor": "Run",
-    "JAR 应用程序.未命名.executor": "Run",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "true",
-    "Repository.Attach.Sources": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "UISEditor",
-    "jdk.selected.JAVA_MODULE": "openjdk-21",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/Projects/ZXNoter/module/extensions/AudioSystem",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "工件",
-    "project.structure.proportion": "0.21134493",
-    "project.structure.side.proportion": "0.23445825",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true",
-    "应用程序.AbstractAnimationRenderer.executor": "Run",
-    "应用程序.AudioMixerTest.executor": "Run",
-    "应用程序.ExpressionCalculator.executor": "Run",
-    "应用程序.FFmpegInfoTest.executor": "Run",
-    "应用程序.IconPackInfoTest.executor": "Run",
-    "应用程序.InfoTest.executor": "Run",
-    "应用程序.Main (1).executor": "Run",
-    "应用程序.Main.executor": "Run",
-    "应用程序.PackInfoTest.executor": "Run",
-    "应用程序.PlayTest.executor": "Run",
-    "应用程序.PlistParser.executor": "Run",
-    "应用程序.RunApp (1).executor": "Run",
-    "应用程序.RunApp.executor": "Run",
-    "应用程序.SkinEditor (1).executor": "Run",
-    "应用程序.SkinEditor.executor": "Run",
-    "应用程序.Test.executor": "Run",
-    "应用程序.UISEditor (1).executor": "Run",
-    "应用程序.UISEditor (2).executor": "Run",
-    "应用程序.UISEditor.executor": "Run",
-    "应用程序.UISParser.executor": "Run",
-    "应用程序.UISPerspectiveTransform.executor": "Run",
-    "应用程序.UISPerspectiveTransformTest (1).executor": "Run",
-    "应用程序.UISPerspectiveTransformTest.executor": "Run",
-    "应用程序.UISSkin.executor": "Run",
-    "应用程序.ZXVersion.executor": "Run",
-    "应用程序.test.executor": "Run"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;JAR 应用程序.RunJar.executor&quot;: &quot;Run&quot;,
+    &quot;JAR 应用程序.SVGReader.jar.executor&quot;: &quot;Run&quot;,
+    &quot;JAR 应用程序.tool-SvgReader.executor&quot;: &quot;Run&quot;,
+    &quot;JAR 应用程序.未命名.executor&quot;: &quot;Run&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;true&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;true&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;UISEditor&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;openjdk-21&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/zedo/IdeaProjects/ZXNoter/ZXNoterUIFrame&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.21134493&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.23445825&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;,
+    &quot;应用程序.AbstractAnimationRenderer.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.AudioMixerTest.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.ExpressionCalculator.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.FFmpegInfoTest.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.IconPackInfoTest.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.InfoTest.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.Main (1).executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.Main.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.PackInfoTest.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.PlayTest.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.PlistParser.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.RunApp (1).executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.RunApp.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.SkinEditor (1).executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.SkinEditor.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.Test.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.UISEditor (1).executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.UISEditor (2).executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.UISEditor.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.UISParser.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.UISPerspectiveTransform.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.UISPerspectiveTransformTest (1).executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.UISPerspectiveTransformTest.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.UISSkin.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.ZXVersion.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.test.executor&quot;: &quot;Run&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Projects\ZXNoter\ZXNoterUIFrame\src\team\zxorg\newskin\uis\ui" />
@@ -227,7 +227,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="jdk-19.0.2-corretto-19.0.2-3183f394aec4-f0552fc0" />
+        <option value="bundled-jdk-9f38398b9061-18abd8497189-intellij.indexing.shared.core-IU-241.14494.240" />
+        <option value="bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-IU-241.14494.240" />
       </set>
     </attachedChunks>
   </component>
@@ -294,6 +295,9 @@
       <workItem from="1704429866544" duration="63476000" />
       <workItem from="1704869893170" duration="23312000" />
       <workItem from="1705048106421" duration="10596000" />
+      <workItem from="1714797827569" duration="903000" />
+      <workItem from="1714798741667" duration="4272000" />
+      <workItem from="1714809513665" duration="252000" />
     </task>
     <task id="LOCAL-00002" summary="update ui">
       <option name="closed" value="true" />
@@ -479,7 +483,15 @@
       <option name="project" value="LOCAL" />
       <updated>1704992733248</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="UIS皮肤编辑器分支">
+      <option name="closed" value="true" />
+      <created>1714797615825</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1714797615825</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -521,7 +533,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/UI" />
+                        <option value="origin/main" />
                       </list>
                     </value>
                   </entry>
@@ -552,7 +564,8 @@
     <MESSAGE value="整理了代码≠没有Bug" />
     <MESSAGE value="更新了框架≠没有Bug" />
     <MESSAGE value="新的渲染框架≠没有Bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="新的渲染框架≠没有Bug" />
+    <MESSAGE value="UIS皮肤编辑器分支" />
+    <option name="LAST_COMMIT_MESSAGE" value="UIS皮肤编辑器分支" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/ZXNoter$Main.ic" NAME="Main 覆盖结果" MODIFIED="1688229822928" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
