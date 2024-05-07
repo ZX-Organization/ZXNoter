@@ -8,8 +8,8 @@ import team.zxorg.skin.uis.ExpressionVector;
 import team.zxorg.skin.uis.UISComponent;
 
 public class NoteComponentRenderer extends AbstractComponentRenderer {
-    ExpressionVector pos1;
-    ExpressionVector size1;
+   private ExpressionVector pos1;
+    private ExpressionVector size1;
 
     public NoteComponentRenderer(UISComponent component) {
         super(component);
@@ -105,10 +105,12 @@ public class NoteComponentRenderer extends AbstractComponentRenderer {
             double y2 = rr.getCenterY();
             double w2 = rr.getWidth() / 2;
 
-            //rr.drawImage(gc, tex2, x1 - w1, y1, x1 + w1, y1, x2 - w2, y2, x2 + w2, y2);
+            //绘制中间
+            gc.drawImage(tex2,  rr.getRight()-rr.getWidth()/2, y1-rr.getHeight()/2,- rr.getWidth(), y2 - y1);
+            //drawImage(tex2, rr.getLeft(), y1, rr.getWidth(), y2 - y1);
             //绘制尾部
             progressCalculation(rr, progress - 0.2);
-            //rr.drawImageTest(gc, tex3);
+            drawImage(tex3, rr.getLeft(), rr.getTop(), rr.getWidth(), rr.getHeight());
 
         } else if (type == 3) {
 
@@ -131,40 +133,38 @@ public class NoteComponentRenderer extends AbstractComponentRenderer {
         }
         //绘制头部
         progressCalculation(rr, progress);
-
-
-        double imgX = pos1.getX() + (pos2.getX() - pos1.getX()) * progress;
-        double imgY = pos1.getY() + (pos2.getY() - pos1.getY()) * progress;
-        double imgW = size1.getW() + (size2.getW() - size1.getW()) * progress;
-        double imgH = size1.getH() + (size2.getH() - size1.getH()) * progress;
-        pos.setX(imgX);
-        pos.setY(imgY);
-        size.setW(imgW);
-        size.setH(imgH);
-        drawImage(tex, imgX, imgY, imgW, imgH);
+        drawImage(tex, rr.getLeft(), rr.getTop(), rr.getWidth(), rr.getHeight());
 
 
         //rr.drawImage(gc, (tex5 != null ? tex5 : tex));
         //rr.drawImageTest(gc, tex);
 
         {
+
+            progressCalculation(rr, 1);
+            drawImage(tex, rr.getLeft(), rr.getTop(), rr.getWidth(), rr.getHeight());
+
             gc.setFill(Color.HOTPINK);
-            progressCalculation(rr, 0);
             gc.fillRect(rr.getLeft() - 2, rr.getTop() - 2, 4, 4);
 
-            //rr.drawImageTest(gc, tex);
 
             progressCalculation(rr, 1);
             //rr.drawImageTest(gc, tex);
             gc.fillRect(rr.getLeft() - 2, rr.getTop() - 2, 4, 4);
         }
+
+
+        pos.setX(rr.getLeft());
+        pos.setY(rr.getTop());
+        size.setW(rr.getWidth());
+        size.setH(rr.getHeight());
     }
 
     private void progressCalculation(RenderRectangle rr, double p) {
-        double imgX = pos.getX() + (pos2.getX() - pos.getX()) * p;
-        double imgY = pos.getY() + (pos2.getY() - pos.getY()) * p;
-        double imgW = size.getW() + (size2.getW() - size.getW()) * p;
-        double imgH = size.getH() + (size2.getH() - size.getH()) * p;
+        double imgX = pos1.getX() + (pos2.getX() - pos1.getX()) * p;
+        double imgY = pos1.getY() + (pos2.getY() - pos1.getY()) * p;
+        double imgW = size1.getW() + (size2.getW() - size1.getW()) * p;
+        double imgH = size1.getH() + (size2.getH() - size1.getH()) * p;
         rr.setPos(Pos.TOP_LEFT, imgX, imgY);
         rr.setSize(Pos.TOP_LEFT, imgW, imgH);
     }

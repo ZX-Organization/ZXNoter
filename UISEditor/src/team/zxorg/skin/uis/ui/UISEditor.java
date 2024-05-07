@@ -192,8 +192,8 @@ public class UISEditor extends HBox {
     public static boolean DEBUG = false;
 
     public static void main(String[] args) {
-        if (args.length == 1 & args[0].equals("DEBUG"))
-            DEBUG = true;
+        /*if (args.length == 1 & args[0].equals("DEBUG"))
+            DEBUG = true;*/
         ZXLogger.info("===== > ZXNoter Skin Editor < =====");
         ZXLogger.info("Version: " + VERSION + " Code: " + VERSION.getVersionCode());
         switch (VERSION.status()) {

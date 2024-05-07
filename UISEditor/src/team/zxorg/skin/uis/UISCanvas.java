@@ -117,7 +117,6 @@ public class UISCanvas extends LayerCanvasPane {
             expressionCalculator.setCanvasSize(width, height);
             expressionCalculator.setUnitCanvasHeight(unitHeight);
             //expressionCalculator.setSize(width, height);
-
         }
 
 
@@ -125,6 +124,7 @@ public class UISCanvas extends LayerCanvasPane {
             component.reloadPos();
             component.reloadStyle();
         }
+        UISSkin.sortRenders(componentRenders);
 
         resetTime();
     }

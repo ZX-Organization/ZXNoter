@@ -286,8 +286,6 @@ public class UISSkin {
             }
         }
 
-        //再次排序渲染器
-        sortRenders(renderers);
         return isChanged;
     }
 
@@ -297,7 +295,7 @@ public class UISSkin {
      *
      * @param renderers 渲染器
      */
-    private static void sortRenders(List<AbstractComponentRenderer> renderers) {
+    public static void sortRenders(List<AbstractComponentRenderer> renderers) {
         renderers.sort(Comparator.comparingInt(AbstractComponentRenderer::getZindex));
     }
 

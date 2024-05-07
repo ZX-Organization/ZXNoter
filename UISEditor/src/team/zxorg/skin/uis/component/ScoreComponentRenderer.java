@@ -1,17 +1,14 @@
 package team.zxorg.skin.uis.component;
 
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 import team.zxorg.skin.uis.ExpressionVector;
 import team.zxorg.skin.uis.UISComponent;
 import team.zxorg.skin.uis.UISFrame;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class ScoreComponentRenderer extends AbstractComponentRenderer {
     //定义数字图片素材, 分别是0到9, 百分号, 小数点, 减号, 加号, 和乘号, 一共需要15张图片
     UISFrame frame;
-    List<Double> frameWeight;
     //字体的高度 宽度需要结合图片计算比例缩放
     ExpressionVector fsize;
     //固定子字宽 跟随第一帧
@@ -30,15 +27,9 @@ public class ScoreComponentRenderer extends AbstractComponentRenderer {
     @Override
     void reloadResComponent() {
         frame = component.getFrame("frame");
-
-
-        frameWeight = new ArrayList<>();
-        for (Image image : frame.getFrames()) {
-            frameWeight.add(image.getWidth() / image.getHeight());
-        }
-        fixWeight = frameWeight.getFirst();
         Image image = frame.getFrame(0);
         if (image != null) {
+            fixWeight = image.getWidth() / image.getHeight();
             texSize.setW(image.getWidth());
             texSize.setH(image.getHeight());
         }
@@ -46,8 +37,10 @@ public class ScoreComponentRenderer extends AbstractComponentRenderer {
 
     @Override
     void reloadPosComponent() {
+        score = 0;
         pos2 = component.getExpressionVector("pos2");
         fsize = component.getExpressionVector("fsize");
+        reloadStyle();
     }
 
     @Override
@@ -63,19 +56,12 @@ public class ScoreComponentRenderer extends AbstractComponentRenderer {
             scoreStr = (int) score + "";
         }
 
-        double aw = 0;
-        double cw = fixWeight * fsize.getW();
-
         //计算所需宽度
-        for (char c : scoreStr.toCharArray()) {
-            int index = getCharIndex(c);
-            //double cw = frameWeight.get(index) * fsize;
-            aw += cw + pos2.getX();
-        }
+        double cw = fixWeight * fsize.getW();
+        double aw = cw * scoreStr.length() + pos2.getX();
 
 
         // 设置初始绘制位置
-
         double x = pos.getX() - switch (anchor.getHpos()) {
             case LEFT -> 0;
             case CENTER -> aw / 2;
@@ -87,24 +73,30 @@ public class ScoreComponentRenderer extends AbstractComponentRenderer {
             case BOTTOM -> fsize.getW();
         };
         // 遍历字符串中的每个字符
-        for (char c : scoreStr.toCharArray()) {
-            int index = getCharIndex(c);
+        char[] sc = scoreStr.toCharArray();
+        for (int i = 0; i < sc.length; i++) {
+            int index = getCharIndex(sc[i]);
             if (index != -1) {
                 //double cw = frameWeight.get(index) * fsize;
                 // 获取当前字符对应的图片
                 Image charFrame = frame.getFrame(index);
-
                 // 绘制字符图片
                 //rr.setPos(Pos.BOTTOM_LEFT, x, y);
-                double fw = 8;
-                if (frameWeight.size() > index)
-                    fw = frameWeight.get(index);
+                /*if (frameWeight.size() > index)
+                    fw = frameWeight.get(index);*/
                 //rr.setSize(Pos.BOTTOM_LEFT, );
-                drawImage(charFrame, x, y, fw * fsize.getW(), fsize.getW());
+                if (charFrame == null)
+                    continue;
+
+                drawImage(charFrame, x, y, cw, fsize.getW());
+                gc.setStroke(Color.GREEN);
+                gc.strokeRect(x, y, cw, fsize.getW());
+
                 // rr.drawImage(gc, charFrame);
                 // 调整下一个字符的绘制位置
             }
-            x += cw + pos2.getX(); // 使用 pos2.getX() 作为字符之间的空隙
+            if (sc.length - 1 != i)
+                x += cw + pos2.getX(); // 使用 pos2.getX() 作为字符之间的空隙
         }
     }
 

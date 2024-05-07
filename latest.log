@@ -1,11 +1,11 @@
-[16:54:20] [UISEditor.main/INFO]: ZXLogger 日志系统 初始化完毕
-[16:54:20] [UISEditor.main/INFO]: ===== > ZXNoter Skin Editor < =====
-[16:54:20] [UISEditor.main/INFO]: Version: 1.0.3-Beta Code: 100031
-[16:54:20] [UISEditor.main/WARNING]: 当前为 [提前预览版本] 如有问题请联系开发者
-[16:54:20] [UISEditor.main/INFO]: ZXNoter Skin Editor启动
-[16:54:20] [UISEditor.main/INFO]: 初始化图形系统
-[16:54:20] [UISEditor.lambda$main$4/INFO]: 初始化配置
-[16:54:20] [ExpressionCalculator.setCanvasSize/INFO]: setCanvasSize: 0.0,0.0
-[16:54:21] [UISCanvas.setDeviceType/INFO]: 设置设备类型: Win
-[16:54:21] [UISCanvas.setAspectRatio/INFO]: 设置纵横比: 1.777777777777778
-[16:54:21] [UISCanvas.updateSkin/INFO]: 更新皮肤
+[23:56:21] [UISEditor.main/INFO]: ZXLogger 日志系统 初始化完毕
+[23:56:21] [UISEditor.main/INFO]: ===== > ZXNoter Skin Editor < =====
+[23:56:21] [UISEditor.main/INFO]: Version: 1.0.3-Beta Code: 100031
+[23:56:21] [UISEditor.main/WARNING]: 当前为 [提前预览版本] 如有问题请联系开发者
+[23:56:21] [UISEditor.main/INFO]: ZXNoter Skin Editor启动
+[23:56:21] [UISEditor.main/INFO]: 初始化图形系统
+[23:56:21] [UISEditor.lambda$main$4/INFO]: 初始化配置
+[23:56:21] [ExpressionCalculator.setCanvasSize/INFO]: setCanvasSize: 0.0,0.0
+[23:56:22] [UISCanvas.setDeviceType/INFO]: 设置设备类型: Win
+[23:56:22] [UISCanvas.setAspectRatio/INFO]: 设置纵横比: 1.777777777777778
+[23:56:22] [UISCanvas.updateSkin/INFO]: 更新皮肤

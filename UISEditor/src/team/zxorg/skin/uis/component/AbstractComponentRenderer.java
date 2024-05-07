@@ -13,6 +13,7 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.transform.Affine;
 import team.zxorg.skin.basis.RenderInterface;
+import team.zxorg.skin.basis.RenderRectangle;
 import team.zxorg.skin.uis.ExpressionCalculator;
 import team.zxorg.skin.uis.ExpressionVector;
 import team.zxorg.skin.uis.UISComponent;
@@ -267,6 +268,9 @@ public abstract class AbstractComponentRenderer implements RenderInterface {
         gc.setGlobalAlpha(opacity);
 
         switch (blend) {
+            case 0 -> {
+                gc.setGlobalBlendMode(BlendMode.SRC_OVER);
+            }
             case 1 -> {
                 gc.setGlobalBlendMode(BlendMode.ADD);
             }
@@ -289,7 +293,10 @@ public abstract class AbstractComponentRenderer implements RenderInterface {
         if (tex != null)
             drawImage(tex, pos.getX(), pos.getY(), size.getW(), size.getH());
     }
-
+    protected void drawImage(Image tex, RenderRectangle rr){
+        if (tex != null)
+            drawImage(tex, rr.getLeft(), rr.getTop(), rr.getWidth(), rr.getHeight());
+    }
     protected void drawImage(Image tex, double x, double y, double w, double h) {
         if (tex == null || tex.isError())
             return;
