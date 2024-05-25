@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="JAVA_MODULE" version="4">
+  <component name="CheckStyle-IDEA-Module" serialisationVersion="2">
+    <option name="activeLocationsIds" />
+  </component>
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$">
@@ -10,12 +13,9 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="apache.httpcomponents.client5.httpclient5" level="project" />
     <orderEntry type="library" name="alibaba.fastjson2" level="project" />
     <orderEntry type="library" name="openjfx.javafx.graphics" level="project" />
     <orderEntry type="library" name="openjfx.javafx.base" level="project" />
     <orderEntry type="library" name="openjfx.javafx.controls" level="project" />
-    <orderEntry type="library" name="AudioChannel" level="project" />
-    <orderEntry type="library" name="openjfx.javafx.fxml" level="project" />
   </component>
 </module>

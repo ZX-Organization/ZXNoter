@@ -9,30 +9,48 @@ import javafx.scene.text.TextAlignment;
 import team.zxorg.zxnoter.map.ZXMap;
 import team.zxorg.zxnoter.note.timing.Timing;
 import team.zxorg.zxnoter.ui_old.TimeUtils;
-import team.zxorg.zxnoter.ui_old.render.Render;
 import team.zxorg.zxnoter.ui_old.render.basis.RenderPoint;
 import team.zxorg.zxnoter.ui_old.render.fixedorbit.key.FixedOrbitObjectKey;
 
 import java.util.ArrayList;
-import java.util.TreeMap;
 
 public class FixedOrbitInfoRender extends FixedOrbitRender {
+    public boolean timeIsFormat = true;
+    public RenderPoint point = new RenderPoint();
+    public Timing selectTiming;
+    ZXMap zxMap;
+    ArrayList<RenderBeat> renderBeats;
+    int frameCount = 0;
+    int frame = 0;
+
     public FixedOrbitInfoRender(FixedOrbitRenderInfo renderInfo, ZXMap renderZXMap, Canvas canvas, String theme, ArrayList<RenderBeat> renderBeats, ZXMap zxMap) {
         super(renderInfo, renderZXMap, canvas, theme);
         this.renderBeats = renderBeats;
         this.zxMap = zxMap;
+        new Thread(() -> {
+            while (true) {
+                frame = frameCount;
+                frameCount = 0;
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }).start();
     }
-
-    ZXMap zxMap;
-
-    ArrayList<RenderBeat> renderBeats;
-    public boolean timeIsFormat = true;
-    public RenderPoint point = new RenderPoint();
-
-    public Timing selectTiming;
 
     @Override
     protected void renderHandle() {
+        frameCount++;
+
+        graphics.setFill(Color.WHEAT);
+        graphics.setFont(new Font(16));
+        graphics.setTextAlign(TextAlignment.LEFT);
+        graphics.setTextBaseline(VPos.BOTTOM);
+        graphics.fillText(frame + "FPS", 0, canvas.getHeight());
+
+
         selectTiming = null;
         //绘制Timing点
         for (int i = 0; i < zxMap.timingPoints.size(); i++) {
@@ -72,7 +90,6 @@ public class FixedOrbitInfoRender extends FixedOrbitRender {
         }
 
 
-
         //绘制Timing点
         for (int i = 0; i < zxMap.timingPoints.size(); i++) {
             Timing timing = zxMap.timingPoints.get(i);
@@ -98,9 +115,6 @@ public class FixedOrbitInfoRender extends FixedOrbitRender {
         }
 
 
-
-
-
         for (RenderBeat renderBeat : renderBeats) {
             double beatCycleTime = 60000. / (renderBeat.timing.absBpm);
 
@@ -115,7 +129,7 @@ public class FixedOrbitInfoRender extends FixedOrbitRender {
                 graphics.setFont(new Font(16));
                 graphics.setTextAlign(TextAlignment.RIGHT);
                 graphics.setTextBaseline(VPos.CENTER);
-                //graphics.fillText((timeIsFormat ? TimeUtils.formatTime(time) : time) + "", getInfo().canvasWidth.getValue() - 16, getInfo().getTimeToPosition(time));
+                graphics.fillText((timeIsFormat ? TimeUtils.formatTime(time) : time) + "", getInfo().canvasWidth.getValue() - 16, getInfo().getTimeToPosition(time));
             }
 
             //绘制拍线
@@ -124,14 +138,14 @@ public class FixedOrbitInfoRender extends FixedOrbitRender {
             renderRectangle.setY(VPos.CENTER, getInfo().getTimeToPosition(renderBeat.time));
             drawImage();*/
 
-
+            //主节拍线的时间渲染
             graphics.setFill(Color.WHEAT);
             graphics.setFont(new Font(16));
             graphics.setTextAlign(TextAlignment.RIGHT);
             graphics.setTextBaseline(VPos.CENTER);
-            /*graphics.fillText((timeIsFormat ? TimeUtils.formatTime(renderBeat.time) : renderBeat.time) + "",
+            graphics.fillText((timeIsFormat ? TimeUtils.formatTime(renderBeat.time) : renderBeat.time) + "",
                     getInfo().canvasWidth.getValue() - 16,
-                    getInfo().getTimeToPosition(renderBeat.time));*/
+                    getInfo().getTimeToPosition(renderBeat.time));
 
 
             graphics.setFill(Color.WHEAT);

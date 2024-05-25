@@ -13,8 +13,8 @@ import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import team.zxorg.zxnoter.Main;
-import team.zxorg.zxnoter.sound.audiomixer.AudioMixer;
 import team.zxorg.zxnoter.resource_old.ZXResources;
+import team.zxorg.zxnoter.sound.audiomixer.AudioMixer;
 import team.zxorg.zxnoter.sound.audiomixer.FFmpeg;
 import team.zxorg.zxnoter.ui_old.editor.BaseEditor;
 import team.zxorg.zxnoter.ui_old.editor.MapEditor;
@@ -27,51 +27,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class ZXNApp extends Application {
-    /**
-     * 标题栏
-     */
-    HBox titleBar = new HBox();
-    /**
-     * 正文容器
-     */
-    HBox bodyPane = new HBox();
-
-    /**
-     * 菜单栏
-     */
-    MenuBar menuBar = new MenuBar();
-
-    /**
-     * 活动栏
-     */
-    VBox activityBar = new VBox();
-
-    /**
-     * 侧边栏
-     */
-    VBox sideBar = new VBox();
-
-
-    /**
-     * 工作空间 分页
-     */
-    TabPane workspaceTabPane = new TabPane();
-
-
-    /**
-     * 工作空间
-     */
-    StackPane workspace = new StackPane();
-
-
-    /**
-     * 根容器
-     */
-    VBox rootPane = new VBox(titleBar, bodyPane);
-
-
     public static AudioFormat audioFormat = new AudioFormat(48000, 16, 2, true, false);//音频格式
-
     public static AudioMixer audioMixer;
 
     static {
@@ -82,9 +38,45 @@ public class ZXNApp extends Application {
         }
     }
 
+    /**
+     * 标题栏
+     */
+    HBox titleBar = new HBox();
+    /**
+     * 正文容器
+     */
+    HBox bodyPane = new HBox();
+    /**
+     * 菜单栏
+     */
+    MenuBar menuBar = new MenuBar();
+    /**
+     * 活动栏
+     */
+    VBox activityBar = new VBox();
+    /**
+     * 侧边栏
+     */
+    VBox sideBar = new VBox();
+    /**
+     * 工作空间 分页
+     */
+    TabPane workspaceTabPane = new TabPane();
+    /**
+     * 工作空间
+     */
+    StackPane workspace = new StackPane();
+    /**
+     * 根容器
+     */
+    VBox rootPane = new VBox(titleBar, bodyPane);
+
+    public static void run() {
+        launch();
+    }
+
     @Override
     public void start(Stage stage) {
-
 
 
         //载入资源
@@ -145,7 +137,7 @@ public class ZXNApp extends Application {
                 FileChooser.ExtensionFilter osuFilter = new FileChooser.ExtensionFilter("osu谱面", "*.osu");
                 FileChooser.ExtensionFilter zxnFilter = new FileChooser.ExtensionFilter("zxn谱面", "*.zxn");
                 FileChooser.ExtensionFilter imdFilter = new FileChooser.ExtensionFilter("节奏大师谱面", "*.imd");
-                fileChooser.getExtensionFilters().addAll(allFilter,zxnFilter, osuFilter, imdFilter);
+                fileChooser.getExtensionFilters().addAll(allFilter, zxnFilter, osuFilter, imdFilter);
                 File file = fileChooser.showOpenDialog(stage.getOwner());
                 if (file != null) {
 
@@ -439,7 +431,7 @@ public class ZXNApp extends Application {
         }*/
 
         //正文容器 添加控件
-        bodyPane.getChildren().addAll( workspace);
+        bodyPane.getChildren().addAll(workspace);
 
 
         Scene mainScene = new Scene(rootPane);
@@ -457,6 +449,7 @@ public class ZXNApp extends Application {
         stage.setWidth(800);
         stage.setHeight(600);
         stage.show();
+        stage.setTitle("ZXNoter");
         stage.setOnCloseRequest(event -> {
             System.exit(0);
         });
@@ -469,9 +462,5 @@ public class ZXNApp extends Application {
             alert.showAndWait();
         }
 
-    }
-
-    public static void run() {
-        launch();
     }
 }

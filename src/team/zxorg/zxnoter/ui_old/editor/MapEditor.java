@@ -53,16 +53,13 @@ import java.util.regex.Pattern;
 
 public class MapEditor extends BaseEditor {
 
-    Tab tab;
-
     /**
      * 需要对应的zxmap
      */
     public ZXMap zxMap;
-
+    Tab tab;
 
     //ArrayList<Render> renders = new ArrayList<>();
-
     FixedOrbitMapRender previewMapRender;//预览渲染器
     FixedOrbitPreviewBackgroundRender previewBackgroundRender;//预览背景渲染器
     FixedOrbitMapRender previewShadowMapRender;//预览渲染器
@@ -698,9 +695,9 @@ public class MapEditor extends BaseEditor {
             //跳转开头
             {
                 Button button = sideToolBar.addButton("state", "svg.icons.editor.align-top", "跳转末尾");
-                if (zxMap.notes.isEmpty())
-                    return;
                 button.setOnAction((event -> {
+                    if (zxMap.notes.isEmpty())
+                        return;
                     mainMapRender.getInfo().timelinePosition.setValue(zxMap.notes.getLast().timeStamp);
                 }));
             }
@@ -785,6 +782,8 @@ public class MapEditor extends BaseEditor {
         fixedOrbitRenderInfo.judgedLinePositionPercentage.bind(mainMapRender.getInfo().judgedLinePositionPercentage);
         fixedOrbitRenderInfo.timelineZoom.bind(mainMapRender.getInfo().timelineZoom);
         infoRender = new FixedOrbitInfoRender(fixedOrbitRenderInfo, zxMap, infoCanvasPane.canvas, "default", renderBeats, zxMap);
+
+
         HBox.setMargin(infoCanvasPane, new Insets(0, 26, 0, 0));
 
 
@@ -1280,11 +1279,21 @@ public class MapEditor extends BaseEditor {
 
                 Path audioPath = mapResourcePath.resolve(zxMap.unLocalizedMapInfo.getInfo(ZXMInfo.AudioPath));
                 if (Files.exists(audioPath)) {
-                    Path workAudioPath = audioPath.getParent().resolve(audioPath.getFileName() + ".wav");
+                    Path workAudioPath;
+                    if (audioPath.getFileName().toString().toLowerCase().endsWith(".wav")) {
+                        workAudioPath = audioPath;
+                    } else {
+                        workAudioPath = audioPath.getParent().resolve(audioPath.getFileName() + ".wav");
+
+                        if (!FFmpeg.audioToWav(audioPath, workAudioPath))
+                            throw new RuntimeException("音频转换失败");
+                    }
+
+
                     //格式转换
                     //System.out.println("格式转化");
-                    if (!FFmpeg.audioToWav(audioPath, workAudioPath))
-                        throw new RuntimeException("音频转换失败");
+
+
                     int id = ZXNApp.audioMixer.addAudio(workAudioPath);
                     audioChannel = ZXNApp.audioMixer.createChannel(id);
                     audioChannel.setVolume(0.10f);
@@ -1432,35 +1441,36 @@ public class MapEditor extends BaseEditor {
 
         if (audioChannel != null) {
             if (!audioChannel.getPlayState().equals(AudioChannel.PlayState.PAUSE)) {
+                //根据音频播放时间同步时间线
                 mainMapRender.getInfo().timelinePosition.set(audioChannel.getTime() + audioTimeOffset.get());
 
                 if (zxMap.notes.isEmpty())
                     return;
-                ArrayList<BaseNote> findsNotes = zxMap.getScaleNotes(mainMapRender.getInfo().timelinePosition.get() - 1, 700, true);
+                ArrayList<BaseNote> findsNotes = zxMap.getScaleNotes(mainMapRender.getInfo().timelinePosition.get() - 1000-10, 1000, true);
                 for (BaseNote note : findsNotes) {
-                    if (Math.abs(note.timeStamp - mainMapRender.getInfo().timelinePosition.get()) < 50)
-                        if (!hitsNotes.contains(note)) {
-                            hitsNotes.add(note);
-                            if (System.currentTimeMillis() - hitTime > 10) {
-                                int count = 0;
-                                for (BaseNote sameNote : findsNotes) {
-                                    if (Math.abs(note.timeStamp - sameNote.timeStamp) < 5)
-                                        count++;
-                                }
-
-
-                                AudioChannel audioChannel1;
-                                try {
-                                    audioChannel1 = ZXNApp.audioMixer.createChannel(hitAudioID);
-                                } catch (UnsupportedAudioFileException | IOException e) {
-                                    throw new RuntimeException(e);
-                                }
-                                audioChannel1.setEndBehavior(AudioChannel.EndBehavior.CLOSE);
-                                audioChannel1.setVolume(Math.min(hitKeyVolume + count * 0.2f * hitKeyVolume, 1f));
-                                audioChannel1.play();
-                                hitTime = System.currentTimeMillis();
+                    //if (note.timeStamp - mainMapRender.getInfo().timelinePosition.get() <= 15)
+                    if (!hitsNotes.contains(note)) {
+                        hitsNotes.add(note);
+                        if (System.currentTimeMillis() - hitTime > 2) {
+                            int count = 0;
+                            for (BaseNote sameNote : findsNotes) {
+                                if (Math.abs(note.timeStamp - sameNote.timeStamp) < 5)
+                                    count++;
                             }
+
+
+                            AudioChannel audioChannel1;
+                            try {
+                                audioChannel1 = ZXNApp.audioMixer.createChannel(hitAudioID);
+                            } catch (UnsupportedAudioFileException | IOException e) {
+                                throw new RuntimeException(e);
+                            }
+                            audioChannel1.setEndBehavior(AudioChannel.EndBehavior.CLOSE);
+                            audioChannel1.setVolume(Math.min(hitKeyVolume + count * 0.2f * hitKeyVolume, 1f));
+                            audioChannel1.play();
+                            hitTime = System.currentTimeMillis();
                         }
+                    }
                 }
             }
         }

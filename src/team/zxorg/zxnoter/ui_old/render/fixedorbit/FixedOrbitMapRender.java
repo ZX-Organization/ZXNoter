@@ -1,11 +1,10 @@
 package team.zxorg.zxnoter.ui_old.render.fixedorbit;
 
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.geometry.HPos;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
+import javafx.scene.image.Image;
 import team.zxorg.zxnoter.map.ZXMap;
 import team.zxorg.zxnoter.note.fixedorbit.ComplexNote;
 import team.zxorg.zxnoter.note.fixedorbit.FixedOrbitNote;
@@ -17,7 +16,14 @@ import team.zxorg.zxnoter.ui_old.render.fixedorbit.key.FixedOrbitNotesKey;
 
 
 public class FixedOrbitMapRender extends FixedOrbitRender {
-    String state;//状态
+    final String state;//状态
+    private final Image IMAGE_NODE;
+    private final Image IMAGE_NOTE;
+    private final Image IMAGE_END;
+    private final Image IMAGE_LEFT;
+    private final Image IMAGE_LONG;
+    private final Image IMAGE_RIGHT;
+    private final Image IMAGE_SLIDE;
     public RenderPoint renderPoint = new RenderPoint();//当前的鼠标位置
     public RenderNote renderNote = new RenderNote();//当前的鼠标位置
 
@@ -25,6 +31,13 @@ public class FixedOrbitMapRender extends FixedOrbitRender {
     public FixedOrbitMapRender(FixedOrbitRenderInfo renderInfo, CanvasPane canvas, ZXMap zxMap, String state, String theme) {
         super(renderInfo, zxMap, canvas.canvas, theme);
         this.state = state;
+        IMAGE_NODE = getImage(state, FixedOrbitNotesKey.NODE);
+        IMAGE_NOTE = getImage(state, FixedOrbitNotesKey.NOTE);
+        IMAGE_END = getImage(state, FixedOrbitNotesKey.END);
+        IMAGE_LEFT = getImage(state, FixedOrbitNotesKey.LEFT);
+        IMAGE_LONG = getImage(state, FixedOrbitNotesKey.LONG);
+        IMAGE_RIGHT = getImage(state, FixedOrbitNotesKey.RIGHT);
+        IMAGE_SLIDE = getImage(state, FixedOrbitNotesKey.SLIDE);
     }
 
 
@@ -61,7 +74,7 @@ public class FixedOrbitMapRender extends FixedOrbitRender {
                     drawNote(note, DrawMode.ALL, null);
                 }
 
-                loadImage(getImage(state, FixedOrbitNotesKey.NOTE));
+                loadImage(IMAGE_NOTE);
                 //计算尺寸
                 renderRectangle.setXY(Pos.CENTER,
                         orbitWidth * (note.orbit) + orbitWidth / 2,
@@ -97,7 +110,7 @@ public class FixedOrbitMapRender extends FixedOrbitRender {
             //画线
             if (!drawMode.equals(DrawMode.ONLY_NODE)) {
                 FixedOrbitNotesKey fixedOrbitNotesKey = FixedOrbitNotesKey.LONG;
-                loadImage(getImage(state, fixedOrbitNotesKey));
+                loadImage(IMAGE_LONG);
                 //计算尺寸
                 renderRectangle.scale(Pos.CENTER, orbitWidth * 0.16, Orientation.HORIZONTAL);
                 renderRectangle.setHeight(VPos.CENTER, longNote.sustainedTime * renderInfo.timelineZoom.doubleValue());
@@ -118,7 +131,7 @@ public class FixedOrbitMapRender extends FixedOrbitRender {
             //末尾节点
             if (!drawMode.equals(DrawMode.ONLY_LINE)) {
                 FixedOrbitNotesKey fixedOrbitNotesKey = drawMode.equals(DrawMode.ONLY_NODE) ? FixedOrbitNotesKey.NODE : FixedOrbitNotesKey.END;
-                loadImage(getImage(state, fixedOrbitNotesKey));
+                loadImage(drawMode.equals(DrawMode.ONLY_NODE) ? IMAGE_NODE : IMAGE_END);
 
                 renderRectangle.setXY(Pos.CENTER,
                         noteXPos,
@@ -139,7 +152,7 @@ public class FixedOrbitMapRender extends FixedOrbitRender {
             //画线
             if (!drawMode.equals(DrawMode.ONLY_NODE)) {
                 FixedOrbitNotesKey fixedOrbitNotesKey = FixedOrbitNotesKey.SLIDE;
-                loadImage(getImage(state, fixedOrbitNotesKey));
+                loadImage(IMAGE_SLIDE);
                 //计算尺寸
 
                 renderRectangle.scale(Pos.CENTER, orbitWidth * 0.16, Orientation.VERTICAL);
@@ -163,10 +176,11 @@ public class FixedOrbitMapRender extends FixedOrbitRender {
                 FixedOrbitNotesKey fixedOrbitNotesKey;
                 if (drawMode.equals(DrawMode.ONLY_NODE)) {//节点
                     fixedOrbitNotesKey = FixedOrbitNotesKey.NODE;
+                    loadImage(IMAGE_NODE);
                 } else {//箭头
                     fixedOrbitNotesKey = (slideNote.slideArg > 0 ? FixedOrbitNotesKey.RIGHT : FixedOrbitNotesKey.LEFT);
+                    loadImage((slideNote.slideArg > 0 ? IMAGE_RIGHT : IMAGE_LEFT));
                 }
-                loadImage(getImage(state, fixedOrbitNotesKey));
 
                 //计算尺寸
                 renderRectangle.setXY(Pos.CENTER,

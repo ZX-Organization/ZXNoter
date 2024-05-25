@@ -4,6 +4,7 @@ import javafx.beans.property.LongProperty;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.image.Image;
 import team.zxorg.zxnoter.map.ZXMap;
 import team.zxorg.zxnoter.ui_old.render.fixedorbit.key.FixedOrbitObjectKey;
 
@@ -11,15 +12,34 @@ import java.util.ArrayList;
 
 public class FixedOrbitBeatLineRender extends FixedOrbitRender {
 
+    final Image SUB_BEAT_LINE_R;
+    final Image SUB_BEAT_LINE_B;
+    final Image SUB_BEAT_LINE_P;
+    final Image SUB_BEAT_LINE_Y;
+    final Image SUB_BEAT_LINE;
+    final Image BEAT_LINE5;
+    final Image BOTTOM_LINE;
+    final Image TOP_LINE;
+    final Image JUDGED_LINE;
+
+    public boolean showSubBeats = false;
     ArrayList<RenderBeat> renderBeats;
     LongProperty mapTimeLength;//谱面时长
-    public boolean showSubBeats = false;
 
     public FixedOrbitBeatLineRender(FixedOrbitRenderInfo renderInfo, ZXMap renderZXMap, Canvas canvas, String theme, ArrayList<RenderBeat> renderBeats, LongProperty mapTimeLength) {
         super(renderInfo, renderZXMap, canvas, theme);
         this.renderBeats = renderBeats;
         this.mapTimeLength = mapTimeLength;
 
+        SUB_BEAT_LINE_R = getImage(FixedOrbitObjectKey.SUB_BEAT_LINE_R);
+        SUB_BEAT_LINE_B = getImage(FixedOrbitObjectKey.SUB_BEAT_LINE_B);
+        SUB_BEAT_LINE_P = getImage(FixedOrbitObjectKey.SUB_BEAT_LINE_P);
+        SUB_BEAT_LINE_Y = getImage(FixedOrbitObjectKey.SUB_BEAT_LINE_Y);
+        SUB_BEAT_LINE = getImage(FixedOrbitObjectKey.SUB_BEAT_LINE);
+        BEAT_LINE5 = getImage(FixedOrbitObjectKey.BEAT_LINE5);
+        BOTTOM_LINE = getImage(FixedOrbitObjectKey.BOTTOM_LINE);
+        TOP_LINE = getImage(FixedOrbitObjectKey.TOP_LINE);
+        JUDGED_LINE = getImage(FixedOrbitObjectKey.JUDGED_LINE);
     }
 
     @Override
@@ -34,38 +54,38 @@ public class FixedOrbitBeatLineRender extends FixedOrbitRender {
                     //loadImage(getImage(FixedOrbitObjectKey.SUB_BEAT_LINE));
                     switch (renderBeat.measure) {
                         case 2 -> {
-                            loadImage(getImage(FixedOrbitObjectKey.SUB_BEAT_LINE_R));
+                            loadImage(SUB_BEAT_LINE_R);
                         }
                         case 4 -> {
                             if (i == 2) {
-                                loadImage(getImage(FixedOrbitObjectKey.SUB_BEAT_LINE_R));
+                                loadImage(SUB_BEAT_LINE_R);
                             } else {
-                                loadImage(getImage(FixedOrbitObjectKey.SUB_BEAT_LINE_B));
+                                loadImage(SUB_BEAT_LINE_B);
                             }
                         }
                         case 6 -> {
                             if (i == 3) {
-                                loadImage(getImage(FixedOrbitObjectKey.SUB_BEAT_LINE_R));
+                                loadImage(SUB_BEAT_LINE_R);
                             } else {
-                                loadImage(getImage(FixedOrbitObjectKey.SUB_BEAT_LINE_P));
+                                loadImage(SUB_BEAT_LINE_P);
                             }
                         }
                         case 8 -> {
                             // 黄蓝黄红黄蓝黄
                             if ((i - 1) % 2 == 0) {
-                                loadImage(getImage(FixedOrbitObjectKey.SUB_BEAT_LINE_Y));
+                                loadImage(SUB_BEAT_LINE_Y);
                             } else {
                                 if (i == 4) {
-                                    loadImage(getImage(FixedOrbitObjectKey.SUB_BEAT_LINE_R));
+                                    loadImage(SUB_BEAT_LINE_R);
                                 } else {
-                                    loadImage(getImage(FixedOrbitObjectKey.SUB_BEAT_LINE_B));
+                                    loadImage(SUB_BEAT_LINE_B);
                                 }
                             }
 
 
                         }
                         default -> {
-                            loadImage(getImage(FixedOrbitObjectKey.SUB_BEAT_LINE));
+                            loadImage(SUB_BEAT_LINE);
                         }
                     }
                     renderRectangle.setWidth(HPos.LEFT, canvasRectangle.getWidth());
@@ -83,9 +103,9 @@ public class FixedOrbitBeatLineRender extends FixedOrbitRender {
                 loadImage(getImage(FixedOrbitObjectKey.BEAT_LINE3));*/
 
             if ("default".equals(theme))
-                loadImage(getImage(FixedOrbitObjectKey.BEAT_LINE5));
-           else if ("preview".equals(theme))
-                loadImage(getImage(FixedOrbitObjectKey.SUB_BEAT_LINE));
+                loadImage(BEAT_LINE5);
+            else if ("preview".equals(theme))
+                loadImage(SUB_BEAT_LINE);
 
             renderRectangle.setWidth(HPos.LEFT, canvasRectangle.getWidth());
             renderRectangle.setY(VPos.CENTER, getInfo().getTimeToPosition(renderBeat.time));
@@ -93,7 +113,7 @@ public class FixedOrbitBeatLineRender extends FixedOrbitRender {
 
 
             //绘制底部线
-            loadImage(getImage(FixedOrbitObjectKey.BOTTOM_LINE));
+            loadImage(BOTTOM_LINE);
             renderRectangle.setWidth(HPos.LEFT, canvasRectangle.getWidth());
             renderRectangle.setY(VPos.CENTER, getInfo().getTimeToPosition(0));
             //image = getImage(FixedOrbitObjectKey.BOTTOM_LINE);
@@ -101,7 +121,7 @@ public class FixedOrbitBeatLineRender extends FixedOrbitRender {
             drawImage();
 
             //绘制头部线
-            loadImage(getImage(FixedOrbitObjectKey.TOP_LINE));
+            loadImage(TOP_LINE);
             renderRectangle.setWidth(HPos.LEFT, canvasRectangle.getWidth());
             renderRectangle.setY(VPos.CENTER, getInfo().getTimeToPosition(mapTimeLength.get() + getInfo().judgedLinePositionTimeOffset.get()));
             //image = getImage(FixedOrbitObjectKey.TOP_LINE);
@@ -110,7 +130,7 @@ public class FixedOrbitBeatLineRender extends FixedOrbitRender {
 
 
             //绘制判定线
-            loadImage(getImage(FixedOrbitObjectKey.JUDGED_LINE));
+            loadImage(JUDGED_LINE);
             renderRectangle.setWidth(HPos.LEFT, canvasRectangle.getWidth());
             renderRectangle.setY(VPos.CENTER, renderInfo.canvasHeight.get() * getInfo().judgedLinePositionPercentage.doubleValue());
             //graphics.drawImage(image, 0, renderInfo.canvasHeight.get() * getInfo().judgedLinePositionPercentage.doubleValue() - image.getHeight() / 2, renderInfo.canvasWidth.get(), image.getHeight());

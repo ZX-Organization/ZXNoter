@@ -1,12 +1,19 @@
 package team.zxorg.zxnoter.ui_old;
 
+import java.util.HashMap;
+
 public class TimeUtils {
+    private static HashMap<Long, String> cache = new HashMap<>();
+
     /**
      * 将时间转为格式化时间字符串
+     *
      * @param timeInMillis 时间ms
      * @return 格式化时间
      */
     public static String formatTime(long timeInMillis) {
+        String f = cache.get(timeInMillis);
+        if (f != null) return f;
         long hours = timeInMillis / (60 * 60 * 1000);
         long remainingTime = timeInMillis % (60 * 60 * 1000);
         long minutes = remainingTime / (60 * 1000);
@@ -15,10 +22,12 @@ public class TimeUtils {
         long milliseconds = remainingTime % 1000;
 
         if (hours > 0) {
-            return String.format("%d:%02d:%02d.%03d", hours, minutes, seconds, milliseconds);
+            f = String.format("%d:%02d:%02d.%03d", hours, minutes, seconds, milliseconds);
         } else {
-            return String.format("%02d:%02d.%03d", minutes, seconds, milliseconds);
+            f = String.format("%02d:%02d.%03d", minutes, seconds, milliseconds);
         }
+        cache.put(timeInMillis, f);
+        return f;
     }
 
 
