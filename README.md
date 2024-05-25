@@ -1,5 +1,5 @@
 <div style="text-align: center; margin: 30px">
-  <span style="display: inline-block; vertical-align: middle; font-size: xxx-large;margin-right: 20px">ZXNoter</span>
+  <span style="display: inline-block; vertical-align: middle; font-size: xxx-large;margin-right: 30px">ZXNoter</span>
   <img src="./docs/ZXNoter-3.png" alt="" width="100" height="100" style="display: inline-block; vertical-align: middle;">
 </div>
 
@@ -33,8 +33,7 @@ This is a MusicGame MapEditor,welcome for use!
 |:-----:|:--:|
 | 资源系统  | ✅  |
 | 插件框架  | ✅  |
+| 谱面框架  | 🟢 |
 | UI框架  | 🟢 |
 | 音频框架  |    |
 | 谱面编辑器 |    |
-
-
