@@ -12,12 +12,11 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="ZXNoter" exported="" />
-    <orderEntry type="library" exported="" name="alibaba.fastjson2" level="project" />
-    <orderEntry type="library" exported="" name="apache.httpcomponents.client5.httpclient5" level="project" />
-    <orderEntry type="library" exported="" name="fxmisc.richtext.richtextfx" level="project" />
     <orderEntry type="library" exported="" name="openjfx.javafx.base" level="project" />
     <orderEntry type="library" exported="" name="openjfx.javafx.controls" level="project" />
     <orderEntry type="library" exported="" name="openjfx.javafx.graphics" level="project" />
+    <orderEntry type="library" exported="" name="fxmisc.flowless" level="project" />
+    <orderEntry type="library" exported="" name="fxmisc.richtext.richtextfx" level="project" />
+    <orderEntry type="library" exported="" name="google.code.gson" level="project" />
   </component>
 </module>

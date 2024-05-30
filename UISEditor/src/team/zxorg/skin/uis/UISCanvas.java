@@ -1,5 +1,7 @@
 package team.zxorg.skin.uis;
 
+import javafx.beans.property.LongProperty;
+import javafx.beans.property.SimpleLongProperty;
 import javafx.scene.canvas.GraphicsContext;
 import team.zxorg.skin.DeviceType;
 import team.zxorg.skin.uis.component.AbstractComponentRenderer;
@@ -13,24 +15,22 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class UISCanvas extends LayerCanvasPane {
+    //暂停状态
+    public boolean isPaused = false;
+    public LongProperty time = new SimpleLongProperty();
     UISSkin skin;
     //UISPerspectiveTransform perspective = new UISPerspectiveTransform();
     ExpressionCalculator expressionCalculator = new ExpressionCalculator();
-
     public MeasuringRulerRenderer measureRuler = new MeasuringRulerRenderer(expressionCalculator);
-
     ArrayList<AbstractComponentRenderer> componentRenders = new ArrayList<>();
     HashMap<UISComponent, AbstractComponentRenderer> componentMap = new HashMap<>();
-    //开始播放时的时间戳
-    public long startTime = 0;
-    //暂停时的时间位置
-    public long pauseTime = 0;
-    //暂停状态
-    public boolean isPaused = false;
-
     DeviceType deviceType;
     double aspectRatio = 1;
     double zoomRate = 1;
+    //开始播放时的时间戳
+    private long startTime = 0;
+    //暂停时的时间位置
+    private long pauseTime = 0;
 
     public UISCanvas() {
         /*createCanvas("bottom");
@@ -45,6 +45,7 @@ public class UISCanvas extends LayerCanvasPane {
         double width = expressionCalculator.getCanvasWidth();
         double height = expressionCalculator.getCanvasHeight();
         long currentTime = (isPaused ? pauseTime : System.currentTimeMillis() - startTime);
+        time.setValue(currentTime);
         /*if (!isPaused) {
             if (!timeLineSlider.isValueChanging())
                 timeLineSlider.setValue(currentTime / 1000.);
@@ -85,6 +86,27 @@ public class UISCanvas extends LayerCanvasPane {
         gc3d.restore();*/
     }
 
+    public void play() {
+        if (isPaused) {
+            isPaused = false;
+            startTime = System.currentTimeMillis() - pauseTime;
+        }
+    }
+
+    public void pause() {
+        if (!isPaused) {
+            isPaused = true;
+            pauseTime = System.currentTimeMillis() - startTime;
+        }
+    }
+
+    public void setTime(long currentTime) {
+        if (isPaused) {
+            pauseTime = currentTime;
+        } else {
+            startTime = System.currentTimeMillis() - currentTime;
+        }
+    }
 
     public void updateSkin() {
         ZXLogger.info("更新皮肤");
@@ -126,7 +148,7 @@ public class UISCanvas extends LayerCanvasPane {
         }
         UISSkin.sortRenders(componentRenders);
 
-        resetTime();
+        //resetTime();
     }
 
     public void setDeviceType(DeviceType deviceType) {
@@ -183,11 +205,11 @@ public class UISCanvas extends LayerCanvasPane {
 
 
     public void resetTime() {
-        if (isPaused) {
+        /*if (isPaused) {
             pauseTime = -3500;
         } else {
             startTime = System.currentTimeMillis() + 3500;
-        }
-
+        }*/
+        setTime(-3500);
     }
 }

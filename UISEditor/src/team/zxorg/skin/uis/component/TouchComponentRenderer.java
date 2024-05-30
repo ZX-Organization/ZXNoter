@@ -49,14 +49,15 @@ public class TouchComponentRenderer extends AbstractComponentRenderer {
     }
 
     @Override
-    void drawComponent( double width, double height,long time) {
+    void drawComponent(double width, double height, long time) {
+        transform();
         gc.restore();
-        gc.setGlobalAlpha(0.5);
+        //gc.setGlobalAlpha(0.5);
         gc.setLineWidth(1);
         gc.setFill(Color.PINK);
         gc.setStroke(Color.PINK);
         for (RenderInterface render : subRenderList)
-            render.draw(gc, width, height,time);
+            render.draw(gc, width, height, time);
     }
 
     /**
@@ -76,7 +77,7 @@ public class TouchComponentRenderer extends AbstractComponentRenderer {
         }
 
         @Override
-        public void draw(GraphicsContext gc, double width, double height,long time) {
+        public void draw(GraphicsContext gc, double width, double height, long time) {
 
             rr.setPos(Pos.BOTTOM_LEFT, pos.getX(), pos.getY());
             rr.setSize(Pos.BOTTOM_LEFT, size.getW(), size.getH());
@@ -101,7 +102,7 @@ public class TouchComponentRenderer extends AbstractComponentRenderer {
         }
 
         @Override
-        public void draw(GraphicsContext gc, double width, double height,long time) {
+        public void draw(GraphicsContext gc, double width, double height, long time) {
             gc.strokeOval(pos.getX(), pos.getY(), size.getW(), size.getH());
         }
 
@@ -126,7 +127,7 @@ public class TouchComponentRenderer extends AbstractComponentRenderer {
         }
 
         @Override
-        public void draw(GraphicsContext gc, double width, double height,long time) {
+        public void draw(GraphicsContext gc, double width, double height, long time) {
             gc.strokeLine(pos.getX(), pos.getY(), pos2.getX(), pos2.getY());
             gc.strokeLine(pos2.getX(), pos2.getY(), pos3.getX(), pos3.getY());
             gc.strokeLine(pos3.getX(), pos3.getY(), pos.getX(), pos.getY());

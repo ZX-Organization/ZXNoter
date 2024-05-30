@@ -1,8 +1,6 @@
 package team.zxorg.skin.uis.component;
 
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import team.zxorg.skin.basis.RenderRectangle;
 import team.zxorg.skin.uis.UISComponent;
 import team.zxorg.skin.uis.UISFrameAnimation;
 
@@ -41,7 +39,8 @@ public class PressComponentRenderer extends AbstractComponentRenderer {
 
     @Override
     void drawComponent( double width, double height,long time) {
-        Image currImage = animation.getCurrentFrames();
+        transform();
+        Image currImage = animation.getCurrentFrame(time);
         drawImage(currImage);
         //rr.drawImage(gc, currImage);
     }

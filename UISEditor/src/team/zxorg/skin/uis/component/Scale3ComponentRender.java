@@ -39,7 +39,10 @@ public class Scale3ComponentRender extends AbstractComponentRenderer {
     }
 
     @Override
-    void drawComponent(  double width, double height, long time) {
+    void drawComponent(double width, double height, long time) {
+        transform();
+        rr.setSize(size.getW(), size.getH());
+        rr.setPos(pos.getX(), pos.getY());
 
         //计算材质位置
         double scale1TexPos = 0;
@@ -65,12 +68,17 @@ public class Scale3ComponentRender extends AbstractComponentRenderer {
 
         if (type2 == 1) {
             // 竖向拉伸，此时拉伸区域0点在素材上部
-
-
-            gc.drawImage(tex,
+            gc.save();
+            /*gc.beginPath();
+            gc.rect(0, scale1TexPos, texSize.getW(), scale1TexSize);
+            gc.clip();*/
+            drawImageA(tex,
                     0, scale1TexPos, texSize.getW(), scale1TexSize,
                     rr.getLeft(), scale1Pos, rr.getWidth(), scale1Size
             );
+            //System.out.println(rr.getLeft());
+            gc.restore();
+
 
             gc.drawImage(tex,
                     0, scale3TexPos, texSize.getW(), scale3TexSize,
@@ -85,10 +93,16 @@ public class Scale3ComponentRender extends AbstractComponentRenderer {
 
         } else {
             // 横向拉伸，默认拉伸区域0点在素材左部
-            gc.drawImage(tex,
+            /*gc.beginPath();
+            gc.rect(0, scale1TexPos, texSize.getW(), scale1TexSize);
+            gc.clip();*/
+
+
+            drawImageA(tex,
                     scale1TexPos, 0, scale1TexSize, texSize.getH(),
                     scale1Pos, rr.getTop(), scale1Size, rr.getHeight()
             );
+
 
             gc.drawImage(tex,
                     scale3TexPos, 0, scale3TexSize, texSize.getH(),

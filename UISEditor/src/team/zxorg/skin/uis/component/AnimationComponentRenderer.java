@@ -40,7 +40,6 @@ public class AnimationComponentRenderer extends AbstractComponentRenderer {
 
     @Override
     void reloadResComponent() {
-
         animations = new ArrayList<>();
         for (String value : component.getAnimations()) {
             AbstractAnimation ar = toAnimationRenderer(value);
@@ -64,6 +63,8 @@ public class AnimationComponentRenderer extends AbstractComponentRenderer {
 
 
     public void update(GraphicsContext gc, double width, double height, AbstractComponentRenderer cr, long time) {
+        transform();
+
         //欲播放动画表
         HashMap<String, AbstractAnimation> preExecutionAnimations = new HashMap<>();
         //检查所有动画

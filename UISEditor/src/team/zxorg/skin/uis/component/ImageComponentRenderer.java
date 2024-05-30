@@ -37,6 +37,7 @@ public class ImageComponentRenderer extends AbstractComponentRenderer {
 
     @Override
     void drawComponent(double width, double height, long time) {
+        transform();
         //rr.drawImage(gc, tex);
         drawImage(tex);
     }

@@ -1,14 +1,11 @@
 package team.zxorg.skin.uis.component;
 
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.effect.BlendMode;
 import javafx.scene.image.Image;
-import team.zxorg.skin.basis.RenderRectangle;
 import team.zxorg.skin.uis.UISComponent;
 import team.zxorg.skin.uis.UISFrameAnimation;
 
 public class HitComponentRenderer extends AbstractComponentRenderer {
-
 
 
     UISFrameAnimation animation;
@@ -23,7 +20,7 @@ public class HitComponentRenderer extends AbstractComponentRenderer {
 
         animation = new UISFrameAnimation(component, "frame", "frame2", "frame3");
         Image image = animation.getFirstFrame();
-        if (image!=null) {
+        if (image != null) {
             texSize.setW(image.getWidth());
             texSize.setH(image.getHeight());
         }
@@ -41,16 +38,12 @@ public class HitComponentRenderer extends AbstractComponentRenderer {
 
 
     @Override
-    void drawComponent(  double width, double height,long time) {
+    void drawComponent(double width, double height, long time) {
+        transform();
 
+        Image currImage = animation.getCurrentFrame(time);
 
-        Image currImage = animation.getCurrentFrames();
-        if (blend == 1) {
-            gc.setGlobalBlendMode(BlendMode.LIGHTEN);
-        } else if (blend == 2) {
-            gc.setGlobalBlendMode(BlendMode.SCREEN);
-        }
-        //rr.drawImage(gc, currImage);
+        drawImage(currImage);
 
     }
 }

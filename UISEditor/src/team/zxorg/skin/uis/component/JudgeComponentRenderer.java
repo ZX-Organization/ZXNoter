@@ -1,8 +1,6 @@
 package team.zxorg.skin.uis.component;
 
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import team.zxorg.skin.basis.RenderRectangle;
 import team.zxorg.skin.uis.UISComponent;
 import team.zxorg.skin.uis.UISFrameAnimation;
 
@@ -42,7 +40,9 @@ public class JudgeComponentRenderer extends AbstractComponentRenderer {
 
     @Override
     void drawComponent(double width, double height,long time) {
-        drawImage(animation.getCurrentFrames());
+
+        transform();
+        drawImage(animation.getCurrentFrame(time));
         //rr.drawImage(gc,animation.getCurrentFrames());
     }
 }

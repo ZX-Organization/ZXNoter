@@ -8,30 +8,12 @@ import java.util.List;
 
 
 public class UISFrameAnimation {
-    public Image getFirstFrame() {
-        return firstFrame;
-    }
-
-    private static class AnimationBehavior {
-        /**
-         * 动画名称 如果name为null则为延迟且repeat为延迟时间ms
-         */
-        String name;
-        /**
-         * 动画播放次数 0为无限重复
-         */
-        int repeat;
-
-        public AnimationBehavior(String name, int repeat) {
-            this.name = name;
-            this.repeat = repeat;
-        }
-    }
-
     //帧动画表
     private final HashMap<String, List<Image>> animationMap = new HashMap<>();
     // 动画行为队列
     private final ArrayList<AnimationBehavior> behaviors = new ArrayList<>();
+    //间隔时间
+    private final double interval;
     // 当前行为索引
     private int currentBehaviorIndex = 0;
     // 当前帧索引
@@ -42,8 +24,6 @@ public class UISFrameAnimation {
     private AnimationBehavior currentBehavior;
     //当前重复的次数
     private int currentRepeat;
-    //间隔时间
-    private final double interval;
     //计时器
     private long timer;
     private Image firstFrame;
@@ -61,6 +41,10 @@ public class UISFrameAnimation {
         }
     }
 
+    public Image getFirstFrame() {
+        return firstFrame;
+    }
+
     /**
      * 添加动画行为
      *
@@ -70,7 +54,7 @@ public class UISFrameAnimation {
     public void addBehavior(String name, int repeat) {
         behaviors.add(new AnimationBehavior(name, repeat));
         if (currentBehavior == null)
-            switchAnimation();
+            switchAnimation(0);
     }
 
     /**
@@ -78,29 +62,35 @@ public class UISFrameAnimation {
      *
      * @return 当前帧 可能为null
      */
-    public Image getCurrentFrames() {
+    public Image getCurrentFrame(long currentTime) {
         if (currentBehavior == null)
             return null;
-        int time = (int) (System.currentTimeMillis() - timer);
+
+        int time = (int) (currentTime - timer);
+        if (time < 0) {
+            timer = currentTime;
+            switchAnimation(currentTime);
+            return getCurrentFrame(currentTime);
+        }
         //如果是延迟
         if (currentBehavior.name == null) {
             if (time > currentBehavior.repeat) {
-                switchAnimation();
-                return getCurrentFrames();
+                switchAnimation(currentTime);
+                return getCurrentFrame(currentTime);
             }
             return null;
         } else {
             //是帧动画
             if (time > interval) {
                 currentFrameIndex++;
-                timer = System.currentTimeMillis();
+                timer = currentTime;
                 if (currentFrameIndex >= currentFrames.size()) {
                     currentFrameIndex = 0;
                     currentRepeat--;
                     //判断当前重复次数 支持无限重复
                     if (currentRepeat <= 0 && currentBehavior.repeat != 0) {
-                        switchAnimation();
-                        return getCurrentFrames();
+                        switchAnimation(currentTime);
+                        return getCurrentFrame(currentTime);
                     }
                 }
             }
@@ -114,13 +104,13 @@ public class UISFrameAnimation {
     /**
      * 切换动画
      */
-    private void switchAnimation() {
+    private void switchAnimation(long currentTime) {
         currentFrameIndex = 0;
         currentBehaviorIndex++;
         currentBehaviorIndex %= behaviors.size();
 
         currentRepeat = 0;
-        timer = System.currentTimeMillis();
+        timer = currentTime;
 
 
         currentBehavior = behaviors.get(currentBehaviorIndex);
@@ -128,5 +118,21 @@ public class UISFrameAnimation {
         currentRepeat = currentBehavior.repeat;
 
 
+    }
+
+    private static class AnimationBehavior {
+        /**
+         * 动画名称 如果name为null则为延迟且repeat为延迟时间ms
+         */
+        String name;
+        /**
+         * 动画播放次数 0为无限重复
+         */
+        int repeat;
+
+        public AnimationBehavior(String name, int repeat) {
+            this.name = name;
+            this.repeat = repeat;
+        }
     }
 }

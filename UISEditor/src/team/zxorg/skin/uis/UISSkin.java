@@ -14,6 +14,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.*;
+import java.util.concurrent.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -59,19 +60,6 @@ public class UISSkin {
     DeviceType deviceType = DeviceType.WINDOWS;
 
 
-    public int getAngle() {
-        return angle;
-    }
-
-    /**
-     * 设置设备类型 会影响到include判断
-     *
-     * @param deviceType 设备类型
-     */
-    public void setDeviceType(DeviceType deviceType) {
-        this.deviceType = deviceType;
-    }
-
     /**
      * 通过mui文件 解析到皮肤
      *
@@ -89,7 +77,6 @@ public class UISSkin {
         this.muiPath = muiPath;
         basePath = muiPath.getParent();
     }
-
 
     /**
      * 解析元件名
@@ -150,6 +137,28 @@ public class UISSkin {
     private static boolean isImageFile(Path file) {
         String fileName = file.getFileName().toString().toLowerCase();
         return fileName.endsWith(".png") || fileName.endsWith(".jpg") || fileName.endsWith(".bmp");
+    }
+
+    /**
+     * 排序渲染器 按照zindex排序
+     *
+     * @param renderers 渲染器
+     */
+    public static void sortRenders(List<AbstractComponentRenderer> renderers) {
+        renderers.sort(Comparator.comparingInt(AbstractComponentRenderer::getZindex));
+    }
+
+    public int getAngle() {
+        return angle;
+    }
+
+    /**
+     * 设置设备类型 会影响到include判断
+     *
+     * @param deviceType 设备类型
+     */
+    public void setDeviceType(DeviceType deviceType) {
+        this.deviceType = deviceType;
     }
 
     @Override
@@ -289,16 +298,6 @@ public class UISSkin {
         return isChanged;
     }
 
-
-    /**
-     * 排序渲染器 按照zindex排序
-     *
-     * @param renderers 渲染器
-     */
-    public static void sortRenders(List<AbstractComponentRenderer> renderers) {
-        renderers.sort(Comparator.comparingInt(AbstractComponentRenderer::getZindex));
-    }
-
     /**
      * 条件判断
      *
@@ -335,6 +334,15 @@ public class UISSkin {
     private void parseMUI(Path muiPath, HashMap<String, UISComponent> componentMap) throws IOException {
         Path muiDivPath = muiPath.getParent();
         enumerateImagesResource(muiDivPath);
+        ExecutorService executorService = Executors.newFixedThreadPool(10);
+        Path cacheDiv = muiDivPath.resolve("cache");
+        if (Files.exists(cacheDiv)) {
+            for (var f : Files.list(cacheDiv).toList())
+                imagePathMap.put(cacheDiv.relativize(f).toString().replaceAll("\\\\", "/"), f);
+        }
+
+        List<Future<Void>> futures = new ArrayList<>();
+
         try (BufferedReader reader = Files.newBufferedReader(muiPath)) {
             String line;
             //当前作用的元件
@@ -365,13 +373,22 @@ public class UISSkin {
                             if (Files.exists(texpackPath)) {
                                 ZXLogger.info("引用 纹理包: " + args[1]);
                                 Path cache = muiDivPath.resolve("cache");
+
                                 if (!Files.exists(cache))
                                     Files.createDirectories(cache);
-                                List<Path> images = PlistParser.parser(texpackPath, cache, true);
-                                //加入到图片索引里
-                                for (Path image : images) {
-                                    imagePathMap.put(cache.relativize(image).toString().replaceAll("\\\\", "/"), image);
-                                }
+
+                                Callable<Void> task = () -> {
+                                    ZXLogger.info("开始拆分 纹理包: " + args[1]);
+                                    List<Path> images = PlistParser.parser(texpackPath, cache, true);
+                                    //加入到图片索引里
+                                    for (Path image : images) {
+                                        imagePathMap.put(cache.relativize(image).toString().replaceAll("\\\\", "/"), image);
+                                    }
+                                    ZXLogger.info("拆分结束 纹理包: " + args[1]);
+                                    return null;
+                                };
+                                // 提交任务并将Future对象添加到列表中
+                                futures.add(executorService.submit(task));
                             } else {
                                 ZXLogger.warning("引用 纹理包: " + texpackPath.getFileName() + " 文件不存在");
                             }
@@ -415,6 +432,33 @@ public class UISSkin {
                     }
                     continue;
                 }
+
+
+
+                // 等待所有任务完成
+                for (Future<Void> future : futures) {
+                    try {
+                        // 调用get()方法会阻塞，直到任务完成并返回结果
+                        future.get();
+                    } catch (InterruptedException | ExecutionException e) {
+                    }
+                }
+
+
+                executorService.shutdown();
+                try {
+                    // 等待所有任务完成或超时
+                    if (!executorService.awaitTermination(60, TimeUnit.SECONDS)) {
+                        executorService.shutdownNow();
+                        if (!executorService.awaitTermination(60, TimeUnit.SECONDS)) {
+                            System.err.println("ThreadPool did not terminate");
+                        }
+                    }
+                } catch (InterruptedException e) {
+                    executorService.shutdownNow();
+                    Thread.currentThread().interrupt();
+                }
+
                 if (skip)
                     continue;
                 if (isProperty) {

@@ -5,6 +5,7 @@ import javafx.scene.paint.Color;
 import team.zxorg.skin.uis.ExpressionVector;
 import team.zxorg.skin.uis.UISComponent;
 import team.zxorg.skin.uis.UISFrame;
+import team.zxorg.zxncore.ZXLogger;
 
 public class ScoreComponentRenderer extends AbstractComponentRenderer {
     //定义数字图片素材, 分别是0到9, 百分号, 小数点, 减号, 加号, 和乘号, 一共需要15张图片
@@ -26,33 +27,44 @@ public class ScoreComponentRenderer extends AbstractComponentRenderer {
 
     @Override
     void reloadResComponent() {
+        //System.out.println(name + " reloadRes");
         frame = component.getFrame("frame");
-        Image image = frame.getFrame(0);
-        if (image != null) {
-            fixWeight = image.getWidth() / image.getHeight();
-            texSize.setW(image.getWidth());
-            texSize.setH(image.getHeight());
+        if (frame != null) {
+            Image image = frame.getFrame(0);
+            if (image != null) {
+                fixWeight = image.getWidth() / image.getHeight();
+                texSize.setW(image.getWidth());
+                texSize.setH(image.getHeight());
+            }
         }
     }
 
     @Override
     void reloadPosComponent() {
+        //System.out.println(name + " reloadPos");
         score = 0;
         pos2 = component.getExpressionVector("pos2");
         fsize = component.getExpressionVector("fsize");
-        reloadStyle();
+
+
+        //reloadStyle();
     }
 
     @Override
     void drawComponent(double width, double height, long time) {
+
+
+        transform();
         String scoreStr;
         if (isACC) {
-            score += 0.11;
-            score %= 100;
+            score = Math.abs(time) / 200 % 100;
+            /*score += 0.11;
+            score %= 100;*/
             scoreStr = String.format("%.2f%%", score);
         } else {
-            score += 1;
-            score %= 1000;
+            score = Math.abs(time) % 10000;
+            /*score += 1;
+            score %= 1000;*/
             scoreStr = (int) score + "";
         }
 
@@ -85,10 +97,13 @@ public class ScoreComponentRenderer extends AbstractComponentRenderer {
                 /*if (frameWeight.size() > index)
                     fw = frameWeight.get(index);*/
                 //rr.setSize(Pos.BOTTOM_LEFT, );
-                if (charFrame == null)
-                    continue;
+                if (charFrame == null) {
+                    ZXLogger.warning("???: {" + sc[i] + "}");
 
-                drawImage(charFrame, x, y, cw, fsize.getW());
+                    continue;
+                }
+                //System.out.println("  " + x + "  " + y + "  " + cw + "  " + fsize.getW());
+                gc.drawImage(charFrame, x, y, cw, fsize.getW());
                 gc.setStroke(Color.GREEN);
                 gc.strokeRect(x, y, cw, fsize.getW());
 

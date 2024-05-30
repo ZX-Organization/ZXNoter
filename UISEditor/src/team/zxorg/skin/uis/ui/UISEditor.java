@@ -3,8 +3,6 @@ package team.zxorg.skin.uis.ui;
 import com.sun.javafx.application.PlatformImpl;
 import com.sun.javafx.util.Logging;
 import javafx.animation.AnimationTimer;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -16,18 +14,19 @@ import javafx.stage.Stage;
 import org.fxmisc.flowless.VirtualizedScrollPane;
 import team.zxorg.skin.DeviceType;
 import team.zxorg.skin.ResolutionInfo;
+import team.zxorg.skin.SkinConfig;
 import team.zxorg.skin.uis.UISCanvas;
 import team.zxorg.zxncore.ZXLogger;
 import team.zxorg.zxncore.ZXVersion;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class UISEditor extends HBox {
 
-    public static final ZXVersion VERSION = new ZXVersion(1, 0, 3, ZXVersion.ReleaseStatus.BETA);
-
+    public static final ZXVersion VERSION = new ZXVersion(1, 1, 0, ZXVersion.ReleaseStatus.BETA);
     UISCanvas uisCanvas = new UISCanvas() {
         {
             setBorder(new Border(new BorderStroke(Color.WHITE, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(1), new Insets(0))));
@@ -48,7 +47,35 @@ public class UISEditor extends HBox {
             setTabClosingPolicy(TabClosingPolicy.ALL_TABS);
         }
     };
+    //private File lastDirectory = new File(System.getProperty("user.dir")); // 记录上一次选择的目录
+    Button openFileButton = new Button("打开mui文件") {
+        {
+            setOnAction(event -> {
+                Path file = Path.of(SkinConfig.data.lastOpenDir);
+                // 创建文件选择器
+                FileChooser fileChooser = new FileChooser();
+                // 设置初始目录为上一次选择的目录
+                if (Files.exists(file) & Files.isDirectory(file)) {
+                    fileChooser.setInitialDirectory(file.toAbsolutePath().toFile());
+                }
+                fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("MUI 文件", "*.mui"));
 
+                // 显示文件选择对话框
+                File selectedFile = fileChooser.showOpenDialog(null);
+
+                if (selectedFile != null) {
+                    System.out.println("Selected File: " + selectedFile.getAbsolutePath());
+
+                    openFIle(selectedFile.toPath());
+                    // 记录本次选择的目录
+                    SkinConfig.data.lastOpenDir = selectedFile.getParentFile().toString();
+                } else {
+                    System.out.println("No file selected.");
+                }
+
+            });
+        }
+    };
     /**
      * 设备类型选择框
      */
@@ -122,14 +149,90 @@ public class UISEditor extends HBox {
             });
         }
     };
+    /**
+     * 顶部工具栏
+     */
+    HBox topToolbar = new HBox(resolutionChoiceBox, deviceTypeChoiceBox, unitChoiceBox, scalingFactorLabel, scalingFactorSlider, openFileButton) {
+        {
+            setMinHeight(40);
+            setBorder(new Border(new BorderStroke(Color.WHITE, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(0, 0, 1, 0), new Insets(0))));
+            setAlignment(Pos.CENTER_LEFT);
+            setSpacing(8);
+            setPadding(new Insets(0, 8, 0, 8));
+        }
+    };
+    CheckBox autoReplayCheckBox = new CheckBox("自动重播") {
+        {
+            setSelected(true);
+        }
+    };
+    Button replayButton = new Button("重放") {
+        {
+            setOnAction(event -> uisCanvas.resetTime());
+        }
+    };
+    Button playButton = new Button("播放") {
+        {
+            setOnAction(_ -> uisCanvas.play());
+        }
+    };
+    Button pauseButton = new Button("暂停") {
+        {
+            setOnAction(_ -> uisCanvas.pause());
+        }
+    };
+    Label timeLabel = new Label() {
+        {
+            setPrefWidth(80);
+            setAlignment(Pos.CENTER_RIGHT);
+        }
+    };
+    Slider timeLineSlider = new Slider(-3.5, 30, -3) {
+        {
+            uisCanvas.time.addListener((observable, oldValue, newValue) -> {
+                if (!uisCanvas.isPaused)
+                    valueProperty().set(newValue.doubleValue() / 1000.);
+            });
 
 
-    private File lastDirectory = new File(System.getProperty("user.dir")); // 记录上一次选择的目录
+            HBox.setHgrow(this, Priority.ALWAYS);
+            setPrefWidth(240);
+
+            //设置块增量
+            setBlockIncrement(0.01);
+            //设置主要刻度单位
+            setMajorTickUnit(0.5);
+            setShowTickLabels(true);
+            setMinorTickCount(1);
+            setSnapToTicks(true);
+            setSnapToPixel(true);
+            valueProperty().addListener((observable, oldValue, newValue) -> {
+                if (isValueChanging()) {
+                    uisCanvas.setTime((long) (newValue.doubleValue() * 1000));
+                }
+            });
+        }
+    };
+    HBox bottomToolbar = new HBox(autoReplayCheckBox, timeLabel, timeLineSlider, playButton, pauseButton, replayButton) {
+        {
+            setMinHeight(40);
+            setBorder(new Border(new BorderStroke(Color.WHITE, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(1, 0, 0, 0), new Insets(0))));
+            setAlignment(Pos.CENTER_LEFT);
+            setSpacing(8);
+            setPadding(new Insets(0, 8, 0, 8));
+        }
+    };
+    VBox sideVBox = new VBox(topToolbar, tabPane, bottomToolbar) {
+        {
+            setHgrow(this, Priority.ALWAYS);
+            setPrefWidth(260);
+            setBackground(Background.fill(Color.BLACK));
+            setBorder(new Border(new BorderStroke(Color.WHITE, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(0, 1, 0, 0), new Insets(0))));
+        }
+    };
 
     public UISEditor() {
 
-        if (DEBUG)
-            lastDirectory = new File("./docs/UISEditorTest");
 
         setAlignment(Pos.CENTER_LEFT);
 
@@ -187,9 +290,11 @@ public class UISEditor extends HBox {
         animationTimer.start();
         HBox.setHgrow(uisCanvas, Priority.ALWAYS);
         getChildren().addAll(sideVBox, uisCanvas);
-    }
-
-    public static boolean DEBUG = false;
+    }    /*Button reloadButton = new Button("重载") {
+        {
+            setOnAction(event -> uisCanvas.updateSkin());
+        }
+    };*/
 
     public static void main(String[] args) {
         /*if (args.length == 1 & args[0].equals("DEBUG"))
@@ -230,7 +335,12 @@ public class UISEditor extends HBox {
             scene.getStylesheets().addAll("resources/baseExpansionPack/color/dark.css");
             Stage stage = new Stage();
             stage.setScene(scene);
+            stage.setTitle("UIS Editor " + VERSION);
             stage.show();
+            stage.setOnCloseRequest(event -> {
+                SkinConfig.save();
+                System.exit(0);
+            });
             uISEditor.minWidthProperty().addListener((observable, oldValue, newValue) -> {
                 stage.setMinWidth(newValue.doubleValue());
             });
@@ -238,8 +348,9 @@ public class UISEditor extends HBox {
                 stage.setMinHeight(newValue.doubleValue());
             });
         });
-    }
 
+
+    }
 
     public void openFIle(Path path) {
         Tab tab = new Tab();
@@ -281,139 +392,6 @@ public class UISEditor extends HBox {
             return id;
         }
     }
-
-
-    /*Button reloadButton = new Button("重载") {
-        {
-            setOnAction(event -> uisCanvas.updateSkin());
-        }
-    };*/
-
-
-    Button openFileButton = new Button("打开mui文件") {
-        {
-            setOnAction(event -> {
-
-                // 创建文件选择器
-                FileChooser fileChooser = new FileChooser();
-                // 设置初始目录为上一次选择的目录
-                if (lastDirectory != null && lastDirectory.isDirectory()) {
-                    fileChooser.setInitialDirectory(lastDirectory);
-                }
-                fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("MUI 文件", "*.mui"));
-
-                // 显示文件选择对话框
-                File selectedFile = fileChooser.showOpenDialog(null);
-
-                if (selectedFile != null) {
-                    System.out.println("Selected File: " + selectedFile.getAbsolutePath());
-
-                    openFIle(selectedFile.toPath());
-                    // 记录本次选择的目录
-                    lastDirectory = selectedFile.getParentFile();
-                } else {
-                    System.out.println("No file selected.");
-                }
-
-            });
-        }
-    };
-
-    /**
-     * 顶部工具栏
-     */
-    HBox topToolbar = new HBox(resolutionChoiceBox, deviceTypeChoiceBox, unitChoiceBox, scalingFactorLabel, scalingFactorSlider, openFileButton) {
-        {
-            setMinHeight(40);
-            setBorder(new Border(new BorderStroke(Color.WHITE, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(0, 0, 1, 0), new Insets(0))));
-            setAlignment(Pos.CENTER_LEFT);
-            setSpacing(8);
-            setPadding(new Insets(0, 8, 0, 8));
-        }
-    };
-
-
-    CheckBox autoReplayCheckBox = new CheckBox("自动重播") {
-        {
-            setSelected(true);
-        }
-    };
-    Button replayButton = new Button("重放") {
-        {
-            setOnAction(event -> uisCanvas.resetTime());
-        }
-    };
-
-    Button playButton = new Button("播放") {
-        {
-            setOnAction(event -> {
-                /*if (isPaused) {
-                    isPaused = false;
-                    startTime = System.currentTimeMillis() - pauseTime;
-                }*/
-            });
-        }
-    };
-    Button pauseButton = new Button("暂停") {
-        {
-            setOnAction(event -> {
-               /* if (!isPaused) {
-                    isPaused = true;
-                    pauseTime = System.currentTimeMillis() - startTime;
-                }*/
-            });
-        }
-    };
-
-    Label timeLabel = new Label() {
-        {
-            setPrefWidth(80);
-            setAlignment(Pos.CENTER_RIGHT);
-        }
-    };
-    Slider timeLineSlider = new Slider(-3.5, 30, -3) {
-        {
-            HBox.setHgrow(this, Priority.ALWAYS);
-            setPrefWidth(240);
-
-            //设置块增量
-            setBlockIncrement(0.01);
-            //设置主要刻度单位
-            setMajorTickUnit(0.5);
-            setShowTickLabels(true);
-            setMinorTickCount(1);
-            setSnapToTicks(true);
-            setSnapToPixel(true);
-            valueProperty().addListener((observable, oldValue, newValue) -> {
-                if (isValueChanging()) {
-                    /*if (isPaused) {
-                        pauseTime = (long) (newValue.doubleValue() * 1000);
-                    } else {
-                        startTime = System.currentTimeMillis() - (long) (newValue.doubleValue() * 1000);
-                    }*/
-                }
-            });
-        }
-    };
-
-    HBox bottomToolbar = new HBox(autoReplayCheckBox, timeLabel, timeLineSlider, playButton, pauseButton, replayButton) {
-        {
-            setMinHeight(40);
-            setBorder(new Border(new BorderStroke(Color.WHITE, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(1, 0, 0, 0), new Insets(0))));
-            setAlignment(Pos.CENTER_LEFT);
-            setSpacing(8);
-            setPadding(new Insets(0, 8, 0, 8));
-        }
-    };
-
-    VBox sideVBox = new VBox(topToolbar, tabPane, bottomToolbar) {
-        {
-            setHgrow(this, Priority.ALWAYS);
-            setPrefWidth(260);
-            setBackground(Background.fill(Color.BLACK));
-            setBorder(new Border(new BorderStroke(Color.WHITE, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(0, 1, 0, 0), new Insets(0))));
-        }
-    };
 
 
 }

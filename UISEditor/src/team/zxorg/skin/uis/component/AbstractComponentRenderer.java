@@ -1,6 +1,5 @@
 package team.zxorg.skin.uis.component;
 
-import com.sun.javafx.geom.Line2D;
 import javafx.geometry.Orientation;
 import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
@@ -11,13 +10,13 @@ import javafx.scene.effect.PerspectiveTransform;
 import javafx.scene.effect.Shadow;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.transform.Affine;
 import team.zxorg.skin.basis.RenderInterface;
 import team.zxorg.skin.basis.RenderRectangle;
 import team.zxorg.skin.uis.ExpressionCalculator;
 import team.zxorg.skin.uis.ExpressionVector;
 import team.zxorg.skin.uis.UISComponent;
-import team.zxorg.skin.uis.UISPerspectiveTransform;
 import team.zxorg.ui.component.LayerCanvasPane;
 
 /**
@@ -26,9 +25,36 @@ import team.zxorg.ui.component.LayerCanvasPane;
 public abstract class AbstractComponentRenderer implements RenderInterface {
 
 
+    /**
+     * 位置
+     */
+    public ExpressionVector pos;
+    /**
+     * 尺寸
+     */
+    public ExpressionVector size;
+    /**
+     * 基于锚点的旋转角 数值表示元件逆时针的转角,单位角度
+     */
+    public double rotate;
+    /**
+     * 透明度 范围 0.-1., 1.表示不透明, 0.表示完全透明
+     */
+    public double opacity = 1;
+    /**
+     * 缩放
+     */
+    public ExpressionVector scale;
+    /**
+     * 是否隐藏
+     */
+    public boolean hide;
+    /**
+     * 倾斜
+     */
+    public ExpressionVector skew;
     protected Affine affine = new Affine();
     protected ExpressionCalculator ec;
-    PerspectiveTransform pt = new PerspectiveTransform();
     /**
      * 父元件
      */
@@ -42,14 +68,6 @@ public abstract class AbstractComponentRenderer implements RenderInterface {
      */
     protected Image tex;
     /**
-     * 位置
-     */
-    public ExpressionVector pos;
-    /**
-     * 尺寸
-     */
-    public ExpressionVector size;
-    /**
      * 锚点
      */
     protected Pos anchor;
@@ -57,14 +75,6 @@ public abstract class AbstractComponentRenderer implements RenderInterface {
      * 填充颜色
      */
     protected Color color;
-    /**
-     * 基于锚点的旋转角 数值表示元件逆时针的转角,单位角度
-     */
-    public double rotate;
-    /**
-     * 透明度 范围 0.-1., 1.表示不透明, 0.表示完全透明
-     */
-    public double opacity;
     /**
      * 图层深度
      * 0为最底层, 10为note所在层, 大于100的元件将不受是否开启3D的影响
@@ -74,7 +84,6 @@ public abstract class AbstractComponentRenderer implements RenderInterface {
      * 元件类型
      */
     protected int type;
-
     /**
      * 元件索引值 如'_sprite-4'为 3
      */
@@ -84,30 +93,9 @@ public abstract class AbstractComponentRenderer implements RenderInterface {
      */
     protected UISComponent component;
     /**
-     * 渲染矩形
-     */
-    //private final RenderRectangle rr = new RenderRectangle();
-    private Shadow shadow;
-    /**
      * 翻转
      */
     protected Orientation flip;
-    /**
-     * 缩放
-     */
-    public ExpressionVector scale;
-    /**
-     * 动画组件
-     */
-    private UISComponent motion;
-    /**
-     * 是否隐藏
-     */
-    public boolean hide;
-    /**
-     * 倾斜
-     */
-    public ExpressionVector skew;
     /**
      * 材质尺寸
      */
@@ -116,6 +104,7 @@ public abstract class AbstractComponentRenderer implements RenderInterface {
      * 像素倍率
      */
     protected double pixelMagnification;
+    PerspectiveTransform pt = new PerspectiveTransform();
     /**
      * 混合模式 1=additive 2=screen
      */
@@ -124,6 +113,15 @@ public abstract class AbstractComponentRenderer implements RenderInterface {
      * 渲染上下文
      */
     GraphicsContext gc;
+    /**
+     * 渲染矩形
+     */
+    //private final RenderRectangle rr = new RenderRectangle();
+    private Shadow shadow;
+    /**
+     * 动画组件
+     */
+    private UISComponent motion;
 
     public AbstractComponentRenderer(UISComponent component) {
         this.component = component;
@@ -131,8 +129,46 @@ public abstract class AbstractComponentRenderer implements RenderInterface {
         reloadResComponent_();
     }
 
-    public final UISComponent getComponent() {
-        return component;
+    /**
+     * 组件转到渲染器
+     *
+     * @param component name
+     */
+    public static AbstractComponentRenderer toRenderer(UISComponent component, LayerCanvasPane layerCanvasPane) {
+        AbstractComponentRenderer r;
+        if (component.getName().startsWith("_")) {
+            r = switch (component.getInt("type", 0)) {
+                case 0 -> new ImageComponentRenderer(component);
+                case 1 -> new TextComponentRenderer(component);
+                case 2 -> new RectangleComponentRenderer(component);
+                case 3 -> new FrameAnimationComponentRenderer(component);
+                case 4 -> new Scale3ComponentRender(component);
+                default -> null;
+            };
+
+        } else if (component.getName().startsWith(":")) {
+            r = new AnimationComponentRenderer(component);
+        } else {
+            r = switch (component.getName()) {
+                case "hit-fast", "hit-slow" -> new FrameAnimationComponentRenderer(component);
+                case "note" -> new NoteComponentRenderer(component);
+                case "key" -> new KeyComponentRenderer(component);
+                case "hit" -> new HitComponentRenderer(component);
+                case "press" -> new PressComponentRenderer(component);
+                case "judge" -> new JudgeComponentRenderer(component);
+                case "pause" -> new ImageComponentRenderer(component);
+                case "bar" -> new BarComponentRender(component);
+                case "touch" -> new TouchComponentRenderer(component);
+                case "score-combo", "score-score", "score-acc", "score-maxcombo" ->
+                        new ScoreComponentRenderer(component);
+                case "score-hp", "progress" -> new ProgressComponentRenderer(component);
+                default -> null;
+            };
+        }
+        if (r != null) {
+            r.initialize(layerCanvasPane.getCanvas(r.getLayoutName()));
+        }
+        return r;
     }
 
     /**
@@ -143,6 +179,9 @@ public abstract class AbstractComponentRenderer implements RenderInterface {
     /*public String getLayoutName() {
         return (getZindex() < 1 ? "bottom" : (getZindex() < 99 ? "3d" : "top"));
     }*/
+    public final UISComponent getComponent() {
+        return component;
+    }
 
     /**
      * 是否是3d图层
@@ -214,7 +253,6 @@ public abstract class AbstractComponentRenderer implements RenderInterface {
         skew = component.getExpressionVector("skew");
 
         zindex = component.getInt("zindex", zindex);
-
         hide = false;
     }
 
@@ -265,8 +303,6 @@ public abstract class AbstractComponentRenderer implements RenderInterface {
             gc.setEffect(shadow);
         }
 
-        gc.setGlobalAlpha(opacity);
-
         switch (blend) {
             case 0 -> {
                 gc.setGlobalBlendMode(BlendMode.SRC_OVER);
@@ -279,7 +315,10 @@ public abstract class AbstractComponentRenderer implements RenderInterface {
             }
         }
 
-        transform();
+        gc.setGlobalAlpha(opacity);
+
+
+        //transform();
         if (!hide)
             drawComponent(width, height, time);
         if (color != null) {
@@ -290,22 +329,32 @@ public abstract class AbstractComponentRenderer implements RenderInterface {
     }
 
     protected void drawImage(Image tex) {
-        if (tex != null)
-            drawImage(tex, pos.getX(), pos.getY(), size.getW(), size.getH());
+        drawImage(tex, pos.getX(), pos.getY(), size.getW(), size.getH());
     }
-    protected void drawImage(Image tex, RenderRectangle rr){
-        if (tex != null)
-            drawImage(tex, rr.getLeft(), rr.getTop(), rr.getWidth(), rr.getHeight());
+
+    protected void drawImage(Image tex, RenderRectangle rr) {
+        drawImage(tex, rr.getLeft(), rr.getTop(), rr.getWidth(), rr.getHeight());
     }
-    protected void drawImage(Image tex, double x, double y, double w, double h) {
-        if (tex == null || tex.isError())
-            return;
+
+    /**
+     * @param tex 材质
+     * @param ulx 左上角X
+     * @param uly 左上角Y
+     * @param urx 右上角X
+     * @param ury 右上角Y
+     * @param lrx 右下角X
+     * @param lry 右下角X
+     * @param llx 左下角X
+     * @param lly 左下角Y
+     */
+    protected void drawImage(Image tex, double ulx, double uly, double urx, double ury, double lrx, double lry, double llx, double lly) {
 
         //进行基本变换
-        Point2D ul = affine.transform(x, y);
-        Point2D ur = affine.transform(x + w, y);
-        Point2D lr = affine.transform(x + w, y + h);
-        Point2D ll = affine.transform(x, y + h);
+        Point2D ul = affine.transform(ulx, uly);
+        Point2D ur = affine.transform(urx, ury);
+        Point2D lr = affine.transform(lrx, lry);
+        Point2D ll = affine.transform(llx, lly);
+
 
         //进行3d变换
         if (is3DLayout()) {
@@ -362,11 +411,11 @@ public abstract class AbstractComponentRenderer implements RenderInterface {
 
 
         // 尺寸检查和限制
-        w = Math.min(w, 2000);
-        h = Math.min(h, 2000);
+        /*w = Math.min(w, 2000);
+        h = Math.min(h, 2000);*/
 
-
-        if (isToBig) {
+        //尝试优化
+        /*if (isToBig) {
             //裁剪渲染  只渲染屏幕内的部分 裁剪掉屏幕外的优化性能
 
             // 图像源尺寸
@@ -447,10 +496,46 @@ public abstract class AbstractComponentRenderer implements RenderInterface {
             gc.drawImage(tex, x, y, w, h);
 
         } else {
-            gc.setEffect(pt);
-            gc.drawImage(tex, x, y, w, h);
-        }
-        gc.setEffect(null);
+
+        }*/
+        gc.save();
+        gc.setEffect(pt);
+        gc.drawImage(tex, 0, 0, tex.getWidth(), tex.getHeight());
+        //gc.setEffect(null);
+        gc.restore();
+    }
+
+    protected void drawImageA(Image tex, double sx, double sy, double sw, double sh, double dx, double dy, double dw, double dh) {
+        if (tex == null || tex.isError())
+            return;
+
+        // 创建一个剪辑区域
+        Rectangle clipRect = new Rectangle(dx, dy, dw, dh);
+        gc.save();
+        gc.beginPath();
+        gc.rect(clipRect.getX(), clipRect.getY(), clipRect.getWidth(), clipRect.getHeight());
+        gc.clip();
+
+        // 计算缩放比例
+        double scaleX = dw / sw;
+        double scaleY = dh / sh;
+
+        // 计算目标位置
+        double targetX = dx - sx * scaleX;
+        double targetY = dy - sy * scaleY;
+
+        // 绘制图像
+        gc.drawImage(tex, targetX, targetY, tex.getWidth() * scaleX, tex.getHeight() * scaleY);
+
+        // 恢复到之前的状态
+        gc.restore();
+    }
+
+    protected void drawImage(Image tex, double x, double y, double w, double h) {
+        if (tex == null || tex.isError())
+            return;
+
+        drawImage(tex, x, y, x + w, y, x + w, y + h, x, y + h);
     }
 
     public void transform() {
@@ -532,48 +617,6 @@ public abstract class AbstractComponentRenderer implements RenderInterface {
      * @param height 画布高度
      */
     abstract void drawComponent(double width, double height, long time);
-
-
-    /**
-     * 组件转到渲染器
-     *
-     * @param component name
-     */
-    public static AbstractComponentRenderer toRenderer(UISComponent component, LayerCanvasPane layerCanvasPane) {
-        AbstractComponentRenderer r;
-        if (component.getName().startsWith("_")) {
-            r = switch (component.getInt("type", 0)) {
-                case 0 -> new ImageComponentRenderer(component);
-                case 1 -> new TextComponentRenderer(component);
-                case 2 -> new RectangleComponentRenderer(component);
-                case 3 -> new FrameAnimationComponentRenderer(component);
-                case 4 -> new Scale3ComponentRender(component);
-                default -> null;
-            };
-
-        } else if (component.getName().startsWith(":")) {
-            r = new AnimationComponentRenderer(component);
-        } else {
-            r = switch (component.getName()) {
-                case "note" -> new NoteComponentRenderer(component);
-                case "key" -> new KeyComponentRenderer(component);
-                case "hit", "hit-fast", "hit-slow" -> new HitComponentRenderer(component);
-                case "press" -> new PressComponentRenderer(component);
-                case "judge" -> new JudgeComponentRenderer(component);
-                case "pause" -> new ImageComponentRenderer(component);
-                case "bar" -> new BarComponentRender(component);
-                case "touch" -> new TouchComponentRenderer(component);
-                case "score-combo", "score-score", "score-acc", "score-maxcombo" ->
-                        new ScoreComponentRenderer(component);
-                case "score-hp", "progress" -> new ProgressComponentRenderer(component);
-                default -> null;
-            };
-        }
-        if (r != null) {
-            r.initialize(layerCanvasPane.getCanvas(r.getLayoutName()));
-        }
-        return r;
-    }
 
 
 }

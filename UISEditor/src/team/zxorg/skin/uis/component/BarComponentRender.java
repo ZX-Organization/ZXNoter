@@ -35,7 +35,9 @@ public class BarComponentRender extends AbstractComponentRenderer {
 
     @Override
     void drawComponent(double width, double height, long time) {
-        progress += 0.004;
+
+        progress = time * 0.0001;
+        //progress += 0.004;
         progress %= 1;
 
         progressCalculation(rr, progress + 1);
@@ -53,18 +55,22 @@ public class BarComponentRender extends AbstractComponentRenderer {
         gc.setFill(Color.HOTPINK);
         gc.fillRect(rr.getLeft() - 2, rr.getTop() - 2, 4, 4);
 
-        pos.setX(rr.getLeft());
-        pos.setY(rr.getTop());
-        size.setW(rr.getWidth());
-        size.setH(rr.getHeight());
+
     }
 
     private void progressCalculation(RenderRectangle rr, double p) {
+
         double imgX = pos1.getX() + (pos2.getX() - pos1.getX()) * p;
         double imgY = pos1.getY() + (pos2.getY() - pos1.getY()) * p;
         double imgW = size1.getW() + (size2.getW() - size1.getW()) * p;
         double imgH = size1.getH() + (size2.getH() - size1.getH()) * p;
         rr.setPos(Pos.TOP_LEFT, imgX, imgY);
         rr.setSize(Pos.TOP_LEFT, imgW, imgH);
+        pos.setX(rr.getLeft());
+        pos.setY(rr.getTop());
+        size.setW(rr.getWidth());
+        size.setH(rr.getHeight());
+        transform();
+
     }
 }
