@@ -1,5 +1,8 @@
 package team.zxorg.zxnoter.sound.audiomixer;
 
+import team.zxorg.zxnoter.sound.audiomixer.AudioChannel.EndBehavior;
+import team.zxorg.zxnoter.sound.audiomixer.AudioChannel.PlayState;
+
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import java.io.ByteArrayInputStream;
@@ -9,22 +12,27 @@ import java.io.IOException;
  * 音频句柄
  */
 public class AudioSonicChannel {
-    /**
-     * 事件监听器
-     */
-    public interface EventListener {
-        void stateEvent(PlayState playState);//状态事件
-
-        void timeEvent(long time);//时间事件 (ms)
-    }
-
+    private final long audioLength;//音频时长 ms
     protected EventListener eventListener;//事件监听器
-
+    protected AudioChannel.EndBehavior endBehavior;//结束行为
+    //private MixerAudioInputStream audioInputStream;//音频数据流
+    protected AudioChannel.PlayState playState;//播放状态
+    protected AudioChannel.PlayState lastPlayState;//上一次播放状态
+    protected long lastTime;//记录播放时间
+    protected long pauseTime;//记录暂停时间
+    protected long lastTimeStamp;//记录播放时间戳
+    private ByteArrayInputStream inputStream;//音频流
+    private AudioFormat audioFormat;//当前的音频格式
+    private Sonic sonic;//处理音频效果
+    private int channelBufSize;//缓冲区大小
+    private byte inBuffer[];//输入缓冲区
+    private byte outStagingBuffer[];//输出暂存缓冲区
+    private long frameLength;//帧总数
 
     public AudioSonicChannel(AudioInputStream audioData) throws IOException {
         inputStream = new ByteArrayInputStream(audioData.readAllBytes());
-        playState = PlayState.PAUSE;
-        lastPlayState = PlayState.PAUSE;
+        playState = AudioChannel.PlayState.PAUSE;
+        lastPlayState = AudioChannel.PlayState.PAUSE;
         endBehavior = EndBehavior.CLOSE;//自动关闭
         audioFormat = new AudioFormat(audioData.getFormat().getSampleRate(), 16, 2, true, false);
 
@@ -45,7 +53,6 @@ public class AudioSonicChannel {
     public long getAudioLength() {
         return audioLength;
     }
-
 
     /**
      * 添加事件监听器
@@ -109,6 +116,47 @@ public class AudioSonicChannel {
     }
 
     /**
+     * 设置当前播放帧
+     *
+     * @param frame
+     * @throws IOException
+     */
+    private void setFrame(long frame) {
+        inputStream.reset();
+        inputStream.skip(frame * audioFormat.getFrameSize());
+    }
+
+    public float getVolume() {
+        return sonic.getVolume();
+    }
+
+    public void setVolume(float volume) {
+        sonic.setVolume(volume);
+    }
+
+    /**
+     * 获取当前播放时间 (实时)
+     *
+     * @return 单位ms
+     */
+    private long getTime_() {
+        double remainingFrames = frameLength - (double) (inputStream.available()) / audioFormat.getFrameSize();
+        double timeInSeconds = remainingFrames / (audioFormat.getSampleRate() / 1000);
+        return Math.round(timeInSeconds);
+    }
+
+    /**
+     * 获取当前播放时间 (变速)
+     *
+     * @return 单位ms
+     */
+    public long getTime() {
+        if (playState.equals(PlayState.PAUSE))
+            return getTime_();
+        return (long) (lastTime + ((System.currentTimeMillis() - lastTimeStamp) * sonic.getRate() * sonic.getSpeed()));
+    }
+
+    /**
      * 设置播放时间
      *
      * @param time 单位ms
@@ -122,64 +170,18 @@ public class AudioSonicChannel {
     }
 
     /**
-     * 设置当前播放帧
-     *
-     * @param frame
-     * @throws IOException
-     */
-    private void setFrame(long frame) {
-        inputStream.reset();
-        inputStream.skip(frame * audioFormat.getFrameSize());
-    }
-
-
-    public void setVolume(float volume) {
-        sonic.setVolume(volume);
-    }
-
-    public float getVolume() {
-        return sonic.getVolume();
-    }
-
-
-    /**
-     * 获取当前播放时间 (实时)
-     *
-     * @return 单位ms
-     */
-    private long getTime_() {
-        double remainingFrames = frameLength - (double) (inputStream.available()) / audioFormat.getFrameSize();
-        double timeInSeconds = remainingFrames / (audioFormat.getSampleRate() / 1000);
-        return Math.round(timeInSeconds);
-    }
-
-
-    /**
-     * 获取当前播放时间 (变速)
-     *
-     * @return 单位ms
-     */
-    public long getTime() {
-        if (playState.equals(PlayState.PAUSE))
-            return getTime_();
-        return (long) (lastTime + ((System.currentTimeMillis() - lastTimeStamp) * sonic.getRate() * sonic.getSpeed()));
-    }
-
-
-    /**
      * 关闭通道
      */
     public void close() {
         playState = PlayState.CLOSE;
     }
 
-
     /**
      * 播放
      */
     public void play() {
         sonic.flushStream();
-        playState = PlayState.PLAY;
+        playState = AudioChannel.PlayState.PLAY;
         lastTimeStamp = System.currentTimeMillis();
         lastTime = getTime_();
     }
@@ -188,7 +190,7 @@ public class AudioSonicChannel {
      * 暂停
      */
     public void pause() {
-        playState = PlayState.PAUSE;
+        playState = AudioChannel.PlayState.PAUSE;
     }
 
     /**
@@ -196,7 +198,7 @@ public class AudioSonicChannel {
      *
      * @return 播放状态
      */
-    public PlayState getPlayState() {
+    public AudioChannel.PlayState getPlayState() {
         return playState;
     }
 
@@ -205,34 +207,9 @@ public class AudioSonicChannel {
      *
      * @param endBehavior 行为
      */
-    public void setEndBehavior(EndBehavior endBehavior) {
+    public void setEndBehavior(AudioChannel.EndBehavior endBehavior) {
         this.endBehavior = endBehavior;
     }
-
-    protected EndBehavior endBehavior;//结束行为
-    private ByteArrayInputStream inputStream;//音频流
-    //private MixerAudioInputStream audioInputStream;//音频数据流
-    protected PlayState playState;//播放状态
-
-    protected PlayState lastPlayState;//上一次播放状态
-
-
-    private AudioFormat audioFormat;//当前的音频格式
-    private Sonic sonic;//处理音频效果
-    private int channelBufSize;//缓冲区大小
-
-    private byte inBuffer[];//输入缓冲区
-    private byte outStagingBuffer[];//输出暂存缓冲区
-    private long frameLength;//帧总数
-
-    protected long lastTime;//记录播放时间
-
-    protected long pauseTime;//记录暂停时间
-    protected long lastTimeStamp;//记录播放时间戳
-
-
-    private final long audioLength;//音频时长 ms
-
 
     /**
      * 设置播放速度
@@ -256,20 +233,13 @@ public class AudioSonicChannel {
     }
 
     /**
-     * 结束行为
+     * 事件监听器
      */
-    public enum EndBehavior {
-        CLOSE,//关闭
-        LOOP,//循环
-        PAUSE//暂停
+    public interface EventListener {
+        void stateEvent(AudioChannel.PlayState playState);//状态事件
+
+        void timeEvent(long time);//时间事件 (ms)
     }
 
 
-    public enum PlayState {
-        PLAY,//播放
-        PAUSE,//暂停
-        END,//播放结束
-
-        CLOSE//关闭
-    }
 }
