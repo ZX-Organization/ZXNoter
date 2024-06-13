@@ -37,3 +37,8 @@ This is a MusicGame MapEditor,welcome for use!
 | UI框架  | 🟢 |
 | 音频框架  |    |
 | 谱面编辑器 |    |
+
+
+## 库
+* https://www.lwjgl.org/
+* http://bytedeco.org/
