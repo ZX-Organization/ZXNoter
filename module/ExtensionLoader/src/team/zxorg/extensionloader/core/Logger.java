@@ -10,8 +10,8 @@ import java.util.Objects;
 import java.util.logging.*;
 
 public class Logger {
-    private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("[HH:mm:ss] ");
-    private static final Formatter formatter = new Formatter() {
+    public static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("[HH:mm:ss] ");
+    public static final Formatter formatter = new Formatter() {
         @Override
         public String format(LogRecord record) {
             String sourceClassName = record.getSourceClassName();
@@ -25,7 +25,7 @@ public class Logger {
                     sourceClassName.substring(sourceClassName.lastIndexOf(".") + 1),
                     record.getSourceMethodName(),
                     record.getParameters()[0],
-                    record.getLevel()
+                    record.getLevel().getName()
             );
 
             String message = record.getMessage();
