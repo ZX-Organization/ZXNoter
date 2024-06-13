@@ -1,6 +1,6 @@
 package team.zxorg.audiosystem;
 
-import team.zxorg.audiosystem.handler.AudioFloatHandler;
+import team.zxorg.audiosystem.handler.AudioHandler;
 
 import javax.sound.sampled.AudioFormat;
 import java.nio.FloatBuffer;
@@ -10,13 +10,13 @@ import java.util.List;
 /**
  * 音频流混音节点
  */
-public class AudioStreamMix implements AudioFloatHandler {
+public class AudioStreamMix implements AudioHandler {
 
 
     /**
      * 混合的音频流节点
      */
-    private final List<AudioFloatHandler> nodes = new ArrayList<>();
+    private final List<AudioHandler> nodes = new ArrayList<>();
 
     @Override
     public void handle(AudioFormat format, FloatBuffer buffer) {
@@ -41,7 +41,7 @@ public class AudioStreamMix implements AudioFloatHandler {
      *
      * @return 节点列表
      */
-    public List<AudioFloatHandler> getNodes() {
+    public List<AudioHandler> getNodes() {
         return nodes;
     }
 
@@ -50,7 +50,7 @@ public class AudioStreamMix implements AudioFloatHandler {
      *
      * @param node 节点
      */
-    public void addNode(AudioFloatHandler node) {
+    public void addNode(AudioHandler node) {
         nodes.add(node);
     }
 
@@ -59,7 +59,7 @@ public class AudioStreamMix implements AudioFloatHandler {
      *
      * @param node 节点
      */
-    public void removeNode(AudioFloatHandler node) {
+    public void removeNode(AudioHandler node) {
         nodes.remove(node);
     }
 }

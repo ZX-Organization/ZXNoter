@@ -1,21 +1,21 @@
 package team.zxorg.audiosystem;
 
-import team.zxorg.audiosystem.handler.AudioFloatHandler;
+import team.zxorg.audiosystem.handler.AudioHandler;
 
 import javax.sound.sampled.AudioFormat;
 import java.nio.FloatBuffer;
 import java.util.Objects;
 
-public class AudioStreamNode implements AudioFloatHandler {
+public class AudioStreamNode implements AudioHandler {
     private final AudioStreamNode child;
-    private final AudioFloatHandler handler;
+    private final AudioHandler handler;
 
-    public AudioStreamNode(AudioFloatHandler handler) {
+    public AudioStreamNode(AudioHandler handler) {
         this.handler = handler;
         child = null;
     }
 
-    public AudioStreamNode(AudioFloatHandler handler, AudioStreamNode child) {
+    public AudioStreamNode(AudioHandler handler, AudioStreamNode child) {
         this.handler = Objects.requireNonNull(handler);
         this.child = Objects.requireNonNull(child);
     }

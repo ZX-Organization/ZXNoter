@@ -10,7 +10,7 @@ import java.nio.file.Path;
 
 public class AudioMixerTest {
     public static void main(String[] args) throws LineUnavailableException, UnsupportedAudioFileException, IOException, InterruptedException {
-        Path file = Path.of("C:\\Users\\zedoC\\Music\\1_nonoc - Believe in You_(Instrumental).wav");
+        Path file = Path.of("docs/reference/jitaimei/0/audio.ogg");
         AudioMixer mixer = new AudioMixer();
         mixer.setBufferSize(2048);
         mixer.open();

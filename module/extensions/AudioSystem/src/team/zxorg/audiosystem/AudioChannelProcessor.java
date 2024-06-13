@@ -1,6 +1,6 @@
 package team.zxorg.audiosystem;
 
-import team.zxorg.audiosystem.handler.AudioFloatHandler;
+import team.zxorg.audiosystem.handler.AudioHandler;
 
 import javax.sound.sampled.AudioFormat;
 import java.nio.FloatBuffer;
@@ -8,7 +8,7 @@ import java.nio.FloatBuffer;
 /**
  * 音频通道处理器
  */
-public abstract class AudioChannelProcessor implements AudioFloatHandler {
+public abstract class AudioChannelProcessor implements AudioHandler {
     /**
      * 音频流子节点
      */

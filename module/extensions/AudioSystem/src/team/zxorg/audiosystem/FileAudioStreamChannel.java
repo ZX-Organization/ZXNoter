@@ -1,6 +1,6 @@
 package team.zxorg.audiosystem;
 
-import team.zxorg.audiosystem.handler.AudioFloatHandler;
+import team.zxorg.audiosystem.handler.AudioHandler;
 
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
@@ -11,13 +11,14 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 
-public class FileAudioStreamChannel implements AudioFloatHandler {
+public class FileAudioStreamChannel implements AudioHandler {
 
     private AudioInputStream audioStream;
     private ByteBuffer byteBuffer;
 
     public void openFile(File file) throws UnsupportedAudioFileException, IOException {
-        audioStream = AudioSystem.getAudioInputStream(new AudioFormat(AudioFormat.Encoding.PCM_SIGNED, 44100/4, 16, 2, 4, 44100, false), AudioSystem.getAudioInputStream(file));
+        audioStream = AudioSystem.getAudioInputStream(new AudioFormat(AudioFormat.Encoding.PCM_SIGNED, 44100, 16, 2, 4, 44100, false), AudioSystem.getAudioInputStream(file));
+
     }
 
 

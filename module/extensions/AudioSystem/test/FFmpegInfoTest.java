@@ -1,7 +1,7 @@
-package team.zxorg.audiosystem.test;
 
 import org.bytedeco.ffmpeg.avformat.AVFormatContext;
 import org.bytedeco.ffmpeg.avutil.AVDictionary;
+import org.bytedeco.ffmpeg.global.avformat;
 import org.bytedeco.ffmpeg.global.avutil;
 
 import static org.bytedeco.ffmpeg.global.avformat.*;
@@ -14,13 +14,13 @@ public class FFmpegInfoTest {
         AVFormatContext formatContext = new AVFormatContext(null);
 
         // 打开输入文件
-        if (avformat_open_input(formatContext, filename, null, null) != 0) {
+        if (avformat.avformat_open_input(formatContext, filename, null, null) != 0) {
             System.err.println("Could not open file " + filename);
             return;
         }
 
         // 获取流信息
-        if (avformat_find_stream_info(formatContext, (AVDictionary) null) < 0) {
+        if (avformat.avformat_find_stream_info(formatContext, (AVDictionary) null) < 0) {
             System.err.println("Could not find stream information");
             return;
         }
@@ -46,7 +46,7 @@ public class FFmpegInfoTest {
         System.out.println(formatTime(formatContext.start_time() / 1000));
         System.out.println(formatTime((formatContext.start_time() + formatContext.duration()) / 1000) + " ms");
         System.out.println(formatContext.max_analyze_duration());
-        avformat_close_input(formatContext);
+        avformat.avformat_close_input(formatContext);
     }
 
     /**
