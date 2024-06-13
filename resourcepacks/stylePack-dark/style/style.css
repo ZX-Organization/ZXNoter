@@ -38,6 +38,46 @@
 }
 
 /**
+颜色填充
+ */
+.bg-fill-blue {
+    -fx-background-color: -color-blue;
+}
+
+.bg-fill-red {
+    -fx-background-color: -color-red;
+}
+
+.bg-fill-purple {
+    -fx-background-color: -color-purple;
+}
+
+.bg-fill-yellow {
+    -fx-background-color: -color-yellow;
+}
+
+.bg-fill-green {
+    -fx-background-color: -color-green;
+}
+
+.bg-fill-orange {
+    -fx-background-color: -color-orange;
+}
+
+.bg-fill-pink {
+    -fx-background-color: -color-pink;
+}
+
+.bg-fill-gray {
+    -fx-background-color: -color-gray;
+}
+
+.bg-fill-white {
+    -fx-background-color: -color-white;
+}
+
+
+/**
 子字体
  */
 
@@ -1378,4 +1418,26 @@
 .code-area .delimiterError {
     -fx-fill: -color-red-light;
 }
+
+
+/**
+列表项
+ */
+.list-cell, .list-cell:odd {
+    -fx-background-color: transparent;
+
+}
+
+.list-cell:hover, .list-cell:odd:hover {
+    -fx-background-color: transparent;
+}
+
+.list-cell:filled:hover, .list-cell:odd:filled:hover {
+    -fx-background-color: rgba(0, 0, 0, 0.15);
+}
+
+.list-cell:filled:selected:focused, .list-cell:filled:selected {
+    -fx-background-color: rgba(0, 0, 0, 0.3);
+}
+
 

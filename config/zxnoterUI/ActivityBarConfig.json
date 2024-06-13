@@ -1,7 +1,7 @@
 {
-  "leftPaneWidth": 290.4,
+  "leftPaneWidth": 314.24,
   "rightPaneWidth": 0.0,
-  "bottomPaneHeight": 0.0,
+  "bottomPaneHeight": 154.39999999999995,
   "hideMainBar": false,
   "hideSecondBar": true,
   "mainBarIsLeft": true,
@@ -10,6 +10,7 @@
     "fileManager"
   ],
   "mainBottomBarItems": [
+    "logger",
     "setup"
   ],
   "secondBarItems": [],

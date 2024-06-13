@@ -83,6 +83,10 @@
           welcome: {
             name: "欢迎",
             icon: "buildings.home-3"
+          },
+          logger: {
+            name: "日志",
+            icon: "development.bug-2"
           }
         }
       },

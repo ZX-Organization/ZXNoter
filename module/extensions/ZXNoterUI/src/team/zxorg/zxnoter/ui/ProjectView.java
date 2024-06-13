@@ -6,6 +6,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import team.zxorg.extensionloader.core.Configuration;
 import team.zxorg.extensionloader.core.Resource;
+import team.zxorg.extensionloader.core.Version;
 import team.zxorg.extensionloader.event.ResourceEventListener;
 import team.zxorg.fxcl.component.flexview.FlexArea;
 import team.zxorg.zxnoter.ui.component.activitypane.ActivityPane;
@@ -89,12 +90,12 @@ public class ProjectView {
         root = new VBox(titleBar, activityBar, statusBar);
         scene = new Scene(root);
 
-
         Resource.addEventListener(loadStyle);
         loadStyle.onReload();
         stage.setScene(scene);
         stage.setMinWidth(800);
         stage.setMinHeight(600);
+        stage.setTitle("ZXNoter");
 
 
         stage.setOnCloseRequest(event -> {

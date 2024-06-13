@@ -12,12 +12,12 @@
   },
   message: {
     icon: {
-      loading: "正在载入图标库...⏳",
-      loaded: "图标库载入完成, 用时 {0} ms"
+      loading: "正在载入图标资源...⏳",
+      loaded: "图标资源载入完成, 用时 {0} ms"
     },
     image: {
-      loading: "正在载入纹理库...⏳",
-      loaded: "纹理库载入完成, 用时 {0} ms"
+      loading: "正在载入纹理资源...⏳",
+      loaded: "纹理资源载入完成, 用时 {0} ms"
     }
   }
-  }
+}

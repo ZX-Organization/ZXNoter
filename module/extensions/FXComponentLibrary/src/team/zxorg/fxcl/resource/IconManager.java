@@ -7,7 +7,10 @@ import com.github.weisj.jsvg.parser.SVGLoader;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.image.Image;
-import team.zxorg.extensionloader.core.*;
+import team.zxorg.extensionloader.core.Language;
+import team.zxorg.extensionloader.core.Logger;
+import team.zxorg.extensionloader.core.Resource;
+import team.zxorg.extensionloader.core.StopWatch;
 import team.zxorg.extensionloader.event.ResourceEventListener;
 
 import javax.imageio.ImageIO;
@@ -16,7 +19,6 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashMap;
 
