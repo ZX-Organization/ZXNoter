@@ -34,8 +34,8 @@ gen
 
 target/
 
-/extensions/*.jar
-/ZXNoter.jar
+extensions/
+ZXNoter.jar
 
 *.log
 *.log.lck

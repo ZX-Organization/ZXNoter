@@ -1,7 +1,7 @@
 package team.zxorg.audiosystem.test;
 
-import team.zxorg.audiosystem.AudioMixer;
-import team.zxorg.audiosystem.FileAudioStreamChannel;
+import team.zxorg.old.AudioMixer;
+import team.zxorg.old.FileAudioStreamChannel;
 
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;

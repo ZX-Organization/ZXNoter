@@ -3,7 +3,7 @@
     <properties maven-id="org.openjfx:javafx-base:LATEST" />
     <CLASSES>
       <root url="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-base/23-ea+20/javafx-base-23-ea+20.jar!/" />
-      <root url="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-base/23-ea+20/javafx-base-23-ea+20-linux.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-base/23-ea+20/javafx-base-23-ea+20-win.jar!/" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-base/23-ea+20/javafx-base-23-ea+20-javadoc.jar!/" />

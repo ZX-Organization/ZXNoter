@@ -32,7 +32,6 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.control.ToggleGroup?>
-<?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.control.TreeView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -336,13 +335,9 @@
                   <VBox id="sideBar" minWidth="38.0" prefHeight="149.0" prefWidth="928.0" styleClass="side-bar" BorderPane.alignment="CENTER">
                      <children>
                         <BorderPane prefHeight="200.0" prefWidth="200.0">
-                           <bottom>
-                              <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-                                <items>
-                                  <Button mnemonicParsing="false" text="Button" />
-                                </items>
-                              </ToolBar>
-                           </bottom></BorderPane>
+                           <center>
+                              <ListView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+                           </center></BorderPane>
                      </children>
                   </VBox>
                </bottom>

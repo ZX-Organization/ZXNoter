@@ -17,7 +17,17 @@
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../../libraries/bytedeco/ffmpeg-6.1.1-1.5.10-linux-x86_64.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../../libraries/bytedeco/ffmpeg-6.1.1-1.5.10-windows-x86_64.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="library" exported="" name="lwjgl.openal" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../libraries/lwjgl/lwjgl-openal-3.3.3-natives-windows.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -26,7 +36,17 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../../libraries/bytedeco/ffmpeg-6.1.1-1.5.10-windows-x86_64.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../../libraries/lwjgl/lwjgl-3.3.3-natives-windows.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="library" name="lwjgl.stb" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../libraries/lwjgl/lwjgl-stb-3.3.3-natives-windows.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
