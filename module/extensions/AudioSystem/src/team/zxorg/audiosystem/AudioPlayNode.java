@@ -23,9 +23,9 @@ public class AudioPlayNode extends AudioNode {
 
     @Override
     protected void process(AudioBuffer audioBuffer) {
-        FloatBuffer buffer = audio.getBuffer();
+        FloatBuffer buffer = audio.getMainBuffer();
         for (int i = 0; i < buffer.remaining(); i++) {
-            buffer.put(i, buffer.get(i) + audio.getBuffer().get());
+            buffer.put(i, buffer.get(i) + audio.getMainBuffer().get());
         }
     }
 

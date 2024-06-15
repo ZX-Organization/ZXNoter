@@ -12,25 +12,54 @@ import org.bytedeco.ffmpeg.global.swresample;
 import org.bytedeco.ffmpeg.swresample.SwrContext;
 import org.bytedeco.javacpp.BytePointer;
 import org.bytedeco.javacpp.PointerPointer;
-import team.zxorg.extensionloader.core.Logger;
 
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
-import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class AudioBuffer {
-    private final FloatBuffer buffer;
+    private final FloatBuffer mainBuffer;
+    private final FloatBuffer[] channelBuffers;
+
     private final int channels;
     private final int sampleRate;
 
-    public AudioBuffer(FloatBuffer buffer, int channels, int sampleRate) {
-        this.buffer = buffer;
+    public AudioBuffer(FloatBuffer mainBuffer, int channels, int sampleRate) {
+        this.mainBuffer = mainBuffer;
         this.channels = channels;
         this.sampleRate = sampleRate;
+        channelBuffers = new FloatBuffer[channels];
+        // 计算每个声道的样本数
+        int channelSampleCount = mainBuffer.capacity() / channels;
+        //分离每个音频通道
+        for (int c = 0; c < channels; c++) {
+            FloatBuffer channelBuffer = mainBuffer.duplicate();
+            channelBuffer.position(c);
+            channelBuffer.limit(mainBuffer.limit());
+            FloatBuffer slicedBuffer = channelBuffer.slice();
+
+
+            ByteBuffer byteBuffer = ByteBuffer.allocateDirect(channelSampleCount * Float.BYTES);
+
+            // 设置步长
+            FloatBuffer resultBuffer = byteBuffer.asFloatBuffer();
+            for (int i = 0; i < channelSampleCount; i++) {
+                resultBuffer.put(slicedBuffer.get(i * (c + 1)));
+            }
+
+            resultBuffer.flip();
+            channelBuffers[c] = byteBuffer.asFloatBuffer();
+        }
+    }
+    // 创建声道 FloatBuffer 视图的方法
+    private static FloatBuffer createChannelBufferView(ByteBuffer mainBuffer, int channel) {
+        // 设置步长为 2，并创建一个新的 FloatBuffer 视图
+        ByteBuffer byteBuffer = mainBuffer.duplicate().order(ByteOrder.nativeOrder()).position(channel * Float.BYTES).limit(mainBuffer.limit() * Float.BYTES).slice();
+        FloatBuffer channelBuffer = byteBuffer.asFloatBuffer();
+        channelBuffer.limit(mainBuffer.capacity() / 2);  // 限制缓冲区容量为主缓冲区的一半
+        return channelBuffer;
     }
 
     public AudioBuffer(Path file, int targetChannels, int targetSampleRate) {
@@ -38,19 +67,11 @@ public class AudioBuffer {
         AVFormatContext formatContext = avformat.avformat_alloc_context();
 
         if (avformat.avformat_open_input(formatContext, file.toString(), null, null) != 0) {
-            Logger.warning("无法打开音频: " + file);
-            buffer = null;
-            channels = 0;
-            sampleRate = 0;
-            return;
+            throw new RuntimeException("无法打开音频: " + file);
         }
         // 查找流信息
         if (avformat.avformat_find_stream_info(formatContext, (PointerPointer) null) < 0) {
-            Logger.warning("没有找到可用的音频流: " + file);
-            buffer = null;
-            channels = 0;
-            sampleRate = 0;
-            return;
+            throw new RuntimeException("没有找到可用的音频流: " + file);
         }
 
         // 获取音频流索引
@@ -62,21 +83,13 @@ public class AudioBuffer {
             }
         }
         if (audioIndex == -1) {
-            Logger.warning("没有找到音频流: " + file);
-            buffer = null;
-            channels = 0;
-            sampleRate = 0;
-            return;
+            throw new RuntimeException("没有找到音频流: " + file);
         }
 
         // 获取音频解码器
         AVCodec audioCodec = avcodec.avcodec_find_decoder(formatContext.streams(audioIndex).codecpar().codec_id());
         if (audioCodec == null) {
-            System.err.println("未找到解码器");
-            buffer = null;
-            channels = 0;
-            sampleRate = 0;
-            return;
+            throw new RuntimeException("未找到解码器");
         }
 
         AVCodecContext codecContext = avcodec.avcodec_alloc_context3(audioCodec);
@@ -93,29 +106,17 @@ public class AudioBuffer {
                 0, null);
 
         if (swrContext == null) {
-            System.err.println("无法创建SwrContext");
-            buffer = null;
-            channels = 0;
-            sampleRate = 0;
-            return;
+            throw new RuntimeException("无法创建SwrContext");
         }
         // 初始化转换器
         if (swresample.swr_init(swrContext) < 0) {
-            System.err.println("无法初始化SwrContext");
             swresample.swr_free(swrContext);
-            buffer = null;
-            channels = 0;
-            sampleRate = 0;
-            return;
+            throw new RuntimeException("无法初始化SwrContext");
         }
 
         // 打开解码器
         if (avcodec.avcodec_open2(codecContext, audioCodec, (PointerPointer) null) < 0) {
-            System.err.println("解码器打开失败");
-            buffer = null;
-            channels = 0;
-            sampleRate = 0;
-            return;
+            throw new RuntimeException("解码器打开失败");
         }
 
         // 初始化包和帧数据结构
@@ -153,16 +154,10 @@ public class AudioBuffer {
 
         byte[] audioBytes = byteArrayOutputStream.toByteArray();
         ByteBuffer directBuffer = ByteBuffer.allocateDirect(audioBytes.length).order(ByteOrder.nativeOrder());
-        try {
-            Files.write(Path.of("test.bin"), audioBytes);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
         directBuffer.put(audioBytes).flip();
 
-        buffer = directBuffer.asFloatBuffer();
-        channels = targetChannels;
-        sampleRate = targetSampleRate;
+
+        this(directBuffer.asFloatBuffer(), targetChannels, targetSampleRate);
 
         // 清理资源
         avcodec.avcodec_free_context(codecContext);
@@ -172,8 +167,8 @@ public class AudioBuffer {
         avformat.avformat_close_input(formatContext);
     }
 
-    public FloatBuffer getBuffer() {
-        return buffer;
+    public FloatBuffer getMainBuffer() {
+        return mainBuffer;
     }
 
     public int getChannels() {
@@ -185,6 +180,6 @@ public class AudioBuffer {
     }
 
     public void rewind() {
-        buffer.rewind();
+        mainBuffer.rewind();
     }
 }
