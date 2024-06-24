@@ -33,33 +33,13 @@ public class AudioBuffer {
         channelBuffers = new FloatBuffer[channels];
         // 计算每个声道的样本数
         int channelSampleCount = mainBuffer.capacity() / channels;
-        //分离每个音频通道
-        for (int c = 0; c < channels; c++) {
-            FloatBuffer channelBuffer = mainBuffer.duplicate();
-            channelBuffer.position(c);
-            channelBuffer.limit(mainBuffer.limit());
-            FloatBuffer slicedBuffer = channelBuffer.slice();
 
-
-            ByteBuffer byteBuffer = ByteBuffer.allocateDirect(channelSampleCount * Float.BYTES);
-
-            // 设置步长
-            FloatBuffer resultBuffer = byteBuffer.asFloatBuffer();
-            for (int i = 0; i < channelSampleCount; i++) {
-                resultBuffer.put(slicedBuffer.get(i * (c + 1)));
-            }
-
-            resultBuffer.flip();
-            channelBuffers[c] = byteBuffer.asFloatBuffer();
+        //初始化每个通道的缓冲区
+        for (int i = 0; i < channels; i++) {
+            channelBuffers[i] = ByteBuffer.allocateDirect(channelSampleCount).asFloatBuffer();
         }
-    }
-    // 创建声道 FloatBuffer 视图的方法
-    private static FloatBuffer createChannelBufferView(ByteBuffer mainBuffer, int channel) {
-        // 设置步长为 2，并创建一个新的 FloatBuffer 视图
-        ByteBuffer byteBuffer = mainBuffer.duplicate().order(ByteOrder.nativeOrder()).position(channel * Float.BYTES).limit(mainBuffer.limit() * Float.BYTES).slice();
-        FloatBuffer channelBuffer = byteBuffer.asFloatBuffer();
-        channelBuffer.limit(mainBuffer.capacity() / 2);  // 限制缓冲区容量为主缓冲区的一半
-        return channelBuffer;
+
+
     }
 
     public AudioBuffer(Path file, int targetChannels, int targetSampleRate) {
@@ -165,6 +145,15 @@ public class AudioBuffer {
         avcodec.av_packet_free(avPacket);
         swresample.swr_free(swrContext);
         avformat.avformat_close_input(formatContext);
+    }
+
+    // 创建声道 FloatBuffer 视图的方法
+    private static FloatBuffer createChannelBufferView(ByteBuffer mainBuffer, int channel) {
+        // 设置步长为 2，并创建一个新的 FloatBuffer 视图
+        ByteBuffer byteBuffer = mainBuffer.duplicate().order(ByteOrder.nativeOrder()).position(channel * Float.BYTES).limit(mainBuffer.limit() * Float.BYTES).slice();
+        FloatBuffer channelBuffer = byteBuffer.asFloatBuffer();
+        channelBuffer.limit(mainBuffer.capacity() / 2);  // 限制缓冲区容量为主缓冲区的一半
+        return channelBuffer;
     }
 
     public FloatBuffer getMainBuffer() {
