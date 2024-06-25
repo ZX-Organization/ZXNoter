@@ -32,3 +32,4 @@ bin/
 .idea
 out
 gen
+/config.json
