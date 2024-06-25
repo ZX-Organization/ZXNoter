@@ -16,7 +16,7 @@
     <orderEntry type="library" exported="" name="openjfx.javafx.controls" level="project" />
     <orderEntry type="library" exported="" name="openjfx.javafx.graphics" level="project" />
     <orderEntry type="library" exported="" name="fxmisc.flowless" level="project" />
-    <orderEntry type="library" exported="" name="fxmisc.richtext.richtextfx" level="project" />
-    <orderEntry type="library" exported="" name="google.code.gson" level="project" />
+    <orderEntry type="library" name="google.code.gson" level="project" />
+    <orderEntry type="library" name="fxmisc.richtext.richtextfx" level="project" />
   </component>
 </module>
