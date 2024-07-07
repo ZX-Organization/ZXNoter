@@ -11,20 +11,25 @@ import java.util.HashMap;
 
 public class FFmpeg {
     public static boolean audioToWav(Path audio, Path wav) {
-        String[] command = {"ffmpeg", "-y", "-i", Main.quotationMark + audio.toAbsolutePath() + Main.quotationMark, Main.quotationMark + wav.toAbsolutePath() + Main.quotationMark};
+        String[] command = {"ffmpeg", "-y", "-i", "\"" + audio.toAbsolutePath() + "\"", "\"" + wav.toAbsolutePath() + "\""};
 
         try {
             ProcessBuilder processBuilder = new ProcessBuilder(command);
-
-            // 获取系统环境变量
             processBuilder.environment().putAll(System.getenv());
+            processBuilder.redirectErrorStream(true); // 将错误流合并到标准流中
 
-            // 启动进程
             Process process = processBuilder.start();
+
+            // 读取进程输出，防止阻塞
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    System.out.println(line);
+                }
+            }
 
             // 等待进程执行完成
             int exitCode = process.waitFor();
-
             return (exitCode == 0);
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
