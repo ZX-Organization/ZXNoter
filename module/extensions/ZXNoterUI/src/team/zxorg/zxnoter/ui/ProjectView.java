@@ -1,16 +1,15 @@
 package team.zxorg.zxnoter.ui;
 
 import javafx.scene.Scene;
-import javafx.scene.control.Tab;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import team.zxorg.extensionloader.core.Configuration;
 import team.zxorg.extensionloader.core.Resource;
-import team.zxorg.extensionloader.core.Version;
 import team.zxorg.extensionloader.event.ResourceEventListener;
 import team.zxorg.fxcl.component.flexview.FlexArea;
-import team.zxorg.zxnoter.ui.component.activitypane.ActivityPane;
+import team.zxorg.fxcl.component.menu.LangMenu;
 import team.zxorg.zxnoter.ui.component.StatusBar;
+import team.zxorg.zxnoter.ui.component.activitypane.ActivityPane;
 import team.zxorg.zxnoter.ui.component.titlebar.TitleBar;
 
 import java.nio.file.Path;
@@ -25,19 +24,6 @@ public class ProjectView {
      * 标题栏
      */
     private final TitleBar titleBar;
-
-    public Stage getStage() {
-        return stage;
-    }
-
-    public TitleBar getTitleBar() {
-        return titleBar;
-    }
-
-    public StatusBar getStatusBar() {
-        return statusBar;
-    }
-
     /**
      * 视图区域
      */
@@ -46,7 +32,6 @@ public class ProjectView {
      * 活动栏面板
      */
     private final ActivityPane activityBar;
-
     /**
      * 状态栏
      */
@@ -55,17 +40,14 @@ public class ProjectView {
      * 窗口
      */
     private final Stage stage = new Stage();
-
     /**
      * 根
      */
     private final VBox root;
-
     /**
      * 场景
      */
     private final Scene scene;
-
     private final ResourceEventListener loadStyle = new ResourceEventListener() {
         @Override
         public void onReload() {
@@ -81,8 +63,8 @@ public class ProjectView {
         viewArea = new FlexArea() {
             {
                 getStyleClass().addAll("view-area");
-                createTabPane().addTab(new Tab());
-                createSplitPane().createTabPane().addTab(new Tab());
+                /*createTabPane().addTab(new Tab());
+                createSplitPane().createTabPane().addTab(new Tab());*/
             }
         };
         activityBar = new ActivityPane(this, viewArea);
@@ -103,9 +85,24 @@ public class ProjectView {
         });
     }
 
+    public static void registerMenu(String id, LangMenu menu) {
+
+    }
+
+    public Stage getStage() {
+        return stage;
+    }
+
+    public TitleBar getTitleBar() {
+        return titleBar;
+    }
+
+    public StatusBar getStatusBar() {
+        return statusBar;
+    }
+
     public void show() {
         stage.show();
     }
-
 
 }

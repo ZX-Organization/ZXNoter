@@ -24,4 +24,5 @@
     <tree path="/module/extensions/UISEditor" title="皮肤编辑器-旧"/>
     <tree path="/libraries" title="所有依赖库" extension="" presentableText="" tooltipTitle=""
           icon="NodesPpLibFolder" textColor="" backgroundColor=""/>
+    <tree path="/module/extensions/MusicMapEditor-Old" title="旧版音游谱面编辑器"/>
 </trees>

@@ -1,16 +1,16 @@
 <component name="libraryTable">
   <library name="fxmisc.flowless" type="repository">
-    <properties maven-id="org.fxmisc.flowless:flowless:0.7.2" />
+    <properties maven-id="org.fxmisc.flowless:flowless:0.7.3" />
     <CLASSES>
-      <root url="jar://$MAVEN_REPOSITORY$/org/fxmisc/flowless/flowless/0.7.2/flowless-0.7.2.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/fxmisc/flowless/flowless/0.7.3/flowless-0.7.3.jar!/" />
       <root url="jar://$MAVEN_REPOSITORY$/org/reactfx/reactfx/2.0-M5/reactfx-2.0-M5.jar!/" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$MAVEN_REPOSITORY$/org/fxmisc/flowless/flowless/0.7.2/flowless-0.7.2-javadoc.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/fxmisc/flowless/flowless/0.7.3/flowless-0.7.3-javadoc.jar!/" />
       <root url="jar://$MAVEN_REPOSITORY$/org/reactfx/reactfx/2.0-M5/reactfx-2.0-M5-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://$MAVEN_REPOSITORY$/org/fxmisc/flowless/flowless/0.7.2/flowless-0.7.2-sources.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/fxmisc/flowless/flowless/0.7.3/flowless-0.7.3-sources.jar!/" />
       <root url="jar://$MAVEN_REPOSITORY$/org/reactfx/reactfx/2.0-M5/reactfx-2.0-M5-sources.jar!/" />
     </SOURCES>
   </library>

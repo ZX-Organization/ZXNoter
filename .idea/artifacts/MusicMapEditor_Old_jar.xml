@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="MusicMapEditor-Old:jar">
+    <output-path>$PROJECT_DIR$/extensions</output-path>
+    <root id="archive" name="MusicMapEditor-Old.jar">
+      <element id="module-output" name="MusicMapEditor-Old" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/alibaba/fastjson2/fastjson2/2.0.51/fastjson2-2.0.51.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

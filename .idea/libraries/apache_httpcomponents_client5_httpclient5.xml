@@ -1,22 +1,22 @@
 <component name="libraryTable">
   <library name="apache.httpcomponents.client5.httpclient5" type="repository">
-    <properties maven-id="org.apache.httpcomponents.client5:httpclient5:5.4-alpha1" />
+    <properties maven-id="org.apache.httpcomponents.client5:httpclient5:5.4-beta1" />
     <CLASSES>
-      <root url="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/client5/httpclient5/5.4-alpha1/httpclient5-5.4-alpha1.jar!/" />
-      <root url="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/core5/httpcore5/5.3-alpha1/httpcore5-5.3-alpha1.jar!/" />
-      <root url="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/core5/httpcore5-h2/5.3-alpha1/httpcore5-h2-5.3-alpha1.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/client5/httpclient5/5.4-beta1/httpclient5-5.4-beta1.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/core5/httpcore5/5.3-beta1/httpcore5-5.3-beta1.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/core5/httpcore5-h2/5.3-beta1/httpcore5-h2-5.3-beta1.jar!/" />
       <root url="jar://$MAVEN_REPOSITORY$/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.jar!/" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/client5/httpclient5/5.4-alpha1/httpclient5-5.4-alpha1-javadoc.jar!/" />
-      <root url="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/core5/httpcore5/5.3-alpha1/httpcore5-5.3-alpha1-javadoc.jar!/" />
-      <root url="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/core5/httpcore5-h2/5.3-alpha1/httpcore5-h2-5.3-alpha1-javadoc.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/client5/httpclient5/5.4-beta1/httpclient5-5.4-beta1-javadoc.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/core5/httpcore5/5.3-beta1/httpcore5-5.3-beta1-javadoc.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/core5/httpcore5-h2/5.3-beta1/httpcore5-h2-5.3-beta1-javadoc.jar!/" />
       <root url="jar://$MAVEN_REPOSITORY$/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/client5/httpclient5/5.4-alpha1/httpclient5-5.4-alpha1-sources.jar!/" />
-      <root url="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/core5/httpcore5/5.3-alpha1/httpcore5-5.3-alpha1-sources.jar!/" />
-      <root url="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/core5/httpcore5-h2/5.3-alpha1/httpcore5-h2-5.3-alpha1-sources.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/client5/httpclient5/5.4-beta1/httpclient5-5.4-beta1-sources.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/core5/httpcore5/5.3-beta1/httpcore5-5.3-beta1-sources.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/core5/httpcore5-h2/5.3-beta1/httpcore5-h2-5.3-beta1-sources.jar!/" />
       <root url="jar://$MAVEN_REPOSITORY$/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36-sources.jar!/" />
     </SOURCES>
   </library>

@@ -1,0 +1,21 @@
+.menu-bar {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+    -fx-pref-height: 30px;
+}
+
+.menu-bar .container .menu{
+    -fx-pref-height: inherit;
+}
+
+
+.context-menu {
+    -fx-padding: 1 2 1 2;
+}
+.tab-pane .tab-header-area {
+    -fx-padding: 0;
+}
+
+.scroll-pane,.scroll-pane .viewport{
+    -fx-background-color: transparent;
+}
