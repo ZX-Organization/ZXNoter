@@ -10,26 +10,44 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dd78a4ca-7956-492b-9d75-ff82bf57b657" name="更改" comment="修改">
-      <change afterPath="$PROJECT_DIR$/.idea/checkstyle-idea.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcespackage/img/note/theme/default/beat-line-4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcespackage/img/note/theme/default/beat-line-5.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcespackage/img/note/theme/default/sub-beat-line-1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcespackage/img/note/theme/default/sub-beat-line-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcespackage/img/note/theme/default/sub-beat-line-3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcespackage/img/note/theme/default/sub-beat-line-4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/bytedeco_ffmpeg.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/ffmpeg.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/javacpp.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/javafx.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/javafx_aarch64.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/audio.mp3.pcm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/drum-hitfinish.wav.pcm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hs_err_pid16400.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hs_err_pid23260.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hs_err_pid33612.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hs_err_pid50324.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/ffmpeg-6.1.1-1.5.10-linux-x86_64.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/ffmpeg-6.1.1-1.5.10-macosx-arm64.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/ffmpeg-6.1.1-1.5.10-windows-x86_64.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javacpp-1.5.10-linux-x86_64.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javacpp-1.5.10-macosx-arm64.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javacpp-1.5.10-windows-x86_64.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resourcespackage/img/note/theme/default/normal-selected/note2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resourcespackage/img/note/theme/default/normal-shadow/note2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resourcespackage/img/note/theme/default/normal/note2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resourcespackage/img/note/theme/default/preview-selected/note2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resourcespackage/img/note/theme/default/preview/note2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/sound/audiomixer/AudioProcessor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test.pcm" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resourcespackage.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/resource_old/ZXResources.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/resource_old/ZXResources.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui_old/TimeUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui_old/TimeUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ZXNoter.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ZXNoter.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resourcespackage/audio/drum-hitclap.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resourcespackage/audio/drum-hitfinish.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resourcespackage/audio/hitnormal.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resourcespackage/audio/soft-hitnormal.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/sound/audiomixer/AudioMixer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/sound/audiomixer/AudioMixer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/sound/audiomixer/AudioSonicChannel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/sound/audiomixer/AudioSonicChannel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/sound/audiomixer/FFmpeg.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/sound/audiomixer/FFmpeg.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui_old/ZXNApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui_old/ZXNApp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui_old/editor/MapEditor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui_old/editor/MapEditor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui_old/render/fixedorbit/FixedOrbitBeatLineRender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui_old/render/fixedorbit/FixedOrbitBeatLineRender.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui_old/render/fixedorbit/FixedOrbitInfoRender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui_old/render/fixedorbit/FixedOrbitInfoRender.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui_old/render/fixedorbit/FixedOrbitRender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui_old/render/fixedorbit/FixedOrbitRender.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui_old/render/fixedorbit/key/FixedOrbitObjectKey.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui_old/render/fixedorbit/key/FixedOrbitObjectKey.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui_old/render/fixedorbit/FixedOrbitMapRender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui_old/render/fixedorbit/FixedOrbitMapRender.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui_old/render/fixedorbit/key/FixedOrbitNotesKey.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui_old/render/fixedorbit/key/FixedOrbitNotesKey.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,8 +60,8 @@
         <option value="AnnotationType" />
         <option value="Enum" />
         <option value="CSS File" />
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -69,6 +87,11 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Application.Main.executor": "Run",
+    "Downloaded.Files.Path.Enabled": "false",
+    "Repository.Attach.Annotations": "true",
+    "Repository.Attach.JavaDocs": "true",
+    "Repository.Attach.Sources": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "extract.method.default.visibility": "private",
@@ -78,7 +101,7 @@
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "工件",
+    "project.structure.last.edited": "Libraries",
     "project.structure.proportion": "0.17292577",
     "project.structure.side.proportion": "0.38297874",
     "settings.editor.selected.configurable": "http.proxy",
@@ -99,18 +122,18 @@
       <recent name="D:\Projects\ZXNoter\resourcespackage\svg" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Projects\old\ZXNoter\lib" />
       <recent name="F:\AllProjects\ZX-Organization\ZXNoter\old" />
       <recent name="F:\AllProjects\ZX-Organization\ZXNoter\docs\reference" />
       <recent name="F:\AllProjects\ZX-Organization\ZXNoter\docs\reference\xiuluo" />
       <recent name="F:\AllProjects\ZX-Organization\ZXNoter\src\team\zxorg\zxnoter\ui_old\editor" />
-      <recent name="D:\Projects\ZXNoter\lib" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="team.zxorg.zxnoter.ui.component" />
       <recent name="team.zxorg.zxnoter.ui.render.fixedorbit" />
     </key>
   </component>
-  <component name="RunManager" selected="应用程序.Main">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="ImdReader" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="team.zxorg.zxnoter.io.reader.ImdReader" />
       <module name="ZXNoter" />
@@ -176,20 +199,29 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="ZXNoter" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="ZXNoter" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <list>
-      <item itemvalue="应用程序.IoTest" />
-      <item itemvalue="应用程序.ImdReader" />
-      <item itemvalue="应用程序.OsuReader" />
-      <item itemvalue="应用程序.ZXNApp" />
-      <item itemvalue="应用程序.Main" />
+      <item itemvalue="Application.ImdReader" />
+      <item itemvalue="Application.IoTest" />
+      <item itemvalue="Application.Main" />
+      <item itemvalue="Application.OsuReader" />
+      <item itemvalue="Application.ZXNApp" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="应用程序.ZXNApp" />
-        <item itemvalue="应用程序.OsuReader" />
-        <item itemvalue="应用程序.Main" />
-        <item itemvalue="应用程序.IoTest" />
-        <item itemvalue="应用程序.ImdReader" />
+        <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>

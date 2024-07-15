@@ -6,10 +6,7 @@ import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.image.Image;
 import team.zxorg.zxnoter.map.ZXMap;
-import team.zxorg.zxnoter.note.fixedorbit.ComplexNote;
-import team.zxorg.zxnoter.note.fixedorbit.FixedOrbitNote;
-import team.zxorg.zxnoter.note.fixedorbit.LongNote;
-import team.zxorg.zxnoter.note.fixedorbit.SlideNote;
+import team.zxorg.zxnoter.note.fixedorbit.*;
 import team.zxorg.zxnoter.ui_old.component.CanvasPane;
 import team.zxorg.zxnoter.ui_old.render.basis.RenderPoint;
 import team.zxorg.zxnoter.ui_old.render.fixedorbit.key.FixedOrbitNotesKey;
@@ -19,6 +16,7 @@ public class FixedOrbitMapRender extends FixedOrbitRender {
     final String state;//状态
     private final Image IMAGE_NODE;
     private final Image IMAGE_NOTE;
+    private final Image IMAGE_NOTE2;
     private final Image IMAGE_END;
     private final Image IMAGE_LEFT;
     private final Image IMAGE_LONG;
@@ -33,6 +31,7 @@ public class FixedOrbitMapRender extends FixedOrbitRender {
         this.state = state;
         IMAGE_NODE = getImage(state, FixedOrbitNotesKey.NODE);
         IMAGE_NOTE = getImage(state, FixedOrbitNotesKey.NOTE);
+        IMAGE_NOTE2 = getImage(state, FixedOrbitNotesKey.NOTE2);
         IMAGE_END = getImage(state, FixedOrbitNotesKey.END);
         IMAGE_LEFT = getImage(state, FixedOrbitNotesKey.LEFT);
         IMAGE_LONG = getImage(state, FixedOrbitNotesKey.LONG);
@@ -74,7 +73,7 @@ public class FixedOrbitMapRender extends FixedOrbitRender {
                     drawNote(note, DrawMode.ALL, null);
                 }
 
-                loadImage(IMAGE_NOTE);
+                loadImage(note instanceof CustomNote ? IMAGE_NOTE2 : IMAGE_NOTE);
                 //计算尺寸
                 renderRectangle.setXY(Pos.CENTER,
                         orbitWidth * (note.orbit) + orbitWidth / 2,
@@ -86,7 +85,7 @@ public class FixedOrbitMapRender extends FixedOrbitRender {
                     renderNote.pos = RenderNote.RenderNoteObject.HEAD;
                     renderNote.note = note;
                     renderNote.complexNote = null;
-                    renderNote.key = FixedOrbitNotesKey.NOTE;
+                    renderNote.key =note instanceof CustomNote ?  FixedOrbitNotesKey.NOTE2 :  FixedOrbitNotesKey.NOTE;
                     renderNote.renderRectangle = renderRectangle.clone();
                 }
                 drawImage();

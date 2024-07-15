@@ -1,36 +1,16 @@
 package team.zxorg.zxnoter.sound.audiomixer;
 
 import javax.sound.sampled.*;
-import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 
 public class AudioMixer {
-    private final ArrayList<byte[]> audioDataList = new ArrayList<>();//音频数据表
+    private final ArrayList<AudioInputStream> audioDataList = new ArrayList<>();//音频数据表
     private final ArrayList<AudioChannel> audioChannelList = new ArrayList<>();//音频通道表
 
     private final SourceDataLine line;//播放数据总线
-
-    /**
-     * 采样率转换
-     *
-     * @param data           原始音频数据
-     * @param destSampleRate 要转换的码率
-     * @return 处理后的音频数据
-     */
-    public static AudioInputStream sampleRateConvert(byte[] data, float destSampleRate) throws UnsupportedAudioFileException, IOException {
-        AudioInputStream audioStream = AudioSystem.getAudioInputStream(new ByteArrayInputStream(data));
-        int sampleSizeInBits = 16;
-        int channels = 2;
-        boolean bigEndian = false;
-
-        AudioFormat newFormat = new AudioFormat(destSampleRate, sampleSizeInBits, channels, true, bigEndian);
-        return AudioSystem.getAudioInputStream(newFormat, audioStream);
-    }
-
+    float sampleRate;
 
     /**
      * 音频混音器对象
@@ -39,7 +19,7 @@ public class AudioMixer {
      * @param mixerBufSize 音频缓冲区大小 必须是2的倍数
      */
     public AudioMixer(float sampleRate, int mixerBufSize) throws LineUnavailableException {
-
+        this.sampleRate = sampleRate;
         AudioFormat audioFormat = new AudioFormat(sampleRate, 16, 2, true, false);
         line = AudioSystem.getSourceDataLine(audioFormat);
         //缓冲区大小
@@ -109,6 +89,22 @@ public class AudioMixer {
 
     }
 
+    /**
+     * 采样率转换
+     *
+     * @param audioStream    音频数据
+     * @param destSampleRate 要转换的码率
+     * @return 处理后的音频数据
+     */
+    public static AudioInputStream sampleRateConvert(AudioInputStream audioStream, float destSampleRate) throws UnsupportedAudioFileException, IOException {
+        int sampleSizeInBits = 16;
+        int channels = 2;
+        boolean bigEndian = false;
+
+        AudioFormat newFormat = new AudioFormat(destSampleRate, sampleSizeInBits, channels, true, bigEndian);
+        return AudioSystem.getAudioInputStream(newFormat, audioStream);
+    }
+
     private void writeToLine(short[] buf) {
         byte[] pcmBuf = new byte[buf.length * 2];
         for (int i = 0; i < buf.length; i++) {
@@ -117,15 +113,6 @@ public class AudioMixer {
         line.write(pcmBuf, 0, pcmBuf.length);
     }
 
-    /**
-     * 打开音频
-     *
-     * @param audioFile 音频文件 wav
-     * @return 被打开的音频句柄 audioHandle
-     */
-    public int addAudio(File audioFile) throws IOException {
-        return addAudio(audioFile.toPath());
-    }
 
     /**
      * 打开音频
@@ -133,8 +120,10 @@ public class AudioMixer {
      * @param audioFile 音频文件 wav
      * @return 被打开的音频句柄 audioHandle
      */
-    public int addAudio(Path audioFile) throws IOException {
-        return addAudio(Files.readAllBytes(audioFile));
+    public int addAudio(Path audioFile) throws IOException, UnsupportedAudioFileException {
+        if (audioFile.getFileName().toString().toLowerCase().endsWith(".wav"))
+            return addAudio(sampleRateConvert(AudioSystem.getAudioInputStream(audioFile.toFile()), sampleRate));
+        return addAudio(FFmpeg.read(audioFile, (int) sampleRate));
     }
 
     /**
@@ -143,8 +132,7 @@ public class AudioMixer {
      * @param audioData 音频数据 wav
      * @return 被打开的音频句柄 audioHandle
      */
-    public int addAudio(byte[] audioData) {
-
+    public int addAudio(AudioInputStream audioData) throws IOException {
         if (!audioDataList.contains(audioData))
             audioDataList.add(audioData);
         return audioDataList.indexOf(audioData);
@@ -166,9 +154,11 @@ public class AudioMixer {
      * @param audioHandle 音频句柄
      */
     public AudioChannel createChannel(int audioHandle) throws UnsupportedAudioFileException, IOException {
-
         synchronized (this) {
-            AudioChannel newChannel = new AudioChannel(sampleRateConvert(audioDataList.get(audioHandle), (int) line.getFormat().getSampleRate()));
+            AudioInputStream audioInputStream = audioDataList.get(audioHandle);
+            audioInputStream.mark(0);
+            AudioChannel newChannel = new AudioChannel(audioInputStream);
+            audioInputStream.reset();
             audioChannelList.add(newChannel);
             return newChannel;
         }

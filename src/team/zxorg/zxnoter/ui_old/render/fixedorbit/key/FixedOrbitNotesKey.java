@@ -6,6 +6,7 @@ public enum FixedOrbitNotesKey {
     LONG("long"),
     NODE("node"),
     NOTE("note"),
+    NOTE2("note2"),
     RIGHT("right"),
     SLIDE("slide");
     FixedOrbitNotesKey(String name) {

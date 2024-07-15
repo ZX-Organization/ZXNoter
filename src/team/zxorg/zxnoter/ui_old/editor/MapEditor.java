@@ -745,7 +745,7 @@ public class MapEditor extends BaseEditor {
 
             { //判定线对齐
                 ToggleButton toggleButton = sideToolBar.addToggleButton("tool", "svg.icons.zxnoter.judged-line-align", "判定线对齐");
-                if (zxMap.notes.size() != 0) {
+                if (!zxMap.notes.isEmpty()) {
                     mainMapRender.getInfo().timelinePosition.set(RenderBeat.alignBeatsTime(renderBeats, 0));
                     judgeLineAlign = true;
                     mainMapRender.getInfo().timelinePosition.addListener(changeListener);
@@ -1279,7 +1279,7 @@ public class MapEditor extends BaseEditor {
 
                 Path audioPath = mapResourcePath.resolve(zxMap.unLocalizedMapInfo.getInfo(ZXMInfo.AudioPath));
                 if (Files.exists(audioPath)) {
-                    Path workAudioPath;
+                    /*Path workAudioPath;
                     if (audioPath.getFileName().toString().toLowerCase().endsWith(".wav")) {
                         workAudioPath = audioPath;
                     } else {
@@ -1287,14 +1287,14 @@ public class MapEditor extends BaseEditor {
 
                         if (!FFmpeg.audioToWav(audioPath, workAudioPath))
                             throw new RuntimeException("音频转换失败");
-                    }
+                    }*/
 
 
                     //格式转换
                     //System.out.println("格式转化");
 
 
-                    int id = ZXNApp.audioMixer.addAudio(workAudioPath);
+                    int id = ZXNApp.audioMixer.addAudio(audioPath);
                     audioChannel = ZXNApp.audioMixer.createChannel(id);
                     audioChannel.setVolume(0.10f);
                     audioChannel.setEndBehavior(AudioChannel.EndBehavior.PAUSE);
@@ -1508,6 +1508,7 @@ public class MapEditor extends BaseEditor {
 
     @Override
     public boolean close() {
+        audioChannel.close();
         return false;
     }
 }

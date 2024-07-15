@@ -7,6 +7,7 @@ import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.nio.file.Path;
 
 /**
  * 音频句柄
@@ -35,13 +36,11 @@ public class AudioSonicChannel {
         lastPlayState = AudioChannel.PlayState.PAUSE;
         endBehavior = EndBehavior.CLOSE;//自动关闭
         audioFormat = new AudioFormat(audioData.getFormat().getSampleRate(), 16, 2, true, false);
-
         sonic = new Sonic((int) audioFormat.getSampleRate(), audioFormat.getChannels());
-        sonic.setQuality(100);
+        sonic.setQuality(1);
         channelBufSize = 512;
         inBuffer = new byte[channelBufSize];//输入缓冲区
         frameLength = inputStream.available() / 4;//帧长度
-
         audioLength = (frameLength * 1000) / (long) (audioFormat.getSampleRate());//音频时长
         //152s
         // audioInputStream=new MixerAudioInputStream(inputStream);
@@ -49,6 +48,9 @@ public class AudioSonicChannel {
         pauseTime = 0;
         lastTime = 0;
     }
+
+
+
 
     public long getAudioLength() {
         return audioLength;

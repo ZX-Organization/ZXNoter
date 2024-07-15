@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="javafx-aarch64">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/javafx-base-23-ea+3-linux-aarch64.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/javafx-base-23-ea+3-mac-aarch64.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/javafx-controls-23-ea+3-linux-aarch64.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/javafx-controls-23-ea+3-mac-aarch64.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/javafx-graphics-23-ea+3-linux-aarch64.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/javafx-graphics-23-ea+3-mac-aarch64.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

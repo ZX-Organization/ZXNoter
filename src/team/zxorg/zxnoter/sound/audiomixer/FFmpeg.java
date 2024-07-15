@@ -1,15 +1,134 @@
 package team.zxorg.zxnoter.sound.audiomixer;
 
+import org.bytedeco.ffmpeg.avcodec.AVCodec;
+import org.bytedeco.ffmpeg.avcodec.AVCodecContext;
+import org.bytedeco.ffmpeg.avcodec.AVPacket;
+import org.bytedeco.ffmpeg.avformat.AVFormatContext;
+import org.bytedeco.ffmpeg.avutil.AVFrame;
+import org.bytedeco.ffmpeg.global.avcodec;
+import org.bytedeco.ffmpeg.global.avformat;
+import org.bytedeco.ffmpeg.global.avutil;
+import org.bytedeco.ffmpeg.global.swresample;
+import org.bytedeco.ffmpeg.swresample.SwrContext;
+import org.bytedeco.javacpp.BytePointer;
+import org.bytedeco.javacpp.PointerPointer;
 import team.zxorg.zxnoter.Main;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioInputStream;
+import java.io.*;
 import java.nio.file.Path;
 import java.util.HashMap;
 
 public class FFmpeg {
+
+
+    public static AudioInputStream read(Path file, int sampleRate) {
+        AVFormatContext formatContext = null;
+        AVCodecContext codecContext = null;
+        SwrContext swrContext = null;
+        AVPacket avPacket = null;
+        AVFrame decodedFrame = null;
+        ByteArrayOutputStream byteArrayOutputStream = null;
+
+        try {
+            formatContext = avformat.avformat_alloc_context();
+            if (avformat.avformat_open_input(formatContext, file.toString(), null, null) != 0) {
+                throw new RuntimeException("无法打开音频: " + file);
+            }
+
+            if (avformat.avformat_find_stream_info(formatContext, (PointerPointer) null) < 0) {
+                throw new RuntimeException("没有找到可用的音频流: " + file);
+            }
+
+            int audioIndex = -1;
+            for (int i = 0; i < formatContext.nb_streams(); i++) {
+                if (formatContext.streams(i).codecpar().codec_type() == avutil.AVMEDIA_TYPE_AUDIO) {
+                    audioIndex = i;
+                    break;
+                }
+            }
+            if (audioIndex == -1) {
+                throw new RuntimeException("没有找到音频流: " + file);
+            }
+
+            AVCodec audioCodec = avcodec.avcodec_find_decoder(formatContext.streams(audioIndex).codecpar().codec_id());
+            if (audioCodec == null) {
+                throw new RuntimeException("未找到解码器");
+            }
+
+            codecContext = avcodec.avcodec_alloc_context3(audioCodec);
+            avcodec.avcodec_parameters_to_context(codecContext, formatContext.streams(audioIndex).codecpar());
+
+            swrContext = swresample.swr_alloc_set_opts(null,
+                    avutil.av_get_default_channel_layout(2),  // 目标音频通道布局
+                    avutil.AV_SAMPLE_FMT_S16,  // 目标音频样本格式
+                    sampleRate,  // 目标音频采样率
+                    codecContext.ch_layout().nb_channels(),  // 输入音频通道布局
+                    codecContext.sample_fmt(),  // 输入音频样本格式
+                    codecContext.sample_rate(),  // 输入音频采样率
+                    0, null);
+
+            if (swrContext == null) {
+                throw new RuntimeException("无法创建SwrContext");
+            }
+            if (swresample.swr_init(swrContext) < 0) {
+                throw new RuntimeException("无法初始化SwrContext");
+            }
+
+            if (avcodec.avcodec_open2(codecContext, audioCodec, (PointerPointer) null) < 0) {
+                throw new RuntimeException("解码器打开失败");
+            }
+
+            avPacket = avcodec.av_packet_alloc();
+            decodedFrame = avutil.av_frame_alloc();
+            byteArrayOutputStream = new ByteArrayOutputStream();
+
+            while (avformat.av_read_frame(formatContext, avPacket) >= 0) {
+                if (audioIndex == avPacket.stream_index()) {
+                    if (avcodec.avcodec_send_packet(codecContext, avPacket) == 0) {
+                        while (avcodec.avcodec_receive_frame(codecContext, decodedFrame) == 0) {
+                            int convertedDataSize = swresample.swr_get_out_samples(swrContext, decodedFrame.nb_samples());
+                            BytePointer convertedData = new BytePointer(avutil.av_malloc((long) convertedDataSize * avutil.av_get_bytes_per_sample(avutil.AV_SAMPLE_FMT_S16) * 2));
+                            int outSamples = swresample.swr_convert(swrContext, convertedData, convertedDataSize, decodedFrame.data(0), decodedFrame.nb_samples());
+
+                            if (outSamples > 0) {
+                                int bufferSize = outSamples * 2 * avutil.av_get_bytes_per_sample(avutil.AV_SAMPLE_FMT_S16);
+                                byte[] buf = new byte[bufferSize];
+                                convertedData.get(buf);
+                                byteArrayOutputStream.write(buf);
+                            }
+
+                            avutil.av_free(convertedData);
+                        }
+                    }
+                }
+                avcodec.av_packet_unref(avPacket);
+            }
+
+            byte[] audioBytes = byteArrayOutputStream.toByteArray();
+            return new AudioInputStream(new ByteArrayInputStream(audioBytes), new AudioFormat(sampleRate, 16, 2, true, false), audioBytes.length / 4);
+        } catch (Exception e) {
+            throw new RuntimeException("音频处理过程中出现错误: " + e.getMessage(), e);
+        } finally {
+            if (codecContext != null) {
+                avcodec.avcodec_free_context(codecContext);
+            }
+            if (decodedFrame != null) {
+                avutil.av_frame_free(decodedFrame);
+            }
+            if (avPacket != null) {
+                avcodec.av_packet_free(avPacket);
+            }
+            if (swrContext != null) {
+                swresample.swr_free(swrContext);
+            }
+            if (formatContext != null) {
+                avformat.avformat_close_input(formatContext);
+            }
+        }
+    }
+
     public static boolean audioToWav(Path audio, Path wav) {
         String[] command = {"ffmpeg", "-y", "-i", "\"" + audio.toAbsolutePath() + "\"", "\"" + wav.toAbsolutePath() + "\""};
 

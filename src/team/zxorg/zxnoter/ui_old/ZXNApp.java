@@ -15,11 +15,9 @@ import javafx.stage.Stage;
 import team.zxorg.zxnoter.Main;
 import team.zxorg.zxnoter.resource_old.ZXResources;
 import team.zxorg.zxnoter.sound.audiomixer.AudioMixer;
-import team.zxorg.zxnoter.sound.audiomixer.FFmpeg;
 import team.zxorg.zxnoter.ui_old.editor.BaseEditor;
 import team.zxorg.zxnoter.ui_old.editor.MapEditor;
 
-import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.LineUnavailableException;
 import java.io.File;
 import java.nio.file.Files;
@@ -27,12 +25,11 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class ZXNApp extends Application {
-    public static AudioFormat audioFormat = new AudioFormat(48000, 16, 2, true, false);//音频格式
     public static AudioMixer audioMixer;
 
     static {
         try {
-            audioMixer = new AudioMixer(48000, 2048);
+            audioMixer = new AudioMixer(192000, 2048);
         } catch (LineUnavailableException e) {
             throw new RuntimeException(e);
         }
@@ -96,7 +93,7 @@ public class ZXNApp extends Application {
         //菜单栏
         Menu menu = new Menu("文件");
 
-        MenuItem testMenuItem = new MenuItem("测试", ZXResources.getSvgPane("svg.icons.zxnoter.file-notemap-line", 16, Color.DARKGREEN));
+      /*  MenuItem testMenuItem = new MenuItem("测试", ZXResources.getSvgPane("svg.icons.zxnoter.file-notemap-line", 16, Color.DARKGREEN));
         testMenuItem.setOnAction(event -> {
             {//添加编辑器
                 Tab tab1 = new Tab();
@@ -122,7 +119,7 @@ public class ZXNApp extends Application {
 
 
             }
-        });
+        });*/
 
 
         MenuItem openMenuItem = new MenuItem("打开谱面", ZXResources.getSvgPane("svg.icons.zxnoter.file-notemap-line", 16, Color.DARKGREEN));
@@ -146,7 +143,9 @@ public class ZXNApp extends Application {
 
 
                     tab1.setGraphic(ZXResources.getSvgPane("svg.icons.zxnoter.file-osu-line", 18, Color.DARKGREEN));
-
+                    tab1.setOnClosed(_ -> {
+                        editor.close();
+                    });
                     tab1.setContent(editor);
                     workspaceTabPane.getTabs().add(tab1);
                     workspaceTabPane.getSelectionModel().select(tab1);
@@ -171,6 +170,9 @@ public class ZXNApp extends Application {
             {//添加编辑器
                 Tab tab1 = new Tab();
                 MapEditor editor = new MapEditor(null, tab1);
+                tab1.setOnClosed(_ -> {
+                    editor.close();
+                });
                 tab1.setGraphic(ZXResources.getSvgPane("svg.icons.zxnoter.file-osu-line", 18, Color.DARKGREEN));
                 tab1.setContent(editor);
                 workspaceTabPane.getTabs().add(tab1);
@@ -243,6 +245,9 @@ public class ZXNApp extends Application {
             if (Files.exists(file)) {//添加编辑器
                 Tab tab1 = new Tab();
                 MapEditor editor = new MapEditor(file, tab1);
+                tab1.setOnClosed(_ -> {
+                    editor.close();
+                });
                 tab1.setGraphic(ZXResources.getSvgPane("svg.icons.zxnoter.file-osu-line", 18, Color.DARKGREEN));
                 tab1.setContent(editor);
                 workspaceTabPane.getTabs().add(tab1);
@@ -271,6 +276,7 @@ public class ZXNApp extends Application {
                             MapEditor editor = new MapEditor(file.toPath(), tab1);
                             tab1.setGraphic(ZXResources.getSvgPane("svg.icons.zxnoter.file-osu-line", 18, Color.DARKGREEN));
                             tab1.setContent(editor);
+                            tab1.setOnClosed(_ -> editor.close());
                             workspaceTabPane.getTabs().add(tab1);
                             workspaceTabPane.getSelectionModel().select(tab1);
                             rootPane.setOnKeyPressed(editor.getOnKeyPressed());
@@ -279,6 +285,7 @@ public class ZXNApp extends Application {
                         //可能是音频
                         Tab tab1 = new Tab();
                         MapEditor editor = new MapEditor(null, tab1);
+                        tab1.setOnClosed(_ -> editor.close());
                         tab1.setGraphic(ZXResources.getSvgPane("svg.icons.zxnoter.file-osu-line", 18, Color.DARKGREEN));
                         tab1.setContent(editor);
                         editor.setNewAudioPath(file.toPath());
@@ -453,14 +460,14 @@ public class ZXNApp extends Application {
         stage.setOnCloseRequest(event -> {
             System.exit(0);
         });
-        if (!FFmpeg.checkFFmpegExistence()) {
+        /*if (!FFmpeg.checkFFmpegExistence()) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.getDialogPane().getStylesheets().addAll(mainScene.getStylesheets());
             alert.setTitle("运行环境警告：");
             alert.setHeaderText(null);
             alert.setContentText("你的计算机环境没有 FFmpeg(音视频库)，可能会影响到软件部分功能。https://ffmpeg.org/");
             alert.showAndWait();
-        }
+        }*/
 
     }
 }
