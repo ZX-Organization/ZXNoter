@@ -60,6 +60,7 @@ public class FixedOrbitMapRender extends FixedOrbitRender {
 
                 double orbitWidth = (renderInfo.canvasWidth.get() / getInfo().orbits.get());
 
+                boolean isSingle = !(note instanceof ComplexNote || note instanceof LongNote || note instanceof SlideNote);
 
                 //渲染对应键的额外内容
                 if (note instanceof ComplexNote complexNote) {
@@ -73,7 +74,7 @@ public class FixedOrbitMapRender extends FixedOrbitRender {
                     drawNote(note, DrawMode.ALL, null);
                 }
 
-                loadImage(note instanceof CustomNote ? IMAGE_NOTE2 : IMAGE_NOTE);
+                loadImage(isSingle ? IMAGE_NOTE2 : IMAGE_NOTE);
                 //计算尺寸
                 renderRectangle.setXY(Pos.CENTER,
                         orbitWidth * (note.orbit) + orbitWidth / 2,
@@ -85,7 +86,7 @@ public class FixedOrbitMapRender extends FixedOrbitRender {
                     renderNote.pos = RenderNote.RenderNoteObject.HEAD;
                     renderNote.note = note;
                     renderNote.complexNote = null;
-                    renderNote.key =note instanceof CustomNote ?  FixedOrbitNotesKey.NOTE2 :  FixedOrbitNotesKey.NOTE;
+                    renderNote.key = isSingle ? FixedOrbitNotesKey.NOTE2 : FixedOrbitNotesKey.NOTE;
                     renderNote.renderRectangle = renderRectangle.clone();
                 }
                 drawImage();
