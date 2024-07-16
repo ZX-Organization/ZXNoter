@@ -23,7 +23,7 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" exported="" name="lwjgl.openal" level="project" />
+    <orderEntry type="library" name="lwjgl.openal" level="project" />
     <orderEntry type="module-library">
       <library>
         <CLASSES>
