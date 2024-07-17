@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/module/extensions/AudioSystem/AudioSystem.iml" filepath="$PROJECT_DIR$/module/extensions/AudioSystem/AudioSystem.iml" />
       <module fileurl="file://$PROJECT_DIR$/new/ExtensionApi/ExtensionApi.iml" filepath="$PROJECT_DIR$/new/ExtensionApi/ExtensionApi.iml" />
       <module fileurl="file://$PROJECT_DIR$/ZXNoter.iml" filepath="$PROJECT_DIR$/ZXNoter.iml" />
       <module fileurl="file://$PROJECT_DIR$/new/ZXNoterApp/ZXNoterApp.iml" filepath="$PROJECT_DIR$/new/ZXNoterApp/ZXNoterApp.iml" />
