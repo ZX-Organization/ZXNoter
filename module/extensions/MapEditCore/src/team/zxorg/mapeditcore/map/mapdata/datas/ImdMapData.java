@@ -1,6 +1,7 @@
 package team.zxorg.mapeditcore.map.mapdata.datas;
 
 import team.zxorg.mapeditcore.map.mapdata.IBaseData;
+import team.zxorg.mapeditcore.map.mapdata.ZXMetaData;
 
 /**
  * 垃圾，内容太少了
@@ -96,5 +97,35 @@ public class ImdMapData implements IBaseData {
 
     public void setCreator(String creator) {
         this.creator = creator;
+    }
+
+    public ZXMetaData toZxMeta() {
+        ZXMetaData metaData = new ZXMetaData();
+        metaData.setTitleUnicode(titleUnicode);
+        StringBuilder title = new StringBuilder();
+        for (char c:titleUnicode.toCharArray()){
+            if (Character.isLetterOrDigit(c)||Character.isWhitespace(c)||Character.isDefined(c))
+                title.append(c);
+        }
+        metaData.setTitle(title.toString());
+        metaData.setArtist("various artists");
+        metaData.setArtistUnicode("various artists");
+        metaData.setSource("rhythm master");
+        metaData.setCreator(creator);
+        metaData.setTags("rm,imd");
+
+        return metaData;
+    }
+
+    @Override
+    public String toString() {
+        return "ImdMapData{" +
+                "titleUnicode='" + titleUnicode + '\'' +
+                ", mapVersion='" + mapVersion + '\'' +
+                ", mscPath='" + mscPath + '\'' +
+                ", creator='" + creator + '\'' +
+                ", tabRows=" + tabRows +
+                ", mapLength=" + mapLength +
+                '}';
     }
 }

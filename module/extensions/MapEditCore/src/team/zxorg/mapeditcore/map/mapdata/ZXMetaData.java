@@ -125,4 +125,19 @@ public class ZXMetaData implements IBaseData{
     public void setTags(String tags) {
         this.tags = tags;
     }
+
+    @Override
+    public String toString() {
+        return "ZXMetaData{" +
+                "title='" + title + '\'' +
+                ", titleUnicode='" + titleUnicode + '\'' +
+                ", artist='" + artist + '\'' +
+                ", artistUnicode='" + artistUnicode + '\'' +
+                ", creator='" + creator + '\'' +
+                ", mapVersion='" + mapVersion + '\'' +
+                ", source='" + source + '\'' +
+                ", tags='" + tags + '\'' +
+                ", mscPath='" + mscPath + '\'' +
+                '}';
+    }
 }

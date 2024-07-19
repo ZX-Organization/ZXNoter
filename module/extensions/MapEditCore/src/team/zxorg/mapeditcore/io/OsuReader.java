@@ -2,54 +2,44 @@ package team.zxorg.mapeditcore.io;
 
 import team.zxorg.mapeditcore.map.ZXMap;
 import team.zxorg.mapeditcore.map.mapdata.ZXMetaData;
+import team.zxorg.mapeditcore.map.mapdata.datas.OsuMapData;
 import team.zxorg.mapeditcore.mapElement.note.Note;
 import team.zxorg.mapeditcore.mapElement.note.OsuHold;
 import team.zxorg.mapeditcore.mapElement.note.OsuNote;
 import team.zxorg.mapeditcore.mapElement.timing.OsuTiming;
 import team.zxorg.mapeditcore.mapElement.timing.Timing;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 
 public class OsuReader extends MapReader{
-
+    BufferedReader bfReader;
+    int orbitCount;
     @Override
-    public OsuReader readFile(File file) {
+    public OsuReader readFile(File file) throws IOException {
         this.file = file;
-        return this;
-    }
+        ready();
+        bfReader = new BufferedReader(new FileReader(file));
+        OsuMapData mapData = new OsuMapData();
+        this.mapData = mapData;
 
-    @Override
-    public ZXMap readMap() throws IOException {
-        if (file == null) {
-            throw new IOException("请先设置读取文件");
-        }
-        BufferedReader bfReader = new BufferedReader(new FileReader(file));
         String readTemp;
         //读取模式[General]等
         byte mode = -1;
+        //当前读取到的类
+        String current;
         //是否进入事件值读取模式
         boolean eventValueMode = false;
         //事件缓存
-        //OsuInfo eventInfo = null;
         //获取基准bpm
         boolean getBaseBpm = true;
         double baseBpm = 0.;
 
-        ZXMap mMap = new ZXMap();
-        ArrayList<Note> allNotes = new ArrayList<>();
-        ArrayList<Timing> timingPoints = new ArrayList<>();
-        //unLocalizedMapInfo = new UnLocalizedMapInfo();
-        readTemp = bfReader.readLine();
+        bfReader.readLine();
 
-        /*unLocalizedMapInfo.setInfo(
-                OsuInfo.valueOf(readTemp.substring(0 , readTemp.lastIndexOf("v")).replaceAll(" ","")).unLocalize(),
-                readTemp.substring(readTemp.lastIndexOf("v"))
-        );*/
         int keyCount = 0;
+        int eventIndex=0;
         while ((readTemp = bfReader.readLine()) != null){
             //按照设置的读取模式读取信息
             if ("".equals(readTemp)){
@@ -58,21 +48,33 @@ public class OsuReader extends MapReader{
             }
             //读取谱面信息
             if (readTemp.startsWith("[")){
-                //处理事件属性末尾未定义情况
-                if (eventValueMode){
-                    //unLocalizedMapInfo.setInfo(eventInfo.unLocalize() , "");
-                }
                 //设置读取模式
-                if ("[Events]".equals(readTemp)){
+                if ("[General]".equals(readTemp)){
                     mode = 0;
                     continue;
                 }
-                if ("[TimingPoints]".equals(readTemp)){
+                if ("[Editor]".equals(readTemp)){
                     mode = 1;
                     continue;
                 }
-                if ("[HitObjects]".equals(readTemp)){
+                if ("[Metadata]".equals(readTemp)){
                     mode = 2;
+                    continue;
+                }
+                if ("[Difficulty]".equals(readTemp)){
+                    mode = 3;
+                    continue;
+                }
+                if ("[Events]".equals(readTemp)){
+                    mode = 4;
+                    continue;
+                }
+                if ("[TimingPoints]".equals(readTemp)){
+                    mode = 5;
+                    continue;
+                }
+                if ("[HitObjects]".equals(readTemp)){
+                    mode = 6;
                     continue;
                 }
                 mode = -1;
@@ -80,47 +82,56 @@ public class OsuReader extends MapReader{
             }
 
             switch (mode){
-                case -1->{
+                case 0,1,3->{
+                    LinkedHashMap<String,String> tempMap = null;
+                    switch (mode){
+                        case 0->tempMap = mapData.getGeneralInfo();
+                        case 1->tempMap = mapData.getEditorInfo();
+                        case 3->tempMap = mapData.getDifficultInfo();
+                    }
                     //带冒号属性
                     String name = readTemp.substring(0 , readTemp.indexOf(":"));
                     String value = readTemp.substring(readTemp.lastIndexOf(":") + 1);
-                    /*unLocalizedMapInfo.setInfo(
-                            OsuInfo.valueOf(name).unLocalize() ,
-                            value.trim()
-                    );*/
+                    tempMap.put(name,value);
                     if ("CircleSize".equals(name)) {
                         keyCount = Integer.parseInt(value);
                     }
                 }
-                case 0->{
+                case 2->{
+                    String name = readTemp.substring(0 , readTemp.indexOf(":"));
+                    String value = readTemp.substring(readTemp.lastIndexOf(":") + 1);
+                    if ("Title".equals(name))
+                        mapData.setTitle(value);
+                    if ("TitleUnicode".equals(name))
+                        mapData.setTitleUnicode(value);
+                    if ("Artist".equals(name))
+                        mapData.setArtist(value);
+                    if ("ArtistUnicode".equals(name))
+                        mapData.setArtistUnicode(value);
+                    if ("Creator".equals(name))
+                        mapData.setCreator(value);
+                    if ("Version".equals(name))
+                        mapData.setMapVersion(value);
+                    if ("Source".equals(name))
+                        mapData.setSource(value);
+                    if ("Tags".equals(name))
+                        mapData.setTags(value);
+                    if ("BeatmapID".equals(name))
+                        mapData.setBeatMapId(Integer.parseInt(value.trim()));
+                    if ("BeatmapSetID".equals(name))
+                        mapData.setBeatMapSetId(Integer.parseInt(value.trim()));
+                }
+                case 4->{
                     //事件处理
                     String key = "";
                     if (readTemp.startsWith("//")){
-                        key = readTemp.replaceAll("/", "").replaceAll("\\(", "").
-                                replaceAll("\\)", "").
-                                replaceAll(" ", "");
-                    }
-                    if (eventValueMode){
-                        //事件值读取模式
-                        if (readTemp.startsWith("//")){
-                            //值读取模式又一次读到事件名
-                            /*unLocalizedMapInfo.setInfo(eventInfo.unLocalize() , "");
-                            eventInfo = OsuInfo.valueOf(key);*/
-                        }else {
-                            //值读取
-//                            unLocalizedMapInfo.setInfo(eventInfo.unLocalize() , readTemp);
-                            eventValueMode = false;
-                        }
+                        //注释
+                        eventIndex++;
                     }else {
-                        if (readTemp.startsWith("//")){
-                            eventValueMode = true;
-//                            eventInfo = OsuInfo.valueOf(key);
-                        }
+                        mapData.getEventInfo().put(OsuMapData.eventDefaultInfo[eventIndex-1],readTemp);
                     }
-                    continue;
                 }
-                case 1->{
-
+                case 5->{
                     //时间点处理
                     String[] allPars = readTemp.split(",");
                     boolean isExtendTiming = (Integer.parseInt(allPars[6]) == 1);
@@ -134,12 +145,17 @@ public class OsuReader extends MapReader{
 
                     if(beatPar > 0){
                         baseBpm = 60000/beatPar;
+                        if (getBaseBpm){
+                            preferenceBpm = baseBpm;
+                            getBaseBpm = false;
+                        }
+
                     }
 
                     if (isExtendTiming){
                         //继承
                         //bpm时间点添加
-                        mMap.timings.add(
+                        timings.add(
                                 new OsuTiming(
                                         timeStamp,
                                         baseBpm,
@@ -155,7 +171,7 @@ public class OsuReader extends MapReader{
                     }else {
                         double speed = 100/Math.abs(beatPar) * baseBpm;
                         //不继承(变速)
-                        mMap.timings.add(
+                        timings.add(
                                 new OsuTiming(
                                         timeStamp,
                                         baseBpm,
@@ -169,9 +185,8 @@ public class OsuReader extends MapReader{
                                 )
                         );
                     }
-                    continue;
                 }
-                case 2->{
+                case 6->{
                     //物件处理
                     String noteStr;
                     String sampleStr;
@@ -233,30 +248,34 @@ public class OsuReader extends MapReader{
                     if (sampleSetPars.length == 5){
                         if (note instanceof OsuNote osuNote)
                             osuNote.setSoundFile(sampleSetPars[4]);
-                        else if (note instanceof OsuHold osuHold)
+                        else {
+                            OsuHold osuHold = (OsuHold) note;
                             osuHold.setSoundFile(sampleSetPars[4]);
+                        }
                     }
-                    mMap.notes.add(note);
+                    notes.add(note);
                 }
-
             }
         }
-        //unLocalizedMapInfo.setInfo(OsuInfo.Bpm.unLocalize(),String.valueOf(baseBpm));
-        //unLocalizedMapInfo.setInfo(ZXMInfo.ObjectCount,String.valueOf(allNotes.size()));
-        //completeInfo();
-        //zxMap.unLocalizedMapInfo = unLocalizedMapInfo;
-        mMap.orbitCount = keyCount;
-        return mMap;
+        orbitCount = keyCount;
+
+        return this;
     }
 
     @Override
-    public Note readNote() {
-        return null;
+    public ZXMap readMap() {
+        ZXMap zxMap = new ZXMap();
+        zxMap.orbitCount = orbitCount;
+        zxMap.preferenceBpm = preferenceBpm;
+        zxMap.notes.addAll(notes);
+        zxMap.timings.addAll(timings);
+        zxMap.metaData = (OsuMapData) mapData;
+        return zxMap;
     }
 
     @Override
-    public ZXMetaData readMeta() {
-        return null;
+    public OsuMapData readMeta() {
+        return (OsuMapData) mapData;
     }
 
     @Override
@@ -264,8 +283,4 @@ public class OsuReader extends MapReader{
         return "osu";
     }
 
-    @Override
-    protected void ready() {
-
-    }
 }

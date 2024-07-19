@@ -1,6 +1,7 @@
 package team.zxorg.mapeditcore.io;
 
 import team.zxorg.mapeditcore.map.ZXMap;
+import team.zxorg.mapeditcore.map.mapdata.IBaseData;
 import team.zxorg.mapeditcore.mapElement.note.Note;
 import team.zxorg.mapeditcore.mapElement.timing.Timing;
 
@@ -25,6 +26,11 @@ public abstract class MapReader{
      * 物件信息
      */
     protected ArrayList<Note> notes;
+    protected IBaseData mapData;
+    /**
+     * 参考基准bpm
+     */
+    protected double preferenceBpm;
 
     /**
      * 重置note读取位置
@@ -72,10 +78,17 @@ public abstract class MapReader{
         }
         return new ZXMap();
     };
-    public abstract Note readNote()throws IOException;
+    public Note readNote() {
+        if (readingNoteIndex < notes.size())
+            return notes.get(readingNoteIndex++);
+        else return null;
+    };
     public abstract <T>T readMeta()throws IOException;
     public abstract String getSuffix();
     public File getPath(){return file;};
-    protected abstract void ready();
+    protected void ready(){
+        notes = new ArrayList<>();
+        timings = new ArrayList<>();
+    };
 
 }

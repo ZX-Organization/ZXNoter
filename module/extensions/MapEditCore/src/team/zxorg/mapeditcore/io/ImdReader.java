@@ -19,7 +19,6 @@ public class ImdReader extends MapReader{
     private int timingAmount;
     private int tabRaws;
     private int orbitCount;
-    private double preferenceBpm;
 
     @Override
     public ImdReader readFile(File file) throws IOException {
@@ -153,14 +152,8 @@ public class ImdReader extends MapReader{
         map.timings.addAll(timings);
         map.preferenceBpm = preferenceBpm;
         map.orbitCount = orbitCount;
+        map.metaData = readMeta().toZxMeta();
         return map;
-    }
-
-    @Override
-    public Note readNote() {
-        if (readingNoteIndex < notes.size())
-            return notes.get(readingNoteIndex++);
-        else return null;
     }
 
     @Override
@@ -184,6 +177,7 @@ public class ImdReader extends MapReader{
             mapData.setTabRows(tabRaws);
             mapData.setMapLength(mapLength);
 
+            this.mapData = mapData;
 
         }
 
@@ -195,11 +189,10 @@ public class ImdReader extends MapReader{
 
     @Override
     protected void ready() {
+        super.ready();
         mapLength = bf.getInt();
         timingAmount = bf.getInt();
         bf.position(8+timingAmount*12 + 2 );
         tabRaws = bf.getInt();
-        timings = new ArrayList<>();
-        notes = new ArrayList<>();
     }
 }

@@ -11,6 +11,10 @@ public class OsuMapData extends ZXMetaData {
     private final LinkedHashMap<String, String> editorInfo;
     private final LinkedHashMap<String, String> difficultInfo;
     private final LinkedHashMap<String,String> colourInfo;
+    public static String[] eventDefaultInfo = {
+            "Background and Video events", "Break Periods", "Storyboard Layer 0 (Background)", "Storyboard Layer 1 (Fail)",
+            "Storyboard Layer 2 (Pass)", "Storyboard Layer 3 (Foreground)", "Storyboard Sound Samples"
+    };
     private final LinkedHashMap<String, String> eventInfo;
 
     public OsuMapData() {
@@ -38,10 +42,6 @@ public class OsuMapData extends ZXMetaData {
 
         //事件信息
         eventInfo = new LinkedHashMap<>();
-        String[] eventDefaultInfo = {
-                "Background and Video events", "Break Periods", "Storyboard Layer 0 (Background)", "Storyboard Layer 1 (Fail)",
-                "Storyboard Layer 2 (Pass)", "Storyboard Layer 3 (Foreground)", "Storyboard Sound Samples"
-        };
         for (String s : eventDefaultInfo) eventInfo.put(s, "");
     }
 
@@ -79,5 +79,27 @@ public class OsuMapData extends ZXMetaData {
 
     public LinkedHashMap<String, String> getEventInfo() {
         return eventInfo;
+    }
+
+    @Override
+    public String toString() {
+        return "OsuMapData{" +
+                "title=" + getTitle() +
+                ", titleUnicode=" + getTitleUnicode() +
+                ", artist=" + getArtist() +
+                ", artistUnicode=" + getArtistUnicode() +
+                ", creator=" + getCreator() +
+                ", mapVersion=" + getMapVersion() +
+                ", source=" + getSource() +
+                ", tags=" + getTags() +
+                ", mscPath=" + getMscPath() +
+                ", beatMapId=" + beatMapId +
+                ", beatMapSetId=" + beatMapSetId +
+                ", generalInfo=" + generalInfo +
+                ", editorInfo=" + editorInfo +
+                ", difficultInfo=" + difficultInfo +
+                ", colourInfo=" + colourInfo +
+                ", eventInfo=" + eventInfo +
+                '}';
     }
 }

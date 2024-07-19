@@ -1,5 +1,6 @@
 package team.zxorg.mapeditcore.map;
 
+import team.zxorg.mapeditcore.map.mapdata.IBaseData;
 import team.zxorg.mapeditcore.map.mapdata.ZXMetaData;
 import team.zxorg.mapeditcore.mapElement.note.Note;
 import team.zxorg.mapeditcore.mapElement.timing.Timing;
@@ -69,7 +70,12 @@ public class ZXMap {
             timings.add(timing);
     }
 
-    public void setMetaData(ZXMetaData metaData) {
-        this.metaData = metaData;
+    @Override
+    public String toString() {
+        return "ZXMap{" +
+                "metaData=" + metaData +
+                ", timings=" + timings +
+                ", notes=" + notes +
+                '}';
     }
 }

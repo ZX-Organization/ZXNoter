@@ -33,14 +33,11 @@ public class Main implements ExtensionEntrypoint {
     }
 
     public static void main(String[] args) {
-        ZXMap map = null;
         try{
             ImdReader reader = new ImdReader().readFile(new File("docs/reference/Contrapasso -paradiso-/t+pazolite - Contrapasso -paradiso-_4k_hd.imd"));
-            Logger.info(reader.toString());
-            Note note;
-            while (!((note = reader.readNote()) == null)){
-                System.out.println(note);
-            }
+//            OsuReader reader = new OsuReader().readFile(new File("docs/reference/LeaF - NANO DEATH!!!!!/LeaF - NANO DEATH!!!!! (nowsmart) [DEATH].osu"));
+            System.out.println(reader.readMap());
+
         }catch (IOException e){
             e.printStackTrace();
         }
