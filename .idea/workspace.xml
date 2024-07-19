@@ -2,389 +2,44 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="AudioSystem:jar" />
       <artifact name="FXComponentLibrary:jar" />
-      <artifact name="MusicMapEditor-Old:jar" />
       <artifact name="ZXNoter:jar" />
-      <artifact name="ZXNoterUIFrame:jar" />
     </artifacts-to-build>
   </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dd78a4ca-7956-492b-9d75-ff82bf57b657" name="更改" comment="修复bug">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/MusicMapEditor_Old_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/alibaba_fastjson2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/module/ExtensionLoader/src/team/zxorg/extensionloader/util/ANSICode.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/module/ExtensionLoader/src/team/zxorg/extensionloader/util/DynamicConsoleOutput.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/module/ExtensionLoader/test/ANSICodeTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/module/ExtensionLoader/test/DynamicConsoleOutputTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/module/extensions/MusicMapEditor-Old/resources/extension.json5" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/module/extensions/MusicMapEditor-Old/src/team/zxorg/zxnoter_old/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/module/extensions/MusicMapEditor-Old/src/team/zxorg/zxnoter_old/io/writer/McWriter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/musicMapEditorResPack-old/audio/drum-hitclap.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/musicMapEditorResPack-old/audio/drum-hitfinish.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/musicMapEditorResPack-old/audio/hitnormal.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/musicMapEditorResPack-old/audio/soft-hitnormal.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/musicMapEditorResPack-old/css/root.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/musicMapEditorResPack-old/css/theme/dark.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/musicMapEditorResPack-old/css/theme/light.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/musicMapEditorResPack-old/icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/musicMapEditorResPack-old/img/Unknown.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/musicMapEditorResPack-old/img/note/theme/default/beat-line-1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/musicMapEditorResPack-old/img/note/theme/default/beat-line-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/musicMapEditorResPack-old/img/note/theme/default/beat-line-3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/musicMapEditorResPack-old/img/note/theme/default/beat-line-4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/musicMapEditorResPack-old/img/note/theme/default/beat-line-5.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/musicMapEditorResPack-old/img/note/theme/default/beat-line.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/musicMapEditorResPack-old/img/note/theme/default/bottom-line.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/musicMapEditorResPack-old/img/note/theme/default/ikun.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/musicMapEditorResPack-old/img/note/theme/default/judged-line.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/musicMapEditorResPack-old/img/note/theme/default/logo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/musicMapEditorResPack-old/img/note/theme/default/normal-selected/end.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/musicMapEditorResPack-old/img/note/theme/default/normal-selected/left.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/musicMapEditorResPack-old/img/note/theme/default/normal-selected/long.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/musicMapEditorResPack-old/img/note/theme/default/normal-selected/node.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/musicMapEditorResPack-old/img/note/theme/default/normal-selected/note.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/musicMapEditorResPack-old/img/note/theme/default/normal-selected/right.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/musicMapEditorResPack-old/img/note/theme/default/normal-selected/slide.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/musicMapEditorResPack-old/img/note/theme/default/normal-shadow/end.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/musicMapEditorResPack-old/img/note/theme/default/normal-shadow/left.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/musicMapEditorResPack-old/img/note/theme/default/normal-shadow/long.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/musicMapEditorResPack-old/img/note/theme/default/normal-shadow/node.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/musicMapEditorResPack-old/img/note/theme/default/normal-shadow/note.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/musicMapEditorResPack-old/img/note/theme/default/normal-shadow/right.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/musicMapEditorResPack-old/img/note/theme/default/normal-shadow/slide.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/musicMapEditorResPack-old/img/note/theme/default/normal/end.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/musicMapEditorResPack-old/img/note/theme/default/normal/left.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/musicMapEditorResPack-old/img/note/theme/default/normal/long.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/musicMapEditorResPack-old/img/note/theme/default/normal/node.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/musicMapEditorResPack-old/img/note/theme/default/normal/note.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/musicMapEditorResPack-old/img/note/theme/default/normal/right.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/musicMapEditorResPack-old/img/note/theme/default/normal/slide.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/musicMapEditorResPack-old/img/note/theme/default/orbit-line.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/musicMapEditorResPack-old/img/note/theme/default/orbit.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/musicMapEditorResPack-old/img/note/theme/default/preview-beat-line.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/musicMapEditorResPack-old/img/note/theme/default/preview-judged-line.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/musicMapEditorResPack-old/img/note/theme/default/preview-selected/end.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/musicMapEditorResPack-old/img/note/theme/default/preview-selected/left.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/musicMapEditorResPack-old/img/note/theme/default/preview-selected/long.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/musicMapEditorResPack-old/img/note/theme/default/preview-selected/node.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/musicMapEditorResPack-old/img/note/theme/default/preview-selected/note.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/musicMapEditorResPack-old/img/note/theme/default/preview-selected/right.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/musicMapEditorResPack-old/img/note/theme/default/preview-selected/slide.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/musicMapEditorResPack-old/img/note/theme/default/preview/end.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/musicMapEditorResPack-old/img/note/theme/default/preview/left.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/musicMapEditorResPack-old/img/note/theme/default/preview/long.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/musicMapEditorResPack-old/img/note/theme/default/preview/node.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/musicMapEditorResPack-old/img/note/theme/default/preview/note.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/musicMapEditorResPack-old/img/note/theme/default/preview/right.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/musicMapEditorResPack-old/img/note/theme/default/preview/slide.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/musicMapEditorResPack-old/img/note/theme/default/red-line.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/musicMapEditorResPack-old/img/note/theme/default/sub-beat-line-1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/musicMapEditorResPack-old/img/note/theme/default/sub-beat-line-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/musicMapEditorResPack-old/img/note/theme/default/sub-beat-line-3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/musicMapEditorResPack-old/img/note/theme/default/sub-beat-line-4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/musicMapEditorResPack-old/img/note/theme/default/sub-beat-line.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/musicMapEditorResPack-old/img/note/theme/default/timing-base-delete.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/musicMapEditorResPack-old/img/note/theme/default/timing-base.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/musicMapEditorResPack-old/img/note/theme/default/timing-delete.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/musicMapEditorResPack-old/img/note/theme/default/timing-line.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/musicMapEditorResPack-old/img/note/theme/default/timing.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/musicMapEditorResPack-old/img/note/theme/default/top-line.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/musicMapEditorResPack-old/img/zxnoter/zxnoter-x26.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/musicMapEditorResPack-old/img/zxnoter/zxnoter.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resourcepacks/musicMapEditorResPack-old/pack.json5" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/UISEditor_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/UISEditor_jar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/checkstyle-idea.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/checkstyle-idea.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/apache_httpcomponents_client5_httpclient5.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/apache_httpcomponents_client5_httpclient5.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/fxmisc_flowless.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/fxmisc_flowless.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/fxmisc_richtext_richtextfx.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/fxmisc_richtext_richtextfx.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/github_weisj_jsvg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/github_weisj_jsvg.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/google_code_gson.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/google_code_gson.xml" afterDir="false" />
+    <list default="true" id="dd78a4ca-7956-492b-9d75-ff82bf57b657" name="更改" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/jetbrains_annotations.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/jetbrains_annotations.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/openjfx_javafx_base.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/openjfx_javafx_base.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/openjfx_javafx_controls.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/openjfx_javafx_controls.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/openjfx_javafx_graphics.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/openjfx_javafx_graphics.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/openjfx_javafx_media.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/openjfx_javafx_media.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DirectoryV3.xml" beforeDir="false" afterPath="$PROJECT_DIR$/DirectoryV3.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ZXNoter.jar" beforeDir="false" afterPath="$PROJECT_DIR$/ZXNoter.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ZXNoterUIFrame/ZXNoterUIFrame.iml" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MusicMapEditor-Old/MusicMapEditor-Old.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/extensionLoader/ResourceConfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/config/extensionLoader/ResourceConfig.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/zxnoterUI/ActivityBarConfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/config/zxnoterUI/ActivityBarConfig.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module/ExtensionLoader/ExtensionLoader.iml" beforeDir="false" afterPath="$PROJECT_DIR$/module/ExtensionLoader/ExtensionLoader.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module/extensions/UISEditor/UISEditor.iml" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/UISEditor/UISEditor.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module/extensions/ZXNoterUI/ZXNoterUI.iml" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/ZXNoterUI/ZXNoterUI.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module/extensions/ZXNoterUI/src/team/zxorg/zxnoter/ui/ProjectView.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/ZXNoterUI/src/team/zxorg/zxnoter/ui/ProjectView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/audiochannel/AudioMixer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/audiochannel/AudioUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/audiochannel/Complex.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/audiochannel/Convolver.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/audiochannel/FFT.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/audiochannel/FFmpeg.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/audiochannel/Sonic.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/audiochannel/ThreadAudioMixer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/audiochannel/channel/AudioChannelPlayControl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/audiochannel/channel/AudioHandleChannel.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/audiochannel/channel/AudioInputChannel.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/audiochannel/channel/AudioOutputChannel.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/audiochannel/channel/MemoryAudioInputChannel.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/audiochannel/channel/SourceAudioOutputChannel.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/audiochannel/channel/TargetAudioInputChannel.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/configuration.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/configurationBackup.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/engine2d/engine3d/CanvasPane.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/engine2d/engine3d/ElementCanvas.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/engine2d/engine3d/ElementObject.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/engine2d/engine3d/Vector3D.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/engine2d/engine3d/component/Component.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/engine2d/engine3d/component/Renderer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/engine2d/engine3d/component/SpriteComponent.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/engine2d/engine3d/component/Transform.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/skin_old/ExpressionCalculator.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/skin_old/ExpressionVector.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/skin_old/components/HitComponent.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/skin_old/components/JudgeComponent.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/skin_old/components/MeasuringRulerRendererInterface.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/skin_old/components/NoteComponent.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/skin_old/components/OrdinaryComponent.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/skin_old/components/PerspectiveComponent.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/skin_old/components/PressComponent.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/skin_old/components/TouchComponent.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/skin_old/test/CanvasRenderer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/skin_old/test/ExpressionCalculator.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/skin_old/test/SkinEditor.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/skin_old/test/UISParser.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/skin_old/test/uis/BlendType.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/skin_old/test/uis/Element.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/skin_old/test/uis/ElementType.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/skin_old/test/uis/ExpressionDimension.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/skin_old/uis/BlendType.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/skin_old/uis/ConventionalComponentType.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/skin_old/uis/UISCodeArea.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/skin_old/uis/UISEditor.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/skin_old/uis/UISElement.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/skin_old/uis/UISParser.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team/zxorg/zxnoter/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team/zxorg/zxnoter/test/bpm/App.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team/zxorg/zxnoter/test/bpm/Bpm.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team/zxorg/zxnoter/test/fft/App.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team/zxorg/zxnoter/test/fft/App2.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team/zxorg/zxnoter/test/fft/AudioV.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team/zxorg/zxnoter/test/fft/Complex.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team/zxorg/zxnoter/test/fft/FFT.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team/zxorg/zxnoter/test/fft/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team/zxorg/zxnoter/test/fft2/Test.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team/zxorg/zxnoter/test/fft2/Utils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team/zxorg/zxnoter/test/fft2/frame/FFTFrame.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team/zxorg/zxnoter/test/fft2/generator/FFTFileGenerator.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team/zxorg/zxnoter/test/fft2/generator/FFTGenerator.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team/zxorg/zxnoter/test/fft2/generator/FFTRealtimeGenerator.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team/zxorg/zxnoter/test/fft2/reader/BufferedFFTReader.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team/zxorg/zxnoter/test/fft2/reader/FFTReader.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team/zxorg/zxnoter/test/sound/audiomixer/AudioChannel.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MusicMapEditor-Old/src/team/zxorg/zxnoter_old/sound/audiomixer/AudioChannel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team/zxorg/zxnoter/test/sound/audiomixer/AudioDataStream.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team/zxorg/zxnoter/test/sound/audiomixer/AudioMixer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team/zxorg/zxnoter/test/sound/audiomixer/BytesUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MusicMapEditor-Old/src/team/zxorg/zxnoter_old/sound/audiomixer/BytesUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team/zxorg/zxnoter/test/sound/audiomixer/Sonic.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team/zxorg/zxnoter/ui/ZXNoterApp.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team/zxorg/zxnoter/utils/FxUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ZXLogger.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/config/ZXConfigManager.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/config/ZXDefaultConfigManager.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/config/ZXProjectManager.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/config/root/Configuration.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/config/root/DefaultConfiguration.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/config/root/ProjectConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/config/sub/LastTimeStatesCfg.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/config/sub/preference/MiniProjectCfg.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/config/sub/preference/UserPreferenceCfg.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/config/sub/preference/editor/EditorCfg.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/config/sub/preference/res/ResourcesPackCfg.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/config/sub/preference/side/FileManagerCfg.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/config/sub/preference/side/SideBarCfg.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/config/sub/project/EditorLayoutCfg.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/info/ReleaseStatus.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/info/UnLocalizedMapInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MusicMapEditor-Old/src/team/zxorg/zxnoter_old/info/map/UnLocalizedMapInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/info/ZXVersion.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/info/editor/ZXNInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MusicMapEditor-Old/src/team/zxorg/zxnoter_old/info/editor/ZXNInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/info/map/ImdInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MusicMapEditor-Old/src/team/zxorg/zxnoter_old/info/map/ImdInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/info/map/OsuInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MusicMapEditor-Old/src/team/zxorg/zxnoter_old/info/map/OsuInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/info/map/ZXMInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MusicMapEditor-Old/src/team/zxorg/zxnoter_old/info/map/ZXMInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/io/IoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MusicMapEditor-Old/src/team/zxorg/zxnoter_old/io/IoTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/io/reader/ImdReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MusicMapEditor-Old/src/team/zxorg/zxnoter_old/io/reader/ImdReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/io/reader/MMGReader.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/io/reader/MapReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MusicMapEditor-Old/src/team/zxorg/zxnoter_old/io/reader/MapReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/io/reader/McReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MusicMapEditor-Old/src/team/zxorg/zxnoter_old/io/reader/McReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/io/reader/OsuReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MusicMapEditor-Old/src/team/zxorg/zxnoter_old/io/reader/OsuReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/io/writer/ImdWriter.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MusicMapEditor-Old/src/team/zxorg/zxnoter_old/io/writer/ImdWriter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/io/writer/MapWriter.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MusicMapEditor-Old/src/team/zxorg/zxnoter_old/io/writer/MapWriter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/io/writer/McWriter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/io/writer/OsuWriter.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MusicMapEditor-Old/src/team/zxorg/zxnoter_old/io/writer/OsuWriter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/map/ZXMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MusicMapEditor-Old/src/team/zxorg/zxnoter_old/map/ZXMap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/map/editor/MapOperate.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MusicMapEditor-Old/src/team/zxorg/zxnoter_old/map/editor/MapOperate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/map/editor/ZXFixedOrbitMapEditor.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MusicMapEditor-Old/src/team/zxorg/zxnoter_old/map/editor/ZXFixedOrbitMapEditor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/note/BaseNote.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MusicMapEditor-Old/src/team/zxorg/zxnoter_old/note/BaseNote.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/note/fixedorbit/ComplexNote.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MusicMapEditor-Old/src/team/zxorg/zxnoter_old/note/fixedorbit/ComplexNote.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/note/fixedorbit/CustomLongNote.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MusicMapEditor-Old/src/team/zxorg/zxnoter_old/note/fixedorbit/CustomLongNote.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/note/fixedorbit/CustomNote.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MusicMapEditor-Old/src/team/zxorg/zxnoter_old/note/fixedorbit/CustomNote.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/note/fixedorbit/FixedOrbitNote.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MusicMapEditor-Old/src/team/zxorg/zxnoter_old/note/fixedorbit/FixedOrbitNote.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/note/fixedorbit/LongNote.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MusicMapEditor-Old/src/team/zxorg/zxnoter_old/note/fixedorbit/LongNote.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/note/fixedorbit/SlideNote.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MusicMapEditor-Old/src/team/zxorg/zxnoter_old/note/fixedorbit/SlideNote.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/note/freeorbit/FreeOrbitNote.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MusicMapEditor-Old/src/team/zxorg/zxnoter_old/note/freeorbit/FreeOrbitNote.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/note/timing/Timing.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MusicMapEditor-Old/src/team/zxorg/zxnoter_old/note/timing/Timing.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/note/timing/ZXTiming.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MusicMapEditor-Old/src/team/zxorg/zxnoter_old/note/timing/ZXTiming.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/plugin/Test.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/plugin/ZXPluginInterface.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/plugin/ZXPluginManager.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/plugin/test/APlugin.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/resource/GlobalResources.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/resource/ResourcePack.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/resource/ResourceType.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/resource/ResourceUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/resource/ResourceWeight.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/resource/Test.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/resource/ZXColor.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/resource/ZXFileType.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/resource/ZXResources.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/resource/pack/BaseResourcePack.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/resource/pack/IconResourcePack.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/resource/pack/LanguageResourcePack.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/resource/pack/LayoutResourcePack.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/resource/pack/SoundResourcePack.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/resource/pack/StyleResourcePack.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/resource/pack/ThemeResourcePack.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/resource_old/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MusicMapEditor-Old/src/team/zxorg/zxnoter_old/resource/Utils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/resource_old/ZXResources.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MusicMapEditor-Old/src/team/zxorg/zxnoter_old/resource/ZXResources.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/sound/audiomixer/AudioChannel.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MusicMapEditor-Old/src/team/zxorg/zxnoter_old/sound/audiomixer/AudioSonicChannel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/sound/audiomixer/AudioDataStream.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MusicMapEditor-Old/src/team/zxorg/zxnoter_old/sound/audiomixer/AudioDataStream.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/sound/audiomixer/AudioMixer.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MusicMapEditor-Old/src/team/zxorg/zxnoter_old/sound/audiomixer/AudioMixer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/sound/audiomixer/BytesUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/sound/audiomixer/FFmpeg.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MusicMapEditor-Old/src/team/zxorg/zxnoter_old/sound/audiomixer/FFmpeg.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/sound/audiomixer/Sonic.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MusicMapEditor-Old/src/team/zxorg/zxnoter_old/sound/audiomixer/Sonic.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui/FXUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui/TimeUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MusicMapEditor-Old/src/team/zxorg/zxnoter_old/ui/TimeUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui/component/ComponentFactory.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui/component/CreateFilePopupBox.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui/component/TimeTextField.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui/component/TrackPopupVHBox.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui/component/TrackTooltip.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui/component/ZXButton.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui/component/ZXCopyStatus.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui/component/ZXGroupComponent.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui/component/ZXIcon.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui/component/ZXIconButton.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui/component/ZXLabel.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui/component/ZXListView.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui/component/ZXMenu.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui/component/ZXMenuItem.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui/component/ZXStatus.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui/component/ZXTextField.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui/component/ZXTextFieldGroup.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui/component/ZXTooltip.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui/component/ZXVHBox.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui/component/ZXVolumeIconButton.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui/main/ZXStage.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui/main/stage/area/EditorArea.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui/main/stage/area/EditorLayout.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui/main/stage/area/EditorTabPane.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui/main/stage/area/LayoutPosition.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui/main/stage/area/editor/base/BaseEditor.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui/main/stage/area/editor/base/BaseTab.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui/main/stage/area/editor/image/ImageViewEditor.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui/main/stage/area/editor/setting/SettingViewEditor.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui/main/stage/area/editor/setting/item/BaseResourceSettingItem.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui/main/stage/area/editor/setting/item/BaseSettingItem.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui/main/stage/area/editor/setting/item/BooleanSettingItem.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui/main/stage/area/editor/setting/item/ChoiceSettingItem.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui/main/stage/area/editor/setting/item/ListSettingItem.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui/main/stage/area/editor/setting/item/ResourceItem.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui/main/stage/area/editor/setting/item/ResourcePackItem.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui/main/stage/area/editor/setting/item/ResourcePackSettingItem.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui/main/stage/area/editor/setting/item/ResourceSettingItem.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui/main/stage/area/editor/setting/pane/RootSettingPane.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui/main/stage/area/editor/setting/pane/preference/BaseSettingItem.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui/main/stage/area/editor/setting/pane/preference/BaseSettingPane.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui/main/stage/area/editor/setting/pane/preference/old/IconSettingPane.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui/main/stage/area/editor/setting/pane/preference/old/LanguageSettingPane.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui/main/stage/area/editor/setting/pane/preference/old/OtherSettingPane.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui/main/stage/area/editor/setting/pane/preference/old/ResourcesSettingPane.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui/main/stage/area/editor/setting/pane/preference/old/UserPreferencePane.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui/main/stage/area/editor/text/TextEditor.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui/main/stage/area/editor/threed/ThreeDimensionalMapEditor.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui/main/stage/area/editor/video/VideoViewEditor.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui/main/stage/menu/CreatFileMenu.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui/main/stage/menu/TitleBar.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui/main/stage/menu/TitleBarFileMenu.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui/main/stage/side/BaseSideBarTab.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui/main/stage/side/SideBar.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui/main/stage/side/filemanager/FileItem.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui/main/stage/side/filemanager/FileManagerTab.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui/main/stage/side/filemanager/FileMenu.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui/main/stage/side/filemanager/view/BaseFileView.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui/main/stage/side/filemanager/view/CreateProjectView.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui/main/stage/side/filemanager/view/FileListView.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui/main/stage/side/filemanager/view/FileTreeView.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui/main/stage/status/ConsoleStatus.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui/main/stage/status/StatusBar.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui/test/CustomWindow.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui/test/TestCustomWindow.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui_old/ComponentFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MusicMapEditor-Old/src/team/zxorg/zxnoter_old/ui/ComponentFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui_old/ZXNApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MusicMapEditor-Old/src/team/zxorg/zxnoter_old/ui/ZXNApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui_old/component/CanvasPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MusicMapEditor-Old/src/team/zxorg/zxnoter_old/ui/component/CanvasPane.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui_old/component/HToolGroupBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MusicMapEditor-Old/src/team/zxorg/zxnoter_old/ui/component/HToolGroupBar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui_old/component/InfoPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MusicMapEditor-Old/src/team/zxorg/zxnoter_old/ui/component/InfoPane.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui_old/component/VToolGroupBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MusicMapEditor-Old/src/team/zxorg/zxnoter_old/ui/component/VToolGroupBar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui_old/editor/BaseEditor.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MusicMapEditor-Old/src/team/zxorg/zxnoter_old/ui/editor/BaseEditor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui_old/editor/MapEditor.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MusicMapEditor-Old/src/team/zxorg/zxnoter_old/ui/editor/MapEditor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui_old/editor/component/MainEditCanvas.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MusicMapEditor-Old/src/team/zxorg/zxnoter_old/ui/editor/component/MainEditCanvas.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui_old/editor/component/MapEditorComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MusicMapEditor-Old/src/team/zxorg/zxnoter_old/ui/editor/component/MapEditorComponent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui_old/render/Render.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MusicMapEditor-Old/src/team/zxorg/zxnoter_old/ui/render/Render.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui_old/render/RenderInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MusicMapEditor-Old/src/team/zxorg/zxnoter_old/ui/render/RenderInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui_old/render/basis/RenderPoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MusicMapEditor-Old/src/team/zxorg/zxnoter_old/ui/render/basis/RenderPoint.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui_old/render/basis/RenderRectangle.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MusicMapEditor-Old/src/team/zxorg/zxnoter_old/ui/render/basis/RenderRectangle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui_old/render/fixedorbit/FixedOrbitBackgroundRender.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MusicMapEditor-Old/src/team/zxorg/zxnoter_old/ui/render/fixedorbit/FixedOrbitBackgroundRender.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui_old/render/fixedorbit/FixedOrbitBeatLineRender.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MusicMapEditor-Old/src/team/zxorg/zxnoter_old/ui/render/fixedorbit/FixedOrbitBeatLineRender.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui_old/render/fixedorbit/FixedOrbitInfoRender.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MusicMapEditor-Old/src/team/zxorg/zxnoter_old/ui/render/fixedorbit/FixedOrbitInfoRender.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui_old/render/fixedorbit/FixedOrbitMapRender.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MusicMapEditor-Old/src/team/zxorg/zxnoter_old/ui/render/fixedorbit/FixedOrbitMapRender.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui_old/render/fixedorbit/FixedOrbitPreviewBackgroundRender.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MusicMapEditor-Old/src/team/zxorg/zxnoter_old/ui/render/fixedorbit/FixedOrbitPreviewBackgroundRender.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui_old/render/fixedorbit/FixedOrbitRender.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MusicMapEditor-Old/src/team/zxorg/zxnoter_old/ui/render/fixedorbit/FixedOrbitRender.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui_old/render/fixedorbit/FixedOrbitRenderInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MusicMapEditor-Old/src/team/zxorg/zxnoter_old/ui/render/fixedorbit/FixedOrbitRenderInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui_old/render/fixedorbit/FixedOrbitTimingRender.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MusicMapEditor-Old/src/team/zxorg/zxnoter_old/ui/render/fixedorbit/FixedOrbitTimingRender.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui_old/render/fixedorbit/RenderBeat.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MusicMapEditor-Old/src/team/zxorg/zxnoter_old/ui/render/fixedorbit/RenderBeat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui_old/render/fixedorbit/RenderNote.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MusicMapEditor-Old/src/team/zxorg/zxnoter_old/ui/render/fixedorbit/RenderNote.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui_old/render/fixedorbit/key/FixedOrbitNotesKey.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MusicMapEditor-Old/src/team/zxorg/zxnoter_old/ui/render/fixedorbit/key/FixedOrbitNotesKey.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/ui_old/render/fixedorbit/key/FixedOrbitObjectKey.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MusicMapEditor-Old/src/team/zxorg/zxnoter_old/ui/render/fixedorbit/key/FixedOrbitObjectKey.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/util/AAAA.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/util/Json2Zxm.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/team_old/zxorg/zxnoter/util/Pytorch.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/temp/EditorArea.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/temp/EditorSplitPane.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/temp/EditorTabPane.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/test/RenderRectangleTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/test/audiochannel/AudioFrame.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/test/audiochannel/AudioMixerTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/test/audiochannel/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/test/audiochannel/MemoryTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/test/audiochannel/SourceAudioOutputChannelTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/test/audiochannel/TargetAudioInputChannelTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/test/audiochannel/audiomixer_t/AudioEndBehavior.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/test/audiochannel/audiomixer_t/AudioMixer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/test/audiochannel/audiomixer_t/AudioPlayState.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/test/audiochannel/audiomixer_t/AudioRealTimeMixer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/test/audiochannel/audiomixer_t/BytesUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/test/audiochannel/audiomixer_t/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/test/audiochannel/audiomixer_t/Sonic.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/test/audiochannel/audiomixer_t/SonicAudioChannel.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/test/audiochannel/audiomixer_t/channel/AudioBitDepth.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/test/audiochannel/audiomixer_t/channel/AudioFileSampleInputStream.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/test/audiochannel/audiomixer_t/channel/AudioMemorySampleInputStream.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/test/audiochannel/audiomixer_t/channel/AudioSampleInputStream.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/olds/test/audiochannel/audiomixer_t/channel/FixedLengthAudioSampleInputStream.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/reference/$RJ54UUV.mp3.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/reference/1591671592.mp3.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/reference/work.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/ExtensionLoader/src/team/zxorg/extensionloader/gson/VersionSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/ExtensionLoader/src/team/zxorg/extensionloader/gson/VersionSerializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/extensions/MapEditCore/src/team/zxorg/mapeditcore/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MapEditCore/src/team/zxorg/mapeditcore/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/extensions/MapEditCore/src/team/zxorg/mapeditcore/map/MapMetaData.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/extensions/MapEditCore/src/team/zxorg/mapeditcore/map/MapOperate.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MapEditCore/src/team/zxorg/mapeditcore/map/MapOperate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/extensions/MapEditCore/src/team/zxorg/mapeditcore/map/MapUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MapEditCore/src/team/zxorg/mapeditcore/map/MapUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/extensions/MapEditCore/src/team/zxorg/mapeditcore/map/ZXMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MapEditCore/src/team/zxorg/mapeditcore/map/ZXMap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/extensions/MapEditCore/src/team/zxorg/mapeditcore/map/mapio/ImdReader.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/extensions/MapEditCore/src/team/zxorg/mapeditcore/map/mapio/MapReader.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/extensions/MapEditCore/src/team/zxorg/mapeditcore/map/mapio/OsuReader.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/extensions/MapEditCore/src/team/zxorg/mapeditcore/note/Flick.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/extensions/MapEditCore/src/team/zxorg/mapeditcore/note/Hold.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/extensions/MapEditCore/src/team/zxorg/mapeditcore/note/MixNote.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/extensions/MapEditCore/src/team/zxorg/mapeditcore/note/Note.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/extensions/MapEditCore/src/team/zxorg/mapeditcore/note/OsuHold.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/extensions/MapEditCore/src/team/zxorg/mapeditcore/note/OsuNote.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/extensions/MapEditCore/src/team/zxorg/mapeditcore/timing/OsuTiming.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/module/extensions/MapEditCore/src/team/zxorg/mapeditcore/timing/Timing.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -416,12 +71,12 @@
     &quot;assignee&quot;: &quot;zedoCN&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/ZX-Organization/ZXNoter.git",
-    "accountId": "44ec7f76-fa3c-4d1b-82e3-f7d3af61de79"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/ZX-Organization/ZXNoter.git&quot;,
+    &quot;accountId&quot;: &quot;44ec7f76-fa3c-4d1b-82e3-f7d3af61de79&quot;
   }
-}]]></component>
+}</component>
   <component name="HighlightingSettingsPerFile">
     <setting file="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-controls/22-ea+16/javafx-controls-22-ea+16-sources.jar!/javafx/scene/control/Label.java" root0="SKIP_INSPECTION" />
     <setting file="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-graphics/22-ea+16/javafx-graphics-22-ea+16-sources.jar!/javafx/animation/FadeTransition.java" root0="SKIP_INSPECTION" />
@@ -471,7 +126,7 @@
     "git-widget-placeholder": "main",
     "jdk.selected.JAVA_MODULE": "graalvm-22",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/Projects/ZXNoter/module/extensions/MusicMapEditor-Old",
+    "last_opened_file_path": "/Users/2333xiang/IdeaProjects/ZXNoter/module/extensions/MapEditCore/src/team/zxorg/mapeditcore",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -513,11 +168,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/module/extensions/MapEditCore/src/team/zxorg/mapeditcore" />
       <recent name="D:\Projects\ZXNoter\module\extensions\MusicMapEditor-Old" />
       <recent name="D:\Projects\ZXNoter\module\extensions\MusicMapEditor-Old\src" />
       <recent name="D:\Projects\ZXNoter\module\ExtensionLoader\src\team\zxorg\extensionloader\util" />
       <recent name="D:\Projects\ZXNoter\module\extensions\AudioSystem" />
-      <recent name="F:\AllProjects\ZX-Organization\ZXNoter\module\extensions\MapEditCore\resources" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Projects\ZXNoter\module\extensions\AudioSystem\src\team\zxorg\audiosystem" />
@@ -537,7 +192,20 @@
       <recent name="team.zxorg.ui.javafx.sub.editor.aa" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="应用程序.Main">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="team.zxorg.mapeditcore.Main" />
+      <module name="MapEditCore" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="team.zxorg.mapeditcore.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="RunJar" type="JarApplication">
       <option name="JAR_PATH" value="$PROJECT_DIR$/ZXNoter.jar" />
       <option name="WORKING_DIRECTORY" value="$ProjectFileDir$" />
@@ -565,6 +233,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="JAR 应用程序.RunJar" />
+      <item itemvalue="应用程序.Main" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="应用程序.Main" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -1108,7 +785,7 @@
     <SUITE FILE_PATH="coverage/ZXNoter$IoTest.ic" NAME="IoTest 覆盖结果" MODIFIED="1688163428769" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>team.zxorg.zxnoter.io.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/ZXNoter$Main.ic" NAME="Main 覆盖结果" MODIFIED="1688229821484" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/ZXNoter$Main.ic" NAME="Main 覆盖结果" MODIFIED="1688229822928" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>team.zxorg.zxnoter.*</FILTER>
     </SUITE>
   </component>

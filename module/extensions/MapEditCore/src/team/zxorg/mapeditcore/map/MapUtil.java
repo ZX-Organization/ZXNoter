@@ -1,7 +1,7 @@
 package team.zxorg.mapeditcore.map;
 
-import team.zxorg.mapeditcore.note.Note;
-import team.zxorg.mapeditcore.timing.Timing;
+import team.zxorg.mapeditcore.mapElement.note.Note;
+import team.zxorg.mapeditcore.mapElement.timing.Timing;
 
 import java.util.ArrayList;
 
