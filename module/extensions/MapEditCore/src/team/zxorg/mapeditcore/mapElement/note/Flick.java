@@ -77,7 +77,7 @@ public class Flick extends Note{
                 ", 位置=" + position +
                 ", 方向=" + direction +
                 ", 距离=" + slideLength +
-                ", key音=" + keyAudio +
+                ", key音=" + keyAudioPath +
                 '}';
     }
 }

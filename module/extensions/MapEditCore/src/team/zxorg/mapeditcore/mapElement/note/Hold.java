@@ -51,7 +51,7 @@ public class Hold extends Note{
                 "时间=" + time +
                 ", 位置=" + position +
                 ", 时长=" + duration +
-                ", key音=" + keyAudio +
+                ", key音=" + keyAudioPath +
                 '}';
     }
 }

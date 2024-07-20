@@ -188,7 +188,7 @@ public class OsuHold extends Hold{
                 ", sampleIndex=" + sampleIndex +
                 ", sampleVolume=" + sampleVolume +
                 ", soundFile=" + soundFile +
-                ", keyAudio=" + keyAudio +
+                ", keyAudio=" + keyAudioPath +
                 '}';
     }
 }

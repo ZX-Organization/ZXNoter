@@ -1,6 +1,5 @@
 package team.zxorg.mapeditcore.map;
 
-import team.zxorg.mapeditcore.map.mapdata.IBaseData;
 import team.zxorg.mapeditcore.map.mapdata.ZXMetaData;
 import team.zxorg.mapeditcore.mapElement.note.Note;
 import team.zxorg.mapeditcore.mapElement.timing.Timing;
@@ -69,6 +68,7 @@ public class ZXMap {
         }else
             timings.add(timing);
     }
+
 
     @Override
     public String toString() {

@@ -1,14 +1,15 @@
 package team.zxorg.mapeditcore.mapElement.note;
 
-import com.google.gson.GsonBuilder;
+import com.google.gson.*;
 import team.zxorg.extensionloader.core.Logger;
 import team.zxorg.extensionloader.gson.GsonManager;
 import team.zxorg.mapeditcore.mapElement.IMapElement;
 
 import javax.sound.sampled.AudioInputStream;
 import java.lang.reflect.Modifier;
+import java.lang.reflect.Type;
 
-public class Note implements IMapElement,Cloneable{
+public class Note implements IMapElement,Cloneable, JsonDeserializer<Note>, JsonSerializer<Note> {
     /**
      * 物件时间戳
      */
@@ -21,7 +22,8 @@ public class Note implements IMapElement,Cloneable{
     /**
      * key音输入流引用
      */
-    public AudioInputStream keyAudio;
+    public String keyAudioPath;
+    public Note(){}
 
     /**
      * 无key音构造
@@ -37,12 +39,12 @@ public class Note implements IMapElement,Cloneable{
      * 带key音构造
      * @param time 时间
      * @param position 位置
-     * @param keyAudio key音
+     * @param keyAudioPath key音
      */
-    public Note(int time, double position, AudioInputStream keyAudio) {
+    public Note(int time, double position, String keyAudioPath) {
         this.time = time;
         this.position = position;
-        this.keyAudio = keyAudio;
+        this.keyAudioPath = keyAudioPath;
     }
 
     /**
@@ -62,10 +64,10 @@ public class Note implements IMapElement,Cloneable{
      * @param orbit 所处轨道
      * @param maxOrbit 最大轨道数
      */
-    public Note(int time, int orbit, int maxOrbit,AudioInputStream keyAudio){
+    public Note(int time, int orbit, int maxOrbit,String keyAudioPath){
         this.time = time;
         this.position = calPosByOrbit(orbit,maxOrbit);
-        this.keyAudio = keyAudio;
+        this.keyAudioPath = keyAudioPath;
     }
 
     /**
@@ -106,16 +108,16 @@ public class Note implements IMapElement,Cloneable{
      * 获取此物件的key音
      * @return 此物件key音音频流
      */
-    public AudioInputStream getKeyAudio() {
-        return keyAudio;
+    public String getKeyAudioPath() {
+        return keyAudioPath;
     }
 
     /**
      * 设置此物件的key音
-     * @param keyAudio 要设置的key音音频流
+     * @param keyAudioPath 要设置的key音音频流
      */
-    public void setKeyAudio(AudioInputStream keyAudio) {
-        this.keyAudio = keyAudio;
+    public void setKeyAudioPath(String keyAudioPath) {
+        this.keyAudioPath = keyAudioPath;
     }
 
     /**
@@ -129,7 +131,7 @@ public class Note implements IMapElement,Cloneable{
     }
 
     public String toJson(){
-        if (keyAudio == null) {
+        if (keyAudioPath == null) {
             return new GsonBuilder().excludeFieldsWithModifiers(Modifier.PUBLIC).create().toJson(this);
         }else {
             return GsonManager.toJson(this);
@@ -155,7 +157,7 @@ public class Note implements IMapElement,Cloneable{
      */
     @Override
     public Note clone(){
-        return new Note(time,position,keyAudio);
+        return new Note(time,position, keyAudioPath);
     }
 
     @Override
@@ -163,7 +165,21 @@ public class Note implements IMapElement,Cloneable{
         return '\n'+"      "+"Note{" +
                 "时间=" + time +
                 ", 位置=" + position +
-                ", key音=" + keyAudio +
+                ", key音=" + keyAudioPath +
                 '}';
+    }
+
+    @Override
+    public Note deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+
+        return null;
+    }
+
+    @Override
+    public JsonElement serialize(Note src, Type typeOfSrc, JsonSerializationContext context) {
+        JsonObject json = new JsonObject();
+        json.addProperty("type",src.getClass().getSimpleName());
+        json.add("note",new Gson().toJsonTree(this));
+        return json;
     }
 }

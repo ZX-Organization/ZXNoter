@@ -190,7 +190,7 @@ public class OsuNote extends Note{
                 ", sampleIndex=" + sampleIndex +
                 ", sampleVolume=" + sampleVolume +
                 ", soundFile=" + soundFile +
-                ", keyAudio=" + keyAudio +
+                ", keyAudio=" + keyAudioPath +
                 '}';
     }
 }

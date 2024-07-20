@@ -1,5 +1,8 @@
 package team.zxorg.mapeditcore.mapElement.note;
 
+import com.google.gson.*;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class MixNote extends Note{
@@ -54,7 +57,7 @@ public class MixNote extends Note{
         return '\n'+"MixNote{" +
                 "时间=" + time +
                 ", 位置=" + position +
-                ", key音=" + keyAudio +
+                ", key音=" + keyAudioPath +
                 ", child=" + childNotes +
                 '}'+'\n';
     }
