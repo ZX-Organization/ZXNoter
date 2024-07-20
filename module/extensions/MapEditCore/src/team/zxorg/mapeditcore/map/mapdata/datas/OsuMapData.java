@@ -1,20 +1,41 @@
 package team.zxorg.mapeditcore.map.mapdata.datas;
 
-import team.zxorg.mapeditcore.map.mapdata.ZXMetaData;
+import team.zxorg.mapeditcore.map.mapdata.ZXMapData;
 
 import java.util.LinkedHashMap;
 
-public class OsuMapData extends ZXMetaData {
+public class OsuMapData extends ZXMapData {
+    /**
+     * 常规信息
+     */
     private final LinkedHashMap<String, String> generalInfo;
+    /**
+     * 谱面id
+     */
     int beatMapId;
+    /**
+     * 谱面组id
+     */
     int beatMapSetId;
+    /**
+     * 编辑器信息
+     */
     private final LinkedHashMap<String, String> editorInfo;
+    /**
+     * 难度信息
+     */
     private final LinkedHashMap<String, String> difficultInfo;
+    /**
+     * 颜色信息
+     */
     private final LinkedHashMap<String,String> colourInfo;
     public static String[] eventDefaultInfo = {
             "Background and Video events", "Break Periods", "Storyboard Layer 0 (Background)", "Storyboard Layer 1 (Fail)",
             "Storyboard Layer 2 (Pass)", "Storyboard Layer 3 (Foreground)", "Storyboard Sound Samples"
     };
+    /**
+     * 事件信息
+     */
     private final LinkedHashMap<String, String> eventInfo;
 
     public OsuMapData() {
@@ -43,6 +64,7 @@ public class OsuMapData extends ZXMetaData {
         //事件信息
         eventInfo = new LinkedHashMap<>();
         for (String s : eventDefaultInfo) eventInfo.put(s, "");
+        type = "OsuMapData";
     }
 
     public int getBeatMapId() {

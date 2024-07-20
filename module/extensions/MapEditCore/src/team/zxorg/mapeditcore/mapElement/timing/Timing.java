@@ -4,22 +4,27 @@ import team.zxorg.mapeditcore.mapElement.IMapElement;
 
 public class Timing implements IMapElement,Comparable<IMapElement>{
     /**
+     * timing类型
+     */
+    protected String type;
+    /**
      * timing所处时间戳
      */
-    int time;
+     protected int time;
     /**
      * 此处timing的绝对bpm
      */
-    double bpm;
+    protected double bpm;
     /**
      *  此处timing的变速bpm
      */
-    double speed;
+    protected double speed;
 
     public Timing(int time, double bpm, double speed) {
         this.time = time;
         this.bpm = bpm;
         this.speed = speed;
+        type = "Timing";
     }
 
     public int getTime() {
@@ -53,10 +58,6 @@ public class Timing implements IMapElement,Comparable<IMapElement>{
      */
     public void setSpeed(double speed) {
         this.speed = speed;
-    }
-    @Override
-    public String getType() {
-        return "Timing";
     }
 
     @Override

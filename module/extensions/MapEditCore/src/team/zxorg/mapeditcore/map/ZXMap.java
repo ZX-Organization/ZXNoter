@@ -1,6 +1,6 @@
 package team.zxorg.mapeditcore.map;
 
-import team.zxorg.mapeditcore.map.mapdata.ZXMetaData;
+import team.zxorg.mapeditcore.map.mapdata.IBaseData;
 import team.zxorg.mapeditcore.mapElement.IMapElement;
 import team.zxorg.mapeditcore.mapElement.note.Note;
 import team.zxorg.mapeditcore.mapElement.timing.Timing;
@@ -11,11 +11,11 @@ public class ZXMap {
     /**
      * 元数据
      */
-    public ZXMetaData metaData;
+    public IBaseData metaData;
     /**
      * 全部timing点
      */
-    public final ArrayList<Timing> timings;
+    public final ArrayList<IMapElement> timings;
     /**
      * 轨道（如果有的话）
      */
@@ -37,38 +37,31 @@ public class ZXMap {
      * @param note 物件
      */
     public void insertNote(Note note) {
-        int noteTime = note.getTime();
-        if (notes.size() > 0) {
-            if (notes.size() > 1) {
-                //表中有两个及以上物件
-                //二分搜索时间
-                notes.add(MapUtil.binarySearchNoteTime(notes, noteTime), note);
-            } else {
-                //表中只有一个物件
-                if (notes.get(0).getTime() <= noteTime)
-                    notes.add(note);
-            }
-        }else
-            notes.add(note);
+        addElement(note , notes);
     }
     /**
      * 有序地插入timing
      * @param timing 要插入点timing
      */
     public void insertTiming(Timing timing){
-        int timingTime = timing.getTime();
-        if (timings.size() > 0) {
-            if (timings.size() > 1) {
+        addElement(timing,timings);
+    }
+
+    private void addElement(IMapElement element,ArrayList<IMapElement> list){
+        int time = element.getTime();
+        if (list.size() > 0) {
+            if (list.size() > 1) {
                 //表中有两个及以上timing
-                timings.add(MapUtil.binarySearchTimingTime(timings, timingTime), timing);
+                list.add(MapUtil.binarySearchMapElement(list, time), element);
             } else {
                 //表中只有一个timing
-                if (timings.get(0).getTime() <= timingTime)
-                    timings.add(timing);
+                if (list.get(0).getTime() <= time)
+                    list.add(element);
             }
         }else
-            timings.add(timing);
+            list.add(element);
     }
+
 
 
     @Override

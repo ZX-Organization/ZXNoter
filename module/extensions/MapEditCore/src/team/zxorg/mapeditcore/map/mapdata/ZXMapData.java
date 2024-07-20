@@ -1,6 +1,13 @@
 package team.zxorg.mapeditcore.map.mapdata;
 
-public class ZXMetaData implements IBaseData{
+import team.zxorg.mapeditcore.map.ZXMap;
+import team.zxorg.mapeditcore.map.mapdata.datas.ImdMapData;
+
+public class ZXMapData implements IBaseData{
+    /**
+     * 谱面数据类型
+     */
+    protected String type;
     /**
      * 歌曲标题
      */
@@ -35,7 +42,7 @@ public class ZXMetaData implements IBaseData{
     String tags;
     String mscPath;
 
-    public ZXMetaData() {
+    public ZXMapData() {
         setTitle("");
         setTitleUnicode("");
         setArtist("");
@@ -44,9 +51,10 @@ public class ZXMetaData implements IBaseData{
         setMapVersion("");
         setSource("");
         setTags("");
+        type = "ZXMapData";
     }
 
-    public ZXMetaData(String title, String titleUnicode, String artist, String artistUnicode, String creator, String mapVersion, String source, String tags) {
+    public ZXMapData(String title, String titleUnicode, String artist, String artistUnicode, String creator, String mapVersion, String source, String tags) {
         this.title = title;
         this.titleUnicode = titleUnicode;
         this.artist = artist;
@@ -126,6 +134,12 @@ public class ZXMetaData implements IBaseData{
         this.tags = tags;
     }
 
+    /**
+     * 转换为imd谱面数据
+     */
+    public ImdMapData toImdMapData(ZXMap map){
+        return new ImdMapData(titleUnicode,mapVersion,mscPath,map.notes.size(),map.notes.get(map.notes.size()-1).getTime());
+    }
     @Override
     public String toString() {
         return "ZXMetaData{" +

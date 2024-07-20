@@ -19,6 +19,7 @@ public class Hold extends Note{
      */
     public Hold(int time, double position, int duration) {
         super(time, position);
+        imdNoteType = 2;
         type = "Hold";
         setDuration(duration);
     }

@@ -1,16 +1,13 @@
-package team.zxorg.mapeditcore.io;
+package team.zxorg.mapeditcore.io.reader;
 
 import team.zxorg.mapeditcore.map.ZXMap;
-import team.zxorg.mapeditcore.map.mapdata.ZXMetaData;
 import team.zxorg.mapeditcore.map.mapdata.datas.OsuMapData;
 import team.zxorg.mapeditcore.mapElement.note.Note;
 import team.zxorg.mapeditcore.mapElement.note.OsuHold;
 import team.zxorg.mapeditcore.mapElement.note.OsuNote;
 import team.zxorg.mapeditcore.mapElement.timing.OsuTiming;
-import team.zxorg.mapeditcore.mapElement.timing.Timing;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
 public class OsuReader extends MapReader{
@@ -280,7 +277,7 @@ public class OsuReader extends MapReader{
 
     @Override
     public String getSuffix() {
-        return "osu";
+        return ".osu";
     }
 
 }

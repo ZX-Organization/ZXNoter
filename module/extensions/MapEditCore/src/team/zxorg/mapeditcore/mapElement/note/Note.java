@@ -27,6 +27,7 @@ public class Note implements IMapElement,Cloneable{
      * key音输入流引用
      */
     public String keyAudioPath;
+    protected int imdNoteType;
 
     /**
      * 无key音构造
@@ -76,11 +77,6 @@ public class Note implements IMapElement,Cloneable{
      * @return 时间
      */
     public int getTime(){return time;}
-
-    @Override
-    public String getType() {
-        return type;
-    }
 
     /**
      * 设置物件时间戳
@@ -136,13 +132,10 @@ public class Note implements IMapElement,Cloneable{
         return ((1.0/maxOrbit)/2) + (orbit-1)*(1.0/maxOrbit);
     }
 
-    public String toJson(){
-        if (keyAudioPath == null) {
-            return new GsonBuilder().excludeFieldsWithModifiers(Modifier.PUBLIC).create().toJson(this);
-        }else {
-            return GsonManager.toJson(this);
-        }
+    public int getImdNoteType() {
+        return imdNoteType;
     }
+
     /**
      * 比较两note顺序
      */

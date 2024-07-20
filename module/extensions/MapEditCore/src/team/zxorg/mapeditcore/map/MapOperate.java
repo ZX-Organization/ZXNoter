@@ -14,6 +14,7 @@ public class MapOperate {
      */
     private final ArrayList<Note> aftOpNotes;
 
+
     /**
      * 反转构造
      * @param operate 要反转的操作

@@ -1,4 +1,4 @@
-package team.zxorg.mapeditcore.io;
+package team.zxorg.mapeditcore.io.reader;
 
 import team.zxorg.mapeditcore.map.ZXMap;
 import team.zxorg.mapeditcore.map.mapdata.IBaseData;

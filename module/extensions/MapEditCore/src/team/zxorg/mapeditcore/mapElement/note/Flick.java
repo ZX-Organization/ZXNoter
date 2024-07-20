@@ -17,6 +17,7 @@ public class Flick extends Note{
      */
     public Flick(int time, double position, double direction, double flickLength) {
         super(time, position);
+        imdNoteType = 1;
         type = "Flick";
         setDirection(direction);
         setSlideLength(flickLength);

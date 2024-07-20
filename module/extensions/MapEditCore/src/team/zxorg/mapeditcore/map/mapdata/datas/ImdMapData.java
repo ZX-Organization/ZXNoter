@@ -1,12 +1,16 @@
 package team.zxorg.mapeditcore.map.mapdata.datas;
 
 import team.zxorg.mapeditcore.map.mapdata.IBaseData;
-import team.zxorg.mapeditcore.map.mapdata.ZXMetaData;
+import team.zxorg.mapeditcore.map.mapdata.ZXMapData;
 
 /**
  * 垃圾，内容太少了
  */
 public class ImdMapData implements IBaseData {
+    /**
+     * 谱面数据类型
+     */
+    String type;
     /**
      * 标题
      */
@@ -33,11 +37,7 @@ public class ImdMapData implements IBaseData {
     int mapLength;
 
     public ImdMapData() {
-        this.titleUnicode = "unnamed";
-        this.mapVersion = "_zxn";
-        this.mscPath = "";
-        this.tabRows = 0;
-        this.mapLength = 0;
+        this("unnamed","_zxn","",0,0);
     }
 
     public ImdMapData(String titleUnicode, String mapVersion, String mscPath, int tabRows, int mapLength) {
@@ -46,6 +46,7 @@ public class ImdMapData implements IBaseData {
         this.mscPath = mscPath;
         this.tabRows = tabRows;
         this.mapLength = mapLength;
+        type = "ImdMapData";
     }
 
     @Override
@@ -99,8 +100,8 @@ public class ImdMapData implements IBaseData {
         this.creator = creator;
     }
 
-    public ZXMetaData toZxMeta() {
-        ZXMetaData metaData = new ZXMetaData();
+    public ZXMapData toZxMeta() {
+        ZXMapData metaData = new ZXMapData();
         metaData.setTitleUnicode(titleUnicode);
         StringBuilder title = new StringBuilder();
         for (char c:titleUnicode.toCharArray()){

@@ -25,6 +25,7 @@ public class OsuTiming extends Timing{
     private int effect;
     public OsuTiming(int time, double bpm, double speed, int beats, int hitSound,int hitSoundPar, int volume, boolean isExtendTiming, int effect) {
         super(time, bpm, speed);
+        type = "OsuTiming";
         setBeats(beats);
         setHitSound(hitSound);
         setHitSoundPar(hitSoundPar);
@@ -121,10 +122,6 @@ public class OsuTiming extends Timing{
      */
     public void setEffect(int effect) {
         this.effect = effect;
-    }
-    @Override
-    public String getType() {
-        return "osuTiming";
     }
     @Override
     public String toString() {

@@ -1,4 +1,4 @@
-package team.zxorg.mapeditcore.io;
+package team.zxorg.mapeditcore.io.reader;
 
 import team.zxorg.mapeditcore.map.ZXMap;
 import team.zxorg.mapeditcore.map.mapdata.datas.ImdMapData;
@@ -11,7 +11,6 @@ import team.zxorg.mapeditcore.mapElement.timing.Timing;
 import java.io.*;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
-import java.util.ArrayList;
 
 public class ImdReader extends MapReader{
     private ByteBuffer bf;
@@ -152,7 +151,7 @@ public class ImdReader extends MapReader{
         map.timings.addAll(timings);
         map.preferenceBpm = preferenceBpm;
         map.orbitCount = orbitCount;
-        map.metaData = readMeta().toZxMeta();
+        map.metaData = readMeta();
         return map;
     }
 
@@ -180,12 +179,11 @@ public class ImdReader extends MapReader{
             this.mapData = mapData;
 
         }
-
         return mapData;
     }
 
     @Override
-    public String getSuffix() {return "imd";}
+    public String getSuffix() {return ".imd";}
 
     @Override
     protected void ready() {
