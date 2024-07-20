@@ -16,7 +16,7 @@ public class OsuWriter extends MapWriter {
     @Override
     public void writeFile(File file) throws IOException {
         OsuMapData osuMapData = null;
-        ZXMapData zxMapData;
+        ZXMapData zxMapData = null;
         if (map.metaData instanceof ImdMapData data) {
             zxMapData = data.toZxMeta();
         } else if (map.metaData instanceof ZXMapData data)
@@ -24,6 +24,9 @@ public class OsuWriter extends MapWriter {
                 osuMapData = osuData;
             else zxMapData = data;
         else osuMapData = new OsuMapData();
+        if (zxMapData !=null){
+            osuMapData = new OsuMapData(zxMapData);
+        }
 
         BufferedWriter writer = new BufferedWriter(new FileWriter(file));
 

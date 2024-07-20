@@ -67,6 +67,11 @@ public class OsuMapData extends ZXMapData {
         type = "OsuMapData";
     }
 
+    public OsuMapData(ZXMapData zxMapData) {
+        this();
+
+    }
+
     public int getBeatMapId() {
         return beatMapId;
     }
