@@ -3,7 +3,6 @@ package team.zxorg.mapeditcore.mapElement.timing;
 import team.zxorg.mapeditcore.mapElement.IMapElement;
 
 public class Timing implements IMapElement,Comparable<IMapElement>{
-
     /**
      * timing所处时间戳
      */
@@ -54,6 +53,15 @@ public class Timing implements IMapElement,Comparable<IMapElement>{
      */
     public void setSpeed(double speed) {
         this.speed = speed;
+    }
+    @Override
+    public String getType() {
+        return "Timing";
+    }
+
+    @Override
+    public IMapElement clone() {
+        return IMapElement.super.clone();
     }
 
     @Override

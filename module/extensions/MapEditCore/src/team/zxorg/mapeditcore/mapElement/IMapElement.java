@@ -7,4 +7,7 @@ package team.zxorg.mapeditcore.mapElement;
  */
 public interface IMapElement extends Comparable<IMapElement>{
     int getTime();
+    String getType();
+    default IMapElement clone(){return this;};
+
 }

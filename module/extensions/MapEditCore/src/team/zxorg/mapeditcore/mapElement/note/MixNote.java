@@ -1,12 +1,13 @@
 package team.zxorg.mapeditcore.mapElement.note;
 
 import com.google.gson.*;
+import team.zxorg.mapeditcore.mapElement.IMapElement;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class MixNote extends Note{
-    private final ArrayList<Note> childNotes;
+    private final ArrayList<IMapElement> childNotes;
 
     /**
      * 位置构造法
@@ -15,6 +16,7 @@ public class MixNote extends Note{
      */
     public MixNote(int time, double position) {
         super(time, position);
+        type = "MixNote";
         childNotes = new ArrayList<>();
     }
 
@@ -42,14 +44,17 @@ public class MixNote extends Note{
      */
     public MixNote clone(){
         MixNote note = new MixNote(getTime(),getPosition());
-        for (Note childNote: childNotes) {
+        for (IMapElement childNote: childNotes) {
             note.childNotes.add(childNote.clone());
         }
         return note;
     }
-
     public void clearNote() {
         childNotes.clear();
+    }
+
+    public ArrayList<IMapElement> getChildNotes() {
+        return childNotes;
     }
 
     @Override

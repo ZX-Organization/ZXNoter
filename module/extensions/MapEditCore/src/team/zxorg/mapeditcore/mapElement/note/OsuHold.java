@@ -42,6 +42,7 @@ public class OsuHold extends Hold{
 
     public OsuHold(int time, int orbit, int maxOrbit, int keyType, int hitSound,int holdTime, String[] sampleSetPars) {
         super(time, calPosByOrbit(orbit,maxOrbit),holdTime);
+        type = "OsuHold";
         setKeyType(keyType);
         setHitSound(hitSound);
         setNormalSampleSet(Integer.parseInt(sampleSetPars[0]));
@@ -175,7 +176,6 @@ public class OsuHold extends Hold{
     public void setSoundFile(String soundFile) {
         this.soundFile = Path.of(new File(soundFile).toURI());
     }
-
     @Override
     public String toString() {
         return '\n'+"      "+"OsuHold{" +

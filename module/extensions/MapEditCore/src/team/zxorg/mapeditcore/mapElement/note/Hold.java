@@ -19,12 +19,12 @@ public class Hold extends Note{
      */
     public Hold(int time, double position, int duration) {
         super(time, position);
+        type = "Hold";
         setDuration(duration);
     }
 
     public Hold(int time, int orbit, int maxOrbit, int duration) {
-        super(time, Note.calPosByOrbit(orbit,maxOrbit));
-        setDuration(duration);
+        this(time,Note.calPosByOrbit(orbit,maxOrbit),duration);
     }
 
     /**
@@ -45,6 +45,10 @@ public class Hold extends Note{
         }
     }
 
+    @Override
+    public Hold clone() {
+        return new Hold(getTime(),getPosition(),getDuration());
+    }
     @Override
     public String toString() {
         return '\n'+"      "+"Hold{" +

@@ -141,7 +141,7 @@ public class ImdReader extends MapReader{
         }
         //排序一遍物件
         notes.sort(Note::compareTo);
-
+//        System.out.println(notes);
         return this;
     }
 

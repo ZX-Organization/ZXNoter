@@ -1,5 +1,7 @@
 package team.zxorg.mapeditcore.mapElement.timing;
 
+import team.zxorg.mapeditcore.mapElement.IMapElement;
+
 /**
  *      * 例子
  *      * 10000,333.33,4,0,0,100,1,1
@@ -120,7 +122,10 @@ public class OsuTiming extends Timing{
     public void setEffect(int effect) {
         this.effect = effect;
     }
-
+    @Override
+    public String getType() {
+        return "osuTiming";
+    }
     @Override
     public String toString() {
         return '\n'+"OsuTiming{" +

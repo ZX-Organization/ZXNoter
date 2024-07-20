@@ -1,6 +1,7 @@
 package team.zxorg.mapeditcore.map;
 
 import team.zxorg.mapeditcore.map.mapdata.ZXMetaData;
+import team.zxorg.mapeditcore.mapElement.IMapElement;
 import team.zxorg.mapeditcore.mapElement.note.Note;
 import team.zxorg.mapeditcore.mapElement.timing.Timing;
 
@@ -8,17 +9,13 @@ import java.util.ArrayList;
 
 public class ZXMap {
     /**
-     * 全部物件
+     * 元数据
      */
-    public final ArrayList<Note> notes;
+    public ZXMetaData metaData;
     /**
      * 全部timing点
      */
     public final ArrayList<Timing> timings;
-    /**
-     * 元数据
-     */
-    public ZXMetaData metaData;
     /**
      * 轨道（如果有的话）
      */
@@ -27,6 +24,10 @@ public class ZXMap {
      * 参考基准bpm（计算变速下落速度）
      */
     public double preferenceBpm;
+    /**
+     * 全部物件
+     */
+    public final ArrayList<IMapElement> notes;
     public ZXMap(){
         notes = new ArrayList<>();
         timings = new ArrayList<>();

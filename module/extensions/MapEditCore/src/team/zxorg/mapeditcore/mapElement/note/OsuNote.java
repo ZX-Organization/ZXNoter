@@ -41,6 +41,7 @@ public class OsuNote extends Note{
 
     public OsuNote(int time, int orbit, int maxOrbit, int keyType, int hitSound, String[] sampleSetPars) {
         super(time, calPosByOrbit(orbit,maxOrbit));
+        type = "OsuNote";
         setKeyType(keyType);
         setHitSound(hitSound);
         setNormalSampleSet(Integer.parseInt(sampleSetPars[0]));
@@ -177,7 +178,6 @@ public class OsuNote extends Note{
     public void setSoundFile(String soundFile) {
         this.soundFile = Path.of(new File(soundFile).toURI());
     }
-
     @Override
     public String toString() {
         return '\n'+"      "+"OsuNote{" +

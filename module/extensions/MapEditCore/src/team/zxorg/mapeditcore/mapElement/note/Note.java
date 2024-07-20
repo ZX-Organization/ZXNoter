@@ -9,7 +9,11 @@ import javax.sound.sampled.AudioInputStream;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.Type;
 
-public class Note implements IMapElement,Cloneable, JsonDeserializer<Note>, JsonSerializer<Note> {
+public class Note implements IMapElement,Cloneable{
+    /**
+     * 太弱智了
+     */
+    protected String type;
     /**
      * 物件时间戳
      */
@@ -23,7 +27,6 @@ public class Note implements IMapElement,Cloneable, JsonDeserializer<Note>, Json
      * key音输入流引用
      */
     public String keyAudioPath;
-    public Note(){}
 
     /**
      * 无key音构造
@@ -33,6 +36,7 @@ public class Note implements IMapElement,Cloneable, JsonDeserializer<Note>, Json
     public Note(int time, double position) {
         setTime(time);
         setPosition(position);
+        type = "Note";
     }
 
     /**
@@ -42,8 +46,7 @@ public class Note implements IMapElement,Cloneable, JsonDeserializer<Note>, Json
      * @param keyAudioPath key音
      */
     public Note(int time, double position, String keyAudioPath) {
-        this.time = time;
-        this.position = position;
+        this(time,position);//这还差不多，要找最少的
         this.keyAudioPath = keyAudioPath;
     }
 
@@ -54,8 +57,7 @@ public class Note implements IMapElement,Cloneable, JsonDeserializer<Note>, Json
      * @param maxOrbit 最大轨道数
      */
     public Note(int time, int orbit, int maxOrbit){
-        this.time = time;
-        this.position = calPosByOrbit(orbit,maxOrbit);
+        this(time,calPosByOrbit(orbit,maxOrbit));
     }
 
     /**
@@ -65,8 +67,7 @@ public class Note implements IMapElement,Cloneable, JsonDeserializer<Note>, Json
      * @param maxOrbit 最大轨道数
      */
     public Note(int time, int orbit, int maxOrbit,String keyAudioPath){
-        this.time = time;
-        this.position = calPosByOrbit(orbit,maxOrbit);
+        this(time,calPosByOrbit(orbit,maxOrbit));
         this.keyAudioPath = keyAudioPath;
     }
 
@@ -75,6 +76,11 @@ public class Note implements IMapElement,Cloneable, JsonDeserializer<Note>, Json
      * @return 时间
      */
     public int getTime(){return time;}
+
+    @Override
+    public String getType() {
+        return type;
+    }
 
     /**
      * 设置物件时间戳
@@ -159,7 +165,6 @@ public class Note implements IMapElement,Cloneable, JsonDeserializer<Note>, Json
     public Note clone(){
         return new Note(time,position, keyAudioPath);
     }
-
     @Override
     public String toString() {
         return '\n'+"      "+"Note{" +
@@ -167,19 +172,5 @@ public class Note implements IMapElement,Cloneable, JsonDeserializer<Note>, Json
                 ", 位置=" + position +
                 ", key音=" + keyAudioPath +
                 '}';
-    }
-
-    @Override
-    public Note deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-
-        return null;
-    }
-
-    @Override
-    public JsonElement serialize(Note src, Type typeOfSrc, JsonSerializationContext context) {
-        JsonObject json = new JsonObject();
-        json.addProperty("type",src.getClass().getSimpleName());
-        json.add("note",new Gson().toJsonTree(this));
-        return json;
     }
 }

@@ -17,6 +17,7 @@ public class Flick extends Note{
      */
     public Flick(int time, double position, double direction, double flickLength) {
         super(time, position);
+        type = "Flick";
         setDirection(direction);
         setSlideLength(flickLength);
     }
@@ -29,9 +30,7 @@ public class Flick extends Note{
      * @param flickPar 滑动参数
      */
     public Flick(int time, int orbit, int maxOrbit, int flickPar) {
-        super(time, calPosByOrbit(orbit,maxOrbit));
-        setDirection(flickPar>0?180:0);
-        setSlideLength(Math.abs(flickPar) * 1.0/maxOrbit);
+        this(time,calPosByOrbit(orbit,maxOrbit),flickPar>0?180:0,Math.abs(flickPar) * 1.0/maxOrbit);
     }
 
     /**
@@ -68,6 +67,11 @@ public class Flick extends Note{
      */
     public void setSlideLength(double slideLength) {
         this.slideLength = slideLength;
+    }
+
+    @Override
+    public Flick clone() {//made
+        return new Flick(getTime(),getPosition(),getDirection(),getSlideLength());
     }
 
     @Override
