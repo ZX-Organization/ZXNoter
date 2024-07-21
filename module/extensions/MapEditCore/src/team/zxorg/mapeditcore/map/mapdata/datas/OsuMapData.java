@@ -1,5 +1,6 @@
 package team.zxorg.mapeditcore.map.mapdata.datas;
 
+import team.zxorg.mapeditcore.map.ZXMap;
 import team.zxorg.mapeditcore.map.mapdata.ZXMapData;
 
 import java.util.LinkedHashMap;
@@ -67,8 +68,44 @@ public class OsuMapData extends ZXMapData {
         type = "OsuMapData";
     }
 
-    public OsuMapData(ZXMapData zxMapData) {
+    public OsuMapData(ZXMapData zxMapData , ZXMap map) {
         this();
+        generalInfo.put("AudioFilename",zxMapData.getMscPath());
+        generalInfo.put("AudioLeadIn"," 0");
+        generalInfo.put("PreviewTime"," 0");
+        generalInfo.put("Countdown"," 0");
+        generalInfo.put("SampleSet"," Soft");
+        generalInfo.put("StackLeniency"," 0.7");
+        generalInfo.put("Mode"," 3");
+        generalInfo.put("LetterboxInBreaks"," 0");
+        generalInfo.put("EpilepsyWarning"," 1");
+        generalInfo.put("SpecialStyle"," 0");
+        generalInfo.put("WidescreenStoryboard"," 1");
+
+        editorInfo.put("DistanceSpacing"," 1");
+        editorInfo.put("BeatDivisor"," 8");
+        editorInfo.put("GridSize"," 4");
+        editorInfo.put("TimelineZoom"," 2.5");
+
+        setTitle(zxMapData.getTitle());
+        setTitleUnicode(zxMapData.getTitleUnicode());
+        setArtist(zxMapData.getArtist());
+        setArtistUnicode(zxMapData.getArtistUnicode());
+        setCreator(zxMapData.getCreator());
+        setMapVersion(zxMapData.getMapVersion());
+        setSource(zxMapData.getSource());
+        setTags(zxMapData.getTags());
+        setBeatMapId(-1);
+        setBeatMapSetId(-1);
+
+        difficultInfo.put("HPDrainRate"," 8");
+        difficultInfo.put("CircleSize", " "+ map.orbitCount);
+        difficultInfo.put("OverallDifficulty", " 8");
+        difficultInfo.put("ApproachRate", " 5");
+        difficultInfo.put("SliderMultiplier", " 1.4");
+        difficultInfo.put("SliderTickRate", " 1");
+
+        eventInfo.put("Background and Video events","\"0,0," + zxMapData.getMscPath().replace(".mp3","")+".png" + ",0,0\"");
 
     }
 

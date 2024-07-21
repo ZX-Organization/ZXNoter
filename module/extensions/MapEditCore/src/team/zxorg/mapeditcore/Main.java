@@ -4,8 +4,10 @@ import team.zxorg.extensionloader.extension.Extension;
 import team.zxorg.extensionloader.extension.ExtensionEntrypoint;
 import team.zxorg.extensionloader.extension.ExtensionManager;
 import team.zxorg.mapeditcore.io.reader.ImdReader;
+import team.zxorg.mapeditcore.io.reader.OsuReader;
 import team.zxorg.mapeditcore.io.writer.ImdWriter;
 import team.zxorg.mapeditcore.io.writer.MapWriter;
+import team.zxorg.mapeditcore.io.writer.OsuWriter;
 import team.zxorg.mapeditcore.io.writer.ZXMapWriter;
 import team.zxorg.mapeditcore.map.ZXMap;
 
@@ -22,13 +24,13 @@ public class Main implements ExtensionEntrypoint {
 
     public static void main(String[] args) {
         try{
-            ImdReader reader = new ImdReader().readFile(new File("docs/reference/Contrapasso -paradiso-/t+pazolite - Contrapasso -paradiso-_4k_hd.imd"));
-//            OsuReader reader = new OsuReader().readFile(new File("docs/reference/LeaF - NANO DEATH!!!!!/LeaF - NANO DEATH!!!!! (nowsmart) [DEATH].osu"));
+            //ImdReader reader = new ImdReader().readFile(new File("docs/reference/Contrapasso -paradiso-/t+pazolite - Contrapasso -paradiso-_4k_hd.imd"));
+            OsuReader reader = new OsuReader().readFile(new File("docs/reference/LeaF - NANO DEATH!!!!!/LeaF - NANO DEATH!!!!! (nowsmart) [DEATH].osu"));
             ZXMap map = reader.readMap();
 
-            MapWriter writer = new ImdWriter(map);
-            writer.writeFile(new File(map.metaData.getTitleUnicode() + writer.getSuffix()));
-            //普通note也全丢,这不就行了吗
+            ImdWriter writer = new ImdWriter(map);
+            writer.setDirectory(new File("/Users/2333xiang/IdeaProjects/ZXNoter")).writeFile();
+
 
         }catch (IOException e){
             e.printStackTrace();

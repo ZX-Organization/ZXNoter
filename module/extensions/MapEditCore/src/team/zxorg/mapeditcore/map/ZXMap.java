@@ -2,6 +2,7 @@ package team.zxorg.mapeditcore.map;
 
 import team.zxorg.mapeditcore.map.mapdata.IBaseData;
 import team.zxorg.mapeditcore.mapElement.IMapElement;
+import team.zxorg.mapeditcore.mapElement.note.MixNote;
 import team.zxorg.mapeditcore.mapElement.note.Note;
 import team.zxorg.mapeditcore.mapElement.timing.Timing;
 
@@ -71,5 +72,24 @@ public class ZXMap {
                 ", timings=" + timings +
                 ", notes=" + notes +
                 '}';
+    }
+
+    public ZXMap convert() {
+        ZXMap map = new ZXMap();
+        map.orbitCount = orbitCount;
+        map.preferenceBpm = preferenceBpm;
+        map.timings.addAll(timings);
+        map.metaData = metaData;
+        for (IMapElement note:notes){
+            if (note instanceof MixNote mixNote){
+                map.notes.addAll(mixNote.getChildNotes());
+            }else {
+                map.notes.add(note);
+            }
+        }
+        map.notes.sort(IMapElement::compareTo);
+
+        return map;
+
     }
 }

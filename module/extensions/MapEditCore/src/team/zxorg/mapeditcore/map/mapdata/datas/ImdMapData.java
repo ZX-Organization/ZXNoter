@@ -114,6 +114,7 @@ public class ImdMapData implements IBaseData {
         metaData.setSource("rhythm master");
         metaData.setCreator(creator);
         metaData.setTags("rm,imd");
+        metaData.setMscPath(mscPath);
 
         return metaData;
     }

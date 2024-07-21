@@ -34,6 +34,10 @@ public class OsuTiming extends Timing{
         setEffect(effect);
     }
 
+    public OsuTiming(Timing t) {
+        this(t.time, t.bpm,t.speed,4,2,0,50,true,0);
+    }
+
     /**
      * 节拍（整型）： 一小节中的拍子数量。继承时间点（绿线）的这个值无效果。
      */
@@ -123,6 +127,9 @@ public class OsuTiming extends Timing{
     public void setEffect(int effect) {
         this.effect = effect;
     }
+
+
+
     @Override
     public String toString() {
         return '\n'+"OsuTiming{" +

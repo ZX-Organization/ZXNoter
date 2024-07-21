@@ -18,6 +18,7 @@ import java.nio.ByteOrder;
 
 public class ImdWriter extends MapWriter {
     private final ByteBuffer bf;
+    private ImdMapData data;
 
     public ImdWriter(ZXMap map) {
         super(map);
@@ -41,18 +42,16 @@ public class ImdWriter extends MapWriter {
     }
 
     @Override
-    public void writeFile(File file) throws IOException {
-        ImdMapData imdMapData = null;
+    public void writeFile() throws IOException {
         //检查谱面数据类型
-        if (map.metaData instanceof ImdMapData data)
-             imdMapData = data;
+        if (map.metaData instanceof ImdMapData data1)
+             this.data = data1;
         else if (map.metaData instanceof ZXMapData zxMapData)
-            imdMapData = zxMapData.toImdMapData(map);
+            data = zxMapData.toImdMapData(map);
         else
-            imdMapData = new ImdMapData();
+            data = new ImdMapData();
 
-
-        bf.putInt(imdMapData.getMapLength());//谱面长度
+        bf.putInt(data.getMapLength());//谱面长度
         bf.putInt(map.timings.size());//时间点数
 
         //时间点
@@ -62,7 +61,7 @@ public class ImdWriter extends MapWriter {
         }
 
         bf.putShort((short) 771);// 03 03
-        bf.putInt(imdMapData.getTabRows());//表格行数
+        bf.putInt(data.getTabRows());//表格行数
         int size = 0;
         //所有物件
         for (IMapElement note : map.notes){
@@ -99,7 +98,7 @@ public class ImdWriter extends MapWriter {
                 }
             }
         }
-        FileOutputStream fos = new FileOutputStream(file);
+        FileOutputStream fos = new FileOutputStream(getPath());
         fos.write(bf.array());
         fos.flush();
         fos.close();
@@ -130,6 +129,42 @@ public class ImdWriter extends MapWriter {
             bf.putInt(0);
         }
     }
+
+    @Override
+    public File getPath() {
+        File file = null;
+        boolean legal = true;
+        if (directory.isDirectory()) legal = false;
+        else if (directory.isFile()) file = directory;
+        //检查文件名
+
+        if (file == null||!file.getName().contains("_")) legal=false;
+        else if (file.getName().length() - file.getName().replaceAll("_","").length() == 2){
+            String[] ss = file.getName().replace(".imd","").split("_");
+            if (!ss[0].contains(data.getMscPath().replace(".mp3",""))) legal = false;
+            if (!ss[1].contains(map.orbitCount + "k")) legal = false;
+            if (!ss[2].contains(data.getMapVersion())) legal = false;
+            if (!ss[0].contains(data.getCreator())) legal = false;
+        }
+        if (!legal){
+            String fileName = "";
+            fileName+=data.getTitleUnicode();
+            if (data.getCreator() != null) {
+                fileName+="("+data.getCreator()+")";
+            }
+            fileName+="_"+map.orbitCount+"k_";
+            fileName+= data.getMapVersion()+getSuffix();
+            file = new File(directory + "/" + fileName);
+        }
+        return file;
+    }
+
+    @Override
+    public ImdWriter setDirectory(File directory) {
+        this.directory = directory;
+        return this;
+    }
+
     @Override
     public String getSuffix() {
         return ".imd";

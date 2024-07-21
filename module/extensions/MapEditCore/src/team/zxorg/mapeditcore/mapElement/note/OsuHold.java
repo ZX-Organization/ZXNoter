@@ -37,11 +37,14 @@ public class OsuHold extends Hold{
     /**
      * 文件名（字符串）： 自定义附加音效的文件名或相对路径。
      */
-    protected Path soundFile;
+    protected String soundFile;
 
 
     public OsuHold(int time, int orbit, int maxOrbit, int keyType, int hitSound,int holdTime, String[] sampleSetPars) {
-        super(time, calPosByOrbit(orbit,maxOrbit),holdTime);
+        this(time, calPosByOrbit(orbit,maxOrbit),keyType,hitSound,holdTime,sampleSetPars);
+    }
+    public OsuHold(int time, double pos, int keyType, int hitSound,int holdTime, String[] sampleSetPars) {
+        super(time, pos,holdTime);
         type = "OsuHold";
         setKeyType(keyType);
         setHitSound(hitSound);
@@ -50,9 +53,14 @@ public class OsuHold extends Hold{
         setSampleIndex(Integer.parseInt(sampleSetPars[2]));
         setSampleVolume(Integer.parseInt(sampleSetPars[3]));
         if (sampleSetPars.length>4){
-            setSoundFile(Path.of(new File(sampleSetPars[4]).toURI()));
-        }
+            setSoundFile(new File(sampleSetPars[4]));
+        }else setSoundFile("");
     }
+
+    public OsuHold(Hold hold) {
+        this(hold.time, hold.position, 1,0, hold.getDuration(), new String[]{"0","0","0","50"});
+    }
+
 
     /**
      * osu中定义物件类型的参数,1为单键,128为长条
@@ -163,18 +171,21 @@ public class OsuHold extends Hold{
     /**
      * 文件名（字符串）： 自定义附加音效的文件名或相对路径。
      */
-    public Path getSoundFile() {
+    public String getSoundFile() {
         return soundFile;
     }
 
     /**
      *当填写了文件名，此时会将这个文件替换掉物件默认的附加打击音效。
      */
-    public void setSoundFile(Path soundFile) {
-        this.soundFile = soundFile;
+    public void setSoundFile(File soundFile) {
+        this.soundFile = soundFile.getAbsolutePath();
     }
     public void setSoundFile(String soundFile) {
-        this.soundFile = Path.of(new File(soundFile).toURI());
+        if (!"".equals(soundFile)){
+            this.soundFile = Path.of(new File(soundFile).toURI()).toAbsolutePath().toString();
+            setKeyAudioPath(this.soundFile);
+        }
     }
     @Override
     public String toString() {

@@ -114,6 +114,10 @@ public class ZXMapData implements IBaseData{
         return mscPath;
     }
 
+    public void setMscPath(String mscPath) {
+        this.mscPath = mscPath;
+    }
+
     public void setMapVersion(String mapVersion) {
         this.mapVersion = mapVersion;
     }
