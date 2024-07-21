@@ -148,8 +148,8 @@ public class ProjectView {
             Logger.warning("注册了重复的文件打开方式: " + extensionName + " -> " + fileEditorId);
             return;
         }
-        fileOpenFilterMap.computeIfAbsent("$all", (_) -> new ArrayList<>()).add("*." + extensionName);
-        fileOpenFilterMap.computeIfAbsent(extensionName, (_) -> new ArrayList<>()).add("*." + extensionName);
+        fileOpenFilterMap.computeIfAbsent("$all", (e) -> new ArrayList<>()).add("*." + extensionName);
+        fileOpenFilterMap.computeIfAbsent(extensionName, (e) -> new ArrayList<>()).add("*." + extensionName);
         fileOpenMethodMap.put(extensionName, fileEditorId);
     }
 
