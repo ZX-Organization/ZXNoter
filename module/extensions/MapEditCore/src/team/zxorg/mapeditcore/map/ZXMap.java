@@ -33,37 +33,6 @@ public class ZXMap {
         notes = new ArrayList<>();
         timings = new ArrayList<>();
     }
-    /**
-     * 有序地插入物件
-     * @param note 物件
-     */
-    public void insertNote(Note note) {
-        addElement(note , notes);
-    }
-    /**
-     * 有序地插入timing
-     * @param timing 要插入点timing
-     */
-    public void insertTiming(Timing timing){
-        addElement(timing,timings);
-    }
-
-    private void addElement(IMapElement element,ArrayList<IMapElement> list){
-        int time = element.getTime();
-        if (list.size() > 0) {
-            if (list.size() > 1) {
-                //表中有两个及以上timing
-                list.add(MapUtil.binarySearchMapElement(list, time), element);
-            } else {
-                //表中只有一个timing
-                if (list.get(0).getTime() <= time)
-                    list.add(element);
-            }
-        }else
-            list.add(element);
-    }
-
-
 
     @Override
     public String toString() {
@@ -88,8 +57,6 @@ public class ZXMap {
             }
         }
         map.notes.sort(IMapElement::compareTo);
-
         return map;
-
     }
 }

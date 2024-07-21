@@ -31,7 +31,6 @@ public class Main implements ExtensionEntrypoint {
             ImdWriter writer = new ImdWriter(map);
             writer.setDirectory(new File("/Users/2333xiang/IdeaProjects/ZXNoter")).writeFile();
 
-
         }catch (IOException e){
             e.printStackTrace();
         }
