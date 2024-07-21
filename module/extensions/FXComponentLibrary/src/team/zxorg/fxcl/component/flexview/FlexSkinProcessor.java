@@ -383,7 +383,7 @@ public class FlexSkinProcessor {
 
                 //延迟设置新的选中标签页 (处理有瑕疵)
                 PauseTransition pause = new PauseTransition(Duration.millis(20));
-                pause.setOnFinished(_ -> {
+                pause.setOnFinished(e -> {
                     draggingTab.getTabPane().requestFocus();
                     draggingTab.getTabPane().getSelectionModel().select(draggingTab);
                 });

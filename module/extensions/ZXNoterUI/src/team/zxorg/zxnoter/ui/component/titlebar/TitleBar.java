@@ -68,8 +68,8 @@ public final class TitleBar extends HBox {
 
         //初始化一堆东西
 
-        openFileMenu.setOnAction(_ -> projectView.openFileChooser());
-        clearRecentMenu.setOnAction(_ -> clearRecent());
+        openFileMenu.setOnAction(e -> projectView.openFileChooser());
+        clearRecentMenu.setOnAction(e -> clearRecent());
         updateRecent();
     }
 
@@ -82,7 +82,7 @@ public final class TitleBar extends HBox {
         items.clear();
         for (var s : config.recentlyOpenedProject) {
             item = new MenuItem(s);
-            item.setOnAction(_ -> {
+            item.setOnAction(e -> {
 
             });
             items.add(item);
@@ -90,7 +90,7 @@ public final class TitleBar extends HBox {
         items.add(new SeparatorMenuItem());
         for (var s : config.recentlyOpenedFile) {
             item = new MenuItem(s);
-            item.setOnAction(_ -> {
+            item.setOnAction(e -> {
                 projectView.openFile(Path.of(s));
             });
             items.add(item);
