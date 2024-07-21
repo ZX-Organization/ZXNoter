@@ -2,6 +2,7 @@ package team.zxorg.mapeditcore.map;
 
 import team.zxorg.mapeditcore.map.mapdata.IBaseData;
 import team.zxorg.mapeditcore.mapElement.IMapElement;
+import team.zxorg.mapeditcore.mapElement.note.MixNote;
 import team.zxorg.mapeditcore.mapElement.note.Note;
 import team.zxorg.mapeditcore.mapElement.timing.Timing;
 
@@ -32,37 +33,6 @@ public class ZXMap {
         notes = new ArrayList<>();
         timings = new ArrayList<>();
     }
-    /**
-     * 有序地插入物件
-     * @param note 物件
-     */
-    public void insertNote(Note note) {
-        addElement(note , notes);
-    }
-    /**
-     * 有序地插入timing
-     * @param timing 要插入点timing
-     */
-    public void insertTiming(Timing timing){
-        addElement(timing,timings);
-    }
-
-    private void addElement(IMapElement element,ArrayList<IMapElement> list){
-        int time = element.getTime();
-        if (list.size() > 0) {
-            if (list.size() > 1) {
-                //表中有两个及以上timing
-                list.add(MapUtil.binarySearchMapElement(list, time), element);
-            } else {
-                //表中只有一个timing
-                if (list.get(0).getTime() <= time)
-                    list.add(element);
-            }
-        }else
-            list.add(element);
-    }
-
-
 
     @Override
     public String toString() {
@@ -71,5 +41,22 @@ public class ZXMap {
                 ", timings=" + timings +
                 ", notes=" + notes +
                 '}';
+    }
+
+    public ZXMap convert() {
+        ZXMap map = new ZXMap();
+        map.orbitCount = orbitCount;
+        map.preferenceBpm = preferenceBpm;
+        map.timings.addAll(timings);
+        map.metaData = metaData;
+        for (IMapElement note:notes){
+            if (note instanceof MixNote mixNote){
+                map.notes.addAll(mixNote.getChildNotes());
+            }else {
+                map.notes.add(note);
+            }
+        }
+        map.notes.sort(IMapElement::compareTo);
+        return map;
     }
 }

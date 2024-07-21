@@ -152,6 +152,7 @@ public class OsuReader extends MapReader{
                     if (isExtendTiming){
                         //继承
                         //bpm时间点添加
+//                        System.out.println("继承");
                         timings.add(
                                 new OsuTiming(
                                         timeStamp,
@@ -166,6 +167,8 @@ public class OsuReader extends MapReader{
                                 )
                         );
                     }else {
+//                        System.out.println("非继承");
+
                         double speed = 100/Math.abs(beatPar) * baseBpm;
                         //不继承(变速)
                         timings.add(
@@ -255,7 +258,7 @@ public class OsuReader extends MapReader{
             }
         }
         orbitCount = keyCount;
-
+//        System.out.println(timings);
         return this;
     }
 

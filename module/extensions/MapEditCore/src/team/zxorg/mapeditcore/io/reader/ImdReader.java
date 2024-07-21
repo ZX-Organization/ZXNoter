@@ -167,6 +167,7 @@ public class ImdReader extends MapReader{
         }else {
             //截取文件标题
             String titleUnicode = fileName. substring(0, fileName.indexOf("_"));
+            mapData.setMscPath(titleUnicode + ".mp3");
             mapData.setTitleUnicode(titleUnicode);
             //版本
             String version = fileName.substring(fileName.lastIndexOf("_") + 1, fileName.lastIndexOf(".imd"));

@@ -22,9 +22,8 @@ public class ZXMapWriter extends MapWriter{
         return ioGson.toJson(map);
     }
     @Override
-    public void writeFile(File file) throws IOException {
-        super.writeFile(file);
-        BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+    public void writeFile() throws IOException {
+        BufferedWriter writer = new BufferedWriter(new FileWriter(getPath()));
         writer.write(toJson(map));
         writer.flush();
         writer.close();
@@ -33,6 +32,24 @@ public class ZXMapWriter extends MapWriter{
     @Override
     public String getSuffix() {
         return ".zx";
+    }
+
+    @Override
+    public File getPath() {
+        File file = null;
+        boolean legal = true;
+        if (directory.isDirectory()) legal = false;
+        else if (directory.isFile()) file = directory;
+        if (!legal)
+            file = new File(directory.getAbsolutePath()+map.metaData.getTitleUnicode() + getSuffix());
+
+        return file;
+    }
+
+    @Override
+    public ZXMapWriter setDirectory(File directory) {
+        this.directory = directory;
+        return this;
     }
 
 
