@@ -21,8 +21,6 @@ public class MapEditor {
         deOperates = new Stack<>();
     }
 
-
-
     /**
      * 有序地插入元素
      */
