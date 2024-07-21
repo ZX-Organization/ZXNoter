@@ -1,62 +1,54 @@
 package team.zxorg.extensionloader.core;
 
+
+import team.zxorg.extensionloader.util.ANSICode;
+
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Objects;
 import java.util.logging.*;
 
 public class Logger {
-    public static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("[HH:mm:ss] ");
-    public static final Formatter formatter = new Formatter() {
-        @Override
-        public String format(LogRecord record) {
-            String sourceClassName = record.getSourceClassName();
-            if (sourceClassName == null) {
-                sourceClassName = "";
-            }
 
-
-            String prefix = String.format("%s[%s.%s(%d)/%s]: ",
-                    simpleDateFormat.format(Date.from(record.getInstant())),
-                    sourceClassName.substring(sourceClassName.lastIndexOf(".") + 1),
-                    record.getSourceMethodName(),
-                    record.getParameters()[0],
-                    record.getLevel().getName()
-            );
-
-            String message = record.getMessage();
-            if (message.contains("\n")) {
-                String[] messageLines = message.split("\n");
-
-                StringBuilder sb = new StringBuilder();
-                for (int i = 0; i < messageLines.length; i++) {
-                    sb.append(prefix).append(messageLines[i].trim()).append("\n");
-                }
-                return sb.toString();
-            }
-
-            return prefix + message + "\n";
+    private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
+    private static final Formatter formatter = new LoggerFormatter(true);
+    private static final Formatter fileFormatter = new LoggerFormatter(false);
+    private static final Handler handler = new ConsoleHandler() {
+        {
+            setOutputStream(System.out);
         }
     };
-    private static final Handler handler = new ConsoleHandler();
-
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Logger.class.getName());
+
+    //自初始化
+    static {
+        initialize();
+    }
+
+    private static String styleLevel(Level level) {
+        if (level == CustomizeLevel.DEBUG) {
+            return ANSICode.applyStyle(level.getName(), ANSICode.MAGENTA);
+        } else if (level == CustomizeLevel.INFO) {
+            return ANSICode.applyStyle(level.getName(), ANSICode.WHITE);
+        } else if (level == CustomizeLevel.WARNING) {
+            return ANSICode.applyStyle(level.getName(), ANSICode.YELLOW, ANSICode.BLINK);
+        } else if (level == CustomizeLevel.SEVERE) {
+            return ANSICode.applyStyle(level.getName(), ANSICode.RED, ANSICode.BLINK_FAST, ANSICode.BOLD);
+        }
+        return ANSICode.applyStyle(level.getName(), ANSICode.RESET);
+    }
 
     public static void addLoggerHandler(Handler handler) {
         logger.addHandler(handler);
     }
 
-    static {
-        Logger.initialize();
-
-        // 设置日志记录级别为 DEBUG
-    }
-
-    public static void initialize() {
+    /**
+     * 初始化日志
+     */
+    private static void initialize() {
         handler.setFormatter(formatter);
         handler.setLevel(Level.ALL);
         logger.setUseParentHandlers(false); // 禁用父级处理程序
@@ -65,11 +57,11 @@ public class Logger {
 
         try {
             FileHandler fileHandler = new FileHandler("./latest.log");
-            fileHandler.setFormatter(formatter);
+            fileHandler.setFormatter(fileFormatter);
             fileHandler.setLevel(Level.ALL);
             logger.addHandler(fileHandler);
         } catch (IOException e) {
-            warning(Language.get("message.logger.error"));
+            warning("message.logger.error");
         }
 
         System.setErr(new PrintStream(System.out) {
@@ -84,9 +76,7 @@ public class Logger {
                 printSystemLog(buf, off, len, CustomizeLevel.DEBUG);
             }
         });
-        info(Objects.requireNonNullElse(Language.getOrNull("message.logger.initialize"),"Logger is initialized"));
     }
-
 
     private static void printSystemLog(byte[] buf, int off, int len, Level level) {
         // 处理输出的日志消息
@@ -95,22 +85,10 @@ public class Logger {
             return;
 
         LogRecord record = new LogRecord(level, null);
-        /*if (messageLines.length > 1) {
-            String[] p = messageLines[0].split(" ");
-            if (p.length > 2) {
-                record.setParameters(new Object[]{-1});
-                record.setSourceClassName(p[p.length - 2]);
-                record.setSourceMethodName(p[p.length - 1].trim());
-                record.setMessage(message.substring(messageLines[0].length() + 1));
-                logger.log(record);
-                return;
-            }
-        }*/
 
         //处理sout的打印
         StackTraceElement stackTraceElement = getStackTraceElement("java.io.PrintStream", 0);
         if (stackTraceElement != null) {
-            //record.setLevel(Level.FINE);
             setLogRecord(record, stackTraceElement);
         }
 
@@ -119,7 +97,6 @@ public class Logger {
 
     }
 
-
     private static void setLogRecord(LogRecord record, StackTraceElement ste) {
         record.setParameters(new Object[]{ste.getLineNumber()});
         record.setSourceClassName(ste.getClassName());
@@ -127,59 +104,79 @@ public class Logger {
     }
 
     /**
+     * 调试
+     */
+    public static void debug(Object message) {
+        log(CustomizeLevel.DEBUG, message.toString(), null);
+    }
+
+    /**
      * 信息
      */
-    public static void info(String message) {
-        log(Level.INFO, message);
+    public static void info(Object message) {
+        log(Level.INFO, message.toString(), null);
     }
 
     /**
      * 警告
      */
-    public static void warning(String message) {
-        log(Level.WARNING, message);
+    public static void warning(Object message) {
+        log(Level.WARNING, message.toString(), null);
     }
 
     /**
      * 严重
      */
-    public static void severe(String message) {
-        log(Level.SEVERE, message);
+    public static void severe(Object message) {
+        log(Level.SEVERE, message.toString(), null);
     }
 
+    /**
+     * 调试
+     */
+    public static void debug(String message, int cutoff) {
+        log(CustomizeLevel.DEBUG, message, null, cutoff);
+    }
 
     /**
      * 信息
      */
     public static void info(String message, int cutoff) {
-        log(Level.INFO, message, cutoff);
+        log(Level.INFO, message, null, cutoff);
     }
 
     /**
      * 警告
      */
     public static void warning(String message, int cutoff) {
-        log(Level.WARNING, message, cutoff);
+        log(Level.WARNING, message, null, cutoff);
     }
 
     /**
      * 严重
      */
     public static void severe(String message, int cutoff) {
-        log(Level.SEVERE, message, cutoff);
+        log(Level.SEVERE, message, null, cutoff);
     }
 
-
-    public static void log(Level level, String message) {
-        log(level, message, 0);
+    private static void log(Level level, String message, String other) {
+        log(level, message, other, 0);
     }
 
-    public static void log(Level level, String message, int cutoff) {
+    /**
+     * 日志
+     *
+     * @param level   等级
+     * @param message 消息
+     * @param cutoff  截止
+     */
+    private static void log(Level level, String message, String other, int cutoff) {
         LogRecord record = new LogRecord(level, message);
         record.setSourceMethodName("UNKNOWN");
         StackTraceElement ste = getStackTraceElement(Logger.class.getName(), cutoff);
+        assert ste != null;
         record.setSourceMethodName(ste.getMethodName());
-        record.setParameters(new Object[]{ste.getLineNumber()});
+        record.setParameters(new Object[]{ste.getLineNumber(), other});
         record.setSourceClassName(ste.getClassName());
         logger.log(record);
     }
@@ -192,9 +189,6 @@ public class Logger {
      * @return 堆栈信息
      */
     public static StackTraceElement getStackTraceElement(String className, int cutoff) {
-        if (className == null) {
-            throw new IllegalArgumentException("className cannot be null");
-        }
         boolean foundClassName = false;
         StackTraceElement[] stackTraceElements = Thread.currentThread().getStackTrace();
 
@@ -220,7 +214,20 @@ public class Logger {
         try (PrintWriter pw = new PrintWriter(sw)) {
             e.printStackTrace(pw);
         }
-        log(Level.WARNING, sw.toString(), 0);
+        warning(sw.toString(), 0);
+    }
+
+    /**
+     * 获取异常的堆栈追踪信息
+     *
+     * @param e 异常
+     */
+    public static String getExceptionStackTrace(Exception e) {
+        StringWriter sw = new StringWriter();
+        try (PrintWriter pw = new PrintWriter(sw)) {
+            e.printStackTrace(pw);
+        }
+        return sw.toString();
     }
 
     /**
@@ -228,9 +235,82 @@ public class Logger {
      */
     public static void logStackTrace() {
         StackTraceElement[] elements = Thread.currentThread().getStackTrace();
-        log(Level.WARNING, "----StackTrace----", 0);
+        warning("----StackTrace----", 0);
         for (int i = 2; i < elements.length; i++) {
-            log(Level.WARNING, "at " + elements[i].toString(), 0);
+            warning("at " + elements[i].toString(), 0);
+        }
+    }
+
+    private static final class LoggerFormatter extends Formatter {
+        private final boolean enabledANSI;
+
+        public LoggerFormatter(boolean enabledANSI) {
+            this.enabledANSI = enabledANSI;
+        }
+
+        @Override
+        public String format(LogRecord record) {
+            String sourceClassName = record.getSourceClassName();
+            if (sourceClassName == null) {
+                sourceClassName = "";
+            }
+            StringBuilder prefix = new StringBuilder();
+            String lines = record.getParameters() == null ? "un" : String.valueOf(record.getParameters()[0]);
+            if (enabledANSI)
+                prefix.append(ANSICode.RESET)
+                        .append('[')
+                        .append(ANSICode.applyStyle(simpleDateFormat.format(Date.from(record.getInstant())), ANSICode.WHITE, ANSICode.FAINT))
+                        .append("] [")
+                        .append(ANSICode.GREEN)
+                        .append(sourceClassName.substring(sourceClassName.lastIndexOf(".") + 1))
+                        .append('.')
+                        .append(record.getSourceMethodName())
+                        .append(ANSICode.RESET)
+                        .append('(')
+                        .append(ANSICode.applyStyle(lines, ANSICode.BRIGHT_GREEN))
+                        .append(")/")
+                        .append(styleLevel(record.getLevel()))
+                        .append("]")
+                        .append(ANSICode.BRIGHT_WHITE)
+                        .append(": ")
+                        .append(ANSICode.RESET)
+                        ;
+            else {
+                prefix.append('[')
+                        .append(simpleDateFormat.format(Date.from(record.getInstant())))
+                        .append("] [")
+                        .append(sourceClassName.substring(sourceClassName.lastIndexOf(".") + 1))
+                        .append('.')
+                        .append(record.getSourceMethodName())
+                        .append('(')
+                        .append(lines)
+                        .append(")/")
+                        .append(record.getLevel().getName())
+                        .append("]")
+                        .append(": ")
+                ;
+            }
+
+            String message = record.getMessage();
+            if (message.contains("\n")) {
+                String[] messageLines = message.split("\n");
+
+                StringBuilder sb = new StringBuilder();
+                for (String messageLine : messageLines) {
+                    sb.append(prefix).append(messageLine.trim()).append("\n");
+                }
+                return sb.toString();
+            }
+
+            return prefix + message + "\n";
+        }
+    }
+
+    private static final class CustomizeLevel extends Level {
+        public static final CustomizeLevel DEBUG = new CustomizeLevel("DEBUG", 200);
+
+        private CustomizeLevel(String name, int value) {
+            super(name, value);
         }
     }
 }

@@ -1,5 +1,7 @@
 package team.zxorg.zxnoter.util;
 
+import team.zxorg.zxnoter.api.core.ANSICode;
+
 /**
  * 动态控制台输出
  */

@@ -7,7 +7,6 @@ import team.zxorg.extensionloader.extension.Extension;
 import team.zxorg.extensionloader.extension.ExtensionEntrypoint;
 import team.zxorg.extensionloader.extension.ExtensionManager;
 import team.zxorg.zxnoter.ui.base.FileManagerActivityPaneSkin;
-import team.zxorg.zxnoter.ui.base.LoggerActivityPaneSkin;
 import team.zxorg.zxnoter.ui.base.SetupActivityPaneSkin;
 import team.zxorg.zxnoter.ui.base.WelcomeActivityPaneSkin;
 import team.zxorg.zxnoter.ui.component.activitypane.ActivityPane;
@@ -36,10 +35,6 @@ public class ZXNoter implements ExtensionEntrypoint {
         ActivityPane.register(FileManagerActivityPaneSkin.class);
         ActivityPane.register(SetupActivityPaneSkin.class);
         ActivityPane.register(WelcomeActivityPaneSkin.class);
-        ActivityPane.register(LoggerActivityPaneSkin.class);
-
-
-
 
     }
 

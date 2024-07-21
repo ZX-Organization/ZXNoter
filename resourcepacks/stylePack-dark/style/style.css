@@ -1441,3 +1441,19 @@
 }
 
 
+.dialog-pane, .header-panel {
+    -fx-background-color: -color-theme-1;
+}
+
+.header-panel .text {
+    -fx-fill: -color-text-active;
+}
+
+.content{
+    -fx-border-color: -color-border-pane;
+    -fx-border-width: 1 0 0 0;
+}
+
+.content .text {
+    -fx-fill: -color-text-usually;
+}

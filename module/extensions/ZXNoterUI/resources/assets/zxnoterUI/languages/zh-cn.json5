@@ -5,44 +5,37 @@
   zxnoterUiFrame: {
     projectView: {
       titleBar: {
-        menuBar: {
-          //文件菜单项
+        menu: {
           file: {
             name: "文件",
-            item: {
-              //新建菜单项
-              new: {
-                name: "新建",
-                //顺序
-                order: 0,
-                group: "file",
-                //组菜单项
-                items: {
-                  name: "项目...",
-                  order: 0,
-                  group: "",
-                  icon: "document.folder-add",
-                  action: "team.zxorg.zxnoter.uiframe.action.NewProject"
-                }
-              },
-              //打开菜单项
-              open: {
-                name: "打开",
-                order: 1,
-                group: "file",
-                action: "team.zxorg.zxnoter.uiframe.action.OpenProject",
-                items: {
+            new: {
+              name: "新建"
+            },
+            openProject: {
+              name: "打开项目",
+              icon: "document.folder"
+            },
+            openFile: {
+              name: "打开文件",
+              icon: "document.file"
+            },
+            recent: {
+              name: "最近的文件",
+              icon: "system.time",
+              clear: {
+                name: "清除最近记录",
+                icon: "system.delete-bin",
+                alert: {
+                  title: "警告",
+                  header: "是否清除所有最近的记录？",
+                  content: "此操作不可逆！"
                 }
               }
             }
           },
           edit: {
-            index: 10,
-            name: "编辑"
-          },
-          help: {
-            index: 20,
-            name: "帮助"
+            name: "编辑",
+            icon: null
           }
         },
         title: "ZXNote 项目视图",

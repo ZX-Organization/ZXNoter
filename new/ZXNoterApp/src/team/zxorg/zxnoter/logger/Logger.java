@@ -1,7 +1,7 @@
 package team.zxorg.zxnoter.logger;
 
 import org.jetbrains.annotations.NotNull;
-import team.zxorg.zxnoter.util.ANSICode;
+import team.zxorg.zxnoter.api.core.ANSICode;
 
 import java.io.IOException;
 import java.io.PrintStream;
@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.logging.*;
 
 public class Logger {
+
     private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
     private static final Formatter formatter = new LoggerFormatter(true);
     private static final Formatter fileFormatter = new LoggerFormatter(false);
@@ -22,10 +23,9 @@ public class Logger {
     };
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Logger.class.getName());
 
+    //自初始化
     static {
         Logger.initialize();
-
-        // 设置日志记录级别为 DEBUG
     }
 
     private static String styleLevel(Level level) {
@@ -48,7 +48,7 @@ public class Logger {
     /**
      * 初始化日志
      */
-    public static void initialize() {
+    private static void initialize() {
         handler.setFormatter(formatter);
         handler.setLevel(Level.ALL);
         logger.setUseParentHandlers(false); // 禁用父级处理程序
@@ -61,7 +61,7 @@ public class Logger {
             fileHandler.setLevel(Level.ALL);
             logger.addHandler(fileHandler);
         } catch (IOException e) {
-            //warning(Language.get("message.logger.error"));
+            warning("message.logger.error", "CORE");
         }
 
         System.setErr(new PrintStream(System.out) {
@@ -76,7 +76,6 @@ public class Logger {
                 printSystemLog(buf, off, len, CustomizeLevel.DEBUG);
             }
         });
-        //info(Objects.requireNonNullElse(Language.getOrNull("message.logger.initialize"),"Logger is initialized"));
     }
 
     private static void printSystemLog(byte[] buf, int off, int len, Level level) {
@@ -86,22 +85,10 @@ public class Logger {
             return;
 
         LogRecord record = new LogRecord(level, null);
-        /*if (messageLines.length > 1) {
-            String[] p = messageLines[0].split(" ");
-            if (p.length > 2) {
-                record.setParameters(new Object[]{-1});
-                record.setSourceClassName(p[p.length - 2]);
-                record.setSourceMethodName(p[p.length - 1].trim());
-                record.setMessage(message.substring(messageLines[0].length() + 1));
-                logger.log(record);
-                return;
-            }
-        }*/
 
         //处理sout的打印
         StackTraceElement stackTraceElement = getStackTraceElement("java.io.PrintStream", 0);
         if (stackTraceElement != null) {
-            //record.setLevel(Level.FINE);
             setLogRecord(record, stackTraceElement);
         }
 
@@ -119,61 +106,61 @@ public class Logger {
     /**
      * 调试
      */
-    public static void debug(Object message) {
-        log(CustomizeLevel.DEBUG, message.toString());
+    public static void debug(Object message, String other) {
+        log(CustomizeLevel.DEBUG, message.toString(), other);
     }
 
     /**
      * 信息
      */
-    public static void info(Object message) {
-        log(Level.INFO, message.toString());
+    public static void info(Object message, String other) {
+        log(Level.INFO, message.toString(), other);
     }
 
     /**
      * 警告
      */
-    public static void warning(Object message) {
-        log(Level.WARNING, message.toString());
+    public static void warning(Object message, String other) {
+        log(Level.WARNING, message.toString(), other);
     }
 
     /**
      * 严重
      */
-    public static void severe(Object message) {
-        log(Level.SEVERE, message.toString());
+    public static void severe(Object message, String other) {
+        log(Level.SEVERE, message.toString(), other);
+    }
+
+    /**
+     * 调试
+     */
+    public static void debug(String message, String other, int cutoff) {
+        log(CustomizeLevel.DEBUG, message, other, cutoff);
     }
 
     /**
      * 信息
      */
-    public static void debug(String message, int cutoff) {
-        log(CustomizeLevel.DEBUG, message, cutoff);
-    }
-
-    /**
-     * 信息
-     */
-    public static void info(String message, int cutoff) {
-        log(Level.INFO, message, cutoff);
+    public static void info(String message, String other, int cutoff) {
+        log(Level.INFO, message, other, cutoff);
     }
 
     /**
      * 警告
      */
-    public static void warning(String message, int cutoff) {
-        log(Level.WARNING, message, cutoff);
+    public static void warning(String message, String other, int cutoff) {
+        log(Level.WARNING, message, other, cutoff);
     }
 
     /**
      * 严重
      */
-    public static void severe(String message, int cutoff) {
-        log(Level.SEVERE, message, cutoff);
+    public static void severe(String message, String other, int cutoff) {
+        log(Level.SEVERE, message, other, cutoff);
     }
 
-    private static void log(Level level, String message) {
-        log(level, message, 0);
+    private static void log(Level level, String message, String other) {
+        log(level, message, other, 0);
     }
 
     /**
@@ -183,13 +170,13 @@ public class Logger {
      * @param message 消息
      * @param cutoff  截止
      */
-    private static void log(Level level, String message, int cutoff) {
+    private static void log(Level level, String message, String other, int cutoff) {
         LogRecord record = new LogRecord(level, message);
         record.setSourceMethodName("UNKNOWN");
         StackTraceElement ste = getStackTraceElement(Logger.class.getName(), cutoff);
         assert ste != null;
         record.setSourceMethodName(ste.getMethodName());
-        record.setParameters(new Object[]{ste.getLineNumber()});
+        record.setParameters(new Object[]{ste.getLineNumber(), other});
         record.setSourceClassName(ste.getClassName());
         logger.log(record);
     }
@@ -227,7 +214,20 @@ public class Logger {
         try (PrintWriter pw = new PrintWriter(sw)) {
             e.printStackTrace(pw);
         }
-        log(Level.WARNING, sw.toString(), 0);
+        warning(sw.toString(), "CORE", 0);
+    }
+
+    /**
+     * 获取异常的堆栈追踪信息
+     *
+     * @param e 异常
+     */
+    public static String getExceptionStackTrace(Exception e) {
+        StringWriter sw = new StringWriter();
+        try (PrintWriter pw = new PrintWriter(sw)) {
+            e.printStackTrace(pw);
+        }
+        return sw.toString();
     }
 
     /**
@@ -235,9 +235,9 @@ public class Logger {
      */
     public static void logStackTrace() {
         StackTraceElement[] elements = Thread.currentThread().getStackTrace();
-        log(Level.WARNING, "----StackTrace----", 0);
+        warning("----StackTrace----", "CORE", 0);
         for (int i = 2; i < elements.length; i++) {
-            log(Level.WARNING, "at " + elements[i].toString(), 0);
+            warning("at " + elements[i].toString(), "CORE", 0);
         }
     }
 
@@ -254,12 +254,14 @@ public class Logger {
             if (sourceClassName == null) {
                 sourceClassName = "";
             }
-
+            String other = (String) record.getParameters()[1];
             StringBuilder prefix = new StringBuilder();
             if (enabledANSI)
                 prefix.append(ANSICode.RESET)
                         .append('[')
                         .append(ANSICode.applyStyle(simpleDateFormat.format(Date.from(record.getInstant())), ANSICode.WHITE, ANSICode.FAINT))
+                        .append("] [")
+                        .append(ANSICode.applyStyle(other, ANSICode.BLUE))
                         .append("] [")
                         .append(ANSICode.GREEN)
                         .append(sourceClassName.substring(sourceClassName.lastIndexOf(".") + 1))
@@ -279,6 +281,8 @@ public class Logger {
                 prefix.append('[')
                         .append(simpleDateFormat.format(Date.from(record.getInstant())))
                         .append("] [")
+                        .append(other)
+                        .append("] [")
                         .append(sourceClassName.substring(sourceClassName.lastIndexOf(".") + 1))
                         .append('.')
                         .append(record.getSourceMethodName())
@@ -296,8 +300,8 @@ public class Logger {
                 String[] messageLines = message.split("\n");
 
                 StringBuilder sb = new StringBuilder();
-                for (int i = 0; i < messageLines.length; i++) {
-                    sb.append(prefix).append(messageLines[i].trim()).append("\n");
+                for (String messageLine : messageLines) {
+                    sb.append(prefix).append(messageLine.trim()).append("\n");
                 }
                 return sb.toString();
             }
@@ -306,10 +310,10 @@ public class Logger {
         }
     }
 
-    private static class CustomizeLevel extends Level {
+    private static final class CustomizeLevel extends Level {
         public static final CustomizeLevel DEBUG = new CustomizeLevel("DEBUG", 200);
 
-        protected CustomizeLevel(String name, int value) {
+        private CustomizeLevel(String name, int value) {
             super(name, value);
         }
     }

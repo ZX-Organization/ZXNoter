@@ -45,10 +45,6 @@ public class Version {
 
     }
 
-    private int parseVersionPart(String[] versionParts, int index) {
-        return versionParts.length > index ? Integer.parseInt(versionParts[index]) : 0;
-    }
-
     public Version(int major, int minor, int patch, ReleaseStatus status) {
         this.major = major;
         this.minor = minor;
@@ -65,6 +61,15 @@ public class Version {
         this.compare = compare;
     }
 
+    public static Version resolve(int versionCode) {
+        return new Version(versionCode / 100000, versionCode / 1000 % 100, versionCode / 10 % 100,
+                ReleaseStatus.values()[versionCode % 10]);
+    }
+
+    private int parseVersionPart(String[] versionParts, int index) {
+        return versionParts.length > index ? Integer.parseInt(versionParts[index]) : 0;
+    }
+
     /**
      * 与其他版本比较 检查是否支持
      *
@@ -79,11 +84,6 @@ public class Version {
             case GREATER_THAN -> version.getCode() > getCode();
             case GREATER_THAN_EQUAL -> version.getCode() >= getCode();
         };
-    }
-
-    public static Version resolve(int versionCode) {
-        return new Version(versionCode / 100000, versionCode / 1000 % 100, versionCode / 10 % 100,
-                ReleaseStatus.values()[versionCode % 10]);
     }
 
     @Override

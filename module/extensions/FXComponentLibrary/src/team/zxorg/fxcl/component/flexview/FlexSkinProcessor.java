@@ -1,5 +1,6 @@
 package team.zxorg.fxcl.component.flexview;
 
+import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -7,6 +8,7 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.geometry.Orientation;
 import javafx.scene.Node;
 import javafx.scene.SnapshotParameters;
@@ -15,6 +17,7 @@ import javafx.scene.image.Image;
 import javafx.scene.input.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.util.Duration;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -123,10 +126,10 @@ public class FlexSkinProcessor {
                 //tabPane.removeTab(draggingTab);
                 tabPane.addTab(draggingTab);
                 Platform.runLater(() -> {
+                    tabPane.requestFocus();
                     tabPane.getSelectionModel().select(draggingTab);
                 });
                 area.draggingTab = null;
-                tabPane.requestFocus();
                 event.setDropCompleted(true);
             }
             event.consume();
@@ -229,11 +232,11 @@ public class FlexSkinProcessor {
                 tabPane.addTab(index, draggingTab);
 
                 Platform.runLater(() -> {
+                    tabPane.requestFocus();
                     tabPane.getSelectionModel().select(draggingTab);
                 });
 
                 area.draggingTab = null;
-                tabPane.requestFocus();
                 event.setDropCompleted(true);
             }
             event.consume();
@@ -376,15 +379,18 @@ public class FlexSkinProcessor {
                     //为拖动标签页创建新面板
                     FlexTabPane newTabPane = newSplitPane.createTabPane(style.getOffset());
                     newTabPane.addTab(draggingTab);
-
                 }
 
-                //延迟设置新的选中标签页
-                Platform.runLater(() -> tabPane.getSelectionModel().select(draggingTab));
+                //延迟设置新的选中标签页 (处理有瑕疵)
+                PauseTransition pause = new PauseTransition(Duration.millis(20));
+                pause.setOnFinished(_ -> {
+                    draggingTab.getTabPane().requestFocus();
+                    draggingTab.getTabPane().getSelectionModel().select(draggingTab);
+                });
+                pause.play();
 
                 //拖拽完成
                 area.draggingTab = null;
-                tabPane.requestFocus();
                 event.setDropCompleted(true);
                 tabContentRegionDragStyle.set(null);
             }

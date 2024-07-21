@@ -12,8 +12,8 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" exported="" name="jetbrains.annotations" level="project" />
     <orderEntry type="library" exported="" name="apache.commons.lang3" level="project" />
     <orderEntry type="library" exported="" name="apache.commons.compress" level="project" />
+    <orderEntry type="module" module-name="ExtensionApi" exported="" />
   </component>
 </module>

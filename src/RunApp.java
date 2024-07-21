@@ -10,6 +10,7 @@ public class RunApp {
     public static Version VERSION = new Version(0, 0, 0, Version.ReleaseStatus.ALPHA);
 
     public static void main(String[] args) {
+
         // 初始化语言
         Language.setGlobalLanguage("version.name", VERSION.toString());
         Language.setGlobalLanguage("version.code", String.valueOf(VERSION.getCode()));

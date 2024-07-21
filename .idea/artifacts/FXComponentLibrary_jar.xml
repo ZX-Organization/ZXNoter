@@ -2,13 +2,13 @@
   <artifact type="jar" name="FXComponentLibrary:jar">
     <output-path>$PROJECT_DIR$/extensions</output-path>
     <root id="archive" name="FXComponentLibrary.jar">
-      <element id="module-output" name="FXComponentLibrary" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/fxmisc/richtext/richtextfx/0.11.2/richtextfx-0.11.2.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/reactfx/reactfx/2.0-M5/reactfx-2.0-M5.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/fxmisc/undo/undofx/2.1.1/undofx-2.1.1.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/fxmisc/flowless/flowless/0.7.2/flowless-0.7.2.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/fxmisc/wellbehaved/wellbehavedfx/0.3.3/wellbehavedfx-0.3.3.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/github/weisj/jsvg/1.3.0/jsvg-1.3.0.jar" path-in-jar="/" />
+      <element id="module-output" name="FXComponentLibrary" />
     </root>
   </artifact>
 </component>
