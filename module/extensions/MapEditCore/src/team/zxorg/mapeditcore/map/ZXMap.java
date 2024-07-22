@@ -1,6 +1,7 @@
 package team.zxorg.mapeditcore.map;
 
 import team.zxorg.mapeditcore.map.mapdata.IBaseData;
+import team.zxorg.mapeditcore.map.mapdata.ZXMapData;
 import team.zxorg.mapeditcore.mapElement.IMapElement;
 import team.zxorg.mapeditcore.mapElement.note.MixNote;
 import team.zxorg.mapeditcore.mapElement.note.Note;
@@ -32,6 +33,7 @@ public class ZXMap {
     public ZXMap(){
         notes = new ArrayList<>();
         timings = new ArrayList<>();
+        metaData = new ZXMapData();
     }
 
     @Override

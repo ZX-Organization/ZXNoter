@@ -24,8 +24,9 @@ public class Main implements ExtensionEntrypoint {
 
     public static void main(String[] args) {
         try{
-            //ImdReader reader = new ImdReader().readFile(new File("docs/reference/Contrapasso -paradiso-/t+pazolite - Contrapasso -paradiso-_4k_hd.imd"));
-            OsuReader reader = new OsuReader().readFile(new File("docs/reference/LeaF - NANO DEATH!!!!!/LeaF - NANO DEATH!!!!! (nowsmart) [DEATH].osu"));
+            ImdReader reader = new ImdReader().readFile(new File("docs/reference/Contrapasso -paradiso-/t+pazolite - Contrapasso -paradiso-_4k_hd.imd"));
+//            ImdReader reader = new ImdReader().readFile(new File("t+pazolite - Contrapasso -paradiso-.imd"));
+//            OsuReader reader = new OsuReader().readFile(new File("docs/reference/LeaF - NANO DEATH!!!!!/LeaF - NANO DEATH!!!!! (nowsmart) [DEATH].osu"));
             ZXMap map = reader.readMap();
 
             ImdWriter writer = new ImdWriter(map);

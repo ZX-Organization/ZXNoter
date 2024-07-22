@@ -12,12 +12,13 @@ import java.io.*;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
-public class ImdReader extends MapReader{
+public class ImdReader extends MapReader {
     private ByteBuffer bf;
     private int mapLength;
     private int timingAmount;
     private int tabRaws;
     private int orbitCount;
+    private boolean illegal;
 
     @Override
     public ImdReader readFile(File file) throws IOException {
@@ -32,6 +33,12 @@ public class ImdReader extends MapReader{
         readingNoteIndex = 0;
         //获得文件名
         String fileName = file.getName();
+        //检查文件名
+//        System.out.println(fileName);
+        illegal = !fileName.endsWith(".imd") || !((fileName.length() - fileName.replaceAll("_", "").length()) == 2);
+        if (illegal) {
+            throw new RuntimeException("imd文件名非法,请检查文件名格式是否为'songname_nk_ez.imd'");
+        }
         //初始化
         int maxOrbit = Integer.parseInt(
                 fileName.substring(
@@ -55,8 +62,8 @@ public class ImdReader extends MapReader{
         for (int i = 0; i < timingAmount; i++) {
             int time = bf.getInt();
             double bpm = bf.getDouble();
-            if (bpm != tempBpm){
-                tempBpm=bpm;
+            if (bpm != tempBpm) {
+                tempBpm = bpm;
                 timings.add(
                         new Timing(
                                 time, bpm, 1
@@ -92,43 +99,43 @@ public class ImdReader extends MapReader{
             byte noteType = (byte) (noteTypePar & 0x0f);
 
             //物件轨道
-            byte orbit = (byte) (bf.get()+1);
+            byte orbit = (byte) (bf.get() + 1);
 
             //物件参数 类型为长时代表持续时间 类型为滑时为滑动参数,参考有轨滑键文档
             int notePar = bf.getInt();
 
             Note tempNote = null;
             //初始化物件
-            switch (noteType){
-                case 0->//单键
-                        tempNote = new Note(timeStamp,orbit,maxOrbit);
-                case 1->//滑键
-                        tempNote = new Flick(timeStamp , orbit,maxOrbit , notePar);
-                case 2->//长键
-                        tempNote = new Hold(timeStamp , orbit,maxOrbit , notePar);
+            switch (noteType) {
+                case 0 ->//单键
+                        tempNote = new Note(timeStamp, orbit, maxOrbit);
+                case 1 ->//滑键
+                        tempNote = new Flick(timeStamp, orbit, maxOrbit, notePar);
+                case 2 ->//长键
+                        tempNote = new Hold(timeStamp, orbit, maxOrbit, notePar);
             }
 
-            if (complexPar != 0){
+            if (complexPar != 0) {
                 //组合参数不为零,处理组合键
-                switch (complexPar){
-                    case 0x06->{
+                switch (complexPar) {
+                    case 0x06 -> {
                         //组合头,重新初始化缓存组合键,并将此首按键加入组合键中
-                        mixNote = new MixNote(timeStamp, orbit,maxOrbit);
+                        mixNote = new MixNote(timeStamp, orbit, maxOrbit);
                         mixNote.addNote(tempNote.clone());
                     }
-                    case 0x02->{
+                    case 0x02 -> {
                         //组合键中间部分,直接加入缓存组合键中
                         if (mixNote != null) {
                             mixNote.addNote(tempNote.clone());
-                        }else {
+                        } else {
                             throw new RuntimeException("读取到非法物件");
                         }
                     }
-                    case 0x0A->{
+                    case 0x0A -> {
                         //组合键尾部,先将尾按键加入组合键,然后克隆组合键加入zxMap,然后清空缓存给下一个组合键使用
                         if (mixNote != null) {
                             mixNote.addNote(tempNote);
-                        }else
+                        } else
                             throw new RuntimeException("读取到非法物件");
                         notes.add(mixNote.clone());
                         mixNote.clearNote();
@@ -145,7 +152,7 @@ public class ImdReader extends MapReader{
     }
 
     @Override
-    public ZXMap readMap(){
+    public ZXMap readMap() {
         ZXMap map = new ZXMap();
         map.notes.addAll(notes);
         map.timings.addAll(timings);
@@ -160,38 +167,35 @@ public class ImdReader extends MapReader{
         String fileName = file.getName();
         ImdMapData mapData = new ImdMapData();
 
-        //检查文件名
-        boolean illegalFile = !fileName.endsWith(".imd") && !((fileName.length() - fileName.replaceAll("_", "").length()) == 2);
-        if (illegalFile) {
-            throw new RuntimeException("imd文件名非法,请检查文件名格式是否为'songname_nk_ez.imd'");
-        }else {
-            //截取文件标题
-            String titleUnicode = fileName. substring(0, fileName.indexOf("_"));
-            mapData.setMscPath(titleUnicode + ".mp3");
-            mapData.setTitleUnicode(titleUnicode);
-            //版本
-            String version = fileName.substring(fileName.lastIndexOf("_") + 1, fileName.lastIndexOf(".imd"));
-            mapData.setMapVersion(version);
+        //截取文件标题
+        String titleUnicode = fileName.substring(0, fileName.indexOf("_"));
+        mapData.setMscPath(titleUnicode + ".mp3");
+        mapData.setTitleUnicode(titleUnicode);
+        //版本
+        String version = fileName.substring(fileName.lastIndexOf("_") + 1, fileName.lastIndexOf(".imd"));
+        mapData.setMapVersion(version);
 
-            //读取表格行数和图长度
-            mapData.setTabRows(tabRaws);
-            mapData.setMapLength(mapLength);
+        //读取表格行数和图长度
+        mapData.setTabRows(tabRaws);
+        mapData.setMapLength(mapLength);
 
-            this.mapData = mapData;
+        this.mapData = mapData;
 
-        }
+
         return mapData;
     }
 
     @Override
-    public String getSuffix() {return ".imd";}
+    public String getSuffix() {
+        return ".imd";
+    }
 
     @Override
     protected void ready() {
         super.ready();
         mapLength = bf.getInt();
         timingAmount = bf.getInt();
-        bf.position(8+timingAmount*12 + 2 );
+        bf.position(8 + timingAmount * 12 + 2);
         tabRaws = bf.getInt();
     }
 }
