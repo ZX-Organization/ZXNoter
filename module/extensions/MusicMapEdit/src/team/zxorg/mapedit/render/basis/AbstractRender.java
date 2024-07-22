@@ -3,14 +3,14 @@ package team.zxorg.mapedit.render.basis;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.effect.*;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import team.zxorg.mapedit.render.IRender;
 import team.zxorg.mapedit.render.RenderTexture;
 
-public abstract class AbstractRender extends RenderRectangle implements IRender {
+public abstract class AbstractRender implements IRender {
     private GraphicsContext gc;
     private Effect effect;
-    private Effect rootEffect;
 
     @Override
     public final void render(GraphicsContext gc, double cw, double ch, long t) {
@@ -19,6 +19,7 @@ public abstract class AbstractRender extends RenderRectangle implements IRender 
         gc.save();
         draw(gc, cw, ch, t);
         gc.restore();
+
     }
 
     protected void drawImage(Image tex, double x, double y, double w, double h) {
@@ -29,14 +30,15 @@ public abstract class AbstractRender extends RenderRectangle implements IRender 
     protected void addFill(Color color) {
         Shadow shadow = new Shadow();
         shadow.setColor(color);
-        addEffect(shadow);
+        effect = shadow;
     }
 
     protected void addShadow(Color color, double w) {
         DropShadow dropShadow = new DropShadow();
         dropShadow.setWidth(w);
+        dropShadow.setHeight(w);
         dropShadow.setColor(color);
-        addEffect(dropShadow);
+        effect = dropShadow;
     }
 
     protected void addColorAdjust(double hue) {
@@ -45,35 +47,24 @@ public abstract class AbstractRender extends RenderRectangle implements IRender 
         colorAdjust.setSaturation(0);
         colorAdjust.setBrightness(0);
         colorAdjust.setContrast(0);
-        addEffect(colorAdjust);
-    }
-
-    private void addEffect(Effect newEffect) {
-        if (effect != null) {
-            if (newEffect instanceof Shadow) {
-                ((Shadow) newEffect).setInput(effect);
-            } else if (newEffect instanceof DropShadow) {
-                ((DropShadow) newEffect).setInput(effect);
-            } else if (newEffect instanceof ColorAdjust) {
-                ((ColorAdjust) newEffect).setInput(effect);
-            }
-        } else {
-            rootEffect = newEffect;
-        }
-        effect = newEffect;
-    }
-
-    private void applyEffect() {
-        if (rootEffect != null) {
-            gc.setEffect(rootEffect);
-        }
+        effect = colorAdjust;
     }
 
 
-    protected void drawImage(RenderTexture tex) {
-        applyEffect();
-        gc.drawImage(tex.get(), getLeft(), getTop(), getWidth(), getHeight());
+    /**
+     * 绘制图形
+     *
+     * @param tex 图形纹理
+     */
+    protected void drawImage(RenderTexture tex, RenderRectangle rr) {
+        gc.drawImage(tex.get(), rr.getLeft(), rr.getTop(), rr.getWidth(), rr.getHeight());
     }
+
+    protected void clearEffect() {
+        gc.setEffect(null);
+    }
+
+    public abstract void onMouseEvent(MouseEvent event);
 
     protected abstract void draw(GraphicsContext gc, double cw, double ch, long t);
 

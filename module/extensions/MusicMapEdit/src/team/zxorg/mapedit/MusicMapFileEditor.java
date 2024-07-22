@@ -1,10 +1,11 @@
 package team.zxorg.mapedit;
 
-import javafx.scene.layout.Background;
+import javafx.geometry.Orientation;
+import javafx.scene.control.Slider;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import javafx.scene.paint.Color;
-import team.zxorg.mapedit.render.MapRender;
+import team.zxorg.mapedit.render.basis.RendererCanvas;
+import team.zxorg.mapedit.render.object.MapRender;
 import team.zxorg.mapeditcore.io.reader.ImdReader;
 import team.zxorg.mapeditcore.io.reader.MapReader;
 import team.zxorg.mapeditcore.io.reader.OsuReader;
@@ -18,21 +19,33 @@ import java.nio.file.Path;
 
 public class MusicMapFileEditor extends BaseFileEditor {
     private ZXMap map;
-    private HBox leftBox = new HBox();
-    private HBox rightBox = new HBox();
+    private final HBox leftBox;
+    private final HBox rightBox;
+    private final Slider progressSlider;
 
-    private RendererCanvas canvas;
-    private HBox canvasBox;
-    private HBox body;
+    private final RendererCanvas canvas;
+    private final HBox canvasBox;
+    private final HBox body;
 
     public MusicMapFileEditor(Path file, ProjectView view) {
         super(file, view);
         getStyleClass().add("music-map-editor");
 
-        canvas = new RendererCanvas();
+        canvas = new RendererCanvas() {
+            @Override
+           protected long getTime() {
+                return (long) (progressSlider.getValue() * 1000);
+            }
+        };
         HBox.setHgrow(canvas, Priority.ALWAYS);
         canvasBox = new HBox(canvas);
 
+
+        leftBox = new HBox();
+        progressSlider = new Slider();
+        progressSlider.setOrientation(Orientation.VERTICAL);
+        progressSlider.setMax(10);//暂时10s
+        rightBox = new HBox(progressSlider);
         body = new HBox(leftBox, canvasBox, rightBox);
         setContent(body);
 

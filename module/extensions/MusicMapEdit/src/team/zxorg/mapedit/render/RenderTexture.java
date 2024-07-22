@@ -5,13 +5,13 @@ import javafx.scene.image.Image;
 import team.zxorg.fxcl.resource.ImageManager;
 
 public enum RenderTexture {
-    NOTE_END("end1"),
-    NOTE_LEFT("left"),
-    NOTE_LONG("long"),
-    NOTE_NODE("node"),
-    NOTE_NOTE("note"),
-    NOTE_right("right"),
-    NOTE_slide("slide"),
+    MAP_END("end"),
+    MAP_LEFT("left"),
+    MAP_LONG("long"),
+    MAP_NODE("node"),
+    MAP_NOTE("note"),
+    MAP_right("right"),
+    MAP_slide("slide"),
 
 
 
