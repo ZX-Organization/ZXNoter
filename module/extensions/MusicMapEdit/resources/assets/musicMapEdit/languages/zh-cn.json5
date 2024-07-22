@@ -15,7 +15,7 @@
       $all: {
         name: "全部文件"
       },
-      zxn: {
+      zx: {
         name: "ZXN谱面"
       },
       osu: {

@@ -20,6 +20,7 @@ import team.zxorg.zxnoter.ui.component.titlebar.TitleBar;
 
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
 
@@ -127,6 +128,7 @@ public class ProjectView {
             fileEditor = fileEditorClass.getDeclaredConstructor(Path.class, ProjectView.class).newInstance(null, null);
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
                  NoSuchMethodException e) {
+            e.printStackTrace();
             Logger.warning("注册失败: " + fileEditorClass.getSimpleName() + " " + e.getMessage());
             return;
         }
@@ -176,6 +178,11 @@ public class ProjectView {
      */
     public void openFile(Path file) {
         Logger.info("打开文件: " + file);
+        if (Files.notExists(file)) {
+            Logger.warning("文件不存在: " + file);
+            return;
+        }
+
         String extension = file.getFileName().toString();
         extension = extension.substring(extension.lastIndexOf(".") + 1);
         String editorId = fileOpenMethodMap.get(extension);
@@ -190,6 +197,7 @@ public class ProjectView {
             fileEditor = fileEditorClass.getDeclaredConstructor(Path.class, ProjectView.class).newInstance(file, this);
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
                  NoSuchMethodException e) {
+            e.printStackTrace();
             Logger.warning("打开文件失败: " + fileEditorClass.getSimpleName() + " " + e.getMessage());
             return;
         }
