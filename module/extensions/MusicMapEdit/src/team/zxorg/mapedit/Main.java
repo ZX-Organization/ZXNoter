@@ -9,6 +9,7 @@ import team.zxorg.zxnoter.ui.ProjectView;
 public class Main implements ExtensionEntrypoint {
     @Override
     public void onLoaded(Extension extension, ExtensionManager manager) {
+
     }
 
     @Override
@@ -17,7 +18,7 @@ public class Main implements ExtensionEntrypoint {
         ProjectView.registerFileEditor("musicMapFileEditor", MusicMapFileEditor.class);
 
         //注册文件打开方式
-        ProjectView.registerFileOpenMethod("zxn", "musicMapFileEditor");
+        ProjectView.registerFileOpenMethod("zx", "musicMapFileEditor");
         ProjectView.registerFileOpenMethod("osu", "musicMapFileEditor");
         ProjectView.registerFileOpenMethod("imd", "musicMapFileEditor");
     }

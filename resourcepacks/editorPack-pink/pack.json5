@@ -1,0 +1,12 @@
+{
+  name: "map editor pink",
+  version: "0.0.0",
+  description: "谱面编辑器 粉色",
+  tags: [
+    ""
+  ],
+  author: [
+    "zedo"
+  ],
+  icon: "icon.png"
+}

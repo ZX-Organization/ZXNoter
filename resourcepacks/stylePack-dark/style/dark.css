@@ -63,6 +63,7 @@
     -color-text-prompt: rgba(155, 155, 155, 0.57); /*提示文本 */
 
     /* 边框颜色 */
+    -color-border-powerless: rgba(37, 37, 37, 0.29); /*无力边框*/
     -color-border-pane: #505050; /*面板边框*/
     -color-border-component: #707070; /*组件边框*/
     -color-border-component-active: #adadad; /*激活组件边框*/

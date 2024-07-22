@@ -1449,7 +1449,7 @@
     -fx-fill: -color-text-active;
 }
 
-.content{
+.content {
     -fx-border-color: -color-border-pane;
     -fx-border-width: 1 0 0 0;
 }
@@ -1457,3 +1457,4 @@
 .content .text {
     -fx-fill: -color-text-usually;
 }
+

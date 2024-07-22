@@ -16,6 +16,7 @@ import team.zxorg.zxnoter.ui.ZXNoter;
 import team.zxorg.zxnoter.ui.factory.AlertFactory;
 import team.zxorg.zxnoter.ui.factory.MenuFactory;
 
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.LinkedHashMap;
 
@@ -81,19 +82,24 @@ public final class TitleBar extends HBox {
         MenuItem item;
         items.clear();
         for (var s : config.recentlyOpenedProject) {
-            item = new MenuItem(s);
-            item.setOnAction(e -> {
+            if (Files.exists(Path.of(s))) {
+                item = new MenuItem(s);
+                item.setOnAction(e -> {
 
-            });
-            items.add(item);
+                });
+                items.add(item);
+            }
         }
         items.add(new SeparatorMenuItem());
         for (var s : config.recentlyOpenedFile) {
-            item = new MenuItem(s);
-            item.setOnAction(e -> {
-                projectView.openFile(Path.of(s));
-            });
-            items.add(item);
+            if (Files.exists(Path.of(s))) {
+                item = new MenuItem(s);
+                item.setOnAction(e -> {
+                    projectView.openFile(Path.of(s));
+                });
+                items.add(item);
+            }
+
         }
         items.add(new SeparatorMenuItem());
         items.add(clearRecentMenu);

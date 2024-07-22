@@ -1,5 +1,6 @@
 package team.zxorg.zxnoter.ui.component.editor;
 
+import javafx.application.Platform;
 import team.zxorg.fxcl.component.flexview.FlexTab;
 import team.zxorg.zxnoter.ui.ProjectView;
 
@@ -11,13 +12,14 @@ public abstract class BaseFileEditor extends FlexTab {
 
 
     public BaseFileEditor(Path file, ProjectView view) {
-        if (file == null)
+        if (file == null || view == null)
             return;
         this.path = file;
         this.view = view;
-        open(path);
+        Platform.runLater(() -> open(path));
     }
 
+    abstract public void create(Path path);
 
     abstract public void open(Path path);
 
