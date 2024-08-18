@@ -2,12 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/module/ExtensionLoader/ExtensionLoader.iml" filepath="$PROJECT_DIR$/module/ExtensionLoader/ExtensionLoader.iml" />
-      <module fileurl="file://$PROJECT_DIR$/module/extensions/FXComponentLibrary/FXComponentLibrary.iml" filepath="$PROJECT_DIR$/module/extensions/FXComponentLibrary/FXComponentLibrary.iml" />
-      <module fileurl="file://$PROJECT_DIR$/module/extensions/MapEditCore/MapEditCore.iml" filepath="$PROJECT_DIR$/module/extensions/MapEditCore/MapEditCore.iml" />
-      <module fileurl="file://$PROJECT_DIR$/module/extensions/MusicMapEdit/MusicMapEdit.iml" filepath="$PROJECT_DIR$/module/extensions/MusicMapEdit/MusicMapEdit.iml" />
+      <module fileurl="file://$PROJECT_DIR$/new/ExtensionApi/ExtensionApi.iml" filepath="$PROJECT_DIR$/new/ExtensionApi/ExtensionApi.iml" />
       <module fileurl="file://$PROJECT_DIR$/ZXNoter.iml" filepath="$PROJECT_DIR$/ZXNoter.iml" />
-      <module fileurl="file://$PROJECT_DIR$/module/extensions/ZXNoterUI/ZXNoterUI.iml" filepath="$PROJECT_DIR$/module/extensions/ZXNoterUI/ZXNoterUI.iml" />
+      <module fileurl="file://$PROJECT_DIR$/new/ZXNoterApp/ZXNoterApp.iml" filepath="$PROJECT_DIR$/new/ZXNoterApp/ZXNoterApp.iml" />
     </modules>
   </component>
 </project>

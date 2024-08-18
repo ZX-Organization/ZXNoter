@@ -1,4 +1,4 @@
-package team.zxorg.zxnoter.core;
+package team.zxorg.zxnoter.node;
 
 import org.jetbrains.annotations.NotNull;
 import team.zxorg.zxnoter.api.node.ITreeNode;

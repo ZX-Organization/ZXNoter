@@ -1,6 +1,9 @@
 package team.zxorg.zxnoter.api.node;
 
-public interface ITreeNodeEventListener<T> {
+import team.zxorg.zxnoter.api.core.IEvent;
+import team.zxorg.zxnoter.api.core.IEventListener;
+
+public interface ITreeNodeEvent<T> extends IEvent {
     void onValueChanged(T oldValue, T newValue);
 
     void onChildAdded(T value);
