@@ -15,5 +15,6 @@
     <orderEntry type="library" exported="" name="apache.commons.lang3" level="project" />
     <orderEntry type="library" exported="" name="apache.commons.compress" level="project" />
     <orderEntry type="module" module-name="ExtensionApi" exported="" />
+    <orderEntry type="library" name="jetbrains.annotations" level="project" />
   </component>
 </module>

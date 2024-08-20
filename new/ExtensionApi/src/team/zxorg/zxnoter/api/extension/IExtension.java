@@ -6,6 +6,7 @@ import team.zxorg.zxnoter.api.version.IVersion;
 import java.util.List;
 
 public interface IExtension {
+
     /**
      * 获取扩展id
      *

@@ -124,6 +124,8 @@ public class Logger {
         log(Level.WARNING, message.toString(), other);
     }
 
+
+
     /**
      * 严重
      */
@@ -176,7 +178,7 @@ public class Logger {
         StackTraceElement ste = getStackTraceElement(Logger.class.getName(), cutoff);
         assert ste != null;
         record.setSourceMethodName(ste.getMethodName());
-        record.setParameters(new Object[]{ste.getLineNumber(), other});
+        record.setParameters(new Object[]{ste.getLineNumber(), ste.getClassLoaderName()});
         record.setSourceClassName(ste.getClassName());
         logger.log(record);
     }
