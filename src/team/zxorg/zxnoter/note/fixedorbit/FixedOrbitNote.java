@@ -3,6 +3,7 @@ package team.zxorg.zxnoter.note.fixedorbit;
 import com.alibaba.fastjson2.JSONObject;
 import team.zxorg.zxnoter.note.BaseNote;
 
+import java.util.Objects;
 import java.util.Random;
 
 /**
@@ -13,18 +14,19 @@ public class FixedOrbitNote extends BaseNote implements Cloneable, Comparable<Ba
      * 轨道
      */
     public int orbit;
-    String soundKey;
     protected String soundPath = "";
     protected int hash;
+    String soundKey;
 
     public FixedOrbitNote(long timeStamp, int orbit) {
         super(timeStamp);
-        hash = new Random().nextInt();
+        hash = Objects.hash(orbit, timeStamp, soundPath);
         this.orbit = orbit;
     }
+
     public FixedOrbitNote(long timeStamp, int orbit, String soundPath) {
         super(timeStamp);
-        hash = new Random().nextInt();
+        hash = Objects.hash(orbit, timeStamp,soundPath);
         this.orbit = orbit;
         this.soundPath = soundPath;
     }
@@ -33,7 +35,8 @@ public class FixedOrbitNote extends BaseNote implements Cloneable, Comparable<Ba
         super(noteJson.getLongValue("time"));
         orbit = noteJson.getIntValue("orbit");
         soundPath = noteJson.getString("soundPath");
-        hash = new Random().nextInt();
+        hash = Objects.hash(orbit, timeStamp,soundPath);
+
     }
 
     public void setSound(String path) {
@@ -85,8 +88,8 @@ public class FixedOrbitNote extends BaseNote implements Cloneable, Comparable<Ba
         JSONObject noteJson = new JSONObject();
         noteJson.put("time", timeStamp);
         noteJson.put("orbit", orbit);
-        noteJson.put("soundKey",soundKey);
-        noteJson.put("soundPath",soundPath);
+        noteJson.put("soundKey", soundKey);
+        noteJson.put("soundPath", soundPath);
         return noteJson;
     }
 

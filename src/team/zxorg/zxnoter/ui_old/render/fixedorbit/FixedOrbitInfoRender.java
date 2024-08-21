@@ -15,6 +15,7 @@ import team.zxorg.zxnoter.ui_old.render.fixedorbit.key.FixedOrbitObjectKey;
 import java.util.ArrayList;
 
 public class FixedOrbitInfoRender extends FixedOrbitRender {
+    private final Font font = new Font(16);
     public boolean timeIsFormat = true;
     public RenderPoint point = new RenderPoint();
     public Timing selectTiming;
@@ -45,7 +46,7 @@ public class FixedOrbitInfoRender extends FixedOrbitRender {
         frameCount++;
 
         graphics.setFill(Color.WHEAT);
-        graphics.setFont(new Font(16));
+        graphics.setFont(font);
         graphics.setTextAlign(TextAlignment.LEFT);
         graphics.setTextBaseline(VPos.BOTTOM);
         graphics.fillText(frame + "FPS", 0, canvas.getHeight());
@@ -59,7 +60,7 @@ public class FixedOrbitInfoRender extends FixedOrbitRender {
                 loadImage(getImage(FixedOrbitObjectKey.TIMING_BASE));
 
                 graphics.setFill(Color.WHEAT);
-                graphics.setFont(new Font(16));
+                graphics.setFont(font);
                 graphics.setTextAlign(TextAlignment.LEFT);
                 graphics.setTextBaseline(VPos.CENTER);
                 graphics.fillText("bpm\n" + (int) (timing.absBpm * 100) / 100f, 0, getInfo().getTimeToPosition(timing.timestamp));
@@ -79,7 +80,7 @@ public class FixedOrbitInfoRender extends FixedOrbitRender {
             } else {
 
                 graphics.setFill(Color.WHEAT);
-                graphics.setFont(new Font(16));
+                graphics.setFont(font);
                 graphics.setTextAlign(TextAlignment.RIGHT);
                 graphics.setTextBaseline(VPos.CENTER);
 
@@ -126,7 +127,7 @@ public class FixedOrbitInfoRender extends FixedOrbitRender {
 
                 long time = (long) (renderBeat.time + (beatCycleTime / renderBeat.measure) * i);
                 graphics.setFill(Color.WHEAT);
-                graphics.setFont(new Font(16));
+                graphics.setFont(font);
                 graphics.setTextAlign(TextAlignment.RIGHT);
                 graphics.setTextBaseline(VPos.CENTER);
                 graphics.fillText((timeIsFormat ? TimeUtils.formatTime(time) : time) + "", getInfo().canvasWidth.getValue() - 16, getInfo().getTimeToPosition(time));
@@ -140,7 +141,7 @@ public class FixedOrbitInfoRender extends FixedOrbitRender {
 
             //主节拍线的时间渲染
             graphics.setFill(Color.WHEAT);
-            graphics.setFont(new Font(16));
+            graphics.setFont(font);
             graphics.setTextAlign(TextAlignment.RIGHT);
             graphics.setTextBaseline(VPos.CENTER);
             graphics.fillText((timeIsFormat ? TimeUtils.formatTime(renderBeat.time) : renderBeat.time) + "",
@@ -149,7 +150,7 @@ public class FixedOrbitInfoRender extends FixedOrbitRender {
 
 
             graphics.setFill(Color.WHEAT);
-            graphics.setFont(new Font(16));
+            graphics.setFont(font);
             graphics.setTextAlign(TextAlignment.LEFT);
             graphics.setTextBaseline(VPos.CENTER);
             graphics.fillText("1/" + renderBeat.measure, 4, getInfo().getTimeToPosition(renderBeat.time + beatCycleTime / 2));

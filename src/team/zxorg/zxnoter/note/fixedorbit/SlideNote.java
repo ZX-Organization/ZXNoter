@@ -5,6 +5,8 @@ import team.zxorg.zxnoter.map.editor.ZXFixedOrbitMapEditor;
 import team.zxorg.zxnoter.info.map.ImdInfo;
 import team.zxorg.zxnoter.note.BaseNote;
 
+import java.util.Objects;
+
 /**
  * 滑键
  */
@@ -18,10 +20,12 @@ public class SlideNote extends FixedOrbitNote implements Cloneable,Comparable<Ba
     public SlideNote(long timeStamp, int orbit, int slideArg) {
         super(timeStamp, orbit);
         this.slideArg = slideArg;
+        hash = Objects.hash(orbit, timeStamp, soundPath, slideArg);
     }
     public SlideNote(JSONObject slideNoteJson) {
         super(slideNoteJson.getLongValue("time"), slideNoteJson.getIntValue("orbit"),slideNoteJson.getString("soundPath"));
         slideArg = slideNoteJson.getIntValue("slideArg");
+        hash = Objects.hash(orbit, timeStamp, soundPath, slideArg);
     }
 
     public SlideNote(SlideNote slideNote) {

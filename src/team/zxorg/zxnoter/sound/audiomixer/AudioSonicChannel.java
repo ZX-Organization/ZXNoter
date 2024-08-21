@@ -7,7 +7,6 @@ import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.nio.file.Path;
 
 /**
  * 音频句柄
@@ -29,6 +28,7 @@ public class AudioSonicChannel {
     private byte inBuffer[];//输入缓冲区
     private byte outStagingBuffer[];//输出暂存缓冲区
     private long frameLength;//帧总数
+    //private float actualShifting;//实际变速
 
     public AudioSonicChannel(AudioInputStream audioData) throws IOException {
         inputStream = new ByteArrayInputStream(audioData.readAllBytes());
@@ -48,8 +48,6 @@ public class AudioSonicChannel {
         pauseTime = 0;
         lastTime = 0;
     }
-
-
 
 
     public long getAudioLength() {

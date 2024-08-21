@@ -4,6 +4,8 @@ import com.alibaba.fastjson2.JSONObject;
 import team.zxorg.zxnoter.map.editor.ZXFixedOrbitMapEditor;
 import team.zxorg.zxnoter.note.BaseNote;
 
+import java.util.Objects;
+
 /**
  * 长键
  */
@@ -15,11 +17,13 @@ public class LongNote extends FixedOrbitNote implements Cloneable,Comparable<Bas
     public LongNote(long timeStamp, int orbit , long sustainedTime) {
         super(timeStamp, orbit);
         this.sustainedTime = sustainedTime;
+        hash = Objects.hash(orbit, timeStamp,sustainedTime, soundPath);
     }
     public LongNote(long timeStamp, int orbit , long sustainedTime, String soundPath) {
         super(timeStamp, orbit);
         this.sustainedTime = sustainedTime;
         this.soundPath = soundPath;
+        hash = Objects.hash(orbit, timeStamp,sustainedTime, soundPath);
     }
 
     public LongNote(LongNote longNote) {
@@ -30,6 +34,7 @@ public class LongNote extends FixedOrbitNote implements Cloneable,Comparable<Bas
     public LongNote(JSONObject longNoteJson) {
         super(longNoteJson.getLongValue("time"),longNoteJson. getIntValue("orbit"),longNoteJson.getString("soundPath"));
         sustainedTime = longNoteJson.getLongValue("sustainedTime");
+        hash = Objects.hash(orbit, timeStamp,sustainedTime, soundPath);
     }
 
     @Override

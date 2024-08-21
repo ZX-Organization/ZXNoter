@@ -5,43 +5,46 @@ import com.alibaba.fastjson2.JSONObject;
 import team.zxorg.zxnoter.info.map.ImdInfo;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class ComplexNote extends FixedOrbitNote implements Cloneable {
     public ArrayList<FixedOrbitNote> notes = new ArrayList<>();
     private boolean isRelativeHead;
 
-    public ComplexNote(long timeStamp, int orbit, ArrayList<FixedOrbitNote> notes,boolean isRelativeHead) {
+    public ComplexNote(long timeStamp, int orbit, ArrayList<FixedOrbitNote> notes, boolean isRelativeHead) {
         super(timeStamp, orbit);
         this.notes = notes;
         this.isRelativeHead = isRelativeHead;
     }
+
     public ComplexNote(JSONObject noteJson) {
-        super(noteJson.getLongValue("time"), noteJson.getIntValue("orbit"),noteJson.getString("soundPath"));
+        super(noteJson.getLongValue("time"), noteJson.getIntValue("orbit"), noteJson.getString("soundPath"));
         JSONArray children = noteJson.getJSONArray("child");
         notes = new ArrayList<>();
         for (int i = 0; i < children.size(); i++) {
             JSONObject childJson = children.getJSONObject(i);
-            if (childJson.size()==3){
+            if (childJson.size() == 3) {
                 //普通单键
                 notes.add(new FixedOrbitNote(childJson));
             }
-            if (childJson.containsKey("slideArg")){
+            if (childJson.containsKey("slideArg")) {
                 //滑键
                 notes.add(new SlideNote(childJson));
             }
-            if (childJson.containsKey("sustainedTime")){
+            if (childJson.containsKey("sustainedTime")) {
                 //长条
                 //判断是否为特殊长条
                 if (childJson.size() == 9) notes.add(new CustomLongNote(childJson));
                 else notes.add(new LongNote(childJson));
             }
-            if (childJson.size()==8){
+            if (childJson.size() == 8) {
                 //特殊单键
                 notes.add(new CustomNote(childJson));
             }
         }
 
         isRelativeHead = noteJson.getBooleanValue("isRelativeHead");
+        hash = Objects.hash(orbit, timeStamp, soundPath, notes);
     }
 
     public ComplexNote(ComplexNote complexNote) {
@@ -50,7 +53,7 @@ public class ComplexNote extends FixedOrbitNote implements Cloneable {
             notes.add(complexNote.notes.get(i).clone());
         }
         isRelativeHead = complexNote.isRelativeHead;
-        hash = complexNote.hash;
+        hash = Objects.hash(orbit, timeStamp, soundPath, notes);
     }
 
     public ComplexNote(long timeStamp, int orbit) {
@@ -280,15 +283,16 @@ public class ComplexNote extends FixedOrbitNote implements Cloneable {
         JSONObject noteJson = new JSONObject();
         noteJson.put("time", timeStamp);
         noteJson.put("orbit", orbit);
-        noteJson.put("soundKey",soundKey);
-        noteJson.put("soundPath",soundPath);
-        noteJson.put("isRelativeHead",isRelativeHead);
+        noteJson.put("soundKey", soundKey);
+        noteJson.put("soundPath", soundPath);
+        noteJson.put("isRelativeHead", isRelativeHead);
         JSONArray childrenNotes = new JSONArray();
-        for (FixedOrbitNote fixedOrbitNote:notes)
+        for (FixedOrbitNote fixedOrbitNote : notes)
             childrenNotes.add(fixedOrbitNote.toJson());
-        noteJson.put("child",childrenNotes);
+        noteJson.put("child", childrenNotes);
         return noteJson;
     }
+
     @Override
     public ComplexNote getParent() {
         return this;
