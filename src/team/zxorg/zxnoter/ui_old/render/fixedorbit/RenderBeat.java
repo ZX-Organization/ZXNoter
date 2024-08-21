@@ -33,7 +33,7 @@ public class RenderBeat {
 
 
     public static ArrayList<Long> keyPoint(ArrayList<BaseNote> baseNotes, boolean andLongEnd) {
-        ArrayList<Long> keyPoint = new ArrayList<Long>();//记录关键点
+        ArrayList<Long> keyPoint = new ArrayList<>();//记录关键点
         for (BaseNote note : baseNotes) {
             keyPoint.add(note.timeStamp);
             if (note instanceof LongNote longNote && andLongEnd) {

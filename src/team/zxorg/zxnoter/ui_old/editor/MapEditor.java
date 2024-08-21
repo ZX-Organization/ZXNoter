@@ -1156,7 +1156,7 @@ public class MapEditor extends BaseEditor {
                     globalSubbeatButton.setText("1/" + globalMeasure);
                     for (RenderBeat beat : renderBeats) {
                         long time = Math.round(60000 / beat.timing.absBpm);
-                        if (zxMap.getScaleNotes(beat.time + 2, time - 4, true).size() == 0)
+                        if (zxMap.getScaleNotes(beat.time + 2, time - 4, true).isEmpty())
                             beat.measure = globalMeasure;
                     }
                 });
@@ -1210,22 +1210,18 @@ public class MapEditor extends BaseEditor {
         mainMapRender.getInfo().timelinePosition.addListener((observable, oldValue, newValue) -> {
             if (audioChannel != null)
                 if (audioChannel.getPlayState().equals(AudioChannel.PlayState.PAUSE)) {
-                    try {
-                        hitsNotes.clear();
+                    hitsNotes.clear();
 
 
-                        ArrayList<BaseNote> findsNotes = zxMap.getScaleNotes(mainMapRender.getInfo().timelinePosition.get() - 1000, 1000, true);
-                        //解决重复key音播放
-                        for (var note : findsNotes) {
-                            if (note.timeStamp < mainMapRender.getInfo().timelinePosition.get()) {
-                                hitsNotes.add(note);
-                            }
+                    ArrayList<BaseNote> findsNotes = zxMap.getScaleNotes(mainMapRender.getInfo().timelinePosition.get() - 1000, 1000, true);
+                    //解决重复key音播放
+                    for (var note : findsNotes) {
+                        if (note.timeStamp < mainMapRender.getInfo().timelinePosition.get()) {
+                            hitsNotes.add(note);
                         }
-
-                        audioChannel.setTime(mainMapRender.getInfo().timelinePosition.get());
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
                     }
+
+                    audioChannel.setTime(mainMapRender.getInfo().timelinePosition.get());
                 }
         });
 
@@ -1366,88 +1362,120 @@ public class MapEditor extends BaseEditor {
         return mapTimeLength.get();
     }
 
-
     public void upDateBeats() {
+        // 清空之前的节拍数据
+        renderBeats.clear();
 
-        renderBeats.clear();//清空
-        //之前的基准
+        // 用于保存上一个基准时间点
         Timing previousBaseTiming = null;
-        //现在的基准
-        Timing nowBaseTiming;
-        //遍历用
+
+        // 创建一个包含所有时间点的列表，并在末尾添加一个时间点，表示时间轴的结束
         ArrayList<Timing> timingPoints = new ArrayList<>(zxMap.timingPoints);
-        //System.out.println(getLastTime(zxMap));
         timingPoints.add(new Timing(getMapTimeLength(), 0, true, 0));
 
-
-        //遍历所以Timing
+        // 遍历所有的时间点
         for (Timing timing : timingPoints) {
-            //记录新基准
-            if (timing.isNewBaseBpm) {
-                nowBaseTiming = timing;
-                //计算 之前的和现在 中间节拍
-                if (previousBaseTiming != null) {
-                    //之前的基准BPM时间
-                    //一拍所花时间
-                    double beatCycleTime = 60000. / (previousBaseTiming.absBpm);
-                    int counts = (int) ((double) (nowBaseTiming.timestamp - previousBaseTiming.timestamp) / beatCycleTime);
-                    //System.out.println(counts);
-                    for (int i = 0; i < counts; i++) {
-                        long time = previousBaseTiming.timestamp + (long) (i * beatCycleTime);
-                        RenderBeat renderBeat = new RenderBeat(time, previousBaseTiming, (i == 0));
-                        ArrayList<BaseNote> notes = zxMap.getScaleNotes(time + 2, Math.round(beatCycleTime) - 4, true);
-                        ArrayList<Long> keyPoints = RenderBeat.keyPoint(notes, true);
-                        keyPoints.add(time);
-                        keyPoints.add(time + Math.round(beatCycleTime));
-                        boolean isTrue = false;
-                        renderBeat.measure = 1;
-                        if (notes.size() > 0) {
-                            for (int measure = 1; measure < 49; measure++) {//尝试拍计算
-                                isTrue = true;
-                                for (long note : keyPoints) {
-                                    if ((note - time + 2) % (beatCycleTime / measure) > 4) {
-                                        isTrue = false;
-                                        break;
-                                    }
-                                }
-                                if (isTrue) {
-                                    renderBeat.measure = measure;
-                                    break;
-                                }
-                            }
-                            if (!isTrue) {//只计算键头
-                                keyPoints = RenderBeat.keyPoint(notes, false);
-                                for (int measure = 1; measure < 49; measure++) {//尝试拍计算
-                                    isTrue = true;
-                                    for (long note : keyPoints) {
-                                        if ((note - time + 2) % (beatCycleTime / measure) > 4) {
-                                            isTrue = false;
-                                            break;
-                                        }
-                                    }
-                                    if (isTrue) {
-                                        renderBeat.measure = measure;
-                                        break;
-                                    }
-                                }
-                            }
-                            if (!isTrue)
-                                renderBeat.measure = globalMeasure;
-                        }
-                        if (!isTrue)
-                            renderBeat.measure = globalMeasure;
-                        renderBeat.measure = Math.max(renderBeat.measure, 1);
-                        renderBeats.add(renderBeat);
-                    }
-                }
-                //赋值之前基准
-                previousBaseTiming = nowBaseTiming;
+            // 如果当前时间点不是新的基准BPM，跳过它
+            if (!timing.isNewBaseBpm) continue;
+
+            // 如果存在之前的基准时间点，处理当前和之前基准之间的节拍
+            if (previousBaseTiming != null) {
+                processTiming(previousBaseTiming, timing);
             }
 
+            // 更新之前的基准时间点为当前的基准时间点
+            previousBaseTiming = timing;
+        }
+    }
+
+    /**
+     * 处理两个基准时间点之间的节拍。
+     *
+     * @param previousBaseTiming 上一个基准时间点
+     * @param nowBaseTiming 当前基准时间点
+     */
+    private void processTiming(Timing previousBaseTiming, Timing nowBaseTiming) {
+        // 计算一拍的时间周期 (毫秒)
+        double beatCycleTime = 60000.0 / previousBaseTiming.absBpm;
+
+        // 计算在这两个时间点之间的节拍数量
+        int beatCount = (int) ((nowBaseTiming.timestamp - previousBaseTiming.timestamp) / beatCycleTime);
+
+        // 生成并添加每个节拍
+        for (int i = 0; i < beatCount+1; i++) {
+            long time = previousBaseTiming.timestamp + (long) (i * beatCycleTime);
+            RenderBeat renderBeat = new RenderBeat(time, previousBaseTiming, i == 0);
+
+            // 设置这个节拍的测量值
+            setRenderBeatMeasure(renderBeat, time, beatCycleTime);
+
+            // 将生成的节拍添加到渲染节拍列表中
+            renderBeats.add(renderBeat);
+        }
+    }
+
+    /**
+     * 为渲染节拍设置测量值。
+     *
+     * @param renderBeat 渲染节拍对象
+     * @param time 当前节拍的时间戳
+     * @param beatCycleTime 一拍的时间周期
+     */
+    private void setRenderBeatMeasure(RenderBeat renderBeat, long time, double beatCycleTime) {
+        // 获取当前节拍时间段内的音符
+        ArrayList<BaseNote> notes = zxMap.getScaleNotes(time + 2, Math.round(beatCycleTime) - 4, true);
+
+        // 获取这些音符的关键点（音符的头部和尾部）
+        ArrayList<Long> keyPoints = RenderBeat.keyPoint(notes, true);
+
+        keyPoints.add(time);
+        keyPoints.add(time + Math.round(beatCycleTime));
+
+        // 尝试找到最合适的测量值
+        renderBeat.measure = findBestMeasure(keyPoints, time, beatCycleTime);
+
+        // 如果没有找到合适的测量值，仅使用键头重新计算
+        if (renderBeat.measure == -1) {
+            keyPoints = RenderBeat.keyPoint(notes, false);
+            renderBeat.measure = findBestMeasure(keyPoints, time, beatCycleTime);
         }
 
-
+        // 如果仍未找到合适的测量值，使用全局测量值
+        renderBeat.measure = (renderBeat.measure == -1) ? globalMeasure : Math.max(renderBeat.measure, 1);
     }
+
+    /**
+     * 尝试找到最佳测量值。
+     *
+     * @param keyPoints 当前节拍的关键点列表
+     * @param time 当前节拍的时间戳
+     * @param beatCycleTime 一拍的时间周期
+     * @return 最佳测量值，如果没有找到则返回 -1
+     */
+    private int findBestMeasure(ArrayList<Long> keyPoints, long time, double beatCycleTime) {
+        // 尝试不同的测量值，范围从 1 到 48
+        for (int measure = 1; measure < 49; measure++) {
+            boolean isMeasureValid = true;
+
+            // 检查每个关键点是否符合当前测量值
+            for (long note : keyPoints) {
+                if ((note - time + 2) % (beatCycleTime / measure) > 4) {
+                    isMeasureValid = false;
+                    break;
+                }
+            }
+
+            // 如果找到一个有效的测量值，返回该值
+            if (isMeasureValid) {
+                return measure;
+            }
+        }
+
+        // 如果没有找到合适的测量值，返回 -1
+        return -1;
+    }
+
+
 
 
     @Override

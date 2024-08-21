@@ -21,14 +21,17 @@ public class AudioSonicChannel {
     protected long lastTime;//记录播放时间
     protected long pauseTime;//记录暂停时间
     protected long lastTimeStamp;//记录播放时间戳
+    protected long syncTime;
     private ByteArrayInputStream inputStream;//音频流
     private AudioFormat audioFormat;//当前的音频格式
     private Sonic sonic;//处理音频效果
     private int channelBufSize;//缓冲区大小
     private byte inBuffer[];//输入缓冲区
     private byte outStagingBuffer[];//输出暂存缓冲区
-    private long frameLength;//帧总数
     //private float actualShifting;//实际变速
+    private long frameLength;//帧总数
+    private long t = 0;
+
 
     public AudioSonicChannel(AudioInputStream audioData) throws IOException {
         inputStream = new ByteArrayInputStream(audioData.readAllBytes());
@@ -48,7 +51,6 @@ public class AudioSonicChannel {
         pauseTime = 0;
         lastTime = 0;
     }
-
 
     public long getAudioLength() {
         return audioLength;
@@ -94,6 +96,15 @@ public class AudioSonicChannel {
         int numRead;
 
         //System.out.println(lastTime);
+
+
+        //同步时间 上缓冲区全用完
+
+        long remainingFrames = frameLength - (inputStream.available()) / audioFormat.getFrameSize();
+        syncTime = (remainingFrames / (long) (audioFormat.getSampleRate() / 1000));
+        //System.out.println("同步->: " + timeInSeconds);
+
+
         numRead = inputStream.read(inBuffer);
         lastTimeStamp = System.currentTimeMillis();
         lastTime = getTime_();
@@ -153,7 +164,12 @@ public class AudioSonicChannel {
     public long getTime() {
         if (playState.equals(PlayState.PAUSE))
             return getTime_();
-        return (long) (lastTime + ((System.currentTimeMillis() - lastTimeStamp) * sonic.getRate() * sonic.getSpeed()));
+
+        //if (syncTime - t > 3)
+        System.out.println(syncTime - t + "  " + syncTime);
+        t = syncTime;
+
+        return (long) (syncTime);//+ ((System.currentTimeMillis() - lastTimeStamp) * sonic.getRate() * sonic.getSpeed())
     }
 
     /**

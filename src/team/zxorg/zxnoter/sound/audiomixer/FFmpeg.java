@@ -14,16 +14,16 @@ import org.bytedeco.javacpp.BytePointer;
 import org.bytedeco.javacpp.PointerPointer;
 import team.zxorg.zxnoter.Main;
 
-import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import java.io.*;
+import java.nio.ByteBuffer;
 import java.nio.file.Path;
 import java.util.HashMap;
 
 public class FFmpeg {
 
 
-    public static AudioInputStream read(Path file, int sampleRate) {
+    public static float[] read(Path file, int sampleRate) {
         AVFormatContext formatContext = null;
         AVCodecContext codecContext = null;
         SwrContext swrContext = null;
@@ -62,7 +62,7 @@ public class FFmpeg {
 
             swrContext = swresample.swr_alloc_set_opts(null,
                     avutil.av_get_default_channel_layout(2),  // 目标音频通道布局
-                    avutil.AV_SAMPLE_FMT_S16,  // 目标音频样本格式
+                    avutil.AV_SAMPLE_FMT_FLT,  // 目标音频样本格式
                     sampleRate,  // 目标音频采样率
                     codecContext.ch_layout().nb_channels(),  // 输入音频通道布局
                     codecContext.sample_fmt(),  // 输入音频样本格式
@@ -89,11 +89,11 @@ public class FFmpeg {
                     if (avcodec.avcodec_send_packet(codecContext, avPacket) == 0) {
                         while (avcodec.avcodec_receive_frame(codecContext, decodedFrame) == 0) {
                             int convertedDataSize = swresample.swr_get_out_samples(swrContext, decodedFrame.nb_samples());
-                            BytePointer convertedData = new BytePointer(avutil.av_malloc((long) convertedDataSize * avutil.av_get_bytes_per_sample(avutil.AV_SAMPLE_FMT_S16) * 2));
+                            BytePointer convertedData = new BytePointer(avutil.av_malloc((long) convertedDataSize * avutil.av_get_bytes_per_sample(avutil.AV_SAMPLE_FMT_FLT) * 2));
                             int outSamples = swresample.swr_convert(swrContext, convertedData, convertedDataSize, decodedFrame.data(0), decodedFrame.nb_samples());
 
                             if (outSamples > 0) {
-                                int bufferSize = outSamples * 2 * avutil.av_get_bytes_per_sample(avutil.AV_SAMPLE_FMT_S16);
+                                int bufferSize = outSamples * 2 * avutil.av_get_bytes_per_sample(avutil.AV_SAMPLE_FMT_FLT);
                                 byte[] buf = new byte[bufferSize];
                                 convertedData.get(buf);
                                 byteArrayOutputStream.write(buf);
@@ -105,9 +105,11 @@ public class FFmpeg {
                 }
                 avcodec.av_packet_unref(avPacket);
             }
+            ByteBuffer data = ByteBuffer.wrap(byteArrayOutputStream.toByteArray());
 
-            byte[] audioBytes = byteArrayOutputStream.toByteArray();
-            return new AudioInputStream(new ByteArrayInputStream(audioBytes), new AudioFormat(sampleRate, 16, 2, true, false), audioBytes.length / 4);
+            //byte[] audioBytes = byteArrayOutputStream.toByteArray();
+//            return new AudioInputStream(new ByteArrayInputStream(audioBytes), new AudioFormat(sampleRate, 16, 2, true, false), audioBytes.length / 4);
+            return data.asFloatBuffer().array();
         } catch (Exception e) {
             throw new RuntimeException("音频处理过程中出现错误: " + e.getMessage(), e);
         } finally {

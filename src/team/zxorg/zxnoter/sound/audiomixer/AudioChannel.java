@@ -10,10 +10,11 @@ import java.nio.ShortBuffer;
 /**
  * 音频句柄
  */
-public class AudioChannel extends AudioSonicChannel{
-    public AudioChannel(AudioInputStream audioData) throws IOException {
-        super(audioData);
+public class AudioChannel extends BetterSonicChannel{
+    public AudioChannel(float[] audioSamples, int sampleRate) throws IOException {
+        super(audioSamples, sampleRate);
     }
+
    /* private final long audioLength;//音频时长 ms
     protected EventListener eventListener;//事件监听器
     protected EndBehavior endBehavior;//结束行为

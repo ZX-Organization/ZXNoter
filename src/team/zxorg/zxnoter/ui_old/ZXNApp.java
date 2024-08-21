@@ -151,6 +151,11 @@ public class ZXNApp extends Application {
                     workspaceTabPane.getSelectionModel().select(tab1);
                     rootPane.setOnKeyPressed(editor.getOnKeyPressed());
 
+                    /*new Thread(() -> {
+                        while (true) {
+                            editor.render();
+                        }
+                    }).start();*/
 
                     //画布更新线程常驻
                     AnimationTimer animationTimer = new AnimationTimer() {

@@ -6,11 +6,11 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 
 public class AudioMixer {
-    private final ArrayList<AudioInputStream> audioDataList = new ArrayList<>();//音频数据表
+    private final ArrayList<float[]> audioDataList = new ArrayList<>();//音频数据表
     private final ArrayList<AudioChannel> audioChannelList = new ArrayList<>();//音频通道表
 
     private final SourceDataLine line;//播放数据总线
-    float sampleRate;
+    int sampleRate;
 
     /**
      * 音频混音器对象
@@ -18,19 +18,21 @@ public class AudioMixer {
      * @param sampleRate   码率
      * @param mixerBufSize 音频缓冲区大小 必须是2的倍数
      */
-    public AudioMixer(float sampleRate, int mixerBufSize) throws LineUnavailableException {
+    public AudioMixer(int sampleRate, int mixerBufSize) throws LineUnavailableException {
         this.sampleRate = sampleRate;
         AudioFormat audioFormat = new AudioFormat(sampleRate, 16, 2, true, false);
         line = AudioSystem.getSourceDataLine(audioFormat);
         //缓冲区大小
         line.open(audioFormat, mixerBufSize * 4);
         line.start();
+        float[] channelBufL = new float[mixerBufSize];
+        float[] channelBufR = new float[mixerBufSize];
+        float[] mixerPCML = new float[mixerBufSize];//混音采样
+        float[] mixerPCMR = new float[mixerBufSize];//混音采样
+
         Thread mixerPlayThread = new Thread(() -> {
             try {
                 while (true) {
-                    short[] mixerPCM = new short[mixerBufSize];//混音采样
-
-
                     synchronized (this) {
 
                         for (int i = 0; i < audioChannelList.size(); i++) {
@@ -63,11 +65,10 @@ public class AudioMixer {
                                     audioChannel.eventListener.timeEvent(audioChannel.pauseTime);//时间事件
                                 }
 
-
-                                byte[] channelBuf = new byte[mixerBufSize * 2];
-                                audioChannel.read(channelBuf, 0, mixerBufSize * 2);
+                                audioChannel.read(channelBuf);
                                 for (int j = 0; j < mixerBufSize; j++) {
-                                    mixerPCM[j] += BytesUtils.bytes2short(new byte[]{channelBuf[j * 2], channelBuf[j * 2 + 1]});//混音
+                                    mixerPCM[j] += channelBuf[j];//混音
+                                    //mixerPCM[j] += BytesUtils.bytes2short(new byte[]{channelBuf[j * 2], channelBuf[j * 2 + 1]});//混音
                                 }
                             }
                         }
@@ -89,6 +90,11 @@ public class AudioMixer {
 
     }
 
+    private static short floatToShort(float sample) {
+        sample = Math.max(-1.0f, Math.min(1.0f, sample));
+        return (short) (sample * 32767);
+    }
+
     /**
      * 采样率转换
      *
@@ -105,34 +111,37 @@ public class AudioMixer {
         return AudioSystem.getAudioInputStream(newFormat, audioStream);
     }
 
-    private void writeToLine(short[] buf) {
-        byte[] pcmBuf = new byte[buf.length * 2];
+    private void writeToLine(float[] buf) {
+        byte[] pcmBuf = new byte[buf.length * 2]; // 每个 float 对应两个字节
+
         for (int i = 0; i < buf.length; i++) {
-            System.arraycopy(BytesUtils.short2bytesA(buf[i]), 0, pcmBuf, i * 2, 2);
+            short shortSample = floatToShort(buf[i]);
+            // 将 short 值转换为两个字节，并存储在 pcmBuf 中
+            pcmBuf[i * 2] = (byte) (shortSample & 0xFF); // 低位字节
+            pcmBuf[i * 2 + 1] = (byte) ((shortSample >> 8) & 0xFF); // 高位字节
         }
+
+        // 将字节数组写入音频输出
         line.write(pcmBuf, 0, pcmBuf.length);
     }
-
 
     /**
      * 打开音频
      *
-     * @param audioFile 音频文件 wav
+     * @param audioFile 音频文件
      * @return 被打开的音频句柄 audioHandle
      */
-    public int addAudio(Path audioFile) throws IOException, UnsupportedAudioFileException {
-        if (audioFile.getFileName().toString().toLowerCase().endsWith(".wav"))
-            return addAudio(sampleRateConvert(AudioSystem.getAudioInputStream(audioFile.toFile()), sampleRate));
+    public int addAudio(Path audioFile) {
         return addAudio(FFmpeg.read(audioFile, (int) sampleRate));
     }
 
     /**
      * 打开音频
      *
-     * @param audioData 音频数据 wav
+     * @param audioData 音频数据
      * @return 被打开的音频句柄 audioHandle
      */
-    public int addAudio(AudioInputStream audioData) throws IOException {
+    public int addAudio(float[] audioData) {
         if (!audioDataList.contains(audioData))
             audioDataList.add(audioData);
         return audioDataList.indexOf(audioData);
@@ -155,14 +164,10 @@ public class AudioMixer {
      */
     public AudioChannel createChannel(int audioHandle) throws UnsupportedAudioFileException, IOException {
         synchronized (this) {
-            AudioInputStream audioInputStream = audioDataList.get(audioHandle);
-            audioInputStream.mark(0);
-            AudioChannel newChannel = new AudioChannel(audioInputStream);
-            audioInputStream.reset();
+            AudioChannel newChannel = new AudioChannel(audioDataList.get(audioHandle), sampleRate);
             audioChannelList.add(newChannel);
             return newChannel;
         }
-
     }
 
     /**
