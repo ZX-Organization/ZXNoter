@@ -1,62 +1,64 @@
 package team.zxorg.mapeditcore.map;
 
-import team.zxorg.mapeditcore.note.Note;
-import team.zxorg.mapeditcore.timing.Timing;
+import team.zxorg.mapeditcore.map.mapdata.IBaseData;
+import team.zxorg.mapeditcore.map.mapdata.ZXMapData;
+import team.zxorg.mapeditcore.mapElement.IMapElement;
+import team.zxorg.mapeditcore.mapElement.note.MixNote;
+import team.zxorg.mapeditcore.mapElement.note.Note;
+import team.zxorg.mapeditcore.mapElement.timing.Timing;
 
 import java.util.ArrayList;
 
 public class ZXMap {
     /**
-     * 全部物件
+     * 元数据
      */
-    public final ArrayList<Note> notes;
+    public IBaseData metaData;
     /**
      * 全部timing点
      */
-    public final ArrayList<Timing> timings;
+    public final ArrayList<IMapElement> timings;
     /**
-     * 元数据
+     * 轨道（如果有的话）
      */
-    public MapMetaData metaData;
+    public int orbitCount;
+    /**
+     * 参考基准bpm（计算变速下落速度）
+     */
+    public double preferenceBpm;
+    /**
+     * 全部物件
+     */
+    public final ArrayList<IMapElement> notes;
     public ZXMap(){
         notes = new ArrayList<>();
         timings = new ArrayList<>();
+        metaData = new ZXMapData();
     }
-    /**
-     * 有序地插入物件
-     * @param note 物件
-     */
-    public void insertNote(Note note) {
-        int noteTime = note.getTime();
-        if (notes.size() > 0) {
-            if (notes.size() > 1) {
-                //表中有两个及以上物件
-                //二分搜索时间
-                notes.add(MapUtil.binarySearchNoteTime(notes, noteTime), note);
-            } else {
-                //表中只有一个物件
-                if (notes.get(0).getTime() <= noteTime)
-                    notes.add(note);
-            }
-        }else
-            notes.add(note);
+
+    @Override
+    public String toString() {
+        return "ZXMap{" +
+                "metaData=" + metaData +
+                ", timings=" + timings +
+                ", notes=" + notes +
+                '}';
     }
-    /**
-     * 有序地插入timing
-     * @param timing 要插入点timing
-     */
-    public void insertTiming(Timing timing){
-        int timingTime = timing.getTime();
-        if (timings.size() > 0) {
-            if (timings.size() > 1) {
-                //表中有两个及以上timing
-                timings.add(MapUtil.binarySearchTimingTime(timings, timingTime), timing);
-            } else {
-                //表中只有一个timing
-                if (timings.get(0).getTime() <= timingTime)
-                    timings.add(timing);
+
+    public ZXMap convert() {
+        ZXMap map = new ZXMap();
+        map.orbitCount = orbitCount;
+        map.preferenceBpm = preferenceBpm;
+        map.timings.addAll(timings);
+        map.metaData = metaData;
+        for (IMapElement note:notes){
+            if (note instanceof MixNote mixNote){
+                map.notes.addAll(mixNote.getChildNotes());
+            }else {
+                map.notes.add(note);
             }
-        }else
-            timings.add(timing);
+        }
+        map.notes.sort(IMapElement::compareTo);
+        return map;
     }
 }

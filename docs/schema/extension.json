@@ -1,0 +1,91 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "扩展的唯一标识符。"
+    },
+    "version": {
+      "type": "string",
+      "description": "扩展的版本号。"
+    },
+    "name": {
+      "type": "string",
+      "description": "扩展名。"
+    },
+    "description": {
+      "type": "string",
+      "description": "扩展功能的简要描述。"
+    },
+    "author": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "扩展的作者或贡献者列表。"
+    },
+    "contact": {
+      "type": "object",
+      "properties": {
+        "homepage": {
+          "type": "string",
+          "format": "uri",
+          "description": "扩展的主页 URL。"
+        },
+        "sources": {
+          "type": "string",
+          "format": "uri",
+          "description": "扩展源代码存储库的 URL。"
+        }
+      },
+      "required": ["homepage", "sources"],
+      "description": "扩展的联系信息。"
+    },
+    "entrypoints": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "扩展入口点的列表。"
+    },
+    "depends": {
+      "type": "object",
+      "properties": {
+        "extension-api": {
+          "type": "string",
+          "description": "所需扩展 API 的版本范围。"
+        },
+        "extensions": {
+          "type": "object",
+          "properties": {
+
+          },
+          "required": ["fxComponentLibrary"],
+          "description": "List of required extensions and their version ranges."
+        }
+      },
+      "required": ["extensionApi", "extensions"],
+      "description": "Dependency information for the extension."
+    },
+    "icon": {
+      "type": "string",
+      "description": "Path to the icon file representing the extension."
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of tags or categories describing the extension."
+    },
+    "languages": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of language files used by the extension."
+    }
+  },
+  "required": ["id", "version", "name", "description", "author", "contact", "entrypoints", "depends", "icon", "tags", "languages"]
+}

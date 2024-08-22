@@ -1,0 +1,31 @@
+{
+  id: "musicMapEdit",
+  version: "0.0.0-RC",
+  name: "音游谱面编辑器",
+  description: "音游谱面编辑器 - 更加强大的编辑器",
+  author: [
+    "zedo"
+  ],
+  contact: {
+    "homepage": "https://github.com/ZX-Organization",
+    "sources": "https://github.com/ZX-Organization/ZXNoter"
+  },
+  entrypoints: [
+    "team.zxorg.mapedit.Main"
+  ],
+  depends: {
+    extensionApi: ">=0.0.0",
+    extensions: {
+      "fxComponentLibrary": ">=0.0.0",
+      "mapEditCore": ">=0.0.0",
+      "zxnoterUI": ">=0.0.0"
+    }
+  },
+  icon: "",
+  tags: [
+    "example"
+  ],
+  languages: [
+    "assets/musicMapEdit/languages/zh-cn.json5"
+  ]
+}

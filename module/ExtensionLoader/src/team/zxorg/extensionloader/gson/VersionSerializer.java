@@ -19,6 +19,4 @@ public class VersionSerializer implements JsonSerializer<Version>, JsonDeseriali
     public JsonElement serialize(Version src, Type typeOfSrc, JsonSerializationContext context) {
         return new JsonPrimitive(src.toString());
     }
-
-
 }

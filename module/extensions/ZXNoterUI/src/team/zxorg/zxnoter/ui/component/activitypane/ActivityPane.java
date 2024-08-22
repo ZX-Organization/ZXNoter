@@ -35,34 +35,16 @@ import static team.zxorg.zxnoter.ui.component.activitypane.ActivityItemSkin.ACTI
 public class ActivityPane extends HBox {
 
     public static final String LANG = "zxnoterUiFrame.projectView.activityBar.";
-    protected ActivityItemSkin dragedActivityItemSkin;
     /**
      * 当前所有被注册的侧边栏类
      */
     protected static final HashMap<String, Class<? extends ActivityPaneSkin>> activityPaneClassMap = new HashMap<>();
+    /**
+     * 活动栏的项的右键菜单
+     */
+    static final ContextMenu activityItemContextMenu = new ContextMenu();
     private static final HashMap<String, LangCheckMenuItem> activityItemMenuMap = new HashMap<>();
     private static final ActivityBarConfig config = ZXNoter.config.get(ActivityBarConfig.class);
-
-    public static void register(Class<? extends ActivityPaneSkin> activityPaneClass) {
-        ActivityPaneSkin activityPaneSkin;
-        try {
-            activityPaneSkin = activityPaneClass.getDeclaredConstructor().newInstance();
-        } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
-                 NoSuchMethodException e) {
-            Logger.warning("注册失败: " + activityPaneClass.getSimpleName());
-            return;
-        }
-
-        activityPaneClassMap.put(activityPaneSkin.getId(), activityPaneClass);
-        LangCheckMenuItem menuItem = MenuFactory.getCheckMenuItem(LANG + "item." + activityPaneSkin.getId());
-        menuItem.setId(activityPaneSkin.getId());
-        activityItemMenu.getItems().add(menuItem);
-        activityItemMenuMap.put(activityPaneSkin.getId(), menuItem);
-        menuItem.setSelected(config.containsItem(menuItem.getId()));
-        menuItem.setOnAction(activityItemMenuHandler);
-        config.save();
-    }
-
     private static final EventHandler<ActionEvent> activityItemMenuHandler = event -> {
         if (event.getSource() instanceof LangCheckMenuItem menuItem) {
             if (menuItem.isSelected()) {
@@ -73,6 +55,17 @@ public class ActivityPane extends HBox {
             config.save();
         }
     };
+    /**
+     * 控制所有活动项菜单
+     */
+    private static final LangMenu activityItemMenu = MenuFactory.getMenu(LANG + "menu.itemConfig");
+    private static final LangMenuItem hideBarMenuItem = MenuFactory.getMenuItem(LANG + "menu.hideBar");
+    /**
+     * 活动栏的右键菜单
+     */
+    static final ContextMenu activityBarContextMenu = new ContextMenu(activityItemMenu, hideBarMenuItem);
+    private static final LangMenuItem moveToLeftMenuItem = MenuFactory.getMenuItem(LANG + "menu.moveToLeft");
+    private static final LangMenuItem moveToRightMenuItem = MenuFactory.getMenuItem(LANG + "menu.moveToRight");
 
     static {
         //刷新活动项菜单
@@ -86,11 +79,25 @@ public class ActivityPane extends HBox {
         });
     }
 
+    static {
+        moveToLeftMenuItem.setOnAction(event -> {
+            config.mainBarIsLeft = !config.mainBarIsLeft;
+            config.save();
+        });
+        moveToRightMenuItem.setOnAction(moveToLeftMenuItem.getOnAction());
+        hideBarMenuItem.setOnAction(event -> {
+            if (hideBarMenuItem.getUserData() instanceof MainActivityBar) {
+                config.hideMainBar = true;
+            } else {
+                config.hideSecondBar = true;
+            }
+            config.save();
+        });
+    }
 
     protected final HashMap<String, ActivityPaneSkin> activityPaneMap = new HashMap<>();
-
-
     final ProjectView projectView;
+    protected ActivityItemSkin dragedActivityItemSkin;
     BorderPane borderPane = new BorderPane() {{
         getStyleClass().add("border-pane");
     }};
@@ -98,12 +105,10 @@ public class ActivityPane extends HBox {
      * 主活动栏
      */
     MainActivityBar mainActivityBar = new MainActivityBar(this);
-
     /**
      * 次活动栏
      */
     SecondActivityBar secondActivityBar = new SecondActivityBar(this);
-
     ActivityBarPaneSkin leftActivityPane;
     ActivityBarPaneSkin rightActivityPane;
     ActivityBarPaneSkin bottomActivityPane;
@@ -135,7 +140,6 @@ public class ActivityPane extends HBox {
             }
             activityPaneSkin.bind(projectView, this);
             activityPaneMap.put(activityPaneSkin.getId(), activityPaneSkin);
-            System.out.println("实例化 " + activityPaneSkin);
         }
         Platform.runLater(this::refresh);
         config.addEventListener(new ConfigEventListener() {
@@ -145,6 +149,26 @@ public class ActivityPane extends HBox {
             }
         });
 
+    }
+
+    public static void register(Class<? extends ActivityPaneSkin> activityPaneClass) {
+        ActivityPaneSkin activityPaneSkin;
+        try {
+            activityPaneSkin = activityPaneClass.getDeclaredConstructor().newInstance();
+        } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
+                 NoSuchMethodException e) {
+            Logger.warning("注册失败: " + activityPaneClass.getSimpleName() + " " + e.getMessage());
+            return;
+        }
+
+        activityPaneClassMap.put(activityPaneSkin.getId(), activityPaneClass);
+        LangCheckMenuItem menuItem = MenuFactory.getCheckMenuItem(LANG + "item." + activityPaneSkin.getId());
+        menuItem.setId(activityPaneSkin.getId());
+        activityItemMenu.getItems().add(menuItem);
+        activityItemMenuMap.put(activityPaneSkin.getId(), menuItem);
+        menuItem.setSelected(config.containsItem(menuItem.getId()));
+        menuItem.setOnAction(activityItemMenuHandler);
+        config.save();
     }
 
     public void refresh() {
@@ -158,43 +182,6 @@ public class ActivityPane extends HBox {
         secondActivityBar.refresh();
 
     }
-
-    /**
-     * 控制所有活动项菜单
-     */
-    private static final LangMenu activityItemMenu = MenuFactory.getMenu(LANG + "menu.itemConfig");
-
-
-    private static final LangMenuItem hideBarMenuItem = MenuFactory.getMenuItem(LANG + "menu.hideBar");
-    private static final LangMenuItem moveToLeftMenuItem = MenuFactory.getMenuItem(LANG + "menu.moveToLeft");
-    private static final LangMenuItem moveToRightMenuItem = MenuFactory.getMenuItem(LANG + "menu.moveToRight");
-
-    static {
-        moveToLeftMenuItem.setOnAction(event -> {
-            config.mainBarIsLeft = !config.mainBarIsLeft;
-            config.save();
-        });
-        moveToRightMenuItem.setOnAction(moveToLeftMenuItem.getOnAction());
-        hideBarMenuItem.setOnAction(event -> {
-            if (hideBarMenuItem.getUserData() instanceof MainActivityBar) {
-                config.hideMainBar = true;
-            } else {
-                config.hideSecondBar = true;
-            }
-            config.save();
-        });
-    }
-
-
-    /**
-     * 活动栏的右键菜单
-     */
-    static final ContextMenu activityBarContextMenu = new ContextMenu(activityItemMenu, hideBarMenuItem);
-    /**
-     * 活动栏的项的右键菜单
-     */
-    static final ContextMenu activityItemContextMenu = new ContextMenu();
-
 
     private static abstract class ActivityBar extends VBox {
         boolean isLeft;
@@ -422,15 +409,8 @@ public class ActivityPane extends HBox {
         ActivityBarPaneSkin activityBarPaneSkin;
 
         List<ActivityItemSkin> activityItemSkins = new ArrayList<>();
-
-        void setShowActivityPane(ActivityBarPaneSkin activityBarPaneSkin) {
-            this.activityBarPaneSkin = activityBarPaneSkin;
-        }
-
         boolean isTop;
         BooleanProperty style = new SimpleBooleanProperty(false);
-
-
         public ShowActivityItemPane(ActivityBar activityBar, boolean isTop) {
             this.activityBar = activityBar;
             activityPane = activityBar.parent;
@@ -501,6 +481,10 @@ public class ActivityPane extends HBox {
                 event.setDropCompleted(true);
                 event.consume();
             });
+        }
+
+        void setShowActivityPane(ActivityBarPaneSkin activityBarPaneSkin) {
+            this.activityBarPaneSkin = activityBarPaneSkin;
         }
     }
 }

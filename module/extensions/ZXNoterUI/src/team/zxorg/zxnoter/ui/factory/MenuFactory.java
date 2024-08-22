@@ -2,27 +2,30 @@ package team.zxorg.zxnoter.ui.factory;
 
 import javafx.beans.property.Property;
 import javafx.scene.control.MenuItem;
-import team.zxorg.extensionloader.core.Language;
 import team.zxorg.fxcl.component.Icon;
 import team.zxorg.fxcl.component.menu.LangCheckMenuItem;
 import team.zxorg.fxcl.component.menu.LangMenu;
 import team.zxorg.fxcl.component.menu.LangMenuItem;
 
+import static team.zxorg.zxnoter.ui.factory.FactoryUtils.getIcon;
+import static team.zxorg.zxnoter.ui.factory.FactoryUtils.getKey;
+
 public class MenuFactory {
+    private static final double DEFAULT_ICON_SIZE = 16;
+
     public static LangMenu getMenu(String key, Property<?>... args) {
-        String langKey = (Language.getOrNull(key) == null ? key + ".name" : key);
-        LangMenu langMenu = new LangMenu(langKey, args);
-        String iconKey = Language.getOrNull(key + ".icon");
-        if (iconKey != null)
-            langMenu.setGraphic(new Icon(iconKey));
+        LangMenu langMenu = new LangMenu(getKey(key), args);
+        Icon icon = getIcon(key, DEFAULT_ICON_SIZE);
+        if (icon != null)
+            langMenu.setGraphic(icon);
         return langMenu;
     }
+
     public static LangMenu getMenu(String key) {
-        String langKey = (Language.getOrNull(key) == null ? key + ".name" : key);
-        LangMenu langMenu = new LangMenu(langKey);
-        String iconKey = Language.getOrNull(key + ".icon");
-        if (iconKey != null)
-            langMenu.setGraphic(new Icon(iconKey));
+        LangMenu langMenu = new LangMenu(getKey(key));
+        Icon icon = getIcon(key, DEFAULT_ICON_SIZE);
+        if (icon != null)
+            langMenu.setGraphic(icon);
         return langMenu;
     }
 
@@ -34,21 +37,19 @@ public class MenuFactory {
 
 
     public static LangMenuItem getMenuItem(String key, Property<?>... args) {
-        String langKey = (Language.getOrNull(key) == null ? key + ".name" : key);
-        LangMenuItem langMenu = new LangMenuItem(langKey, args);
-        String iconKey = Language.getOrNull(key + ".icon");
-        if (iconKey != null)
-            langMenu.setGraphic(new Icon(iconKey));
+        LangMenuItem langMenu = new LangMenuItem(getKey(key), args);
+        Icon icon = getIcon(key, DEFAULT_ICON_SIZE);
+        if (icon != null)
+            langMenu.setGraphic(icon);
         return langMenu;
     }
 
 
     public static LangCheckMenuItem getCheckMenuItem(String key, Property<?>... args) {
-        String langKey = (Language.getOrNull(key) == null ? key + ".name" : key);
-        LangCheckMenuItem langMenu = new LangCheckMenuItem(langKey, args);
-        String iconKey = Language.getOrNull(key + ".icon");
-        if (iconKey != null)
-            langMenu.setGraphic(new Icon(iconKey));
+        LangCheckMenuItem langMenu = new LangCheckMenuItem(getKey(key), args);
+        Icon icon = getIcon(key, DEFAULT_ICON_SIZE);
+        if (icon != null)
+            langMenu.setGraphic(icon);
         return langMenu;
     }
 

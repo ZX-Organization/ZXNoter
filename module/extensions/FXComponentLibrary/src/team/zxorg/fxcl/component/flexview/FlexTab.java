@@ -11,10 +11,9 @@ import java.nio.file.Path;
  */
 public abstract class FlexTab extends Tab {
 
-    protected final Path path;
 
-    public FlexTab(Path path) {
-        this.path = path;
+
+    public FlexTab() {
 
         //监听所属选项卡窗格 重新注册事件
         /*tabPaneProperty().addListener((observable, oldValue, newValue) -> {
