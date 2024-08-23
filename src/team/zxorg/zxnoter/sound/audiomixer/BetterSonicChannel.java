@@ -13,11 +13,10 @@ public class BetterSonicChannel {
     protected AudioChannel.PlayState lastPlayState;//上一次播放状态
     protected AudioChannel.EndBehavior endBehavior;//结束行为
     protected AudioSonicChannel.EventListener eventListener;//事件监听器
-
-
     protected long lastTime;//记录播放时间
     protected long pauseTime;//记录暂停时间
     protected long lastTimeStamp;//记录播放时间戳
+    private int samplePosition;
 
 
     public BetterSonicChannel(float[] audioSamples, int sampleRate) {
@@ -37,7 +36,7 @@ public class BetterSonicChannel {
 
         sonic = new Sonic(sampleRate, 2);
         sonic.setQuality(1);
-        frameLength = audioSamples.length / 2;
+        frameLength = audioLSamples.length;
 
 
         /*channelBufSize = 512;
@@ -55,9 +54,9 @@ public class BetterSonicChannel {
 
     //获取16位
     protected int read(float[] bufL, float[] bufR) {
-
-        System.arraycopy(audioLSamples, 0, bufL, 0, bufL.length);
-        System.arraycopy(audioRSamples, 0, bufR, 0, bufR.length);
+        samplePosition += bufL.length;
+        System.arraycopy(audioLSamples, samplePosition, bufL, 0, bufL.length);
+        System.arraycopy(audioRSamples, samplePosition, bufR, 0, bufR.length);
         return 0;
     }
 

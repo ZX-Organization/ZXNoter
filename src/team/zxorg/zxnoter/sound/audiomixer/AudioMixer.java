@@ -65,9 +65,9 @@ public class AudioMixer {
                                     audioChannel.eventListener.timeEvent(audioChannel.pauseTime);//时间事件
                                 }
 
-                                audioChannel.read(channelBuf);
+                                audioChannel.read(channelBufL, channelBufR);
                                 for (int j = 0; j < mixerBufSize; j++) {
-                                    mixerPCM[j] += channelBuf[j];//混音
+                                    mixerPCML[j] += channelBufL[j];//混音
                                     //mixerPCM[j] += BytesUtils.bytes2short(new byte[]{channelBuf[j * 2], channelBuf[j * 2 + 1]});//混音
                                 }
                             }
@@ -76,7 +76,7 @@ public class AudioMixer {
 
                     }
 
-                    writeToLine(mixerPCM);
+                   // writeToLine(mixerPCM);
 
 
                 }
