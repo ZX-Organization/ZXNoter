@@ -6,6 +6,8 @@
       <element id="module-output" name="ZXNoter" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/google/code/gson/gson/2.11.0/gson-2.11.0.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/google/errorprone/error_prone_annotations/2.27.0/error_prone_annotations-2.27.0.jar" path-in-jar="/" />
+      <element id="module-output" name="ExtensionApi" />
+      <element id="library" level="project" name="jetbrains.annotations" />
     </root>
   </artifact>
 </component>
