@@ -6,6 +6,7 @@ public enum ResolutionInfo {
     IPAD3(1.431654676258993, "ipad 11英寸", DeviceType.IOS),
     IPAD4(1.6, "ipad mini6", DeviceType.IOS),
     PHONE(1.706666666666667, "手机", DeviceType.ANDROID),
+    PHONE_LONG(2.22222222222222, "超长手机", DeviceType.ANDROID),
     PC(1.777777777777778, "电脑", DeviceType.WINDOWS);
     final double aspectRatio;
     final String name;
@@ -31,6 +32,6 @@ public enum ResolutionInfo {
 
     @Override
     public String toString() {
-        return  name + " " + String.format("%.4f", aspectRatio);
+        return name + " " + String.format("%.4f", aspectRatio);
     }
 }
