@@ -31,7 +31,7 @@ public class PlayTest {
         sourceDataLine.start();
 
 
-        String filename = "D:\\Projects\\ZXNoter\\docs\\reference\\Corruption\\Corruption.mp3";
+        String filename = "E:\\zxn\\示例谱\\No title\\No title.mp3";
 
         AVFormatContext formatContext = new AVFormatContext(null);
 

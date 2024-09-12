@@ -1,13 +1,7 @@
-import team.zxorg.audiosystem.AudioBuffer;
-
-import java.nio.file.Path;
-
 public class AudioBufferTest {
     public static void main(String[] args) {
-        AudioBuffer audioBuffer = new AudioBuffer(Path.of("docs/reference/jitaimei/0/audio.ogg"), 1, 44100);
-        System.out.println(audioBuffer.getMainBuffer().remaining() / 44100f);
-        /*while (audioBuffer.getBuffer().hasRemaining()) {
-            System.out.printf("%.4f%n", audioBuffer.getBuffer().get());
-        }*/
+       /* SampleBuffer sampleBuffer = SampleBuffer.readFile(Path.of("E:\\zxn\\示例谱\\No title\\No title.mp3"), 1, 44100);
+        System.out.println(sampleBuffer.getSamples().remaining() / 44100f);*/
+
     }
 }
