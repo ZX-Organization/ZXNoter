@@ -1,8 +1,0 @@
-{
-  configuration: {
-    languageCode: "zh-CN"
-  },
-  message: {
-    hello: "扩展模板消息 你好世界!"
-  }
-}

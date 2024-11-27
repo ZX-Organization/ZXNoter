@@ -42,3 +42,8 @@ ZXNoter.jar
 
 .idea/workspace.xml
 .idea/misc.xml
+
+
+# gradle
+build
+.gradle
