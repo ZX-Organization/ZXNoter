@@ -43,7 +43,11 @@ ZXNoter.jar
 .idea/workspace.xml
 .idea/misc.xml
 
+.idea
 
 # gradle
 build
 .gradle
+
+
+runtime

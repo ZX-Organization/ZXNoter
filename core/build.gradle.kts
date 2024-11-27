@@ -1,8 +1,7 @@
 plugins {
-    kotlin("jvm")
 }
 
-group = "org.zxnoter"
+group = rootProject.group
 version = "1.0-SNAPSHOT"
 
 repositories {
@@ -10,10 +9,6 @@ repositories {
 }
 
 dependencies {
-    testImplementation(kotlin("test"))
     implementation(project(":api"))
-}
-
-tasks.test {
-    useJUnitPlatform()
+    implementation("com.google.code.gson:gson:2.11.0")
 }
