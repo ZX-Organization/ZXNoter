@@ -3,7 +3,10 @@ package org.zxnoter.core.treenode
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.descriptors.buildClassSerialDescriptor
 import kotlinx.serialization.encodeToString
+import kotlinx.serialization.encoding.Encoder
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.modules.SerializersModule
 import org.zxnoter.api.treenode.TreeNode
@@ -73,27 +76,15 @@ class TreeNode<T> : TreeNode<T> {
         TODO("Not yet implemented")
     }
 
-   /* override fun toString(): String {
-        val serializer = serializer<T>()
-        return Json.encodeToString(serializer, this)
+/*    override fun toString(): String {
+//        val serializer = serializer<T>()
+        return Json.encodeToString(PersonSerializer, this)
     }
 
-    object PersonSerializer : KSerializer<TreeNode> {
+    object PersonSerializer : KSerializer<TreeNode<T>> {
         override val descriptor: SerialDescriptor = SerialDescriptor("Person")
 
-        override fun serialize(encoder: Encoder, value: Person) {
-            val jsonObject = buildJsonObject {
-                put("name", value.name)
-                put("age", value.age)
-            }
-            encoder.encodeJsonElement(jsonObject)
-        }
-
-        override fun deserialize(decoder: Decoder): Person {
-            val jsonElement = decoder.decodeJsonElement()
-            val name = jsonElement.jsonObject["name"]!!.jsonPrimitive.content
-            val age = jsonElement.jsonObject["age"]!!.jsonPrimitive.int
-            return Person(name, age)
-        }
     }*/
 }
+
+
