@@ -5,7 +5,11 @@ group = rootProject.group
 version = "1.0-SNAPSHOT"
 
 dependencies {
-    implementation(project(":core"))
+    compileOnly(project(":api"))
+//    implementation("io.insert-koin:koin-core:3.1.2")
+    implementation("com.google.code.gson:gson:2.11.0")
+
+
 }
 
 tasks.shadowJar {

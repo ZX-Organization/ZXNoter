@@ -39,10 +39,7 @@ subprojects {
     }
 
     dependencies {
-        implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
 //        implementation("com.google.code.gson:gson:2.8.9")
-        implementation("org.slf4j:slf4j-api:2.0.0")
-//        implementation("com.squareup.okhttp3:okhttp:5.0.0-alpha.14")
 //        implementation("org.bytedeco:ffmpeg:6.1.1-1.5.10")
         testImplementation(kotlin("test"))
     }
@@ -57,10 +54,26 @@ task("buildApp") {
     description = "Build the app module"
     dependsOn(":app:shadowJar")
 }
+
+task("buildApi") {
+    group = "zxnoter"
+    description = "Build the api module"
+    dependsOn(":app:jar")
+}
+task("buildCore") {
+    group = "zxnoter"
+    description = "Build the core module"
+    dependsOn(":core:shadowJar")
+}
+task("buildExtensionExample") {
+    group = "zxnoter"
+    description = "Build the core module"
+    dependsOn(":extensions:extension-example:shadowJar")
+}
 task("buildAll") {
     group = "zxnoter"
     description = "Build all module"
-    dependsOn(":buildApp")
+    dependsOn(":buildApp", ":buildApi", ":buildCore", ":buildExtensionExample")
 }
 task("run") {
     group = "zxnoter"
@@ -73,7 +86,7 @@ task("run") {
         exec {
             commandLine(
                 "cmd", "/c", """
-                chcp 65001 && "${javaHome}/bin/java" -jar "$jarPath"
+                chcp 65001 && "${javaHome}/bin/java" -Xbootclasspath/a:"${Config.runtimeDir}/zxnoter-api.jar";"${Config.runtimeDir}/zxnoter-core.jar" -jar "$jarPath"
             """.trimIndent()
             )
         }
