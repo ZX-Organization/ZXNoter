@@ -1,6 +1,5 @@
 package org.zxnoter.app
 
-import com.google.gson.Gson
 import org.zxnoter.api.extension.Extension
 import org.zxnoter.api.treenode.ZXNoter
 import java.io.File
@@ -12,13 +11,13 @@ class Main {
         fun main(args: Array<String>) {
             println("Hello, ZXNoter!")
             val extensionLoader = JarClassLoader(File("runtime/extensions/example.jar"))
-            loadPluginClass(extensionLoader, "org.zxnoter.example.ExampleExtension").execute()
+//            loadPluginClass(extensionLoader, "org.zxnoter.example.ExampleExtension").execute()
 
 
             val treeNode = ZXNoter.getFactory().createTreeNode<String>();
             treeNode.addNode("aaa", "bb").addNode("gg","ggg")
-            treeNode.addNode("cc", "ddd")
-            println(Gson().toJson(treeNode))
+            treeNode.addNode("cc", "ddd").addNode("gg","ggg")
+            println(treeNode)
         }
     }
 }

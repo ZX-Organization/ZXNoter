@@ -12,8 +12,6 @@ object ZXNoter {
 }
 
 interface TreeNode<T> {
-
-
     /**
      * 获取当前节点的大小
      */

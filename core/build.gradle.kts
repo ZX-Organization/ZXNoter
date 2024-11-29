@@ -1,4 +1,5 @@
 plugins {
+    id("org.jetbrains.kotlin.plugin.serialization") version "1.9.23"
 }
 
 group = rootProject.group
