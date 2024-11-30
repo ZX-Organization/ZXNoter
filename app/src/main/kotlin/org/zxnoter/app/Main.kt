@@ -1,7 +1,7 @@
 package org.zxnoter.app
 
 import org.zxnoter.api.extension.Extension
-import org.zxnoter.api.treenode.ZXNoter
+import org.zxnoter.api.node.ZXNoter
 import java.io.File
 import java.net.URLClassLoader
 
@@ -11,12 +11,16 @@ class Main {
         fun main(args: Array<String>) {
             println("Hello, ZXNoter!")
             val extensionLoader = JarClassLoader(File("runtime/extensions/example.jar"))
-//            loadPluginClass(extensionLoader, "org.zxnoter.example.ExampleExtension").execute()
+            loadPluginClass(extensionLoader, "org.zxnoter.example.ExampleExtension").execute()
 
 
             val treeNode = ZXNoter.getFactory().createTreeNode<String>();
-            treeNode.addNode("aaa", "bb").addNode("gg","ggg")
-            treeNode.addNode("cc", "ddd").addNode("gg","ggg")
+            val n1 = treeNode.add("aaa", "bb")
+            val n2 = n1.add("gg", "ggg")
+            treeNode.add("cc", "ddd").add("gg", "ggg")
+            println(treeNode.depth())
+            println(n1.depth())
+            println(n2.depth())
             println(treeNode)
         }
     }

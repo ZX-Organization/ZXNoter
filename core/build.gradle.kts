@@ -1,5 +1,5 @@
 plugins {
-    id("org.jetbrains.kotlin.plugin.serialization") version "1.9.23"
+    id("org.jetbrains.kotlin.plugin.serialization") version "2.1.0"
 }
 
 group = rootProject.group
@@ -11,6 +11,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
     implementation("com.squareup.okhttp3:okhttp:5.0.0-alpha.14")
     implementation("org.slf4j:slf4j-api:2.0.0")
+//    implementation("com.google.code.gson:gson:2.11.0")
 }
 
 tasks.shadowJar {
