@@ -1,20 +1,31 @@
-package org.zxnoter.core.node
+package org.zxnoter.utils.node
 
 
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.Transient
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
-import okhttp3.internal.readOnly
-import org.zxnoter.api.node.NodePath
-import org.zxnoter.api.node.TreeNode
-import java.nio.file.Path
+class TreeNodeImpl<T>(value: T? = null) : TreeNode<T> {
+    override var value: T? = value
+        get() {
+            return field
+        }
+        set(name) {
+            field = name
+        }
 
-@Serializable
-class TreeNodeImpl<T>(
-    private var value: T? = null
-) : TreeNode<T> {
-    private var name = null as String?
+    override var name: String? = null
+        get() {
+            return field
+        }
+        set(name) {
+            field = name
+        }
+
+    override fun path(): NodePath {
+        TODO("Not yet implemented")
+    }
+
+    operator fun plus(other: TreeNodeImpl<T>): TreeNodeImpl<T> {
+        return TreeNodeImpl(this.value ?: this.value)
+    }
+
 
     private val children = mutableMapOf<String, TreeNodeImpl<T>>()
 
@@ -53,23 +64,7 @@ class TreeNodeImpl<T>(
 
     override fun root(): TreeNode<T> = root
     override fun children(): List<TreeNode<T>> = children.values.toList()
-    override fun value(): T? = value
 
-
-    override fun name(): String? = name
-
-    override fun path(): Path {
-        TODO("Not yet implemented")
-        /* val path = Path.of("")
-         var node = this.parent
-         var depth = 0
-         while (true) {
-             if (node == null) break
-             node = node.parent()
-             depth++
-         }
-         return depth*/
-    }
 
     override fun isLeaf(): Boolean {
         return children.isEmpty()
@@ -85,24 +80,13 @@ class TreeNodeImpl<T>(
         }
         return depth
     }
-
-    /*  fun serializable() = SerializableRequest(value, bodyType)
-        @Serializable(SerializableRequest.Serializer::class)
-        class SerializableRequest(val body: Any?, val bodyType: KType) {
-            class Serializer : KSerializer<SerializableRequest> {
-                // ... serialize by using bodyType to create a serializer
-            }
-        }*/
-
-    override fun toString(): String {
-        return Json.encodeToString(this)
-    }
 }
+
 
 class NodePathImpl(vararg path: String) : NodePath {
     private val nodePath = mutableListOf<String>()
 
-    override fun nodes(): List<String> = nodePath.readOnly()
+    override fun nodes(): List<String> = nodePath
 
     override fun parent(): NodePath {
         return NodePathImpl(nodePath[nodePath.size - 2])
@@ -123,7 +107,6 @@ class NodePathImpl(vararg path: String) : NodePath {
     override fun depth(): Int {
         TODO("Not yet implemented")
     }
-
 
 }
 
