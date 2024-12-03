@@ -1,6 +1,6 @@
 rootProject.name = "ZXNoter"
-include("core")
-include("api")
-include("app")
+include("zxnoter-core")
+include("zxnoter-core-api")
+include("zxnoter-app")
 include("extensions:extension-example")
-include("utils")
+include("zxnoter-core-utils")

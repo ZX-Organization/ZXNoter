@@ -6,7 +6,8 @@ version = "1.0-SNAPSHOT"
 
 
 dependencies {
-    compileOnly(project(":api"))
+    compileOnly(project(":zxnoter-core-api"))
+    compileOnly(project(":zxnoter-core-utils"))
     compileOnly("org.jetbrains.kotlin:kotlin-stdlib")
 }
 
