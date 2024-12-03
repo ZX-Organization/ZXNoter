@@ -39,4 +39,5 @@ interface NodePath {
      * @return 返回路径的深度，深度为路径中节点的数量。
      */
     fun depth(): Int
+
 }

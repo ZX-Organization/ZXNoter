@@ -59,6 +59,14 @@ interface TreeNode<T> {
 
     fun put(node: TreeNode<T>): TreeNode<T>
 
+    fun get(name: String): TreeNode<T>? {
+        return children.find { it.name == name }
+    }
+
+    fun get(index: Int): TreeNode<T>? {
+        return children[index]
+    }
+
     fun remove(name: String): TreeNode<T>
 
     fun remove(node: TreeNode<T>): TreeNode<T> {
@@ -113,6 +121,20 @@ interface TreeNode<T> {
         return sb
     }
 
+    fun getOrCreate(path: List<String>): TreeNode<T> {
+        var currentNode = this
+        for (i in path.indices) {
+            val child = currentNode.children.find { it.name == path[i] }
+            if (child != null) {
+                currentNode = child
+            } else {
+                val newNode = currentNode.create(path[i])
+                currentNode.put(newNode)
+                currentNode = newNode
+            }
+        }
+        return currentNode
+    }
 
 }
 

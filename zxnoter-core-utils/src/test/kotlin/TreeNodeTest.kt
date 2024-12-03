@@ -1,12 +1,16 @@
-import org.zxnoter.utils.node.TreeNodeImpl
+import org.zxnoter.utils.Node
+import java.nio.file.*
+import java.nio.file.attribute.BasicFileAttributes
 
 fun main() {
-    val treeNode = TreeNodeImpl<String>();
-    val n1 = treeNode.add("aaa", "bb")
-    val n2 = n1.add("gg", "ggg")
-    treeNode.add("cc", "ddd").add("gg", "ggg")
-    println(treeNode.depth())
-    println(n1.depth())
-    println(n2.depth())
-    println(treeNode)
+    val node = Node.createTreeNode<Path>()
+    Files.walkFileTree(Paths.get("./"), object : SimpleFileVisitor<Path>() {
+        override fun visitFile(file: Path?, attrs: BasicFileAttributes?): FileVisitResult {
+            var p = file.toString().substring(2).split("\\")
+            node.getOrCreate(p)
+            return FileVisitResult.CONTINUE
+        }
+    })
+
+    println(node.treeToString(StringBuilder()))
 }
