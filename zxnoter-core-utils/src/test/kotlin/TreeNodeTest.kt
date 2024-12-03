@@ -7,7 +7,7 @@ fun main() {
     Files.walkFileTree(Paths.get("./"), object : SimpleFileVisitor<Path>() {
         override fun visitFile(file: Path?, attrs: BasicFileAttributes?): FileVisitResult {
             var p = file.toString().substring(2).split("\\")
-            node.getOrCreate(p)
+            node.getOrCreate(p).value = file
             return FileVisitResult.CONTINUE
         }
     })
