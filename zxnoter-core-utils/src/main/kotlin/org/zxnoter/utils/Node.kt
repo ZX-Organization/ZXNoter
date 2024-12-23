@@ -15,3 +15,4 @@ fun <T> treeNode(value: T? = null): TreeNode<T> {
 fun <T> treeNode(name: String, value: T? = null): TreeNode<T> {
     return TreeNodeImpl(name, value)
 }
+

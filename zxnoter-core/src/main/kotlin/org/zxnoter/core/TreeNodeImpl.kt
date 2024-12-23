@@ -86,7 +86,6 @@ class TreeNodeImpl<T> : TreeNode<T> {
 
     override var root = this as TreeNode<T>
 
-
 }
 
 

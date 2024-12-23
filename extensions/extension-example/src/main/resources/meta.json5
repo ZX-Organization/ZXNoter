@@ -1,0 +1,10 @@
+{
+  id: "org.zxnoter.example",
+  api: "1.0",
+  dependencies: [
+    {
+      id: "org.zxnoter.example",
+      version: ">1.0"
+    }
+  ]
+}

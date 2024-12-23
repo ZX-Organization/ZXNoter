@@ -40,7 +40,6 @@ interface TreeNode<T> {
         node.name = name
         return node
     }
-
     fun create(name: String, value: T?): TreeNode<T> {
         val node = create(name)
         node.value = value
@@ -106,7 +105,7 @@ interface TreeNode<T> {
         return remove(other)
     }
 
-    fun treeToString(sb: StringBuilder, isLast: Boolean = true, prefix: String = ""): StringBuilder {
+    fun treeToString(sb: StringBuilder = StringBuilder(), isLast: Boolean = true, prefix: String = ""): StringBuilder {
         val connector = if (isLast) "┗━" else "┣━"
         val nodePrefix = if (prefix.isEmpty()) "" else connector
         sb.append("$prefix$nodePrefix[${name}]")
@@ -135,6 +134,7 @@ interface TreeNode<T> {
         }
         return currentNode
     }
+
 
 }
 

@@ -11,5 +11,7 @@ fun main() {
             return FileVisitResult.CONTINUE
         }
     })
-    println(node.treeToString(StringBuilder()))
+    node.name = "我是歌姬"
+    println(node.get(0)?.get(1)?.name)
+//    println(node.treeToString(StringBuilder()))
 }
