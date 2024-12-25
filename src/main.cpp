@@ -1,10 +1,15 @@
 #include <iostream>
-
-extern "C"{
-    #include <libavformat/avformat.h>
-}
+#include <qapplication.h>
+#include "qt/ui/mainwidget.h"
 
 int main(int argc , char* argv[]){
     std::cout << "nmsl " << std::endl;
-    return 0;
+    QApplication app(argc,argv);
+
+    // 测试main窗口
+    mainwidget w;
+    w.show();
+
+    // 进入qt事件循环
+    return app.exec();
 }
