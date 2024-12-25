@@ -21,17 +21,31 @@ include_directories(src)
 if(WIN32)
 # WIN系统
     set(VCPKG "$ENV{CMAKE_TOOLCHAIN_FILE}/../../../packages/")
-    # 包含外部头文件
+    # 配置vcpkg库路径
     list(APPEND CMAKE_MODULE_PATH "${VCPKG}ffmpeg_x64-windows/share/ffmpeg")
+    # sdl2(simple directmedia layer)媒体库
     list(APPEND CMAKE_PREFIX_PATH "${VCPKG}sdl2_x64-windows/share/sdl2")
+    # json库
     list(APPEND CMAKE_PREFIX_PATH "${VCPKG}jsoncpp_x64-windows/share/jsoncpp")
+    # gl数学库
+    list(APPEND CMAKE_PREFIX_PATH "${VCPKG}glm_x64-windows/share/glm")
+    # 字体库
+    list(APPEND CMAKE_PREFIX_PATH "${VCPKG}freetype_x64-windows/share/freetype")
+    # 日志和前置
+    list(APPEND CMAKE_PREFIX_PATH "${VCPKG}fmt_x64-windows/share/fmt")
+    list(APPEND CMAKE_PREFIX_PATH "${VCPKG}spdlog_x64-windows/share/spdlog")
     find_package(FFMPEG REQUIRED)
     find_package(SDL2 CONFIG REQUIRED)
+    find_package(glm CONFIG REQUIRED)
+    find_package(Freetype CONFIG REQUIRED)
+    find_package(spdlog CONFIG REQUIRED)
 endif(WIN32)
 if(UNIX)
 # UNIX系统
-    # 查找sdl2
-    find_package(SDL2 CONFIG REQUIRED)
+    find_package(SDL2 REQUIRED)
+    find_package(glm REQUIRED)
+    find_package(Freetype REQUIRED)
+    find_package(spdlog REQUIRED)
 endif(UNIX)
 
 # 查找jsoncpp库
@@ -65,6 +79,9 @@ target_link_libraries(
     test_zxnoter PRIVATE 
     JsonCpp::JsonCpp 
     SDL2::SDL2
+    glm::glm
+    Freetype::Freetype
+    spdlog::spdlog
     )
 # 链接sdl2库
 target_link_libraries(test_zxnoter PRIVATE SDL2::SDL2)
