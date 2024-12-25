@@ -1,0 +1,25 @@
+#ifndef ZXNOTER_GLCANVAS_H
+#define ZXNOTER_GLCANVAS_H
+
+// opengl组件相关头文件
+#include <qopenglfunctions.h>
+#include <qopenglshaderprogram.h>
+#include <qopenglwidget.h>
+
+class GLCanvas : public QOpenGLWidget, QOpenGLFunctions {
+  Q_OBJECT
+public:
+  // 构造&析构
+  GLCanvas(QWidget *parent = nullptr);
+  virtual ~GLCanvas();
+
+protected:
+  // 初始化gl环境
+  void initializeGL() override;
+  // 渲染内容
+  void paintGL() override;
+  // 调整大小
+  void resizeGL(int w, int h) override;
+};
+
+#endif // ZXNOTER_GLCANVAS_H
