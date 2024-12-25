@@ -44,6 +44,7 @@ set(QTUIS
     src/qt/ui/mainwidget.ui)
 # 源文件列表
 set(SOURCES 
+    src/qt/gl/glcanvas.cpp
     src/qt/ui/mainwidget.cpp
     src/main.cpp
     ${QTUIS})
@@ -66,7 +67,7 @@ target_link_libraries(
     SDL2::SDL2
     )
 # 链接sdl2库
-target_link_libraries(test_zxnoter PRIVATE )
+target_link_libraries(test_zxnoter PRIVATE SDL2::SDL2)
 # 链接ffmpeg
 if(WIN32)
 # WIN系统
