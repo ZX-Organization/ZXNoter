@@ -30,10 +30,17 @@
     <number>2</number>
    </property>
    <item>
-    <widget class="QOpenGLWidget" name="glcanvas"/>
+    <widget class="GLCanvas" name="openGLWidget"/>
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>GLCanvas</class>
+   <extends>QOpenGLWidget</extends>
+   <header>../../../src/qt/gl/glcanvas.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
