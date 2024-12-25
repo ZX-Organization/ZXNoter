@@ -40,6 +40,6 @@ ZXNoter.jar
 *.log
 *.log.lck
 
-.cache/
-.build/
-.idea/
+/.cache
+/build
+/.idea
