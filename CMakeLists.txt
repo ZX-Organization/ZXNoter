@@ -54,9 +54,9 @@ find_package(jsoncpp CONFIG REQUIRED)
 find_package(Qt6 REQUIRED COMPONENTS Gui Core Widgets OpenGL OpenGLWidgets)
 
 # qt ui文件列表
-set(QTUIS src/qt/ui/mainwidget.ui)
+set(QTUIS src/qt/ui/mainwindow.ui)
 # 源文件列表
-set(SOURCES src/qt/gl/glcanvas.cpp src/qt/ui/mainwidget.cpp src/main.cpp
+set(SOURCES src/qt/gl/glcanvas.cpp src/qt/ui/mainwindow.cpp src/main.cpp
             ${QTUIS})
 
 # 添加启动项
