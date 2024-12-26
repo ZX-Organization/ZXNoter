@@ -56,10 +56,11 @@ find_package(Qt6 REQUIRED COMPONENTS Gui Core Widgets OpenGL OpenGLWidgets)
 # qt ui文件列表
 set(QTUIS src/qt/ui/mainwindow.ui)
 # qt资源文件管理
-set(RESOURCES src/qt/ui/css_resources.qrc)
+set(RESOURCES src/qt/ui/resources/css_resources.qrc)
 # 源文件列表
-set(SOURCES src/qt/gl/glcanvas.cpp src/qt/ui/mainwindow.cpp src/main.cpp
-            ${QTUIS} ${RESOURCES})
+set(SOURCES src/qt/gl/glcanvas.cpp src/qt/ui/mainwindow.cpp src/main.cpp src/qt/concurrent_preview.cpp
+            ${QTUIS} ${RESOURCES}
+)
 
 # 添加启动项
 add_executable(test_zxnoter ${SOURCES})
