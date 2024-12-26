@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" name="MapEditCore:jar">
-    <output-path>$PROJECT_DIR$/extensions</output-path>
-    <root id="archive" name="MapEditCore.jar">
-      <element id="module-output" name="MapEditCore" />
-    </root>
-  </artifact>
-</component>
