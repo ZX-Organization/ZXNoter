@@ -100,7 +100,7 @@ if(UNIX)
     pkg_check_modules(
         ffmpeg
         REQUIRED
-        IMPORTED_TARGETS
+        IMPORTED_TARGET
         libavutil libavformat libavcodec libswresample libswscale
     )
     # 链接ffmpeg
