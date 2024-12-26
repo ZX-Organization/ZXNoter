@@ -32,14 +32,9 @@ bin/
 out
 gen
 
-target/
-
-extensions/
-ZXNoter.jar
-
-*.log
-*.log.lck
 
 /.cache
 /build
 /.idea
+
+/*build*
