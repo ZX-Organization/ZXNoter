@@ -12,11 +12,20 @@
 
 class ConcurrentPreview {
 public:
-    ConcurrentPreview(std::filesystem::path *path, QApplication *app);
+    ConcurrentPreview(QApplication *app, std::filesystem::path *path);
 
-    ConcurrentPreview(QApplication *app);
+    ~ConcurrentPreview();
 
-    bool setWatchFilePath(std::filesystem::path &qss_file);
+    ///开始监听
+    void Start();
+
+    ///停止监听
+    void Stop();
+
+    ///设置新监听文件
+    inline void const SetPath(const std::filesystem::path *&new_path) {
+        path = new_path;
+    };
 
     ///周期(ms)
     uint32_t interval{200};
@@ -26,10 +35,12 @@ public:
     };
 
 private:
-    void watch(std::filesystem::path *path, QApplication *app);
 
+    void watch();
+
+    QApplication *app;
+    const std::filesystem::path *path;
     std::chrono::time_point<std::filesystem::__file_clock> modifiedTime;
-    std::filesystem::path qss_path;
     bool watching{false};
     std::thread thread;
 };
