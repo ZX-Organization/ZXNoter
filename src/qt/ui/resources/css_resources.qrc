@@ -1,8 +1,11 @@
 <RCC>
-  <qresource prefix="/rootcss">
-    <file>root_window_css.css</file>
-  </qresource>
-  <qresource prefix="/css">
-    <file>cnm.qss</file>
-  </qresource>
+    <qresource prefix="/rootcss">
+        <file>root_window_css.css</file>
+    </qresource>
+    <qresource prefix="/css">
+        <file>cnm.qss</file>
+    </qresource>
+    <qresource prefix="/img">
+        <file>st.jpg</file>
+    </qresource>
 </RCC>

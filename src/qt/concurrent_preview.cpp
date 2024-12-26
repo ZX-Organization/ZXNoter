@@ -3,15 +3,13 @@
 //
 
 #include "concurrent_preview.h"
-#include <iostream>
-#include <fstream>
-#include <thread>
+
 
 
 /// 读取文件
 /// @filePath 文件路径
 /// @str 文件字符串结果
-int readFile(std::filesystem::path *filePath, std::string &str) {
+int readFile(const std::filesystem::path *filePath, std::string &str) {
     std::ifstream file(*filePath);
     if (!file.is_open()) {
         return 0;
@@ -21,33 +19,42 @@ int readFile(std::filesystem::path *filePath, std::string &str) {
     return 1;
 }
 
-ConcurrentPreview::ConcurrentPreview(std::filesystem::path *path, QApplication *app) {
+ConcurrentPreview::ConcurrentPreview(QApplication *app, std::filesystem::path *path) : app(app), path(path) {
+    if (!app)
+        throw std::runtime_error("sb");
+}
+
+void ConcurrentPreview::Start() {
+    if (watching)
+        return;
     watching = true;
-    thread = std::thread(&ConcurrentPreview::watch, this, path, app);
+    thread = std::thread(&ConcurrentPreview::watch, this);
     thread.detach();
 }
 
-ConcurrentPreview::ConcurrentPreview(QApplication *app) : ConcurrentPreview(nullptr, app) {
-
+void ConcurrentPreview::Stop() {
+    if (!watching)
+        return;
+    watching = false;
+    thread.join();
 }
 
+ConcurrentPreview::~ConcurrentPreview() {
+    Stop();
+}
 
-void ConcurrentPreview::watch(std::filesystem::path *path, QApplication *app) {
+void ConcurrentPreview::watch() {
     while (watching) {
         std::this_thread::sleep_for(std::chrono::milliseconds(interval));
-        if (!path || !app)
+        if (!path)
             continue;
 
-        auto currentModifiedTime = std::filesystem::last_write_time(qss_path);
-
+        auto currentModifiedTime = std::filesystem::last_write_time(*path).time_since_epoch().count();
         if (currentModifiedTime != modifiedTime) {
             modifiedTime = currentModifiedTime;
 
-            // 重新加载文件内容
             std::string content;
-            if (readFile(&qss_path, content)) {
-                // 动态更新（这里模拟一个更新行为）
-                std::cout << "QSS File updated!" << std::endl;
+            if (readFile(path, content)) {
                 auto qs = QString::fromStdString(content);
                 app->setStyleSheet(qs);
             }
