@@ -13,7 +13,41 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
-  <widget class="QWidget" name="centralwidget"/>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <property name="spacing">
+     <number>0</number>
+    </property>
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
+    <item>
+     <widget class="QWidget" name="filewidget" native="true">
+      <property name="maximumSize">
+       <size>
+        <width>256</width>
+        <height>16777215</height>
+       </size>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="GLCanvas" name="openglcanvas"/>
+    </item>
+   </layout>
+  </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
@@ -23,29 +57,39 @@
      <height>17</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menu">
+   <widget class="QMenu" name="menua">
     <property name="title">
      <string>文件</string>
     </property>
     <addaction name="actionopen"/>
    </widget>
-   <widget class="QMenu" name="menu_2">
+   <widget class="QMenu" name="menub">
     <property name="title">
      <string>编辑</string>
     </property>
    </widget>
-   <addaction name="menu"/>
-   <addaction name="menu_2"/>
+   <addaction name="menua"/>
+   <addaction name="menub"/>
   </widget>
   <action name="actionopen">
+   <property name="icon">
+    <iconset theme="QIcon::ThemeIcon::DocumentNew"/>
+   </property>
    <property name="text">
     <string>打开</string>
    </property>
-   <property name="shortcut">
-    <string extracomment="(O)">Ctrl+O</string>
+   <property name="shortcutContext">
+    <enum>Qt::ShortcutContext::WindowShortcut</enum>
    </property>
   </action>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>GLCanvas</class>
+   <extends>QOpenGLWidget</extends>
+   <header>../../../src/qt/gl/glcanvas.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

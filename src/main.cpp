@@ -1,8 +1,9 @@
-#include "qt/ui/mainwindow.h"
 
 #include <iostream>
 #include <ostream>
 #include <qapplication.h>
+
+#include "qt/ui/mainwindow.h"
 
 int main(int argc, char *argv[]) {
   std::cout << "nmsl " << std::endl;

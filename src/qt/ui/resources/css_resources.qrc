@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/rootcss">
+        <file>root_window_css.css</file>
+    </qresource>
+</RCC>
