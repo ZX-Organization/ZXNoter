@@ -5,7 +5,6 @@
 #include "concurrent_preview.h"
 
 
-
 /// 读取文件
 /// @filePath 文件路径
 /// @str 文件字符串结果
@@ -55,10 +54,15 @@ void ConcurrentPreview::watch() {
 
             std::string content;
             if (readFile(path, content)) {
-                auto qs = QString::fromStdString(content);
-                app->setStyleSheet(qs);
+                QMetaObject::invokeMethod(app, [=] {
+                    //std::cout << "qss changed!" << std::endl;
+                    auto qs = QString::fromStdString(content);
+                    app->setStyleSheet(qs);
+                }, Qt::QueuedConnection);
             }
         }
     }
 }
+
+
 
