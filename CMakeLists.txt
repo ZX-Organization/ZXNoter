@@ -11,6 +11,9 @@ set(CMAKE_AUTORCC ON)
 # 设置c++标准
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_BUILD_TYPE
+    Debug
+    CACHE STRING "Build type" FORCE)
 # 导出编译命令(clangd补全用)
 set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
 
@@ -58,9 +61,8 @@ set(QTUIS src/qt/ui/mainwindow.ui)
 # qt资源文件管理
 set(RESOURCES src/qt/ui/resources/css_resources.qrc)
 # 源文件列表
-set(SOURCES src/qt/gl/glcanvas.cpp src/qt/ui/mainwindow.cpp src/main.cpp src/qt/concurrent_preview.cpp
-            ${QTUIS} ${RESOURCES}
-)
+set(SOURCES src/qt/gl/glcanvas.cpp src/qt/ui/mainwindow.cpp src/main.cpp
+            src/qt/concurrent_preview.cpp ${QTUIS} ${RESOURCES})
 
 # 添加启动项
 add_executable(test_zxnoter ${SOURCES})
@@ -94,4 +96,3 @@ if(UNIX)
   # 链接ffmpeg
   target_link_libraries(test_zxnoter PRIVATE PkgConfig::ffmpeg)
 endif(UNIX)
-
