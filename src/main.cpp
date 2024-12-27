@@ -1,4 +1,3 @@
-
 #include <qapplication.h>
 #include <qsurfaceformat.h>
 
