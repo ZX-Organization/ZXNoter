@@ -1,9 +1,13 @@
 #include "glcanvas.h"
 
-#include <OpenGL/OpenGL.h>
+#include <fstream>
+#include <gl/GL.h>
 #include <gl/gl.h>
+#include <qopenglext.h>
 #include <qopenglwidget.h>
 #include <qwidget.h>
+#include <sstream>
+#include <string>
 
 GLCanvas::GLCanvas(QWidget *parent) : QOpenGLWidget(parent) {
     // 初始化opengl显示组件
@@ -16,6 +20,27 @@ void GLCanvas::initializeGL() {
     // 初始化gl
     // 初始化opengl显卡函数接口
     initializeOpenGLFunctions();
+    // 创建着色器
+    auto vshader = glCreateShader(GL_VERTEX_SHADER);
+    auto fshader = glCreateShader(GL_FRAGMENT_SHADER);
+    // 读取着色器源代码
+    std::ifstream vsis,fsis;
+    std::stringstream vsstrstream,fsstrstream;
+    vsis.open("../src/qt/gl/assetes/shader/vertexshader.glsl.vert");
+    fsis.open("../src/qt/gl/assetes/shader/fragmentshader.glsl.vert");
+    vsstrstream << vsis.rdbuf();
+    fsstrstream << fsis.rdbuf();
+    std::string vssourcesstr,fssourcestr;
+    vssourcesstr = vsstrstream.str();
+    fssourcestr = fsstrstream.str();
+    const char* vssourcecode = vssourcesstr.c_str();
+    const char* fssourcecode = fssourcestr.c_str();
+    // 导入源代码
+    glShaderSource(vshader, 1, &vssourcecode, nullptr);
+    glShaderSource(fshader, 1, &fssourcecode, nullptr);
+    // 编译源代码
+    glCompileShader(vshader);
+    glCompileShader(fshader);
 
     // 生成顶点数组对象
 #ifdef __APPLE__
@@ -38,6 +63,8 @@ void GLCanvas::initializeGL() {
     // 描述location0 顶点缓冲0~2float为float类型数据(用vec2接收)
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), nullptr);
+
+    
 }
 
 void GLCanvas::paintGL() {

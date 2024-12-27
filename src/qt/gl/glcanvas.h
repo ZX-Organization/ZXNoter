@@ -2,11 +2,11 @@
 #define ZXNOTER_GLCANVAS_H
 
 // opengl组件相关头文件
-#include <qopenglfunctions.h>
+#include <qopenglfunctions_4_1_core.h>
 #include <qopenglshaderprogram.h>
 #include <qopenglwidget.h>
 
-class GLCanvas : public QOpenGLWidget, QOpenGLFunctions {
+class GLCanvas : public QOpenGLWidget, QOpenGLFunctions_4_1_Core {
     Q_OBJECT
    public:
     // 构造&析构
