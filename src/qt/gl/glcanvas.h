@@ -25,6 +25,14 @@ class GLCanvas : public QOpenGLWidget, QOpenGLFunctions_4_1_Core {
   void paintGL() override;
   // 调整大小
   void resizeGL(int w, int h) override;
+
+  // 鼠标按钮事件重写
+  void mousePressEvent(QMouseEvent *event) override;
+  void mouseReleaseEvent(QMouseEvent *event) override;
+  // 鼠标移动事件重写
+  void mouseMoveEvent(QMouseEvent *event) override;
+  // 鼠标滚轮事件重写
+  void wheelEvent(QWheelEvent *event) override;
 };
 
 #endif  // ZXNOTER_GLCANVAS_H
