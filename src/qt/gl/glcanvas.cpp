@@ -91,6 +91,7 @@ void GLCanvas::paintGL() {
 
   // 使用着色器程序
   shader_program->bind();
+
   // 绑定顶点数组对象
   glBindVertexArray(VAO);
   // 绘制三角形(0~3顶点)
@@ -105,3 +106,11 @@ void GLCanvas::resizeGL(int w, int h) {
   // 调整gl可视区域
   glViewport(0, 0, w, h);
 }
+
+// 鼠标按钮事件重写
+void GLCanvas::mousePressEvent(QMouseEvent* event) {}
+void GLCanvas::mouseReleaseEvent(QMouseEvent* event) {}
+// 鼠标移动事件重写
+void GLCanvas::mouseMoveEvent(QMouseEvent* event) {}
+// 鼠标滚轮事件重写
+void GLCanvas::wheelEvent(QWheelEvent* event) {}
