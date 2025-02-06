@@ -1,0 +1,203 @@
+syntax = "proto3";
+option java_package = "team.zxorg.skinv";
+
+message SkinFile {
+  message Types {
+    enum ModuleCondFlag {
+      Equal = 0;
+      NotEqual = 1;
+      Large = 2;
+      Less = 3;
+      Occur = 4;
+    }
+
+    enum ModuleParamAnchor {
+      LeftTop = 0;
+      Top = 1;
+      RightTop = 2;
+      Left = 3;
+      Middle = 4;
+      Right = 5;
+      LeftBottom = 6;
+      Bottom = 7;
+      RightBottom = 8;
+    }
+
+    enum ModuleParamFill {
+      FromLeft = 0;
+      FromRight = 1;
+    }
+
+    enum ModuleParamUnit {
+      Percent = 0;
+      Unit = 1;
+      PX = 2;
+    }
+
+    enum ModuleBlend {
+      None = 0;
+      Additive = 1;
+    }
+
+    message MetaModeKey {
+      bool locked = 1;
+      int32 angle = 2;
+      bool use3D = 3;
+      int32 keys = 4;
+      float scale = 5;
+      bool lock3D = 6;
+      bool lockScale = 7;
+      int32 judgePos = 8;
+    }
+
+    message MetaModeRing {
+      bool lockDis = 1;
+      int32 dis = 2;
+    }
+
+    message MetaModeTaiko {
+      float scale = 1;
+      int32 judgePos = 2;
+      int32 judgeY = 3;
+    }
+
+    message Meta {
+      string title = 1;
+      string desc = 2;
+      string creator = 3;
+      string cover = 4;
+      int32 mode = 5;
+      int32 client = 6;
+      oneof perMode {
+        MetaModeKey key = 7;
+        MetaModeRing ring = 8;
+        MetaModeTaiko taiko = 9;
+      }
+      string script = 23;
+      int32 minver = 24;
+      int32 feature = 25;
+      bool free = 26;
+    }
+
+    message ModuleMeta {
+      string creator = 1;
+      string tags = 2;
+      string desc = 3;
+      int32 client = 4;
+      uint32 time = 5;
+      bool disabled = 6;
+      bool hideInEditor = 7;
+    }
+
+    message ModuleCondition {
+      int32 source = 1;
+      ModuleCondFlag flag = 2;
+      oneof value {
+        int32 valint = 3;
+        double valdbl = 4;
+        string valstr = 5;
+      }
+    }
+
+    message ModuleParam {
+      ModuleParamAnchor pivot = 2;
+      int32 rotate = 3;
+      float x = 4;
+      float y = 5;
+      int32 alpha = 6;
+      int32 layer = 7;
+      int32 order = 8;
+      ModuleParamUnit xu = 9;
+      ModuleParamUnit yu = 10;
+      float dx = 11;
+      float dy = 12;
+      ModuleParamUnit dxu = 13;
+      ModuleParamUnit dyu = 14;
+      bool anchorNote = 15;
+      bool coexist = 16;
+    }
+
+    message ModuleParamImage {
+      string file = 1;
+      int32 res = 2;
+      int32 frames = 3;
+      int32 fps = 4;
+      int32 repeat = 5;
+      float width = 6;
+      float height = 7;
+      bool flipx = 8;
+      bool flipy = 9;
+      repeated int32 slice = 10;
+      string filebase = 11;
+      int32 filestart = 12;
+      ModuleParamFill fill = 13;
+      int32 valint = 14;
+      string color = 15;
+      bool hide = 16;
+      ModuleParamUnit wu = 17;
+      ModuleParamUnit hu = 18;
+      ModuleBlend blend = 19;
+    }
+
+    message ModuleParamText {
+      string text = 1;
+      int32 font = 2;
+      string color = 3;
+      float size = 4;
+    }
+
+    message ModuleParamImages {
+      repeated ModuleParamImage items = 1;
+    }
+
+    message ModuleParamNotes {
+      repeated ModuleParamImage images = 1;
+    }
+
+    message ModuleParamNumber {
+      string file = 1;
+      string text = 2;
+      float height = 3;
+      float padding = 4;
+      string filebase = 5;
+      int32 filestart = 6;
+      int32 valint = 7;
+    }
+
+    message ModuleParamValue {
+      float valF = 1;
+      string valS = 2;
+      bool valB = 3;
+      float valMin = 4;
+      float valMax = 5;
+    }
+
+    message Module {
+      int32 usage = 1;
+      int32 type = 2;
+      ModuleMeta meta = 3;
+      repeated ModuleCondition scenes = 4;
+      repeated ModuleCondition triggers = 5;
+      ModuleParam param = 6;
+      oneof subParam {
+        ModuleParamImage image = 7;
+        ModuleParamText text = 8;
+        ModuleParamImages images = 9;
+        ModuleParamNumber number = 10;
+        ModuleParamNotes note = 11;
+        ModuleParamValue value = 12;
+      }
+    }
+
+    message ComposerSetting {
+      bool hideDef = 1;
+      bool hideImg = 2;
+      int32 usageFilter = 3;
+    }
+  }
+
+  Types.Meta meta = 1;
+  repeated int32 disabled = 2;
+  repeated Types.Module modules = 3;
+  Types.ComposerSetting settings = 4;
+}
