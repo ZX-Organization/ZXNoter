@@ -4,6 +4,7 @@ import org.bytedeco.ffmpeg.avcodec.AVCodec;
 import org.bytedeco.ffmpeg.avcodec.AVCodecContext;
 import org.bytedeco.ffmpeg.avcodec.AVPacket;
 import org.bytedeco.ffmpeg.avformat.AVFormatContext;
+import org.bytedeco.ffmpeg.avutil.AVChannelLayout;
 import org.bytedeco.ffmpeg.avutil.AVFrame;
 import org.bytedeco.ffmpeg.global.avcodec;
 import org.bytedeco.ffmpeg.global.avformat;
@@ -14,7 +15,6 @@ import org.bytedeco.javacpp.BytePointer;
 import org.bytedeco.javacpp.PointerPointer;
 import team.zxorg.zxnoter.Main;
 
-import javax.sound.sampled.AudioInputStream;
 import java.io.*;
 import java.nio.ByteBuffer;
 import java.nio.file.Path;
@@ -60,18 +60,19 @@ public class FFmpeg {
             codecContext = avcodec.avcodec_alloc_context3(audioCodec);
             avcodec.avcodec_parameters_to_context(codecContext, formatContext.streams(audioIndex).codecpar());
 
-            swrContext = swresample.swr_alloc_set_opts(null,
-                    avutil.av_get_default_channel_layout(2),  // 目标音频通道布局
-                    avutil.AV_SAMPLE_FMT_FLT,  // 目标音频样本格式
-                    sampleRate,  // 目标音频采样率
-                    codecContext.ch_layout().nb_channels(),  // 输入音频通道布局
-                    codecContext.sample_fmt(),  // 输入音频样本格式
-                    codecContext.sample_rate(),  // 输入音频采样率
-                    0, null);
+            AVChannelLayout outChLayout = new AVChannelLayout();
+            avutil.av_channel_layout_default(outChLayout, 2);
+            swrContext = new SwrContext();
+            swresample.swr_alloc_set_opts2(swrContext,
+                    outChLayout,
+                    avutil.AV_SAMPLE_FMT_S16,
+                    sampleRate,
+                    codecContext.ch_layout(),
+                    codecContext.sample_fmt(),
+                    codecContext.sample_rate(),
+                    0,
+                    null);
 
-            if (swrContext == null) {
-                throw new RuntimeException("无法创建SwrContext");
-            }
             if (swresample.swr_init(swrContext) < 0) {
                 throw new RuntimeException("无法初始化SwrContext");
             }
