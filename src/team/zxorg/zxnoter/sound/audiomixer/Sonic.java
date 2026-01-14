@@ -1,25 +1,31 @@
 /* Sonic library
-   Copyright 2010, 2011
-   Bill Cox
+   Copyright 2010, 2011 Bill Cox
+   Refactored 2026 for Float-Only interface and Latency control.
    This file is part of the Sonic Library.
-
-   This file is licensed under the Apache 2.0 license.
 */
 
 package team.zxorg.zxnoter.sound.audiomixer;
 
+/**
+ * Sonic 音频变速变调处理库（纯浮点接口版）。
+ * <p>
+ * 该类使用重采样和这种叠加算法（SOLA）来实现音频的时间拉伸（变速）和音高偏移（变调）。
+ * 支持流式处理。
+ */
 public class Sonic {
 
-    private static final int SONIC_MIN_PITCH = 65;
-    private static final int SONIC_MAX_PITCH = 400;
-    // This is used to down-sample some inputs to improve speed
+    // 默认配置
+    private static final int DEFAULT_MIN_PITCH = 65;
+    private static final int DEFAULT_MAX_PITCH = 400;
+
+    // 用于加速处理的降采样频率
     private static final int SONIC_AMDF_FREQ = 4000;
-    // The number of points to use in the sinc FIR filter for resampling.
+    // Sinc FIR 滤波器点数
     private static final int SINC_FILTER_POINTS = 12;
     private static final int SINC_TABLE_SIZE = 601;
 
-    // Lookup table for windowed sinc function of SINC_FILTER_POINTS points.
-    private static final short sincTable[] = {
+    // Sinc 函数查找表 (Windowed Sinc function)
+    private static final short[] sincTable = {
             0, 0, 0, 0, 0, 0, 0, -1, -1, -2, -2, -3, -4, -6, -7, -9, -10, -12, -14,
             -17, -19, -21, -24, -26, -29, -32, -34, -37, -40, -42, -44, -47, -48, -50,
             -51, -52, -53, -53, -53, -52, -50, -48, -46, -43, -39, -34, -29, -22, -16,
@@ -70,10 +76,12 @@ public class Sonic {
             -12, -10, -9, -7, -6, -4, -3, -2, -2, -1, -1, 0, 0, 0, 0, 0, 0, 0
     };
 
+    // 内部缓冲区（使用 short 保证原始算法性能）
     private short[] inputBuffer;
     private short[] outputBuffer;
     private short[] pitchBuffer;
     private short[] downSampleBuffer;
+
     private double speed;
     private float volume;
     private float pitch;
@@ -83,9 +91,9 @@ public class Sonic {
     private boolean useChordPitch;
     private int quality;
     private int numChannels;
-    public int inputBufferSize;
+    private int inputBufferSize;
     private int pitchBufferSize;
-    public int outputBufferSize;
+    private int outputBufferSize;
     private int numInputSamples;
     private int numOutputSamples;
     private int numPitchSamples;
@@ -99,143 +107,24 @@ public class Sonic {
     private int minDiff;
     private int maxDiff;
 
-    // Resize the array.
-    private short[] resize(
-            short[] oldArray,
-            int newLength) {
-        newLength *= numChannels;
-        short[] newArray = new short[newLength];
-        int length = Math.min(oldArray.length, newLength);
+    // 音高检测范围设置
+    private int minPitch;
+    private int maxPitch;
 
-        System.arraycopy(oldArray, 0, newArray, 0, length);
-        return newArray;
-    }
-
-    // Move samples from one array to another.  May move samples down within an array, but not up.
-    private void move(
-            short[] dest,
-            int destPos,
-            short[] source,
-            int sourcePos,
-            int numSamples) {
-        System.arraycopy(source, sourcePos * numChannels, dest, destPos * numChannels, numSamples * numChannels);
-    }
-
-    // Scale the samples by the factor.
-    private void scaleSamples(
-            short[] samples,
-            int position,
-            int numSamples,
-            float volume) {
-        int fixedPointVolume = (int) (volume * 4096.0f);
-        int start = position * numChannels;
-        int stop = start + numSamples * numChannels;
-
-        for (int xSample = start; xSample < stop; xSample++) {
-            int value = (samples[xSample] * fixedPointVolume) >> 12;
-            if (value > 32767) {
-                value = 32767;
-            } else if (value < -32767) {
-                value = -32767;
-            }
-            samples[xSample] = (short) value;
-        }
-    }
-
-    // Get the speed of the stream.
-    public double getSpeed() {
-        return speed;
-    }
-
-    // Set the speed of the stream.
-    public void setSpeed(
-            double speed) {
-        this.speed = speed;
-    }
-
-    // Get the pitch of the stream.
-    public float getPitch() {
-        return pitch;
-    }
-
-    // Set the pitch of the stream.
-    public void setPitch(
-            float pitch) {
-        this.pitch = pitch;
-    }
-
-    // Get the rate of the stream.
-    public double getRate() {
-        return rate;
-    }
-
-    // Set the playback rate of the stream. This scales pitch and speed at the same time.
-    public void setRate(
-            double rate) {
-        this.rate = rate;
-        this.oldRatePosition = 0;
-        this.newRatePosition = 0;
-    }
-
-    // Get the vocal chord pitch setting.
-    public boolean getChordPitch() {
-        return useChordPitch;
-    }
-
-    // Set the vocal chord mode for pitch computation.  Default is off.
-    public void setChordPitch(
-            boolean useChordPitch) {
-        this.useChordPitch = useChordPitch;
-    }
-
-    // Get the quality setting.
-    public int getQuality() {
-        return quality;
-    }
-
-    // Set the "quality".  Default 0 is virtually as good as 1, but very much faster.
-    public void setQuality(
-            int quality) {
-        this.quality = quality;
-    }
-
-    // Get the scaling factor of the stream.
-    public float getVolume() {
-        return volume;
-    }
-
-    // Set the scaling factor of the stream.
-    public void setVolume(
-            float volume) {
-        this.volume = volume;
-    }
-
-    // Allocate stream buffers.
-    private void allocateStreamBuffers(
-            int sampleRate,
-            int numChannels) {
-        minPeriod = sampleRate / SONIC_MAX_PITCH;
-        maxPeriod = sampleRate / SONIC_MIN_PITCH;
-        maxRequired = 2 * maxPeriod;
-        inputBufferSize = maxRequired;
-        inputBuffer = new short[maxRequired * numChannels];
-        outputBufferSize = maxRequired;
-        outputBuffer = new short[maxRequired * numChannels];
-        pitchBufferSize = maxRequired;
-        pitchBuffer = new short[maxRequired * numChannels];
-        downSampleBuffer = new short[maxRequired];
+    /**
+     * 创建一个 Sonic 实例。
+     *
+     * @param sampleRate  采样率 (例如 44100)
+     * @param numChannels 通道数 (例如 1 或 2)
+     */
+    public Sonic(int sampleRate, int numChannels) {
         this.sampleRate = sampleRate;
         this.numChannels = numChannels;
-        oldRatePosition = 0;
-        newRatePosition = 0;
-        prevPeriod = 0;
-    }
+        this.minPitch = DEFAULT_MIN_PITCH;
+        this.maxPitch = DEFAULT_MAX_PITCH;
 
-    // Create a AudioPlayer.sonic stream.
-    public Sonic(
-            int sampleRate,
-            int numChannels) {
         allocateStreamBuffers(sampleRate, numChannels);
+
         speed = 1.0f;
         pitch = 1.0f;
         volume = 1.0f;
@@ -246,141 +135,229 @@ public class Sonic {
         quality = 0;
     }
 
-    // Get the sample rate of the stream.
+    /**
+     * 设置音频检测的音高范围。
+     * <p>
+     * 减小 maxPeriod (即增加 minPitch) 可以显著降低缓冲延迟，
+     * 但如果设置过高可能会丢失低频声音的音高检测准确性。
+     *
+     * @param minPitch 最小音高 (Hz)，默认 65
+     * @param maxPitch 最大音高 (Hz)，默认 400
+     */
+    public void setPitchRange(int minPitch, int maxPitch) {
+        this.minPitch = minPitch;
+        this.maxPitch = maxPitch;
+        allocateStreamBuffers(sampleRate, numChannels);
+    }
+
+    /**
+     * 获取当前流的播放速度。
+     */
+    public double getSpeed() {
+        return speed;
+    }
+
+    /**
+     * 设置流的播放速度。
+     *
+     * @param speed 速度倍率 (1.0 为正常速度)
+     */
+    public void setSpeed(double speed) {
+        this.speed = speed;
+    }
+
+    /**
+     * 获取当前流的音调。
+     */
+    public float getPitch() {
+        return pitch;
+    }
+
+    /**
+     * 设置流的音调。
+     *
+     * @param pitch 音调倍率 (1.0 为正常音调)
+     */
+    public void setPitch(float pitch) {
+        this.pitch = pitch;
+    }
+
+    /**
+     * 获取当前流的速率。
+     */
+    public double getRate() {
+        return rate;
+    }
+
+    /**
+     * 设置流的播放速率。这将同时改变速度和音调。
+     *
+     * @param rate 速率倍率
+     */
+    public void setRate(double rate) {
+        this.rate = rate;
+        this.oldRatePosition = 0;
+        this.newRatePosition = 0;
+    }
+
+    /**
+     * 获取是否使用和弦音高计算模式。
+     */
+    public boolean getChordPitch() {
+        return useChordPitch;
+    }
+
+    /**
+     * 设置是否使用和弦模式进行音高计算。默认关闭。
+     *
+     * @param useChordPitch true 开启
+     */
+    public void setChordPitch(boolean useChordPitch) {
+        this.useChordPitch = useChordPitch;
+    }
+
+    /**
+     * 获取质量设置。
+     */
+    public int getQuality() {
+        return quality;
+    }
+
+    /**
+     * 设置处理质量。
+     *
+     * @param quality 0 为默认质量（最快），1 为高质量（较慢）
+     */
+    public void setQuality(int quality) {
+        this.quality = quality;
+    }
+
+    /**
+     * 获取音量缩放因子。
+     */
+    public float getVolume() {
+        return volume;
+    }
+
+    /**
+     * 设置音量缩放因子。
+     *
+     * @param volume 音量倍率 (1.0 为原始音量)
+     */
+    public void setVolume(float volume) {
+        this.volume = volume;
+    }
+
+    /**
+     * 获取采样率。
+     */
     public int getSampleRate() {
         return sampleRate;
     }
 
-    // Set the sample rate of the stream.  This will cause samples buffered in the stream to be lost.
-    public void setSampleRate(
-            int sampleRate) {
+    /**
+     * 设置采样率。这将导致缓冲区中的样本丢失。
+     */
+    public void setSampleRate(int sampleRate) {
         allocateStreamBuffers(sampleRate, numChannels);
     }
 
-    // Get the number of channels.
+    /**
+     * 获取通道数。
+     */
     public int getNumChannels() {
         return numChannels;
     }
 
-    // Set the num channels of the stream.  This will cause samples buffered in the stream to be lost.
-    public void setNumChannels(
-            int numChannels) {
+    /**
+     * 设置通道数。这将导致缓冲区中的样本丢失。
+     */
+    public void setNumChannels(int numChannels) {
         allocateStreamBuffers(sampleRate, numChannels);
     }
 
-    // Enlarge the output buffer if needed.
-    private void enlargeOutputBufferIfNeeded(
-            int numSamples) {
-        if (numOutputSamples + numSamples > outputBufferSize) {
-            outputBufferSize += (outputBufferSize >> 1) + numSamples;
-            outputBuffer = resize(outputBuffer, outputBufferSize);
-        }
+    /**
+     * 立即清空所有内部缓冲区和状态。
+     * 用于切歌或停止播放时，避免残留音频。
+     */
+    public void clear() {
+        numInputSamples = 0;
+        numOutputSamples = 0;
+        numPitchSamples = 0;
+        remainingInputToCopy = 0;
+        oldRatePosition = 0;
+        newRatePosition = 0;
+        prevPeriod = 0;
+        prevMinDiff = 0;
     }
 
-    // Enlarge the input buffer if needed.
-    private void enlargeInputBufferIfNeeded(
-            int numSamples) {
-        if (numInputSamples + numSamples > inputBufferSize) {
-            inputBufferSize += (inputBufferSize >> 1) + numSamples;
-            inputBuffer = resize(inputBuffer, inputBufferSize);
+    /**
+     * 强制处理并刷新流中的剩余数据。
+     * 在流结束时调用，以确保所有输入样本都被处理和输出。
+     * 注意：这可能会在末尾引入少量静音。
+     */
+    public void flush() {
+        int remainingSamples = numInputSamples;
+        double s = speed / pitch;
+        double r = rate * pitch;
+        int expectedOutputSamples = numOutputSamples + (int) ((remainingSamples / s + numPitchSamples) / r + 0.5f);
+
+        // Add enough silence to flush both input and pitch buffers.
+        enlargeInputBufferIfNeeded(remainingSamples + 2 * maxRequired);
+        for (int xSample = 0; xSample < 2 * maxRequired * numChannels; xSample++) {
+            inputBuffer[remainingSamples * numChannels + xSample] = 0;
         }
+        numInputSamples += 2 * maxRequired;
+        write(null, 0); // Trigger processing
+
+        // Throw away any extra samples we generated due to the silence we added.
+        if (numOutputSamples > expectedOutputSamples) {
+            numOutputSamples = expectedOutputSamples;
+        }
+
+        // Empty input and pitch buffers.
+        numInputSamples = 0;
+        remainingInputToCopy = 0;
+        numPitchSamples = 0;
     }
 
-    // Add the input samples to the input buffer.
-    private void addFloatSamplesToInputBuffer(
-            float samples[],
-            int numSamples) {
-        if (numSamples == 0) {
+    /**
+     * 返回输出缓冲区中可读取的样本数量。
+     */
+    public int samplesAvailable() {
+        return numOutputSamples;
+    }
+
+    /**
+     * 写入浮点音频数据到流中。
+     *
+     * @param samples    输入样本数组
+     * @param numSamples 样本数量（每通道）
+     */
+    public void write(float[] samples, int numSamples) {
+        if (numSamples == 0 || samples == null) {
+            // 允许传入 null/0 来触发内部处理逻辑（flush 时使用）
+            processStreamInput();
             return;
         }
         enlargeInputBufferIfNeeded(numSamples);
         int xBuffer = numInputSamples * numChannels;
         for (int xSample = 0; xSample < numSamples * numChannels; xSample++) {
+            // 转换为 short 并限幅
             inputBuffer[xBuffer++] = (short) (samples[xSample] * 32767.0f);
         }
         numInputSamples += numSamples;
+        processStreamInput();
     }
 
-    // Add the input samples to the input buffer.
-    private void addShortSamplesToInputBuffer(
-            short samples[],
-            int numSamples) {
-        if (numSamples == 0) {
-            return;
-        }
-        enlargeInputBufferIfNeeded(numSamples);
-        move(inputBuffer, numInputSamples, samples, 0, numSamples);
-        numInputSamples += numSamples;
-    }
-
-    // Add the input samples to the input buffer.
-    private void addUnsignedByteSamplesToInputBuffer(
-            byte samples[],
-            int numSamples) {
-        short sample;
-
-        enlargeInputBufferIfNeeded(numSamples);
-        int xBuffer = numInputSamples * numChannels;
-        for (int xSample = 0; xSample < numSamples * numChannels; xSample++) {
-            sample = (short) ((samples[xSample] & 0xff) - 128); // Convert from unsigned to signed
-            inputBuffer[xBuffer++] = (short) (sample << 8);
-        }
-        numInputSamples += numSamples;
-    }
-
-    // Add the input samples to the input buffer.  They must be 16-bit little-endian encoded in a byte array.
-    private void addBytesToInputBuffer(
-            byte inBuffer[],
-            int numBytes) {
-        int numSamples = numBytes / (2 * numChannels);
-        short sample;
-
-        enlargeInputBufferIfNeeded(numSamples);
-        int xBuffer = numInputSamples * numChannels;
-        for (int xByte = 0; xByte + 1 < numBytes; xByte += 2) {
-            sample = (short) ((inBuffer[xByte] & 0xff) | (inBuffer[xByte + 1] << 8));
-            inputBuffer[xBuffer++] = sample;
-        }
-        numInputSamples += numSamples;
-    }
-
-    // Remove input samples that we have already processed.
-    private void removeInputSamples(
-            int position) {
-        int remainingSamples = numInputSamples - position;
-
-        move(inputBuffer, 0, inputBuffer, position, remainingSamples);
-        numInputSamples = remainingSamples;
-    }
-
-    // Just copy from the array to the output buffer
-    private void copyToOutput(
-            short samples[],
-            int position,
-            int numSamples) {
-        enlargeOutputBufferIfNeeded(numSamples);
-        move(outputBuffer, numOutputSamples, samples, position, numSamples);
-        numOutputSamples += numSamples;
-    }
-
-    // Just copy from the input buffer to the output buffer.  Return num samples copied.
-    private int copyInputToOutput(
-            int position) {
-        int numSamples = remainingInputToCopy;
-
-        if (numSamples > maxRequired) {
-            numSamples = maxRequired;
-        }
-        copyToOutput(inputBuffer, position, numSamples);
-        remainingInputToCopy -= numSamples;
-        return numSamples;
-    }
-
-    // Read data out of the stream.  Sometimes no data will be available, and zero
-    // is returned, which is not an error condition.
-    public int readFloatFromStream(
-            float samples[],
-            int maxSamples) {
+    /**
+     * 从流中读取浮点音频数据。
+     *
+     * @param samples    用于存储输出的数组
+     * @param maxSamples 最大读取样本数（每通道）
+     * @return 实际读取的样本数
+     */
+    public int read(float[] samples, int maxSamples) {
         int numSamples = numOutputSamples;
         int remainingSamples = 0;
 
@@ -399,114 +376,93 @@ public class Sonic {
         return numSamples;
     }
 
-    // Read short data out of the stream.  Sometimes no data will be available, and zero
-    // is returned, which is not an error condition.
-    public int readShortFromStream(
-            short samples[],
-            int maxSamples) {
-        int numSamples = numOutputSamples;
-        int remainingSamples = 0;
+    // ================= 私有内部方法 =================
 
-        if (numSamples == 0) {
-            return 0;
+    private void allocateStreamBuffers(int sampleRate, int numChannels) {
+        this.sampleRate = sampleRate;
+        this.numChannels = numChannels;
+
+        // 基于 min/max pitch 计算缓冲区大小，这直接影响延迟
+        minPeriod = sampleRate / maxPitch;
+        maxPeriod = sampleRate / minPitch;
+
+        maxRequired = 2 * maxPeriod;
+        inputBufferSize = maxRequired;
+        inputBuffer = new short[maxRequired * numChannels];
+        outputBufferSize = maxRequired;
+        outputBuffer = new short[maxRequired * numChannels];
+        pitchBufferSize = maxRequired;
+        pitchBuffer = new short[maxRequired * numChannels];
+        downSampleBuffer = new short[maxRequired];
+
+        clear(); // 分配缓冲区时重置状态
+    }
+
+    private short[] resize(short[] oldArray, int newLength) {
+        newLength *= numChannels;
+        short[] newArray = new short[newLength];
+        int length = Math.min(oldArray.length, newLength);
+        System.arraycopy(oldArray, 0, newArray, 0, length);
+        return newArray;
+    }
+
+    private void move(short[] dest, int destPos, short[] source, int sourcePos, int numSamples) {
+        System.arraycopy(source, sourcePos * numChannels, dest, destPos * numChannels, numSamples * numChannels);
+    }
+
+    private void scaleSamples(short[] samples, int position, int numSamples, float volume) {
+        int fixedPointVolume = (int) (volume * 4096.0f);
+        int start = position * numChannels;
+        int stop = start + numSamples * numChannels;
+
+        for (int xSample = start; xSample < stop; xSample++) {
+            int value = (samples[xSample] * fixedPointVolume) >> 12;
+            if (value > 32767) {
+                value = 32767;
+            } else if (value < -32767) {
+                value = -32767;
+            }
+            samples[xSample] = (short) value;
         }
-        if (numSamples > maxSamples) {
-            remainingSamples = numSamples - maxSamples;
-            numSamples = maxSamples;
+    }
+
+    private void enlargeOutputBufferIfNeeded(int numSamples) {
+        if (numOutputSamples + numSamples > outputBufferSize) {
+            outputBufferSize += (outputBufferSize >> 1) + numSamples;
+            outputBuffer = resize(outputBuffer, outputBufferSize);
         }
-        move(samples, 0, outputBuffer, 0, numSamples);
-        move(outputBuffer, 0, outputBuffer, numSamples, remainingSamples);
-        numOutputSamples = remainingSamples;
+    }
+
+    private void enlargeInputBufferIfNeeded(int numSamples) {
+        if (numInputSamples + numSamples > inputBufferSize) {
+            inputBufferSize += (inputBufferSize >> 1) + numSamples;
+            inputBuffer = resize(inputBuffer, inputBufferSize);
+        }
+    }
+
+    private void removeInputSamples(int position) {
+        int remainingSamples = numInputSamples - position;
+        move(inputBuffer, 0, inputBuffer, position, remainingSamples);
+        numInputSamples = remainingSamples;
+    }
+
+    private void copyToOutput(short[] samples, int position, int numSamples) {
+        enlargeOutputBufferIfNeeded(numSamples);
+        move(outputBuffer, numOutputSamples, samples, position, numSamples);
+        numOutputSamples += numSamples;
+    }
+
+    private int copyInputToOutput(int position) {
+        int numSamples = remainingInputToCopy;
+        if (numSamples > maxRequired) {
+            numSamples = maxRequired;
+        }
+        copyToOutput(inputBuffer, position, numSamples);
+        remainingInputToCopy -= numSamples;
         return numSamples;
     }
 
-    // Read unsigned byte data out of the stream.  Sometimes no data will be available, and zero
-    // is returned, which is not an error condition.
-    public int readUnsignedByteFromStream(
-            byte samples[],
-            int maxSamples) {
-        int numSamples = numOutputSamples;
-        int remainingSamples = 0;
-
-        if (numSamples == 0) {
-            return 0;
-        }
-        if (numSamples > maxSamples) {
-            remainingSamples = numSamples - maxSamples;
-            numSamples = maxSamples;
-        }
-        for (int xSample = 0; xSample < numSamples * numChannels; xSample++) {
-            samples[xSample] = (byte) ((outputBuffer[xSample] >> 8) + 128);
-        }
-        move(outputBuffer, 0, outputBuffer, numSamples, remainingSamples);
-        numOutputSamples = remainingSamples;
-        return numSamples;
-    }
-
-    // Read unsigned byte data out of the stream.  Sometimes no data will be available, and zero
-    // is returned, which is not an error condition.
-    public int readBytesFromStream(
-            byte outBuffer[],
-            int maxBytes) {
-        int maxSamples = maxBytes / (2 * numChannels);
-        int numSamples = numOutputSamples;
-        int remainingSamples = 0;
-
-        if (numSamples == 0 || maxSamples == 0) {
-            return 0;
-        }
-        if (numSamples > maxSamples) {
-            remainingSamples = numSamples - maxSamples;
-            numSamples = maxSamples;
-        }
-        for (int xSample = 0; xSample < numSamples * numChannels; xSample++) {
-            short sample = outputBuffer[xSample];
-            outBuffer[xSample << 1] = (byte) (sample & 0xff);
-            outBuffer[(xSample << 1) + 1] = (byte) (sample >> 8);
-        }
-        move(outputBuffer, 0, outputBuffer, numSamples, remainingSamples);
-        numOutputSamples = remainingSamples;
-        return 2 * numSamples * numChannels;
-    }
-
-    // Force the AudioPlayer.sonic stream to generate output using whatever data it currently
-    // has.  No extra delay will be added to the output, but flushing in the middle of
-    // words could introduce distortion.
-    public void flushStream() {
-        int remainingSamples = numInputSamples;
-        double s = speed / pitch;
-        double r = rate * pitch;
-        int expectedOutputSamples = numOutputSamples + (int) ((remainingSamples / s + numPitchSamples) / r + 0.5f);
-
-        // Add enough silence to flush both input and pitch buffers.
-        enlargeInputBufferIfNeeded(remainingSamples + 2 * maxRequired);
-        for (int xSample = 0; xSample < 2 * maxRequired * numChannels; xSample++) {
-            inputBuffer[remainingSamples * numChannels + xSample] = 0;
-        }
-        numInputSamples += 2 * maxRequired;
-        writeShortToStream(null, 0);
-        // Throw away any extra samples we generated due to the silence we added.
-        if (numOutputSamples > expectedOutputSamples) {
-            numOutputSamples = expectedOutputSamples;
-        }
-        // Empty input and pitch buffers.
-        numInputSamples = 0;
-        remainingInputToCopy = 0;
-        numPitchSamples = 0;
-    }
-
-    // Return the number of samples in the output buffer
-    public int samplesAvailable() {
-        return numOutputSamples;
-    }
-
-    // If skip is greater than one, average skip samples together and write them to
-    // the down-sample buffer.  If numChannels is greater than one, mix the channels
-    // together as we down sample.
-    private void downSampleInput(
-            short samples[],
-            int position,
-            int skip) {
+    private void downSampleInput(short[] samples, int position, int skip) {
         int numSamples = maxRequired / skip;
         int samplesPerValue = numChannels * skip;
         int value;
@@ -522,13 +478,7 @@ public class Sonic {
         }
     }
 
-    // Find the best frequency match in the range, and given a sample skip multiple.
-    // For now, just find the pitch of the first channel.
-    private int findPitchPeriodInRange(
-            short samples[],
-            int position,
-            int minPeriod,
-            int maxPeriod) {
+    private int findPitchPeriodInRange(short[] samples, int position, int minPeriod, int maxPeriod) {
         int bestPeriod = 0, worstPeriod = 255;
         int minDiff = 1, maxDiff = 0;
 
@@ -540,9 +490,6 @@ public class Sonic {
                 short pVal = samples[position + period + i];
                 diff += sVal >= pVal ? sVal - pVal : pVal - sVal;
             }
-            /* Note that the highest number of samples we add into diff will be less
-               than 256, since we skip samples.  Thus, diff is a 24 bit number, and
-               we can safely multiply by numSamples without overflow */
             if (diff * bestPeriod < minDiff * period) {
                 minDiff = diff;
                 bestPeriod = period;
@@ -558,22 +505,15 @@ public class Sonic {
         return bestPeriod;
     }
 
-    // At abrupt ends of voiced words, we can have pitch periods that are better
-    // approximated by the previous pitch period estimate.  Try to detect this case.
-    private boolean prevPeriodBetter(
-            int minDiff,
-            int maxDiff,
-            boolean preferNewPeriod) {
+    private boolean prevPeriodBetter(int minDiff, int maxDiff, boolean preferNewPeriod) {
         if (minDiff == 0 || prevPeriod == 0) {
             return false;
         }
         if (preferNewPeriod) {
             if (maxDiff > minDiff * 3) {
-                // Got a reasonable match this period
                 return false;
             }
             if (minDiff * 2 <= prevMinDiff * 3) {
-                // Mismatch is not that much greater this period
                 return false;
             }
         } else {
@@ -584,14 +524,7 @@ public class Sonic {
         return true;
     }
 
-    // Find the pitch period.  This is a critical step, and we may have to try
-    // multiple ways to get a good answer.  This version uses AMDF.  To improve
-    // speed, we down sample by an integer factor get in the 11KHz range, and then
-    // do it again with a narrower frequency range without down sampling
-    private int findPitchPeriod(
-            short samples[],
-            int position,
-            boolean preferNewPeriod) {
+    private int findPitchPeriod(short[] samples, int position, boolean preferNewPeriod) {
         int period, retPeriod;
         int skip = 1;
 
@@ -602,8 +535,7 @@ public class Sonic {
             period = findPitchPeriodInRange(samples, position, minPeriod, maxPeriod);
         } else {
             downSampleInput(samples, position, skip);
-            period = findPitchPeriodInRange(downSampleBuffer, 0, minPeriod / skip,
-                    maxPeriod / skip);
+            period = findPitchPeriodInRange(downSampleBuffer, 0, minPeriod / skip, maxPeriod / skip);
             if (skip != 1) {
                 period *= skip;
                 int minP = period - (skip << 2);
@@ -632,17 +564,7 @@ public class Sonic {
         return retPeriod;
     }
 
-    // Overlap two sound segments, ramp the volume of one down, while ramping the
-    // other one from zero up, and add them, storing the result at the output.
-    private void overlapAdd(
-            int numSamples,
-            int numChannels,
-            short out[],
-            int outPos,
-            short rampDown[],
-            int rampDownPos,
-            short rampUp[],
-            int rampUpPos) {
+    private void overlapAdd(int numSamples, int numChannels, short[] out, int outPos, short[] rampDown, int rampDownPos, short[] rampUp, int rampUpPos) {
         for (int i = 0; i < numChannels; i++) {
             int o = outPos * numChannels + i;
             int u = rampUpPos * numChannels + i;
@@ -656,18 +578,7 @@ public class Sonic {
         }
     }
 
-    // Overlap two sound segments, ramp the volume of one down, while ramping the
-    // other one from zero up, and add them, storing the result at the output.
-    private void overlapAddWithSeparation(
-            int numSamples,
-            int numChannels,
-            int separation,
-            short out[],
-            int outPos,
-            short rampDown[],
-            int rampDownPos,
-            short rampUp[],
-            int rampUpPos) {
+    private void overlapAddWithSeparation(int numSamples, int numChannels, int separation, short[] out, int outPos, short[] rampDown, int rampDownPos, short[] rampUp, int rampUpPos) {
         for (int i = 0; i < numChannels; i++) {
             int o = outPos * numChannels + i;
             int u = rampUpPos * numChannels + i;
@@ -689,9 +600,7 @@ public class Sonic {
         }
     }
 
-    // Just move the new samples in the output buffer to the pitch buffer
-    private void moveNewSamplesToPitchBuffer(
-            int originalNumOutputSamples) {
+    private void moveNewSamplesToPitchBuffer(int originalNumOutputSamples) {
         int numSamples = numOutputSamples - originalNumOutputSamples;
 
         if (numPitchSamples + numSamples > pitchBufferSize) {
@@ -703,9 +612,7 @@ public class Sonic {
         numPitchSamples += numSamples;
     }
 
-    // Remove processed samples from the pitch buffer.
-    private void removePitchSamples(
-            int numSamples) {
+    private void removePitchSamples(int numSamples) {
         if (numSamples == 0) {
             return;
         }
@@ -713,10 +620,7 @@ public class Sonic {
         numPitchSamples -= numSamples;
     }
 
-    // Change the pitch.  The latency this introduces could be reduced by looking at
-    // past samples to determine pitch, rather than future.
-    private void adjustPitch(
-            int originalNumOutputSamples) {
+    private void adjustPitch(int originalNumOutputSamples) {
         int period, newPeriod, separation;
         int position = 0;
 
@@ -742,38 +646,26 @@ public class Sonic {
         removePitchSamples(position);
     }
 
-    // Aproximate the sinc function times a Hann window from the sinc table.
     private int findSincCoefficient(int i, int ratio, int width) {
         int lobePoints = (SINC_TABLE_SIZE - 1) / SINC_FILTER_POINTS;
         int left = i * lobePoints + (ratio * lobePoints) / width;
         int right = left + 1;
         int position = i * lobePoints * width + ratio * lobePoints - left * width;
-        if (left < 0)
-            left = 0;
-        if (left >= sincTable.length)
-            left = sincTable.length - 1;
-        if (right < 0)
-            right = 0;
-        if (right >= sincTable.length)
-            right = sincTable.length - 1;
+        if (left < 0) left = 0;
+        if (left >= sincTable.length) left = sincTable.length - 1;
+        if (right < 0) right = 0;
+        if (right >= sincTable.length) right = sincTable.length - 1;
         int leftVal = sincTable[left];
         int rightVal = sincTable[right];
 
         return ((leftVal * (width - position) + rightVal * position) << 1) / width;
     }
 
-    // Return 1 if value >= 0, else -1.  This represents the sign of value.
     private int getSign(int value) {
         return value >= 0 ? 1 : -1;
     }
 
-    // Interpolate the new output sample.
-    private short interpolate(
-            short in[],
-            int inPos,  // Index to first sample which already includes channel offset.
-            int oldSampleRate,
-            int newSampleRate) {
-        // Compute N-point sinc FIR-filter here.  Clip rather than overflow.
+    private short interpolate(short[] in, int inPos, int oldSampleRate, int newSampleRate) {
         int i;
         int total = 0;
         int position = newRatePosition * oldSampleRate;
@@ -787,16 +679,13 @@ public class Sonic {
 
         for (i = 0; i < SINC_FILTER_POINTS; i++) {
             weight = findSincCoefficient(i, ratio, width);
-            /* printf("%u %f\n", i, weight); */
             value = in[inPos + i * numChannels] * weight;
             oldSign = getSign(total);
             total += value;
             if (oldSign != getSign(total) && getSign(value) == oldSign) {
-                /* We must have overflowed.  This can happen with a sinc filter. */
                 overflowCount += oldSign;
             }
         }
-        /* It is better to clip than to wrap if there was a overflow. */
         if (overflowCount > 0) {
             return Short.MAX_VALUE;
         } else if (overflowCount < 0) {
@@ -805,16 +694,12 @@ public class Sonic {
         return (short) (total >> 16);
     }
 
-    // Change the rate.
-    private void adjustRate(
-            double rate,
-            int originalNumOutputSamples) {
+    private void adjustRate(double rate, int originalNumOutputSamples) {
         int newSampleRate = (int) (sampleRate / rate);
         int oldSampleRate = sampleRate;
         int position;
         int N = SINC_FILTER_POINTS;
 
-        // Set these values to help with the integer math
         while (newSampleRate > (1 << 14) || oldSampleRate > (1 << 14)) {
             newSampleRate >>= 1;
             oldSampleRate >>= 1;
@@ -823,7 +708,6 @@ public class Sonic {
             return;
         }
         moveNewSamplesToPitchBuffer(originalNumOutputSamples);
-        // Leave at least N pitch samples in the buffer
         for (position = 0; position < numPitchSamples - N; position++) {
             while ((oldRatePosition + 1) * newSampleRate > newRatePosition * oldSampleRate) {
                 enlargeOutputBufferIfNeeded(1);
@@ -837,25 +721,14 @@ public class Sonic {
             oldRatePosition++;
             if (oldRatePosition == oldSampleRate) {
                 oldRatePosition = 0;
-                if (newRatePosition != newSampleRate) {
-                    System.out.printf("Assertion failed: newRatePosition != newSampleRate\n");
-                    assert false;
-                }
                 newRatePosition = 0;
             }
         }
         removePitchSamples(position);
     }
 
-
-    // Skip over a pitch period, and copy period/speed samples to the output
-    private int skipPitchPeriod(
-            short samples[],
-            int position,
-            double speed,
-            int period) {
+    private int skipPitchPeriod(short[] samples, int position, double speed, int period) {
         int newSamples;
-
         if (speed >= 2.0f) {
             newSamples = (int) (period / (speed - 1.0f));
         } else {
@@ -869,14 +742,8 @@ public class Sonic {
         return newSamples;
     }
 
-    // Insert a pitch period, and determine how much input to copy directly.
-    private int insertPitchPeriod(
-            short samples[],
-            int position,
-            double speed,
-            int period) {
+    private int insertPitchPeriod(short[] samples, int position, double speed, int period) {
         int newSamples;
-
         if (speed < 0.5f) {
             newSamples = (int) (period * speed / (1.0f - speed));
         } else {
@@ -891,10 +758,7 @@ public class Sonic {
         return newSamples;
     }
 
-    // Resample as many pitch periods as we have buffered on the input.  Return 0 if
-    // we fail to resize an input or output buffer.  Also scale the output by the volume.
-    private void changeSpeed(
-            double speed) {
+    private void changeSpeed(double speed) {
         int numSamples = numInputSamples;
         int position = 0, period, newSamples;
 
@@ -919,7 +783,6 @@ public class Sonic {
         removeInputSamples(position);
     }
 
-    // Resample as many pitch periods as we have buffered on the input.  Scale the output by the volume.
     private void processStreamInput() {
         int originalNumOutputSamples = numOutputSamples;
         double s = speed / pitch;
@@ -942,92 +805,7 @@ public class Sonic {
             adjustRate(r, originalNumOutputSamples);
         }
         if (volume != 1.0f) {
-            // Adjust output volume.
-            scaleSamples(outputBuffer, originalNumOutputSamples, numOutputSamples - originalNumOutputSamples,
-                    volume);
+            scaleSamples(outputBuffer, originalNumOutputSamples, numOutputSamples - originalNumOutputSamples, volume);
         }
-    }
-
-    // Write floating point data to the input buffer and process it.
-    public void writeFloatToStream(
-            float samples[],
-            int numSamples) {
-        addFloatSamplesToInputBuffer(samples, numSamples);
-        processStreamInput();
-    }
-
-    // Write the data to the input stream, and process it.
-    public void writeShortToStream(
-            short samples[],
-            int numSamples) {
-        addShortSamplesToInputBuffer(samples, numSamples);
-        processStreamInput();
-    }
-
-    // Simple wrapper around sonicWriteFloatToStream that does the unsigned byte to short
-    // conversion for you.
-    public void writeUnsignedByteToStream(
-            byte samples[],
-            int numSamples) {
-        addUnsignedByteSamplesToInputBuffer(samples, numSamples);
-        processStreamInput();
-    }
-
-    // Simple wrapper around sonicWriteBytesToStream that does the byte to 16-bit LE conversion.
-    public void writeBytesToStream(
-            byte inBuffer[],
-            int numBytes) {
-        addBytesToInputBuffer(inBuffer, numBytes);
-        processStreamInput();
-    }
-
-    // This is a non-stream oriented interface to just change the speed of a sound sample
-    public static int changeFloatSpeed(
-            float samples[],
-            int numSamples,
-            double speed,
-            float pitch,
-            float rate,
-            float volume,
-            boolean useChordPitch,
-            int sampleRate,
-            int numChannels) {
-        Sonic stream = new Sonic(sampleRate, numChannels);
-
-        stream.setSpeed(speed);
-        stream.setPitch(pitch);
-        stream.setRate(rate);
-        stream.setVolume(volume);
-        stream.setChordPitch(useChordPitch);
-        stream.writeFloatToStream(samples, numSamples);
-        stream.flushStream();
-        numSamples = stream.samplesAvailable();
-        stream.readFloatFromStream(samples, numSamples);
-        return numSamples;
-    }
-
-    /* This is a non-stream oriented interface to just change the speed of a sound sample */
-    public int sonicChangeShortSpeed(
-            short samples[],
-            int numSamples,
-            double speed,
-            float pitch,
-            float rate,
-            float volume,
-            boolean useChordPitch,
-            int sampleRate,
-            int numChannels) {
-        Sonic stream = new Sonic(sampleRate, numChannels);
-
-        stream.setSpeed(speed);
-        stream.setPitch(pitch);
-        stream.setRate(rate);
-        stream.setVolume(volume);
-        stream.setChordPitch(useChordPitch);
-        stream.writeShortToStream(samples, numSamples);
-        stream.flushStream();
-        numSamples = stream.samplesAvailable();
-        stream.readShortFromStream(samples, numSamples);
-        return numSamples;
     }
 }

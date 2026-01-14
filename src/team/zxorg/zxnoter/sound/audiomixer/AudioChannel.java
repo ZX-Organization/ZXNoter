@@ -1,226 +1,351 @@
 package team.zxorg.zxnoter.sound.audiomixer;
 
-import javax.sound.sampled.AudioFormat;
-import javax.sound.sampled.AudioInputStream;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.nio.ByteBuffer;
-import java.nio.ShortBuffer;
+import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
+import java.util.concurrent.locks.LockSupport;
+import java.util.logging.Logger;
 
-/**
- * 音频句柄
- */
-public class AudioChannel extends BetterSonicChannel{
-    public AudioChannel(float[] audioSamples, int sampleRate) throws IOException {
-        super(audioSamples, sampleRate);
+public class AudioChannel {
+    private static final Logger logger = Logger.getLogger(AudioChannel.class.getName());
+
+    public enum PlayState { PLAY, PAUSE, STOPPED, CLOSE, END }
+    public enum EndBehavior { PAUSE, LOOP, CLOSE }
+
+    private final AudioData data;
+    private final AtomicReference<PlayState> state = new AtomicReference<>(PlayState.PAUSE);
+    private volatile EndBehavior endBehavior = EndBehavior.CLOSE;
+
+    private volatile float volume = 1.0f;
+    private volatile float pan = 0.0f;
+    private volatile boolean isMuted = false;
+
+    private final AtomicInteger speedChangeVersion = new AtomicInteger(0);
+    private volatile double targetSpeed = 1.0;
+    private volatile double targetPitch = 1.0;
+
+    private volatile double preciseTimeMs = 0.0;
+    private volatile long lastUpdateTimeNano = 0;
+    private double consumerRenderSpeed = 1.0;
+    private volatile double interpolationSpeed = 1.0;
+
+    // syncTime 用于强制纠正时间轴
+    private record SpeedMarker(long absoluteIndex, double speed, double syncTime) {}
+    private final ConcurrentLinkedQueue<SpeedMarker> speedCheckpoints = new ConcurrentLinkedQueue<>();
+
+    private volatile boolean seekRequest = false;
+    private volatile long seekTargetSample = 0;
+
+    private final RingBuffer outputRingBuffer;
+    private final DSPWorker worker;
+
+    public AudioChannel(AudioData data) {
+        this.data = data;
+        this.outputRingBuffer = new RingBuffer(2048 * data.channels);
+        this.worker = new DSPWorker();
+        this.worker.start();
     }
 
-   /* private final long audioLength;//音频时长 ms
-    protected EventListener eventListener;//事件监听器
-    protected EndBehavior endBehavior;//结束行为
-    //private MixerAudioInputStream audioInputStream;//音频数据流
-    protected PlayState playState;//播放状态
-    protected PlayState lastPlayState;//上一次播放状态
-    protected long lastTime;//记录播放时间
-    protected long pauseTime;//记录暂停时间
-    protected long lastTimeStamp;//记录播放时间戳
-    private ByteArrayInputStream inputStream;//音频流
-    private AudioFormat audioFormat;//当前的音频格式
-    private long frameLength;//帧总数
-    private ByteBuffer buffer;
-    private ShortBuffer shortBuffer;
+    public void pullAudio(float[] outL, float[] outR, int framesNeeded, int hardwarePendingFrames) {
+        int samplesNeeded = framesNeeded * data.channels;
+        float[] tempBuf = new float[samplesNeeded];
 
+        long startReadPos = outputRingBuffer.getTotalRead();
+        int samplesRead = outputRingBuffer.read(tempBuf, 0, samplesNeeded);
 
-    public AudioChannel(AudioInputStream audioData) throws IOException {
-        inputStream = new ByteArrayInputStream(audioData.readAllBytes());
-        playState = PlayState.PAUSE;
-        lastPlayState = PlayState.PAUSE;
-        endBehavior = EndBehavior.CLOSE;//自动关闭
-        audioFormat = new AudioFormat(audioData.getFormat().getSampleRate(), 16, 2, true, false);
-
-        frameLength = inputStream.available() / 4;//帧长度
-
-        audioLength = (frameLength * 1000) / (long) (audioFormat.getSampleRate());//音频时长
-        //152s
-        // audioInputStream=new MixerAudioInputStream(inputStream);
-        lastTimeStamp = System.currentTimeMillis();
-        pauseTime = 0;
-        lastTime = 0;
-    }
-
-    public long getAudioLength() {
-        return audioLength;
-    }
-
-    *//**
-     * 添加事件监听器
-     *
-     * @param e 事件回调
-     *//*
-    public void addEventListener(EventListener e) {
-        this.eventListener = e;
-    }
-
-    //获取16位
-    protected int read(byte[] buf, int pos, int bufSize) throws IOException {
-        if (buffer == null) {
-            buffer = ByteBuffer.allocate(bufSize);
-            shortBuffer = buffer.asShortBuffer();
+        if (samplesRead < samplesNeeded) {
+            java.util.Arrays.fill(tempBuf, samplesRead, samplesNeeded, 0.0f);
         }
 
-        int numBytes;
-        numBytes = inputStream.read(buffer.array());
-        System.out.println(shortBuffer.get());
-        System.out.println(shortBuffer.get());
-        System.out.println(shortBuffer.get());
+        float vol = isMuted ? 0.0f : volume;
+        float leftGain = vol * (pan > 0 ? 1.0f - pan : 1.0f);
+        float rightGain = vol * (pan < 0 ? 1.0f + pan : 1.0f);
 
-        if (numBytes == -1)
-            playState = PlayState.END;
+        for (int i = 0; i < framesNeeded; i++) {
+            outL[i] = tempBuf[i * 2] * leftGain;
+            outR[i] = tempBuf[i * 2 + 1] * rightGain;
+        }
 
-        return numBytes;
-    }
+        if (state.get() == PlayState.PLAY) {
+            long currentReadPos = startReadPos;
+            int framesProcessed = 0;
 
-    *//**
-     * 设置当前播放帧
-     *
-     * @param frame
-     * @throws IOException
-     *//*
-    private void setFrame(long frame) {
-        inputStream.reset();
-        inputStream.skip(frame * audioFormat.getFrameSize());
-    }
+            while (!speedCheckpoints.isEmpty()) {
+                SpeedMarker marker = speedCheckpoints.peek();
+                long markerFrameIdx = marker.absoluteIndex / data.channels;
+                long currentFrameIdx = currentReadPos / data.channels;
 
-    public float getVolume() {
-        return 0;
-    }
+                if (currentFrameIdx <= (startReadPos + samplesRead) / data.channels) {
+                    long framesBeforeMarker = Math.max(0, markerFrameIdx - currentFrameIdx);
 
-    public void setVolume(float volume) {
-        //sonic.setVolume(volume);
-    }
+                    // 累加 Marker 之前的时间
+                    preciseTimeMs += (framesBeforeMarker * consumerRenderSpeed / data.sampleRate) * 1000.0;
 
-    *//**
-     * 获取当前播放时间 (实时)
-     *
-     * @return 单位ms
-     *//*
-    private long getTime_() {
-        double remainingFrames = frameLength - (double) (inputStream.available()) / audioFormat.getFrameSize();
-        double timeInSeconds = remainingFrames / (audioFormat.getSampleRate() / 1000);
-        return Math.round(timeInSeconds);
-    }
+                    framesProcessed += framesBeforeMarker;
+                    currentReadPos += framesBeforeMarker * data.channels;
 
-    *//**
-     * 获取当前播放时间 (变速)
-     *
-     * @return 单位ms
-     *//*
-    public long getTime() {
-        if (playState.equals(PlayState.PAUSE))
-            return getTime_();
-        return (long) (lastTime + ((System.currentTimeMillis() - lastTimeStamp) ));
-    }
+                    // 应用新速度并强制同步时间，解决回滚错位问题
+                    consumerRenderSpeed = marker.speed;
+                    preciseTimeMs = marker.syncTime;
 
-    *//**
-     * 设置播放时间
-     *
-     * @param time 单位ms
-     * @throws IOException
-     *//*
-    public void setTime(long time) throws IOException {
-        //sonic.flushStream();
-        setFrame((long) (time * audioFormat.getSampleRate() / 1000));
-        //lastTime = getTime_();//获取时间
-        //lastTimeStamp = System.currentTimeMillis();//获取时间戳
-    }
+                    speedCheckpoints.poll();
+                } else {
+                    break;
+                }
+            }
 
-    *//**
-     * 关闭通道
-     *//*
-    public void close() {
-        playState = PlayState.CLOSE;
-    }
+            int remainingFrames = framesNeeded - framesProcessed;
+            if (remainingFrames > 0) {
+                preciseTimeMs += (remainingFrames * consumerRenderSpeed / data.sampleRate) * 1000.0;
+            }
 
-    *//**
-     * 播放
-     *//*
-    public void play() {
-        playState = PlayState.PLAY;
-        lastTimeStamp = System.currentTimeMillis();
-        lastTime = getTime_();
-    }
-
-    *//**
-     * 暂停
-     *//*
-    public void pause() {
-        playState = PlayState.PAUSE;
-    }
-
-    *//**
-     * 获取播放状态
-     *
-     * @return 播放状态
-     *//*
-    public PlayState getPlayState() {
-        return playState;
-    }
-
-    *//**
-     * 设置播放结束行为
-     *
-     * @param endBehavior 行为
-     *//*
-    public void setEndBehavior(EndBehavior endBehavior) {
-        this.endBehavior = endBehavior;
-    }
-
-    *//**
-     * 设置播放速度
-     *
-     * @param v         1f为原速
-     * @param transpose 变调
-     *//*
-    public void setPlaySpeed(boolean transpose, double v) {
-        if (transpose) {
-            //sonic.setRate(v);
-            //sonic.setSpeed(1f);
+            lastUpdateTimeNano = System.nanoTime();
+            interpolationSpeed = consumerRenderSpeed;
+            if (preciseTimeMs > data.totalLengthMs) preciseTimeMs = data.totalLengthMs;
         } else {
-            //sonic.setSpeed(v);
-            //sonic.setRate(1f);
+            lastUpdateTimeNano = 0;
+        }
+    }
+
+    public void play() {
+        if (state.get() == PlayState.CLOSE) return;
+        state.set(PlayState.PLAY);
+        lastUpdateTimeNano = System.nanoTime();
+        LockSupport.unpark(worker);
+    }
+
+    public void pause() {
+        if (state.get() == PlayState.CLOSE) return;
+        state.set(PlayState.PAUSE);
+        lastUpdateTimeNano = 0;
+    }
+
+    public void stop() {
+        if (state.get() == PlayState.CLOSE) return;
+        state.set(PlayState.PAUSE);
+        setTime(0);
+        lastUpdateTimeNano = 0;
+    }
+
+    public void close() {
+        state.set(PlayState.CLOSE);
+        worker.running = false;
+        worker.interrupt();
+    }
+
+    public void setTime(double timeMs) {
+        long sample = (long) (timeMs / 1000.0 * data.sampleRate);
+        sample = Math.max(0, Math.min(sample, data.samples.length / data.channels));
+        if (sample % 2 != 0) sample--;
+
+        seekTargetSample = sample;
+        seekRequest = true;
+
+        preciseTimeMs = timeMs;
+        lastUpdateTimeNano = 0;
+
+        // Seek 会清空缓冲区，所以直接重置消费端速度，无需 Marker
+        speedCheckpoints.clear();
+        consumerRenderSpeed = targetSpeed;
+
+        speedChangeVersion.incrementAndGet();
+        LockSupport.unpark(worker);
+    }
+
+    public double getTime() {
+        if (state.get() != PlayState.PLAY || lastUpdateTimeNano == 0) {
+            return preciseTimeMs;
+        }
+        long now = System.nanoTime();
+        double deltaMs = ((now - lastUpdateTimeNano) / 1_000_000.0) * interpolationSpeed;
+        return Math.min(preciseTimeMs + deltaMs, data.totalLengthMs);
+    }
+
+    public void setSpeed(double speed) {
+        if (Math.abs(targetSpeed - speed) > 0.001) {
+            targetSpeed = Math.max(0.1, speed);
+            speedChangeVersion.incrementAndGet();
+            LockSupport.unpark(worker);
+        }
+    }
+    public double getSpeed() { return targetSpeed; }
+
+    public void setPitch(double pitch) {
+        if (Math.abs(targetPitch - pitch) > 0.001) {
+            targetPitch = Math.max(0.1, pitch);
+            speedChangeVersion.incrementAndGet();
+            LockSupport.unpark(worker);
+        }
+    }
+    public double getPitch() { return targetPitch; }
+
+    public void setVolume(float v) { this.volume = Math.max(0f, Math.min(1f, v)); }
+    public float getVolume() { return volume; }
+    public void setPan(float p) { this.pan = Math.max(-1f, Math.min(1f, p)); }
+    public void setMute(boolean m) { this.isMuted = m; }
+    public boolean isMuted() { return isMuted; }
+    public long getDuration() { return data.totalLengthMs; }
+    public PlayState getPlayState() { return state.get(); }
+    public void setEndBehavior(EndBehavior behavior) { this.endBehavior = behavior; }
+
+    private class DSPWorker extends Thread {
+        volatile boolean running = true;
+
+        private volatile int sourceIndex = 0;
+        private volatile double internalSpeed = 1.0;
+        private volatile double internalPitch = 1.0;
+        private int lastProcessedVersion = 0;
+
+        private Sonic sonicPrimary;
+        private final float[] inputChunk;
+        private static final int CHUNK_FRAMES = 128;
+
+        public DSPWorker() {
+            super("Audio-DSP-Worker");
+            setPriority(Thread.NORM_PRIORITY + 2);
+            this.inputChunk = new float[CHUNK_FRAMES * data.channels];
+            initSonic();
         }
 
-    }
+        private void initSonic() {
+            sonicPrimary = new Sonic(data.sampleRate, data.channels);
+            sonicPrimary.setQuality(0);
+            sonicPrimary.setSpeed((float) internalSpeed);
+            sonicPrimary.setPitch((float) internalPitch);
+        }
 
-    public double getPlaySpeed() {
-        //return sonic.getSpeed() * sonic.getRate();
-        return 1;
-    }*/
+        @Override
+        public void run() {
+            while (running) {
+                try {
+                    if (seekRequest) {
+                        handleSeek();
+                        continue;
+                    }
 
-    /**
-     * 结束行为
-     */
-    public enum EndBehavior {
-        CLOSE,//关闭
-        LOOP,//循环
-        PAUSE//暂停
-    }
+                    if (state.get() != PlayState.PLAY) {
+                        LockSupport.park();
+                        continue;
+                    }
 
-    public enum PlayState {
-        PLAY,//播放
-        PAUSE,//暂停
-        END,//播放结束
+                    int currentVersion = speedChangeVersion.get();
+                    if (currentVersion != lastProcessedVersion) {
+                        handleSpeedChange(currentVersion);
+                        continue;
+                    }
 
-        CLOSE//关闭
-    }
+                    int freeSpace = outputRingBuffer.capacity() - outputRingBuffer.size();
+                    if (freeSpace < CHUNK_FRAMES * data.channels) {
+                        LockSupport.parkNanos(500_000);
+                        continue;
+                    }
 
+                    if (sourceIndex >= data.samples.length && sonicPrimary.samplesAvailable() == 0) {
+                        handleEnd();
+                        continue;
+                    }
 
-    /**
-     * 事件监听器
-     */
-    public interface EventListener {
-        void stateEvent(PlayState playState);//状态事件
+                    feedSonic();
+                    processOutput();
 
-        void timeEvent(long time);//时间事件 (ms)
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        private void handleSeek() {
+            sourceIndex = (int) seekTargetSample * data.channels;
+
+            initSonic();
+            internalSpeed = targetSpeed;
+            internalPitch = targetPitch;
+            sonicPrimary.setSpeed((float) internalSpeed);
+            sonicPrimary.setPitch((float) internalPitch);
+
+            outputRingBuffer.clear();
+            speedCheckpoints.clear();
+
+            lastProcessedVersion = speedChangeVersion.get();
+            seekRequest = false;
+        }
+
+        private void handleSpeedChange(int requestVersion) {
+            double newSpeed = targetSpeed;
+            double newPitch = targetPitch;
+
+            if (speedChangeVersion.get() != requestVersion) return;
+
+            int pendingSamples = outputRingBuffer.size();
+            int pendingFrames = pendingSamples / data.channels;
+
+            // 清空缓冲区并回滚 Source 索引，确保瞬时响应
+            if (pendingFrames > 0) {
+                double sourceFramesConsumed = pendingFrames / internalSpeed;
+                int rollbackSamples = (int)(sourceFramesConsumed * data.channels);
+                sourceIndex = Math.max(0, sourceIndex - rollbackSamples);
+
+                outputRingBuffer.clear();
+                speedCheckpoints.clear();
+            }
+
+            sonicPrimary.clear();
+
+            internalSpeed = newSpeed;
+            internalPitch = newPitch;
+            sonicPrimary.setSpeed((float) internalSpeed);
+            sonicPrimary.setPitch((float) internalPitch);
+            sonicPrimary.setQuality(0);
+
+            if (speedChangeVersion.get() != requestVersion) return;
+
+            // 计算回滚后的准确物理时间
+            double syncTime = ((double) sourceIndex / data.channels / data.sampleRate) * 1000.0;
+
+            long writePos = outputRingBuffer.getTotalWritten();
+            speedCheckpoints.offer(new SpeedMarker(writePos, internalSpeed, syncTime));
+
+            lastProcessedVersion = requestVersion;
+        }
+
+        private void feedSonic() {
+            int remaining = data.samples.length - sourceIndex;
+            if (remaining <= 0) {
+                sonicPrimary.flush();
+                return;
+            }
+            int readLen = Math.min(CHUNK_FRAMES * data.channels, remaining);
+            System.arraycopy(data.samples, sourceIndex, inputChunk, 0, readLen);
+            sonicPrimary.write(inputChunk, readLen / data.channels);
+            sourceIndex += readLen;
+        }
+
+        private void processOutput() {
+            int framesToMake = CHUNK_FRAMES;
+            float[] finalBuffer = new float[framesToMake * data.channels];
+            int framesGenerated = sonicPrimary.read(finalBuffer, framesToMake);
+
+            if (framesGenerated > 0) {
+                outputRingBuffer.write(finalBuffer, 0, framesGenerated * data.channels);
+            }
+        }
+
+        private void handleEnd() {
+            if (endBehavior == EndBehavior.LOOP) {
+                sourceIndex = 0;
+                initSonic();
+                outputRingBuffer.clear();
+                preciseTimeMs = 0;
+                speedCheckpoints.clear();
+                consumerRenderSpeed = targetSpeed;
+                lastProcessedVersion = speedChangeVersion.get();
+            } else if (endBehavior == EndBehavior.PAUSE) {
+                state.set(PlayState.PAUSE);
+                stop();
+            } else {
+                state.set(PlayState.CLOSE);
+                close();
+            }
+        }
     }
 }

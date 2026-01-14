@@ -2,9 +2,12 @@ package team.zxorg.zxnoter.sound.audiomixer;
 
 import org.bytedeco.ffmpeg.avcodec.AVCodec;
 import org.bytedeco.ffmpeg.avcodec.AVCodecContext;
+import org.bytedeco.ffmpeg.avcodec.AVCodecParameters;
 import org.bytedeco.ffmpeg.avcodec.AVPacket;
 import org.bytedeco.ffmpeg.avformat.AVFormatContext;
 import org.bytedeco.ffmpeg.avutil.AVChannelLayout;
+import org.bytedeco.ffmpeg.avutil.AVDictionary;
+import org.bytedeco.ffmpeg.avutil.AVDictionaryEntry;
 import org.bytedeco.ffmpeg.avutil.AVFrame;
 import org.bytedeco.ffmpeg.global.avcodec;
 import org.bytedeco.ffmpeg.global.avformat;
@@ -13,34 +16,50 @@ import org.bytedeco.ffmpeg.global.swresample;
 import org.bytedeco.ffmpeg.swresample.SwrContext;
 import org.bytedeco.javacpp.BytePointer;
 import org.bytedeco.javacpp.PointerPointer;
-import team.zxorg.zxnoter.Main;
 
-import java.io.*;
+import java.io.ByteArrayOutputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 import java.nio.file.Path;
 import java.util.HashMap;
 
+
 public class FFmpeg {
+    public static boolean DEBUG_WRITE_PCM = false;
 
-
+    /**
+     * 读取音频文件并解码为浮点数组 (32-bit Float, Interleaved Stereo)
+     */
     public static float[] read(Path file, int sampleRate) {
         AVFormatContext formatContext = null;
         AVCodecContext codecContext = null;
         SwrContext swrContext = null;
         AVPacket avPacket = null;
         AVFrame decodedFrame = null;
-        ByteArrayOutputStream byteArrayOutputStream = null;
+        ByteArrayOutputStream rawOutStream = new ByteArrayOutputStream();
+
+        // 调试文件流
+        FileOutputStream debugFileStream = null;
 
         try {
+            if (DEBUG_WRITE_PCM) {
+                debugFileStream = new FileOutputStream("debug_audio_dump.pcm", true);
+                System.out.println("[FFmpeg] 调试模式开启，数据写入 debug_audio_dump.pcm");
+            }
+
+            // 1. 打开输入文件
             formatContext = avformat.avformat_alloc_context();
-            if (avformat.avformat_open_input(formatContext, file.toString(), null, null) != 0) {
-                throw new RuntimeException("无法打开音频: " + file);
+            if (avformat.avformat_open_input(formatContext, file.toAbsolutePath().toString(), null, null) != 0) {
+                throw new RuntimeException("FFmpeg: 无法打开文件: " + file);
             }
 
             if (avformat.avformat_find_stream_info(formatContext, (PointerPointer) null) < 0) {
-                throw new RuntimeException("没有找到可用的音频流: " + file);
+                throw new RuntimeException("FFmpeg: 无法获取流信息");
             }
 
+            // 2. 查找音频流
             int audioIndex = -1;
             for (int i = 0; i < formatContext.nb_streams(); i++) {
                 if (formatContext.streams(i).codecpar().codec_type() == avutil.AVMEDIA_TYPE_AUDIO) {
@@ -48,194 +67,146 @@ public class FFmpeg {
                     break;
                 }
             }
-            if (audioIndex == -1) {
-                throw new RuntimeException("没有找到音频流: " + file);
-            }
+            if (audioIndex == -1) throw new RuntimeException("FFmpeg: 未找到音频流");
 
-            AVCodec audioCodec = avcodec.avcodec_find_decoder(formatContext.streams(audioIndex).codecpar().codec_id());
-            if (audioCodec == null) {
-                throw new RuntimeException("未找到解码器");
-            }
+            // 3. 初始化解码器
+            AVCodecParameters codecParams = formatContext.streams(audioIndex).codecpar();
+            AVCodec audioCodec = avcodec.avcodec_find_decoder(codecParams.codec_id());
+            if (audioCodec == null) throw new RuntimeException("FFmpeg: 未找到解码器");
 
             codecContext = avcodec.avcodec_alloc_context3(audioCodec);
-            avcodec.avcodec_parameters_to_context(codecContext, formatContext.streams(audioIndex).codecpar());
-
-            AVChannelLayout outChLayout = new AVChannelLayout();
-            avutil.av_channel_layout_default(outChLayout, 2);
-            swrContext = new SwrContext();
-            swresample.swr_alloc_set_opts2(swrContext,
-                    outChLayout,
-                    avutil.AV_SAMPLE_FMT_S16,
-                    sampleRate,
-                    codecContext.ch_layout(),
-                    codecContext.sample_fmt(),
-                    codecContext.sample_rate(),
-                    0,
-                    null);
-
-            if (swresample.swr_init(swrContext) < 0) {
-                throw new RuntimeException("无法初始化SwrContext");
-            }
+            avcodec.avcodec_parameters_to_context(codecContext, codecParams);
 
             if (avcodec.avcodec_open2(codecContext, audioCodec, (PointerPointer) null) < 0) {
-                throw new RuntimeException("解码器打开失败");
+                throw new RuntimeException("FFmpeg: 无法打开解码器");
+            }
+
+            // 4. 初始化重采样 (SwrContext) -> 目标: 浮点数立体声
+            AVChannelLayout outChLayout = new AVChannelLayout();
+            avutil.av_channel_layout_default(outChLayout, 2); // 强制立体声
+
+            swrContext = new SwrContext();
+            swresample.swr_alloc_set_opts2(swrContext, outChLayout, avutil.AV_SAMPLE_FMT_FLT,   // 输出: Float (32-bit)
+                    sampleRate,                 // 输出采样率
+                    codecContext.ch_layout(),   // 输入布局
+                    codecContext.sample_fmt(),  // 输入格式
+                    codecContext.sample_rate(), // 输入采样率
+                    0, null);
+
+            if (swresample.swr_init(swrContext) < 0) {
+                throw new RuntimeException("FFmpeg: 无法初始化重采样上下文");
             }
 
             avPacket = avcodec.av_packet_alloc();
             decodedFrame = avutil.av_frame_alloc();
-            byteArrayOutputStream = new ByteArrayOutputStream();
 
+            // 预分配指针数组用于存放输出 buffer 地址
+            PointerPointer outData = new PointerPointer(1);
+
+            // 5. 解码循环
             while (avformat.av_read_frame(formatContext, avPacket) >= 0) {
-                if (audioIndex == avPacket.stream_index()) {
+                if (avPacket.stream_index() == audioIndex) {
                     if (avcodec.avcodec_send_packet(codecContext, avPacket) == 0) {
                         while (avcodec.avcodec_receive_frame(codecContext, decodedFrame) == 0) {
-                            int convertedDataSize = swresample.swr_get_out_samples(swrContext, decodedFrame.nb_samples());
-                            BytePointer convertedData = new BytePointer(avutil.av_malloc((long) convertedDataSize * avutil.av_get_bytes_per_sample(avutil.AV_SAMPLE_FMT_FLT) * 2));
-                            int outSamples = swresample.swr_convert(swrContext, convertedData, convertedDataSize, decodedFrame.data(0), decodedFrame.nb_samples());
+                            // 计算输出样本数
+                            long delay = swresample.swr_get_delay(swrContext, codecContext.sample_rate());
+                            int dstNbSamples = (int) avutil.av_rescale_rnd(delay + decodedFrame.nb_samples(), sampleRate, codecContext.sample_rate(), avutil.AV_ROUND_UP);
 
-                            if (outSamples > 0) {
-                                int bufferSize = outSamples * 2 * avutil.av_get_bytes_per_sample(avutil.AV_SAMPLE_FMT_FLT);
-                                byte[] buf = new byte[bufferSize];
-                                convertedData.get(buf);
-                                byteArrayOutputStream.write(buf);
+                            // 分配输出内存 (Samples * Channels * BytesPerSample)
+                            BytePointer outBuffer = new BytePointer(avutil.av_malloc((long) dstNbSamples * 2 * 4));
+
+                            // === 关键修复: 将分配的内存放入指针数组 ===
+                            outData.put(0, outBuffer);
+
+                            // === 执行转换: 传入 decodedFrame.data() 以支持平面(Planar)格式 ===
+                            int convertedSamples = swresample.swr_convert(swrContext, outData, dstNbSamples, decodedFrame.data(), // 修复点：传递整个数据指针数组，而非 data(0)
+                                    decodedFrame.nb_samples());
+
+                            if (convertedSamples > 0) {
+                                byte[] data = new byte[convertedSamples * 2 * 4];
+                                outBuffer.get(data);
+                                rawOutStream.write(data);
+
+                                if (debugFileStream != null) {
+                                    debugFileStream.write(data);
+                                }
                             }
 
-                            avutil.av_free(convertedData);
+                            avutil.av_free(outBuffer); // 释放原生内存
                         }
                     }
                 }
                 avcodec.av_packet_unref(avPacket);
             }
-            ByteBuffer data = ByteBuffer.wrap(byteArrayOutputStream.toByteArray());
 
-            //byte[] audioBytes = byteArrayOutputStream.toByteArray();
-//            return new AudioInputStream(new ByteArrayInputStream(audioBytes), new AudioFormat(sampleRate, 16, 2, true, false), audioBytes.length / 4);
-            return data.asFloatBuffer().array();
+            outData.close();
+            System.out.println("[FFmpeg] 解码完成，总字节数: " + rawOutStream.size());
+
+            // 6. 转换为 float 数组
+            byte[] allBytes = rawOutStream.toByteArray();
+            float[] finalFloats = new float[allBytes.length / 4];
+            ByteBuffer.wrap(allBytes).order(ByteOrder.LITTLE_ENDIAN).asFloatBuffer().get(finalFloats);
+            return finalFloats;
+
         } catch (Exception e) {
-            throw new RuntimeException("音频处理过程中出现错误: " + e.getMessage(), e);
+            throw new RuntimeException("FFmpeg 解码错误", e);
         } finally {
-            if (codecContext != null) {
-                avcodec.avcodec_free_context(codecContext);
+            if (debugFileStream != null) {
+                try {
+                    debugFileStream.close();
+                } catch (IOException ignored) {
+                }
             }
-            if (decodedFrame != null) {
-                avutil.av_frame_free(decodedFrame);
-            }
-            if (avPacket != null) {
-                avcodec.av_packet_free(avPacket);
-            }
-            if (swrContext != null) {
-                swresample.swr_free(swrContext);
-            }
+            if (avPacket != null) avcodec.av_packet_free(avPacket);
+            if (decodedFrame != null) avutil.av_frame_free(decodedFrame);
+            if (codecContext != null) avcodec.avcodec_free_context(codecContext);
+            if (swrContext != null) swresample.swr_free(swrContext);
             if (formatContext != null) {
                 avformat.avformat_close_input(formatContext);
+                avformat.avformat_free_context(formatContext);
             }
         }
     }
 
-    public static boolean audioToWav(Path audio, Path wav) {
-        String[] command = {"ffmpeg", "-y", "-i", "\"" + audio.toAbsolutePath() + "\"", "\"" + wav.toAbsolutePath() + "\""};
+    /**
+     * 读取音频元数据
+     */
+    public static HashMap<String, String> readMetadata(Path file) {
+        HashMap<String, String> metadataMap = new HashMap<>();
+        AVFormatContext formatContext = null;
 
         try {
-            ProcessBuilder processBuilder = new ProcessBuilder(command);
-            processBuilder.environment().putAll(System.getenv());
-            processBuilder.redirectErrorStream(true); // 将错误流合并到标准流中
-
-            Process process = processBuilder.start();
-
-            // 读取进程输出，防止阻塞
-            try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    System.out.println(line);
-                }
+            formatContext = avformat.avformat_alloc_context();
+            if (avformat.avformat_open_input(formatContext, file.toAbsolutePath().toString(), null, null) != 0) {
+                return metadataMap;
             }
 
-            // 等待进程执行完成
-            int exitCode = process.waitFor();
-            return (exitCode == 0);
-        } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
+            AVDictionary dict = formatContext.metadata();
+            AVDictionaryEntry tag = null;
 
-    public static boolean checkFFmpegExistence() {
-        String[] command = {"ffmpeg", "-version"};
-
-        try {
-            ProcessBuilder processBuilder = new ProcessBuilder(command);
-
-            // 获取系统环境变量
-            processBuilder.environment().putAll(System.getenv());
-
-            // 重定向标准输出和错误输出
-            processBuilder.redirectErrorStream(true);
-
-            // 启动进程
-            Process process = processBuilder.start();
-
-            // 读取进程输出
-            InputStream inputStream = process.getInputStream();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-            StringBuilder output = new StringBuilder();
-            String line;
-            while ((line = reader.readLine()) != null) {
-                output.append(line).append("\n");
+            while ((tag = avutil.av_dict_get(dict, "", tag, avutil.AV_DICT_IGNORE_SUFFIX)) != null) {
+                String key = tag.key().getString();
+                String value = tag.value().getString();
+                metadataMap.put(key, value);
+                metadataMap.put(key.toLowerCase(), value);
             }
-
-            // 等待进程执行完成
-            int exitCode = process.waitFor();
-
-            // 检查输出中是否包含 FFmpeg 版本信息
-            boolean ffmpegExists = output.toString().toLowerCase().contains("ffmpeg version");
-
-            return (exitCode == 0 && ffmpegExists);
-        } catch (IOException | InterruptedException e) {
+        } catch (Exception e) {
             e.printStackTrace();
-        }
-        return false;
-    }
-
-    public static HashMap<String, String> audioToMetadata(Path audio) {
-        HashMap<String, String> metadata = new HashMap<>();
-        String[] command = {"ffmpeg", "-i", Main.quotationMark + audio.toAbsolutePath() + Main.quotationMark, "-f", "ffmetadata"};
-        try {
-            ProcessBuilder processBuilder = new ProcessBuilder(command);
-            // 获取系统环境变量
-            processBuilder.environment().putAll(System.getenv());
-            // 启动进程
-            Process process = processBuilder.start();
-            // 获取进程的输出流
-            InputStream inputStream = process.getErrorStream();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-            // 读取命令输出的每一行数据
-            String line;
-            while ((line = reader.readLine()) != null) {
-                // 在每行中查找包含元数据的部分
-                if (line.startsWith("  ")) {
-                    String[] parts = line.trim().split(": ");
-                    if (parts.length == 2) {
-                        String key = parts[0].trim();
-                        String value = parts[1].trim();
-                        metadata.put(key, value);
-                    }
-                }
+        } finally {
+            if (formatContext != null) {
+                avformat.avformat_close_input(formatContext);
+                avformat.avformat_free_context(formatContext);
             }
-            // 等待进程执行完成
-            int exitCode = process.waitFor();
-            return metadata;
-        } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
         }
-        return metadata;
+        return metadataMap;
     }
 
+
+    /**
+     * 元数据 Key 枚举
+     */
     public enum AudioMetadataKey {
-        ARTIST("artist"),
-        GENRE("genre"),
-        TITLE("title"),
-        TEMPO("TBPM"),
-        ENCODER("encoder");
+        ARTIST("artist"), GENRE("genre"), TITLE("title"), ALBUM("album"), TEMPO("TBPM"), ENCODER("encoder");
 
         private final String key;
 
@@ -247,5 +218,4 @@ public class FFmpeg {
             return key;
         }
     }
-
 }
