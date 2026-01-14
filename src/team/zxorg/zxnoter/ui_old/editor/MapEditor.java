@@ -22,6 +22,7 @@ import team.zxorg.zxnoter.io.reader.ImdReader;
 import team.zxorg.zxnoter.io.reader.McReader;
 import team.zxorg.zxnoter.io.reader.OsuReader;
 import team.zxorg.zxnoter.io.writer.ImdWriter;
+import team.zxorg.zxnoter.io.writer.McWriter;
 import team.zxorg.zxnoter.io.writer.OsuWriter;
 import team.zxorg.zxnoter.map.ZXMap;
 import team.zxorg.zxnoter.map.editor.ZXFixedOrbitMapEditor;
@@ -618,6 +619,7 @@ public class MapEditor extends BaseEditor {
                 tab1.setContent(scrollPane);
                 tabPane.getTabs().addAll(tab1);
             }
+
             {
                 Tab tab1 = new Tab("全部");
                 InfoPane infoPane = new InfoPane(zxMap.unLocalizedMapInfo, ZXMInfo.values());
@@ -802,14 +804,16 @@ public class MapEditor extends BaseEditor {
                         FileChooser.ExtensionFilter zxnFilter = new FileChooser.ExtensionFilter("zxn谱面", "*.zxn");
                         FileChooser.ExtensionFilter osuFilter = new FileChooser.ExtensionFilter("osu谱面", "*.osu");
                         FileChooser.ExtensionFilter imdFilter = new FileChooser.ExtensionFilter("节奏大师谱面", "*.imd");
+                        FileChooser.ExtensionFilter mcFilter = new FileChooser.ExtensionFilter("Malody谱面", "*.mc");
 
-                        fileChooser.getExtensionFilters().addAll(zxnFilter, osuFilter, imdFilter);
+                        fileChooser.getExtensionFilters().addAll(zxnFilter, osuFilter, imdFilter,mcFilter);
                         File file = fileChooser.showSaveDialog(this.getScene().getWindow());
                         if (file != null) {
                             try {
                                 if (file.getName().endsWith(".zxn")) zxMap.saveZXN(file.toPath());
                                 if (file.getName().endsWith(".osu")) new OsuWriter().writeOut(zxMap, file.toPath());
                                 if (file.getName().endsWith(".imd")) new ImdWriter().writeOut(zxMap, file.toPath());
+                                if (file.getName().endsWith(".mc")) new McWriter().writeOut(zxMap, file.toPath());
                             } catch (NoSuchFieldException | IOException e) {
                                 e.printStackTrace();
                                 throw new RuntimeException(e);

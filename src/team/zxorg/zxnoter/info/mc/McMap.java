@@ -1,42 +1,16 @@
 package team.zxorg.zxnoter.info.mc;
 
+import com.google.gson.annotations.SerializedName;
+import java.util.List;
+
+/**
+ * Malody Chart JSON 结构映射类
+ */
 public class McMap {
     public McMeta meta;
-    public McTime[] time;
-    public McNote[] note;
-
-
-    public static class McNote {
-        public int[] beat;
-        public Integer x;
-        public int w;
-        public McNote[] seg;
-    }
-
-    public static class McTime {
-        public int[] beat;
-        public float bpm;
-        public float delay;
-    }
-
-    public static class McMeta {
-        public int id;
-        public String creator;
-        public String background;
-        public String cover;
-        public String version;
-        public int preview;
-        public int mode;
-        public McSong song;
-
-        public static class McSong {
-            public int id;
-            public String title;
-            public String artist;
-            public String file;
-            public float bpm;
-        }
-    }
-
-
+    public List<McTime> time;
+    public List<McEffect> effect;
+    public List<McNote> note;
+    public Object extra; // 通常为 null，或者保留不做处理
 }
+

@@ -9,21 +9,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dd78a4ca-7956-492b-9d75-ff82bf57b657" name="更改" comment="修改">
-      <change afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/sound/audiomixer/AudioDSPProcessor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/sound/audiomixer/AudioData.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/sound/audiomixer/RingBuffer.java" afterDir="false" />
+    <list default="true" id="dd78a4ca-7956-492b-9d75-ff82bf57b657" name="更改" comment="完善音频系统(有点缺陷)">
+      <change afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/info/mc/McEffect.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/info/mc/McMeta.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/info/mc/McModeExt.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/info/mc/McNote.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/info/mc/McSong.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/info/mc/McTime.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/sound/audiomixer/AudioChannel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/sound/audiomixer/AudioChannel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/sound/audiomixer/AudioDataStream.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/sound/audiomixer/AudioMixer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/sound/audiomixer/AudioMixer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/sound/audiomixer/AudioProcessor.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/sound/audiomixer/AudioSonicChannel.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/sound/audiomixer/BetterSonicChannel.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/sound/audiomixer/BytesUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/sound/audiomixer/FFmpeg.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/sound/audiomixer/FFmpeg.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/sound/audiomixer/Sonic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/sound/audiomixer/Sonic.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui_old/ZXNApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui_old/ZXNApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/info/mc/McMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/info/mc/McMap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/io/reader/McReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/io/reader/McReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/io/writer/McWriter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/io/writer/McWriter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui_old/editor/MapEditor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui_old/editor/MapEditor.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -716,7 +712,15 @@
       <option name="project" value="LOCAL" />
       <updated>1714202479308</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="完善音频系统(有点缺陷)">
+      <option name="closed" value="true" />
+      <created>1768426897713</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1768426897713</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -747,7 +751,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="fixed all edit orbit method bugs" />
     <MESSAGE value="fixed follow edit" />
     <MESSAGE value="fixed edit time" />
     <MESSAGE value="update edit time" />
@@ -772,7 +775,8 @@
     <MESSAGE value="fixed" />
     <MESSAGE value="fixed objectCount" />
     <MESSAGE value="修改" />
-    <option name="LAST_COMMIT_MESSAGE" value="修改" />
+    <MESSAGE value="完善音频系统(有点缺陷)" />
+    <option name="LAST_COMMIT_MESSAGE" value="完善音频系统(有点缺陷)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
