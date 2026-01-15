@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="ZXNoter:jar" />
+      <artifact name="ZXNoter_old:jar" />
     </artifacts-to-build>
   </component>
   <component name="AutoImportSettings">
@@ -10,16 +10,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dd78a4ca-7956-492b-9d75-ff82bf57b657" name="更改" comment="完善音频系统(有点缺陷)">
-      <change afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/info/mc/McEffect.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/info/mc/McMeta.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/info/mc/McModeExt.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/info/mc/McNote.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/info/mc/McSong.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/info/mc/McTime.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/info/mc/McMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/info/mc/McMap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/io/reader/McReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/io/reader/McReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/io/writer/McWriter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/io/writer/McWriter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/sound/audiomixer/AudioChannel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/sound/audiomixer/AudioChannel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui_old/editor/MapEditor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/zxorg/zxnoter/ui_old/editor/MapEditor.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -59,9 +52,25 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;zedoCN&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/ZX-Organization/ZXNoter.git&quot;,
+    &quot;accountId&quot;: &quot;44ec7f76-fa3c-4d1b-82e3-f7d3af61de79&quot;
+  }
+}</component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 2
+}</component>
   <component name="ProjectId" id="2R4d2a2ICdAen8WQi8ONuWVnUMn" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -70,37 +79,40 @@
     <option name="foldersAlwaysOnTop" value="false" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "Application.Main.executor": "Run",
-    "Downloaded.Files.Path.Enabled": "false",
-    "Repository.Attach.Annotations": "true",
-    "Repository.Attach.JavaDocs": "true",
-    "Repository.Attach.Sources": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "extract.method.default.visibility": "private",
-    "git-widget-placeholder": "old",
-    "last_opened_file_path": "F:/AllProjects/ZX-Organization/ZXNoter/res",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.17292577",
-    "project.structure.side.proportion": "0.38297874",
-    "settings.editor.selected.configurable": "http.proxy",
-    "vue.rearranger.settings.migration": "true",
-    "应用程序.Main.executor": "Run"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;true&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;true&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;android.gradle.sync.needed&quot;: &quot;true&quot;,
+    &quot;extract.method.default.visibility&quot;: &quot;private&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;old&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;F:/AllProjects/ZX-Organization/ZXNoter/res&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.17292577&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.38297874&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;http.proxy&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;,
+    &quot;应用程序.Main.executor&quot;: &quot;Run&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mongo"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mongo&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="F:\AllProjects\ZX-Organization\ZXNoter\docs\reference\xiang" />
@@ -186,12 +198,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="ZXNoter" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
       <module name="ZXNoter" />
       <option name="filePath" />
@@ -215,8 +221,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.15989.69" />
-        <option value="bundled-js-predefined-1d06a55b98c1-2e7d6887c066-JavaScript-IU-241.15989.69" />
+        <option value="bundled-jdk-30f59d01ecdd-26cb7f24e5b0-intellij.indexing.shared.core-IU-253.29346.240" />
       </set>
     </attachedChunks>
   </component>
@@ -785,11 +790,6 @@
           <url>file://$PROJECT_DIR$/src/team/zxorg/zxnoter/io/IoTest.java</url>
           <line>49</line>
           <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/team/zxorg/zxnoter/map/editor/ZXFixedOrbitMapEditor.java</url>
-          <line>671</line>
-          <option name="timeStamp" value="8" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

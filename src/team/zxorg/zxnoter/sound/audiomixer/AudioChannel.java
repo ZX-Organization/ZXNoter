@@ -234,19 +234,35 @@ public class AudioChannel {
                         continue;
                     }
 
+                    boolean bypassSonic = (Math.abs(internalSpeed - 1.0) < 0.001 && Math.abs(internalPitch - 1.0) < 0.001);
+
                     int freeSpace = outputRingBuffer.capacity() - outputRingBuffer.size();
                     if (freeSpace < CHUNK_FRAMES * data.channels) {
                         LockSupport.parkNanos(500_000);
                         continue;
                     }
 
-                    if (sourceIndex >= data.samples.length && sonicPrimary.samplesAvailable() == 0) {
-                        handleEnd();
-                        continue;
-                    }
+                    if (bypassSonic) {
+                        int remaining = data.samples.length - sourceIndex;
+                        if (remaining <= 0) {
+                            handleEnd();
+                            continue;
+                        }
 
-                    feedSonic();
-                    processOutput();
+                        int writeCap = Math.min(freeSpace, 4096 * data.channels);
+                        int toWrite = Math.min(writeCap, remaining);
+
+                        outputRingBuffer.write(data.samples, sourceIndex, toWrite);
+                        sourceIndex += toWrite;
+                    } else {
+                        if (sourceIndex >= data.samples.length && sonicPrimary.samplesAvailable() == 0) {
+                            handleEnd();
+                            continue;
+                        }
+
+                        feedSonic();
+                        processOutput();
+                    }
 
                 } catch (Exception e) {
                     e.printStackTrace();

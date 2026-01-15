@@ -749,7 +749,7 @@ public class MapEditor extends BaseEditor {
 
             {//工具
                 { //反转
-                    isReverse = sideToolBar.addToggleButton("tool", "svg.icons.arrows.arrow-up-down-line", "反转");
+                    isReverse = sideToolBar.addToggleButton("tool", "svg.icons.arrows.arrow-up-down-line", "滚动反转");
                 }
             }
 
