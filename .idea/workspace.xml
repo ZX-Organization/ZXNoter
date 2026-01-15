@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
+      <artifact name="AudioSystem:jar" />
       <artifact name="FXComponentLibrary:jar" />
       <artifact name="ZXNoter:jar" />
+      <artifact name="ZXNoterUI:jar" />
     </artifacts-to-build>
   </component>
   <component name="AutoImportSettings">
@@ -11,41 +13,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dd78a4ca-7956-492b-9d75-ff82bf57b657" name="更改" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/jetbrains_annotations.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/jetbrains_annotations.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/openjfx_javafx_base.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/openjfx_javafx_base.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/openjfx_javafx_controls.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/openjfx_javafx_controls.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/openjfx_javafx_graphics.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/openjfx_javafx_graphics.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/openjfx_javafx_media.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/openjfx_javafx_media.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/AudioSystem_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/AudioSystem_jar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/FXComponentLibrary_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/FXComponentLibrary_jar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ZXNoter.jar" beforeDir="false" afterPath="$PROJECT_DIR$/ZXNoter.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/reference/$RJ54UUV.mp3.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/reference/1591671592.mp3.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/reference/work.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/module/ExtensionLoader/src/team/zxorg/extensionloader/gson/VersionSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/ExtensionLoader/src/team/zxorg/extensionloader/gson/VersionSerializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module/extensions/MapEditCore/src/team/zxorg/mapeditcore/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MapEditCore/src/team/zxorg/mapeditcore/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module/extensions/MapEditCore/src/team/zxorg/mapeditcore/map/MapMetaData.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/module/extensions/MapEditCore/src/team/zxorg/mapeditcore/map/MapOperate.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MapEditCore/src/team/zxorg/mapeditcore/map/MapOperate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module/extensions/MapEditCore/src/team/zxorg/mapeditcore/map/MapUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MapEditCore/src/team/zxorg/mapeditcore/map/MapUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module/extensions/MapEditCore/src/team/zxorg/mapeditcore/map/ZXMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/module/extensions/MapEditCore/src/team/zxorg/mapeditcore/map/ZXMap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/module/extensions/MapEditCore/src/team/zxorg/mapeditcore/map/mapio/ImdReader.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/module/extensions/MapEditCore/src/team/zxorg/mapeditcore/map/mapio/MapReader.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/module/extensions/MapEditCore/src/team/zxorg/mapeditcore/map/mapio/OsuReader.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/module/extensions/MapEditCore/src/team/zxorg/mapeditcore/note/Flick.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/module/extensions/MapEditCore/src/team/zxorg/mapeditcore/note/Hold.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/module/extensions/MapEditCore/src/team/zxorg/mapeditcore/note/MixNote.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/module/extensions/MapEditCore/src/team/zxorg/mapeditcore/note/Note.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/module/extensions/MapEditCore/src/team/zxorg/mapeditcore/note/OsuHold.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/module/extensions/MapEditCore/src/team/zxorg/mapeditcore/note/OsuNote.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/module/extensions/MapEditCore/src/team/zxorg/mapeditcore/timing/OsuTiming.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/module/extensions/MapEditCore/src/team/zxorg/mapeditcore/timing/Timing.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -94,7 +73,7 @@
   &quot;associatedIndex&quot;: 2
 }</component>
   <component name="ProjectId" id="2Y1E1Kbqe3Ad7f7qSglNh6Icyer" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+  <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
@@ -115,7 +94,7 @@
     "JAR 应用程序.SVGReader.jar.executor": "Run",
     "JAR 应用程序.tool-SvgReader.executor": "Run",
     "JAR 应用程序.未命名.executor": "Run",
-    "Repository.Attach.Annotations": "true",
+    "Repository.Attach.Annotations": "false",
     "Repository.Attach.JavaDocs": "true",
     "Repository.Attach.Sources": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
@@ -133,9 +112,9 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Artifacts",
+    "project.structure.last.edited": "工件",
     "project.structure.proportion": "0.21134493",
-    "project.structure.side.proportion": "0.3987667",
+    "project.structure.side.proportion": "0.36183396",
     "settings.editor.selected.configurable": "preferences.pluginManager",
     "vue.rearranger.settings.migration": "true",
     "应用程序.AbstractAnimationRenderer.executor": "Run",
@@ -192,7 +171,7 @@
       <recent name="team.zxorg.ui.javafx.sub.editor.aa" />
     </key>
   </component>
-  <component name="RunManager" selected="应用程序.Main">
+  <component name="RunManager" selected="JAR 应用程序.RunJar">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="team.zxorg.mapeditcore.Main" />
       <module name="MapEditCore" />
@@ -736,7 +715,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/main" />
+                        <option value="old" />
                       </list>
                     </value>
                   </entry>

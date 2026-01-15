@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/module/extensions/AudioSystem/AudioSystem.iml" filepath="$PROJECT_DIR$/module/extensions/AudioSystem/AudioSystem.iml" />
       <module fileurl="file://$PROJECT_DIR$/new/ExtensionApi/ExtensionApi.iml" filepath="$PROJECT_DIR$/new/ExtensionApi/ExtensionApi.iml" />
       <module fileurl="file://$PROJECT_DIR$/module/ExtensionLoader/ExtensionLoader.iml" filepath="$PROJECT_DIR$/module/ExtensionLoader/ExtensionLoader.iml" />
       <module fileurl="file://$PROJECT_DIR$/module/extensions/FXComponentLibrary/FXComponentLibrary.iml" filepath="$PROJECT_DIR$/module/extensions/FXComponentLibrary/FXComponentLibrary.iml" />

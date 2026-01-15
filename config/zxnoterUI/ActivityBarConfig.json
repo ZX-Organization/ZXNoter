@@ -1,7 +1,7 @@
 {
-  "leftPaneWidth": 223.2,
+  "leftPaneWidth": 284.8,
   "rightPaneWidth": 0.0,
-  "bottomPaneHeight": 154.39999999999995,
+  "bottomPaneHeight": 302.4,
   "hideMainBar": false,
   "hideSecondBar": true,
   "mainBarIsLeft": true,
@@ -14,7 +14,7 @@
     "setup"
   ],
   "secondBarItems": [],
-  "activeMainBarTopItemIndex": 0,
+  "activeMainBarTopItemIndex": -1,
   "activeMainBarBottomItemIndex": -1,
   "activeSecondBarItemIndex": 0
 }
